@@ -49,6 +49,7 @@ add_library(px4_platform
 	px4_cli.cpp
 	shutdown.cpp
 	spi.cpp
+	Serial.cpp
 	${SRCS}
 )
 add_dependencies(px4_platform prebuild_targets)

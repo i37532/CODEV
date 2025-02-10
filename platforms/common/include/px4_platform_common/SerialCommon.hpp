@@ -1,6 +1,6 @@
 /****************************************************************************
  *
- *   Copyright (c) 2016 PX4 Development Team. All rights reserved.
+ *   Copyright (C) 2023 PX4 Development Team. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -31,36 +31,40 @@
  *
  ****************************************************************************/
 
-/**
- * @file definitions.h
- * common platform-specific definitions & abstractions for gps
- * @author Beat Küng <beat-kueng@gmx.net>
- */
-
 #pragma once
 
-#include <drivers/drv_hrt.h>
-#include <px4_platform_common/defines.h>
-#include <px4_platform_common/log.h>
-#include <uORB/topics/satellite_info.h>
-#include <uORB/topics/sensor_gps.h>
-#include <uORB/topics/sensor_gnss_relative.h>
-
-#define GPS_INFO(...) PX4_INFO(__VA_ARGS__)
-#define GPS_WARN(...) PX4_WARN(__VA_ARGS__)
-#define GPS_ERR(...) PX4_ERR(__VA_ARGS__)
-
-#define gps_usleep px4_usleep
-
-/**
- * Get the current time in us. Function signature:
- * uint64_t hrt_absolute_time()
- */
-#define gps_absolute_time hrt_absolute_time
-typedef hrt_abstime gps_abstime;
+namespace device
+{
+namespace SerialConfig
+{
 
 
-// TODO: this functionality is not available on the Snapdragon yet
-#ifdef __PX4_QURT
-#define NO_MKTIME
-#endif
+// ByteSize: number of data bits
+enum class ByteSize {
+	FiveBits  = 5,
+	SixBits   = 6,
+	SevenBits = 7,
+	EightBits = 8,
+};
+
+// Parity: enable parity checking
+enum class Parity {
+	None = 0,
+	Odd  = 1,
+	Even = 2,
+};
+
+// StopBits: number of stop bits
+enum class StopBits {
+	One = 1,
+	Two = 2
+};
+
+// FlowControl: enable flow control
+enum class FlowControl {
+	Disabled = 0,
+	Enabled  = 1,
+};
+
+} // namespace SerialConfig
+} // namespace device

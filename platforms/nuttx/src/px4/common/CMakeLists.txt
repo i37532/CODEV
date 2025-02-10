@@ -48,6 +48,7 @@ if(NOT PX4_BOARD MATCHES "io-v2")
 		px4_manifest.cpp
 		px4_mtd.cpp
 		px4_24xxxx_mtd.c
+		SerialImpl.cpp
 	)
 	target_link_libraries(px4_layer
 		PRIVATE
