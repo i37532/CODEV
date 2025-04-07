@@ -906,7 +906,7 @@ GPS::run()
 			break;
 
 		case gps_driver_mode_t::NMEA:
-			_helper = new GPSDriverNMEA(&GPS::callback, this, &_report_gps_pos, _p_report_sat_info, heading_offset);
+			_helper = new GPSDriverNMEA(_interface, &GPS::callback, this, &_report_gps_pos, _p_report_sat_info, heading_offset);
 			set_device_type(DRV_GPS_DEVTYPE_NMEA);
 			break;
 #endif // CONSTRAINED_FLASH
@@ -1221,10 +1221,15 @@ GPS::publish()
 		_report_gps_pos.selected_rtcm_instance = _selected_rtcm_instance;
 		_report_gps_pos.rtcm_injection_rate = _rate_rtcm_injection;
 
+		_report_gps_pos.lat = _report_gps_pos.latitude_deg * 1E7;
+		_report_gps_pos.lon = _report_gps_pos.longitude_deg * 1E7;
+		_report_gps_pos.alt = _report_gps_pos.altitude_ellipsoid_m * 1e3;
+		_report_gps_pos.alt_ellipsoid = _report_gps_pos.altitude_ellipsoid_m * 1e3;
+
 		_report_gps_pos_pub.publish(_report_gps_pos);
 		// Heading/yaw data can be updated at a lower rate than the other navigation data.
 		// The uORB message definition requires this data to be set to a NAN if no new valid data is available.
-		_report_gps_pos.heading = NAN;
+		// _report_gps_pos.heading = NAN;
 		_is_gps_main_advertised.store(true);
 
 		if (_report_gps_pos.spoofing_state != _spoofing_state) {
@@ -1545,8 +1550,8 @@ GPS *GPS::instantiate(int argc, char *argv[], Instance instance)
 
 	GPS *gps = nullptr;
 	if (instance == Instance::Main) {
-		// if (Serial::validatePort(device_name)) {
-		if(true) {
+		if (Serial::validatePort(device_name)) {
+		// if(true) {
 			gps = new GPS(device_name, mode, interface, instance, baudrate_main);
 
 		} else {
@@ -1569,8 +1574,8 @@ GPS *GPS::instantiate(int argc, char *argv[], Instance instance)
 			}
 		}
 	} else { // secondary instance
-		// if (Serial::validatePort(device_name_secondary)) {
-		if(true) {
+		if (Serial::validatePort(device_name_secondary)) {
+		// if(true) {
 			gps = new GPS(device_name_secondary, mode, interface_secondary, instance, baudrate_secondary);
 
 		} else {

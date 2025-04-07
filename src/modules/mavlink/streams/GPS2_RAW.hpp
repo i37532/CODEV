@@ -87,12 +87,15 @@ private:
 
 			if (PX4_ISFINITE(gps.heading)) {
 				if (fabsf(gps.heading) < FLT_EPSILON) {
-					msg.yaw = 36000; // Use 36000 for north.
+					// msg.yaw = 36000; // Use 36000 for north.
+					msg.yaw = 36000.0f + math::degrees(gps.heading) * 100.f;
 
 				} else {
 					msg.yaw = math::degrees(gps.heading) * 100.f; // centidegrees
 				}
 			}
+
+			msg.alt_ellipsoid = gps.altitude_ellipsoid_m * 1E3;
 
 			mavlink_msg_gps2_raw_send_struct(_mavlink->get_channel(), &msg);
 
