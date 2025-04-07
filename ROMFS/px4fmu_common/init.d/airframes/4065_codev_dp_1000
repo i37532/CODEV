@@ -24,7 +24,7 @@ set OUTPUT_MODE tap_esc
 set VEHICLE_TYPE mc
 sh /etc/init.d/rc.mc_defaults
 
-set PARAM_DEFAULTS_VER 5
+set PARAM_DEFAULTS_VER 6
 set MIXER quad_x
 
 if param compare SYS_PARAM_VER ${PARAM_DEFAULTS_VER}
@@ -221,13 +221,14 @@ then
 
 	#mavlink default setting
 	param set MAV_0_CONFIG 101
-	param set MAV_2_CONFIG 103
+	# param set MAV_2_CONFIG 103
 	param set MAV_0_MODE 5
 	param set MAV_2_MODE 5
 	param set SER_TEL1_BAUD 115200
 	param set SER_TEL3_BAUD 115200
 	param set MAV_0_RATE 10000
 	param set MAV_2_RATE 10000
+	param set GPS_YAW_OFFSET 90
 
 	param save
 	reboot
