@@ -24,7 +24,7 @@ set OUTPUT_MODE tap_esc
 set VEHICLE_TYPE mc
 sh /etc/init.d/rc.mc_defaults
 
-set PARAM_DEFAULTS_VER 6
+set PARAM_DEFAULTS_VER 9
 set MIXER quad_x
 
 if param compare SYS_PARAM_VER ${PARAM_DEFAULTS_VER}
@@ -213,6 +213,8 @@ then
 	param set EV_TSK_STAT_DIS 1
 
 	param set GPS_1_CONFIG 201
+	param set GPS_1_PROTOCOL 6
+	param set SER_GPS1_BAUD 115200
 
 	param set MAV_PROTO_VER 2
 
