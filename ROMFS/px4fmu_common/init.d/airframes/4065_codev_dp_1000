@@ -24,7 +24,7 @@ set OUTPUT_MODE tap_esc
 set VEHICLE_TYPE mc
 sh /etc/init.d/rc.mc_defaults
 
-set PARAM_DEFAULTS_VER 9
+set PARAM_DEFAULTS_VER 10
 set MIXER quad_x
 
 if param compare SYS_PARAM_VER ${PARAM_DEFAULTS_VER}
@@ -196,7 +196,7 @@ then
 	# sensor thermal calibration
 	param set SYS_CAL_TDEL 24
 	param set SYS_RESTART_TYPE 0
-	param set SDLOG_PROFILE 3
+	param set SDLOG_PROFILE 1
 
 	param set EKF2_BARO_NOISE 10.0
 	param set EKF2_GPS_P_NOISE 0.5
