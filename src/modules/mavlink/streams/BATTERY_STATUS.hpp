@@ -132,7 +132,7 @@ private:
 						bat_msg.voltages_ext[cell - mavlink_cells_max] = battery_status.voltage_cell_v[cell] * 1000.0f;
 
 					} else {
-						bat_msg.voltages_ext[cell - mavlink_cells_max] = UINT16_MAX;
+						bat_msg.voltages_ext[cell - mavlink_cells_max] = 0;
 					}
 				}
 
