@@ -27,7 +27,9 @@ set(build_cores 1)
 
 ProcessorCount(N)
 if(N GREATER_EQUAL 4)
-	math(EXPR build_cores "${N} - 2")
+	# Gazebo 11 translation units can each consume more than 1 GiB while
+	# compiling. Keep parallelism conservative on typical developer machines.
+	set(build_cores 2)
 endif()
 
 # project to build sitl_gazebo if necessary
@@ -38,6 +40,8 @@ ExternalProject_Add(sitl_gazebo
 		-DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
 		-DSEND_ODOMETRY_DATA=ON
 		-DGENERATE_ROS_MODELS=ON
+		-DBUILD_GSTREAMER_PLUGIN=OFF
+		-DCMAKE_PROJECT_INCLUDE=${PX4_SOURCE_DIR}/cmake/sitl_gazebo_compat.cmake
 	BINARY_DIR ${PX4_BINARY_DIR}/build_gazebo
 	INSTALL_COMMAND ""
 	DEPENDS git_gazebo
