@@ -59,6 +59,7 @@ void LoggedTopics::add_default_topics()
 	add_topic("camera_trigger_secondary");
 	add_topic("cellular_status", 200);
 	add_topic("commander_state");
+	add_topic("rate_ctrl_selection"); // Low-rate, on-change controller selection diagnostics.
 	add_topic("cpuload");
 	add_topic("esc_status", 250);
 	add_topic("follow_target", 500);

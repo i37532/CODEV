@@ -117,6 +117,7 @@ set(msg_files
 	qshell_retval.msg
 	radio_status.msg
 	rate_ctrl_status.msg
+	rate_ctrl_selection.msg
 	rc_channels.msg
 	rc_parameter_map.msg
 	rpm.msg

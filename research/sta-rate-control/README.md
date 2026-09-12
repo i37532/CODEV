@@ -1,11 +1,12 @@
 # PX4 STA 研究目录
 
-当前仅 M00：原 PID 基线。没有接入 ESTA/ISTA，也没有实施 M01。
+已完成 M00 原 PID 基线；M01 增加仅 PID 可执行的选择框架，阶段验收见对应报告。ESTA/ISTA 尚未接入。
 
 - `plan/`：M00 开始时三份外部计划的历史快照。
 - `environment.md`：环境、模型、参数与启动约定。
 - `baseline/`：版本指纹、参数和指标摘要；不存大型日志。
 - `reports/M00.md`：验收、失败记录、限制及下一步边界。
+- `reports/M01.md`、`m01/`：选择框架、逐样本等价回归和 SITL 证据。
 - `scripts/`：SITL 捕获、ULog 分析及证据索引生成器。
 
 ## 复跑一轮（仅本机 Gazebo SITL）
@@ -28,4 +29,6 @@ python3 research/sta-rate-control/scripts/analyze_m00.py '/home/yr/Desktop/codev
 
 本次原始数据根目录为 `/home/yr/Desktop/codev doc/experiments/M00-20260912`。`build/` 是构建/单测原始输出；`runNN/` 是成功或失败试验的控制台、命令、ULog、参数、指标。所有失败都保留，报告同时说明调试尝试总数和冻结场景的重复次数。Python 依赖缓存不作为实验数据提交。
 
-提交只包含研究目录的小型文本和 JSON；`baseline/artifacts.sha256` 索引外部证据。Git 克隆本身不含大型 ULog，迁移/共享论文数据时必须另行复制并校验原始数据；本阶段没有上传。脚本 `capture_m00_provenance.py` 是本次一次性现场采集工具，不要在新 HEAD 上覆盖历史 provenance。外部状态表后续变化不会改变历史计划快照的含义。
+M01 数据独立保存在 `/home/yr/Desktop/codev doc/experiments/M01-20260912`。`run_m01.py --output <新目录>` 复用 M00 启动器，并增加起飞前、悬停中及 disarm 后的实际参数检查；随后运行 `analyze_m01.py <该目录>`。它会暂时设置两个新选择参数，验证拒绝/等待/取消行为，最后恢复 `MODE=0、AXES=0`，全程实际仍为 PID。默认无检查回调时 `run_m00.py` 保持原场景；其历史版本及指纹保留在 M00 提交中。
+
+M00 提交包含研究目录的小型文本和 JSON；M01 另包含选择框架与单测源码。`baseline/artifacts.sha256`、`m01/artifacts.sha256` 分别索引各阶段外部证据。Git 克隆本身不含大型 ULog，迁移/共享论文数据时必须另行复制并校验原始数据；原始数据没有上传。脚本 `capture_m00_provenance.py` 是一次性现场采集工具，不要在新 HEAD 上覆盖历史 provenance。外部状态表后续变化不会改变历史计划快照的含义。

@@ -44,7 +44,7 @@ def active_simulators():
     return found
 
 
-def main():
+def main(checks=None, scenario_path=None):
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
@@ -66,6 +66,9 @@ def main():
         "success": False,
         "events": [],
     }
+    if scenario_path is not None:
+        result["scenario_sha256"] = digest(scenario_path)
+        result["scenario_path"] = str(scenario_path.resolve())
     (output / "worktree_status.txt").write_text(
         subprocess.check_output(["git", "status", "--short"], cwd=REPO, text=True))
     (output / "tracked_diff.patch").write_bytes(
@@ -165,10 +168,17 @@ def main():
             time.sleep(0.5)
         else:
             raise TimeoutError("Startup timeout")
+        # The project launcher invokes make and may rebuild before starting PX4.
+        actual_binary = digest(BIN / "px4")
+        if actual_binary != result["binary_sha256"]:
+            result["prelaunch_binary_sha256"] = result["binary_sha256"]
+            result["binary_sha256"] = actual_binary
         (output / "params_all.txt").write_text(cli("param", "show", "-a"))
         cli("param", "save", str(output / "parameters.bson"))
         (output / "version.txt").write_text(cli("ver", "all"))
         (output / "mavlink_status.txt").write_text(cli("mavlink", "status"))
+        if checks is not None:
+            checks("preflight", cli, topic, output)
         deadline = time.monotonic() + 180
         while time.monotonic() < deadline:
             state = sample("warmup")
@@ -211,6 +221,8 @@ def main():
         event("hover_start", state)
         (output / "perf_hover_start.txt").write_text(cli("perf"))
         hover_start = state["position"]["timestamp"]
+        if checks is not None:
+            checks("hover", cli, topic, output)
         deadline = time.monotonic() + 240
         while state["position"]["timestamp"] - hover_start < 60e6:
             if time.monotonic() > deadline:
@@ -233,6 +245,8 @@ def main():
         else:
             raise TimeoutError("Landing/automatic disarm timeout")
         event("landed_disarmed", state)
+        if checks is not None:
+            checks("disarmed", cli, topic, output)
         (output / "logger_status.txt").write_text(cli("logger", "status"))
         (output / "params_end.txt").write_text(cli("param", "show", "-a"))
         result["success"] = True
@@ -241,6 +255,12 @@ def main():
         print(result["error"], flush=True)
     finally:
         if proc.poll() is None:
+            if checks is not None:
+                try:
+                    checks("cleanup", cli, topic, output)
+                except Exception as exc:
+                    result["cleanup_error"] = repr(exc)
+                    result["success"] = False
             try:
                 cli("shutdown", check=False)
                 proc.wait(timeout=15)

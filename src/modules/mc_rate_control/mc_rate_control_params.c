@@ -398,3 +398,35 @@ PARAM_DEFINE_FLOAT(MC_ACRO_SUPEXPOY, 0.7f);
  * @group Multicopter Rate Control
  */
 PARAM_DEFINE_INT32(MC_BAT_SCALE_EN, 0);
+
+/**
+ * Rate controller research mode
+ *
+ * Only PID is executable in M01. ESTA/ISTA requests are explicitly reported
+ * unsupported and leave PID active. Requests changed while armed remain
+ * pending until disarm. Existing PID gains keep their live update semantics.
+ *
+ * @value 0 PID
+ * @value 1 ESTA (unsupported)
+ * @value 2 ISTA (unsupported)
+ * @min 0
+ * @max 2
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_INT32(MC_RTC_MODE, 0);
+
+/**
+ * Experimental rate control axes
+ *
+ * Bit mask: roll=1, pitch=2, yaw=4. Default 0. In PID mode all valid masks
+ * are inactive: effective experimental axes remain zero. Changes while
+ * armed are evaluated after disarm. Out-of-range masks are rejected.
+ *
+ * @bit 0 Roll
+ * @bit 1 Pitch
+ * @bit 2 Yaw
+ * @min 0
+ * @max 7
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_INT32(MC_STA_AXES, 0);

@@ -33,7 +33,7 @@
 
 #pragma once
 
-#include <RateControl.hpp>
+#include <RateControlDispatcher.hpp>
 
 #include <lib/matrix/matrix/math.hpp>
 #include <lib/perf/perf_counter.h>
@@ -53,6 +53,7 @@
 #include <uORB/topics/multirotor_motor_limits.h>
 #include <uORB/topics/parameter_update.h>
 #include <uORB/topics/rate_ctrl_status.h>
+#include <uORB/topics/rate_ctrl_selection.h>
 #include <uORB/topics/vehicle_angular_acceleration.h>
 #include <uORB/topics/vehicle_angular_velocity.h>
 #include <uORB/topics/vehicle_control_mode.h>
@@ -78,6 +79,7 @@ public:
 	static int print_usage(const char *reason = nullptr);
 
 	bool init();
+	int print_status() override;
 
 private:
 	void Run() override;
@@ -87,7 +89,8 @@ private:
 	 */
 	void		parameters_updated();
 
-	RateControl _rate_control; ///< class for rate control calculations
+	RateControlDispatcher _rate_control; ///< selects the executable rate controller
+	bool _selection_published{false};
 
 	uORB::Subscription _battery_status_sub{ORB_ID(battery_status)};
 	uORB::Subscription _landing_gear_sub{ORB_ID(landing_gear)};
@@ -105,6 +108,7 @@ private:
 
 	uORB::Publication<actuator_controls_s>		_actuators_0_pub;
 	uORB::PublicationMulti<rate_ctrl_status_s>	_controller_status_pub{ORB_ID(rate_ctrl_status)};	/**< controller status publication */
+	uORB::Publication<rate_ctrl_selection_s> _selection_status_pub{ORB_ID(rate_ctrl_selection)};
 	uORB::Publication<vehicle_rates_setpoint_s>	_v_rates_sp_pub{ORB_ID(vehicle_rates_setpoint)};			/**< rate setpoint publication */
 
 	vehicle_control_mode_s		_v_control_mode{};
@@ -127,6 +131,9 @@ private:
 	int8_t _landing_gear{landing_gear_s::GEAR_DOWN};
 
 	DEFINE_PARAMETERS(
+		(ParamInt<px4::params::MC_RTC_MODE>) _param_mc_rtc_mode,
+		(ParamInt<px4::params::MC_STA_AXES>) _param_mc_sta_axes,
+
 		(ParamFloat<px4::params::MC_ROLLRATE_P>) _param_mc_rollrate_p,
 		(ParamFloat<px4::params::MC_ROLLRATE_I>) _param_mc_rollrate_i,
 		(ParamFloat<px4::params::MC_RR_INT_LIM>) _param_mc_rr_int_lim,

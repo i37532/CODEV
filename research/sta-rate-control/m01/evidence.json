@@ -1,0 +1,635 @@
+{
+  "scope": "M01: PID-only selector, host tests and one Iris Gazebo Classic flight smoke",
+  "run": {
+    "source_head": "9a0ed8e9f9be5040cea1893bc8129959cdc65478",
+    "branch": "research/sta-rate-control",
+    "binary_sha256": "f313fef5ce6e13d6b75b5c81f01c0f798b14fdda3f9cb23ab6efd24e01374e79",
+    "runner_sha256": "b4ecfc59aed0870e42fc12de5e26874a88d863d4b4fbd4bc7c4bf782ee90e113",
+    "command": [
+      "./sitl/run.sh",
+      "--headless",
+      "--backend",
+      "gazebo",
+      "--model",
+      "iris"
+    ],
+    "pid_parameters_modified": false,
+    "success": true,
+    "events": [
+      {
+        "name": "ready",
+        "timestamp_us": 30136000.0
+      },
+      {
+        "name": "takeoff_command",
+        "timestamp_us": 30136000.0
+      },
+      {
+        "name": "hold_command_after_takeoff",
+        "timestamp_us": 37228000.0
+      },
+      {
+        "name": "hover_start",
+        "timestamp_us": 41768000.0
+      },
+      {
+        "name": "hover_end",
+        "timestamp_us": 101888000.0
+      },
+      {
+        "name": "land_command",
+        "timestamp_us": 101888000.0
+      },
+      {
+        "name": "landed_disarmed",
+        "timestamp_us": 113512000.0
+      }
+    ],
+    "scenario_sha256": "1465b2465c7115deef9cdb0fcd755a631db7d53fabc76c78671d1aa87b5b36cb",
+    "scenario_path": "/home/yr/Desktop/Codev-autopilot/research/sta-rate-control/scripts/run_m01.py",
+    "explicit_environment": {
+      "PX4_SITL_WORLD": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world",
+      "GAZEBO_MASTER_URI": "http://127.0.0.1:11345"
+    },
+    "launcher_pid": 149553,
+    "launcher_returncode": 0,
+    "logs": [
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-12/09_46_35.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/M01-20260912/run01/09_46_35.ulg",
+        "sha256": "372ad8da6afedec0541c8f21c66f1748f64de4ac75090de7ea3cc00afed61d01",
+        "bytes": 7197014
+      }
+    ],
+    "finished_utc": "2026-09-12T09:48:29Z"
+  },
+  "hover_metrics": {
+    "run": "run01",
+    "ulog_sha256": "372ad8da6afedec0541c8f21c66f1748f64de4ac75090de7ea3cc00afed61d01",
+    "hover_start_us": 41768000.0,
+    "hover_end_us": 101888000.0,
+    "hover_duration_s": 60.12,
+    "acceptance": {
+      "hover_60s": true,
+      "hover_auto_loiter_only": true,
+      "hover_armed": true,
+      "hover_no_failsafe": true,
+      "hover_not_landed": true,
+      "logged_landed_disarmed": true,
+      "armed_flight_no_failsafe": true,
+      "armed_flight_no_failure_detector": true,
+      "hover_controls_finite": true
+    },
+    "rate_error_rad_s": {
+      "rmse": [
+        0.0038787517696619034,
+        0.003007198916748166,
+        0.0017812781734392047
+      ],
+      "mean": [
+        -8.698067176737823e-06,
+        -2.6551140763331205e-05,
+        2.1346875200833892e-06
+      ],
+      "std": [
+        0.0038787396624684334,
+        0.0030070790089666843,
+        0.0017812751466408372
+      ],
+      "max_abs": [
+        0.017060592770576477,
+        0.01272978913038969,
+        0.013993721455335617
+      ]
+    },
+    "position_error_m": {
+      "rmse": [
+        0.032416023313999176,
+        0.014742170460522175,
+        0.08244989067316055
+      ],
+      "mean": [
+        -0.001126880757510662,
+        0.0038175531663000584,
+        0.056287430226802826
+      ],
+      "std": [
+        0.03239642083644867,
+        0.014239308424293995,
+        0.06024700030684471
+      ],
+      "max_abs": [
+        0.0884372740983963,
+        0.03801153227686882,
+        0.15009069442749023
+      ]
+    },
+    "position_displacement_from_hover_start_m": {
+      "rmse": [
+        0.03300422430038452,
+        0.01583644188940525,
+        0.08814775198698044
+      ],
+      "mean": [
+        -0.0063195787370204926,
+        -0.0068670460022985935,
+        0.06549088656902313
+      ],
+      "std": [
+        0.032393548637628555,
+        0.014270130544900894,
+        0.05899976193904877
+      ],
+      "max_abs": [
+        0.0810154527425766,
+        0.04111495241522789,
+        0.15979552268981934
+      ]
+    },
+    "tilt_deg": {
+      "rmse": 0.34025874733924866,
+      "mean": 0.3065114915370941,
+      "std": 0.14773869514465332,
+      "max_abs": 0.7094159126281738
+    },
+    "yaw_drift_from_hover_start_deg": {
+      "rmse": 0.01577259600162506,
+      "mean": 0.010991842485964298,
+      "std": 0.011311684735119343,
+      "max_abs": 0.03783241659402847
+    },
+    "control_roll_pitch_yaw_throttle": {
+      "rms": [
+        0.0008233388653025031,
+        0.004329802934080362,
+        0.00036012314376421273,
+        0.7072218060493469
+      ],
+      "min": [
+        -0.002672511851415038,
+        0.0016902285860851407,
+        -0.001216815086081624,
+        0.7043311595916748
+      ],
+      "max": [
+        0.0030474180821329355,
+        0.007027207873761654,
+        0.0011173022212460637,
+        0.7095116376876831
+      ],
+      "logged_sample_tv_not_full_rate": [
+        1.0877357721328735,
+        1.056686520576477,
+        0.4790704846382141,
+        0.4023509621620178
+      ]
+    },
+    "logged_rates": {
+      "vehicle_angular_velocity": {
+        "count": 6012,
+        "logged_hz": 100.00332734411393,
+        "logged_dt_min_s": 0.003999999999990678,
+        "logged_dt_max_s": 0.016000000000005343,
+        "logged_dt_mean_s": 0.009999667276659458,
+        "logged_dt_std_s": 0.0030534526912942687
+      },
+      "vehicle_rates_setpoint": {
+        "count": 3006,
+        "logged_hz": 50.0033280085197,
+        "logged_dt_min_s": 0.015999999999991132,
+        "logged_dt_max_s": 0.02400000000000091,
+        "logged_dt_mean_s": 0.019998668885191348,
+        "logged_dt_std_s": 0.002589110350005613
+      },
+      "actuator_controls_0": {
+        "count": 1202,
+        "logged_hz": 20.00066613375966,
+        "logged_dt_min_s": 0.04399999999999693,
+        "logged_dt_max_s": 0.056000000000011596,
+        "logged_dt_mean_s": 0.04999833472106578,
+        "logged_dt_std_s": 0.003269213579238774
+      },
+      "vehicle_local_position": {
+        "count": 602,
+        "logged_hz": 10.000000000000002,
+        "logged_dt_min_s": 0.09199999999999875,
+        "logged_dt_max_s": 0.10800000000000409,
+        "logged_dt_mean_s": 0.09999999999999999,
+        "logged_dt_std_s": 0.005782525745151925
+      },
+      "vehicle_attitude": {
+        "count": 1202,
+        "logged_hz": 20.000666133759662,
+        "logged_dt_min_s": 0.04399999999999693,
+        "logged_dt_max_s": 0.056000000000011596,
+        "logged_dt_mean_s": 0.049998334721065775,
+        "logged_dt_std_s": 0.003404947748041941
+      }
+    },
+    "ulog_reported_dropout_count": 0,
+    "ulog_reported_dropout_total_ms": 0,
+    "dropout_note": "Absence of logger dropouts does not prove full-rate uORB capture.",
+    "parameter_changes_count": 26,
+    "stationary_filtered_gyro_std_rad_s": [
+      0.0016480202320963144,
+      0.001684993738308549,
+      0.0016973743913695216
+    ],
+    "stationary_raw_sensor_samples": [
+      {
+        "topic": "sensor_accel",
+        "instance": 0,
+        "unit": "m/s^2",
+        "count": 10,
+        "statistics": {
+          "rmse": [
+            0.030595235526561737,
+            0.025841856375336647,
+            9.756179809570312
+          ],
+          "mean": [
+            0.024660278111696243,
+            -0.020350713282823563,
+            -9.756132125854492
+          ],
+          "std": [
+            0.018109092488884926,
+            0.015926390886306763,
+            0.030349768698215485
+          ],
+          "max_abs": [
+            0.05506663769483566,
+            0.043095629662275314,
+            9.806650161743164
+          ]
+        },
+        "note": "Sparse preflight samples, not full-rate noise or independent IMUs."
+      },
+      {
+        "topic": "sensor_accel",
+        "instance": 1,
+        "unit": "m/s^2",
+        "count": 10,
+        "statistics": {
+          "rmse": [
+            0.035678207874298096,
+            0.03440835326910019,
+            9.749772071838379
+          ],
+          "mean": [
+            0.02998419478535652,
+            -0.021026330068707466,
+            -9.749719619750977
+          ],
+          "std": [
+            0.01933603547513485,
+            0.02723652310669422,
+            0.031984224915504456
+          ],
+          "max_abs": [
+            0.06147517263889313,
+            0.07444262504577637,
+            9.796540260314941
+          ]
+        },
+        "note": "Sparse preflight samples, not full-rate noise or independent IMUs."
+      },
+      {
+        "topic": "sensor_accel",
+        "instance": 2,
+        "unit": "m/s^2",
+        "count": 10,
+        "statistics": {
+          "rmse": [
+            0.035678207874298096,
+            0.03440835326910019,
+            9.749772071838379
+          ],
+          "mean": [
+            0.02998419478535652,
+            -0.021026330068707466,
+            -9.749719619750977
+          ],
+          "std": [
+            0.01933603547513485,
+            0.02723652310669422,
+            0.031984224915504456
+          ],
+          "max_abs": [
+            0.06147517263889313,
+            0.07444262504577637,
+            9.796540260314941
+          ]
+        },
+        "note": "Sparse preflight samples, not full-rate noise or independent IMUs."
+      },
+      {
+        "topic": "sensor_gyro",
+        "instance": 0,
+        "unit": "rad/s",
+        "count": 10,
+        "statistics": {
+          "rmse": [
+            0.0019714587833732367,
+            0.001633019419386983,
+            0.002481174422428012
+          ],
+          "mean": [
+            -0.0007989484001882374,
+            -0.0010652643395587802,
+            0.0001597896625753492
+          ],
+          "std": [
+            0.001802312908694148,
+            0.0012377254897728562,
+            0.002476023742929101
+          ],
+          "max_abs": [
+            0.003195793367922306,
+            0.003195793367922306,
+            0.006391586735844612
+          ]
+        },
+        "note": "Sparse preflight samples, not full-rate noise or independent IMUs."
+      },
+      {
+        "topic": "sensor_gyro",
+        "instance": 1,
+        "unit": "rad/s",
+        "count": 10,
+        "statistics": {
+          "rmse": [
+            0.003028657753020525,
+            0.0023062522523105145,
+            0.0032348516397178173
+          ],
+          "mean": [
+            -0.0007676306995563209,
+            -0.0007041427306830883,
+            0.0016942195361480117
+          ],
+          "std": [
+            0.002929762937128544,
+            0.002196128945797682,
+            0.00275570061057806
+          ],
+          "max_abs": [
+            0.004651152994483709,
+            0.004918205086141825,
+            0.007401544135063887
+          ]
+        },
+        "note": "Sparse preflight samples, not full-rate noise or independent IMUs."
+      },
+      {
+        "topic": "sensor_gyro",
+        "instance": 2,
+        "unit": "rad/s",
+        "count": 10,
+        "statistics": {
+          "rmse": [
+            0.003028657753020525,
+            0.0023062522523105145,
+            0.0032348516397178173
+          ],
+          "mean": [
+            -0.0007676306995563209,
+            -0.0007041427306830883,
+            0.0016942195361480117
+          ],
+          "std": [
+            0.002929762937128544,
+            0.002196128945797682,
+            0.00275570061057806
+          ],
+          "max_abs": [
+            0.004651152994483709,
+            0.004918205086141825,
+            0.007401544135063887
+          ]
+        },
+        "note": "Sparse preflight samples, not full-rate noise or independent IMUs."
+      }
+    ],
+    "groundtruth_position_displacement_m": {
+      "rmse": [
+        0.04901533201336861,
+        0.029689598828554153,
+        0.21138103306293488
+      ],
+      "mean": [
+        0.0009990934049710631,
+        -0.015341718681156635,
+        0.13386599719524384
+      ],
+      "std": [
+        0.04900515824556351,
+        0.025418587028980255,
+        0.16359052062034607
+      ],
+      "max_abs": [
+        0.14455339312553406,
+        0.06774155050516129,
+        0.376007080078125
+      ]
+    },
+    "module_perf_counter_source": "two ordered perf calls in console.log",
+    "module_perf_callback_count_delta": 15029,
+    "module_perf_approx_callback_hz": 249.98336660013308
+  },
+  "selection_validation": {
+    "success": true,
+    "analyzer_sha256": "ec0a803c78bb200bf456c94eb2caf3311f0926942131dc12b004103a4e9f548f",
+    "ulog_sha256": "372ad8da6afedec0541c8f21c66f1748f64de4ac75090de7ea3cc00afed61d01",
+    "selection_logged_samples": 16,
+    "all_logged_effective_modes_pid": true,
+    "all_logged_effective_axes_zero": true,
+    "cli_check_count": 16,
+    "preflight_hover_checks_verified_in_ulog": 13,
+    "initial_parameter_differences_vs_M00": {
+      "COM_FLIGHT_UUID": {
+        "M00": 4,
+        "M01": 5
+      },
+      "LND_FLIGHT_T_LO": {
+        "M00": 34680000,
+        "M01": 113092000
+      },
+      "MC_RTC_MODE": {
+        "M00": null,
+        "M01": 0
+      },
+      "MC_STA_AXES": {
+        "M00": null,
+        "M01": 0
+      }
+    },
+    "changed_parameters": [
+      [
+        528000,
+        "MC_RTC_MODE",
+        1
+      ],
+      [
+        528000,
+        "MC_STA_AXES",
+        1
+      ],
+      [
+        1140000,
+        "MC_RTC_MODE",
+        2
+      ],
+      [
+        1140000,
+        "MC_STA_AXES",
+        7
+      ],
+      [
+        2148000,
+        "MC_RTC_MODE",
+        -1
+      ],
+      [
+        2148000,
+        "MC_STA_AXES",
+        0
+      ],
+      [
+        3164000,
+        "MC_RTC_MODE",
+        256
+      ],
+      [
+        3164000,
+        "MC_STA_AXES",
+        0
+      ],
+      [
+        4176000,
+        "MC_RTC_MODE",
+        0
+      ],
+      [
+        4176000,
+        "MC_STA_AXES",
+        8
+      ],
+      [
+        5192000,
+        "MC_RTC_MODE",
+        0
+      ],
+      [
+        5192000,
+        "MC_STA_AXES",
+        -1
+      ],
+      [
+        6008000,
+        "MC_RTC_MODE",
+        0
+      ],
+      [
+        6008000,
+        "MC_STA_AXES",
+        7
+      ],
+      [
+        7024000,
+        "MC_RTC_MODE",
+        0
+      ],
+      [
+        7024000,
+        "MC_STA_AXES",
+        0
+      ],
+      [
+        41780000,
+        "MC_RTC_MODE",
+        1
+      ],
+      [
+        41780000,
+        "MC_STA_AXES",
+        1
+      ],
+      [
+        41984000,
+        "MC_RTC_MODE",
+        2
+      ],
+      [
+        41984000,
+        "MC_STA_AXES",
+        7
+      ],
+      [
+        41988000,
+        "MC_RTC_MODE",
+        2
+      ],
+      [
+        41988000,
+        "MC_STA_AXES",
+        7
+      ],
+      [
+        42800000,
+        "MC_RTC_MODE",
+        0
+      ],
+      [
+        42800000,
+        "MC_STA_AXES",
+        0
+      ],
+      [
+        43816000,
+        "MC_RTC_MODE",
+        0
+      ],
+      [
+        43816000,
+        "MC_STA_AXES",
+        7
+      ]
+    ],
+    "disarmed_check_note": "Final disarm/cleanup checks use archived CLI observations; boot-to-disarm ULog may stop earlier."
+  },
+  "tested_worktree_patch_sha256": "f74beea7b03e86515cc13de8cb4dd84ffce702d9e15f101ff16e9e3167f59b61",
+  "tested_worktree_status_sha256": "b8656c75b8e3200954cb7418106e7348b2194674450e9e204974dbaad2b4717e",
+  "assets_sha256": {
+    "sitl/run.sh": "f0fc7c081c50e8c20e58170a92b359435ee6b9820b01ed6c6ed92bc6a068f282",
+    "sitl/worlds/empty_grey.world": "09d9a334728b35a5ca0392e8751e3df5b8aea8b1d5019f8e850a4b0b8bc57b96",
+    "Tools/sitl_gazebo/models/iris/iris.sdf": "366bf1264ce86c0c65b837a5323410c7cd695b0ffa23cdd29e6c52f6315dc00e",
+    "ROMFS/px4fmu_common/init.d-posix/airframes/10016_iris": "982f170d692f4f7a4cf01b5e74f05b7e7a856dc7da64e6da77edc16f342dce38",
+    "ROMFS/px4fmu_common/mixers/quad_w.main.mix": "3db9434060d08a35e253f33b571ed00175847eb40ab1123b29350a0ee6a21b6d",
+    "src/modules/mc_rate_control/RateControl/RateControl.cpp": "9f90c0ea42ee672138f9aaa76cfeea6ea1abf5df4db3d889c36750dfd1f66a4d",
+    "src/modules/mc_rate_control/RateControl/RateControl.hpp": "ea8cc37349e899f4bd3d914a5220b92a32c7c5078fe4766b6876ad08bd76c37c"
+  },
+  "submodules": " 7c2c623da9f5dcb3f01d32830af1a2ed958de363 Tools/flightgear_bridge (7c2c623)\n cbdb2fc7dd44331da1dcd04a891ed7f8c27b1ef0 Tools/flightgear_bridge/models/Rascal (remotes/origin/electric-14-gcbdb2fc)\n 4540de7ae8e71b9bd6e6f67d085695be0ab36bc3 Tools/flightgear_bridge/models/TF-G1 (4540de7)\n 562ee71388c493675269210f7692d8b7a8bb800d Tools/flightgear_bridge/models/TF-G2 (562ee71)\n 158e429a0110589b1e2adfe868e166271470e144 Tools/flightgear_bridge/models/TF-R1 (heads/master)\n 0a816d8100e9860a031ccfccfb9941bcd6eedc81 Tools/jMAVSim (0a816d8)\n c08380767b21938391bec676a43b36b837af9ba4 Tools/jMAVSim/jMAVlib (heads/master)\n e070c50d591541d440510b65c9da5cad1db5aa9a Tools/jsbsim_bridge (e070c50)\n 40571cd808a204f4062128daeb6bb6db8c134c48 Tools/jsbsim_bridge/models/ATI-Resolution (2019.1)\n d0d1db1961549e557885002cf9c3cff40cc27be2 Tools/jsbsim_bridge/models/Rascal (remotes/origin/preserve-this-branch-for-px4-submodules)\n 822050a7ab6fd87972e59f16312f451bce217a56 Tools/sitl_gazebo (822050a)\n 28ef45c1fcb532b2bfd54c16b059c6a545143b2f Tools/sitl_gazebo/external/OpticalFlow (28ef45c)\n 9b5b567ae77f93d1ef4d36151529ba2506a46e7a Tools/sitl_gazebo/external/OpticalFlow/external/klt_feature_tracker (heads/master)\n 08fd0a73045346448adf6969660196228b23e1fa boards/atlflight/cmake_hexagon (remotes/origin/px4)\n 636fae5ca34eff6007344718755d78fcdf94238e mavlink/include/mavlink/v2.0 (636fae5c)\n 979e27408fa90a3c3d6432190c8f65cc80c3e6b6 platforms/nuttx/NuttX/apps (nuttx-8.2-590-g979e27408)\n bf660cba2af81f055002b3817c87b1f63a78fd09 platforms/nuttx/NuttX/nuttx (nuttx-8.2-3070-gbf660cba2a)\n 0322a4e345e48ea28cb1cee14a33033cdaf0b16a platforms/qurt/dspal (heads/master)\n 07168bd5715818802b78f674816ec851307998a7 platforms/qurt/dspal/cmake_hexagon (remotes/origin/sdk3.1-4-g07168bd)\n c34ef0ce3100684a927c6aecebf0c904bee251b3 src/drivers/gps/devices (remotes/origin/codev_main_12.3_gps_update)\n 29e1aa6c12e3590252b102153d8c62155047a676 src/drivers/uavcan/libuavcan (remotes/origin/pr-nuttx_update_7.31+-4-g29e1aa6c)\n 192295c4f9b67f4a20b0eabf74757b6597415f2b src/drivers/uavcan/libuavcan/dsdl (192295c)\n c58477a644d20ccf95a20c151f3a0402f271c3b8 src/drivers/uavcan/libuavcan/libuavcan/dsdl_compiler/pyuavcan (v1.0.0dev3~7)\n fd12483ddd4e58242d61d74a163e7aeaa1e0f466 src/drivers/uavcan/libuavcan/libuavcan/dsdl_compiler/pyuavcan/dsdl (fd12483)\n 36a01e428b110ff84c8babe5b65667b5e3037d5e src/drivers/uavcan_v1/legacy_data_types (remotes/origin/legacy)\n 2a116170285fb47fcaae150ad21c2ccde0756a5f src/drivers/uavcan_v1/libcanard (1.1.0)\n 0a773b93ce5c94e1d2791b180058cb9897fab7e1 src/drivers/uavcan_v1/public_regulated_data_types (0a773b9)\n 2a116170285fb47fcaae150ad21c2ccde0756a5f src/drivers/uavcannode_gps_demo/libcanard (1.1.0)\n 0a773b93ce5c94e1d2791b180058cb9897fab7e1 src/drivers/uavcannode_gps_demo/public_regulated_data_types (0a773b9)\n baca5d31259c598540e4d1284bc8d8f793abf83a src/lib/crypto/monocypher (3.1.2)\n b3fed06fe822d08d19ab1d2c2f8daf7b7d21951c src/lib/ecl (v1.9.0-rc1-591-gb3fed06)\n b8568a89db8455d0ab2e2e391e2149ba2e5e10dd src/lib/matrix (v1.0.2-195-gb8568a8)\n 21d3cfe3ae570d1674da0105ab23b80958e0449a src/modules/micrortps_bridge/micro-CDR (v1.0.0beta2-54-g21d3cfe)\n",
+  "submodule_worktrees": "",
+  "observed_build_and_test_exits": {
+    "ratecontrol_tests.log": {
+      "exit": 2,
+      "reason": "Test fixture accessor rename; corrected before execution"
+    },
+    "ratecontrol_tests_retry.log": {
+      "exit": 0,
+      "ctest_suites": 2,
+      "gtest_cases": 4
+    },
+    "selection_tests.log": {
+      "exit": 0,
+      "ctest_suites": 1,
+      "gtest_cases": 5
+    },
+    "px4_sitl_default.log": {
+      "exit": 0
+    }
+  },
+  "test_scope_note": "Two deterministic 2048-step sequences compare output and integrator float bits against a frozen M00 reference, including disabled cycles.",
+  "frequency_and_randomness": "Same Iris/gray world, lockstep and SDLOG_PROFILE=131 as M00; one smoke is not a statistical comparison; output log remains decimated."
+}

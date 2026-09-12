@@ -42,6 +42,12 @@ using namespace matrix;
 using namespace time_literals;
 using math::radians;
 
+static_assert(ControllerSelection::PID == rate_ctrl_selection_s::MODE_PID, "selection mode ABI");
+static_assert(ControllerSelection::Accepted == rate_ctrl_selection_s::REQUEST_ACCEPTED, "selection status ABI");
+static_assert(ControllerSelection::Unsupported == rate_ctrl_selection_s::REQUEST_UNSUPPORTED, "selection status ABI");
+static_assert(ControllerSelection::InvalidMode == rate_ctrl_selection_s::REQUEST_INVALID_MODE, "selection status ABI");
+static_assert(ControllerSelection::InvalidAxes == rate_ctrl_selection_s::REQUEST_INVALID_AXES, "selection status ABI");
+
 MulticopterRateControl::MulticopterRateControl(bool vtol) :
 	ModuleParams(nullptr),
 	WorkItem(MODULE_NAME, px4::wq_configurations::rate_ctrl),
@@ -148,6 +154,31 @@ MulticopterRateControl::Run()
 		}
 
 		_vehicle_status_sub.update(&_vehicle_status);
+
+		// Selection uses the latest arming state. Existing PID parameter updates
+		// above remain immediate and retain their original scheduling/order.
+		const bool selection_changed = _rate_control.select(_param_mc_rtc_mode.get(), _param_mc_sta_axes.get(),
+					       _v_control_mode.flag_armed);
+
+		if (selection_changed || !_selection_published) {
+			const auto &selection = _rate_control.selectionStatus();
+			rate_ctrl_selection_s status{};
+			status.timestamp = hrt_absolute_time();
+			status.requested_mode = selection.requested_mode;
+			status.requested_axes = selection.requested_axes;
+			status.effective_mode = selection.effective_mode;
+			status.effective_axes = selection.effective_axes;
+			status.request_status = selection.request_status;
+			status.pending = selection.pending;
+			_selection_status_pub.publish(status);
+			_selection_published = true;
+
+			if (selection.request_status != ControllerSelection::Accepted) {
+				PX4_WARN("controller request mode=%ld axes=%ld: %s; effective=PID axes=0, pending=%d",
+					 (long)selection.requested_mode, (long)selection.requested_axes,
+					 ControllerSelection::statusName(selection.request_status), (int)selection.pending);
+			}
+		}
 
 		if (_landing_gear_sub.updated()) {
 			landing_gear_s landing_gear;
@@ -267,6 +298,25 @@ MulticopterRateControl::Run()
 	}
 
 	perf_end(_loop_perf);
+}
+
+int MulticopterRateControl::print_status()
+{
+	// Read a uORB snapshot instead of racing the work queue's controller state.
+	uORB::Subscription sub{ORB_ID(rate_ctrl_selection)};
+	rate_ctrl_selection_s status{};
+
+	if (sub.copy(&status)) {
+		PX4_INFO("requested: mode=%ld axes=%ld; effective: mode=%u axes=%u; request=%s; pending=%d",
+			 (long)status.requested_mode, (long)status.requested_axes,
+			 (unsigned)status.effective_mode, (unsigned)status.effective_axes,
+			 ControllerSelection::statusName(status.request_status), (int)status.pending);
+
+	} else {
+		PX4_INFO("selection status awaiting first gyro update");
+	}
+
+	return 0;
 }
 
 int MulticopterRateControl::task_spawn(int argc, char *argv[])
