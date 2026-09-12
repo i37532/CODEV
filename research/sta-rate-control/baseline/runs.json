@@ -1,0 +1,290 @@
+{
+  "accepted_count": 3,
+  "all_attempt_count": 5,
+  "data_root": "/home/yr/Desktop/codev doc/experiments/M00-20260912",
+  "note": "Includes setup failures; same-configuration repeats, not independent seeded trials.",
+  "runs": [
+    {
+      "result": {
+        "binary_sha256": "7eb94d98b1a4e88d33985ef584817f95533fc1b5c8bb8608b6439333646d0ef3",
+        "branch": "research/sta-rate-control",
+        "command": [
+          "./sitl/run.sh",
+          "--headless",
+          "--backend",
+          "gazebo",
+          "--model",
+          "iris"
+        ],
+        "error": "RuntimeError(\"CLI failed: listener ('vehicle_local_position', '-n', '1'): ERROR [px4] PX4 daemon not running yet\\n \")",
+        "events": [
+          {
+            "name": "ready",
+            "timestamp_us": 30368000.0
+          },
+          {
+            "name": "takeoff_command",
+            "timestamp_us": 30368000.0
+          }
+        ],
+        "explicit_environment": {
+          "GAZEBO_MASTER_URI": "http://127.0.0.1:11345",
+          "PX4_SITL_WORLD": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world"
+        },
+        "finished_utc": "2026-09-12T02:57:13Z",
+        "launcher_pid": 106126,
+        "launcher_returncode": 0,
+        "logs": [
+          {
+            "archive": "/home/yr/Desktop/codev doc/experiments/M00-20260912/run01/02_54_38.ulg",
+            "bytes": 4002156,
+            "sha256": "c78ef9225b475de97229d422393a77a642fada98f9d347a3eef75d8fdf911e0d",
+            "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-12/02_54_38.ulg"
+          }
+        ],
+        "pid_parameters_modified": false,
+        "runner_sha256": "1e04c7a25bbb421db284344efd3375de678762fe7cd5922aac4c0edf42c4733d",
+        "source_head": "9a3c4e3625474ce7fd2cd5c9687933ccf6a70bc7",
+        "success": false
+      },
+      "run": "run01"
+    },
+    {
+      "result": {
+        "binary_sha256": "7eb94d98b1a4e88d33985ef584817f95533fc1b5c8bb8608b6439333646d0ef3",
+        "branch": "research/sta-rate-control",
+        "command": [
+          "./sitl/run.sh",
+          "--headless",
+          "--backend",
+          "gazebo",
+          "--model",
+          "iris"
+        ],
+        "error": "TimeoutError('Takeoff did not reach stable AUTO_LOITER')",
+        "events": [
+          {
+            "name": "ready",
+            "timestamp_us": 30324000.0
+          },
+          {
+            "name": "takeoff_command",
+            "timestamp_us": 30324000.0
+          }
+        ],
+        "explicit_environment": {
+          "GAZEBO_MASTER_URI": "http://127.0.0.1:11345",
+          "PX4_SITL_WORLD": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world"
+        },
+        "finished_utc": "2026-09-12T03:00:33Z",
+        "launcher_pid": 109018,
+        "launcher_returncode": 0,
+        "logs": [
+          {
+            "archive": "/home/yr/Desktop/codev doc/experiments/M00-20260912/run02/02_57_32.ulg",
+            "bytes": 11354772,
+            "sha256": "48af071efe5a02a5fd2b641c489d05c81261c84605100f6d5ee2657c5ca14494",
+            "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-12/02_57_32.ulg"
+          }
+        ],
+        "pid_parameters_modified": false,
+        "runner_sha256": "d840b106d71b1503ed8e34c954e0e6bf925e91a6cd505a9990ef876bcd88b5c8",
+        "source_head": "9a3c4e3625474ce7fd2cd5c9687933ccf6a70bc7",
+        "success": false
+      },
+      "run": "run02"
+    },
+    {
+      "result": {
+        "binary_sha256": "7eb94d98b1a4e88d33985ef584817f95533fc1b5c8bb8608b6439333646d0ef3",
+        "branch": "research/sta-rate-control",
+        "command": [
+          "./sitl/run.sh",
+          "--headless",
+          "--backend",
+          "gazebo",
+          "--model",
+          "iris"
+        ],
+        "events": [
+          {
+            "name": "ready",
+            "timestamp_us": 30816000.0
+          },
+          {
+            "name": "takeoff_command",
+            "timestamp_us": 30816000.0
+          },
+          {
+            "name": "hold_command_after_takeoff",
+            "timestamp_us": 37896000.0
+          },
+          {
+            "name": "hover_start",
+            "timestamp_us": 42436000.0
+          },
+          {
+            "name": "hover_end",
+            "timestamp_us": 102564000.0
+          },
+          {
+            "name": "land_command",
+            "timestamp_us": 102564000.0
+          },
+          {
+            "name": "landed_disarmed",
+            "timestamp_us": 110664000.0
+          }
+        ],
+        "explicit_environment": {
+          "GAZEBO_MASTER_URI": "http://127.0.0.1:11345",
+          "PX4_SITL_WORLD": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world"
+        },
+        "finished_utc": "2026-09-12T03:03:52Z",
+        "launcher_pid": 112554,
+        "launcher_returncode": 0,
+        "logs": [
+          {
+            "archive": "/home/yr/Desktop/codev doc/experiments/M00-20260912/run03/03_02_01.ulg",
+            "bytes": 6992040,
+            "sha256": "b9ae060984b440bf3f27325f7ba63ff57f12d0d04b8b4dd8d4c629c084d0c17d",
+            "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-12/03_02_01.ulg"
+          }
+        ],
+        "pid_parameters_modified": false,
+        "runner_sha256": "e6522ef5938336b6caf3f962e18a5acf0db4fa9fd421fd2d1568ac17109e3114",
+        "source_head": "9a3c4e3625474ce7fd2cd5c9687933ccf6a70bc7",
+        "success": true
+      },
+      "run": "run03"
+    },
+    {
+      "result": {
+        "binary_sha256": "7eb94d98b1a4e88d33985ef584817f95533fc1b5c8bb8608b6439333646d0ef3",
+        "branch": "research/sta-rate-control",
+        "command": [
+          "./sitl/run.sh",
+          "--headless",
+          "--backend",
+          "gazebo",
+          "--model",
+          "iris"
+        ],
+        "events": [
+          {
+            "name": "ready",
+            "timestamp_us": 30396000.0
+          },
+          {
+            "name": "takeoff_command",
+            "timestamp_us": 30396000.0
+          },
+          {
+            "name": "hold_command_after_takeoff",
+            "timestamp_us": 37468000.0
+          },
+          {
+            "name": "hover_start",
+            "timestamp_us": 42016000.0
+          },
+          {
+            "name": "hover_end",
+            "timestamp_us": 102076000.0
+          },
+          {
+            "name": "land_command",
+            "timestamp_us": 102076000.0
+          },
+          {
+            "name": "landed_disarmed",
+            "timestamp_us": 113712000.0
+          }
+        ],
+        "explicit_environment": {
+          "GAZEBO_MASTER_URI": "http://127.0.0.1:11345",
+          "PX4_SITL_WORLD": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world"
+        },
+        "finished_utc": "2026-09-12T08:00:59Z",
+        "launcher_pid": 131552,
+        "launcher_returncode": 0,
+        "logs": [
+          {
+            "archive": "/home/yr/Desktop/codev doc/experiments/M00-20260912/run04/07_59_05.ulg",
+            "bytes": 7213299,
+            "sha256": "e083fbefc6ac24ff82b123153590cbc8691603044fd2095a6d4022b1762df5f7",
+            "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-12/07_59_05.ulg"
+          }
+        ],
+        "pid_parameters_modified": false,
+        "runner_sha256": "e6522ef5938336b6caf3f962e18a5acf0db4fa9fd421fd2d1568ac17109e3114",
+        "source_head": "9a3c4e3625474ce7fd2cd5c9687933ccf6a70bc7",
+        "success": true
+      },
+      "run": "run04"
+    },
+    {
+      "result": {
+        "binary_sha256": "7eb94d98b1a4e88d33985ef584817f95533fc1b5c8bb8608b6439333646d0ef3",
+        "branch": "research/sta-rate-control",
+        "command": [
+          "./sitl/run.sh",
+          "--headless",
+          "--backend",
+          "gazebo",
+          "--model",
+          "iris"
+        ],
+        "events": [
+          {
+            "name": "ready",
+            "timestamp_us": 30676000.0
+          },
+          {
+            "name": "takeoff_command",
+            "timestamp_us": 30676000.0
+          },
+          {
+            "name": "hold_command_after_takeoff",
+            "timestamp_us": 37756000.0
+          },
+          {
+            "name": "hover_start",
+            "timestamp_us": 42296000.0
+          },
+          {
+            "name": "hover_end",
+            "timestamp_us": 102376000.0
+          },
+          {
+            "name": "land_command",
+            "timestamp_us": 102376000.0
+          },
+          {
+            "name": "landed_disarmed",
+            "timestamp_us": 114004000.0
+          }
+        ],
+        "explicit_environment": {
+          "GAZEBO_MASTER_URI": "http://127.0.0.1:11345",
+          "PX4_SITL_WORLD": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world"
+        },
+        "finished_utc": "2026-09-12T08:03:20Z",
+        "launcher_pid": 133609,
+        "launcher_returncode": 0,
+        "logs": [
+          {
+            "archive": "/home/yr/Desktop/codev doc/experiments/M00-20260912/run05/08_01_26.ulg",
+            "bytes": 7230516,
+            "sha256": "9ae43e9a1751e39f4a6de9860dd440d7a4a05819891efab8da2411c99515a0a9",
+            "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-12/08_01_26.ulg"
+          }
+        ],
+        "pid_parameters_modified": false,
+        "runner_sha256": "e6522ef5938336b6caf3f962e18a5acf0db4fa9fd421fd2d1568ac17109e3114",
+        "source_head": "9a3c4e3625474ce7fd2cd5c9687933ccf6a70bc7",
+        "success": true
+      },
+      "run": "run05"
+    }
+  ]
+}
