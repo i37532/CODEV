@@ -1,0 +1,339 @@
+{
+  "source": {
+    "command": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "exit_code": 0,
+    "stdout": "9a3c4e3625474ce7fd2cd5c9687933ccf6a70bc7",
+    "stderr": ""
+  },
+  "submodules": {
+    "command": [
+      "git",
+      "submodule",
+      "status",
+      "--recursive"
+    ],
+    "exit_code": 0,
+    "stdout": "7c2c623da9f5dcb3f01d32830af1a2ed958de363 Tools/flightgear_bridge (7c2c623)\n cbdb2fc7dd44331da1dcd04a891ed7f8c27b1ef0 Tools/flightgear_bridge/models/Rascal (remotes/origin/electric-14-gcbdb2fc)\n 4540de7ae8e71b9bd6e6f67d085695be0ab36bc3 Tools/flightgear_bridge/models/TF-G1 (4540de7)\n 562ee71388c493675269210f7692d8b7a8bb800d Tools/flightgear_bridge/models/TF-G2 (562ee71)\n 158e429a0110589b1e2adfe868e166271470e144 Tools/flightgear_bridge/models/TF-R1 (heads/master)\n 0a816d8100e9860a031ccfccfb9941bcd6eedc81 Tools/jMAVSim (0a816d8)\n c08380767b21938391bec676a43b36b837af9ba4 Tools/jMAVSim/jMAVlib (heads/master)\n e070c50d591541d440510b65c9da5cad1db5aa9a Tools/jsbsim_bridge (e070c50)\n 40571cd808a204f4062128daeb6bb6db8c134c48 Tools/jsbsim_bridge/models/ATI-Resolution (2019.1)\n d0d1db1961549e557885002cf9c3cff40cc27be2 Tools/jsbsim_bridge/models/Rascal (remotes/origin/preserve-this-branch-for-px4-submodules)\n 822050a7ab6fd87972e59f16312f451bce217a56 Tools/sitl_gazebo (822050a)\n 28ef45c1fcb532b2bfd54c16b059c6a545143b2f Tools/sitl_gazebo/external/OpticalFlow (28ef45c)\n 9b5b567ae77f93d1ef4d36151529ba2506a46e7a Tools/sitl_gazebo/external/OpticalFlow/external/klt_feature_tracker (heads/master)\n 08fd0a73045346448adf6969660196228b23e1fa boards/atlflight/cmake_hexagon (remotes/origin/px4)\n 636fae5ca34eff6007344718755d78fcdf94238e mavlink/include/mavlink/v2.0 (636fae5c)\n 979e27408fa90a3c3d6432190c8f65cc80c3e6b6 platforms/nuttx/NuttX/apps (nuttx-8.2-590-g979e27408)\n bf660cba2af81f055002b3817c87b1f63a78fd09 platforms/nuttx/NuttX/nuttx (nuttx-8.2-3070-gbf660cba2a)\n 0322a4e345e48ea28cb1cee14a33033cdaf0b16a platforms/qurt/dspal (heads/master)\n 07168bd5715818802b78f674816ec851307998a7 platforms/qurt/dspal/cmake_hexagon (remotes/origin/sdk3.1-4-g07168bd)\n c34ef0ce3100684a927c6aecebf0c904bee251b3 src/drivers/gps/devices (remotes/origin/codev_main_12.3_gps_update)\n 29e1aa6c12e3590252b102153d8c62155047a676 src/drivers/uavcan/libuavcan (remotes/origin/pr-nuttx_update_7.31+-4-g29e1aa6c)\n 192295c4f9b67f4a20b0eabf74757b6597415f2b src/drivers/uavcan/libuavcan/dsdl (192295c)\n c58477a644d20ccf95a20c151f3a0402f271c3b8 src/drivers/uavcan/libuavcan/libuavcan/dsdl_compiler/pyuavcan (v1.0.0dev3~7)\n fd12483ddd4e58242d61d74a163e7aeaa1e0f466 src/drivers/uavcan/libuavcan/libuavcan/dsdl_compiler/pyuavcan/dsdl (fd12483)\n 36a01e428b110ff84c8babe5b65667b5e3037d5e src/drivers/uavcan_v1/legacy_data_types (remotes/origin/legacy)\n 2a116170285fb47fcaae150ad21c2ccde0756a5f src/drivers/uavcan_v1/libcanard (1.1.0)\n 0a773b93ce5c94e1d2791b180058cb9897fab7e1 src/drivers/uavcan_v1/public_regulated_data_types (0a773b9)\n 2a116170285fb47fcaae150ad21c2ccde0756a5f src/drivers/uavcannode_gps_demo/libcanard (1.1.0)\n 0a773b93ce5c94e1d2791b180058cb9897fab7e1 src/drivers/uavcannode_gps_demo/public_regulated_data_types (0a773b9)\n baca5d31259c598540e4d1284bc8d8f793abf83a src/lib/crypto/monocypher (3.1.2)\n b3fed06fe822d08d19ab1d2c2f8daf7b7d21951c src/lib/ecl (v1.9.0-rc1-591-gb3fed06)\n b8568a89db8455d0ab2e2e391e2149ba2e5e10dd src/lib/matrix (v1.0.2-195-gb8568a8)\n 21d3cfe3ae570d1674da0105ab23b80958e0449a src/modules/micrortps_bridge/micro-CDR (v1.0.0beta2-54-g21d3cfe)",
+    "stderr": ""
+  },
+  "submodule_worktrees": {
+    "command": [
+      "git",
+      "submodule",
+      "foreach",
+      "--recursive",
+      "--quiet",
+      "git status --porcelain"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "gazebo": {
+    "command": [
+      "gazebo",
+      "--version"
+    ],
+    "exit_code": 255,
+    "stdout": "Gazebo multi-robot simulator, version 11.10.2\nCopyright (C) 2012 Open Source Robotics Foundation.\nReleased under the Apache 2 License.\nhttp://gazebosim.org",
+    "stderr": ""
+  },
+  "gcc": {
+    "command": [
+      "gcc",
+      "--version"
+    ],
+    "exit_code": 0,
+    "stdout": "gcc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0\nCopyright (C) 2021 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+    "stderr": ""
+  },
+  "cmake": {
+    "command": [
+      "cmake",
+      "--version"
+    ],
+    "exit_code": 0,
+    "stdout": "cmake version 3.22.1\n\nCMake suite maintained and supported by Kitware (kitware.com/cmake).",
+    "stderr": ""
+  },
+  "ninja": {
+    "command": [
+      "ninja",
+      "--version"
+    ],
+    "exit_code": 0,
+    "stdout": "1.10.1",
+    "stderr": ""
+  },
+  "python": {
+    "command": [
+      "python3",
+      "--version"
+    ],
+    "exit_code": 0,
+    "stdout": "Python 3.10.12",
+    "stderr": ""
+  },
+  "board_toolchain_present_not_tested": {
+    "command": [
+      "arm-none-eabi-gcc",
+      "--version"
+    ],
+    "exit_code": 0,
+    "stdout": "arm-none-eabi-gcc (15:10.3-2021.07-4) 10.3.1 20210621 (release)\nCopyright (C) 2020 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+    "stderr": ""
+  },
+  "assets": {
+    "sitl/run.sh": {
+      "sha256": "f0fc7c081c50e8c20e58170a92b359435ee6b9820b01ed6c6ed92bc6a068f282",
+      "bytes": 2158
+    },
+    "Tools/sitl_run.sh": {
+      "sha256": "60df5d9cfe17901a35032231babfd26c4b8197c841aabc0c355d70a4bdedbb6f",
+      "bytes": 7256
+    },
+    "sitl/worlds/empty_grey.world": {
+      "sha256": "09d9a334728b35a5ca0392e8751e3df5b8aea8b1d5019f8e850a4b0b8bc57b96",
+      "bytes": 1081
+    },
+    "Tools/sitl_gazebo/models/iris/iris.sdf": {
+      "sha256": "366bf1264ce86c0c65b837a5323410c7cd695b0ffa23cdd29e6c52f6315dc00e",
+      "bytes": 19264
+    },
+    "Tools/sitl_gazebo/models/iris/iris.sdf.jinja": {
+      "sha256": "28bd25741a48a485a2bde689625705bc41f656a984ee16d4ca89d2425d8760a8",
+      "bytes": 19354
+    },
+    "Tools/sitl_gazebo/models/gps/gps.sdf": {
+      "sha256": "ed28b2b88fb667218d2e9c360fac77bd7cd73b4c620a1bd4237b690ddb146a99",
+      "bytes": 2902
+    },
+    "ROMFS/px4fmu_common/init.d-posix/airframes/10016_iris": {
+      "sha256": "982f170d692f4f7a4cf01b5e74f05b7e7a856dc7da64e6da77edc16f342dce38",
+      "bytes": 165
+    },
+    "ROMFS/px4fmu_common/init.d/airframes/4065_codev_dp_1000": {
+      "sha256": "ba400b30e42a4a88f4bde5cbceac318722bdc96d1c6a787f7c48359d795e4d9b",
+      "bytes": 6284
+    },
+    "ROMFS/px4fmu_common/init.d/rc.mc_defaults": {
+      "sha256": "c54c9aeea8d31df6530f0f358e355545679869d22f146f4d9b46647c2cf39f1f",
+      "bytes": 519
+    },
+    "ROMFS/px4fmu_common/init.d-posix/rcS": {
+      "sha256": "babd771917e3aec6db4c3b2c682952d7e366bacda7e80d43cf8c9a533b8b9c8c",
+      "bytes": 7359
+    },
+    "ROMFS/px4fmu_common/mixers/quad_w.main.mix": {
+      "sha256": "3db9434060d08a35e253f33b571ed00175847eb40ab1123b29350a0ee6a21b6d",
+      "bytes": 366
+    },
+    "src/modules/mc_rate_control/RateControl/RateControl.cpp": {
+      "sha256": "9f90c0ea42ee672138f9aaa76cfeea6ea1abf5df4db3d889c36750dfd1f66a4d",
+      "bytes": 4455
+    },
+    "src/modules/mc_rate_control/RateControl/RateControlTest.cpp": {
+      "sha256": "2b3c2557aab0c81438ea2861ba62ac824b4d55180d888ca978d8b6890269989c",
+      "bytes": 1997
+    },
+    "src/modules/mc_rate_control/MulticopterRateControl.cpp": {
+      "sha256": "338a9cb401a291bc4a6cbfefd3a9dcdd03549ca848e65b42cb7c466f8493d14f",
+      "bytes": 11291
+    },
+    "build/px4_sitl_default/bin/px4": {
+      "sha256": "7eb94d98b1a4e88d33985ef584817f95533fc1b5c8bb8608b6439333646d0ef3",
+      "bytes": 34781440
+    },
+    "build/px4_sitl_default/CMakeCache.txt": {
+      "sha256": "b6f550a2b2ccc0c575f57c39772241eb4b0145b52273fd152afc680cefaaad41",
+      "bytes": 50665
+    },
+    "build/px4_sitl_test/unit-RateControl": {
+      "sha256": "903a721730a2464b301342effd3c37a26b1e447ddd046af86d3b0f80646a9b0c",
+      "bytes": 4038320
+    },
+    "build/px4_sitl_default/build_gazebo/libgazebo_airship_dynamics_plugin.so": {
+      "sha256": "9c8ea45680bd93feae250d504856754101161ee0a2429431fc5b7cc3f86f70a9",
+      "bytes": 5428712
+    },
+    "build/px4_sitl_default/build_gazebo/libgazebo_airspeed_plugin.so": {
+      "sha256": "6cba9777cb084b3cdeeab22a842ebbba899cc7a60248dd8eb6989e39a90a87fa",
+      "bytes": 5457728
+    },
+    "build/px4_sitl_default/build_gazebo/libgazebo_barometer_plugin.so": {
+      "sha256": "75a6d4c78cc33a32ededde939670a82b7a9cea066c6867fc98d74a431ce44943",
+      "bytes": 4941608
+    },
+    "build/px4_sitl_default/build_gazebo/libgazebo_camera_manager_plugin.so": {
+      "sha256": "fab52dbf1a0021c9d234696bf7c77c033336843dcb628fa882197714e1d612ff",
+      "bytes": 5801944
+    },
+    "build/px4_sitl_default/build_gazebo/libgazebo_catapult_plugin.so": {
+      "sha256": "cc70f23502881e8d60232f9004ca5668bb725d39da0f2f22dafcb5dd29a51dea",
+      "bytes": 5005944
+    },
+    "build/px4_sitl_default/build_gazebo/libgazebo_controller_interface.so": {
+      "sha256": "e04339180792efb55f5eb9e7e9e44e7a873ad2e027c9084f94084d25dd50d1cc",
+      "bytes": 5159800
+    },
+    "build/px4_sitl_default/build_gazebo/libgazebo_drop_plugin.so": {
+      "sha256": "dd843906cc79ab86aa5b481124b343c0ce682119478abf532fe0beb9faa41dfd",
+      "bytes": 4960704
+    },
+    "build/px4_sitl_default/build_gazebo/libgazebo_gimbal_controller_plugin.so": {
+      "sha256": "c7fc8dd90d04ed38affbeced41f2898273c21689ba2950623c4fe2aa1b6907b9",
+      "bytes": 5199360
+    },
+    "build/px4_sitl_default/build_gazebo/libgazebo_gps_plugin.so": {
+      "sha256": "ea6159d297f7ee5d50b3e669ad184cae3839da732a65c667fada0a25d8717441",
+      "bytes": 5436144
+    },
+    "build/px4_sitl_default/build_gazebo/libgazebo_groundtruth_plugin.so": {
+      "sha256": "000f56e62e37d1470dffd032e98a23186039f2a48b68fa1470e4429204aacaa8",
+      "bytes": 4887752
+    },
+    "build/px4_sitl_default/build_gazebo/libgazebo_imu_plugin.so": {
+      "sha256": "05c2a2df0a3b0b947eb029cacea03fce031f61fbe717f48c1dd2274d64112d8c",
+      "bytes": 5332480
+    },
+    "build/px4_sitl_default/build_gazebo/libgazebo_irlock_plugin.so": {
+      "sha256": "71746d66ac00fc45215034c3112e454b580118f34c2b33dff5f3856289486d74",
+      "bytes": 5431704
+    },
+    "build/px4_sitl_default/build_gazebo/libgazebo_lidar_plugin.so": {
+      "sha256": "f72e720a4dcc2c8788dba34407fb3517ba82faf161f26b0d356ae392085d2ce1",
+      "bytes": 5402288
+    },
+    "build/px4_sitl_default/build_gazebo/libgazebo_magnetometer_plugin.so": {
+      "sha256": "b1b0c80f9dff8bd35870bca328910ade7a7eddafbb89503a0c8af0bf0a53b856",
+      "bytes": 7528184
+    },
+    "build/px4_sitl_default/build_gazebo/libgazebo_mavlink_interface.so": {
+      "sha256": "4c11f4620bae168c5c9ac16e2c5b447ea662152787b242039f1b0cd8f52e346d",
+      "bytes": 9969832
+    },
+    "build/px4_sitl_default/build_gazebo/libgazebo_motor_model.so": {
+      "sha256": "2f7edcfb3127807dac72f7722711235ec5f8d515894724adb7db9053eb9568dd",
+      "bytes": 5269976
+    },
+    "build/px4_sitl_default/build_gazebo/libgazebo_multirotor_base_plugin.so": {
+      "sha256": "87b457b5683a333a7a552852bf33a21fd97519be6d5a5031fec808c59e34f7e2",
+      "bytes": 5051728
+    },
+    "build/px4_sitl_default/build_gazebo/libgazebo_opticalflow_mockup_plugin.so": {
+      "sha256": "34591bdb931aa8ae39f5090167397fb172af2b4d8e58a989c5758d6445fc3046",
+      "bytes": 5117880
+    },
+    "build/px4_sitl_default/build_gazebo/libgazebo_opticalflow_plugin.so": {
+      "sha256": "d2133edb61ffb7b1435e478ac84a3829163119ca277c36a2934e6bd6472d00ad",
+      "bytes": 5880064
+    },
+    "build/px4_sitl_default/build_gazebo/libgazebo_parachute_plugin.so": {
+      "sha256": "4b3f428bf267e5e01485808485c12533749c8f6535e7ecf55eb2096de276faee",
+      "bytes": 4966800
+    },
+    "build/px4_sitl_default/build_gazebo/libgazebo_sonar_plugin.so": {
+      "sha256": "c784420900ef1d4da8325e9bdacab17528a967b16f57e59861aea425d7598f78",
+      "bytes": 5181528
+    },
+    "build/px4_sitl_default/build_gazebo/libgazebo_user_camera_plugin.so": {
+      "sha256": "791eff18e72e6e56b00ba6be63b04fb347464bf53ae0629c400c72cb702b4321",
+      "bytes": 6878064
+    },
+    "build/px4_sitl_default/build_gazebo/libgazebo_usv_dynamics_plugin.so": {
+      "sha256": "e01e28c677ba590067c0491bce9c2ea41b7a7118a9f002dd9f1e8560b14dfda9",
+      "bytes": 5313880
+    },
+    "build/px4_sitl_default/build_gazebo/libgazebo_uuv_plugin.so": {
+      "sha256": "cdcefb5829c404dba140ccdad2c6e1681a04a22998ebee47dac7104cab06bfd1",
+      "bytes": 4866800
+    },
+    "build/px4_sitl_default/build_gazebo/libgazebo_vision_plugin.so": {
+      "sha256": "1d0ef43f43a0bba02bbca39c79c21d8da3a982bdad6418ba5a14d9ecff961df6",
+      "bytes": 4996176
+    },
+    "build/px4_sitl_default/build_gazebo/libgazebo_wind_plugin.so": {
+      "sha256": "77f18c659df6e5e0186db46faffcb0e15d399d51a0429447283e619c8530c50c",
+      "bytes": 5251760
+    },
+    "Tools/sitl_gazebo/src/gazebo_imu_plugin.cpp": {
+      "sha256": "795c48f6cdc34906a0a651294c312dae6ac12f76edf53b66e4385305019a4144",
+      "bytes": 13142
+    },
+    "Tools/sitl_gazebo/include/gazebo_imu_plugin.h": {
+      "sha256": "3fa438186f9d1f5ce8529bd6771e0896c36982e58430c5fa1a6e8c1b3af3e7f1",
+      "bytes": 5245
+    },
+    "Tools/sitl_gazebo/src/gazebo_gps_plugin.cpp": {
+      "sha256": "128a20dc01e140ebba7e7c889cce5c729aa1a013bcafd3b272ea0360f7a42c75",
+      "bytes": 13228
+    },
+    "Tools/sitl_gazebo/include/gazebo_gps_plugin.h": {
+      "sha256": "fcaa736262d89575a6084e659500cb8889d6a927c91f1c044eab5587e74f357f",
+      "bytes": 4361
+    },
+    "Tools/sitl_gazebo/src/gazebo_magnetometer_plugin.cpp": {
+      "sha256": "1d5b30ca8849b21f340a46533c1642a6c1a0e61347ccba259ec08a3a6e6e4698",
+      "bytes": 8596
+    },
+    "Tools/sitl_gazebo/include/gazebo_magnetometer_plugin.h": {
+      "sha256": "b19d8065f029d1b98089b07233e16f24fa9a2bd04d58239afcd0335fb1bd2a7e",
+      "bytes": 4105
+    },
+    "Tools/sitl_gazebo/src/gazebo_barometer_plugin.cpp": {
+      "sha256": "876bcb2816e1505f9bfdc0ab7af6c4114aa88c09c9ea3f516ae61e07cf3ba358",
+      "bytes": 7850
+    },
+    "Tools/sitl_gazebo/include/gazebo_barometer_plugin.h": {
+      "sha256": "d2895b1f0a8d3cb7dada2cc644f4bce63b0709d12758b49f8a7fb91f0f468f86",
+      "bytes": 3715
+    }
+  },
+  "iris_explicit_link_masses_kg": {
+    "base_link": 1.5,
+    "/imu_link": 0.015,
+    "rotor_0": 0.005,
+    "rotor_1": 0.005,
+    "rotor_2": 0.005,
+    "rotor_3": 0.005
+  },
+  "mass_note": "Link masses do not include externally included gps0 model; base_link is not total mass.",
+  "model": "Iris / SYS_AUTOSTART=10016 / quad_w",
+  "not_tested": "CODEV DP1000 airframe 4065 / quad_x; no hardware flight or board firmware build.",
+  "physics": {
+    "engine": "ode",
+    "step_s": 0.004,
+    "requested_update_hz": 250,
+    "requested_real_time_factor": 1,
+    "gravity_m_s2": [
+      0,
+      0,
+      -9.8066
+    ],
+    "lockstep_model_enabled": true
+  },
+  "randomness": {
+    "gazebo_seed_explicitly_set": false,
+    "external_force_injection": false,
+    "sensor_noise_changed": false,
+    "observed_source": "IMU/magnetometer/GPS/barometer use default-constructed std::default_random_engine; no explicit seed override found in inspected plugin sources.",
+    "limitation": "Engine sequence/callback ordering, Gazebo startup and EKF multi-instance selection prevent a claim of bitwise determinism or independent random seeds."
+  },
+  "test_results": {
+    "px4_sitl_default": {
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/M00-20260912/build/px4_sitl_default.log"
+    },
+    "RateControl": {
+      "exit_code": 0,
+      "ctest_count": 1,
+      "gtest_case": "RateControlTest.AllZeroCase",
+      "log": "/home/yr/Desktop/codev doc/experiments/M00-20260912/build/ratecontrol_tests.log",
+      "scope": "Existing zero-input regression only; not a stability or full-controller proof."
+    }
+  }
+}
