@@ -1,6 +1,6 @@
 # PX4 STA 研究目录
 
-已完成 M00 原 PID 基线、M01 仅 PID 可执行的选择框架、M02 ESTA 独立内核与算法测试；阶段验收见对应报告。ESTA/ISTA 尚未接入执行器。
+已完成 M00 原 PID 基线、M01 仅 PID 可执行的选择框架、M02 ESTA 独立内核与算法测试、M03 保护适配器/日志/脚本及 PID SITL 验证；阶段验收见对应报告。ESTA/ISTA 尚未接入执行器。M03 原始 motor_limits 仍丢样，不是合格的完整全速 TV/频谱数据集。
 
 - `plan/`：M00 开始时三份外部计划的历史快照。
 - `environment.md`：环境、模型、参数与启动约定。
@@ -8,9 +8,12 @@
 - `reports/M00.md`：验收、失败记录、限制及下一步边界。
 - `reports/M01.md`、`m01/`：选择框架、逐样本等价回归和 SITL 证据。
 - `reports/M02.md`、`m02/`：ESTA 公式/单位、11 个内核单测、27 组独立对象闭环及 PID 回归证据；MATLAB 未执行。
+- `reports/M03.md`、`m03/`：公共保护、真实更新序号/实际 PID 消费的 mixer 反馈、高频诊断与原始话题丢样统计；30 个 C++、8 个 Python 用例和最终 PID 60.440 s 悬停证据。
 - `scripts/`：SITL 捕获、ULog 分析及证据索引生成器。
 
 M02 算法验证入口：`python3 research/sta-rate-control/scripts/verify_m02.py --output <新的绝对路径>`。它构建 SITL 固件、执行并核对共 20 个相关 GTest，不启动 Gazebo、不驱动执行器。双精度期望值生成器及可选 MATLAB 对照入口见 M02 报告。原始数据独立保存在 `/home/yr/Desktop/codev doc/experiments/M02-20260912`，由 `m02/artifacts.sha256` 索引。
+
+上述 M02 入口包含 M02 历史提交的“算法未链接”约束；M03 已链接保护观察器，应使用 M03 报告的 CTest 命令回归内核。M03 飞行入口为 `run_m03.py --output <新的绝对路径>`，之后执行 `analyze_m03.py <该目录>`；原始数据在 `/home/yr/Desktop/codev doc/experiments/M03-20260913`，91 份指纹见 `m03/artifacts.sha256`。脚本暂时添加 HIGH_RATE 日志位，并在悬停时修改未启用的实验参数验证 pending，结束恢复；全程仍是 PID。中止机制只关闭自有 SITL，不适用于实机安全处置。
 
 ## 复跑一轮（仅本机 Gazebo SITL）
 

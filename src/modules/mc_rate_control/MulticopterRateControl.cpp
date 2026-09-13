@@ -93,6 +93,27 @@ MulticopterRateControl::parameters_updated()
 
 	_rate_control.setFeedForwardGain(
 		Vector3f(_param_mc_rollrate_ff.get(), _param_mc_pitchrate_ff.get(), _param_mc_yawrate_ff.get()));
+	// Diagnostic copies only: original PID setters and their timing are untouched.
+	_research_p = rate_k.emult(Vector3f(_param_mc_rollrate_p.get(), _param_mc_pitchrate_p.get(),
+					    _param_mc_yawrate_p.get()));
+	_research_d = rate_k.emult(Vector3f(_param_mc_rollrate_d.get(), _param_mc_pitchrate_d.get(),
+					    _param_mc_yawrate_d.get()));
+	_research_ff = Vector3f(_param_mc_rollrate_ff.get(), _param_mc_pitchrate_ff.get(), _param_mc_yawrate_ff.get());
+	_sta_requested.mode = _param_mc_rtc_mode.get();
+	_sta_requested.axes = _param_mc_sta_axes.get();
+	// Uncalibrated defaults are zero. Read/stage as one configuration; begin()
+	// applies it only while disarmed. No experimental values affect original PID.
+	const char *l1[] = {"MC_STA_L1_R", "MC_STA_L1_P", "MC_STA_L1_Y"};
+	const char *l2[] = {"MC_STA_L2_R", "MC_STA_L2_P", "MC_STA_L2_Y"};
+	const char *g[] = {"MC_STA_G_R", "MC_STA_G_P", "MC_STA_G_Y"};
+	const char *nu[] = {"MC_STA_NU_R", "MC_STA_NU_P", "MC_STA_NU_Y"};
+
+	for (size_t i = 0; i < 3; ++i) {
+		param_get(param_find(l1[i]), &_sta_requested.gains[i].lambda1);
+		param_get(param_find(l2[i]), &_sta_requested.gains[i].lambda2);
+		param_get(param_find(g[i]), &_sta_requested.gains[i].g);
+		param_get(param_find(nu[i]), &_sta_requested.nu_limit[i]);
+	}
 
 
 	// manual rate control acro mode rate limits
@@ -229,12 +250,55 @@ MulticopterRateControl::Run()
 			}
 		}
 
+		// Research timing does not replace legacy clamped dt. Mixer diagnostics
+		// below record the exact feedback consumed by PID, without another read.
+		StaProtection::Frame frame{};
+		frame.sample = now; frame.armed = _v_control_mode.flag_armed;
+		frame.rate_enabled = _v_control_mode.flag_control_rates_enabled && !_actuators_0_circuit_breaker_enabled;
+		frame.landed = _landed; frame.maybe_landed = _maybe_landed;
+
+		for (int i = 0; i < 3; ++i) {
+			frame.measurement_valid = frame.measurement_valid && PX4_ISFINITE(rates(i))
+						  && PX4_ISFINITE(angular_accel(i)) && PX4_ISFINITE(_rates_sp(i));
+		}
+
+		frame.experiment_active = false; // M03 hard gate: no ESTA/ISTA actuator path
+		_sta_guard.begin(_sta_requested, frame);
+		sta_rate_ctrl_status_s research{};
+		research.measurement_valid = frame.measurement_valid;
+		research.timestamp_sample = now;
+		research.publish_seq = ++_research_publish_seq;
+		research.config_seq = _sta_guard.configSequence();
+		research.config_pending = _sta_guard.pending(); research.config_valid = _sta_guard.configValid();
+		research.raw_dt = _sta_guard.rawDt(); research.dt = dt;
+		research.timing_status = _sta_guard.timing(); research.fault = _sta_guard.fault();
+		research.reset_reason = _sta_guard.resetReason(); research.abort_requested = _sta_guard.abortRequested();
+		const auto &selection = _rate_control.selectionStatus();
+		research.requested_mode = selection.requested_mode; research.requested_axes = selection.requested_axes;
+		research.effective_mode = selection.effective_mode; research.effective_axes = selection.effective_axes;
+		research.request_status = selection.request_status; research.pending = selection.pending;
+		research.armed = frame.armed; research.landed = _landed; research.maybe_landed = _maybe_landed;
+		research.rate_enabled = frame.rate_enabled;
+		research.experiment_frozen = true; // no experiment updates under the M03 gate
+		research.battery_scale = 1.f;
+
+		for (int i = 0; i < 3; ++i) {
+			research.rate[i] = rates(i); research.rate_sp[i] = _rates_sp(i); research.angular_accel[i] = angular_accel(i);
+			research.s[i] = rates(i) - _rates_sp(i); research.nu[i] = _sta_guard.state()[i];
+			research.a_raw[i] = research.xi[i] = research.virtual_state[i] = NAN;
+			research.c_raw[i] = research.c_applied[i] = NAN;
+			research.pid_integral_before[i] = research.pid_integral_after[i] = NAN;
+			research.ista_branch[i] = 255;
+			research.pid_p[i] = _research_p(i); research.pid_d[i] = _research_d(i); research.pid_ff[i] = _research_ff(i);
+		}
+
 		// run the rate controller
 		if (_v_control_mode.flag_control_rates_enabled && !_actuators_0_circuit_breaker_enabled) {
 
 			// reset integral if disarmed
 			if (!_v_control_mode.flag_armed || _vehicle_status.vehicle_type != vehicle_status_s::VEHICLE_TYPE_ROTARY_WING) {
 				_rate_control.resetIntegral();
+				research.pid_reset = true;
 			}
 
 			// update saturation status from mixer feedback
@@ -246,15 +310,27 @@ MulticopterRateControl::Run()
 					saturation_status.value = motor_limits.saturation_status;
 
 					_rate_control.setSaturationStatus(saturation_status);
+					_research_motor = motor_limits; // exact already-consumed feedback; no extra subscription copy
 				}
 			}
 
+			rate_ctrl_status_s integral_before{};
+			_rate_control.getRateControlStatus(integral_before);
+			research.pid_integral_before[0] = integral_before.rollspeed_integ;
+			research.pid_integral_before[1] = integral_before.pitchspeed_integ;
+			research.pid_integral_before[2] = integral_before.yawspeed_integ;
+			research.pid_frozen = _maybe_landed || _landed;
 			// run rate controller
 			const Vector3f att_control = _rate_control.update(rates, _rates_sp, angular_accel, dt, _maybe_landed || _landed);
 
 			// publish rate controller status
 			rate_ctrl_status_s rate_ctrl_status{};
 			_rate_control.getRateControlStatus(rate_ctrl_status);
+			research.pid_integral_after[0] = rate_ctrl_status.rollspeed_integ;
+			research.pid_integral_after[1] = rate_ctrl_status.pitchspeed_integ;
+			research.pid_integral_after[2] = rate_ctrl_status.yawspeed_integ;
+			research.updated = true;
+			++_research_update_seq;
 			rate_ctrl_status.timestamp = hrt_absolute_time();
 			_controller_status_pub.publish(rate_ctrl_status);
 
@@ -278,6 +354,8 @@ MulticopterRateControl::Run()
 				}
 
 				if (_battery_status_scale > 0.0f) {
+					research.battery_scale = _battery_status_scale;
+
 					for (int i = 0; i < 4; i++) {
 						actuators.control[i] *= _battery_status_scale;
 					}
@@ -286,8 +364,17 @@ MulticopterRateControl::Run()
 
 			actuators.timestamp = hrt_absolute_time();
 			_actuators_0_pub.publish(actuators);
+			research.output_valid = true;
+
+			for (int i = 0; i < 3; ++i) {
+				research.c_raw[i] = att_control(i);
+				research.c_applied[i] = actuators.control[i];
+				research.output_valid = research.output_valid && PX4_ISFINITE(att_control(i)) && PX4_ISFINITE(actuators.control[i]);
+			}
 
 		} else if (_v_control_mode.flag_control_termination_enabled) {
+			research.termination = true;
+
 			if (!_vehicle_status.is_vtol) {
 				// publish actuator controls
 				actuator_controls_s actuators{};
@@ -295,6 +382,14 @@ MulticopterRateControl::Run()
 				_actuators_0_pub.publish(actuators);
 			}
 		}
+
+		research.update_seq = _research_update_seq;
+		research.timestamp = hrt_absolute_time();
+		research.motor_timestamp = _research_motor.timestamp;
+		research.motor_update_seq = _research_motor.update_seq;
+		research.motor_saturation = _research_motor.saturation_status;
+		research.motor_valid = StaProtection::Feedback{_research_motor.timestamp, research.timestamp, _research_motor.saturation_status}.valid();
+		_sta_status_pub.publish(research);
 	}
 
 	perf_end(_loop_perf);

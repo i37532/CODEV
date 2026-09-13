@@ -137,6 +137,10 @@ def main(checks=None, scenario_path=None):
                  "status": topic("vehicle_status"), "land": topic("vehicle_land_detected")}
         sample_file.write(json.dumps(state) + "\n")
         sample_file.flush()
+        # Opt-in research monitor. Raising preserves failure evidence and enters
+        # the existing local-instance shutdown path; it never commands fallback.
+        if checks is not None and hasattr(checks, "monitor"):
+            checks.monitor(phase, cli, topic, output, state)
         return state
 
     def event(name, state):

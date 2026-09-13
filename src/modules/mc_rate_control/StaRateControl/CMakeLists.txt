@@ -1,5 +1,6 @@
-px4_add_library(StaRateControl StaRateControl.cpp StaRateControl.hpp)
+px4_add_library(StaRateControl StaRateControl.cpp StaRateControl.hpp StaProtection.cpp StaProtection.hpp)
 target_compile_features(StaRateControl PUBLIC cxx_std_14)
 target_compile_options(StaRateControl PRIVATE ${MAX_CUSTOM_OPT_LEVEL})
 target_include_directories(StaRateControl PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 px4_add_unit_gtest(SRC StaRateControlTest.cpp LINKLIBS StaRateControl)
+px4_add_unit_gtest(SRC StaProtectionTest.cpp LINKLIBS StaRateControl)

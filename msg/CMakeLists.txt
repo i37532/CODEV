@@ -118,6 +118,7 @@ set(msg_files
 	radio_status.msg
 	rate_ctrl_status.msg
 	rate_ctrl_selection.msg
+	sta_rate_ctrl_status.msg
 	rc_channels.msg
 	rc_parameter_map.msg
 	rpm.msg

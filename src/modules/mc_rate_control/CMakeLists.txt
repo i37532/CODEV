@@ -46,8 +46,9 @@ px4_add_module(
 		circuit_breaker
 		mathlib
 		RateControl
+		StaRateControl
 		px4_work_queue
 	)
 
-# M02: compile the experimental kernel, but do not link or call it in the module.
+# M03: protection diagnostics are linked, but the dispatcher still runs only PID.
 add_dependencies(modules__mc_rate_control StaRateControl)

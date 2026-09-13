@@ -34,6 +34,7 @@
 #pragma once
 
 #include <RateControlDispatcher.hpp>
+#include <StaProtection.hpp>
 
 #include <lib/matrix/matrix/math.hpp>
 #include <lib/perf/perf_counter.h>
@@ -54,6 +55,7 @@
 #include <uORB/topics/parameter_update.h>
 #include <uORB/topics/rate_ctrl_status.h>
 #include <uORB/topics/rate_ctrl_selection.h>
+#include <uORB/topics/sta_rate_ctrl_status.h>
 #include <uORB/topics/vehicle_angular_acceleration.h>
 #include <uORB/topics/vehicle_angular_velocity.h>
 #include <uORB/topics/vehicle_control_mode.h>
@@ -91,6 +93,12 @@ private:
 
 	RateControlDispatcher _rate_control; ///< selects the executable rate controller
 	bool _selection_published{false};
+	StaProtection _sta_guard; ///< observation only: never enables experimental actuation in M03
+	StaProtection::Config _sta_requested{};
+	multirotor_motor_limits_s _research_motor{};
+	uORB::Publication<sta_rate_ctrl_status_s> _sta_status_pub{ORB_ID(sta_rate_ctrl_status)};
+	uint32_t _research_publish_seq{0}, _research_update_seq{0};
+	matrix::Vector3f _research_p{}, _research_d{}, _research_ff{};
 
 	uORB::Subscription _battery_status_sub{ORB_ID(battery_status)};
 	uORB::Subscription _landing_gear_sub{ORB_ID(landing_gear)};

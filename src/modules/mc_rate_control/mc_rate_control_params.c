@@ -430,3 +430,135 @@ PARAM_DEFINE_INT32(MC_RTC_MODE, 0);
  * @group Multicopter Rate Control
  */
 PARAM_DEFINE_INT32(MC_STA_AXES, 0);
+
+/**
+ * Experimental R root-error gain
+ *
+ * Units: (rad/s^2)/sqrt(rad/s). Zero means unconfigured. Staged while armed.
+ * M03 diagnostics only: ESTA/ISTA cannot drive actuators.
+ *
+ * @min 0
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_FLOAT(MC_STA_L1_R, 0.0f);
+
+/**
+ * Experimental P root-error gain
+ *
+ * Units: (rad/s^2)/sqrt(rad/s). Zero means unconfigured. Staged while armed.
+ * M03 diagnostics only: ESTA/ISTA cannot drive actuators.
+ *
+ * @min 0
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_FLOAT(MC_STA_L1_P, 0.0f);
+
+/**
+ * Experimental Y root-error gain
+ *
+ * Units: (rad/s^2)/sqrt(rad/s). Zero means unconfigured. Staged while armed.
+ * M03 diagnostics only: ESTA/ISTA cannot drive actuators.
+ *
+ * @min 0
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_FLOAT(MC_STA_L1_Y, 0.0f);
+
+/**
+ * Experimental R nu derivative gain
+ *
+ * Units: rad/s^3. Zero means unconfigured. Staged while armed.
+ * M03 diagnostics only: ESTA/ISTA cannot drive actuators.
+ *
+ * @min 0
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_FLOAT(MC_STA_L2_R, 0.0f);
+
+/**
+ * Experimental P nu derivative gain
+ *
+ * Units: rad/s^3. Zero means unconfigured. Staged while armed.
+ * M03 diagnostics only: ESTA/ISTA cannot drive actuators.
+ *
+ * @min 0
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_FLOAT(MC_STA_L2_P, 0.0f);
+
+/**
+ * Experimental Y nu derivative gain
+ *
+ * Units: rad/s^3. Zero means unconfigured. Staged while armed.
+ * M03 diagnostics only: ESTA/ISTA cannot drive actuators.
+ *
+ * @min 0
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_FLOAT(MC_STA_L2_Y, 0.0f);
+
+/**
+ * Experimental R input gain (requires calibration)
+ *
+ * Units: rad/s^2 per normalized command. Zero means unconfigured. Staged while armed.
+ * M03 diagnostics only: ESTA/ISTA cannot drive actuators.
+ *
+ * @min 0
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_FLOAT(MC_STA_G_R, 0.0f);
+
+/**
+ * Experimental P input gain (requires calibration)
+ *
+ * Units: rad/s^2 per normalized command. Zero means unconfigured. Staged while armed.
+ * M03 diagnostics only: ESTA/ISTA cannot drive actuators.
+ *
+ * @min 0
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_FLOAT(MC_STA_G_P, 0.0f);
+
+/**
+ * Experimental Y input gain (requires calibration)
+ *
+ * Units: rad/s^2 per normalized command. Zero means unconfigured. Staged while armed.
+ * M03 diagnostics only: ESTA/ISTA cannot drive actuators.
+ *
+ * @min 0
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_FLOAT(MC_STA_G_Y, 0.0f);
+
+/**
+ * Experimental R nu magnitude limit
+ *
+ * Units: rad/s^2. Zero means unconfigured. Staged while armed.
+ * M03 diagnostics only: ESTA/ISTA cannot drive actuators.
+ *
+ * @min 0
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_FLOAT(MC_STA_NU_R, 0.0f);
+
+/**
+ * Experimental P nu magnitude limit
+ *
+ * Units: rad/s^2. Zero means unconfigured. Staged while armed.
+ * M03 diagnostics only: ESTA/ISTA cannot drive actuators.
+ *
+ * @min 0
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_FLOAT(MC_STA_NU_P, 0.0f);
+
+/**
+ * Experimental Y nu magnitude limit
+ *
+ * Units: rad/s^2. Zero means unconfigured. Staged while armed.
+ * M03 diagnostics only: ESTA/ISTA cannot drive actuators.
+ *
+ * @min 0
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_FLOAT(MC_STA_NU_Y, 0.0f);
