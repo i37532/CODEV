@@ -1,13 +1,16 @@
 # PX4 STA 研究目录
 
-已完成 M00 原 PID 基线；M01 增加仅 PID 可执行的选择框架，阶段验收见对应报告。ESTA/ISTA 尚未接入。
+已完成 M00 原 PID 基线、M01 仅 PID 可执行的选择框架、M02 ESTA 独立内核与算法测试；阶段验收见对应报告。ESTA/ISTA 尚未接入执行器。
 
 - `plan/`：M00 开始时三份外部计划的历史快照。
 - `environment.md`：环境、模型、参数与启动约定。
 - `baseline/`：版本指纹、参数和指标摘要；不存大型日志。
 - `reports/M00.md`：验收、失败记录、限制及下一步边界。
 - `reports/M01.md`、`m01/`：选择框架、逐样本等价回归和 SITL 证据。
+- `reports/M02.md`、`m02/`：ESTA 公式/单位、11 个内核单测、27 组独立对象闭环及 PID 回归证据；MATLAB 未执行。
 - `scripts/`：SITL 捕获、ULog 分析及证据索引生成器。
+
+M02 算法验证入口：`python3 research/sta-rate-control/scripts/verify_m02.py --output <新的绝对路径>`。它构建 SITL 固件、执行并核对共 20 个相关 GTest，不启动 Gazebo、不驱动执行器。双精度期望值生成器及可选 MATLAB 对照入口见 M02 报告。原始数据独立保存在 `/home/yr/Desktop/codev doc/experiments/M02-20260912`，由 `m02/artifacts.sha256` 索引。
 
 ## 复跑一轮（仅本机 Gazebo SITL）
 

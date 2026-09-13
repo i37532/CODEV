@@ -32,6 +32,7 @@
 ############################################################################
 
 add_subdirectory(RateControl)
+add_subdirectory(StaRateControl)
 
 px4_add_module(
 	MODULE modules__mc_rate_control
@@ -47,3 +48,6 @@ px4_add_module(
 		RateControl
 		px4_work_queue
 	)
+
+# M02: compile the experimental kernel, but do not link or call it in the module.
+add_dependencies(modules__mc_rate_control StaRateControl)
