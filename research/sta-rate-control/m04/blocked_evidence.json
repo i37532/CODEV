@@ -1,0 +1,143 @@
+{
+  "milestone": "M04",
+  "status": "blocked",
+  "start_head": "4f4df5fe09ccc1c52de7149b1526a4b7931baa4f",
+  "branch": "research/sta-rate-control",
+  "commit_sha": null,
+  "source_files": {
+    "msg/sta_rate_ctrl_status.msg": "9adb27fe9f2cb1b2fa57d6bfacb1a67f52463b55fcb1335e5bfc32ac39431bdc",
+    "msg/vehicle_rates_setpoint.msg": "a1959279b34507c59f2f21420201cf82dee8d499a6496b5ab8c6ac5bfb809e34",
+    "research/sta-rate-control/m04/CALIBRATION_CN.md": "631367a635519a18e031b1284de5782439b59a297ebf1662b656fb06f9559ef2",
+    "research/sta-rate-control/m04/calibration.json": "0319442f9713db69272b8b5af3739e65618ad575328b01baf282da60d1f2a6fa",
+    "research/sta-rate-control/m04/iris_esta_roll.json": "bca129beecad91ffb9d427e70d9a6a05f0e82c9a4f74270eb1792a04a2d5ee79",
+    "research/sta-rate-control/m04/protocol.json": "5de7d7c25166343fbd8d00a89ea443c92fec042d4eaf0f642b009aef624d7c2b",
+    "research/sta-rate-control/scripts/analyze_m04.py": "2d2766118c4a485a69741b8a0527aa2b9b22d4efec3e6b0d91a24506047091af",
+    "research/sta-rate-control/scripts/calibrate_m04.py": "29da9e49a84660dec9d227890a7bde0703d571b428354a5744434ecb39e8df99",
+    "research/sta-rate-control/scripts/inspect_m04_timing.py": "8affe0dd4a85d8e603d1d63bb176f38e11242ce2faddfd5b7e3e67243b44c710",
+    "research/sta-rate-control/scripts/run_m04.py": "28c8e92dbb27c1de6cda6820c00c8c1f75922c44ee49ac2f17c8d732c6805e95",
+    "research/sta-rate-control/scripts/test_m04.py": "c066467eab7a41208c61d38a797f61e6aea61008ff03a09c6f0fc003de800793",
+    "src/modules/mc_att_control/AttitudeControl/ResearchPulse.hpp": "443da89bbd94755676f1239a5d17d8abf412bcde3296006aad3fb1f140057cf2",
+    "src/modules/mc_att_control/mc_att_control.hpp": "fb33d4521ebaf5f71c00288a2b6eae419d5236e2b6ddd1a17e99940644b324a9",
+    "src/modules/mc_att_control/mc_att_control_main.cpp": "3af1f8881dab0005626f8a64acbb63e7bbbc36ca9d0d16bf5a9d755c4dd886aa",
+    "src/modules/mc_att_control/mc_att_control_params.c": "7cf200ff85b0f2eb146729c9471f122690c78e88ce030cc899e6512dcb1bb10a",
+    "src/modules/mc_rate_control/MulticopterRateControl.cpp": "4792db60b585e60574d3586449a0e70ea21671517673033df6d2baa3eafd1a3a",
+    "src/modules/mc_rate_control/MulticopterRateControl.hpp": "29b5363750f6fd8fa4458752b4036675239865ba87730d44107743deb4b16ce5",
+    "src/modules/mc_rate_control/RateControl/ControllerSelection.hpp": "8d1698fcac3146ce0a10847e90b4f3a74f81ef0a7916149a5e2882f2d87c10c3",
+    "src/modules/mc_rate_control/RateControl/RateControlDispatcher.hpp": "e125453178f066d452114448d48e3ebaa786e9adc463e9ab175b9df1776b70c1",
+    "src/modules/mc_rate_control/StaRateControl/StaProtection.cpp": "3013a5ca5821242c61fd3116e5042d64f1c3f353fc11a37cbbe36521f5a51c6a",
+    "src/modules/mc_rate_control/StaRateControl/StaProtection.hpp": "4ba47245d173b6e284d9ef6b8a32126dd0d95b2f8c46c90f420d2f7fafb87057",
+    "src/modules/mc_rate_control/StaRateControl/StaProtectionTest.cpp": "47713bbacc2aa56abfecffc5b06d2674f5780f3de5a41b2062235cf21a0d1a40",
+    "src/modules/mc_rate_control/StaRateControl/StaRollApplication.hpp": "45d7169713e7de8290fc6264f8ffc543b5a17b8c5a98c8bdbf9dd18812d8eb86",
+    "src/modules/mc_rate_control/mc_rate_control_params.c": "732c030f732f839335e72d9d3edd8d330081fd206b69221d6d5626de1b010954"
+  },
+  "external_artifact_count": 54,
+  "tests": {
+    "cpp_actual": 37,
+    "cpp_failures": 0,
+    "python_m04": 6,
+    "python_m03": 5,
+    "python_m00": 3,
+    "sitl_build_exit": 0,
+    "test_build_failed_attempt_exit_codes": [
+      2,
+      2
+    ],
+    "test_build_final_exit": 0
+  },
+  "flight_attempts": 1,
+  "pid_flight_completed": 1,
+  "pid_m04_acceptance_passed": 0,
+  "esta_flights": 0,
+  "pid01": {
+    "source_head": "4f4df5fe09ccc1c52de7149b1526a4b7931baa4f",
+    "branch": "research/sta-rate-control",
+    "binary_sha256": "80edf7866d39cbc07c5feaad6cc782c082443066d3d2aec6b03f5d45f69fa7b6",
+    "runner_sha256": "00db523d9ad84d7b968e178bbffc11b3168833b53ebfcc4070e704acfe76ce23",
+    "command": [
+      "./sitl/run.sh",
+      "--headless",
+      "--backend",
+      "gazebo",
+      "--model",
+      "iris"
+    ],
+    "pid_parameters_modified": false,
+    "success": true,
+    "events": [
+      {
+        "name": "ready",
+        "timestamp_us": 30840000
+      },
+      {
+        "name": "takeoff_command",
+        "timestamp_us": 30840000
+      },
+      {
+        "name": "hold_command_after_takeoff",
+        "timestamp_us": 37960000
+      },
+      {
+        "name": "hover_start",
+        "timestamp_us": 42524000
+      },
+      {
+        "name": "hover_end",
+        "timestamp_us": 102584000
+      },
+      {
+        "name": "land_command",
+        "timestamp_us": 102584000
+      },
+      {
+        "name": "landed_disarmed",
+        "timestamp_us": 114776000
+      }
+    ],
+    "scenario_sha256": "f357fe23ae4f22776dd61d2170896c8fd9d9f5e3ed66410671eecf8f28a72de8",
+    "scenario_path": "/home/yr/Desktop/Codev-autopilot/research/sta-rate-control/scripts/run_m04.py",
+    "explicit_environment": {
+      "PX4_SITL_WORLD": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world",
+      "GAZEBO_MASTER_URI": "http://127.0.0.1:11345"
+    },
+    "launcher_pid": 3787784,
+    "launcher_returncode": 0,
+    "logs": [
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-14/01_46_05.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/M04-20260914/pid01/01_46_05.ulg",
+        "sha256": "7b71bede08f5d7a1023e7848365aa3a849b43ff76aa1622f1a59f9b1c584cc0c",
+        "bytes": 98357
+      },
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-14/01_46_06.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/M04-20260914/pid01/01_46_06.ulg",
+        "sha256": "14d4575e75772c220db9aa09ab4d27b93b2c355fde0ed90c3ecbdf36c701cf4a",
+        "bytes": 24260035
+      }
+    ],
+    "finished_utc": "2026-09-14T01:48:00Z"
+  },
+  "blocker": {
+    "samples_us": [
+      105656000,
+      106912000
+    ],
+    "raw_dt": 0,
+    "timing_status": 2,
+    "gyro_switches": [
+      {
+        "from": 1310988,
+        "to": 1310996
+      },
+      {
+        "from": 1310996,
+        "to": 1310988
+      }
+    ],
+    "cause": "Same sample timestamp with changed measurement on IMU selection; upstream actual-publish monotonicity is not enforced by scheduling marker.",
+    "upstream_changed": false,
+    "guard_relaxed": false,
+    "imu_redundancy_disabled": false,
+    "next_authority": "Confirm expansion to upstream sensor-switch timestamp handling and its regression tests before continuing roll ESTA flights."
+  }
+}

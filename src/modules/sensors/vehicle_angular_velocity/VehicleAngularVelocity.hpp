@@ -32,6 +32,8 @@
  ****************************************************************************/
 
 #pragma once
+#include "GyroPublicationGuard.hpp"
+#include <uORB/topics/gyro_sample_status.h>
 
 #include <containers/Bitset.hpp>
 #include <lib/sensor_calibration/Gyroscope.hpp>
@@ -127,6 +129,9 @@ private:
 
 	hrt_abstime _publish_interval_min_us{0};
 	hrt_abstime _last_publish{0};
+	GyroPublicationGuard _publication_guard;
+	uORB::Publication<gyro_sample_status_s> _sample_status_pub{ORB_ID(gyro_sample_status)};
+	uint32_t _sample_event_seq{0};
 
 	float _filter_sample_rate_hz{NAN};
 

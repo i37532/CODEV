@@ -98,6 +98,13 @@ MulticopterAttitudeControl::parameters_updated()
 						radians(_param_mc_yawrate_max.get())));
 
 	_man_tilt_max = math::radians(_param_mpc_man_tilt_max.get());
+#if defined(CONFIG_ARCH_BOARD_PX4_SITL)
+	int32_t test = 0, airframe = 0;
+	param_get(param_find("MC_RATT_TEST"), &test);
+	param_get(param_find("SYS_AUTOSTART"), &airframe);
+	_research_test = test == 1;
+	_research_iris = airframe == 10016;
+#endif
 }
 
 float
@@ -315,12 +322,20 @@ MulticopterAttitudeControl::Run()
 			}
 
 			Vector3f rates_sp = _attitude_control.update(q);
+			// Only this original publisher injects the bounded roll pulse.
+			const float addition = _research_pulse.update(_research_test,
+					       _research_iris && _v_control_mode.flag_armed && !_landed,
+					       v_att.timestamp_sample);
+
+			if (_research_test) { rates_sp(0) += addition; }
 
 			// publish rate setpoint
 			vehicle_rates_setpoint_s v_rates_sp{};
 			v_rates_sp.roll = rates_sp(0);
 			v_rates_sp.pitch = rates_sp(1);
 			v_rates_sp.yaw = rates_sp(2);
+			v_rates_sp.research_roll_addition = addition;
+			v_rates_sp.research_elapsed = _research_pulse.elapsed();
 			_thrust_setpoint_body.copyTo(v_rates_sp.thrust_body);
 			v_rates_sp.timestamp = hrt_absolute_time();
 

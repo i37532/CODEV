@@ -6,14 +6,14 @@
 #include <ControllerSelection.hpp>
 #include <RateControl.hpp>
 
-/** Controller entry point. M01 dispatches exclusively to the original PID.
+/** PID reference entry point; M04 module composes protected ESTA on roll only.
  * Lifecycle decisions remain in MulticopterRateControl at their original
  * call sites; this adapter adds no output limits, resets or float arithmetic.
  */
 class RateControlDispatcher
 {
 public:
-	bool select(int32_t mode, int32_t axes, bool armed) { return _selection.select(mode, axes, armed); }
+	bool select(int32_t mode, int32_t axes, bool armed, bool esta_ready = false) { return _selection.select(mode, axes, armed, esta_ready); }
 	const ControllerSelection::Status &selectionStatus() const { return _selection.status(); }
 
 	void setGains(const matrix::Vector3f &p, const matrix::Vector3f &i, const matrix::Vector3f &d)
@@ -29,8 +29,8 @@ public:
 	matrix::Vector3f update(const matrix::Vector3f &rate, const matrix::Vector3f &rate_sp,
 				const matrix::Vector3f &angular_accel, float dt, bool landed)
 	{
-		// Requested mode is diagnostic only until a new controller is implemented.
-		// Selection guarantees effective_mode == PID; exactly one PID update.
+		// M04 computes the complete PID once so pitch/yaw state order is unchanged.
+		// The module replaces only roll using the separately protected ESTA output.
 		return _pid.update(rate, rate_sp, angular_accel, dt, landed);
 	}
 

@@ -2,7 +2,7 @@
 #pragma once
 #include "StaRateControl.hpp"
 
-/** Research-only adapter. The M03 dispatcher NEVER enables this output path.
+/** Research-only adapter. M04 enables only validated Iris SITL roll actuation.
  * PID does not pass through these limits/resets. A fault returns invalid output,
  * latches until explicit disarmed acknowledgement, and requests SITL abort.
  * No automatic PID takeover, zero-torque fallback or commander override.
@@ -38,7 +38,8 @@ public:
 	};
 
 	void begin(const Config &requested, const Frame &frame);
-	Output step(const std::array<float, 3> &rate, const std::array<float, 3> &sp, const Feedback &feedback);
+	Output step(const std::array<float, 3> &rate, const std::array<float, 3> &sp, const Feedback &feedback,
+		    bool allow_frozen = false);
 	bool acknowledge(); // only disarmed; never silently clear a flight fault
 	const Config &config() const { return _config; }
 	const std::array<float, 3> &state() const { return _kernel.state(); }

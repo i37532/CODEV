@@ -57,6 +57,7 @@
 #include <lib/ecl/AlphaFilter/AlphaFilter.hpp>
 
 #include <AttitudeControl.hpp>
+#include "AttitudeControl/ResearchPulse.hpp"
 
 using namespace time_literals;
 
@@ -99,6 +100,8 @@ private:
 	void		generate_attitude_setpoint(const matrix::Quatf &q, float dt, bool reset_yaw_sp);
 
 	AttitudeControl _attitude_control; ///< class for attitude control calculations
+	ResearchPulse _research_pulse;
+	bool _research_test{false}, _research_iris{false};
 
 	uORB::SubscriptionInterval _parameter_update_sub{ORB_ID(parameter_update), 1_s};
 
@@ -160,4 +163,3 @@ private:
 		(ParamFloat<px4::params::MC_MAN_TILT_TAU>) _param_mc_man_tilt_tau
 	)
 };
-

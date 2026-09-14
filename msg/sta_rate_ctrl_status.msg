@@ -1,4 +1,4 @@
-# M03 diagnostics. PID is the only effective controller. NaN = not applicable.
+# Research diagnostics. M04 permits only PID or Iris SITL roll ESTA. NaN = not applicable.
 uint64 timestamp
 uint64 timestamp_sample
 uint64 motor_timestamp
@@ -21,7 +21,7 @@ bool config_pending
 bool config_valid
 bool motor_valid
 bool measurement_valid
-bool output_valid # true only when updated and raw/applied PID output is finite
+bool output_valid # true only when an emitted PID/mixed output is finite and valid
 bool abort_requested
 bool updated
 bool held # retained previous command only; false for disabled/termination
@@ -36,14 +36,20 @@ bool experiment_frozen
 bool termination
 float32 raw_dt # signed sensor time delta before checks/clamp; NaN on first
 float32 dt # actual legacy PID dt, unchanged by experiment guard
-float32 battery_scale # factor actually applied to c_raw this frame
+float32 battery_scale # applied after experimental output clipping; PID scales c_raw directly
 float32[3] rate
 float32[3] rate_sp
 float32[3] angular_accel
 float32[3] s # rate-rate_sp, rad/s
 float32[3] nu # experiment state rad/s^2, not PID integral
-float32[3] a_raw # NaN for PID: g has not been calibrated
-float32[3] c_raw # actual PID output before battery scaling
+float32[3] nu_before # state used to compute current ESTA a_raw
+float32[3] lambda1
+float32[3] lambda2
+float32[3] g
+float32 research_roll_addition # single mc_att_control publisher test input
+float32 research_elapsed # seconds since pulse trigger, -1 when inactive
+float32[3] a_raw # ESTA virtual angular acceleration; NaN on PID axes
+float32[3] c_raw # PID raw output, or armed ESTA a_raw/g BEFORE output clipping and battery scaling
 float32[3] c_applied # actual emitted normalized command; NOT physical motor torque
 float32[3] pid_integral_before
 float32[3] pid_integral_after

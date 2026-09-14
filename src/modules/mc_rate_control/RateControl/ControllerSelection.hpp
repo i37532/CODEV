@@ -5,11 +5,11 @@
 
 #include <stdint.h>
 
-/** M01 selection policy: PID is the only executable controller. */
+/** PID default; M04 enables roll-only ESTA with explicit validated SITL capability. */
 class ControllerSelection
 {
 public:
-	enum Mode : uint8_t { PID = 0 };
+	enum Mode : uint8_t { PID = 0, ESTA = 1 };
 	enum RequestStatus : uint8_t {
 		Accepted = 0,
 		Unsupported = 1,
@@ -32,24 +32,29 @@ public:
 	 * last evaluated request while armed cancels the pending change.
 	 * No request or rejection resets the PID integrator.
 	 */
-	bool select(int32_t mode, int32_t axes, bool armed)
+	bool select(int32_t mode, int32_t axes, bool armed, bool esta_ready = false)
 	{
-		const RequestStatus reason = validate(mode, axes);
+		const RequestStatus reason = mode == ESTA && axes == 1 && esta_ready ? Accepted : validate(mode, axes);
+		const uint8_t effective = !armed && reason == Accepted ? static_cast<uint8_t>(mode) : _status.effective_mode;
+		const uint8_t effective_axes = effective == ESTA ? 1 : 0;
 		const bool pending = armed && (mode != _evaluated_mode || axes != _evaluated_axes);
 		const bool changed = mode != _status.requested_mode || axes != _status.requested_axes
-				     || reason != _status.request_status || pending != _status.pending;
+				     || reason != _status.request_status || pending != _status.pending
+				     || effective != _status.effective_mode || effective_axes != _status.effective_axes;
 		_status.requested_mode = mode;
 		_status.requested_axes = axes;
 		_status.request_status = reason;
 		_status.pending = pending;
+		_status.effective_mode = effective;
+		_status.effective_axes = effective_axes;
 
 		if (!armed) {
 			_evaluated_mode = mode;
 			_evaluated_axes = axes;
 		}
 
-		// Both the initial and last supported configuration are PID in M01.
-		// Effective axes are zero even when an inactive PID mask is requested.
+		// Rejected requests keep the prior effective selection; never silently
+		// fall back from an armed experiment. PID ignores inactive axes masks.
 		return changed;
 	}
 

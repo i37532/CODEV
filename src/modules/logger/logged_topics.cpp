@@ -60,6 +60,7 @@ void LoggedTopics::add_default_topics()
 	add_topic("cellular_status", 200);
 	add_topic("commander_state");
 	add_topic("rate_ctrl_selection"); // Low-rate, on-change controller selection diagnostics.
+	add_topic("gyro_sample_status"); // Event-only IMU switch / rejected timestamp evidence.
 	add_topic("sta_rate_ctrl_status", 100); // Full rate is selected via HIGH_RATE, not forced in every profile.
 	add_topic("cpuload");
 	add_topic("esc_status", 250);

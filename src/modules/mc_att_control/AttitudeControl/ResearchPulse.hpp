@@ -1,0 +1,36 @@
+// SPDX-License-Identifier: BSD-3-Clause
+#pragma once
+#include <cmath>
+#include <cstdint>
+
+/** Frozen M04 zero-integral sine pulses, one existing rates-setpoint publisher. */
+class ResearchPulse
+{
+public:
+	float update(bool request, bool permitted, uint64_t now)
+	{
+		if (!request || !permitted) { _start = 0; _elapsed = -1.f; _previous = request; return 0.f; }
+
+		if (!_previous) { _start = now; }
+
+		_previous = request;
+
+		if (!_start || now < _start) { _elapsed = -1.f; return 0.f; }
+
+		_elapsed = static_cast<float>(now - _start) * 1e-6f;
+		return value(_elapsed);
+	}
+	float elapsed() const { return _elapsed; }
+	static float value(float t)
+	{
+		if (t < 0.f || t >= 20.f) { return 0.f; }
+
+		const int part = static_cast<int>(t / 8.f);
+		const float local = t - part * 8.f;
+		return local < 4.f ? .04f * (part + 1) * sinf(1.5707963267948966f * local) : 0.f;
+	}
+private:
+	uint64_t _start{0};
+	bool _previous{false};
+	float _elapsed{-1.f};
+};

@@ -85,8 +85,8 @@ void StaProtection::begin(const Config &requested, const Frame &frame)
 	_last_sample = frame.sample;
 	_allowed = frame.experiment_active && frame.armed && frame.rate_enabled && !frame.landed && !frame.maybe_landed;
 
-	if (_allowed) {
-		if (_config.mode != 1 || !validConfig(_config)) { latch(Configuration); }
+	if (frame.experiment_active && frame.armed && frame.rate_enabled) {
+		if (_config.mode != 1 || !validConfig(_config) || (!_previous.armed && !_request_valid)) { latch(Configuration); }
 
 		else if (!frame.measurement_valid) { latch(Measurement); }
 
@@ -107,14 +107,19 @@ bool StaProtection::acknowledge()
 }
 
 StaProtection::Output StaProtection::step(const std::array<float, 3> &rate, const std::array<float, 3> &sp,
-		const Feedback &feedback)
+		const Feedback &feedback, bool allow_frozen)
 {
 	Output out{};
 	const float nan = std::numeric_limits<float>::quiet_NaN();
 	out.a.fill(nan); out.c_raw.fill(nan); out.c_applied.fill(nan);
 	out.nu = state();
 
-	if (!canUpdate()) { return out; }
+	// Land/maybe_landed freeze nu, not the proportional correction needed for
+	// takeoff. Only M04 explicitly requests this armed, active frozen evaluation.
+	const bool frozen_evaluation = allow_frozen && _frame.experiment_active && _frame.armed
+				       && _frame.rate_enabled && !_used && _fault == None;
+
+	if (!canUpdate() && !frozen_evaluation) { return out; }
 
 	_used = true;
 	StaRateControl proposal = _kernel; // all selected axes commit together, or none do
@@ -150,7 +155,7 @@ StaProtection::Output StaProtection::step(const std::array<float, 3> &rate, cons
 
 		if (bounded < nu || bounded > nu) { out.limits[i] |= NuLimit; }
 
-		proposal.reset(i, bounded);
+		proposal.reset(i, _allowed ? bounded : state()[i]);
 		out.a[i] = candidate.a; out.c_raw[i] = candidate.c_raw;
 		out.c_applied[i] = std::max(-_config.c_limit, std::min(_config.c_limit, candidate.c_raw));
 
@@ -158,6 +163,6 @@ StaProtection::Output StaProtection::step(const std::array<float, 3> &rate, cons
 	}
 
 	_kernel = proposal;
-	out.nu = state(); out.valid = true; out.updated = true;
+	out.nu = state(); out.valid = true; out.updated = _allowed;
 	return out;
 }

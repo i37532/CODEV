@@ -2,6 +2,11 @@
 #include "StaProtection.hpp"
 #include <gtest/gtest.h>
 #include <cmath>
+#include <cstring>
+#include "StaRollApplication.hpp"
+#include "../RateControl/ControllerSelection.hpp"
+#include "../../mc_att_control/AttitudeControl/ResearchPulse.hpp"
+#include "../../sensors/vehicle_angular_velocity/GyroPublicationGuard.hpp"
 
 using Guard = StaProtection;
 namespace
@@ -190,4 +195,136 @@ TEST(StaProtectionTest, InvalidConfigurationDomain)
 		c = config(); c.nu_limit[1] = bad; EXPECT_FALSE(Guard::validConfig(c));
 		c = config(); c.c_limit = bad; EXPECT_FALSE(Guard::validConfig(c));
 	}
+}
+
+TEST(M04, RollDirectionAndNonselectedPidBitIdentity)
+{
+	for (float sign : {-1.f, 1.f}) {
+		Guard g; auto c = config(); c.axes = 1; initialize(g, c);
+		const auto result = g.step({sign, 0.f, 0.f}, {}, feedback(), true);
+		ASSERT_TRUE(result.valid); EXPECT_LT(result.c_raw[0] * sign, 0.f);
+		std::array<float, 3> mixed{}, pid{.125f, -.234567f, .345678f};
+		ASSERT_TRUE(StaRollApplication::apply(true, true, result, pid, mixed));
+		EXPECT_FLOAT_EQ(mixed[0], result.c_applied[0]);
+		EXPECT_EQ(std::memcmp(&mixed[1], &pid[1], 2 * sizeof(float)), 0);
+		ASSERT_TRUE(StaRollApplication::apply(false, true, {}, pid, mixed));
+		EXPECT_EQ(std::memcmp(mixed.data(), pid.data(), 3 * sizeof(float)), 0);
+	}
+}
+
+TEST(M04, FaultSuppressesActuationRatherThanPidTakeover)
+{
+	std::array<float, 3> mixed{}, pid{.1f, .2f, .3f};
+	EXPECT_FALSE(StaRollApplication::apply(true, true, {}, pid, mixed));
+	Guard g; auto c = config(); c.axes = 1; initialize(g, c);
+	g.begin(c, airborne(1004000));
+	EXPECT_TRUE(g.abortRequested());
+	EXPECT_FALSE(StaRollApplication::apply(true, true, g.step({}, {}, feedback(), true), pid, mixed));
+	EXPECT_TRUE(StaRollApplication::apply(true, false, {}, pid, mixed));
+	EXPECT_FLOAT_EQ(mixed[0], 0.f); // only disarmed, never fault fallback
+}
+
+TEST(M04, GroundCorrectionWithoutNuIntegration)
+{
+	Guard g; auto c = config(); c.axes = 1; initialize(g, c);
+	auto f = airborne(1008000); f.landed = true; f.maybe_landed = true;
+	g.begin(c, f);
+	const auto result = g.step({.1f, 0.f, 0.f}, {}, feedback(), true);
+	ASSERT_TRUE(result.valid); EXPECT_FALSE(result.updated);
+	EXPECT_LT(result.c_applied[0], 0.f); EXPECT_FLOAT_EQ(g.state()[0], 0.f);
+	EXPECT_FALSE(g.step({}, {}, feedback(), true).valid);
+	EXPECT_FALSE(g.canUpdate());
+}
+
+TEST(M04, CapabilityRollOnlyAndArmedSwitchIsStaged)
+{
+	ControllerSelection s;
+	s.select(1, 1, false, false); EXPECT_EQ(s.status().effective_mode, 0);
+	s.select(1, 1, false, true); EXPECT_EQ(s.status().effective_mode, 1);
+	s.select(0, 0, true, true); EXPECT_EQ(s.status().effective_mode, 1); EXPECT_TRUE(s.status().pending);
+	s.select(1, 1, true, true); EXPECT_FALSE(s.status().pending);
+	s.select(2, 1, false, true); EXPECT_EQ(s.status().request_status, ControllerSelection::Unsupported);
+	s.select(1, 3, false, true); EXPECT_EQ(s.status().effective_axes, 1);
+	EXPECT_EQ(s.status().request_status, ControllerSelection::Unsupported);
+	s.select(0, 0, false); EXPECT_EQ(s.status().effective_mode, 0);
+}
+
+TEST(M04, RejectInvalidConfigurationOnArmingButNotMidflight)
+{
+	Guard g; auto c = config(); c.axes = 1; initialize(g, c);
+	auto bad = c; bad.c_limit = 0.f;
+	g.begin(bad, airborne(1008000)); EXPECT_TRUE(g.pending()); EXPECT_FALSE(g.abortRequested());
+	Guard::Frame ground; ground.sample = 1012000; g.begin(bad, ground);
+	g.begin(bad, airborne(1016000)); EXPECT_EQ(g.fault(), Guard::Configuration);
+}
+
+TEST(M04, PulseZeroIntegralBoundedAndSingleTrigger)
+{
+	double sum = 0.;
+
+	for (int k = 0; k <= 6000; ++k) {
+		const float v = ResearchPulse::value(k * .004f);
+		EXPECT_LE(fabsf(v), .120001f); sum += static_cast<double>(v) * .004;
+	}
+
+	EXPECT_NEAR(sum, 0., 1e-6);
+	ResearchPulse p;
+	EXPECT_FLOAT_EQ(p.update(true, false, 1000000), 0.f);
+	EXPECT_FLOAT_EQ(p.update(true, true, 2000000), 0.f); // no automatic trigger after forbidden request
+	p.update(false, true, 3000000); p.update(true, true, 4000000);
+	EXPECT_NEAR(p.update(true, true, 5000000), .04f, 1e-6f);
+	EXPECT_FLOAT_EQ(p.update(true, true, 30000000), 0.f);
+}
+
+static void checkLaggedRollObject(float lambda1, float lambda2)
+{
+	for (double mismatch : {.8, 1., 1.2}) {
+		Guard g; auto c = config(); c.axes = 1; c.c_limit = .15f;
+		c.gains[0] = {lambda1, lambda2, 130.575283f}; c.nu_limit[0] = 3.f;
+		Guard::Frame ground; ground.sample = 1000000; g.begin(c, ground);
+		double angle = 0., rate = 0., acceleration = 0., max_angle = 0.;
+
+		for (int k = 1; k <= 15000; ++k) {
+			g.begin(c, airborne(1000000 + 4000 * k));
+			const float sp = static_cast<float>(-6.5 * angle) + ResearchPulse::value(k * .004f - 15.f);
+			const auto out = g.step({static_cast<float>(rate), 0.f, 0.f}, {sp, 0.f, 0.f}, feedback(), true);
+			ASSERT_TRUE(out.valid);
+			// Independent rigid-body integrator with 25 ms actuator lag;
+			// uncertainty sweep is engineering sensitivity, not flight validation.
+			acceleration += (130.575283 * mismatch * static_cast<double>(out.c_applied[0]) - acceleration) * (1. - exp(
+						-.004 / .025));
+			rate += .004 * acceleration; angle += .004 * rate;
+			max_angle = std::max(max_angle, fabs(angle));
+			ASSERT_TRUE(std::isfinite(rate)); EXPECT_LT(fabs(rate), 1.);
+		}
+
+		EXPECT_LT(max_angle, .261799); EXPECT_LT(fabs(angle), .01);
+	}
+}
+
+TEST(M04, PulsesOnIndependentLaggedRollObject)
+{
+	checkLaggedRollObject(3.f, 6.f);
+	checkLaggedRollObject(3.f, .5f);
+	checkLaggedRollObject(1.5f, .5f);
+	checkLaggedRollObject(1.5f, .05f);
+	checkLaggedRollObject(2.5f, .05f);
+}
+
+TEST(M04, UpstreamDuplicateDoesNotAdvanceNuAndRealGapStillLatches)
+{
+	GyroPublicationGuard source;
+	Guard g; auto c = config(); c.axes = 1;
+	Guard::Frame ground; ground.sample = 1000000;
+	ASSERT_TRUE(source.consider(ground.sample, 1, true).publish); g.begin(c, ground);
+	ASSERT_TRUE(source.consider(1004000, 1, true).publish); g.begin(c, airborne(1004000));
+	ASSERT_TRUE(g.step({.1f, 0.f, 0.f}, {}, feedback(), true).valid);
+	const float nu = g.state()[0];
+	EXPECT_FALSE(source.consider(1004000, 2, true).publish);
+	EXPECT_FLOAT_EQ(g.state()[0], nu); // no new downstream begin/update
+	ASSERT_TRUE(source.consider(1008000, 2, true).publish); g.begin(c, airborne(1008000));
+	EXPECT_EQ(g.timing(), Guard::None); EXPECT_FALSE(g.abortRequested());
+	ASSERT_TRUE(source.consider(1108000, 2, true).publish); g.begin(c, airborne(1108000));
+	EXPECT_EQ(g.fault(), Guard::LongGap); EXPECT_TRUE(g.abortRequested());
+	EXPECT_FALSE(g.step({}, {}, feedback(), true).valid);
 }
