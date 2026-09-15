@@ -12,6 +12,7 @@ M04 已按用户授权修复 IMU 切换时间戳发布契约；协议 v3 下 PID
 - `reports/M02.md`、`m02/`：ESTA 公式/单位、11 个内核单测、27 组独立对象闭环及 PID 回归证据；MATLAB 未执行。
 - `reports/M03.md`、`m03/`：公共保护、真实更新序号/实际 PID 消费的 mixer 反馈、高频诊断与原始话题丢样统计；30 个 C++、8 个 Python 用例和最终 PID 60.440 s 悬停证据。
 - `reports/M04.md`、`m04/`：roll 标定、协议修订、五组候选、上游 IMU 修复、44 个 C++/17 个 Python 用例、六轮比较和最终构建复核；复现使用 `run_m04.py`、`analyze_m04.py`、`compare_m04.py`。
+- `M04_RUN_PLOTJUGGLER_CN.md`：Gazebo/PX4 启动、PID/roll ESTA 切换、三轮自动对比及 PlotJuggler 曲线选择快速指南。
 - `scripts/`：SITL 捕获、ULog 分析及证据索引生成器。
 
 M02 算法验证入口：`python3 research/sta-rate-control/scripts/verify_m02.py --output <新的绝对路径>`。它构建 SITL 固件、执行并核对共 20 个相关 GTest，不启动 Gazebo、不驱动执行器。双精度期望值生成器及可选 MATLAB 对照入口见 M02 报告。原始数据独立保存在 `/home/yr/Desktop/codev doc/experiments/M02-20260912`，由 `m02/artifacts.sha256` 索引。
