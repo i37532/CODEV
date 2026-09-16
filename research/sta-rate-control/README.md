@@ -1,5 +1,7 @@
 # PX4 STA 研究目录
 
+日常操作入口：[sim_scripts 中文说明](../../sim_scripts/README_CN.md)。三个入口：`start.sh` 启动Gazebo，`switch.sh pid|esta` 选择算法，`fly.sh hover|figure8|yaw` 自动完成10秒悬停、8字轨迹或定点yaw激励及起降，保留当前仿真窗口供下一轮对比。
+
 已完成 M00～M06 的各阶段限定范围验收。M06在Iris固定悬停航向协议v2下完成PID/三轴ESTA各三轮，45项比值均≤1.25，最大1.175228，见 [M06报告](reports/M06.md)。默认仍为 PID，ISTA 未开放。原始 motor_limits 仍丢样，不是完整全速 TV/频谱数据集。
 
 M04 已按用户授权修复 IMU 切换时间戳发布契约；协议 v3 下 PID/ESTA 同固件各三轮通过，最终注释修订构建另各一轮复核。M04 最终独立配置 `m04/iris_esta_roll.json`（lambda1=2.5、lambda2=0.05）达到该小幅场景门槛，五组候选和所有失败均保留。详见 [M04 报告](reports/M04.md)，历史暂停报告另存 `reports/M04_BLOCKED_20260914.md`。
