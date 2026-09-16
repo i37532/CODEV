@@ -5,7 +5,7 @@
 
 #include <stdint.h>
 
-/** PID default; M04 enables roll-only ESTA with explicit validated SITL capability. */
+/** PID default; ESTA requires explicit validated SITL R or R/P capability. */
 class ControllerSelection
 {
 public:
@@ -34,9 +34,10 @@ public:
 	 */
 	bool select(int32_t mode, int32_t axes, bool armed, bool esta_ready = false)
 	{
-		const RequestStatus reason = mode == ESTA && axes == 1 && esta_ready ? Accepted : validate(mode, axes);
+		const RequestStatus reason = mode == ESTA && (axes == 1 || axes == 3) && esta_ready ? Accepted : validate(mode, axes);
 		const uint8_t effective = !armed && reason == Accepted ? static_cast<uint8_t>(mode) : _status.effective_mode;
-		const uint8_t effective_axes = effective == ESTA ? 1 : 0;
+		const uint8_t effective_axes = effective != ESTA ? 0 :
+					       (!armed && reason == Accepted ? static_cast<uint8_t>(axes) : _status.effective_axes);
 		const bool pending = armed && (mode != _evaluated_mode || axes != _evaluated_axes);
 		const bool changed = mode != _status.requested_mode || axes != _status.requested_axes
 				     || reason != _status.request_status || pending != _status.pending

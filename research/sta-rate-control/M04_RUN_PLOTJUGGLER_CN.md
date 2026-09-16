@@ -1,5 +1,7 @@
 # PX4 Gazebo PID / roll ESTA 快速运行与 PlotJuggler 查看指南
 
+本文保留 M04 roll 单轴操作。M05 已增加经过名义 SITL 验收的 AXES=3；双轴参数、36秒组合激励和新增 pitch 曲线请看 [M05运行说明](m05/RUN_CN.md)。下文“当前M04只开放roll”指本文的历史版本范围。
+
 适用仓库：`/home/yr/Desktop/Codev-autopilot`
 
 适用分支：`research/sta-rate-control`

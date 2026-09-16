@@ -1,4 +1,4 @@
-# Research diagnostics. M04 permits only PID or Iris SITL roll ESTA. NaN = not applicable.
+# Research diagnostics. M05 permits PID or Iris SITL R / R/P ESTA. NaN = not applicable.
 uint64 timestamp
 uint64 timestamp_sample
 uint64 motor_timestamp
@@ -47,6 +47,7 @@ float32[3] lambda1
 float32[3] lambda2
 float32[3] g
 float32 research_roll_addition # single mc_att_control publisher test input
+float32 research_pitch_addition # single mc_att_control publisher M05 pitch test input
 float32 research_elapsed # seconds since pulse trigger, -1 when inactive
 float32[3] a_raw # ESTA virtual angular acceleration; NaN on PID axes
 float32[3] c_raw # PID raw output, or armed ESTA a_raw/g BEFORE output clipping and battery scaling

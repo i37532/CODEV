@@ -115,7 +115,7 @@ StaProtection::Output StaProtection::step(const std::array<float, 3> &rate, cons
 	out.nu = state();
 
 	// Land/maybe_landed freeze nu, not the proportional correction needed for
-	// takeoff. Only M04 explicitly requests this armed, active frozen evaluation.
+	// takeoff. The staged SITL application explicitly requests this evaluation.
 	const bool frozen_evaluation = allow_frozen && _frame.experiment_active && _frame.armed
 				       && _frame.rate_enabled && !_used && _fault == None;
 

@@ -24,17 +24,22 @@ def arrays(raw, key):
 
 
 class Checks:
+    stage = 'm04'
+    prefix = 'M04'
+    config_name = 'iris_esta_roll.json'
+
     def __init__(self):
-        self.mode = int(os.environ.get('M04_MODE', '0'))
+        self.mode = int(os.environ.get(self.prefix+'_MODE', '0'))
         if self.mode not in (0, 1):
             raise ValueError('Only PID or roll ESTA')
-        config_path = Path(os.environ.get('M04_CONFIG', str(RESEARCH/'m04/iris_esta_roll.json')))
+        config_path = Path(os.environ.get(self.prefix+'_CONFIG', str(RESEARCH/self.stage/self.config_name)))
         self.config = json.loads(config_path.read_text())
         self.config['MC_RTC_MODE'] = self.mode
-        self.config['MC_STA_AXES'] = self.mode
-        self.protocol = json.loads((RESEARCH/'m04/protocol.json').read_text())
+        self.axes = int(self.config['MC_STA_AXES']) if self.mode else 0
+        self.config['MC_STA_AXES'] = self.axes
+        self.protocol = json.loads((RESEARCH/self.stage/'protocol.json').read_text())
         self.config.update(self.protocol.get('scenario_parameters',{}))
-        calibration=json.loads((RESEARCH/'m04/calibration.json').read_text())
+        calibration=json.loads((RESEARCH/self.stage/'calibration.json').read_text())
         for path,expected in calibration['files'].items():
             if digest(RESEARCH.parents[1]/path)!=expected:
                 raise RuntimeError('Calibrated model/source changed: '+path)
@@ -63,7 +68,9 @@ class Checks:
             save(output/'m04_config.json',self.config)
             save(output/'m04_protocol.json',self.protocol)
             save(output/'m04_source_hashes.json', {str(p.relative_to(RESEARCH)):digest(p) for p in
-                 [RESEARCH/'m04/calibration.json',RESEARCH/'m04/protocol.json',Path(__file__)]})
+                 [RESEARCH/self.stage/'calibration.json',RESEARCH/self.stage/'protocol.json',Path(__file__),
+                  RESEARCH/'scripts/run_m00.py', RESEARCH/'scripts/run_m03.py',
+                  RESEARCH/('scripts/run_'+self.stage+'.py')]})
             # Gains first, axes then mode. All are validated before arming.
             for name,value in self.config.items():
                 cli('param','set',name,value)
@@ -76,7 +83,7 @@ class Checks:
             deadline = time.monotonic()+12
             while time.monotonic()<deadline:
                 status=topic('sta_rate_ctrl_status')
-                if status.get('effective_mode') == self.mode and status.get('effective_axes') == self.mode and status.get('config_valid'):
+                if status.get('effective_mode') == self.mode and status.get('effective_axes') == self.axes and status.get('config_valid'):
                     break
                 time.sleep(.2)
             else:
@@ -100,7 +107,7 @@ class Checks:
         now=state['position'].get('timestamp',0)
         if phase=='warmup' and (not now or ('timestamp' not in d and now<=30e6)):
             return
-        if d.get('effective_mode')!=self.mode or d.get('effective_axes')!=self.mode:
+        if d.get('effective_mode')!=self.mode or d.get('effective_axes')!=self.axes:
             raise RuntimeError('Mode/axis mismatch')
         if d.get('fault',1) or d.get('abort_requested',True):
             raise RuntimeError('Latched controller fault: '+str(d))
@@ -121,7 +128,7 @@ class Checks:
                 if abs(state['position']['z']-sp.get('z',float('inf')))>self.protocol['limits']['height_error_m']:
                     raise RuntimeError('Height tracking boundary exceeded')
         if phase=='hover' and self.hover_start and not self.triggered and now-self.hover_start>=15e6:
-            cli('param','set','MC_RATT_TEST',1)
+            cli('param','set','MC_RATT_TEST',self.protocol.get('trigger',1))
             self.triggered=True
             save(output/'pulse_trigger.json',dict(timestamp_us=now))
         with (output/'m04_monitor.jsonl').open('a') as stream:

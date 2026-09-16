@@ -33,6 +33,9 @@ def main(run):
     protocol=json.loads((run/'m04_protocol.json').read_text())
     limits=protocol['limits']
     mode=int(config['MC_RTC_MODE'])
+    mask_axes=int(config['MC_STA_AXES'])
+    experiment_axes=[i for i in range(3) if mask_axes & (1<<i)]
+    rp=protocol.get('milestone')=='M05'
     require(result['success'],'Scenario failure')
     candidates=[]
     for index,item in enumerate(result['logs']):
@@ -48,10 +51,10 @@ def main(run):
     d=log.get_dataset('sta_rate_ctrl_status').data
     start,end=metrics['hover_start_us'],metrics['hover_end_us']
     hover=(d['timestamp_sample']>=start)&(d['timestamp_sample']<=end)
-    tracking=hover&(d['research_elapsed']>=0)&(d['research_elapsed']<=24)
+    tracking=hover&(d['research_elapsed']>=0)&(d['research_elapsed']<=protocol.get('tracking_seconds',24))
     require(np.count_nonzero(hover)>1000 and np.count_nonzero(tracking)>1000,'Insufficient samples')
     armed=d['armed'].astype(bool)
-    for key,value in [('requested_mode',mode),('requested_axes',mode),('effective_mode',mode),('effective_axes',mode),
+    for key,value in [('requested_mode',mode),('requested_axes',mask_axes),('effective_mode',mode),('effective_axes',mask_axes),
                       ('request_status',0),('pending',0),('fault',0),('abort_requested',0)]:
         require(np.all(d[key]==value),'Unexpected '+key)
     for key in ['measurement_valid','output_valid','updated']:
@@ -65,6 +68,9 @@ def main(run):
     require(np.all(np.abs(vector(d,'rate')[armed])<=limits['rate_rad_s']),'Rate bound')
     require(np.all(np.abs(vector(d,'c_applied')[armed,0])<=limits['roll_command_abs']+1e-6),'Roll command bound')
     require(np.all(np.abs(vector(d,'nu')[armed,0])<=limits['nu_abs_rad_s2']+1e-6),'Nu bound')
+    if rp:
+        require(np.all(np.abs(vector(d,'c_applied')[armed,1])<=limits['pitch_command_abs']+1e-6),'Pitch command bound')
+        require(np.all(np.abs(vector(d,'nu')[armed,1])<=limits['nu_abs_rad_s2']+1e-6),'Pitch nu bound')
     require(metrics['tilt_deg']['max_abs']<=limits['tilt_deg'],'Tilt bound')
     attitude=log.get_dataset('vehicle_attitude').data
     preceding=np.clip(np.searchsorted(d['timestamp_sample'],attitude['timestamp'],side='right')-1,0,len(armed)-1)
@@ -74,33 +80,39 @@ def main(run):
     require(metrics['position_error_m']['max_abs'][2]<=limits['height_error_m'],'Height bound')
     # PID pure path and both non-experimental axes keep float operation order.
     expected,raw=pid_output(d),vector(d,'c_raw')
-    axes=[0,1,2] if mode==0 else [1,2]
+    axes=[i for i in range(3) if i not in experiment_axes]
     updated=d['updated'].astype(bool)
     a=expected[updated][:,axes].copy(); b=raw[updated][:,axes].copy()
     pid_mismatch=int(np.count_nonzero(a.view(np.uint32)!=b.view(np.uint32)))
     require(pid_mismatch==0,'PID bit mismatch')
-    if mode==1:
-        s=vector(d,'s')[:,0]; old=vector(d,'nu_before')[:,0]
-        l1,l2,g=(vector(d,n)[:,0] for n in ('lambda1','lambda2','g'))
+    for axis in experiment_axes:
+        s=vector(d,'s')[:,axis]; old=vector(d,'nu_before')[:,axis]
+        l1,l2,g=(vector(d,n)[:,axis] for n in ('lambda1','lambda2','g'))
+        for field,param in [('lambda1','L1'),('lambda2','L2'),('g','G')]:
+            require(np.all(vector(d,field)[armed,axis]==np.float32(config['MC_STA_'+param+'_'+'RPY'[axis]])), 'Logged gain mismatch')
         sigma=np.sign(s).astype(np.float32)
         alpha=-(l1*np.sqrt(np.abs(s)))*sigma+old
-        np.testing.assert_allclose(vector(d,'a_raw')[armed,0],alpha[armed],rtol=1e-6,atol=1e-7)
-        np.testing.assert_allclose(raw[armed,0],(alpha/g)[armed],rtol=1e-6,atol=1e-7)
+        np.testing.assert_allclose(vector(d,'a_raw')[armed,axis],alpha[armed],rtol=1e-6,atol=1e-7)
+        np.testing.assert_allclose(raw[armed,axis],(alpha/g)[armed],rtol=1e-6,atol=1e-7)
         nu_next=old-(d['raw_dt']*l2)*sigma
-        freeze=(d['limits[0]']&3)!=0
+        freeze=(d[f'limits[{axis}]']&3)!=0
         # Output-limit winding direction is a freeze, just as invalid feedback.
         delta=nu_next-old
-        freeze |= ((raw[:,0]>.15)&(delta>0))|((raw[:,0]<-.15)&(delta<0))
+        freeze |= ((raw[:,axis]>.15)&(delta>0))|((raw[:,axis]<-.15)&(delta<0))
         freeze |= ~d['experiment_updated'].astype(bool)
         nu_next=np.where(freeze,old,np.clip(nu_next,-3,3))
-        np.testing.assert_allclose(vector(d,'nu')[armed,0],nu_next[armed],rtol=1e-6,atol=1e-7)
+        np.testing.assert_allclose(vector(d,'nu')[armed,axis],nu_next[armed],rtol=1e-6,atol=1e-7)
+        # Full-rate state continuity detects shared/swapped states, not just a local formula.
+        contiguous=(np.diff(d['update_seq'].astype(np.int64))==1)&armed[1:]&armed[:-1]&(d['reset_reason'][1:]==0)
+        np.testing.assert_array_equal(old[1:][contiguous],vector(d,'nu')[:-1,axis][contiguous])
+    if mode==1:
         require(np.all(d['experiment_updated'][hover]),'Frozen experiment in hover')
-        require(np.all(vector(d,'nu')[:,1:]==0),'Non-roll experimental state changed')
+        require(np.all(vector(d,'nu')[:,axes]==0),'Non-selected experimental state changed')
     else:
         require(np.all(d['experiment_updated']==0),'PID experiment updated')
     command=raw.copy()
-    if mode==1:
-        command[:,0]=np.clip(command[:,0],-.15,.15)
+    for axis in experiment_axes:
+        command[:,axis]=np.clip(command[:,axis],-.15,.15)
     np.testing.assert_allclose(vector(d,'c_applied')[updated],(command*d['battery_scale'][:,None])[updated],rtol=1e-6,atol=1e-7)
     act=log.get_dataset('actuator_controls_0').data
     common,di,ai=np.intersect1d(d['timestamp_sample'][updated],act['timestamp_sample'],return_indices=True)
@@ -110,11 +122,34 @@ def main(run):
     error=vector(d,'s')
     stats={name:dict(rmse=np.sqrt(np.mean(error[mask].astype(float)**2,axis=0)),samples=int(np.count_nonzero(mask)))
            for name,mask in [('hover',hover),('tracking',tracking)]}
+    for name,(lo,hi) in protocol.get('windows',{}).items():
+        mask=hover&(d['research_elapsed']>=lo)&(d['research_elapsed']<hi)
+        require(np.count_nonzero(mask)>2000,'Missing phase '+name)
+        stats[name]=dict(rmse=np.sqrt(np.mean(error[mask].astype(float)**2,axis=0)),samples=int(np.count_nonzero(mask)),
+                         rate_rms=np.sqrt(np.mean(vector(d,'rate')[mask].astype(float)**2,axis=0)),
+                         command_rms=np.sqrt(np.mean(vector(d,'c_applied')[mask].astype(float)**2,axis=0)))
+        for axis,field in enumerate(['research_roll_addition','research_pitch_addition']):
+            values=d[field][mask]
+            commanded=name=='synchronous' or name==['roll_only','pitch_only'][axis]
+            if commanded:
+                require(np.max(values)>.119 and np.min(values)<-.119,'Incomplete phase signs '+name)
+                require(abs(float(np.trapz(values,d['research_elapsed'][mask])))<.002,'Phase nonzero integral')
+            else:
+                require(np.all(values==0),'Uncommanded axis received excitation')
     pulse=d['research_roll_addition']
     require(np.max(pulse[tracking])>.119 and np.min(pulse[tracking])<-.119,'Pulse sequence incomplete')
     elapsed=d['research_elapsed'][tracking].astype(float)
     integral=float(np.trapz(pulse[tracking],elapsed))
     require(abs(integral)<.002,'Pulse not zero integral')
+    if rp:
+        pitch_pulse=d['research_pitch_addition'][tracking]
+        require(abs(float(np.trapz(pitch_pulse,elapsed)))<.002,'Pitch pulse not zero integral')
+        t=d['research_elapsed'].astype(float)
+        local=t % 12; cycle=np.floor(local/4)
+        expected_pulse=.04*(cycle+1)*np.sin(np.pi*.5*(local-4*cycle))
+        for axis,field in enumerate(['research_roll_addition','research_pitch_addition']):
+            active=(t>=0)&(t<36)&((np.floor(t/12)==axis)|(t>=24))
+            np.testing.assert_allclose(d[field],np.where(active,expected_pulse,0),atol=2e-6,rtol=1e-5)
     motor=log.get_dataset('multirotor_motor_limits').data
     mm=(motor['timestamp']>=start)&(motor['timestamp']<=end)
     seq=dict(status=sequence_stats(d['publish_seq'][hover],d['timestamp_sample'][hover]),
@@ -156,6 +191,23 @@ def main(run):
                  max_armed_tilt_deg=float(np.max(tilt[am])),max_armed_roll_command=float(np.max(np.abs(vector(d,'c_applied')[armed,0]))),
                  dropout_count=len(log.dropouts),full_raw_topic_tv_ready=all(s['missing']==0 for s in seq.values()) and not log.dropouts,
                  parameter_differences=changes,parameter_changes=log.changed_parameters)
+    if rp:
+        asp=log.get_dataset('vehicle_attitude_setpoint').data
+        q=np.column_stack([attitude[f'q[{i}]'] for i in range(4)]).astype(float)
+        yaw=np.arctan2(2*(q[:,0]*q[:,3]+q[:,1]*q[:,2]),1-2*(q[:,2]**2+q[:,3]**2))
+        previous=np.clip(np.searchsorted(asp['timestamp'],attitude['timestamp'],side='right')-1,0,len(asp['timestamp'])-1)
+        yaw_error=np.arctan2(np.sin(yaw-asp['yaw_body'][previous]),np.cos(yaw-asp['yaw_body'][previous]))
+        ah=(attitude['timestamp']>=start)&(attitude['timestamp']<=end)
+        require(np.count_nonzero(ah)>100 and np.all(np.isfinite(yaw_error[ah])),'Invalid yaw attitude data')
+        summary.update(axes=mask_axes, milestone='M05',
+                       yaw_attitude_error_rad=dict(rmse=float(np.sqrt(np.mean(yaw_error[ah]**2))),max_abs=float(np.max(np.abs(yaw_error[ah])))),
+                       all_axes_max_nu=np.max(np.abs(vector(d,'nu')[armed]),axis=0),
+                       all_axes_max_command=np.max(np.abs(vector(d,'c_applied')[armed]),axis=0),
+                       all_axes_hover_max_command=np.max(np.abs(vector(d,'c_applied')[hover]),axis=0),
+                       all_axes_armed_limits_fraction={str(axis):{str(bit):float(np.mean(d[f'limits[{axis}]'][armed]&bit!=0)) for bit in (1,2,4,8)} for axis in range(3)},
+                       all_axes_armed_mixer_saturation_fraction={str(axis):{direction:float(np.mean((d['motor_saturation'][armed]&(1<<(3+2*axis+j)))!=0)) for j,direction in enumerate(['positive','negative'])} for axis in range(3)},
+                       all_axes_limits_fraction={str(axis):{str(bit):float(np.mean(d[f'limits[{axis}]'][hover]&bit!=0)) for bit in (1,2,4,8)} for axis in range(3)},
+                       all_axes_mixer_saturation_fraction={str(axis):{direction:float(np.mean((d['motor_saturation'][hover]&(1<<(3+2*axis+j)))!=0)) for j,direction in enumerate(['positive','negative'])} for axis in range(3)})
     (run/'m04_analysis.json').write_text(json.dumps(summary,indent=2,default=plain)+'\n')
     print(json.dumps(summary,indent=2,default=plain))
 

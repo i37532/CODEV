@@ -6,7 +6,7 @@
 #include <ControllerSelection.hpp>
 #include <RateControl.hpp>
 
-/** PID reference entry point; M04 module composes protected ESTA on roll only.
+/** PID reference entry point; module composes protected ESTA on selected R/P axes.
  * Lifecycle decisions remain in MulticopterRateControl at their original
  * call sites; this adapter adds no output limits, resets or float arithmetic.
  */
@@ -29,8 +29,8 @@ public:
 	matrix::Vector3f update(const matrix::Vector3f &rate, const matrix::Vector3f &rate_sp,
 				const matrix::Vector3f &angular_accel, float dt, bool landed)
 	{
-		// M04 computes the complete PID once so pitch/yaw state order is unchanged.
-		// The module replaces only roll using the separately protected ESTA output.
+		// Mixed-axis stages compute complete PID once, retaining its state order.
+		// The module replaces selected axes using the separately protected ESTA output.
 		return _pid.update(rate, rate_sp, angular_accel, dt, landed);
 	}
 

@@ -21,6 +21,17 @@ public:
 		return value(_elapsed);
 	}
 	float elapsed() const { return _elapsed; }
+	// M05: R only [0,12), P only [12,24), synchronous R/P [24,36).
+	// Each 4 s cycle has zero integral; amplitudes grow .04, .08, .12.
+	static float combined(float t, unsigned axis)
+	{
+		if (!std::isfinite(t) || t < 0.f || t >= 36.f || axis > 1) { return 0.f; }
+		const int phase = static_cast<int>(t / 12.f);
+		if (phase < 2 && axis != static_cast<unsigned>(phase)) { return 0.f; }
+		const float local = t - 12.f * phase;
+		const int cycle = static_cast<int>(local / 4.f);
+		return .04f * (cycle + 1) * sinf(1.5707963267948966f * (local - 4.f * cycle));
+	}
 	static float value(float t)
 	{
 		if (t < 0.f || t >= 20.f) { return 0.f; }

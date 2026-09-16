@@ -244,7 +244,7 @@ TEST(M04, CapabilityRollOnlyAndArmedSwitchIsStaged)
 	s.select(0, 0, true, true); EXPECT_EQ(s.status().effective_mode, 1); EXPECT_TRUE(s.status().pending);
 	s.select(1, 1, true, true); EXPECT_FALSE(s.status().pending);
 	s.select(2, 1, false, true); EXPECT_EQ(s.status().request_status, ControllerSelection::Unsupported);
-	s.select(1, 3, false, true); EXPECT_EQ(s.status().effective_axes, 1);
+	s.select(1, 7, false, true); EXPECT_EQ(s.status().effective_axes, 1);
 	EXPECT_EQ(s.status().request_status, ControllerSelection::Unsupported);
 	s.select(0, 0, false); EXPECT_EQ(s.status().effective_mode, 0);
 }

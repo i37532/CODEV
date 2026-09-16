@@ -2,7 +2,7 @@
 #pragma once
 #include "StaRateControl.hpp"
 
-/** Research-only adapter. M04 enables only validated Iris SITL roll actuation.
+/** Research-only adapter. M05 enables validated Iris SITL R / R/P actuation.
  * PID does not pass through these limits/resets. A fault returns invalid output,
  * latches until explicit disarmed acknowledgement, and requests SITL abort.
  * No automatic PID takeover, zero-torque fallback or commander override.

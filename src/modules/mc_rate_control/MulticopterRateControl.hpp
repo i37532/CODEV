@@ -35,7 +35,7 @@
 
 #include <RateControlDispatcher.hpp>
 #include <StaProtection.hpp>
-#include <StaRollApplication.hpp>
+#include <StaAxesApplication.hpp>
 
 #include <lib/matrix/matrix/math.hpp>
 #include <lib/perf/perf_counter.h>
@@ -100,6 +100,7 @@ private:
 	bool _research_input_valid{false};
 	uint64_t _research_sp_timestamp{0};
 	float _research_test_addition{0.f}, _research_test_elapsed{-1.f};
+	float _research_pitch_addition{0.f};
 	multirotor_motor_limits_s _research_motor{};
 	uORB::Publication<sta_rate_ctrl_status_s> _sta_status_pub{ORB_ID(sta_rate_ctrl_status)};
 	uint32_t _research_publish_seq{0}, _research_update_seq{0};

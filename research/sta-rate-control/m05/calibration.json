@@ -1,0 +1,254 @@
+{
+  "method": "model-only quasi-static, full inertia solve; no motor reaction in R/P derivative",
+  "mass_kg": 1.5499999999999994,
+  "com_flu_m": [
+    0.0009677419354838714,
+    0.0,
+    0.0002967741935483872
+  ],
+  "inertia_frd_kg_m2": [
+    [
+      0.030043343483870964,
+      0.0,
+      -4.4516129032258627e-07
+    ],
+    [
+      0.0,
+      0.03073440787096774,
+      0.0
+    ],
+    [
+      -4.4516129032258627e-07,
+      0.0,
+      0.05771156438709677
+    ]
+  ],
+  "g_P": 112.7635334435299,
+  "g_R_retained": 130.5752831836131,
+  "pitch_mixer": [
+    0.707107,
+    -0.707107,
+    0.707107,
+    -0.707107
+  ],
+  "pitch_lever_frd_m": [
+    0.12903225806451613,
+    -0.13096774193548388,
+    0.12903225806451613,
+    -0.13096774193548388
+  ],
+  "rp_acceleration_jacobian": [
+    [
+      130.57528319857406,
+      0.0
+    ],
+    [
+      0.0,
+      112.7635334435299
+    ],
+    [
+      0.0010071995477896015,
+      0.0
+    ]
+  ],
+  "working_point": {
+    "throttle": 0.707,
+    "roll": 0,
+    "pitch": 0.004,
+    "yaw": 0
+  },
+  "samples": [
+    {
+      "throttle": 0.65,
+      "delta_c_pitch": -0.01,
+      "delta_alpha": [
+        0.0,
+        -1.04802292804485,
+        0.0
+      ],
+      "gain": 104.802292804485
+    },
+    {
+      "throttle": 0.65,
+      "delta_c_pitch": -0.005,
+      "delta_alpha": [
+        0.0,
+        -0.524002269740188,
+        0.0
+      ],
+      "gain": 104.8004539480376
+    },
+    {
+      "throttle": 0.65,
+      "delta_c_pitch": -0.001,
+      "delta_alpha": [
+        0.0,
+        -0.10479898286289673,
+        0.0
+      ],
+      "gain": 104.79898286289672
+    },
+    {
+      "throttle": 0.65,
+      "delta_c_pitch": 0.001,
+      "delta_alpha": [
+        0.0,
+        0.10479824732030461,
+        0.0
+      ],
+      "gain": 104.79824732030461
+    },
+    {
+      "throttle": 0.65,
+      "delta_c_pitch": 0.005,
+      "delta_alpha": [
+        0.0,
+        0.5239838811757319,
+        0.0
+      ],
+      "gain": 104.79677623514638
+    },
+    {
+      "throttle": 0.65,
+      "delta_c_pitch": 0.01,
+      "delta_alpha": [
+        0.0,
+        1.0479493737870187,
+        0.0
+      ],
+      "gain": 104.79493737870186
+    },
+    {
+      "throttle": 0.707,
+      "delta_c_pitch": -0.01,
+      "delta_alpha": [
+        0.0,
+        -1.1276721115638966,
+        0.0
+      ],
+      "gain": 112.76721115638965
+    },
+    {
+      "throttle": 0.707,
+      "delta_c_pitch": -0.005,
+      "delta_alpha": [
+        0.0,
+        -0.5638268614997329,
+        0.0
+      ],
+      "gain": 112.76537229994659
+    },
+    {
+      "throttle": 0.707,
+      "delta_c_pitch": -0.001,
+      "delta_alpha": [
+        0.0,
+        -0.11276390121480426,
+        0.0
+      ],
+      "gain": 112.76390121480425
+    },
+    {
+      "throttle": 0.707,
+      "delta_c_pitch": 0.001,
+      "delta_alpha": [
+        0.0,
+        0.11276316567220854,
+        0.0
+      ],
+      "gain": 112.76316567220853
+    },
+    {
+      "throttle": 0.707,
+      "delta_c_pitch": 0.005,
+      "delta_alpha": [
+        0.0,
+        0.5638084729352462,
+        0.0
+      ],
+      "gain": 112.76169458704923
+    },
+    {
+      "throttle": 0.707,
+      "delta_c_pitch": 0.01,
+      "delta_alpha": [
+        0.0,
+        1.127598557306067,
+        0.0
+      ],
+      "gain": 112.75985573060669
+    },
+    {
+      "throttle": 0.75,
+      "delta_c_pitch": -0.01,
+      "delta_alpha": [
+        0.0,
+        -1.1877583377273924,
+        0.0
+      ],
+      "gain": 118.77583377273923
+    },
+    {
+      "throttle": 0.75,
+      "delta_c_pitch": -0.005,
+      "delta_alpha": [
+        0.0,
+        -0.5938699745814574,
+        0.0
+      ],
+      "gain": 118.77399491629149
+    },
+    {
+      "throttle": 0.75,
+      "delta_c_pitch": -0.001,
+      "delta_alpha": [
+        0.0,
+        -0.11877252383114771,
+        0.0
+      ],
+      "gain": 118.77252383114771
+    },
+    {
+      "throttle": 0.75,
+      "delta_c_pitch": 0.001,
+      "delta_alpha": [
+        0.0,
+        0.11877178828854837,
+        0.0
+      ],
+      "gain": 118.77178828854836
+    },
+    {
+      "throttle": 0.75,
+      "delta_c_pitch": 0.005,
+      "delta_alpha": [
+        0.0,
+        0.5938515860170085,
+        0.0
+      ],
+      "gain": 118.7703172034017
+    },
+    {
+      "throttle": 0.75,
+      "delta_c_pitch": 0.01,
+      "delta_alpha": [
+        0.0,
+        1.1876847834695683,
+        0.0
+      ],
+      "gain": 118.76847834695683
+    }
+  ],
+  "local_gain_variation": 0.07066642753633268,
+  "unit": "rad/s^2 per normalized pitch command",
+  "uncertainty": "Not measured: 12.5/25 ms motor lag, filters, drag and coupling. +/-20% is an engineering sensitivity range, NOT a confidence interval.",
+  "files": {
+    "Tools/sitl_gazebo/models/iris/iris.sdf": "366bf1264ce86c0c65b837a5323410c7cd695b0ffa23cdd29e6c52f6315dc00e",
+    "Tools/sitl_gazebo/models/gps/gps.sdf": "ed28b2b88fb667218d2e9c360fac77bd7cd73b4c620a1bd4237b690ddb146a99",
+    "build/px4_sitl_default/src/lib/mixer/MultirotorMixer/mixer_multirotor_normalized.generated.h": "928f33bd53b0e2cabb64b797e4f195775842e2ee6cb073d81662498575f8bd13",
+    "src/drivers/pwm_out_sim/PWMSim.hpp": "e5710fc1efcbb49e885f3726a9766605175f1b5f7177f9b6af8fe9c5f2837b04",
+    "src/modules/simulator/simulator_mavlink.cpp": "843c1cb93c0046cc39c7d332015e52eec4f0db6c2000cfb24535e7b821196212",
+    "Tools/sitl_gazebo/src/gazebo_motor_model.cpp": "bf5c3ee5ee01dcfbbb17a5832c2fb7b98f9f8fcc307b6dc059ede55d0cdb69b1",
+    "Tools/sitl_gazebo/src/gazebo_mavlink_interface.cpp": "85d26a3640f9514093ed7f332870b32d363f7946ab77b12965c5f977069532de"
+  }
+}

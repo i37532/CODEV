@@ -101,7 +101,7 @@ MulticopterRateControl::parameters_updated()
 	_research_ff = Vector3f(_param_mc_rollrate_ff.get(), _param_mc_pitchrate_ff.get(), _param_mc_yawrate_ff.get());
 	_sta_requested.mode = _param_mc_rtc_mode.get();
 	_sta_requested.axes = _param_mc_sta_axes.get();
-	_sta_requested.c_limit = 0.15f; // frozen M04 normalized roll-command bound
+	_sta_requested.c_limit = 0.15f; // frozen normalized R/P command bound
 #if defined(CONFIG_ARCH_BOARD_PX4_SITL)
 	int32_t airframe = 0;
 	param_get(param_find("SYS_AUTOSTART"), &airframe);
@@ -184,9 +184,7 @@ MulticopterRateControl::Run()
 
 		// Selection uses the latest arming state. Existing PID parameter updates
 		// above remain immediate and retain their original scheduling/order.
-		const bool esta_ready = _research_iris && _sta_requested.mode == 1 && _sta_requested.axes == 1
-					&& StaProtection::validConfig(_sta_requested)
-					&& fabsf(_sta_requested.gains[0].g - 130.575283f) < 0.01f;
+		const bool esta_ready = StaAxesApplication::ready(_research_iris, _sta_requested);
 		const bool selection_changed = _rate_control.select(_param_mc_rtc_mode.get(), _param_mc_sta_axes.get(),
 					       _v_control_mode.flag_armed, esta_ready);
 
@@ -261,6 +259,7 @@ MulticopterRateControl::Run()
 				_rates_sp(2) = PX4_ISFINITE(v_rates_sp.yaw)   ? v_rates_sp.yaw   : rates(2);
 				_thrust_sp = -v_rates_sp.thrust_body[2];
 				_research_test_addition = v_rates_sp.research_roll_addition;
+				_research_pitch_addition = v_rates_sp.research_pitch_addition;
 				_research_test_elapsed = v_rates_sp.research_elapsed;
 			}
 		}
@@ -308,6 +307,7 @@ MulticopterRateControl::Run()
 		research.rate_enabled = frame.rate_enabled;
 		research.experiment_frozen = true;
 		research.research_roll_addition = _research_test_addition;
+		research.research_pitch_addition = _research_pitch_addition;
 		research.research_elapsed = _research_test_elapsed;
 		research.battery_scale = 1.f;
 
@@ -363,7 +363,7 @@ MulticopterRateControl::Run()
 			}
 
 			std::array<float, 3> mixed{};
-			const bool emit = StaRollApplication::apply(frame.experiment_active, frame.armed, experiment,
+			const bool emit = StaAxesApplication::apply(selection.effective_axes, frame.armed, experiment,
 			{att_control(0), att_control(1), att_control(2)}, mixed);
 
 			for (int i = 0; i < 3; ++i) { att_control(i) = mixed[i]; }
@@ -373,8 +373,12 @@ MulticopterRateControl::Run()
 			if (frame.experiment_active) {
 				research.experiment_updated = experiment.updated;
 				research.experiment_frozen = !experiment.updated;
-				research.a_raw[0] = experiment.a[0]; research.nu[0] = _sta_guard.state()[0];
-				research.limits[0] = experiment.limits[0];
+				for (int i = 0; i < 3; ++i) {
+					if (selection.effective_axes & (1 << i)) {
+						research.a_raw[i] = experiment.a[i]; research.nu[i] = _sta_guard.state()[i];
+						research.limits[i] = experiment.limits[i];
+					}
+				}
 			}
 
 			// publish rate controller status
@@ -432,7 +436,11 @@ MulticopterRateControl::Run()
 				research.output_valid = research.output_valid && PX4_ISFINITE(att_control(i)) && PX4_ISFINITE(actuators.control[i]);
 			}
 
-			if (frame.experiment_active && frame.armed) { research.c_raw[0] = experiment.c_raw[0]; }
+			if (frame.experiment_active && frame.armed) {
+				for (int i = 0; i < 3; ++i) {
+					if (selection.effective_axes & (1 << i)) { research.c_raw[i] = experiment.c_raw[i]; }
+				}
+			}
 
 			if (!emit) { for (int i = 0; i < 3; ++i) { research.c_applied[i] = NAN; } }
 

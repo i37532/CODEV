@@ -1,8 +1,10 @@
 # PX4 STA 研究目录
 
-已完成 M00 原 PID 基线、M01 选择框架、M02 ESTA 内核、M03 保护/日志，以及 M04 Iris roll-only ESTA 名义 SITL 验收。各阶段范围见对应报告；默认仍为 PID，ISTA 与 pitch/yaw ESTA 尚未开放。原始 motor_limits 仍丢样，不是完整全速 TV/频谱数据集。
+已完成 M00 原 PID 基线、M01 选择框架、M02 ESTA 内核、M03 保护/日志、M04 Iris roll ESTA 及 M05 roll/pitch ESTA 名义 SITL 验收。各阶段范围见对应报告；默认仍为 PID，ISTA 与 yaw ESTA 尚未开放。原始 motor_limits 仍丢样，不是完整全速 TV/频谱数据集。
 
-M04 已按用户授权修复 IMU 切换时间戳发布契约；协议 v3 下 PID/ESTA 同固件各三轮通过，最终注释修订构建另各一轮复核。仅最终独立配置 `m04/iris_esta_roll.json`（lambda1=2.5、lambda2=0.05）达到该小幅场景门槛，五组候选和所有失败均保留。详见 [M04 报告](reports/M04.md)，历史暂停报告另存 `reports/M04_BLOCKED_20260914.md`。这是 Iris 仿真结果，不是 DP1000 实机或正式论文验证；未开始 M05。
+M04 已按用户授权修复 IMU 切换时间戳发布契约；协议 v3 下 PID/ESTA 同固件各三轮通过，最终注释修订构建另各一轮复核。M04 最终独立配置 `m04/iris_esta_roll.json`（lambda1=2.5、lambda2=0.05）达到该小幅场景门槛，五组候选和所有失败均保留。详见 [M04 报告](reports/M04.md)，历史暂停报告另存 `reports/M04_BLOCKED_20260914.md`。
+
+M05 独立标定 g_P=112.763533，开放 AXES=3，组合场景 PID/ESTA 各三次及原 roll 回归各一次通过。45项各轴/窗口RMSE比值全部≤1.25，最大1.246256，接近门槛；起降方向冻结与原始日志丢样均保留。见 [M05 报告](reports/M05.md)、[双轴运行说明](m05/RUN_CN.md)。这是 Iris 仿真结果，不是 DP1000 实机或正式论文验证；未开始 M06。
 
 - `plan/`：M00 开始时三份外部计划的历史快照。
 - `environment.md`：环境、模型、参数与启动约定。
@@ -12,6 +14,7 @@ M04 已按用户授权修复 IMU 切换时间戳发布契约；协议 v3 下 PID
 - `reports/M02.md`、`m02/`：ESTA 公式/单位、11 个内核单测、27 组独立对象闭环及 PID 回归证据；MATLAB 未执行。
 - `reports/M03.md`、`m03/`：公共保护、真实更新序号/实际 PID 消费的 mixer 反馈、高频诊断与原始话题丢样统计；30 个 C++、8 个 Python 用例和最终 PID 60.440 s 悬停证据。
 - `reports/M04.md`、`m04/`：roll 标定、协议修订、五组候选、上游 IMU 修复、44 个 C++/17 个 Python 用例、六轮比较和最终构建复核；复现使用 `run_m04.py`、`analyze_m04.py`、`compare_m04.py`。
+- `reports/M05.md`、`m05/`：pitch 标定、独立参数、R/P 激励及交叉轴验收；51 个 C++/21 个 Python 用例、六轮组合对照与两个 roll 回归；使用 `run_m05.py`、`analyze_m05.py`、`compare_m05.py`。
 - `M04_RUN_PLOTJUGGLER_CN.md`：Gazebo/PX4 启动、PID/roll ESTA 切换、三轮自动对比及 PlotJuggler 曲线选择快速指南。
 - `scripts/`：SITL 捕获、ULog 分析及证据索引生成器。
 
