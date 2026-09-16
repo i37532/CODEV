@@ -2,13 +2,15 @@
 
 日常操作入口：[sim_scripts 中文说明](../../sim_scripts/README_CN.md)。三个入口：`start.sh` 启动Gazebo，`switch.sh pid|esta` 选择算法，`fly.sh hover|figure8|yaw` 自动完成10秒悬停、8字轨迹或定点yaw激励及起降，保留当前仿真窗口供下一轮对比。
 
-已完成 M00～M06 的各阶段限定范围验收。M06在Iris固定悬停航向协议v2下完成PID/三轴ESTA各三轮，45项比值均≤1.25，最大1.175228，见 [M06报告](reports/M06.md)。默认仍为 PID，ISTA 未开放。原始 motor_limits 仍丢样，不是完整全速 TV/频谱数据集。
+已完成 M00～M07 的各阶段限定范围验收。M07仅完成ISTA解析内核、数值/独立对象验证及ESTA/PID回归，见 [M07报告](reports/M07.md)；MODE=2仍不可启用，没有ISTA飞行。M06在Iris固定悬停航向协议v2下完成PID/三轴ESTA各三轮，45项比值均≤1.25，最大1.175228，见 [M06报告](reports/M06.md)。默认仍为 PID。原始 motor_limits 仍丢样，不是完整全速 TV/频谱数据集。
 
 M04 已按用户授权修复 IMU 切换时间戳发布契约；协议 v3 下 PID/ESTA 同固件各三轮通过，最终注释修订构建另各一轮复核。M04 最终独立配置 `m04/iris_esta_roll.json`（lambda1=2.5、lambda2=0.05）达到该小幅场景门槛，五组候选和所有失败均保留。详见 [M04 报告](reports/M04.md)，历史暂停报告另存 `reports/M04_BLOCKED_20260914.md`。
 
 M05 独立标定 g_P=112.763533，开放 AXES=3，组合场景 PID/ESTA 各三次及原 roll 回归各一次通过。45项各轴/窗口RMSE比值全部≤1.25，最大1.246256，接近门槛；起降方向冻结与原始日志丢样均保留。见 [M05 报告](reports/M05.md)、[双轴运行说明](m05/RUN_CN.md)。这是 Iris 仿真结果，不是 DP1000 实机或正式论文验证。
 
-M06独立标定gY=34.582326，开放AXES=7且正常运行不计算闲置PID；1/3/7、重启重载与disarm切换回归通过。冻结 [三轴参数基准](m06/FROZEN_BASELINE.json)，复现见 [三轴运行说明](m06/RUN_CN.md)。三组候选、v1/v2场景与全部失败均保留；不覆盖旧v1自动航向重捕获、强yaw饱和或实机任务，未开始ISTA。
+M06独立标定gY=34.582326，开放AXES=7且正常运行不计算闲置PID；1/3/7、重启重载与disarm切换回归通过。冻结 [三轴参数基准](m06/FROZEN_BASELINE.json)，复现见 [三轴运行说明](m06/RUN_CN.md)。三组候选、v1/v2场景与全部失败均保留；不覆盖旧v1自动航向重捕获、强yaw饱和或实机任务。
+
+M07新增未链接至飞行控制路径的 `IstaRateControl`，采用有理化求根、double中间运算、float可表示范围及隐式方程校验。73个C++、39个Python用例，6011个独立参考样本、36组独立对象闭环通过；理想/扰动/噪声/饱和结果分开记录，MATLAB未运行。复跑：`python3 research/sta-rate-control/scripts/verify_m07.py --output <新的绝对路径>`。不会启动仿真、改参数或push；不代替M08接入验收。
 
 - `plan/`：M00 开始时三份外部计划的历史快照。
 - `environment.md`：环境、模型、参数与启动约定。
