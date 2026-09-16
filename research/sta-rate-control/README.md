@@ -1,10 +1,12 @@
 # PX4 STA 研究目录
 
-已完成 M00 原 PID 基线、M01 选择框架、M02 ESTA 内核、M03 保护/日志、M04 Iris roll ESTA 及 M05 roll/pitch ESTA 名义 SITL 验收。各阶段范围见对应报告；默认仍为 PID，ISTA 与 yaw ESTA 尚未开放。原始 motor_limits 仍丢样，不是完整全速 TV/频谱数据集。
+已完成 M00～M06 的各阶段限定范围验收。M06在Iris固定悬停航向协议v2下完成PID/三轴ESTA各三轮，45项比值均≤1.25，最大1.175228，见 [M06报告](reports/M06.md)。默认仍为 PID，ISTA 未开放。原始 motor_limits 仍丢样，不是完整全速 TV/频谱数据集。
 
 M04 已按用户授权修复 IMU 切换时间戳发布契约；协议 v3 下 PID/ESTA 同固件各三轮通过，最终注释修订构建另各一轮复核。M04 最终独立配置 `m04/iris_esta_roll.json`（lambda1=2.5、lambda2=0.05）达到该小幅场景门槛，五组候选和所有失败均保留。详见 [M04 报告](reports/M04.md)，历史暂停报告另存 `reports/M04_BLOCKED_20260914.md`。
 
-M05 独立标定 g_P=112.763533，开放 AXES=3，组合场景 PID/ESTA 各三次及原 roll 回归各一次通过。45项各轴/窗口RMSE比值全部≤1.25，最大1.246256，接近门槛；起降方向冻结与原始日志丢样均保留。见 [M05 报告](reports/M05.md)、[双轴运行说明](m05/RUN_CN.md)。这是 Iris 仿真结果，不是 DP1000 实机或正式论文验证；未开始 M06。
+M05 独立标定 g_P=112.763533，开放 AXES=3，组合场景 PID/ESTA 各三次及原 roll 回归各一次通过。45项各轴/窗口RMSE比值全部≤1.25，最大1.246256，接近门槛；起降方向冻结与原始日志丢样均保留。见 [M05 报告](reports/M05.md)、[双轴运行说明](m05/RUN_CN.md)。这是 Iris 仿真结果，不是 DP1000 实机或正式论文验证。
+
+M06独立标定gY=34.582326，开放AXES=7且正常运行不计算闲置PID；1/3/7、重启重载与disarm切换回归通过。冻结 [三轴参数基准](m06/FROZEN_BASELINE.json)，复现见 [三轴运行说明](m06/RUN_CN.md)。三组候选、v1/v2场景与全部失败均保留；不覆盖旧v1自动航向重捕获、强yaw饱和或实机任务，未开始ISTA。
 
 - `plan/`：M00 开始时三份外部计划的历史快照。
 - `environment.md`：环境、模型、参数与启动约定。

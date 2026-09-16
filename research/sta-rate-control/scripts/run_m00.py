@@ -251,7 +251,10 @@ def main(checks=None, scenario_path=None):
         event("landed_disarmed", state)
         if checks is not None:
             checks("disarmed", cli, topic, output)
-        (output / "logger_status.txt").write_text(cli("logger", "status"))
+        # M06 explicitly closes its constant-configuration flight log before
+        # disarmed transition checks. "not running" is expected only then.
+        (output / "logger_status.txt").write_text(cli("logger", "status",
+            check=not getattr(checks, "flight_logger_stopped", False)))
         (output / "params_end.txt").write_text(cli("param", "show", "-a"))
         result["success"] = True
     except Exception as exc:

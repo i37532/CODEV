@@ -48,6 +48,9 @@ float32[3] lambda2
 float32[3] g
 float32 research_roll_addition # single mc_att_control publisher test input
 float32 research_pitch_addition # single mc_att_control publisher M05 pitch test input
+float32 research_yaw_addition # M06 world-z rate excitation, transformed to body before addition
+bool pid_updated # actual PID update this cycle, false for all-axis ESTA
+uint32 pid_update_seq # counts real PID update calls, not selected ESTA updates
 float32 research_elapsed # seconds since pulse trigger, -1 when inactive
 float32[3] a_raw # ESTA virtual angular acceleration; NaN on PID axes
 float32[3] c_raw # PID raw output, or armed ESTA a_raw/g BEFORE output clipping and battery scaling

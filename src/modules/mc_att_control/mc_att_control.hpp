@@ -103,6 +103,7 @@ private:
 	ResearchPulse _research_pulse;
 	bool _research_test{false}, _research_iris{false};
 	bool _research_combined{false};
+	int32_t _research_scene{0};
 
 	uORB::SubscriptionInterval _parameter_update_sub{ORB_ID(parameter_update), 1_s};
 

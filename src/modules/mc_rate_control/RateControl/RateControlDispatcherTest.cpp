@@ -141,3 +141,30 @@ TEST(RateControlDispatcher, UsesOldIntegralAndLandedFreezesWithoutClearing)
 	controller.resetIntegral();
 	expectExact(controller.update(zero, error, zero, 0.01f, true), zero);
 }
+
+TEST(RateControlDispatcher, AllAxesSkipsPidAndDisarmedReturnStartsResetState)
+{
+	RateControlDispatcher c; gains(c, 0);
+	const Vector3f zero, sp(.1f, -.2f, .3f);
+	c.update(zero, sp, zero, .004f, false);
+	rate_ctrl_status_s before{}, after{}; c.getRateControlStatus(before);
+	c.select(1, 7, false, true); EXPECT_FALSE(c.pidRequired());
+	const auto seq = c.pidUpdateSequence();
+	for (int i = 0; i < 100; ++i) {
+		c.select(0, 0, true); // airborne request cannot resume PID, including after an ESTA fault
+		const auto ignored = c.update(zero, sp, zero, .004f, false);
+		for (int axis = 0; axis < 3; ++axis) { EXPECT_TRUE(std::isnan(ignored(axis))); }
+	}
+	EXPECT_EQ(c.pidUpdateSequence(), seq); c.getRateControlStatus(after);
+	EXPECT_EQ(bits(before.rollspeed_integ), bits(after.rollspeed_integ));
+	EXPECT_EQ(bits(before.pitchspeed_integ), bits(after.pitchspeed_integ));
+	EXPECT_EQ(bits(before.yawspeed_integ), bits(after.yawspeed_integ));
+	c.select(0, 0, false); c.resetIntegral(); // actual module order on disarm
+	RateControlDispatcher fresh; gains(fresh, 0);
+	expectExact(c.update(zero, sp, zero, .004f, true), fresh.update(zero, sp, zero, .004f, true));
+	EXPECT_EQ(c.pidUpdateSequence(), seq + 1);
+	for (int mask : {1, 3, 7, 1, 0}) {
+		c.select(mask ? 1 : 0, mask, false, true); c.resetIntegral();
+		EXPECT_EQ(c.pidRequired(), mask != 7);
+	}
+}

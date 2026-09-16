@@ -5,7 +5,7 @@
 
 #include <stdint.h>
 
-/** PID default; ESTA requires explicit validated SITL R or R/P capability. */
+/** PID default; ESTA requires explicit validated SITL R, R/P or R/P/Y capability. */
 class ControllerSelection
 {
 public:
@@ -34,7 +34,7 @@ public:
 	 */
 	bool select(int32_t mode, int32_t axes, bool armed, bool esta_ready = false)
 	{
-		const RequestStatus reason = mode == ESTA && (axes == 1 || axes == 3) && esta_ready ? Accepted : validate(mode, axes);
+		const RequestStatus reason = mode == ESTA && (axes == 1 || axes == 3 || axes == 7) && esta_ready ? Accepted : validate(mode, axes);
 		const uint8_t effective = !armed && reason == Accepted ? static_cast<uint8_t>(mode) : _status.effective_mode;
 		const uint8_t effective_axes = effective != ESTA ? 0 :
 					       (!armed && reason == Accepted ? static_cast<uint8_t>(axes) : _status.effective_axes);

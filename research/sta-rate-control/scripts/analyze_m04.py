@@ -25,6 +25,14 @@ def check_gyro_events(gyro, published_samples):
     require(np.all(np.diff(gyro['event_seq'].astype(np.int64))==1),'Gyro diagnostic events missing')
 
 
+def outer_yaw_feedforward_max(data, start, end, limit):
+    mask=(data['timestamp']>=start)&(data['timestamp']<=end)
+    values=data['yaw_sp_move_rate'][mask]
+    require(len(values)>100 and np.all(np.isfinite(values)) and np.max(np.abs(values))<=limit,
+            'Unplanned outer yaw feedforward: small-excitation scene invalid')
+    return float(np.max(np.abs(values)))
+
+
 def main(run):
     result=json.loads((run/'result.json').read_text())
     settings=json.loads((run/'m03_logging.json').read_text())
@@ -35,7 +43,8 @@ def main(run):
     mode=int(config['MC_RTC_MODE'])
     mask_axes=int(config['MC_STA_AXES'])
     experiment_axes=[i for i in range(3) if mask_axes & (1<<i)]
-    rp=protocol.get('milestone')=='M05'
+    m06=protocol.get('milestone')=='M06'
+    rp=protocol.get('milestone') in ('M05','M06')
     require(result['success'],'Scenario failure')
     candidates=[]
     for index,item in enumerate(result['logs']):
@@ -71,6 +80,16 @@ def main(run):
     if rp:
         require(np.all(np.abs(vector(d,'c_applied')[armed,1])<=limits['pitch_command_abs']+1e-6),'Pitch command bound')
         require(np.all(np.abs(vector(d,'nu')[armed,1])<=limits['nu_abs_rad_s2']+1e-6),'Pitch nu bound')
+    if m06:
+        require(np.all(np.abs(vector(d,'c_applied')[armed,2])<=limits['yaw_command_abs']+1e-6),'Yaw command bound')
+        require(np.all(np.abs(vector(d,'nu')[armed,2])<=limits['nu_abs_rad_s2']+1e-6),'Yaw nu bound')
+        require(np.all(d['pid_updated'][armed] == (mode == 0)), 'Unexpected PID execution in full-axis path')
+        delta_pid = np.diff(d['pid_update_seq'].astype(np.int64))
+        require(np.all(delta_pid == d['pid_updated'][1:]), 'Real PID update counter mismatch')
+        if mode:
+            require(np.all(d['pid_update_seq'][armed]==d['pid_update_seq'][armed][0]), 'Idle PID computed')
+            np.testing.assert_array_equal(vector(d,'pid_integral_before')[armed],vector(d,'pid_integral_after')[armed])
+            require(np.all(np.abs(vector(d,'c_applied')[armed])<=limits['esta_command_abs']+1e-6),'ESTA bound')
     require(metrics['tilt_deg']['max_abs']<=limits['tilt_deg'],'Tilt bound')
     attitude=log.get_dataset('vehicle_attitude').data
     preceding=np.clip(np.searchsorted(d['timestamp_sample'],attitude['timestamp'],side='right')-1,0,len(armed)-1)
@@ -128,15 +147,16 @@ def main(run):
         stats[name]=dict(rmse=np.sqrt(np.mean(error[mask].astype(float)**2,axis=0)),samples=int(np.count_nonzero(mask)),
                          rate_rms=np.sqrt(np.mean(vector(d,'rate')[mask].astype(float)**2,axis=0)),
                          command_rms=np.sqrt(np.mean(vector(d,'c_applied')[mask].astype(float)**2,axis=0)))
-        for axis,field in enumerate(['research_roll_addition','research_pitch_addition']):
+        fields=['research_roll_addition','research_pitch_addition'] + (['research_yaw_addition'] if m06 else [])
+        for axis,field in enumerate(fields):
             values=d[field][mask]
-            commanded=name=='synchronous' or name==['roll_only','pitch_only'][axis]
+            commanded=(axis==2 or (protocol['trigger']==4 and lo>=12)) if m06 else (name=='synchronous' or name==['roll_only','pitch_only'][axis])
             if commanded:
                 require(np.max(values)>.119 and np.min(values)<-.119,'Incomplete phase signs '+name)
                 require(abs(float(np.trapz(values,d['research_elapsed'][mask])))<.002,'Phase nonzero integral')
             else:
                 require(np.all(values==0),'Uncommanded axis received excitation')
-    pulse=d['research_roll_addition']
+    pulse=d['research_yaw_addition' if m06 else 'research_roll_addition']
     require(np.max(pulse[tracking])>.119 and np.min(pulse[tracking])<-.119,'Pulse sequence incomplete')
     elapsed=d['research_elapsed'][tracking].astype(float)
     integral=float(np.trapz(pulse[tracking],elapsed))
@@ -147,8 +167,10 @@ def main(run):
         t=d['research_elapsed'].astype(float)
         local=t % 12; cycle=np.floor(local/4)
         expected_pulse=.04*(cycle+1)*np.sin(np.pi*.5*(local-4*cycle))
-        for axis,field in enumerate(['research_roll_addition','research_pitch_addition']):
-            active=(t>=0)&(t<36)&((np.floor(t/12)==axis)|(t>=24))
+        fields=['research_roll_addition','research_pitch_addition'] + (['research_yaw_addition'] if m06 else [])
+        for axis,field in enumerate(fields):
+            phase_active=((axis==2) | ((t>=12)&(protocol['trigger']==4))) if m06 else ((np.floor(t/12)==axis)|(t>=24))
+            active=(t>=0)&(t<36)&phase_active
             np.testing.assert_allclose(d[field],np.where(active,expected_pulse,0),atol=2e-6,rtol=1e-5)
     motor=log.get_dataset('multirotor_motor_limits').data
     mm=(motor['timestamp']>=start)&(motor['timestamp']<=end)
@@ -178,7 +200,7 @@ def main(run):
                 for t,k,v in log.changed_parameters if first_armed<=t<=last_armed),'Armed parameter change')
     summary=dict(success=True,mode=mode,source_head=result['source_head'],binary_sha256=result['binary_sha256'],
                  ulog_sha256=result['logs'][index]['sha256'],hover_duration_s=metrics['hover_duration_s'],
-                 metrics=stats,pid_bit_mismatches=pid_mismatch,pid_compared_samples=int(np.count_nonzero(updated)),
+                 metrics=stats,pid_bit_mismatches=pid_mismatch,pid_compared_samples=int(np.count_nonzero(updated)) if axes else 0,
                  actuator_matched_samples=len(common),pulse_integral_rad=integral,sequences=seq,
                  motor_valid_ratio=float(np.mean(d['motor_valid'][hover])),
                  gyro_event_count=len(gyro['timestamp']),gyro_switch_count=int(gyro['switch_count'][-1]),
@@ -193,13 +215,16 @@ def main(run):
                  parameter_differences=changes,parameter_changes=log.changed_parameters)
     if rp:
         asp=log.get_dataset('vehicle_attitude_setpoint').data
+        if m06 and 'heading_contract' in protocol:
+            summary['max_outer_yaw_feedforward_rad_s']=outer_yaw_feedforward_max(
+                asp,start,end,protocol['heading_contract']['max_outer_yaw_feedforward_rad_s'])
         q=np.column_stack([attitude[f'q[{i}]'] for i in range(4)]).astype(float)
         yaw=np.arctan2(2*(q[:,0]*q[:,3]+q[:,1]*q[:,2]),1-2*(q[:,2]**2+q[:,3]**2))
         previous=np.clip(np.searchsorted(asp['timestamp'],attitude['timestamp'],side='right')-1,0,len(asp['timestamp'])-1)
         yaw_error=np.arctan2(np.sin(yaw-asp['yaw_body'][previous]),np.cos(yaw-asp['yaw_body'][previous]))
         ah=(attitude['timestamp']>=start)&(attitude['timestamp']<=end)
         require(np.count_nonzero(ah)>100 and np.all(np.isfinite(yaw_error[ah])),'Invalid yaw attitude data')
-        summary.update(axes=mask_axes, milestone='M05',
+        summary.update(axes=mask_axes, milestone=protocol['milestone'],
                        yaw_attitude_error_rad=dict(rmse=float(np.sqrt(np.mean(yaw_error[ah]**2))),max_abs=float(np.max(np.abs(yaw_error[ah])))),
                        all_axes_max_nu=np.max(np.abs(vector(d,'nu')[armed]),axis=0),
                        all_axes_max_command=np.max(np.abs(vector(d,'c_applied')[armed]),axis=0),
@@ -208,6 +233,17 @@ def main(run):
                        all_axes_armed_mixer_saturation_fraction={str(axis):{direction:float(np.mean((d['motor_saturation'][armed]&(1<<(3+2*axis+j)))!=0)) for j,direction in enumerate(['positive','negative'])} for axis in range(3)},
                        all_axes_limits_fraction={str(axis):{str(bit):float(np.mean(d[f'limits[{axis}]'][hover]&bit!=0)) for bit in (1,2,4,8)} for axis in range(3)},
                        all_axes_mixer_saturation_fraction={str(axis):{direction:float(np.mean((d['motor_saturation'][hover]&(1<<(3+2*axis+j)))!=0)) for j,direction in enumerate(['positive','negative'])} for axis in range(3)})
+    if m06:
+        require(np.any((~armed)&(d['timestamp_sample']>last_armed)), 'Missing actual post-disarm diagnostic')
+        summary.update(pid_updates_armed=int(np.sum(d['pid_updated'][armed])),
+                       initial_nu=vector(d,'nu_before')[armed][0],
+                       post_disarm_nu=vector(d,'nu')[~armed][-1],
+                       yaw_saturation_rp_response={})
+        require(np.all(summary['initial_nu']==0) and np.all(summary['post_disarm_nu']==0),'Flight lifecycle state not reset')
+        ys=armed & ((d['motor_saturation'] & ((1<<7)|(1<<8))) != 0)
+        summary['yaw_saturation_rp_response']=dict(samples=int(np.count_nonzero(ys)),
+            max_abs_rate=np.max(np.abs(vector(d,'rate')[ys]),axis=0) if np.any(ys) else [0,0,0],
+            max_abs_command=np.max(np.abs(vector(d,'c_applied')[ys]),axis=0) if np.any(ys) else [0,0,0])
     (run/'m04_analysis.json').write_text(json.dumps(summary,indent=2,default=plain)+'\n')
     print(json.dumps(summary,indent=2,default=plain))
 

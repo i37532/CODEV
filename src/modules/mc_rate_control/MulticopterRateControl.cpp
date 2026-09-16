@@ -260,6 +260,7 @@ MulticopterRateControl::Run()
 				_thrust_sp = -v_rates_sp.thrust_body[2];
 				_research_test_addition = v_rates_sp.research_roll_addition;
 				_research_pitch_addition = v_rates_sp.research_pitch_addition;
+				_research_yaw_addition = v_rates_sp.research_yaw_addition;
 				_research_test_elapsed = v_rates_sp.research_elapsed;
 			}
 		}
@@ -308,6 +309,7 @@ MulticopterRateControl::Run()
 		research.experiment_frozen = true;
 		research.research_roll_addition = _research_test_addition;
 		research.research_pitch_addition = _research_pitch_addition;
+		research.research_yaw_addition = _research_yaw_addition;
 		research.research_elapsed = _research_test_elapsed;
 		research.battery_scale = 1.f;
 
@@ -355,6 +357,8 @@ MulticopterRateControl::Run()
 			research.pid_frozen = _maybe_landed || _landed;
 			// run rate controller
 			Vector3f att_control = _rate_control.update(rates, _rates_sp, angular_accel, dt, _maybe_landed || _landed);
+			research.pid_updated = _rate_control.pidRequired();
+			research.pid_frozen = research.pid_frozen || !research.pid_updated;
 			StaProtection::Output experiment{};
 
 			if (frame.experiment_active && frame.armed) {
@@ -456,6 +460,7 @@ MulticopterRateControl::Run()
 		}
 
 		research.update_seq = _research_update_seq;
+		research.pid_update_seq = _rate_control.pidUpdateSequence();
 		research.timestamp = hrt_absolute_time();
 		research.motor_timestamp = _research_motor.timestamp;
 		research.motor_update_seq = _research_motor.update_seq;

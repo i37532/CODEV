@@ -43,8 +43,8 @@ TEST(StaAxesApplication, ArmedMasksPreserveEffectiveAxesAndDisarmApplies)
 	s.select(1, 1, true, true); EXPECT_FALSE(s.status().pending);
 	s.select(1, 3, false, true); EXPECT_EQ(s.status().effective_axes, 3);
 	s.select(1, 1, true, true); EXPECT_EQ(s.status().effective_axes, 3);
-	s.select(1, 7, false, true); EXPECT_EQ(s.status().effective_axes, 3);
-	EXPECT_EQ(s.status().request_status, ControllerSelection::Unsupported);
+	s.select(1, 7, false, true); EXPECT_EQ(s.status().effective_axes, 7);
+	EXPECT_EQ(s.status().request_status, ControllerSelection::Accepted);
 	s.select(0, 0, false); EXPECT_EQ(s.status().effective_axes, 0);
 }
 
@@ -115,6 +115,127 @@ TEST(StaAxesApplication, CombinedPulsePhasesHaveBothSignsAndZeroIntegral)
 				EXPECT_LT(lo, -.119f); EXPECT_GT(hi, .119f);
 			} else { EXPECT_EQ(lo, 0.f); EXPECT_EQ(hi, 0.f); }
 		}
+	}
+}
+
+TEST(StaAxesApplication, ThreeAxesCalibratedGateAndNoPidFallbackOnFault)
+{
+	auto c = config(); c.axes = 7; c.gains[2] = {.65f, .02f, 34.582326f}; c.nu_limit[2] = 3.f;
+	ASSERT_TRUE(StaAxesApplication::ready(true, c));
+	auto bad = c; bad.gains[2].g = c.gains[0].g; EXPECT_FALSE(StaAxesApplication::ready(true, bad));
+	G together, isolated[3]; together.begin(c, frame(1000000, false));
+	for (int i = 0; i < 3; ++i) { auto one = c; one.axes = 1 << i; isolated[i].begin(one, frame(1000000, false)); }
+	for (int k = 1; k <= 512; ++k) {
+		const auto f = frame(1000000 + k * 4000, true);
+		const std::array<float, 3> rate{.07f * sinf(k*.11f), .03f * cosf(k*.07f), .04f * sinf(k*.09f)};
+		// Alternate both yaw saturation directions, without freezing R/P.
+		const auto feedback = fb(1 | (1 << (k % 2 ? 7 : 8)));
+		together.begin(c, f); auto out = together.step(rate, {}, feedback); ASSERT_TRUE(out.valid);
+		std::array<float, 3> command{};
+		ASSERT_TRUE(StaAxesApplication::apply(7, true, out, {NAN, NAN, NAN}, command));
+		for (int i = 0; i < 3; ++i) {
+			auto one = c; one.axes = 1 << i; isolated[i].begin(one, f);
+			auto single = isolated[i].step(rate, {}, feedback);
+			EXPECT_FLOAT_EQ(out.nu[i], single.nu[i]); EXPECT_FLOAT_EQ(command[i], single.c_applied[i]);
+			EXPECT_EQ(out.limits[i], single.limits[i]);
+		}
+	}
+	together.begin(c, frame(3052000, true));
+	auto fault = together.step({0.f, 0.f, NAN}, {}, fb());
+	EXPECT_FALSE(fault.valid); EXPECT_TRUE(together.abortRequested());
+	std::array<float, 3> command{};
+	EXPECT_FALSE(StaAxesApplication::apply(7, true, fault, {NAN, NAN, NAN}, command));
+	for (float v : command) { EXPECT_TRUE(std::isnan(v)); }
+	together.begin(c, frame(3056000, false));
+	for (float nu : together.state()) { EXPECT_EQ(nu, 0.f); }
+}
+
+TEST(StaAxesApplication, YawSaturationFreezesOnlyWorseningDirection)
+{
+	for (bool positive : {false, true}) {
+		G g; auto c = config(); c.axes = 7; c.gains[2] = {1.5f, .02f, 34.582326f}; c.nu_limit[2] = 3.f;
+		g.begin(c, frame(1000000, false)); g.begin(c, frame(1004000, true));
+		const std::array<float, 3> rate{.1f, -.1f, positive ? -.1f : .1f};
+		const auto blocked = g.step(rate, {}, fb(1 | (1 << (positive ? 7 : 8))));
+		ASSERT_TRUE(blocked.valid); EXPECT_FLOAT_EQ(blocked.nu[2], 0.f);
+		EXPECT_EQ(blocked.limits[2], G::MixerFreeze);
+		EXPECT_LT(blocked.nu[0], 0.f); EXPECT_GT(blocked.nu[1], 0.f);
+		g.begin(c, frame(1008000, true));
+		const auto unwind = g.step(rate, {}, fb(1 | (1 << (positive ? 8 : 7))));
+		ASSERT_TRUE(unwind.valid); EXPECT_EQ(unwind.limits[2], 0);
+		EXPECT_NEAR(unwind.nu[2], positive ? .00008f : -.00008f, 1e-10f);
+	}
+}
+
+TEST(StaAxesApplication, WorldYawTransformationAndThreeAxisScene)
+{
+	for (float heading : {-2.f, 0.f, 1.5f}) {
+		matrix::Quatf q(matrix::Eulerf(.15f, -.1f, heading));
+		const auto body = ResearchPulse::yawBody(q, .12f);
+		const matrix::Vector3f world = matrix::Dcmf(q) * body;
+		EXPECT_NEAR(world(0), 0.f, 1e-7); EXPECT_NEAR(world(1), 0.f, 1e-7); EXPECT_NEAR(world(2), .12f, 1e-7);
+		EXPECT_GT(fabsf(body(0)), .005f); EXPECT_GT(fabsf(body(1)), .005f);
+	}
+	for (bool yaw_only : {false, true}) {
+		for (unsigned axis = 0; axis < 3; ++axis) {
+			for (int phase = 0; phase < 3; ++phase) {
+				double integral = 0.; float peak = 0.f;
+				for (int k = 0; k < 3000; ++k) {
+					const float v = ResearchPulse::threeAxis(12.f * phase + .004f * k, axis, yaw_only);
+					integral += .004 * static_cast<double>(v); peak = std::max(peak, fabsf(v));
+				}
+				EXPECT_NEAR(integral, 0., 1e-6);
+				if (axis == 2 || (!yaw_only && phase > 0)) { EXPECT_GT(peak, .119f); }
+				else { EXPECT_EQ(peak, 0.f); }
+			}
+		}
+	}
+}
+
+TEST(StaAxesApplication, YawParameterStagedWhileArmedAndReloadResetsAllStates)
+{
+	G g; auto c = config(); c.axes = 7; c.gains[2] = {.65f, .02f, 34.582326f}; c.nu_limit[2] = 3.f;
+	g.begin(c, frame(1000000, false)); g.begin(c, frame(1004000, true));
+	ASSERT_TRUE(g.step({.1f, -.1f, .07f}, {}, fb()).valid);
+	const auto old = g.state();
+	auto changed = c; changed.gains[2].lambda1 = .8f; changed.gains[2].lambda2 = .03f;
+	g.begin(changed, frame(1008000, true)); EXPECT_TRUE(g.pending()); EXPECT_EQ(g.state(), old);
+	EXPECT_FLOAT_EQ(g.config().gains[2].lambda1, .65f);
+	g.begin(c, frame(1012000, true)); EXPECT_FALSE(g.pending()); EXPECT_EQ(g.state(), old);
+	g.begin(changed, frame(1016000, false)); EXPECT_FALSE(g.pending());
+	EXPECT_FLOAT_EQ(g.config().gains[2].lambda1, .8f);
+	for (float value : g.state()) { EXPECT_EQ(value, 0.f); }
+	G fresh; fresh.begin(changed, frame(1016000, false));
+	g.begin(changed, frame(1020000, true)); fresh.begin(changed, frame(1020000, true));
+	const auto a = g.step({.1f, -.1f, .07f}, {}, fb()), b = fresh.step({.1f, -.1f, .07f}, {}, fb());
+	EXPECT_EQ(a.nu, b.nu); EXPECT_EQ(a.c_raw, b.c_raw);
+}
+
+TEST(StaAxesApplication, ThreeAxisLaggedCoupledObjectWithUncertainGain)
+{
+	for (double mismatch : {.8, 1., 1.2}) {
+		G g; auto c = config(); c.axes = 7; c.gains[2] = {1.5f, .02f, 34.582326f}; c.nu_limit[2] = 3.f;
+		c.gains[0].lambda1 = 2.2f; c.gains[1].lambda1 = 2.4f; c.gains[1].lambda2 = .08f;
+		g.begin(c, frame(1000000, false));
+		double angle[3]{}, rate[3]{}, acceleration[3]{};
+		for (int k = 1; k <= 15000; ++k) {
+			std::array<float, 3> measured{}, sp{};
+			for (int i = 0; i < 3; ++i) {
+				measured[i] = static_cast<float>(rate[i]);
+				sp[i] = static_cast<float>(-(i == 2 ? 2.8 : 6.5) * angle[i]) + ResearchPulse::threeAxis(.004f*k - 15.f, i, false);
+			}
+			g.begin(c, frame(1000000 + k*4000, true)); const auto out = g.step(measured, sp, fb());
+			ASSERT_TRUE(out.valid);
+			const double command[3]{out.c_applied[0], out.c_applied[1], out.c_applied[2]};
+			const double target[3]{130.575283*command[0] + 19.039183*command[2],
+					       112.763533*command[1] - .484, -.067051*command[0] + 34.582326*command[2]};
+			for (int i = 0; i < 3; ++i) {
+				acceleration[i] += (mismatch*target[i] - acceleration[i]) * (1. - exp(-.004/.025));
+				rate[i] += .004*acceleration[i]; angle[i] += .004*rate[i];
+				ASSERT_TRUE(std::isfinite(rate[i])); ASSERT_LT(fabs(rate[i]), 1.); ASSERT_LT(fabs(angle[i]), .261799);
+			}
+		}
+		for (double value : angle) { EXPECT_LT(fabs(value), .01); }
 	}
 }
 
