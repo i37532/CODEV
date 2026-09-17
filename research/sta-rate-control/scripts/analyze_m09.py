@@ -43,7 +43,19 @@ def tv(t, command, window_seconds=None):
     return dict(actual_update_span_s=duration, duration_s=normalization, tv=total.tolist(), tv_per_s=(total/normalization).tolist())
 
 
-def main(run, suffix=''):
+def fixed_tracking_window(t, elapsed, hover):
+    """36 sensor-time seconds from first active diagnostic, half-open.
+
+    Attitude setpoints may be consumed on the next rate callback, so elapsed=0
+    or 36 can legitimately repeat. Never normalize a >36s span by 36s.
+    """
+    first=np.flatnonzero(hover & (elapsed>=0))
+    require(len(first)>0,'No excitation trigger')
+    start=int(t[first[0]])
+    return hover & (t>=start) & (t<start+36000000)
+
+
+def main(run, suffix='', fixed_window=False):
     result = json.loads((run/'result.json').read_text())
     require(result['success'], 'Scenario failed')
     config = json.loads((run/'m04_config.json').read_text())
@@ -144,6 +156,8 @@ def main(run, suffix=''):
         protected_a = a if mode == 1 else a + (nu[use]-candidate)
         require(np.allclose(command[use],np.clip(protected_a/g,-.15,.15),atol=2e-7), 'Protected output mapping')
     tracking = hover & (d['research_elapsed'] >= 0) & (d['research_elapsed'] <= 36)
+    if fixed_window:
+        tracking=fixed_tracking_window(t,d['research_elapsed'],hover)
     require(np.count_nonzero(tracking) > 8000, 'Incomplete 36 s excitation')
     callback_dt = np.diff(t[tracking])
     require(np.max(callback_dt) == np.min(callback_dt), 'Nonuniform flight: spectrum not valid without resampling design')
@@ -160,6 +174,7 @@ def main(run, suffix=''):
     motor = log.get_dataset('multirotor_motor_limits').data
     mm = (motor['timestamp'] >= metrics['hover_start_us']) & (motor['timestamp'] <= metrics['hover_end_us'])
     output = dict(success=True,analysis_version=2,mode=mode,div=div,ulog=log_path,callback_hz=hz,update_hz=native_hz,
+                  tracking_start_us=int(t[tracking][0]),tracking_window='sensor_half_open_36s' if fixed_window else 'legacy_elapsed_inclusive',
                   hover_updates=len(idx),hover_callbacks=int(np.count_nonzero(hover)),
                   actual_dt_s=dict(min=float(d['dt'][idx].min()),max=float(d['dt'][idx].max())),
                   tv_actual_updates=tv(t[uidx],applied[uidx],36.0),

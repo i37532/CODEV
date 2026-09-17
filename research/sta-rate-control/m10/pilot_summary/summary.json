@@ -1,0 +1,4052 @@
+{
+  "planned": 90,
+  "attempted": 90,
+  "success": 88,
+  "cells": [
+    {
+      "scene": "nominal",
+      "group": "A",
+      "mode": 1,
+      "planned": 3,
+      "success": 3,
+      "missing": 0,
+      "failures": [],
+      "flight_completed": 3,
+      "failure_classes": {
+        "flight": 0,
+        "control_boundary": 0,
+        "infrastructure": 0,
+        "analysis_or_data_quality": 0
+      },
+      "attempted": 3,
+      "accepted_fraction": 1.0,
+      "accepted_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "flight_completion_fraction": 1.0,
+      "flight_completion_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "rmse_tracking_mean": [
+        0.004369532056191978,
+        0.004367713089287506,
+        0.0030110420626106916
+      ],
+      "iae_tracking_rad_mean": [
+        0.12492026940539169,
+        0.12374690517499887,
+        0.08719863172921276
+      ],
+      "rmse_steady_mean": [
+        0.0040988133381700724,
+        0.0039615007891954865,
+        0.0018125972437145136
+      ],
+      "control_rms_mean": [
+        0.0009946524484030085,
+        0.004490682756929427,
+        0.0021466441712780365
+      ],
+      "control_peak_mean": [
+        0.0021805561458071074,
+        0.0069395690225064754,
+        0.004483603406697512
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.0003111636557704848,
+        0.000420485618450497,
+        0.0008984533327484298
+      ],
+      "common_0_20hz_rms_mean": [
+        0.0009926597397612604,
+        0.0011324803679688012,
+        0.0019605729362533616
+      ],
+      "tv_per_s_mean": [
+        0.058100096978533966,
+        0.07544107466755022,
+        0.15453430724682415
+      ],
+      "kernel_median_ns_mean": 312.3333333333333,
+      "module_median_ns_mean": 2005.3333333333333,
+      "update_hz_range": [
+        250.00000000000003,
+        250.00000000000003
+      ],
+      "max_clock_offset_s": 0.0040000000000048885,
+      "unrecovered": 0,
+      "motor_missing_total": 3906,
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 115370.21497309876,
+      "module_wall_ns_per_sim_second_mean": 817795.8866567475,
+      "kernel_cost_p95_ns_mean": 1314.6999999999996,
+      "kernel_cost_p99_ns_mean": 2028.4466666666674,
+      "module_cost_p95_ns_mean": 8481.08333333333,
+      "module_cost_p99_ns_mean": 14082.17
+    },
+    {
+      "scene": "nominal",
+      "group": "A",
+      "mode": 2,
+      "planned": 3,
+      "success": 3,
+      "missing": 0,
+      "failures": [],
+      "flight_completed": 3,
+      "failure_classes": {
+        "flight": 0,
+        "control_boundary": 0,
+        "infrastructure": 0,
+        "analysis_or_data_quality": 0
+      },
+      "attempted": 3,
+      "accepted_fraction": 1.0,
+      "accepted_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "flight_completion_fraction": 1.0,
+      "flight_completion_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "rmse_tracking_mean": [
+        0.004374951571190551,
+        0.004543637438153005,
+        0.0031051586382388097
+      ],
+      "iae_tracking_rad_mean": [
+        0.12408089445078319,
+        0.12981220207246955,
+        0.09015504947522035
+      ],
+      "rmse_steady_mean": [
+        0.004074767648445664,
+        0.00444016067446849,
+        0.0017462107624871854
+      ],
+      "control_rms_mean": [
+        0.0009275449567240899,
+        0.004451280281091808,
+        0.002072274156266742
+      ],
+      "control_peak_mean": [
+        0.0021933448345710835,
+        0.006828481486688058,
+        0.004585627932101488
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.0002853644187166651,
+        0.0003895808456519986,
+        0.0008336181004334024
+      ],
+      "common_0_20hz_rms_mean": [
+        0.0009190924852143539,
+        0.0010146521277258457,
+        0.0018971290087619172
+      ],
+      "tv_per_s_mean": [
+        0.05423072183401595,
+        0.0718766068910352,
+        0.14443904856213932
+      ],
+      "kernel_median_ns_mean": 575.3333333333334,
+      "module_median_ns_mean": 2366.1666666666665,
+      "update_hz_range": [
+        250.00000000000003,
+        250.00000000000003
+      ],
+      "max_clock_offset_s": 0.0040000000000048885,
+      "unrecovered": 0,
+      "motor_missing_total": 4107,
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 207790.29881837327,
+      "module_wall_ns_per_sim_second_mean": 933661.2403744328,
+      "kernel_cost_p95_ns_mean": 2462.0166666666664,
+      "kernel_cost_p99_ns_mean": 3765.203333333333,
+      "module_cost_p95_ns_mean": 9602.733333333332,
+      "module_cost_p99_ns_mean": 15825.739999999996
+    },
+    {
+      "scene": "nominal",
+      "group": "B",
+      "mode": 0,
+      "planned": 3,
+      "success": 3,
+      "missing": 0,
+      "failures": [],
+      "flight_completed": 3,
+      "failure_classes": {
+        "flight": 0,
+        "control_boundary": 0,
+        "infrastructure": 0,
+        "analysis_or_data_quality": 0
+      },
+      "attempted": 3,
+      "accepted_fraction": 1.0,
+      "accepted_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "flight_completion_fraction": 1.0,
+      "flight_completion_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "rmse_tracking_mean": [
+        0.003920793728272355,
+        0.004201713039846359,
+        0.007100855687972613
+      ],
+      "iae_tracking_rad_mean": [
+        0.11135412431451064,
+        0.1201143297701977,
+        0.2173997172398182
+      ],
+      "rmse_steady_mean": [
+        0.003275931795158334,
+        0.0037808513348265966,
+        0.0015363896614795848
+      ],
+      "control_rms_mean": [
+        0.000976980406539451,
+        0.004383895902990868,
+        0.0017092423978843927
+      ],
+      "control_peak_mean": [
+        0.004081698600202799,
+        0.00791278543571631,
+        0.004333385111143191
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.0006090297542823583,
+        0.000616197263028702,
+        0.00027749214317450026
+      ],
+      "common_0_20hz_rms_mean": [
+        0.0008133432745651936,
+        0.0007222749180293698,
+        0.0016890882678666592
+      ],
+      "tv_per_s_mean": [
+        0.10568173389330054,
+        0.10589281915842245,
+        0.052235698833101196
+      ],
+      "kernel_median_ns_mean": 105.0,
+      "module_median_ns_mean": 1621.0,
+      "update_hz_range": [
+        250.00000000000003,
+        250.00000000000003
+      ],
+      "max_clock_offset_s": 0.003999999999997783,
+      "unrecovered": 0,
+      "motor_missing_total": 4095,
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 39594.00809301457,
+      "module_wall_ns_per_sim_second_mean": 673372.8277928011,
+      "kernel_cost_p95_ns_mean": 449.0,
+      "kernel_cost_p99_ns_mean": 777.3233333333332,
+      "module_cost_p95_ns_mean": 6748.483333333331,
+      "module_cost_p99_ns_mean": 13171.559999999992
+    },
+    {
+      "scene": "nominal",
+      "group": "B",
+      "mode": 1,
+      "planned": 3,
+      "success": 3,
+      "missing": 0,
+      "failures": [],
+      "flight_completed": 3,
+      "failure_classes": {
+        "flight": 0,
+        "control_boundary": 0,
+        "infrastructure": 0,
+        "analysis_or_data_quality": 0
+      },
+      "attempted": 3,
+      "accepted_fraction": 1.0,
+      "accepted_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "flight_completion_fraction": 1.0,
+      "flight_completion_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "rmse_tracking_mean": [
+        0.004429857709253145,
+        0.004375117171090209,
+        0.002982599393955557
+      ],
+      "iae_tracking_rad_mean": [
+        0.12624783036192336,
+        0.12401124512617633,
+        0.08652289476968388
+      ],
+      "rmse_steady_mean": [
+        0.004225518116028765,
+        0.004084377566375895,
+        0.0018072613504106704
+      ],
+      "control_rms_mean": [
+        0.000999735225650592,
+        0.004492387084461234,
+        0.0021388179387644124
+      ],
+      "control_peak_mean": [
+        0.002229611544559399,
+        0.006871425391485293,
+        0.0046080748240153
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.00031086028581588234,
+        0.0004116815030680944,
+        0.0009042516179776769
+      ],
+      "common_0_20hz_rms_mean": [
+        0.000985944369073084,
+        0.0011439295231390663,
+        0.0019474738784738862
+      ],
+      "tv_per_s_mean": [
+        0.057626212431372364,
+        0.07495649035856196,
+        0.1548526399338799
+      ],
+      "kernel_median_ns_mean": 308.6666666666667,
+      "module_median_ns_mean": 2000.3333333333333,
+      "update_hz_range": [
+        250.00000000000003,
+        250.00000000000003
+      ],
+      "max_clock_offset_s": 0.003999999999997783,
+      "unrecovered": 0,
+      "motor_missing_total": 3924,
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 114122.1435466653,
+      "module_wall_ns_per_sim_second_mean": 807514.7805670142,
+      "kernel_cost_p95_ns_mean": 1313.983333333333,
+      "kernel_cost_p99_ns_mean": 2042.9066666666658,
+      "module_cost_p95_ns_mean": 8399.199999999999,
+      "module_cost_p99_ns_mean": 14072.83
+    },
+    {
+      "scene": "nominal",
+      "group": "B",
+      "mode": 2,
+      "planned": 3,
+      "success": 3,
+      "missing": 0,
+      "failures": [],
+      "flight_completed": 3,
+      "failure_classes": {
+        "flight": 0,
+        "control_boundary": 0,
+        "infrastructure": 0,
+        "analysis_or_data_quality": 0
+      },
+      "attempted": 3,
+      "accepted_fraction": 1.0,
+      "accepted_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "flight_completion_fraction": 1.0,
+      "flight_completion_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "rmse_tracking_mean": [
+        0.004518929424497767,
+        0.004650614951925009,
+        0.003073831276006743
+      ],
+      "iae_tracking_rad_mean": [
+        0.1293492197217808,
+        0.13215568121212223,
+        0.08915466502441753
+      ],
+      "rmse_steady_mean": [
+        0.004165361596968019,
+        0.004608119314351942,
+        0.0020675370157632734
+      ],
+      "control_rms_mean": [
+        0.000947864526133451,
+        0.004416239309335404,
+        0.002057356614008761
+      ],
+      "control_peak_mean": [
+        0.002138726878911257,
+        0.006458779952178399,
+        0.0043112849816679955
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.000295828021822489,
+        0.0003460190481067928,
+        0.0008395173311395891
+      ],
+      "common_0_20hz_rms_mean": [
+        0.0009285945591699371,
+        0.000856988840660624,
+        0.0018894888658908858
+      ],
+      "tv_per_s_mean": [
+        0.05632057200293478,
+        0.0626152927525928,
+        0.146575765706677
+      ],
+      "kernel_median_ns_mean": 504.8333333333333,
+      "module_median_ns_mean": 2097.0,
+      "update_hz_range": [
+        250.00000000000003,
+        250.00000000000003
+      ],
+      "max_clock_offset_s": 0.0,
+      "unrecovered": 0,
+      "motor_missing_total": 4837,
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 160576.51990092298,
+      "module_wall_ns_per_sim_second_mean": 738576.1006997916,
+      "kernel_cost_p95_ns_mean": 1672.0499999999981,
+      "kernel_cost_p99_ns_mean": 3122.113333333334,
+      "module_cost_p95_ns_mean": 7965.8499999999985,
+      "module_cost_p99_ns_mean": 12995.076666666662
+    },
+    {
+      "scene": "torque",
+      "group": "A",
+      "mode": 1,
+      "planned": 3,
+      "success": 3,
+      "missing": 0,
+      "failures": [],
+      "flight_completed": 3,
+      "failure_classes": {
+        "flight": 0,
+        "control_boundary": 0,
+        "infrastructure": 0,
+        "analysis_or_data_quality": 0
+      },
+      "attempted": 3,
+      "accepted_fraction": 1.0,
+      "accepted_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "flight_completion_fraction": 1.0,
+      "flight_completion_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "rmse_tracking_mean": [
+        0.004419360972886596,
+        0.004561813999841042,
+        0.0030188244014329735
+      ],
+      "iae_tracking_rad_mean": [
+        0.12693688830768224,
+        0.12624368699892755,
+        0.0872224522679268
+      ],
+      "rmse_steady_mean": [
+        0.003925834592773323,
+        0.004205782684296436,
+        0.0018086722359466371
+      ],
+      "control_rms_mean": [
+        0.0010035719732687184,
+        0.004490803274661201,
+        0.002148857945484884
+      ],
+      "control_peak_mean": [
+        0.00226046199289461,
+        0.007294269589086373,
+        0.004696730834742387
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.00030708531370726515,
+        0.00041437086974288216,
+        0.0008962681253845336
+      ],
+      "common_0_20hz_rms_mean": [
+        0.0009646456764860253,
+        0.0011390994172801774,
+        0.0019463330682986304
+      ],
+      "tv_per_s_mean": [
+        0.056691402076159685,
+        0.074610519225071,
+        0.15430031415369613
+      ],
+      "kernel_median_ns_mean": 303.6666666666667,
+      "module_median_ns_mean": 2032.6666666666667,
+      "update_hz_range": [
+        250.00000000000003,
+        250.00000000000003
+      ],
+      "max_clock_offset_s": 0.0040000000000048885,
+      "unrecovered": 0,
+      "motor_missing_total": 3872,
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 112014.94806952612,
+      "module_wall_ns_per_sim_second_mean": 813889.1687303375,
+      "kernel_cost_p95_ns_mean": 1284.3333333333333,
+      "kernel_cost_p99_ns_mean": 1982.696666666665,
+      "module_cost_p95_ns_mean": 8414.15,
+      "module_cost_p99_ns_mean": 15004.616666666596
+    },
+    {
+      "scene": "torque",
+      "group": "A",
+      "mode": 2,
+      "planned": 3,
+      "success": 3,
+      "missing": 0,
+      "failures": [],
+      "flight_completed": 3,
+      "failure_classes": {
+        "flight": 0,
+        "control_boundary": 0,
+        "infrastructure": 0,
+        "analysis_or_data_quality": 0
+      },
+      "attempted": 3,
+      "accepted_fraction": 1.0,
+      "accepted_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "flight_completion_fraction": 1.0,
+      "flight_completion_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "rmse_tracking_mean": [
+        0.004517014219849339,
+        0.004827373242511292,
+        0.0031076242222502024
+      ],
+      "iae_tracking_rad_mean": [
+        0.12859213484158197,
+        0.1365580472832371,
+        0.09011687998023504
+      ],
+      "rmse_steady_mean": [
+        0.003866726146723478,
+        0.004544582170305581,
+        0.001850328910455179
+      ],
+      "control_rms_mean": [
+        0.0009461074504793643,
+        0.0044607719766740495,
+        0.0020723776095736535
+      ],
+      "control_peak_mean": [
+        0.002343781990930438,
+        0.006980596265445153,
+        0.0044901068322360516
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.0002857869821018088,
+        0.0003830194848985782,
+        0.0008395210737541537
+      ],
+      "common_0_20hz_rms_mean": [
+        0.0009306765827361715,
+        0.0010542722463455993,
+        0.0019010114325701587
+      ],
+      "tv_per_s_mean": [
+        0.05428854257538387,
+        0.07127650302438135,
+        0.1451844212797979
+      ],
+      "kernel_median_ns_mean": 552.6666666666666,
+      "module_median_ns_mean": 2275.6666666666665,
+      "update_hz_range": [
+        250.00000000000003,
+        250.00000000000003
+      ],
+      "max_clock_offset_s": 0.003999999999997783,
+      "unrecovered": 0,
+      "motor_missing_total": 4461,
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 196786.3684549228,
+      "module_wall_ns_per_sim_second_mean": 849063.6229514425,
+      "kernel_cost_p95_ns_mean": 2384.783333333333,
+      "kernel_cost_p99_ns_mean": 3640.9533333333297,
+      "module_cost_p95_ns_mean": 9169.999999999998,
+      "module_cost_p99_ns_mean": 14249.43
+    },
+    {
+      "scene": "torque",
+      "group": "B",
+      "mode": 0,
+      "planned": 3,
+      "success": 3,
+      "missing": 0,
+      "failures": [],
+      "flight_completed": 3,
+      "failure_classes": {
+        "flight": 0,
+        "control_boundary": 0,
+        "infrastructure": 0,
+        "analysis_or_data_quality": 0
+      },
+      "attempted": 3,
+      "accepted_fraction": 1.0,
+      "accepted_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "flight_completion_fraction": 1.0,
+      "flight_completion_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "rmse_tracking_mean": [
+        0.004139164631217321,
+        0.0044539212419796945,
+        0.007081109312830608
+      ],
+      "iae_tracking_rad_mean": [
+        0.11848034086626529,
+        0.1254367862114256,
+        0.21580109024816194
+      ],
+      "rmse_steady_mean": [
+        0.003427871797206421,
+        0.003907557130763035,
+        0.0016899814226417076
+      ],
+      "control_rms_mean": [
+        0.0010247599881802415,
+        0.004392491997652788,
+        0.001702560749351232
+      ],
+      "control_peak_mean": [
+        0.0038731700430313745,
+        0.007949844002723694,
+        0.004444178193807602
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.0006187829631396634,
+        0.0006275810186373315,
+        0.0002778968873308956
+      ],
+      "common_0_20hz_rms_mean": [
+        0.0008275012875662958,
+        0.0007394002057698511,
+        0.0016767611224969045
+      ],
+      "tv_per_s_mean": [
+        0.10848980297288546,
+        0.10844780711017342,
+        0.052490685215869026
+      ],
+      "kernel_median_ns_mean": 101.33333333333333,
+      "module_median_ns_mean": 1521.0,
+      "update_hz_range": [
+        250.00000000000003,
+        250.00000000000003
+      ],
+      "max_clock_offset_s": 0.0040000000000048885,
+      "unrecovered": 0,
+      "motor_missing_total": 4445,
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 36194.6148045627,
+      "module_wall_ns_per_sim_second_mean": 581171.8149579213,
+      "kernel_cost_p95_ns_mean": 399.5166666666664,
+      "kernel_cost_p99_ns_mean": 741.3333333333345,
+      "module_cost_p95_ns_mean": 6050.483333333331,
+      "module_cost_p99_ns_mean": 11790.236666666688
+    },
+    {
+      "scene": "torque",
+      "group": "B",
+      "mode": 1,
+      "planned": 3,
+      "success": 3,
+      "missing": 0,
+      "failures": [],
+      "flight_completed": 3,
+      "failure_classes": {
+        "flight": 0,
+        "control_boundary": 0,
+        "infrastructure": 0,
+        "analysis_or_data_quality": 0
+      },
+      "attempted": 3,
+      "accepted_fraction": 1.0,
+      "accepted_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "flight_completion_fraction": 1.0,
+      "flight_completion_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "rmse_tracking_mean": [
+        0.004641045212800888,
+        0.004476759048597449,
+        0.003004984248403983
+      ],
+      "iae_tracking_rad_mean": [
+        0.13237044102500659,
+        0.1260522366117657,
+        0.08706111179337798
+      ],
+      "rmse_steady_mean": [
+        0.0041092207488190495,
+        0.0041521599506662375,
+        0.0018992985728650978
+      ],
+      "control_rms_mean": [
+        0.001023812067753171,
+        0.004491988464076134,
+        0.0021455668000372385
+      ],
+      "control_peak_mean": [
+        0.002302368481953939,
+        0.007020366222908099,
+        0.0045316882121066255
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.00030801813755758426,
+        0.0004147566050297171,
+        0.0008940323678547564
+      ],
+      "common_0_20hz_rms_mean": [
+        0.000997073939194004,
+        0.001127058980877179,
+        0.0019493224080317556
+      ],
+      "tv_per_s_mean": [
+        0.057320530012520764,
+        0.07505960949627614,
+        0.155000698442012
+      ],
+      "kernel_median_ns_mean": 310.0,
+      "module_median_ns_mean": 2007.6666666666667,
+      "update_hz_range": [
+        250.00000000000003,
+        250.00000000000003
+      ],
+      "max_clock_offset_s": 7.105427357601002e-15,
+      "unrecovered": 0,
+      "motor_missing_total": 4215,
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 110883.47519935826,
+      "module_wall_ns_per_sim_second_mean": 785611.152462213,
+      "kernel_cost_p95_ns_mean": 1240.6499999999996,
+      "kernel_cost_p99_ns_mean": 1990.9000000000003,
+      "module_cost_p95_ns_mean": 8154.699999999996,
+      "module_cost_p99_ns_mean": 13837.193333333349
+    },
+    {
+      "scene": "torque",
+      "group": "B",
+      "mode": 2,
+      "planned": 3,
+      "success": 3,
+      "missing": 0,
+      "failures": [],
+      "flight_completed": 3,
+      "failure_classes": {
+        "flight": 0,
+        "control_boundary": 0,
+        "infrastructure": 0,
+        "analysis_or_data_quality": 0
+      },
+      "attempted": 3,
+      "accepted_fraction": 1.0,
+      "accepted_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "flight_completion_fraction": 1.0,
+      "flight_completion_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "rmse_tracking_mean": [
+        0.004572618156333853,
+        0.005009849967545489,
+        0.003103704132181194
+      ],
+      "iae_tracking_rad_mean": [
+        0.13025589497340842,
+        0.1409726461250927,
+        0.0897508987604136
+      ],
+      "rmse_steady_mean": [
+        0.003933921269409044,
+        0.00453224325048578,
+        0.0018644008957351792
+      ],
+      "control_rms_mean": [
+        0.0009527450196502264,
+        0.00442432472030829,
+        0.0020677631327382907
+      ],
+      "control_peak_mean": [
+        0.0022748211243500314,
+        0.006765890090415875,
+        0.004572545488675435
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.00029251262854895836,
+        0.0003330230215669659,
+        0.0008396983571041292
+      ],
+      "common_0_20hz_rms_mean": [
+        0.0009164571282121301,
+        0.0008670362040967043,
+        0.0018954807169063094
+      ],
+      "tv_per_s_mean": [
+        0.054176213535711254,
+        0.05914689832004822,
+        0.14539586097075027
+      ],
+      "kernel_median_ns_mean": 532.0,
+      "module_median_ns_mean": 2203.0,
+      "update_hz_range": [
+        250.00000000000003,
+        250.00000000000003
+      ],
+      "max_clock_offset_s": 7.105427357601002e-15,
+      "unrecovered": 0,
+      "motor_missing_total": 4318,
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 188500.3754831572,
+      "module_wall_ns_per_sim_second_mean": 836682.526699779,
+      "kernel_cost_p95_ns_mean": 2223.199999999995,
+      "kernel_cost_p99_ns_mean": 3507.146666666666,
+      "module_cost_p95_ns_mean": 8888.016666666665,
+      "module_cost_p99_ns_mean": 14195.863333333327
+    },
+    {
+      "scene": "inertia",
+      "group": "A",
+      "mode": 1,
+      "planned": 3,
+      "success": 3,
+      "missing": 0,
+      "failures": [],
+      "flight_completed": 3,
+      "failure_classes": {
+        "flight": 0,
+        "control_boundary": 0,
+        "infrastructure": 0,
+        "analysis_or_data_quality": 0
+      },
+      "attempted": 3,
+      "accepted_fraction": 1.0,
+      "accepted_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "flight_completion_fraction": 1.0,
+      "flight_completion_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "rmse_tracking_mean": [
+        0.004406401202973046,
+        0.004279934927099224,
+        0.003479951412786241
+      ],
+      "iae_tracking_rad_mean": [
+        0.12531948017837324,
+        0.11903519780129136,
+        0.09967085133272728
+      ],
+      "rmse_steady_mean": [
+        0.0035689754080528886,
+        0.003785245588337089,
+        0.0017234591684880502
+      ],
+      "control_rms_mean": [
+        0.0009971445003986194,
+        0.004477755344511122,
+        0.002300315505797216
+      ],
+      "control_peak_mean": [
+        0.0022355259085694947,
+        0.006927117860565583,
+        0.004872574315716823
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.0003013901253462598,
+        0.0004236835437690997,
+        0.0008632278367677809
+      ],
+      "common_0_20hz_rms_mean": [
+        0.0010017275581973033,
+        0.0010917308548134593,
+        0.0021346595400334742
+      ],
+      "tv_per_s_mean": [
+        0.05691871057275774,
+        0.0766500112260002,
+        0.14600892041040778
+      ],
+      "kernel_median_ns_mean": 308.3333333333333,
+      "module_median_ns_mean": 2012.3333333333333,
+      "update_hz_range": [
+        250.00000000000003,
+        250.00000000000003
+      ],
+      "max_clock_offset_s": 0.0040000000000048885,
+      "unrecovered": 0,
+      "motor_missing_total": 3893,
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 113810.00460086373,
+      "module_wall_ns_per_sim_second_mean": 812079.12436722,
+      "kernel_cost_p95_ns_mean": 1292.9666666666665,
+      "kernel_cost_p99_ns_mean": 2015.0400000000009,
+      "module_cost_p95_ns_mean": 8327.233333333332,
+      "module_cost_p99_ns_mean": 14351.27333333334
+    },
+    {
+      "scene": "inertia",
+      "group": "A",
+      "mode": 2,
+      "planned": 3,
+      "success": 3,
+      "missing": 0,
+      "failures": [],
+      "flight_completed": 3,
+      "failure_classes": {
+        "flight": 0,
+        "control_boundary": 0,
+        "infrastructure": 0,
+        "analysis_or_data_quality": 0
+      },
+      "attempted": 3,
+      "accepted_fraction": 1.0,
+      "accepted_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "flight_completion_fraction": 1.0,
+      "flight_completion_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "rmse_tracking_mean": [
+        0.004515671986280209,
+        0.004580964746659616,
+        0.0036190044510282307
+      ],
+      "iae_tracking_rad_mean": [
+        0.126371745818833,
+        0.13059645238113202,
+        0.1037661852739596
+      ],
+      "rmse_steady_mean": [
+        0.0038742878551648804,
+        0.0045536415142989626,
+        0.001789442769812236
+      ],
+      "control_rms_mean": [
+        0.0009385563317224478,
+        0.004450810871716194,
+        0.0022345149864863934
+      ],
+      "control_peak_mean": [
+        0.0022179650453229747,
+        0.006803632248193026,
+        0.004742256676157315
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.00028675231482521525,
+        0.00040471595354141205,
+        0.0007951252883788592
+      ],
+      "common_0_20hz_rms_mean": [
+        0.0009402753852455614,
+        0.0009862751595770553,
+        0.0020917016959529446
+      ],
+      "tv_per_s_mean": [
+        0.054625908441314174,
+        0.07310192194913893,
+        0.13627673445601565
+      ],
+      "kernel_median_ns_mean": 549.0,
+      "module_median_ns_mean": 2265.5,
+      "update_hz_range": [
+        250.00000000000003,
+        250.00000000000003
+      ],
+      "max_clock_offset_s": 0.0040000000000048885,
+      "unrecovered": 0,
+      "motor_missing_total": 4231,
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 197616.07716045264,
+      "module_wall_ns_per_sim_second_mean": 864248.9564191155,
+      "kernel_cost_p95_ns_mean": 2353.7833333333324,
+      "kernel_cost_p99_ns_mean": 3626.570000000002,
+      "module_cost_p95_ns_mean": 9257.933333333332,
+      "module_cost_p99_ns_mean": 15330.636666666664
+    },
+    {
+      "scene": "inertia",
+      "group": "B",
+      "mode": 0,
+      "planned": 3,
+      "success": 2,
+      "missing": 0,
+      "failures": [
+        {
+          "mode": 0,
+          "scene": "inertia",
+          "seed": 2102,
+          "group": "B",
+          "success": false,
+          "flight_success": true,
+          "analysis_success": false,
+          "source_head": "585310ee7d4ac2cd8dd8fcc3662b7a1e19621d41",
+          "binary_sha256": "4c835a23a656ad33f4f8ca24afecaf109768eb8696aac1fe9bff697becc14eab",
+          "logs": [
+            {
+              "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-17/10_02_32.ulg",
+              "archive": "/home/yr/Desktop/codev doc/experiments/M10-20260917/pilot03/0037_B_m0_inertia_s2102/10_02_32.ulg",
+              "sha256": "839aff8c3cf3f11d4d2072ceb4a1a8004589c5fb102faecde61f1aa33a1bd574",
+              "bytes": 147200
+            },
+            {
+              "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-17/10_02_38.ulg",
+              "archive": "/home/yr/Desktop/codev doc/experiments/M10-20260917/pilot03/0037_B_m0_inertia_s2102/10_02_38.ulg",
+              "sha256": "58eabf7971f10b3cb51ee9603bf3c3e2681b70014ad41ce2bd6bb05e90411281",
+              "bytes": 25577827
+            }
+          ],
+          "error": "ValueError('R/P command boundary')",
+          "failure_class": "control_boundary",
+          "failure_diagnostics": [
+            {
+              "ulog": "/home/yr/Desktop/codev doc/experiments/M10-20260917/pilot03/0037_B_m0_inertia_s2102/10_02_32.ulg",
+              "fault_samples": 0,
+              "abort_samples": 0,
+              "effective_modes": [
+                0
+              ],
+              "dropouts": 0,
+              "max_rate_abs": [
+                0.00345209869556129,
+                0.0029210634529590607,
+                0.0028279658872634172
+              ],
+              "max_command_abs": [
+                0.0018139197491109371,
+                0.0013819767627865076,
+                0.0005655931890942156
+              ],
+              "command_peak_sample_us": [
+                836000,
+                436000,
+                1236000
+              ],
+              "command_peak_last_event": [
+                "startup",
+                "startup",
+                "startup"
+              ]
+            },
+            {
+              "ulog": "/home/yr/Desktop/codev doc/experiments/M10-20260917/pilot03/0037_B_m0_inertia_s2102/10_02_38.ulg",
+              "fault_samples": 0,
+              "abort_samples": 0,
+              "effective_modes": [
+                0
+              ],
+              "dropouts": 0,
+              "max_rate_abs": [
+                0.3292680084705353,
+                0.16198499500751495,
+                0.06800482422113419
+              ],
+              "max_command_abs": [
+                0.15341702103614807,
+                0.05031305178999901,
+                0.004988012835383415
+              ],
+              "command_peak_sample_us": [
+                109108000,
+                33184000,
+                93084000
+              ],
+              "command_peak_last_event": [
+                "land_command",
+                "takeoff_command",
+                "hover_start"
+              ]
+            }
+          ],
+          "path": "/home/yr/Desktop/codev doc/experiments/M10-20260917/pilot03/0037_B_m0_inertia_s2102/m10_analysis.json"
+        }
+      ],
+      "flight_completed": 3,
+      "failure_classes": {
+        "flight": 0,
+        "control_boundary": 1,
+        "infrastructure": 0,
+        "analysis_or_data_quality": 0
+      },
+      "attempted": 3,
+      "accepted_fraction": 0.6666666666666666,
+      "accepted_wilson95": [
+        0.2076596008020477,
+        0.9385080552796037
+      ],
+      "flight_completion_fraction": 1.0,
+      "flight_completion_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "rmse_tracking_mean": [
+        0.004058940892911645,
+        0.00437976773993198,
+        0.008352617221905402
+      ],
+      "iae_tracking_rad_mean": [
+        0.11642315642918402,
+        0.1268547520623979,
+        0.256309582128888
+      ],
+      "rmse_steady_mean": [
+        0.0038410660925544127,
+        0.004275301792465242,
+        0.0016322589012933847
+      ],
+      "control_rms_mean": [
+        0.0010064699246564311,
+        0.004388094792498571,
+        0.0020128208370899623
+      ],
+      "control_peak_mean": [
+        0.004159034928306937,
+        0.008197100833058357,
+        0.0049230370204895735
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.0006158979472953079,
+        0.0006257625534032525,
+        0.00028212596257393423
+      ],
+      "common_0_20hz_rms_mean": [
+        0.000803431997794946,
+        0.0007692251123734289,
+        0.002000675873528304
+      ],
+      "tv_per_s_mean": [
+        0.10772555920549268,
+        0.10814122407949375,
+        0.05268546713346546
+      ],
+      "kernel_median_ns_mean": 102.0,
+      "module_median_ns_mean": 1544.5,
+      "update_hz_range": [
+        250.00000000000003,
+        250.00000000000003
+      ],
+      "max_clock_offset_s": 0.0,
+      "unrecovered": 0,
+      "motor_missing_total": 2945,
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 35967.01004081296,
+      "module_wall_ns_per_sim_second_mean": 621744.9889131561,
+      "kernel_cost_p95_ns_mean": 388.22499999999945,
+      "kernel_cost_p99_ns_mean": 688.0349999999999,
+      "module_cost_p95_ns_mean": 6254.524999999995,
+      "module_cost_p99_ns_mean": 12384.764999999998
+    },
+    {
+      "scene": "inertia",
+      "group": "B",
+      "mode": 1,
+      "planned": 3,
+      "success": 3,
+      "missing": 0,
+      "failures": [],
+      "flight_completed": 3,
+      "failure_classes": {
+        "flight": 0,
+        "control_boundary": 0,
+        "infrastructure": 0,
+        "analysis_or_data_quality": 0
+      },
+      "attempted": 3,
+      "accepted_fraction": 1.0,
+      "accepted_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "flight_completion_fraction": 1.0,
+      "flight_completion_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "rmse_tracking_mean": [
+        0.004374747352041397,
+        0.004114635536841891,
+        0.0034565896124476073
+      ],
+      "iae_tracking_rad_mean": [
+        0.12325431616313291,
+        0.1155618908322358,
+        0.09945821085812834
+      ],
+      "rmse_steady_mean": [
+        0.003976661326608582,
+        0.0040649300811193365,
+        0.0017155276885753741
+      ],
+      "control_rms_mean": [
+        0.000988984773399243,
+        0.004471198225339447,
+        0.0022975629065029816
+      ],
+      "control_peak_mean": [
+        0.0023031438079973063,
+        0.006938988963762919,
+        0.004760433298846086
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.0003066972338387816,
+        0.00042943888353050443,
+        0.0008660957817603253
+      ],
+      "common_0_20hz_rms_mean": [
+        0.000990976305997781,
+        0.001077499505957435,
+        0.002130473370768235
+      ],
+      "tv_per_s_mean": [
+        0.05746702099746941,
+        0.07677196230549642,
+        0.1455262803245308
+      ],
+      "kernel_median_ns_mean": 307.5,
+      "module_median_ns_mean": 2006.6666666666667,
+      "update_hz_range": [
+        250.00000000000003,
+        250.00000000000003
+      ],
+      "max_clock_offset_s": 7.105427357601002e-15,
+      "unrecovered": 0,
+      "motor_missing_total": 4089,
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 111713.8847714351,
+      "module_wall_ns_per_sim_second_mean": 804753.2491042702,
+      "kernel_cost_p95_ns_mean": 1283.8,
+      "kernel_cost_p99_ns_mean": 2004.6366666666647,
+      "module_cost_p95_ns_mean": 8445.066666666666,
+      "module_cost_p99_ns_mean": 14763.220000000007
+    },
+    {
+      "scene": "inertia",
+      "group": "B",
+      "mode": 2,
+      "planned": 3,
+      "success": 3,
+      "missing": 0,
+      "failures": [],
+      "flight_completed": 3,
+      "failure_classes": {
+        "flight": 0,
+        "control_boundary": 0,
+        "infrastructure": 0,
+        "analysis_or_data_quality": 0
+      },
+      "attempted": 3,
+      "accepted_fraction": 1.0,
+      "accepted_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "flight_completion_fraction": 1.0,
+      "flight_completion_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "rmse_tracking_mean": [
+        0.004473828515717454,
+        0.004958912130527228,
+        0.003623983921024225
+      ],
+      "iae_tracking_rad_mean": [
+        0.12545950209194173,
+        0.14037968995134967,
+        0.1037823706539736
+      ],
+      "rmse_steady_mean": [
+        0.003848450718107328,
+        0.004631103033289377,
+        0.001779812165025882
+      ],
+      "control_rms_mean": [
+        0.0009340953958005345,
+        0.004419859333803157,
+        0.002232504649975136
+      ],
+      "control_peak_mean": [
+        0.0023244136633972325,
+        0.006627161366244157,
+        0.004685800212124984
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.0002872641110399408,
+        0.0003359775123396734,
+        0.0007971420180891654
+      ],
+      "common_0_20hz_rms_mean": [
+        0.0009502507943948787,
+        0.0008626210380091917,
+        0.0020917935787528367
+      ],
+      "tv_per_s_mean": [
+        0.05462279010765283,
+        0.05888082548820724,
+        0.13675619466815403
+      ],
+      "kernel_median_ns_mean": 539.6666666666666,
+      "module_median_ns_mean": 2216.3333333333335,
+      "update_hz_range": [
+        250.00000000000003,
+        250.00000000000003
+      ],
+      "max_clock_offset_s": 0.007999999999995566,
+      "unrecovered": 0,
+      "motor_missing_total": 4346,
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 191344.68841402527,
+      "module_wall_ns_per_sim_second_mean": 832191.9219746878,
+      "kernel_cost_p95_ns_mean": 2247.9999999999977,
+      "kernel_cost_p99_ns_mean": 3619.853333333333,
+      "module_cost_p95_ns_mean": 8917.099999999999,
+      "module_cost_p99_ns_mean": 14229.200000000003
+    },
+    {
+      "scene": "noise",
+      "group": "A",
+      "mode": 1,
+      "planned": 3,
+      "success": 3,
+      "missing": 0,
+      "failures": [],
+      "flight_completed": 3,
+      "failure_classes": {
+        "flight": 0,
+        "control_boundary": 0,
+        "infrastructure": 0,
+        "analysis_or_data_quality": 0
+      },
+      "attempted": 3,
+      "accepted_fraction": 1.0,
+      "accepted_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "flight_completion_fraction": 1.0,
+      "flight_completion_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "rmse_tracking_mean": [
+        0.005892622373485199,
+        0.0056519547781260894,
+        0.004692300918787982
+      ],
+      "iae_tracking_rad_mean": [
+        0.16831491314852612,
+        0.1598690522418765,
+        0.13538413744959205
+      ],
+      "rmse_steady_mean": [
+        0.005519971722269788,
+        0.005355519457582445,
+        0.0035822720790913503
+      ],
+      "control_rms_mean": [
+        0.0011533471031320677,
+        0.004561800116869231,
+        0.0026675439517670173
+      ],
+      "control_peak_mean": [
+        0.002660717504719893,
+        0.007416575060536464,
+        0.005742065918942292
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.00048635797174517215,
+        0.0006546937904424563,
+        0.0014046399488358173
+      ],
+      "common_0_20hz_rms_mean": [
+        0.001068525203916769,
+        0.001212881713827182,
+        0.0022639539386629585
+      ],
+      "tv_per_s_mean": [
+        0.08787366708017325,
+        0.11413584187997643,
+        0.24557893829018618
+      ],
+      "kernel_median_ns_mean": 309.0,
+      "module_median_ns_mean": 2026.1666666666667,
+      "update_hz_range": [
+        250.00000000000003,
+        250.00000000000003
+      ],
+      "max_clock_offset_s": 0.0,
+      "unrecovered": 0,
+      "motor_missing_total": 3969,
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 112397.22252493123,
+      "module_wall_ns_per_sim_second_mean": 835187.1457061615,
+      "kernel_cost_p95_ns_mean": 1289.0,
+      "kernel_cost_p99_ns_mean": 2012.8766666666652,
+      "module_cost_p95_ns_mean": 8322.566666666664,
+      "module_cost_p99_ns_mean": 14469.30666666663
+    },
+    {
+      "scene": "noise",
+      "group": "A",
+      "mode": 2,
+      "planned": 3,
+      "success": 3,
+      "missing": 0,
+      "failures": [],
+      "flight_completed": 3,
+      "failure_classes": {
+        "flight": 0,
+        "control_boundary": 0,
+        "infrastructure": 0,
+        "analysis_or_data_quality": 0
+      },
+      "attempted": 3,
+      "accepted_fraction": 1.0,
+      "accepted_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "flight_completion_fraction": 1.0,
+      "flight_completion_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "rmse_tracking_mean": [
+        0.005865791278194075,
+        0.005899795752497651,
+        0.004747466304803601
+      ],
+      "iae_tracking_rad_mean": [
+        0.16713531089507647,
+        0.16806946247859741,
+        0.1377622231866311
+      ],
+      "rmse_steady_mean": [
+        0.0053874709176081476,
+        0.005740725747804577,
+        0.0035311351879013173
+      ],
+      "control_rms_mean": [
+        0.001085086796357537,
+        0.004533872342468776,
+        0.0025753544988488066
+      ],
+      "control_peak_mean": [
+        0.00251627069277068,
+        0.007216650526970625,
+        0.005605729296803474
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.00045910833550059173,
+        0.0006106233189166183,
+        0.0013247767442090893
+      ],
+      "common_0_20hz_rms_mean": [
+        0.0010162286289493638,
+        0.0011374758175142338,
+        0.0022103303050532777
+      ],
+      "tv_per_s_mean": [
+        0.08430746820662897,
+        0.10918178731528179,
+        0.2339018653074163
+      ],
+      "kernel_median_ns_mean": 551.6666666666666,
+      "module_median_ns_mean": 2273.0,
+      "update_hz_range": [
+        250.00000000000003,
+        250.00000000000003
+      ],
+      "max_clock_offset_s": 7.105427357601002e-15,
+      "unrecovered": 0,
+      "motor_missing_total": 4071,
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 204801.41638039472,
+      "module_wall_ns_per_sim_second_mean": 889835.8265599528,
+      "kernel_cost_p95_ns_mean": 2457.1499999999996,
+      "kernel_cost_p99_ns_mean": 3704.033333333333,
+      "module_cost_p95_ns_mean": 9437.699999999999,
+      "module_cost_p99_ns_mean": 14788.070000000012
+    },
+    {
+      "scene": "noise",
+      "group": "B",
+      "mode": 0,
+      "planned": 3,
+      "success": 3,
+      "missing": 0,
+      "failures": [],
+      "flight_completed": 3,
+      "failure_classes": {
+        "flight": 0,
+        "control_boundary": 0,
+        "infrastructure": 0,
+        "analysis_or_data_quality": 0
+      },
+      "attempted": 3,
+      "accepted_fraction": 1.0,
+      "accepted_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "flight_completion_fraction": 1.0,
+      "flight_completion_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "rmse_tracking_mean": [
+        0.00522900153585359,
+        0.005565385213957402,
+        0.007707159343629325
+      ],
+      "iae_tracking_rad_mean": [
+        0.14981281583327413,
+        0.1598278519193797,
+        0.23044572199710336
+      ],
+      "rmse_steady_mean": [
+        0.004830761493897875,
+        0.005009447367137227,
+        0.003261291347615105
+      ],
+      "control_rms_mean": [
+        0.0016880797550453946,
+        0.0046072209284545645,
+        0.0018425737122744644
+      ],
+      "control_peak_mean": [
+        0.006781095638871193,
+        0.010792295138041178,
+        0.005475586901108424
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.001199889617771199,
+        0.0012127381088732235,
+        0.0005504208419780203
+      ],
+      "common_0_20hz_rms_mean": [
+        0.001218902170743611,
+        0.0011542891845179152,
+        0.0017586280950451208
+      ],
+      "tv_per_s_mean": [
+        0.20688302205280706,
+        0.20695348667774213,
+        0.10338709642044502
+      ],
+      "kernel_median_ns_mean": 108.0,
+      "module_median_ns_mean": 1603.3333333333333,
+      "update_hz_range": [
+        250.00000000000003,
+        250.00000000000003
+      ],
+      "max_clock_offset_s": 0.0,
+      "unrecovered": 0,
+      "motor_missing_total": 4151,
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 41275.232406974676,
+      "module_wall_ns_per_sim_second_mean": 663437.3710383156,
+      "kernel_cost_p95_ns_mean": 477.6666666666667,
+      "kernel_cost_p99_ns_mean": 800.7566666666668,
+      "module_cost_p95_ns_mean": 6772.399999999995,
+      "module_cost_p99_ns_mean": 12668.513333333365
+    },
+    {
+      "scene": "noise",
+      "group": "B",
+      "mode": 1,
+      "planned": 3,
+      "success": 3,
+      "missing": 0,
+      "failures": [],
+      "flight_completed": 3,
+      "failure_classes": {
+        "flight": 0,
+        "control_boundary": 0,
+        "infrastructure": 0,
+        "analysis_or_data_quality": 0
+      },
+      "attempted": 3,
+      "accepted_fraction": 1.0,
+      "accepted_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "flight_completion_fraction": 1.0,
+      "flight_completion_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "rmse_tracking_mean": [
+        0.005888266156091864,
+        0.005533014526356385,
+        0.0046816400957350275
+      ],
+      "iae_tracking_rad_mean": [
+        0.16855251636891624,
+        0.15710295459413706,
+        0.13564433348978247
+      ],
+      "rmse_steady_mean": [
+        0.0057911450163964625,
+        0.005525924255950397,
+        0.0035526316186912303
+      ],
+      "control_rms_mean": [
+        0.0011535152823675457,
+        0.00456076729952153,
+        0.0026698019332018473
+      ],
+      "control_peak_mean": [
+        0.0025982537772506475,
+        0.00737732012445728,
+        0.005816556202868621
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.00048585382324712527,
+        0.0006654625168172243,
+        0.0014038812140178426
+      ],
+      "common_0_20hz_rms_mean": [
+        0.001072614420303336,
+        0.0012062763082924324,
+        0.0022708705604628974
+      ],
+      "tv_per_s_mean": [
+        0.08825389087712454,
+        0.11586047118934976,
+        0.24571650378154405
+      ],
+      "kernel_median_ns_mean": 311.0,
+      "module_median_ns_mean": 2047.0,
+      "update_hz_range": [
+        250.00000000000003,
+        250.00000000000003
+      ],
+      "max_clock_offset_s": 0.003999999999997783,
+      "unrecovered": 0,
+      "motor_missing_total": 4048,
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 115576.33813927435,
+      "module_wall_ns_per_sim_second_mean": 821716.1196118155,
+      "kernel_cost_p95_ns_mean": 1338.0,
+      "kernel_cost_p99_ns_mean": 2041.0533333333321,
+      "module_cost_p95_ns_mean": 8562.65,
+      "module_cost_p99_ns_mean": 15082.439999999993
+    },
+    {
+      "scene": "noise",
+      "group": "B",
+      "mode": 2,
+      "planned": 3,
+      "success": 3,
+      "missing": 0,
+      "failures": [],
+      "flight_completed": 3,
+      "failure_classes": {
+        "flight": 0,
+        "control_boundary": 0,
+        "infrastructure": 0,
+        "analysis_or_data_quality": 0
+      },
+      "attempted": 3,
+      "accepted_fraction": 1.0,
+      "accepted_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "flight_completion_fraction": 1.0,
+      "flight_completion_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "rmse_tracking_mean": [
+        0.0057892029489116335,
+        0.006085662897254589,
+        0.004757602856821285
+      ],
+      "iae_tracking_rad_mean": [
+        0.16578168824641035,
+        0.17324565240780065,
+        0.13787551418606503
+      ],
+      "rmse_steady_mean": [
+        0.00562789297447774,
+        0.005629251412663228,
+        0.003546675578580259
+      ],
+      "control_rms_mean": [
+        0.0010803896053502527,
+        0.004482210297748855,
+        0.0025762810942524775
+      ],
+      "control_peak_mean": [
+        0.0025246390141546726,
+        0.006843357502172391,
+        0.005535496554027001
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.0004625962274116308,
+        0.0005205986229032045,
+        0.0013262239026413805
+      ],
+      "common_0_20hz_rms_mean": [
+        0.0010000916922541956,
+        0.0009543598397761269,
+        0.0022098435769544894
+      ],
+      "tv_per_s_mean": [
+        0.08446824304185281,
+        0.09041562170023099,
+        0.23372170289316593
+      ],
+      "kernel_median_ns_mean": 568.0,
+      "module_median_ns_mean": 2300.5,
+      "update_hz_range": [
+        250.00000000000003,
+        250.00000000000003
+      ],
+      "max_clock_offset_s": 7.105427357601002e-15,
+      "unrecovered": 0,
+      "motor_missing_total": 4044,
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 212990.04004742307,
+      "module_wall_ns_per_sim_second_mean": 912592.8630637577,
+      "kernel_cost_p95_ns_mean": 2547.983333333332,
+      "kernel_cost_p99_ns_mean": 3844.0833333333335,
+      "module_cost_p95_ns_mean": 9621.299999999997,
+      "module_cost_p99_ns_mean": 15376.559999999998
+    },
+    {
+      "scene": "div2",
+      "group": "A",
+      "mode": 1,
+      "planned": 3,
+      "success": 3,
+      "missing": 0,
+      "failures": [],
+      "flight_completed": 3,
+      "failure_classes": {
+        "flight": 0,
+        "control_boundary": 0,
+        "infrastructure": 0,
+        "analysis_or_data_quality": 0
+      },
+      "attempted": 3,
+      "accepted_fraction": 1.0,
+      "accepted_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "flight_completion_fraction": 1.0,
+      "flight_completion_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "rmse_tracking_mean": [
+        0.004806167642216171,
+        0.004697075747820337,
+        0.0030246687612230996
+      ],
+      "iae_tracking_rad_mean": [
+        0.13776486208747762,
+        0.1341283783213973,
+        0.08768974757276009
+      ],
+      "rmse_steady_mean": [
+        0.0043557781778541,
+        0.0045027179151812995,
+        0.0018375810688301107
+      ],
+      "control_rms_mean": [
+        0.0010427615781842556,
+        0.004504615291021993,
+        0.002153773191178858
+      ],
+      "control_peak_mean": [
+        0.0023446159126857915,
+        0.007129796004543702,
+        0.004570787927756707
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.00029375998465737326,
+        0.00037911283031167475,
+        0.0008862315751962515
+      ],
+      "common_0_20hz_rms_mean": [
+        0.0010345539967383554,
+        0.0012152933203414074,
+        0.0019610933147077097
+      ],
+      "tv_per_s_mean": [
+        0.04613032361657832,
+        0.0600138657717724,
+        0.13196949995355886
+      ],
+      "kernel_median_ns_mean": 385.0,
+      "module_median_ns_mean": 1908.6666666666667,
+      "update_hz_range": [
+        125.00000000000001,
+        125.00000000000001
+      ],
+      "max_clock_offset_s": 7.105427357601002e-15,
+      "unrecovered": 0,
+      "motor_missing_total": 3741,
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 71455.27569660563,
+      "module_wall_ns_per_sim_second_mean": 791898.5639569584,
+      "kernel_cost_p95_ns_mean": 1705.3333333333333,
+      "kernel_cost_p99_ns_mean": 2467.6,
+      "module_cost_p95_ns_mean": 8214.666666666664,
+      "module_cost_p99_ns_mean": 13715.219999999958
+    },
+    {
+      "scene": "div2",
+      "group": "A",
+      "mode": 2,
+      "planned": 3,
+      "success": 2,
+      "missing": 0,
+      "failures": [
+        {
+          "mode": 2,
+          "scene": "div2",
+          "seed": 2102,
+          "group": "A",
+          "success": false,
+          "flight_success": true,
+          "analysis_success": false,
+          "source_head": "585310ee7d4ac2cd8dd8fcc3662b7a1e19621d41",
+          "binary_sha256": "4c835a23a656ad33f4f8ca24afecaf109768eb8696aac1fe9bff697becc14eab",
+          "logs": [
+            {
+              "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-17/10_16_34.ulg",
+              "archive": "/home/yr/Desktop/codev doc/experiments/M10-20260917/pilot03/0066_A_m2_div2_s2102/10_16_34.ulg",
+              "sha256": "54b906d05d03368d6a1a7e0c847b24471e47e487ca70ca631c014bb248750fd4",
+              "bytes": 269886
+            },
+            {
+              "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-17/10_16_42.ulg",
+              "archive": "/home/yr/Desktop/codev doc/experiments/M10-20260917/pilot03/0066_A_m2_div2_s2102/10_16_42.ulg",
+              "sha256": "0c0b590e84ddac2bfa3198deabbab8860f53e26e2d157396dcc17a7431626bbd",
+              "bytes": 25138504
+            }
+          ],
+          "error": "ValueError('Missing diagnostics: no TV/spectrum acceptance')",
+          "failure_class": "analysis_or_data_quality",
+          "failure_diagnostics": [
+            {
+              "ulog": "/home/yr/Desktop/codev doc/experiments/M10-20260917/pilot03/0066_A_m2_div2_s2102/10_16_34.ulg",
+              "fault_samples": 0,
+              "abort_samples": 0,
+              "effective_modes": [
+                0
+              ],
+              "dropouts": 0,
+              "max_rate_abs": [
+                0.0031433291733264923,
+                0.0032822825014591217,
+                0.0023699020966887474
+              ],
+              "max_command_abs": [
+                0.0013430833350867033,
+                0.0012429290218278766,
+                0.0004739804135169834
+              ],
+              "command_peak_sample_us": [
+                1212000,
+                2208000,
+                1504000
+              ],
+              "command_peak_last_event": [
+                "startup",
+                "startup",
+                "startup"
+              ]
+            },
+            {
+              "ulog": "/home/yr/Desktop/codev doc/experiments/M10-20260917/pilot03/0066_A_m2_div2_s2102/10_16_42.ulg",
+              "fault_samples": 0,
+              "abort_samples": 0,
+              "effective_modes": [
+                2
+              ],
+              "dropouts": 0,
+              "max_rate_abs": [
+                0.04957882687449455,
+                0.03602927550673485,
+                0.06496618688106537
+              ],
+              "max_command_abs": [
+                0.005027540493756533,
+                0.009528687223792076,
+                0.08081170916557312
+              ],
+              "command_peak_sample_us": [
+                109208000,
+                111028000,
+                31116000
+              ],
+              "command_peak_last_event": [
+                "land_command",
+                "land_command",
+                "takeoff_command"
+              ]
+            }
+          ],
+          "path": "/home/yr/Desktop/codev doc/experiments/M10-20260917/pilot03/0066_A_m2_div2_s2102/m10_analysis.json"
+        }
+      ],
+      "flight_completed": 3,
+      "failure_classes": {
+        "flight": 0,
+        "control_boundary": 0,
+        "infrastructure": 0,
+        "analysis_or_data_quality": 1
+      },
+      "attempted": 3,
+      "accepted_fraction": 0.6666666666666666,
+      "accepted_wilson95": [
+        0.2076596008020477,
+        0.9385080552796037
+      ],
+      "flight_completion_fraction": 1.0,
+      "flight_completion_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "rmse_tracking_mean": [
+        0.004354774205487789,
+        0.005617110161494529,
+        0.0032425439616304364
+      ],
+      "iae_tracking_rad_mean": [
+        0.12393829148144869,
+        0.16669980194963863,
+        0.09385038649928173
+      ],
+      "rmse_steady_mean": [
+        0.004188201888235461,
+        0.0057907341916425045,
+        0.0017700521551430946
+      ],
+      "control_rms_mean": [
+        0.0008689190092787081,
+        0.0044324290563544765,
+        0.0020089142531497014
+      ],
+      "control_peak_mean": [
+        0.0021211212733760476,
+        0.006621877895668149,
+        0.004232343751937151
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.0002601032738392482,
+        0.0003372844464733316,
+        0.0007790953192716814
+      ],
+      "common_0_20hz_rms_mean": [
+        0.0008519335659687516,
+        0.0010036458010964939,
+        0.0018572341860511896
+      ],
+      "tv_per_s_mean": [
+        0.042281185403933504,
+        0.05424565422193457,
+        0.11777772130963704
+      ],
+      "kernel_median_ns_mean": 638.5,
+      "module_median_ns_mean": 2005.5,
+      "update_hz_range": [
+        125.00000000000001,
+        125.00000000000001
+      ],
+      "max_clock_offset_s": 0.0,
+      "unrecovered": 0,
+      "motor_missing_total": 2763,
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 120989.22362391764,
+      "module_wall_ns_per_sim_second_mean": 806328.6348673959,
+      "kernel_cost_p95_ns_mean": 2982.8999999999996,
+      "kernel_cost_p99_ns_mean": 4218.314999999999,
+      "module_cost_p95_ns_mean": 9163.574999999999,
+      "module_cost_p99_ns_mean": 15098.014999999978
+    },
+    {
+      "scene": "div2",
+      "group": "B",
+      "mode": 0,
+      "planned": 3,
+      "success": 3,
+      "missing": 0,
+      "failures": [],
+      "flight_completed": 3,
+      "failure_classes": {
+        "flight": 0,
+        "control_boundary": 0,
+        "infrastructure": 0,
+        "analysis_or_data_quality": 0
+      },
+      "attempted": 3,
+      "accepted_fraction": 1.0,
+      "accepted_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "flight_completion_fraction": 1.0,
+      "flight_completion_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "rmse_tracking_mean": [
+        0.003969008322894821,
+        0.00436490456619404,
+        0.0071185224355636454
+      ],
+      "iae_tracking_rad_mean": [
+        0.11251957381017079,
+        0.12426734749950508,
+        0.21778584496711847
+      ],
+      "rmse_steady_mean": [
+        0.003437088295367994,
+        0.0039660471861681194,
+        0.0015373911910904205
+      ],
+      "control_rms_mean": [
+        0.0009785963131049471,
+        0.004383282476300712,
+        0.0017118722858613653
+      ],
+      "control_peak_mean": [
+        0.0036946244072169065,
+        0.007728812905649344,
+        0.004256711496661107
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.0006128366686972884,
+        0.000621456585672207,
+        0.0002771021427676162
+      ],
+      "common_0_20hz_rms_mean": [
+        0.0008135631219271695,
+        0.0007159164785593045,
+        0.0016872903277916006
+      ],
+      "tv_per_s_mean": [
+        0.09390087254115753,
+        0.0947938753621808,
+        0.04481874405542772
+      ],
+      "kernel_median_ns_mean": 141.33333333333334,
+      "module_median_ns_mean": 1572.6666666666667,
+      "update_hz_range": [
+        125.00000000000001,
+        125.00000000000001
+      ],
+      "max_clock_offset_s": 7.105427357601002e-15,
+      "unrecovered": 0,
+      "motor_missing_total": 3984,
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 26507.885794540693,
+      "module_wall_ns_per_sim_second_mean": 659093.025836693,
+      "kernel_cost_p95_ns_mean": 637.2999999999993,
+      "kernel_cost_p99_ns_mean": 1006.4933333333335,
+      "module_cost_p95_ns_mean": 6757.316666666662,
+      "module_cost_p99_ns_mean": 13020.17666666666
+    },
+    {
+      "scene": "div2",
+      "group": "B",
+      "mode": 1,
+      "planned": 3,
+      "success": 3,
+      "missing": 0,
+      "failures": [],
+      "flight_completed": 3,
+      "failure_classes": {
+        "flight": 0,
+        "control_boundary": 0,
+        "infrastructure": 0,
+        "analysis_or_data_quality": 0
+      },
+      "attempted": 3,
+      "accepted_fraction": 1.0,
+      "accepted_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "flight_completion_fraction": 1.0,
+      "flight_completion_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "rmse_tracking_mean": [
+        0.0047384197662152195,
+        0.004753605064979344,
+        0.003024569550785325
+      ],
+      "iae_tracking_rad_mean": [
+        0.13500890058968798,
+        0.13473467393906322,
+        0.08759118967643008
+      ],
+      "rmse_steady_mean": [
+        0.004329531845413562,
+        0.004477760096790063,
+        0.001835062791404431
+      ],
+      "control_rms_mean": [
+        0.0010332146228611415,
+        0.00450350593405247,
+        0.002152383486522066
+      ],
+      "control_peak_mean": [
+        0.002261522846917311,
+        0.007104148467381795,
+        0.004475497330228488
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.00029627217660046254,
+        0.00038843417945119176,
+        0.0008933789725520854
+      ],
+      "common_0_20hz_rms_mean": [
+        0.0010091840082667358,
+        0.0011959291096416372,
+        0.001962351791996606
+      ],
+      "tv_per_s_mean": [
+        0.0466634620311476,
+        0.06065140394450821,
+        0.13336666372239742
+      ],
+      "kernel_median_ns_mean": 384.6666666666667,
+      "module_median_ns_mean": 1881.6666666666667,
+      "update_hz_range": [
+        125.00000000000001,
+        125.00000000000001
+      ],
+      "max_clock_offset_s": 0.003999999999997783,
+      "unrecovered": 0,
+      "motor_missing_total": 3895,
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 71478.05640777045,
+      "module_wall_ns_per_sim_second_mean": 770558.1523512108,
+      "kernel_cost_p95_ns_mean": 1688.7166666666662,
+      "kernel_cost_p99_ns_mean": 2486.8766666666656,
+      "module_cost_p95_ns_mean": 8227.799999999997,
+      "module_cost_p99_ns_mean": 14278.310000000007
+    },
+    {
+      "scene": "div2",
+      "group": "B",
+      "mode": 2,
+      "planned": 3,
+      "success": 3,
+      "missing": 0,
+      "failures": [],
+      "flight_completed": 3,
+      "failure_classes": {
+        "flight": 0,
+        "control_boundary": 0,
+        "infrastructure": 0,
+        "analysis_or_data_quality": 0
+      },
+      "attempted": 3,
+      "accepted_fraction": 1.0,
+      "accepted_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "flight_completion_fraction": 1.0,
+      "flight_completion_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "rmse_tracking_mean": [
+        0.004537007466124294,
+        0.005939092443722784,
+        0.0032112801930132737
+      ],
+      "iae_tracking_rad_mean": [
+        0.12932238705164734,
+        0.17428729329890483,
+        0.09328842051631121
+      ],
+      "rmse_steady_mean": [
+        0.0040853140622294495,
+        0.005708081017402856,
+        0.0019564536707683986
+      ],
+      "control_rms_mean": [
+        0.0008900134372502928,
+        0.004410159804511497,
+        0.002002854218639008
+      ],
+      "control_peak_mean": [
+        0.002167163804794351,
+        0.006456013768911362,
+        0.004352801479399204
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.0002586155175206321,
+        0.00030190168899597164,
+        0.0007700125688891642
+      ],
+      "common_0_20hz_rms_mean": [
+        0.0009025218228271348,
+        0.0008454818861828537,
+        0.0018503497953279583
+      ],
+      "tv_per_s_mean": [
+        0.04270240535058284,
+        0.046233058044755894,
+        0.11702257108715197
+      ],
+      "kernel_median_ns_mean": 644.0,
+      "module_median_ns_mean": 1950.0,
+      "update_hz_range": [
+        125.00000000000001,
+        125.00000000000001
+      ],
+      "max_clock_offset_s": 0.0040000000000048885,
+      "unrecovered": 0,
+      "motor_missing_total": 4681,
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 107448.7320012395,
+      "module_wall_ns_per_sim_second_mean": 747959.6036287216,
+      "kernel_cost_p95_ns_mean": 2512.8333333333317,
+      "kernel_cost_p99_ns_mean": 4036.2633333333324,
+      "module_cost_p95_ns_mean": 7984.049999999998,
+      "module_cost_p99_ns_mean": 13160.846666666645
+    },
+    {
+      "scene": "div4",
+      "group": "A",
+      "mode": 1,
+      "planned": 3,
+      "success": 3,
+      "missing": 0,
+      "failures": [],
+      "flight_completed": 3,
+      "failure_classes": {
+        "flight": 0,
+        "control_boundary": 0,
+        "infrastructure": 0,
+        "analysis_or_data_quality": 0
+      },
+      "attempted": 3,
+      "accepted_fraction": 1.0,
+      "accepted_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "flight_completion_fraction": 1.0,
+      "flight_completion_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "rmse_tracking_mean": [
+        0.0060703838941172416,
+        0.006276846654709871,
+        0.0031021809405676827
+      ],
+      "iae_tracking_rad_mean": [
+        0.1749863231551184,
+        0.1727322283760877,
+        0.0902714576163562
+      ],
+      "rmse_steady_mean": [
+        0.005641782536755485,
+        0.005428871124333691,
+        0.00221491841735505
+      ],
+      "control_rms_mean": [
+        0.0011729159547439925,
+        0.004559562864080199,
+        0.0021776775891152234
+      ],
+      "control_peak_mean": [
+        0.0025072762897859016,
+        0.007727504086991151,
+        0.004403574547419946
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.00023855302171545711,
+        0.0003209152540393035,
+        0.0007532251558069336
+      ],
+      "common_0_20hz_rms_mean": [
+        0.0011837448402398836,
+        0.0013533256821298904,
+        0.0020302148989523425
+      ],
+      "tv_per_s_mean": [
+        0.032084207160323786,
+        0.04224193798156058,
+        0.08399239881749021
+      ],
+      "kernel_median_ns_mean": 434.0,
+      "module_median_ns_mean": 1663.3333333333333,
+      "update_hz_range": [
+        62.5,
+        62.5
+      ],
+      "max_clock_offset_s": 0.008000000000002672,
+      "unrecovered": 0,
+      "motor_missing_total": 4606,
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 37103.54334266883,
+      "module_wall_ns_per_sim_second_mean": 611239.7579792006,
+      "kernel_cost_p95_ns_mean": 1687.1166666666659,
+      "kernel_cost_p99_ns_mean": 2675.1099999999938,
+      "module_cost_p95_ns_mean": 6642.083333333331,
+      "module_cost_p99_ns_mean": 11515.793333333328
+    },
+    {
+      "scene": "div4",
+      "group": "A",
+      "mode": 2,
+      "planned": 3,
+      "success": 3,
+      "missing": 0,
+      "failures": [],
+      "flight_completed": 3,
+      "failure_classes": {
+        "flight": 0,
+        "control_boundary": 0,
+        "infrastructure": 0,
+        "analysis_or_data_quality": 0
+      },
+      "attempted": 3,
+      "accepted_fraction": 1.0,
+      "accepted_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "flight_completion_fraction": 1.0,
+      "flight_completion_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "rmse_tracking_mean": [
+        0.00539693153238869,
+        0.00913826208752931,
+        0.003536775856892932
+      ],
+      "iae_tracking_rad_mean": [
+        0.15158226467890198,
+        0.2868590578578199,
+        0.10239825813416004
+      ],
+      "rmse_steady_mean": [
+        0.004597993971601566,
+        0.009146173861007911,
+        0.00188472321727479
+      ],
+      "control_rms_mean": [
+        0.000868849571833034,
+        0.004420592562026676,
+        0.0019203274717986974
+      ],
+      "control_peak_mean": [
+        0.0021905950270593166,
+        0.006650576212753852,
+        0.004382752347737551
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.00018707547756678387,
+        0.00024806678477737727,
+        0.0005801973146098664
+      ],
+      "common_0_20hz_rms_mean": [
+        0.0009035841303290921,
+        0.0009284581943692621,
+        0.0018234700405452516
+      ],
+      "tv_per_s_mean": [
+        0.024839206169613784,
+        0.031943756834759064,
+        0.06588636306196666
+      ],
+      "kernel_median_ns_mean": 753.3333333333334,
+      "module_median_ns_mean": 1807.6666666666667,
+      "update_hz_range": [
+        62.5,
+        62.5
+      ],
+      "max_clock_offset_s": 7.105427357601002e-15,
+      "unrecovered": 0,
+      "motor_missing_total": 4191,
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 68284.91553923876,
+      "module_wall_ns_per_sim_second_mean": 721784.5261278026,
+      "kernel_cost_p95_ns_mean": 3213.9999999999977,
+      "kernel_cost_p99_ns_mean": 4455.259999999999,
+      "module_cost_p95_ns_mean": 8004.799999999999,
+      "module_cost_p99_ns_mean": 13386.249999999987
+    },
+    {
+      "scene": "div4",
+      "group": "B",
+      "mode": 0,
+      "planned": 3,
+      "success": 3,
+      "missing": 0,
+      "failures": [],
+      "flight_completed": 3,
+      "failure_classes": {
+        "flight": 0,
+        "control_boundary": 0,
+        "infrastructure": 0,
+        "analysis_or_data_quality": 0
+      },
+      "attempted": 3,
+      "accepted_fraction": 1.0,
+      "accepted_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "flight_completion_fraction": 1.0,
+      "flight_completion_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "rmse_tracking_mean": [
+        0.004267638260264174,
+        0.0047230718666972935,
+        0.007130331038586776
+      ],
+      "iae_tracking_rad_mean": [
+        0.12090008735098916,
+        0.1342434157311897,
+        0.21843540126942873
+      ],
+      "rmse_steady_mean": [
+        0.0037749936737122686,
+        0.00425029274111078,
+        0.0016384756531368514
+      ],
+      "control_rms_mean": [
+        0.0010186830633914584,
+        0.004400307855934044,
+        0.0017112751071740085
+      ],
+      "control_peak_mean": [
+        0.003661046347891291,
+        0.0075627276673913,
+        0.004321166314184666
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.0005969496163575356,
+        0.0005948957227665102,
+        0.00023888155401135722
+      ],
+      "common_0_20hz_rms_mean": [
+        0.0008466938877654179,
+        0.0007719915918579409,
+        0.0016893834788824634
+      ],
+      "tv_per_s_mean": [
+        0.06644518144986689,
+        0.06592632740028892,
+        0.028050264005657854
+      ],
+      "kernel_median_ns_mean": 169.0,
+      "module_median_ns_mean": 1490.6666666666667,
+      "update_hz_range": [
+        62.5,
+        62.5
+      ],
+      "max_clock_offset_s": 0.0040000000000048885,
+      "unrecovered": 0,
+      "motor_missing_total": 4288,
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 16313.364724114552,
+      "module_wall_ns_per_sim_second_mean": 597204.62863133,
+      "kernel_cost_p95_ns_mean": 773.9166666666664,
+      "kernel_cost_p99_ns_mean": 1100.6633333333336,
+      "module_cost_p95_ns_mean": 6117.483333333327,
+      "module_cost_p99_ns_mean": 11909.613333333325
+    },
+    {
+      "scene": "div4",
+      "group": "B",
+      "mode": 1,
+      "planned": 3,
+      "success": 3,
+      "missing": 0,
+      "failures": [],
+      "flight_completed": 3,
+      "failure_classes": {
+        "flight": 0,
+        "control_boundary": 0,
+        "infrastructure": 0,
+        "analysis_or_data_quality": 0
+      },
+      "attempted": 3,
+      "accepted_fraction": 1.0,
+      "accepted_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "flight_completion_fraction": 1.0,
+      "flight_completion_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "rmse_tracking_mean": [
+        0.005750782043844452,
+        0.005253483792754116,
+        0.0031385542151661817
+      ],
+      "iae_tracking_rad_mean": [
+        0.16533792902729086,
+        0.15148218202558927,
+        0.0911353437245222
+      ],
+      "rmse_steady_mean": [
+        0.005142040996588177,
+        0.005302100311681892,
+        0.001997319668418089
+      ],
+      "control_rms_mean": [
+        0.001139417065835895,
+        0.004529076763736394,
+        0.0021887608458399815
+      ],
+      "control_peak_mean": [
+        0.002534910182779034,
+        0.007114950257043044,
+        0.004415673824648063
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.0002279385419885377,
+        0.00031286333667217113,
+        0.0007633099359789929
+      ],
+      "common_0_20hz_rms_mean": [
+        0.00113159715471022,
+        0.0012828614190706037,
+        0.002033255692996474
+      ],
+      "tv_per_s_mean": [
+        0.030879976882219908,
+        0.04113263133654577,
+        0.08407424825614068
+      ],
+      "kernel_median_ns_mean": 485.0,
+      "module_median_ns_mean": 1808.0,
+      "update_hz_range": [
+        62.5,
+        62.5
+      ],
+      "max_clock_offset_s": 7.105427357601002e-15,
+      "unrecovered": 0,
+      "motor_missing_total": 3989,
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 45316.48364610266,
+      "module_wall_ns_per_sim_second_mean": 747835.7557325871,
+      "kernel_cost_p95_ns_mean": 2081.1666666666665,
+      "kernel_cost_p99_ns_mean": 2868.7666666666664,
+      "module_cost_p95_ns_mean": 7892.5999999999985,
+      "module_cost_p99_ns_mean": 13689.986666666688
+    },
+    {
+      "scene": "div4",
+      "group": "B",
+      "mode": 2,
+      "planned": 3,
+      "success": 3,
+      "missing": 0,
+      "failures": [],
+      "flight_completed": 3,
+      "failure_classes": {
+        "flight": 0,
+        "control_boundary": 0,
+        "infrastructure": 0,
+        "analysis_or_data_quality": 0
+      },
+      "attempted": 3,
+      "accepted_fraction": 1.0,
+      "accepted_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "flight_completion_fraction": 1.0,
+      "flight_completion_wilson95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "rmse_tracking_mean": [
+        0.005270541938089527,
+        0.009384357019009163,
+        0.0035607621504348866
+      ],
+      "iae_tracking_rad_mean": [
+        0.1474255434620039,
+        0.2923037698463498,
+        0.10291134046252894
+      ],
+      "rmse_steady_mean": [
+        0.0044653853974387595,
+        0.009327423305356491,
+        0.001801664137354307
+      ],
+      "control_rms_mean": [
+        0.0008543204906323673,
+        0.004408067572484968,
+        0.001921032066464553
+      ],
+      "control_peak_mean": [
+        0.0022625878918915987,
+        0.006398683258642753,
+        0.004206661445399125
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.0001815476750104052,
+        0.00021244728544856652,
+        0.0005773617897681979
+      ],
+      "common_0_20hz_rms_mean": [
+        0.000876533233194248,
+        0.0008211561305024998,
+        0.0018231430856708915
+      ],
+      "tv_per_s_mean": [
+        0.024172313699125425,
+        0.026011313037964067,
+        0.06450037178537064
+      ],
+      "kernel_median_ns_mean": 784.6666666666666,
+      "module_median_ns_mean": 1892.3333333333333,
+      "update_hz_range": [
+        62.5,
+        62.5
+      ],
+      "max_clock_offset_s": 0.0040000000000048885,
+      "unrecovered": 0,
+      "motor_missing_total": 4167,
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 72325.87428159938,
+      "module_wall_ns_per_sim_second_mean": 772582.6665051571,
+      "kernel_cost_p95_ns_mean": 3497.1333333333328,
+      "kernel_cost_p99_ns_mean": 4604.8933333333325,
+      "module_cost_p95_ns_mean": 8539.649999999998,
+      "module_cost_p99_ns_mean": 14304.306666666662
+    }
+  ],
+  "contrasts": [
+    {
+      "scene": "nominal",
+      "group": "A",
+      "left": 1,
+      "right": 2,
+      "seeds": [
+        2101,
+        2102,
+        2103
+      ],
+      "interpretation": "right minus left; negative means lower mean 3-axis RMSE",
+      "n": 3,
+      "mean_difference": 9.182014649739608e-05,
+      "sd_difference": 7.239428678464873e-05,
+      "ci95": [
+        2.3297746722488345e-05,
+        0.0001675475170046909
+      ],
+      "family_interval": [
+        2.3297746722488345e-05,
+        0.0001675475170046909
+      ],
+      "bootstrap_replicates": 10000,
+      "seed": 10102026,
+      "note": "Descriptive percentile bootstrap of independent seed blocks conditional on both succeeding; not a p-value/power proof. Extreme family tails have limited Monte Carlo resolution.",
+      "anticipated_n20_normal_halfwidth": 3.172819510088549e-05
+    },
+    {
+      "scene": "nominal",
+      "group": "B",
+      "left": 0,
+      "right": 1,
+      "seeds": [
+        2101,
+        2102,
+        2103
+      ],
+      "interpretation": "right minus left; negative means lower mean 3-axis RMSE",
+      "n": 3,
+      "mean_difference": -0.0011452627272641386,
+      "sd_difference": 0.00010157786145013789,
+      "ci95": [
+        -0.0012487277540414775,
+        -0.0010456835513768495
+      ],
+      "family_interval": [
+        -0.0012487277540414775,
+        -0.0010456835513768495
+      ],
+      "bootstrap_replicates": 10000,
+      "seed": 10102026,
+      "note": "Descriptive percentile bootstrap of independent seed blocks conditional on both succeeding; not a p-value/power proof. Extreme family tails have limited Monte Carlo resolution.",
+      "anticipated_n20_normal_halfwidth": 4.451846062946648e-05
+    },
+    {
+      "scene": "nominal",
+      "group": "B",
+      "left": 0,
+      "right": 2,
+      "seeds": [
+        2101,
+        2102,
+        2103
+      ],
+      "interpretation": "right minus left; negative means lower mean 3-axis RMSE",
+      "n": 3,
+      "mean_difference": -0.0009933289345539357,
+      "sd_difference": 0.0001433529265397595,
+      "ci95": [
+        -0.001154299995001884,
+        -0.0008794323309977425
+      ],
+      "family_interval": [
+        -0.001154299995001884,
+        -0.0008794323309977425
+      ],
+      "bootstrap_replicates": 10000,
+      "seed": 10102026,
+      "note": "Descriptive percentile bootstrap of independent seed blocks conditional on both succeeding; not a p-value/power proof. Extreme family tails have limited Monte Carlo resolution.",
+      "anticipated_n20_normal_halfwidth": 6.282719014922146e-05
+    },
+    {
+      "scene": "nominal",
+      "group": "B",
+      "left": 1,
+      "right": 2,
+      "seeds": [
+        2101,
+        2102,
+        2103
+      ],
+      "interpretation": "right minus left; negative means lower mean 3-axis RMSE",
+      "n": 3,
+      "mean_difference": 0.00015193379271020296,
+      "sd_difference": 9.530491888537695e-05,
+      "ci95": [
+        9.442775903959356e-05,
+        0.00026194454537634615
+      ],
+      "family_interval": [
+        9.442775903959356e-05,
+        0.00026194454537634615
+      ],
+      "bootstrap_replicates": 10000,
+      "seed": 10102026,
+      "note": "Descriptive percentile bootstrap of independent seed blocks conditional on both succeeding; not a p-value/power proof. Extreme family tails have limited Monte Carlo resolution.",
+      "anticipated_n20_normal_halfwidth": 4.176922233469004e-05
+    },
+    {
+      "scene": "torque",
+      "group": "A",
+      "left": 1,
+      "right": 2,
+      "seeds": [
+        2101,
+        2102,
+        2103
+      ],
+      "interpretation": "right minus left; negative means lower mean 3-axis RMSE",
+      "n": 3,
+      "mean_difference": 0.00015067077015007424,
+      "sd_difference": 9.002951707449614e-05,
+      "ci95": [
+        5.314627245798977e-05,
+        0.0002306106264587963
+      ],
+      "family_interval": [
+        5.314627245798977e-05,
+        0.0002306106264587963
+      ],
+      "bootstrap_replicates": 10000,
+      "seed": 10102026,
+      "note": "Descriptive percentile bootstrap of independent seed blocks conditional on both succeeding; not a p-value/power proof. Extreme family tails have limited Monte Carlo resolution.",
+      "anticipated_n20_normal_halfwidth": 3.945717555137006e-05
+    },
+    {
+      "scene": "torque",
+      "group": "B",
+      "left": 0,
+      "right": 1,
+      "seeds": [
+        2101,
+        2102,
+        2103
+      ],
+      "interpretation": "right minus left; negative means lower mean 3-axis RMSE",
+      "n": 3,
+      "mean_difference": -0.001183802225408435,
+      "sd_difference": 0.00010657216297939187,
+      "ci95": [
+        -0.001301908214010045,
+        -0.0010948183521624112
+      ],
+      "family_interval": [
+        -0.001301908214010045,
+        -0.0010948183521624112
+      ],
+      "bootstrap_replicates": 10000,
+      "seed": 10102026,
+      "note": "Descriptive percentile bootstrap of independent seed blocks conditional on both succeeding; not a p-value/power proof. Extreme family tails have limited Monte Carlo resolution.",
+      "anticipated_n20_normal_halfwidth": 4.6707309782496915e-05
+    },
+    {
+      "scene": "torque",
+      "group": "B",
+      "left": 0,
+      "right": 2,
+      "seeds": [
+        2101,
+        2102,
+        2103
+      ],
+      "interpretation": "right minus left; negative means lower mean 3-axis RMSE",
+      "n": 3,
+      "mean_difference": -0.0009960076433223628,
+      "sd_difference": 3.863416992555192e-05,
+      "ci95": [
+        -0.0010401612620831134,
+        -0.0009684133572919109
+      ],
+      "family_interval": [
+        -0.0010401612620831134,
+        -0.0009684133572919109
+      ],
+      "bootstrap_replicates": 10000,
+      "seed": 10102026,
+      "note": "Descriptive percentile bootstrap of independent seed blocks conditional on both succeeding; not a p-value/power proof. Extreme family tails have limited Monte Carlo resolution.",
+      "anticipated_n20_normal_halfwidth": 1.6932171520731168e-05
+    },
+    {
+      "scene": "torque",
+      "group": "B",
+      "left": 1,
+      "right": 2,
+      "seeds": [
+        2101,
+        2102,
+        2103
+      ],
+      "interpretation": "right minus left; negative means lower mean 3-axis RMSE",
+      "n": 3,
+      "mean_difference": 0.00018779458208607216,
+      "sd_difference": 6.853998078081064e-05,
+      "ci95": [
+        0.00012640499487050032,
+        0.0002617469519269316
+      ],
+      "family_interval": [
+        0.00012640499487050032,
+        0.0002617469519269316
+      ],
+      "bootstrap_replicates": 10000,
+      "seed": 10102026,
+      "note": "Descriptive percentile bootstrap of independent seed blocks conditional on both succeeding; not a p-value/power proof. Extreme family tails have limited Monte Carlo resolution.",
+      "anticipated_n20_normal_halfwidth": 3.0038971015674652e-05
+    },
+    {
+      "scene": "inertia",
+      "group": "A",
+      "left": 1,
+      "right": 2,
+      "seeds": [
+        2101,
+        2102,
+        2103
+      ],
+      "interpretation": "right minus left; negative means lower mean 3-axis RMSE",
+      "n": 3,
+      "mean_difference": 0.00018311788036984894,
+      "sd_difference": 9.467959060998611e-06,
+      "ci95": [
+        0.00017525033547481465,
+        0.00019362573463722584
+      ],
+      "family_interval": [
+        0.00017525033547481465,
+        0.00019362573463722584
+      ],
+      "bootstrap_replicates": 10000,
+      "seed": 10102026,
+      "note": "Descriptive percentile bootstrap of independent seed blocks conditional on both succeeding; not a p-value/power proof. Extreme family tails have limited Monte Carlo resolution.",
+      "anticipated_n20_normal_halfwidth": 4.149516013441282e-06
+    },
+    {
+      "scene": "inertia",
+      "group": "B",
+      "left": 0,
+      "right": 1,
+      "seeds": [
+        2101,
+        2103
+      ],
+      "interpretation": "right minus left; negative means lower mean 3-axis RMSE",
+      "n": 2,
+      "mean_difference": -0.0017086859254763346,
+      "sd_difference": 5.6413345872362384e-05,
+      "ci95": [
+        -0.0017485761848921042,
+        -0.001668795666060565
+      ],
+      "family_interval": [
+        -0.0017485761848921042,
+        -0.001668795666060565
+      ],
+      "bootstrap_replicates": 10000,
+      "seed": 10102026,
+      "note": "Descriptive percentile bootstrap of independent seed blocks conditional on both succeeding; not a p-value/power proof. Extreme family tails have limited Monte Carlo resolution.",
+      "anticipated_n20_normal_halfwidth": 2.4724238936926653e-05
+    },
+    {
+      "scene": "inertia",
+      "group": "B",
+      "left": 0,
+      "right": 2,
+      "seeds": [
+        2101,
+        2103
+      ],
+      "interpretation": "right minus left; negative means lower mean 3-axis RMSE",
+      "n": 2,
+      "mean_difference": -0.001370476894130379,
+      "sd_difference": 1.2733770974490778e-05,
+      "ci95": [
+        -0.0013794810299365178,
+        -0.00136147275832424
+      ],
+      "family_interval": [
+        -0.0013794810299365178,
+        -0.00136147275832424
+      ],
+      "bootstrap_replicates": 10000,
+      "seed": 10102026,
+      "note": "Descriptive percentile bootstrap of independent seed blocks conditional on both succeeding; not a p-value/power proof. Extreme family tails have limited Monte Carlo resolution.",
+      "anticipated_n20_normal_halfwidth": 5.580821191739524e-06
+    },
+    {
+      "scene": "inertia",
+      "group": "B",
+      "left": 1,
+      "right": 2,
+      "seeds": [
+        2101,
+        2102,
+        2103
+      ],
+      "interpretation": "right minus left; negative means lower mean 3-axis RMSE",
+      "n": 3,
+      "mean_difference": 0.00037025068864600386,
+      "sd_difference": 7.396394589066604e-05,
+      "ci95": [
+        0.00028931463612404725,
+        0.0004343340032461002
+      ],
+      "family_interval": [
+        0.00028931463612404725,
+        0.0004343340032461002
+      ],
+      "bootstrap_replicates": 10000,
+      "seed": 10102026,
+      "note": "Descriptive percentile bootstrap of independent seed blocks conditional on both succeeding; not a p-value/power proof. Extreme family tails have limited Monte Carlo resolution.",
+      "anticipated_n20_normal_halfwidth": 3.2416128535546514e-05
+    },
+    {
+      "scene": "noise",
+      "group": "A",
+      "left": 1,
+      "right": 2,
+      "seeds": [
+        2101,
+        2102,
+        2103
+      ],
+      "interpretation": "right minus left; negative means lower mean 3-axis RMSE",
+      "n": 3,
+      "mean_difference": 9.205842169868628e-05,
+      "sd_difference": 9.718465313673178e-06,
+      "ci95": [
+        8.24149929811533e-05,
+        0.00010185022458588603
+      ],
+      "family_interval": [
+        8.24149929811533e-05,
+        0.00010185022458588603
+      ],
+      "bootstrap_replicates": 10000,
+      "seed": 10102026,
+      "note": "Descriptive percentile bootstrap of independent seed blocks conditional on both succeeding; not a p-value/power proof. Extreme family tails have limited Monte Carlo resolution.",
+      "anticipated_n20_normal_halfwidth": 4.259305219356019e-06
+    },
+    {
+      "scene": "noise",
+      "group": "B",
+      "left": 0,
+      "right": 1,
+      "seeds": [
+        2101,
+        2102,
+        2103
+      ],
+      "interpretation": "right minus left; negative means lower mean 3-axis RMSE",
+      "n": 3,
+      "mean_difference": -0.0007995417717523472,
+      "sd_difference": 6.318176403504635e-05,
+      "ci95": [
+        -0.0008365720841856878,
+        -0.0007265885564464959
+      ],
+      "family_interval": [
+        -0.0008365720841856878,
+        -0.0007265885564464959
+      ],
+      "bootstrap_replicates": 10000,
+      "seed": 10102026,
+      "note": "Descriptive percentile bootstrap of independent seed blocks conditional on both succeeding; not a p-value/power proof. Extreme family tails have limited Monte Carlo resolution.",
+      "anticipated_n20_normal_halfwidth": 2.7690628986860142e-05
+    },
+    {
+      "scene": "noise",
+      "group": "B",
+      "left": 0,
+      "right": 2,
+      "seeds": [
+        2101,
+        2102,
+        2103
+      ],
+      "interpretation": "right minus left; negative means lower mean 3-axis RMSE",
+      "n": 3,
+      "mean_difference": -0.0006230257968176042,
+      "sd_difference": 0.00010443923866095698,
+      "ci95": [
+        -0.0007306910263665178,
+        -0.0005221431732045177
+      ],
+      "family_interval": [
+        -0.0007306910263665178,
+        -0.0005221431732045177
+      ],
+      "bootstrap_replicates": 10000,
+      "seed": 10102026,
+      "note": "Descriptive percentile bootstrap of independent seed blocks conditional on both succeeding; not a p-value/power proof. Extreme family tails have limited Monte Carlo resolution.",
+      "anticipated_n20_normal_halfwidth": 4.5772514484187886e-05
+    },
+    {
+      "scene": "noise",
+      "group": "B",
+      "left": 1,
+      "right": 2,
+      "seeds": [
+        2101,
+        2102,
+        2103
+      ],
+      "interpretation": "right minus left; negative means lower mean 3-axis RMSE",
+      "n": 3,
+      "mean_difference": 0.00017651597493474296,
+      "sd_difference": 6.263619201930826e-05,
+      "ci95": [
+        0.00010477364825834008,
+        0.00022032889330391055
+      ],
+      "family_interval": [
+        0.00010477364825834008,
+        0.00022032889330391055
+      ],
+      "bootstrap_replicates": 10000,
+      "seed": 10102026,
+      "note": "Descriptive percentile bootstrap of independent seed blocks conditional on both succeeding; not a p-value/power proof. Extreme family tails have limited Monte Carlo resolution.",
+      "anticipated_n20_normal_halfwidth": 2.7451521508553005e-05
+    },
+    {
+      "scene": "div2",
+      "group": "A",
+      "left": 1,
+      "right": 2,
+      "seeds": [
+        2101,
+        2103
+      ],
+      "interpretation": "right minus left; negative means lower mean 3-axis RMSE",
+      "n": 2,
+      "mean_difference": 0.00029642688845722513,
+      "sd_difference": 2.625655477834476e-06,
+      "ci95": [
+        0.00029457026966378877,
+        0.0002982835072506615
+      ],
+      "family_interval": [
+        0.00029457026966378877,
+        0.0002982835072506615
+      ],
+      "bootstrap_replicates": 10000,
+      "seed": 10102026,
+      "note": "Descriptive percentile bootstrap of independent seed blocks conditional on both succeeding; not a p-value/power proof. Extreme family tails have limited Monte Carlo resolution.",
+      "anticipated_n20_normal_halfwidth": 1.1507442502507858e-06
+    },
+    {
+      "scene": "div2",
+      "group": "B",
+      "left": 0,
+      "right": 1,
+      "seeds": [
+        2101,
+        2102,
+        2103
+      ],
+      "interpretation": "right minus left; negative means lower mean 3-axis RMSE",
+      "n": 3,
+      "mean_difference": -0.0009786136475575396,
+      "sd_difference": 0.00011164177763545284,
+      "ci95": [
+        -0.0011055786580598794,
+        -0.0008957972059583453
+      ],
+      "family_interval": [
+        -0.0011055786580598794,
+        -0.0008957972059583453
+      ],
+      "bootstrap_replicates": 10000,
+      "seed": 10102026,
+      "note": "Descriptive percentile bootstrap of independent seed blocks conditional on both succeeding; not a p-value/power proof. Extreme family tails have limited Monte Carlo resolution.",
+      "anticipated_n20_normal_halfwidth": 4.89291663686705e-05
+    },
+    {
+      "scene": "div2",
+      "group": "B",
+      "left": 0,
+      "right": 2,
+      "seeds": [
+        2101,
+        2102,
+        2103
+      ],
+      "interpretation": "right minus left; negative means lower mean 3-axis RMSE",
+      "n": 3,
+      "mean_difference": -0.0005883517405973852,
+      "sd_difference": 4.705350095120095e-05,
+      "ci95": [
+        -0.0006323659855913362,
+        -0.0005387567289101506
+      ],
+      "family_interval": [
+        -0.0006323659855913362,
+        -0.0005387567289101506
+      ],
+      "bootstrap_replicates": 10000,
+      "seed": 10102026,
+      "note": "Descriptive percentile bootstrap of independent seed blocks conditional on both succeeding; not a p-value/power proof. Extreme family tails have limited Monte Carlo resolution.",
+      "anticipated_n20_normal_halfwidth": 2.062210603442232e-05
+    },
+    {
+      "scene": "div2",
+      "group": "B",
+      "left": 1,
+      "right": 2,
+      "seeds": [
+        2101,
+        2102,
+        2103
+      ],
+      "interpretation": "right minus left; negative means lower mean 3-axis RMSE",
+      "n": 3,
+      "mean_difference": 0.00039026190696015453,
+      "sd_difference": 7.231009515512068e-05,
+      "ci95": [
+        0.0003405325713637256,
+        0.0004732126724685433
+      ],
+      "family_interval": [
+        0.0003405325713637256,
+        0.0004732126724685433
+      ],
+      "bootstrap_replicates": 10000,
+      "seed": 10102026,
+      "note": "Descriptive percentile bootstrap of independent seed blocks conditional on both succeeding; not a p-value/power proof. Extreme family tails have limited Monte Carlo resolution.",
+      "anticipated_n20_normal_halfwidth": 3.16912964923603e-05
+    },
+    {
+      "scene": "div4",
+      "group": "A",
+      "left": 1,
+      "right": 2,
+      "seeds": [
+        2101,
+        2102,
+        2103
+      ],
+      "interpretation": "right minus left; negative means lower mean 3-axis RMSE",
+      "n": 3,
+      "mean_difference": 0.0008741859958053792,
+      "sd_difference": 0.0003720513102589174,
+      "ci95": [
+        0.0004931091290761198,
+        0.0012365018831569478
+      ],
+      "family_interval": [
+        0.0004931091290761198,
+        0.0012365018831569478
+      ],
+      "bootstrap_replicates": 10000,
+      "seed": 10102026,
+      "note": "Descriptive percentile bootstrap of independent seed blocks conditional on both succeeding; not a p-value/power proof. Extreme family tails have limited Monte Carlo resolution.",
+      "anticipated_n20_normal_halfwidth": 0.0001630586760879336
+    },
+    {
+      "scene": "div4",
+      "group": "B",
+      "left": 0,
+      "right": 1,
+      "seeds": [
+        2101,
+        2102,
+        2103
+      ],
+      "interpretation": "right minus left; negative means lower mean 3-axis RMSE",
+      "n": 3,
+      "mean_difference": -0.0006594070379278312,
+      "sd_difference": 0.000124875428373254,
+      "ci95": [
+        -0.0007816585346136808,
+        -0.0005320634575458252
+      ],
+      "family_interval": [
+        -0.0007816585346136808,
+        -0.0005320634575458252
+      ],
+      "bootstrap_replicates": 10000,
+      "seed": 10102026,
+      "note": "Descriptive percentile bootstrap of independent seed blocks conditional on both succeeding; not a p-value/power proof. Extreme family tails have limited Monte Carlo resolution.",
+      "anticipated_n20_normal_halfwidth": 5.472906952615238e-05
+    },
+    {
+      "scene": "div4",
+      "group": "B",
+      "left": 0,
+      "right": 2,
+      "seeds": [
+        2101,
+        2102,
+        2103
+      ],
+      "interpretation": "right minus left; negative means lower mean 3-axis RMSE",
+      "n": 3,
+      "mean_difference": 0.0006982066473284445,
+      "sd_difference": 6.189753105440676e-05,
+      "ci95": [
+        0.0006312385013842797,
+        0.000753318362849636
+      ],
+      "family_interval": [
+        0.0006312385013842797,
+        0.000753318362849636
+      ],
+      "bootstrap_replicates": 10000,
+      "seed": 10102026,
+      "note": "Descriptive percentile bootstrap of independent seed blocks conditional on both succeeding; not a p-value/power proof. Extreme family tails have limited Monte Carlo resolution.",
+      "anticipated_n20_normal_halfwidth": 2.7127789067103317e-05
+    },
+    {
+      "scene": "div4",
+      "group": "B",
+      "left": 1,
+      "right": 2,
+      "seeds": [
+        2101,
+        2102,
+        2103
+      ],
+      "interpretation": "right minus left; negative means lower mean 3-axis RMSE",
+      "n": 3,
+      "mean_difference": 0.0013576136852562757,
+      "sd_difference": 0.0001722882476280445,
+      "ci95": [
+        0.0011633019589301049,
+        0.0014917216123650984
+      ],
+      "family_interval": [
+        0.0011633019589301049,
+        0.0014917216123650984
+      ],
+      "bootstrap_replicates": 10000,
+      "seed": 10102026,
+      "note": "Descriptive percentile bootstrap of independent seed blocks conditional on both succeeding; not a p-value/power proof. Extreme family tails have limited Monte Carlo resolution.",
+      "anticipated_n20_normal_halfwidth": 7.550865375044238e-05
+    }
+  ],
+  "seed_audit": [
+    {
+      "scene": "nominal",
+      "seed": 2101,
+      "runs": 5,
+      "max_initial_imu_delta": 0.0,
+      "paired_gyro_prefix_samples": 5000,
+      "max_gyro_prefix_delta": 0.0,
+      "paired_rng_confirmed": true
+    },
+    {
+      "scene": "nominal",
+      "seed": 2102,
+      "runs": 5,
+      "max_initial_imu_delta": 0.0,
+      "paired_gyro_prefix_samples": 5000,
+      "max_gyro_prefix_delta": 0.0,
+      "paired_rng_confirmed": true
+    },
+    {
+      "scene": "nominal",
+      "seed": 2103,
+      "runs": 5,
+      "max_initial_imu_delta": 0.0,
+      "paired_gyro_prefix_samples": 5000,
+      "max_gyro_prefix_delta": 0.0,
+      "paired_rng_confirmed": true
+    },
+    {
+      "scene": "torque",
+      "seed": 2101,
+      "runs": 5,
+      "max_initial_imu_delta": 0.0,
+      "paired_gyro_prefix_samples": 5000,
+      "max_gyro_prefix_delta": 0.0,
+      "paired_rng_confirmed": true
+    },
+    {
+      "scene": "torque",
+      "seed": 2102,
+      "runs": 5,
+      "max_initial_imu_delta": 0.0,
+      "paired_gyro_prefix_samples": 5000,
+      "max_gyro_prefix_delta": 0.0,
+      "paired_rng_confirmed": true
+    },
+    {
+      "scene": "torque",
+      "seed": 2103,
+      "runs": 5,
+      "max_initial_imu_delta": 0.0,
+      "paired_gyro_prefix_samples": 5000,
+      "max_gyro_prefix_delta": 0.0,
+      "paired_rng_confirmed": true
+    },
+    {
+      "scene": "inertia",
+      "seed": 2101,
+      "runs": 5,
+      "max_initial_imu_delta": 0.0,
+      "paired_gyro_prefix_samples": 5000,
+      "max_gyro_prefix_delta": 0.0,
+      "paired_rng_confirmed": true
+    },
+    {
+      "scene": "inertia",
+      "seed": 2102,
+      "runs": 4,
+      "max_initial_imu_delta": 0.0,
+      "paired_gyro_prefix_samples": 5000,
+      "max_gyro_prefix_delta": 0.0,
+      "paired_rng_confirmed": true
+    },
+    {
+      "scene": "inertia",
+      "seed": 2103,
+      "runs": 5,
+      "max_initial_imu_delta": 0.0,
+      "paired_gyro_prefix_samples": 5000,
+      "max_gyro_prefix_delta": 0.0,
+      "paired_rng_confirmed": true
+    },
+    {
+      "scene": "noise",
+      "seed": 2101,
+      "runs": 5,
+      "max_initial_imu_delta": 0.0,
+      "paired_gyro_prefix_samples": 5000,
+      "max_gyro_prefix_delta": 0.0,
+      "paired_rng_confirmed": true
+    },
+    {
+      "scene": "noise",
+      "seed": 2102,
+      "runs": 5,
+      "max_initial_imu_delta": 0.0,
+      "paired_gyro_prefix_samples": 5000,
+      "max_gyro_prefix_delta": 0.0,
+      "paired_rng_confirmed": true
+    },
+    {
+      "scene": "noise",
+      "seed": 2103,
+      "runs": 5,
+      "max_initial_imu_delta": 0.0,
+      "paired_gyro_prefix_samples": 5000,
+      "max_gyro_prefix_delta": 0.0,
+      "paired_rng_confirmed": true
+    },
+    {
+      "scene": "div2",
+      "seed": 2101,
+      "runs": 5,
+      "max_initial_imu_delta": 0.0,
+      "paired_gyro_prefix_samples": 5000,
+      "max_gyro_prefix_delta": 0.0,
+      "paired_rng_confirmed": true
+    },
+    {
+      "scene": "div2",
+      "seed": 2102,
+      "runs": 4,
+      "max_initial_imu_delta": 0.0,
+      "paired_gyro_prefix_samples": 5000,
+      "max_gyro_prefix_delta": 0.0,
+      "paired_rng_confirmed": true
+    },
+    {
+      "scene": "div2",
+      "seed": 2103,
+      "runs": 5,
+      "max_initial_imu_delta": 0.0,
+      "paired_gyro_prefix_samples": 5000,
+      "max_gyro_prefix_delta": 0.0,
+      "paired_rng_confirmed": true
+    },
+    {
+      "scene": "div4",
+      "seed": 2101,
+      "runs": 5,
+      "max_initial_imu_delta": 0.0,
+      "paired_gyro_prefix_samples": 5000,
+      "max_gyro_prefix_delta": 0.0,
+      "paired_rng_confirmed": true
+    },
+    {
+      "scene": "div4",
+      "seed": 2102,
+      "runs": 5,
+      "max_initial_imu_delta": 0.0,
+      "paired_gyro_prefix_samples": 5000,
+      "max_gyro_prefix_delta": 0.0,
+      "paired_rng_confirmed": true
+    },
+    {
+      "scene": "div4",
+      "seed": 2103,
+      "runs": 5,
+      "max_initial_imu_delta": 0.0,
+      "paired_gyro_prefix_samples": 5000,
+      "max_gyro_prefix_delta": 0.0,
+      "paired_rng_confirmed": true
+    }
+  ],
+  "seed_diversity": [
+    {
+      "scene": "nominal",
+      "seeds": [
+        2101,
+        2102,
+        2103
+      ],
+      "minimum_between_seed_difference": 0.08555027707453235,
+      "distinct_realizations_confirmed": true
+    },
+    {
+      "scene": "torque",
+      "seeds": [
+        2101,
+        2102,
+        2103
+      ],
+      "minimum_between_seed_difference": 0.08555027707453235,
+      "distinct_realizations_confirmed": true
+    },
+    {
+      "scene": "inertia",
+      "seeds": [
+        2101,
+        2102,
+        2103
+      ],
+      "minimum_between_seed_difference": 0.08555027707453235,
+      "distinct_realizations_confirmed": true
+    },
+    {
+      "scene": "noise",
+      "seeds": [
+        2101,
+        2102,
+        2103
+      ],
+      "minimum_between_seed_difference": 0.08555027707453235,
+      "distinct_realizations_confirmed": true
+    },
+    {
+      "scene": "div2",
+      "seeds": [
+        2101,
+        2102,
+        2103
+      ],
+      "minimum_between_seed_difference": 0.08555027707453235,
+      "distinct_realizations_confirmed": true
+    },
+    {
+      "scene": "div4",
+      "seeds": [
+        2101,
+        2102,
+        2103
+      ],
+      "minimum_between_seed_difference": 0.08555027707453235,
+      "distinct_realizations_confirmed": true
+    }
+  ],
+  "cross_seed_noise_correlation": [
+    {
+      "scene": "nominal",
+      "left_seed": 2101,
+      "right_seed": 2102,
+      "samples": 5000,
+      "gyro_prefix_correlation": [
+        0.02720402335492372,
+        -0.014457708605699924,
+        -0.018152585912028108
+      ]
+    },
+    {
+      "scene": "nominal",
+      "left_seed": 2101,
+      "right_seed": 2103,
+      "samples": 5000,
+      "gyro_prefix_correlation": [
+        -0.018326446975503962,
+        -0.000595728037462841,
+        0.004893231176951847
+      ]
+    },
+    {
+      "scene": "nominal",
+      "left_seed": 2102,
+      "right_seed": 2103,
+      "samples": 5000,
+      "gyro_prefix_correlation": [
+        -0.005256035832249679,
+        -0.021127110306280783,
+        -0.023301303781501186
+      ]
+    },
+    {
+      "scene": "torque",
+      "left_seed": 2101,
+      "right_seed": 2102,
+      "samples": 5000,
+      "gyro_prefix_correlation": [
+        0.02720402335492372,
+        -0.014457708605699924,
+        -0.018152585912028108
+      ]
+    },
+    {
+      "scene": "torque",
+      "left_seed": 2101,
+      "right_seed": 2103,
+      "samples": 5000,
+      "gyro_prefix_correlation": [
+        -0.018326446975503962,
+        -0.000595728037462841,
+        0.004893231176951847
+      ]
+    },
+    {
+      "scene": "torque",
+      "left_seed": 2102,
+      "right_seed": 2103,
+      "samples": 5000,
+      "gyro_prefix_correlation": [
+        -0.005256035832249679,
+        -0.021127110306280783,
+        -0.023301303781501186
+      ]
+    },
+    {
+      "scene": "inertia",
+      "left_seed": 2101,
+      "right_seed": 2102,
+      "samples": 5000,
+      "gyro_prefix_correlation": [
+        0.027204023354923723,
+        -0.01445770860569992,
+        -0.018152585912028115
+      ]
+    },
+    {
+      "scene": "inertia",
+      "left_seed": 2101,
+      "right_seed": 2103,
+      "samples": 5000,
+      "gyro_prefix_correlation": [
+        -0.018326446975503962,
+        -0.0005957280374628354,
+        0.004893231176951844
+      ]
+    },
+    {
+      "scene": "inertia",
+      "left_seed": 2102,
+      "right_seed": 2103,
+      "samples": 5000,
+      "gyro_prefix_correlation": [
+        -0.005256035832249686,
+        -0.021127110306280783,
+        -0.023301303781501186
+      ]
+    },
+    {
+      "scene": "noise",
+      "left_seed": 2101,
+      "right_seed": 2102,
+      "samples": 5000,
+      "gyro_prefix_correlation": [
+        0.02728898205632531,
+        -0.01420477556542599,
+        -0.0182665617721146
+      ]
+    },
+    {
+      "scene": "noise",
+      "left_seed": 2101,
+      "right_seed": 2103,
+      "samples": 5000,
+      "gyro_prefix_correlation": [
+        -0.018177457941841203,
+        -0.0008744402972094082,
+        0.004675651139227493
+      ]
+    },
+    {
+      "scene": "noise",
+      "left_seed": 2102,
+      "right_seed": 2103,
+      "samples": 5000,
+      "gyro_prefix_correlation": [
+        -0.005106487975230213,
+        -0.021053356929356146,
+        -0.023396172127556302
+      ]
+    },
+    {
+      "scene": "div2",
+      "left_seed": 2101,
+      "right_seed": 2102,
+      "samples": 5000,
+      "gyro_prefix_correlation": [
+        0.02720402335492372,
+        -0.014457708605699924,
+        -0.018152585912028108
+      ]
+    },
+    {
+      "scene": "div2",
+      "left_seed": 2101,
+      "right_seed": 2103,
+      "samples": 5000,
+      "gyro_prefix_correlation": [
+        -0.018326446975503962,
+        -0.000595728037462841,
+        0.004893231176951847
+      ]
+    },
+    {
+      "scene": "div2",
+      "left_seed": 2102,
+      "right_seed": 2103,
+      "samples": 5000,
+      "gyro_prefix_correlation": [
+        -0.005256035832249679,
+        -0.021127110306280783,
+        -0.023301303781501186
+      ]
+    },
+    {
+      "scene": "div4",
+      "left_seed": 2101,
+      "right_seed": 2102,
+      "samples": 5000,
+      "gyro_prefix_correlation": [
+        0.02720402335492372,
+        -0.014457708605699924,
+        -0.018152585912028108
+      ]
+    },
+    {
+      "scene": "div4",
+      "left_seed": 2101,
+      "right_seed": 2103,
+      "samples": 5000,
+      "gyro_prefix_correlation": [
+        -0.018326446975503962,
+        -0.000595728037462841,
+        0.004893231176951847
+      ]
+    },
+    {
+      "scene": "div4",
+      "left_seed": 2102,
+      "right_seed": 2103,
+      "samples": 5000,
+      "gyro_prefix_correlation": [
+        -0.005256035832249679,
+        -0.021127110306280783,
+        -0.023301303781501186
+      ]
+    }
+  ],
+  "correlation_note": "Descriptive first-5000-sample cross-stream Pearson correlation, not proof/test of independence; flight remains the experimental unit.",
+  "unchanged_sensor_filter_estimator_parameters": {
+    "EKF2_ABIAS_INIT": 0.20000000298023224,
+    "EKF2_ABL_ACCLIM": 25.0,
+    "EKF2_ABL_GYRLIM": 3.0,
+    "EKF2_ABL_LIM": 0.4000000059604645,
+    "EKF2_ABL_TAU": 0.5,
+    "EKF2_ACC_B_NOISE": 0.003000000026077032,
+    "EKF2_ACC_NOISE": 0.3499999940395355,
+    "EKF2_AID_MASK": 1,
+    "EKF2_ANGERR_INIT": 0.10000000149011612,
+    "EKF2_ARSP_THR": 0.0,
+    "EKF2_ASPD_MAX": 20.0,
+    "EKF2_ASP_DELAY": 100.0,
+    "EKF2_AVEL_DELAY": 5.0,
+    "EKF2_BARO_DELAY": 0.0,
+    "EKF2_BARO_GATE": 5.0,
+    "EKF2_BARO_NOISE": 3.5,
+    "EKF2_BCOEF_X": 25.0,
+    "EKF2_BCOEF_Y": 25.0,
+    "EKF2_BETA_GATE": 5.0,
+    "EKF2_BETA_NOISE": 0.30000001192092896,
+    "EKF2_DECL_TYPE": 7,
+    "EKF2_DRAG_NOISE": 2.5,
+    "EKF2_EAS_NOISE": 1.399999976158142,
+    "EKF2_EVA_NOISE": 0.05000000074505806,
+    "EKF2_EVP_GATE": 5.0,
+    "EKF2_EVP_NOISE": 0.10000000149011612,
+    "EKF2_EVV_GATE": 3.0,
+    "EKF2_EVV_NOISE": 0.10000000149011612,
+    "EKF2_EV_DELAY": 175.0,
+    "EKF2_EV_NOISE_MD": 0,
+    "EKF2_EV_POS_X": 0.0,
+    "EKF2_EV_POS_Y": 0.0,
+    "EKF2_EV_POS_Z": 0.0,
+    "EKF2_FUSE_BETA": 0,
+    "EKF2_GBIAS_INIT": 0.10000000149011612,
+    "EKF2_GND_EFF_DZ": 4.0,
+    "EKF2_GND_MAX_HGT": 0.5,
+    "EKF2_GPS_CHECK": 245,
+    "EKF2_GPS_DELAY": 110.0,
+    "EKF2_GPS_POS_X": 0.0,
+    "EKF2_GPS_POS_Y": 0.0,
+    "EKF2_GPS_POS_Z": 0.0,
+    "EKF2_GPS_P_GATE": 5.0,
+    "EKF2_GPS_P_NOISE": 0.5,
+    "EKF2_GPS_V_GATE": 5.0,
+    "EKF2_GPS_V_NOISE": 0.30000001192092896,
+    "EKF2_GSF_TAS": 15.0,
+    "EKF2_GYR_B_NOISE": 0.0010000000474974513,
+    "EKF2_GYR_NOISE": 0.014999999664723873,
+    "EKF2_HDG_GATE": 2.5999999046325684,
+    "EKF2_HEAD_NOISE": 0.30000001192092896,
+    "EKF2_HGT_MODE": 0,
+    "EKF2_IMU_POS_X": 0.0,
+    "EKF2_IMU_POS_Y": 0.0,
+    "EKF2_IMU_POS_Z": 0.0,
+    "EKF2_MAG_ACCLIM": 0.5,
+    "EKF2_MAG_B_NOISE": 9.999999747378752e-05,
+    "EKF2_MAG_CHECK": 0,
+    "EKF2_MAG_DECL": 0.0,
+    "EKF2_MAG_DELAY": 0.0,
+    "EKF2_MAG_E_NOISE": 0.0010000000474974513,
+    "EKF2_MAG_GATE": 3.0,
+    "EKF2_MAG_NOISE": 0.05000000074505806,
+    "EKF2_MAG_TYPE": 0,
+    "EKF2_MAG_YAWLIM": 0.25,
+    "EKF2_MIN_OBS_DT": 20,
+    "EKF2_MIN_RNG": 0.10000000149011612,
+    "EKF2_MOVE_TEST": 1.0,
+    "EKF2_MULTI_IMU": 3,
+    "EKF2_MULTI_MAG": 2,
+    "EKF2_NOAID_NOISE": 10.0,
+    "EKF2_NOAID_TOUT": 5000000,
+    "EKF2_OF_DELAY": 20.0,
+    "EKF2_OF_GATE": 3.0,
+    "EKF2_OF_N_MAX": 0.5,
+    "EKF2_OF_N_MIN": 0.15000000596046448,
+    "EKF2_OF_POS_X": 0.0,
+    "EKF2_OF_POS_Y": 0.0,
+    "EKF2_OF_POS_Z": 0.0,
+    "EKF2_OF_QMIN": 1,
+    "EKF2_PCOEF_XN": 0.0,
+    "EKF2_PCOEF_XP": 0.0,
+    "EKF2_PCOEF_YN": 0.0,
+    "EKF2_PCOEF_YP": 0.0,
+    "EKF2_PCOEF_Z": 0.0,
+    "EKF2_REQ_EPH": 3.0,
+    "EKF2_REQ_EPV": 5.0,
+    "EKF2_REQ_GPS_H": 0.5,
+    "EKF2_REQ_HDRIFT": 0.10000000149011612,
+    "EKF2_REQ_NSATS": 6,
+    "EKF2_REQ_PDOP": 2.5,
+    "EKF2_REQ_SACC": 0.5,
+    "EKF2_REQ_VDRIFT": 0.20000000298023224,
+    "EKF2_RNG_AID": 1,
+    "EKF2_RNG_A_HMAX": 5.0,
+    "EKF2_RNG_A_IGATE": 1.0,
+    "EKF2_RNG_A_VMAX": 1.0,
+    "EKF2_RNG_DELAY": 5.0,
+    "EKF2_RNG_GATE": 5.0,
+    "EKF2_RNG_NOISE": 0.10000000149011612,
+    "EKF2_RNG_PITCH": 0.0,
+    "EKF2_RNG_POS_X": 0.0,
+    "EKF2_RNG_POS_Y": 0.0,
+    "EKF2_RNG_POS_Z": 0.0,
+    "EKF2_RNG_QLTY_T": 1.0,
+    "EKF2_RNG_SFE": 0.05000000074505806,
+    "EKF2_SEL_ERR_RED": 0.20000000298023224,
+    "EKF2_SEL_IMU_ACC": 1.0,
+    "EKF2_SEL_IMU_ANG": 15.0,
+    "EKF2_SEL_IMU_RAT": 7.0,
+    "EKF2_SEL_IMU_VEL": 2.0,
+    "EKF2_SYNT_MAG_Z": 0,
+    "EKF2_TAS_GATE": 3.0,
+    "EKF2_TAU_POS": 0.25,
+    "EKF2_TAU_VEL": 0.25,
+    "EKF2_TERR_GRAD": 0.5,
+    "EKF2_TERR_MASK": 3,
+    "EKF2_TERR_NOISE": 5.0,
+    "EKF2_WIND_NOISE": 0.10000000149011612,
+    "IMU_ACCEL_CUTOFF": 30.0,
+    "IMU_DGYRO_CUTOFF": 30.0,
+    "IMU_GYRO_CAL_EN": 1,
+    "IMU_GYRO_CUTOFF": 40.0,
+    "IMU_GYRO_DYN_NF": 0,
+    "IMU_GYRO_FFT_EN": 1,
+    "IMU_GYRO_FFT_LEN": 1024,
+    "IMU_GYRO_FFT_MAX": 192.0,
+    "IMU_GYRO_FFT_MIN": 32.0,
+    "IMU_GYRO_NF_BW": 20.0,
+    "IMU_GYRO_NF_FREQ": 0.0,
+    "IMU_GYRO_RATEMAX": 800,
+    "IMU_INTEG_RATE": 250,
+    "SENS_BARO_QNH": 1013.25,
+    "SENS_BARO_RATE": 20.0,
+    "SENS_BOARD_ROT": 0,
+    "SENS_BOARD_X_OFF": 9.999999974752427e-07,
+    "SENS_BOARD_Y_OFF": 0.0,
+    "SENS_BOARD_Z_OFF": 0.0,
+    "SENS_DPRES_OFF": 0.0010000000474974513,
+    "SENS_FLOW_MAXHGT": 3.0,
+    "SENS_FLOW_MAXR": 2.5,
+    "SENS_FLOW_MINHGT": 0.699999988079071,
+    "SENS_FLOW_ROT": 6,
+    "SENS_GPS_MASK": 0,
+    "SENS_GPS_PRIME": 0,
+    "SENS_GPS_TAU": 10.0,
+    "SENS_IMU_MODE": 0,
+    "SENS_MAG_MODE": 0,
+    "SENS_MAG_RATE": 50.0
+  },
+  "all_planned_present": true,
+  "independence_scope": "3 planned seeded IMU/phase streams per scene; actual available counts in seed_audit/cells. Fresh processes; other plugins keep original default engines and host scheduling is not randomized by seed."
+}

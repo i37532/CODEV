@@ -49,6 +49,10 @@ def main(checks=None, scenario_path=None):
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     output = args.output.resolve()
+    # Opt-in M10 only; prior milestones retain exactly the original timing.
+    speed = float(getattr(checks, 'simulation_speed', 1))
+    if not 1 <= speed <= 10:
+        raise ValueError('Simulation speed must be within [1,10]')
     if active_simulators():
         raise RuntimeError(f"Refusing conflicting instances: {active_simulators()}")
     output.mkdir(parents=True, exist_ok=False)
@@ -62,7 +66,7 @@ def main(checks=None, scenario_path=None):
         "binary_sha256": digest(BIN / "px4"),
         "runner_sha256": digest(Path(__file__)),
         "command": ["./sitl/run.sh", "--headless", "--backend", "gazebo", "--model", "iris"],
-        "pid_parameters_modified": False,
+        "pid_parameters_modified": bool(getattr(checks, 'pid_parameters_modified', False)),
         "success": False,
         "events": [],
     }
@@ -85,13 +89,13 @@ def main(checks=None, scenario_path=None):
         last_manual = 0
         with (output / "mavlink_events.jsonl").open("w") as stream:
             while not stop.is_set():
-                msg = link.recv_match(blocking=True, timeout=0.1)
+                msg = link.recv_match(blocking=True, timeout=0.1/speed)
                 if msg:
                     if msg.get_type() in ("HEARTBEAT", "STATUSTEXT", "EXTENDED_SYS_STATE"):
                         stream.write(json.dumps(msg.to_dict()) + "\n")
                         stream.flush()
                     telemetry[msg.get_type()] = msg
-                if time.monotonic() - last_heartbeat > 0.5 and telemetry:
+                if time.monotonic() - last_heartbeat > 0.5/speed and telemetry:
                     link.mav.heartbeat_send(mavutil.mavlink.MAV_TYPE_GCS,
                                             mavutil.mavlink.MAV_AUTOPILOT_INVALID,
                                             0, 0, mavutil.mavlink.MAV_STATE_ACTIVE)
@@ -99,7 +103,7 @@ def main(checks=None, scenario_path=None):
                 # Emulate a connected RC transmitter at neutral sticks. This
                 # satisfies the existing RC-loss policy during AUTO_LOITER.
                 # It does not publish attitude/rate/offboard setpoints.
-                if time.monotonic() - last_manual > 0.1 and telemetry:
+                if time.monotonic() - last_manual > 0.1/speed and telemetry:
                     link.mav.manual_control_send(1, 0, 0, 500, 0, 0)
                     last_manual = time.monotonic()
 
@@ -155,6 +159,10 @@ def main(checks=None, scenario_path=None):
     env.pop("PX4_SIM_SPEED_FACTOR", None)
     env["PX4_SITL_WORLD"] = str(REPO / "sitl/worlds/empty_grey.world")
     env["GAZEBO_MASTER_URI"] = "http://127.0.0.1:11345"
+    if checks is not None and hasattr(checks, 'prepare_environment'):
+        env.update(checks.prepare_environment(output))
+        env['PX4_SIM_SPEED_FACTOR'] = str(speed)
+        result['simulation_speed_requested'] = speed
     result["explicit_environment"] = {k: env[k] for k in ("PX4_SITL_WORLD", "GAZEBO_MASTER_URI")}
     console = (output / "console.log").open("w")
     proc = subprocess.Popen(result["command"], cwd=REPO, env=env,
@@ -189,7 +197,7 @@ def main(checks=None, scenario_path=None):
             p = state["position"]
             if p.get("timestamp", 0) > 30e6 and p.get("xy_global") and p.get("z_valid") and telemetry:
                 break
-            time.sleep(1)
+            time.sleep(1/speed)
         else:
             raise TimeoutError("Global estimator readiness timeout")
         event("ready", state)
@@ -219,7 +227,7 @@ def main(checks=None, scenario_path=None):
                     break
             else:
                 stable_since = None
-            time.sleep(0.5)
+            time.sleep(0.5/speed)
         else:
             raise TimeoutError("Takeoff did not reach stable AUTO_LOITER")
         event("hover_start", state)
@@ -231,7 +239,7 @@ def main(checks=None, scenario_path=None):
         while state["position"]["timestamp"] - hover_start < 60e6:
             if time.monotonic() > deadline:
                 raise TimeoutError("60 s simulation hover wall timeout")
-            time.sleep(0.5)
+            time.sleep(0.5/speed)
             state = sample("hover")
             if (state["status"].get("failsafe") or state["status"].get("nav_state") != 4
                     or state["status"].get("arming_state") != 2 or state["land"].get("landed")):
@@ -245,7 +253,7 @@ def main(checks=None, scenario_path=None):
             state = sample("landing")
             if state["land"].get("landed") and state["status"].get("arming_state") == 1:
                 break
-            time.sleep(0.5)
+            time.sleep(0.5/speed)
         else:
             raise TimeoutError("Landing/automatic disarm timeout")
         event("landed_disarmed", state)
