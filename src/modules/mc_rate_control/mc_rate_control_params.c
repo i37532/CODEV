@@ -562,3 +562,18 @@ PARAM_DEFINE_FLOAT(MC_STA_NU_P, 0.0f);
  * @group Multicopter Rate Control
  */
 PARAM_DEFINE_FLOAT(MC_STA_NU_Y, 0.0f);
+
+/**
+ * Rate-controller callback divisor (research SITL)
+ *
+ * Only 1, 2 and 4 accepted. Staged while armed for all modes.
+ * Sensor/filter settings stay unchanged. Torque held, thrust refreshed.
+ *
+ * @value 1 Every callback
+ * @value 2 Every second callback
+ * @value 4 Every fourth callback
+ * @min 1
+ * @max 4
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_INT32(MC_RTC_DIV, 1);

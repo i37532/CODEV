@@ -25,6 +25,7 @@ public:
 		uint64_t sample{0};
 		bool armed{false}, rate_enabled{false}, landed{true}, maybe_landed{true};
 		bool measurement_valid{true}, experiment_active{false};
+		bool decimated{false}; // timing/measurement latch also protects decimated PID
 	};
 	struct Feedback {
 		uint64_t timestamp{0}, now{0}; // publication-clock age, not sensor-clock age
@@ -47,7 +48,7 @@ public:
 
 	void begin(const Config &requested, const Frame &frame);
 	Output step(const std::array<float, 3> &rate, const std::array<float, 3> &sp, const Feedback &feedback,
-		    bool allow_frozen = false);
+		    bool allow_frozen = false, float update_dt = 0.f);
 	bool acknowledge(); // only disarmed; never silently clear a flight fault
 	const Config &config() const { return _config; }
 	const std::array<float, 3> &state() const { return _config.mode == 2 ? _ista.state() : _kernel.state(); }

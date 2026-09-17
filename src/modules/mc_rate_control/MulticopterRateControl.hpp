@@ -35,6 +35,7 @@
 
 #include <RateControlDispatcher.hpp>
 #include <StaProtection.hpp>
+#include <ControlDecimation.hpp>
 #include <StaAxesApplication.hpp>
 
 #include <lib/matrix/matrix/math.hpp>
@@ -94,7 +95,8 @@ private:
 
 	RateControlDispatcher _rate_control; ///< selects the executable rate controller
 	bool _selection_published{false};
-	StaProtection _sta_guard; ///< observation only: never enables experimental actuation in M03
+	StaProtection _sta_guard;
+	ControlDecimation _decimation;
 	StaProtection::Config _sta_requested{};
 	bool _research_iris{false};
 	bool _research_input_valid{false};
@@ -147,6 +149,7 @@ private:
 
 	DEFINE_PARAMETERS(
 		(ParamInt<px4::params::MC_RTC_MODE>) _param_mc_rtc_mode,
+		(ParamInt<px4::params::MC_RTC_DIV>) _param_mc_rtc_div,
 		(ParamInt<px4::params::MC_STA_AXES>) _param_mc_sta_axes,
 
 		(ParamFloat<px4::params::MC_ROLLRATE_P>) _param_mc_rollrate_p,

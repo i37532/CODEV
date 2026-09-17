@@ -2,7 +2,9 @@
 
 日常操作入口：[sim_scripts 中文说明](../../sim_scripts/README_CN.md)。三个入口：`start.sh` 启动Gazebo，`switch.sh pid|esta|ista` 选择算法，`fly.sh hover|figure8|yaw` 自动完成10秒悬停、8字轨迹或定点yaw激励及起降，保留当前仿真窗口供下一轮对比。
 
-已完成 M00～M08 的各阶段限定范围验收。M08开放Iris SITL的MODE=2，按roll→R/P→三轴通过后，同固件PID/ESTA/ISTA各三轮，90项比值均≤1.25；ESTA最大1.233325、ISTA最大1.178393。重启/重载和armed暂存/取消回归通过，80个C++/45个Python用例通过，见 [M08报告](reports/M08.md)、[运行说明](m08/RUN_CN.md)及 [冻结配置](m08/FROZEN_BASELINE.json)。默认仍PID；未执行M09。原始motor_limits仍丢样，不是完整全速TV/频谱数据集。
+已完成 M00～M09 的各阶段限定范围验收。M09新增 `MC_RTC_DIV=1/2/4`：同固件三算法九格起降/低幅激励通过，实测250/125/62.5Hz，传感器回调保持250Hz；90个C++/57个Python用例通过。见 [M09报告](reports/M09.md) 和 [分频运行/PlotJuggler说明](m09/RUN_CN.md)。默认仍PID/DIV1，未执行M10。ISTA/DIV4的pitch RMSE约为自身DIV1的2.23倍，功能通过不等于性能改善。原motor_limits仍丢样；M09命令TV/频谱使用完整的实际更新诊断序列，不冒充原motor话题无损。
+
+M08历史验收：开放Iris SITL的MODE=2，按roll→R/P→三轴通过后，同固件PID/ESTA/ISTA各三轮，90项比值均≤1.25；ESTA最大1.233325、ISTA最大1.178393。重启/重载和armed暂存/取消通过，当时80个C++/45个Python用例通过，见 [M08报告](reports/M08.md)、[运行说明](m08/RUN_CN.md)及 [冻结配置](m08/FROZEN_BASELINE.json)。M09保留这些增益，不把M08历史三轮统计当成本次分频结论。
 
 ISTA初始R/P候选因非命令pitch比值1.315543失败，完整保留。合格候选02仅把ISTA pitch lambda1改成2.0，ESTA仍为M06的2.4，因此不是同增益、纯离散化效应的论文实验。M08之后追加的日常 `sim_scripts/switch.sh ista` 自动加载候选02；M08报告中“日常脚本只支持PID/ESTA”是完成当时的历史状态。日常10秒悬停/8字/yaw任务不等于M08原验收场景，验证记录见 `sim_scripts/_internal/VERIFY_TASKS_CN.md`。
 
@@ -12,7 +14,7 @@ M05 独立标定 g_P=112.763533，开放 AXES=3，组合场景 PID/ESTA 各三�
 
 M06独立标定gY=34.582326，开放AXES=7且正常运行不计算闲置PID；1/3/7、重启重载与disarm切换回归通过。冻结 [三轴参数基准](m06/FROZEN_BASELINE.json)，复现见 [三轴运行说明](m06/RUN_CN.md)。三组候选、v1/v2场景与全部失败均保留；不覆盖旧v1自动航向重捕获、强yaw饱和或实机任务。
 
-M07历史阶段新增当时未链接至飞行控制路径的 `IstaRateControl`，采用有理化求根、double中间运算、float可表示范围及隐式方程校验。73个C++、39个Python用例，6011个独立参考样本、36组独立对象闭环通过；理想/扰动/噪声/饱和结果分开记录，MATLAB未运行。M08已经链接该内核；当前总回归请用 `python3 research/sta-rate-control/scripts/verify_m08.py --output <新的绝对路径>`。M07旧入口保留历史“不得链接ISTA”断言，只适用于M07提交。
+M07历史阶段新增当时未链接至飞行控制路径的 `IstaRateControl`，采用有理化求根、double中间运算、float可表示范围及隐式方程校验。73个C++、39个Python用例，6011个独立参考样本、36组独立对象闭环通过；理想/扰动/噪声/饱和结果分开记录，MATLAB未运行。M08已经链接该内核；当前总回归请用 `python3 research/sta-rate-control/scripts/verify_m09.py --output <新的绝对路径>`。M07旧入口保留历史“不得链接ISTA”断言，只适用于M07提交。
 
 - `plan/`：M00 开始时三份外部计划的历史快照。
 - `environment.md`：环境、模型、参数与启动约定。
@@ -26,6 +28,7 @@ M07历史阶段新增当时未链接至飞行控制路径的 `IstaRateControl`�
 - `reports/M06.md`、`m06/`：三轴ESTA与参数冻结，yaw标定及坐标变换/耦合/重启验证。
 - `reports/M07.md`、`m07/`：ISTA纯内核、数值域及独立对象验证的历史证据。
 - `reports/M08.md`、`m08/`：ISTA共用保护/日志接入、逐轴门槛、同固件九轮比较、失败候选、三模式配置与生命周期验证。
+- `reports/M09.md`、`m09/`：分频/缓存/饱和区间与耗时，最终九格SITL、完整失败数据索引、真实更新TV和共同带宽频谱。
 - `M04_RUN_PLOTJUGGLER_CN.md`：Gazebo/PX4 启动、PID/roll ESTA 切换、三轮自动对比及 PlotJuggler 曲线选择快速指南。
 - `scripts/`：SITL 捕获、ULog 分析及证据索引生成器。
 

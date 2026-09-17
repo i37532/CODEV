@@ -37,6 +37,21 @@
 #include <circuit_breaker/circuit_breaker.h>
 #include <mathlib/math/Limits.hpp>
 #include <mathlib/math/Functions.hpp>
+#if defined(__PX4_POSIX) && defined(__linux__)
+#include <time.h>
+#endif
+
+// Explicit host clock: px4_clock_gettime/hrt are virtual under Gazebo lockstep.
+static uint64_t research_cost_clock()
+{
+#if defined(__PX4_POSIX) && defined(__linux__)
+	struct timespec ts {};
+	if (system_clock_gettime(CLOCK_MONOTONIC, &ts) == 0) {
+		return uint64_t(ts.tv_sec) * 1000000000ULL + uint64_t(ts.tv_nsec);
+	}
+#endif
+	return 0;
+}
 
 using namespace matrix;
 using namespace time_literals;
@@ -132,6 +147,7 @@ MulticopterRateControl::parameters_updated()
 void
 MulticopterRateControl::Run()
 {
+	const uint64_t module_begin = research_cost_clock();
 	if (should_exit()) {
 		_vehicle_angular_velocity_sub.unregisterCallback();
 		exit_and_cleanup();
@@ -269,6 +285,8 @@ MulticopterRateControl::Run()
 		// Research timing does not replace legacy clamped dt. Mixer diagnostics
 		// below record the exact feedback consumed by PID, without another read.
 		StaProtection::Frame frame{};
+		_decimation.configure(_param_mc_rtc_div.get(), _v_control_mode.flag_armed);
+		frame.decimated = _decimation.divisor() > 1;
 		frame.sample = now; frame.armed = _v_control_mode.flag_armed;
 		frame.rate_enabled = _v_control_mode.flag_control_rates_enabled && !_actuators_0_circuit_breaker_enabled;
 		frame.landed = _landed; frame.maybe_landed = _maybe_landed;
@@ -292,13 +310,18 @@ MulticopterRateControl::Run()
 		if (staged.mode != 0 && !experiment_ready) { staged.c_limit = 0.f; }
 
 		_sta_guard.begin(staged, frame);
+		// Safety/lifecycle invalidates a held command immediately. Termination is
+		// still handled by the original rate-disabled commander branch below.
+		_decimation.lifecycle(frame, _sta_guard.resetReason() != 0, _sta_guard.abortRequested());
 		sta_rate_ctrl_status_s research{};
+		research.div_req = _decimation.requested(); research.div_eff = _decimation.divisor();
+		research.div_ok = _decimation.valid(); research.div_wait = _decimation.pending();
 		research.measurement_valid = frame.measurement_valid;
 		research.timestamp_sample = now;
 		research.publish_seq = ++_research_publish_seq;
 		research.config_seq = _sta_guard.configSequence();
 		research.config_pending = _sta_guard.pending(); research.config_valid = _sta_guard.configValid();
-		research.raw_dt = _sta_guard.rawDt(); research.dt = dt;
+		research.raw_dt = _sta_guard.rawDt(); research.dt = NAN; // no algorithm h on a held callback
 		research.timing_status = _sta_guard.timing(); research.fault = _sta_guard.fault();
 		research.reset_reason = _sta_guard.resetReason(); research.abort_requested = _sta_guard.abortRequested();
 		const auto &selection = _rate_control.selectionStatus();
@@ -358,25 +381,48 @@ MulticopterRateControl::Run()
 			research.pid_integral_before[2] = integral_before.yawspeed_integ;
 			research.pid_frozen = _maybe_landed || _landed;
 			// run rate controller
-			Vector3f att_control = _rate_control.update(rates, _rates_sp, angular_accel, dt, _maybe_landed || _landed);
-			research.pid_updated = _rate_control.pidRequired();
-			research.pid_frozen = research.pid_frozen || !research.pid_updated;
+			const uint64_t feedback_now = hrt_absolute_time();
+			_decimation.observe({_research_motor.timestamp, feedback_now, _research_motor.saturation_status});
+			research.sat_bits = _decimation.bits();
+			research.sat_valid = _decimation.feedbackValid();
+			research.sat_n = _decimation.observations();
+			const bool safe = !(frame.experiment_active || frame.decimated) || !_sta_guard.abortRequested();
+			const bool update = safe && _decimation.due(now, dt);
+			Vector3f att_control{_decimation.command().data()};
 			StaProtection::Output experiment{};
+			bool emit = safe && _decimation.cached();
 
-			if (frame.experiment_active && frame.armed) {
-				experiment = _sta_guard.step({rates(0), rates(1), rates(2)}, {_rates_sp(0), _rates_sp(1), _rates_sp(2)},
-				{_research_motor.timestamp, hrt_absolute_time(), _research_motor.saturation_status}, true);
+			if (update) {
+				const uint64_t kernel_begin = research_cost_clock();
+				research.dt = frame.decimated ? _decimation.dt() : dt;
+				if (frame.decimated) {
+					MultirotorMixer::saturation_status interval;
+					// On unknown feedback freeze BOTH directions on all PID axes.
+					interval.value = research.sat_valid ? research.sat_bits : uint16_t(0x1f8);
+					_rate_control.setSaturationStatus(interval);
+				}
+				att_control = _rate_control.update(rates, _rates_sp, angular_accel, research.dt, _maybe_landed || _landed);
+				research.pid_updated = _rate_control.pidRequired();
+				if (frame.experiment_active && frame.armed) {
+					experiment = _sta_guard.step({rates(0), rates(1), rates(2)}, {_rates_sp(0), _rates_sp(1), _rates_sp(2)},
+					{_research_motor.timestamp, feedback_now, research.sat_bits}, true,
+					frame.decimated ? research.dt : 0.f);
+				}
+
+				std::array<float, 3> mixed{};
+				emit = StaAxesApplication::apply(selection.effective_axes, frame.armed, experiment,
+				{att_control(0), att_control(1), att_control(2)}, mixed);
+
+				for (int i = 0; i < 3; ++i) { att_control(i) = mixed[i]; }
+				if (emit) { _decimation.commit(now, mixed); }
+				research.kern_ns = kernel_begin ? research_cost_clock() - kernel_begin : 0;
 			}
-
-			std::array<float, 3> mixed{};
-			const bool emit = StaAxesApplication::apply(selection.effective_axes, frame.armed, experiment,
-			{att_control(0), att_control(1), att_control(2)}, mixed);
-
-			for (int i = 0; i < 3; ++i) { att_control(i) = mixed[i]; }
+			research.pid_frozen = research.pid_frozen || !research.pid_updated;
+			research.held = emit && !update;
 
 			research.fault = _sta_guard.fault(); research.abort_requested = _sta_guard.abortRequested();
 
-			if (frame.experiment_active) {
+			if (frame.experiment_active && update) {
 				research.experiment_updated = experiment.updated;
 				research.experiment_frozen = !experiment.updated;
 				for (int i = 0; i < 3; ++i) {
@@ -397,9 +443,9 @@ MulticopterRateControl::Run()
 			research.pid_integral_after[0] = rate_ctrl_status.rollspeed_integ;
 			research.pid_integral_after[1] = rate_ctrl_status.pitchspeed_integ;
 			research.pid_integral_after[2] = rate_ctrl_status.yawspeed_integ;
-			research.updated = emit;
+			research.updated = update && emit;
 
-			if (emit) { ++_research_update_seq; }
+			if (research.updated) { ++_research_update_seq; }
 
 			rate_ctrl_status.timestamp = hrt_absolute_time();
 			_controller_status_pub.publish(rate_ctrl_status);
@@ -425,14 +471,15 @@ MulticopterRateControl::Run()
 
 				if (_battery_status_scale > 0.0f) {
 					research.battery_scale = _battery_status_scale;
-
+					const auto scaled = _decimation.output(actuators.control[actuator_controls_s::INDEX_THROTTLE], _battery_status_scale);
 					for (int i = 0; i < 4; i++) {
-						actuators.control[i] *= _battery_status_scale;
+						actuators.control[i] = scaled[i];
 					}
 				}
 			}
 
 			actuators.timestamp = hrt_absolute_time();
+			research.thrust = actuators.control[actuator_controls_s::INDEX_THROTTLE];
 
 			// Invalid ESTA suppresses publication; no zero-torque or PID fallback.
 			// The local monitor aborts SITL even if lockstep stops at this sample.
@@ -441,6 +488,7 @@ MulticopterRateControl::Run()
 			research.output_valid = emit;
 
 			for (int i = 0; i < 3; ++i) {
+				research.c_held[i] = att_control(i);
 				research.c_raw[i] = att_control(i);
 				research.c_applied[i] = actuators.control[i];
 				research.output_valid = research.output_valid && PX4_ISFINITE(att_control(i)) && PX4_ISFINITE(actuators.control[i]);
@@ -453,6 +501,7 @@ MulticopterRateControl::Run()
 			}
 
 			if (!emit) { for (int i = 0; i < 3; ++i) { research.c_applied[i] = NAN; } }
+			if (!update) { for (int i = 0; i < 3; ++i) { research.c_raw[i] = NAN; } }
 
 		} else if (_v_control_mode.flag_control_termination_enabled) {
 			research.termination = true;
@@ -472,6 +521,8 @@ MulticopterRateControl::Run()
 		research.motor_update_seq = _research_motor.update_seq;
 		research.motor_saturation = _research_motor.saturation_status;
 		research.motor_valid = StaProtection::Feedback{_research_motor.timestamp, research.timestamp, _research_motor.saturation_status}.valid();
+		research.clock = module_begin ? 1 : 0;
+		research.mod_ns = module_begin ? research_cost_clock() - module_begin : 0;
 		_sta_status_pub.publish(research);
 	}
 

@@ -88,8 +88,9 @@ void StaProtection::begin(const Config &requested, const Frame &frame)
 	_last_sample = frame.sample;
 	_allowed = frame.experiment_active && frame.armed && frame.rate_enabled && !frame.landed && !frame.maybe_landed;
 
-	if (frame.experiment_active && frame.armed && frame.rate_enabled) {
-		if ((_config.mode != 1 && _config.mode != 2) || !validConfig(_config) || (!_previous.armed && !_request_valid)) { latch(Configuration); }
+	if ((frame.experiment_active || frame.decimated) && frame.armed && frame.rate_enabled) {
+		if (frame.experiment_active && ((_config.mode != 1 && _config.mode != 2) || !validConfig(_config)
+					      || (!_previous.armed && !_request_valid))) { latch(Configuration); }
 
 		else if (!frame.measurement_valid) { latch(Measurement); }
 
@@ -110,7 +111,7 @@ bool StaProtection::acknowledge()
 }
 
 StaProtection::Output StaProtection::step(const std::array<float, 3> &rate, const std::array<float, 3> &sp,
-		const Feedback &feedback, bool allow_frozen)
+		const Feedback &feedback, bool allow_frozen, float update_dt)
 {
 	Output out{};
 	const float nan = std::numeric_limits<float>::quiet_NaN();
@@ -125,6 +126,9 @@ StaProtection::Output StaProtection::step(const std::array<float, 3> &rate, cons
 	if (!canUpdate() && !frozen_evaluation) { return out; }
 
 	_used = true;
+	// Zero selects legacy callback dt. M09 h spans up to four valid callbacks.
+	const float h = sameFloat(update_dt, 0.f) ? _raw_dt : update_dt;
+	if (!std::isfinite(h) || h < 0.000125f || h > 0.08f) { latch(Numerical); return out; }
 	StaRateControl proposal = _kernel; // all selected axes commit together, or none do
 	IstaRateControl implicit_proposal = _ista;
 	const auto failure = [this]() { Output invalid; invalid.nu = state(); return invalid; };
@@ -135,13 +139,13 @@ StaProtection::Output StaProtection::step(const std::array<float, 3> &rate, cons
 		StaRateControl::Result candidate;
 
 		if (_config.mode == 2) {
-			const auto implicit = implicit_proposal.update(i, rate[i], sp[i], _raw_dt);
+			const auto implicit = implicit_proposal.update(i, rate[i], sp[i], h);
 			candidate = implicit;
 			out.xi[i] = implicit.xi; out.virtual_s[i] = implicit.virtual_s;
 			out.branch[i] = static_cast<uint8_t>(implicit.branch);
 
 		} else {
-			candidate = proposal.update(i, rate[i], sp[i], _raw_dt);
+			candidate = proposal.update(i, rate[i], sp[i], h);
 		}
 
 		if (!candidate.valid()) { latch(Numerical); return failure(); }

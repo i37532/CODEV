@@ -66,3 +66,15 @@ float32[3] xi # ideal ISTA only; NaN otherwise
 float32[3] virtual_state # NaN unless ISTA
 uint8[3] ista_branch # 255 not applicable; never label ESTA as sliding
 uint8 ORB_QUEUE_LENGTH = 32
+int32 div_req
+uint8 div_eff
+bool div_ok
+bool div_wait
+uint16 sat_bits
+bool sat_valid
+uint32 sat_n
+float32[3] c_held # unscaled cached torque
+float32 thrust
+uint64 kern_ns # selected algorithm + protection/mixing, zero on hold
+uint64 mod_ns # Run entry through output preparation, excludes this diagnostic publish
+uint8 clock # 1 Linux host monotonic ns, 0 unsupported/zero
