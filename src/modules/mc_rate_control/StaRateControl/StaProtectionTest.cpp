@@ -188,7 +188,7 @@ TEST(StaProtectionTest, InvalidConfigurationDomain)
 	auto c = config();
 
 	for (int bad : {-1, 8, 256}) { c.axes = bad; EXPECT_FALSE(Guard::validConfig(c)); }
-	c = config(); c.mode = 2; EXPECT_FALSE(Guard::validConfig(c));
+	c = config(); c.mode = 3; EXPECT_FALSE(Guard::validConfig(c));
 	c = config(); c.axes = 0; EXPECT_FALSE(Guard::validConfig(c));
 
 	for (float bad : {0.f, -1.f, NAN, INFINITY}) {

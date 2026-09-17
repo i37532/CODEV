@@ -8,6 +8,7 @@ import numpy as np
 from pyulog import ULog
 from analyze_m00 import analyze, plain
 from analyze_m03 import vector, pid_output, require, sequence_stats
+from m08_ista_reference import ideal as ista_ideal
 
 
 def check_gyro_events(gyro, published_samples):
@@ -111,9 +112,23 @@ def main(run):
             require(np.all(vector(d,field)[armed,axis]==np.float32(config['MC_STA_'+param+'_'+'RPY'[axis]])), 'Logged gain mismatch')
         sigma=np.sign(s).astype(np.float32)
         alpha=-(l1*np.sqrt(np.abs(s)))*sigma+old
+        nu_next=old-(d['raw_dt']*l2)*sigma
+        if mode == 2:
+            require(protocol.get('integration_milestone')=='M08','ISTA requires M08 protocol')
+            ref=ista_ideal(s[armed],old[armed],d['raw_dt'][armed],l1[armed],l2[armed],g[armed])
+            alpha=alpha.copy(); nu_next=nu_next.copy()
+            alpha[armed]=ref['a']; nu_next[armed]=ref['nu']
+            np.testing.assert_array_equal(d[f'ista_branch[{axis}]'][armed],ref['branch'])
+            np.testing.assert_allclose(vector(d,'xi')[armed,axis],ref['xi'],rtol=1e-6,atol=1e-8)
+            np.testing.assert_allclose(vector(d,'virtual_state')[armed,axis],ref['virtual'],rtol=1e-6,atol=1e-25)
+            require(np.all(np.abs(vector(d,'xi')[armed,axis])<=1),'ISTA xi range')
+        elif 'nu_candidate[0]' in d:
+            require(np.all(d[f'ista_branch[{axis}]']==255) and np.all(np.isnan(vector(d,'xi')[:,axis])),
+                    'ESTA mislabeled as ISTA')
         np.testing.assert_allclose(vector(d,'a_raw')[armed,axis],alpha[armed],rtol=1e-6,atol=1e-7)
         np.testing.assert_allclose(raw[armed,axis],(alpha/g)[armed],rtol=1e-6,atol=1e-7)
-        nu_next=old-(d['raw_dt']*l2)*sigma
+        if 'nu_candidate[0]' in d:
+            np.testing.assert_allclose(vector(d,'nu_candidate')[armed,axis],nu_next[armed],rtol=1e-6,atol=1e-7)
         freeze=(d[f'limits[{axis}]']&3)!=0
         # Output-limit winding direction is a freeze, just as invalid feedback.
         delta=nu_next-old
@@ -124,13 +139,21 @@ def main(run):
         # Full-rate state continuity detects shared/swapped states, not just a local formula.
         contiguous=(np.diff(d['update_seq'].astype(np.int64))==1)&armed[1:]&armed[:-1]&(d['reset_reason'][1:]==0)
         np.testing.assert_array_equal(old[1:][contiguous],vector(d,'nu')[:-1,axis][contiguous])
-    if mode==1:
+    if mode in (1,2):
         require(np.all(d['experiment_updated'][hover]),'Frozen experiment in hover')
         require(np.all(vector(d,'nu')[:,axes]==0),'Non-selected experimental state changed')
     else:
         require(np.all(d['experiment_updated']==0),'PID experiment updated')
     command=raw.copy()
     for axis in experiment_axes:
+        if mode==2:
+            candidate=vector(d,'nu_candidate')[:,axis]
+            applied=vector(d,'nu')[:,axis]
+            a=vector(d,'a_raw')[:,axis]
+            protected=a+(applied-candidate)
+            np.testing.assert_allclose(vector(d,'a_protected')[armed,axis],protected[armed],rtol=1e-6,atol=1e-7)
+            changed=applied.view(np.uint32)!=candidate.view(np.uint32)
+            command[armed,axis]=np.where(changed,protected/vector(d,'g')[:,axis],raw[:,axis])[armed]
         command[:,axis]=np.clip(command[:,axis],-.15,.15)
     np.testing.assert_allclose(vector(d,'c_applied')[updated],(command*d['battery_scale'][:,None])[updated],rtol=1e-6,atol=1e-7)
     act=log.get_dataset('actuator_controls_0').data
@@ -213,6 +236,13 @@ def main(run):
                  max_armed_tilt_deg=float(np.max(tilt[am])),max_armed_roll_command=float(np.max(np.abs(vector(d,'c_applied')[armed,0]))),
                  dropout_count=len(log.dropouts),full_raw_topic_tv_ready=all(s['missing']==0 for s in seq.values()) and not log.dropouts,
                  parameter_differences=changes,parameter_changes=log.changed_parameters)
+    if protocol.get('integration_milestone')=='M08':
+        summary.update(integration_milestone='M08', axes=mask_axes,
+                       ista_branches={str(axis):{str(b):int(np.sum(d[f'ista_branch[{axis}]'][armed]==b)) for b in (1,2,3)} for axis in experiment_axes} if mode==2 else {},
+                       protected_nu_changed={str(axis):int(np.count_nonzero(vector(d,'nu')[armed,axis]!=vector(d,'nu_candidate')[armed,axis])) for axis in experiment_axes},
+                       protected_prediction_discrepancy={str(axis):float(np.max(np.abs(
+                           vector(d,'s')[armed,axis].astype(float)+d['raw_dt'][armed].astype(float)*vector(d,'g')[armed,axis].astype(float)*
+                           (vector(d,'c_applied')[armed,axis]/d['battery_scale'][armed]).astype(float)-vector(d,'virtual_state')[armed,axis].astype(float)))) for axis in experiment_axes} if mode==2 else {})
     if rp:
         asp=log.get_dataset('vehicle_attitude_setpoint').data
         if m06 and 'heading_contract' in protocol:

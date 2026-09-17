@@ -184,9 +184,10 @@ MulticopterRateControl::Run()
 
 		// Selection uses the latest arming state. Existing PID parameter updates
 		// above remain immediate and retain their original scheduling/order.
-		const bool esta_ready = StaAxesApplication::ready(_research_iris, _sta_requested);
+		const bool experiment_ready = StaAxesApplication::ready(_research_iris, _sta_requested);
 		const bool selection_changed = _rate_control.select(_param_mc_rtc_mode.get(), _param_mc_sta_axes.get(),
-					       _v_control_mode.flag_armed, esta_ready);
+					       _v_control_mode.flag_armed, experiment_ready && _sta_requested.mode == 1,
+					       experiment_ready && _sta_requested.mode == 2);
 
 		if (selection_changed || !_selection_published) {
 			const auto &selection = _rate_control.selectionStatus();
@@ -277,7 +278,7 @@ MulticopterRateControl::Run()
 						  && PX4_ISFINITE(angular_accel(i)) && PX4_ISFINITE(_rates_sp(i));
 		}
 
-		frame.experiment_active = _rate_control.selectionStatus().effective_mode == ControllerSelection::ESTA;
+		frame.experiment_active = _rate_control.selectionStatus().effective_mode != ControllerSelection::PID;
 
 		if (frame.experiment_active) {
 			const uint64_t clock_now = hrt_absolute_time();
@@ -288,7 +289,7 @@ MulticopterRateControl::Run()
 
 		StaProtection::Config staged = _sta_requested;
 
-		if (staged.mode != 0 && !esta_ready) { staged.c_limit = 0.f; }
+		if (staged.mode != 0 && !experiment_ready) { staged.c_limit = 0.f; }
 
 		_sta_guard.begin(staged, frame);
 		sta_rate_ctrl_status_s research{};
@@ -321,6 +322,7 @@ MulticopterRateControl::Run()
 			research.lambda2[i] = _sta_guard.config().gains[i].lambda2;
 			research.g[i] = _sta_guard.config().gains[i].g;
 			research.a_raw[i] = research.xi[i] = research.virtual_state[i] = NAN;
+			research.nu_candidate[i] = research.a_protected[i] = NAN;
 			research.c_raw[i] = research.c_applied[i] = NAN;
 			research.pid_integral_before[i] = research.pid_integral_after[i] = NAN;
 			research.ista_branch[i] = 255;
@@ -381,6 +383,10 @@ MulticopterRateControl::Run()
 					if (selection.effective_axes & (1 << i)) {
 						research.a_raw[i] = experiment.a[i]; research.nu[i] = _sta_guard.state()[i];
 						research.limits[i] = experiment.limits[i];
+						research.nu_candidate[i] = experiment.nu_candidate[i];
+						research.a_protected[i] = experiment.a_protected[i];
+						research.xi[i] = experiment.xi[i]; research.virtual_state[i] = experiment.virtual_s[i];
+						research.ista_branch[i] = experiment.branch[i];
 					}
 				}
 			}

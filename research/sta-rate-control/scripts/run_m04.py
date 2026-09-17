@@ -27,11 +27,12 @@ class Checks:
     stage = 'm04'
     prefix = 'M04'
     config_name = 'iris_esta_roll.json'
+    allowed_modes = (0, 1)
 
     def __init__(self):
         self.mode = int(os.environ.get(self.prefix+'_MODE', '0'))
-        if self.mode not in (0, 1):
-            raise ValueError('Only PID or roll ESTA')
+        if self.mode not in self.allowed_modes:
+            raise ValueError('Unsupported mode for this milestone')
         config_path = Path(os.environ.get(self.prefix+'_CONFIG', str(RESEARCH/self.stage/self.config_name)))
         self.config = json.loads(config_path.read_text())
         self.config['MC_RTC_MODE'] = self.mode

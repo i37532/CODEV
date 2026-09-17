@@ -2,7 +2,9 @@
 
 日常操作入口：[sim_scripts 中文说明](../../sim_scripts/README_CN.md)。三个入口：`start.sh` 启动Gazebo，`switch.sh pid|esta` 选择算法，`fly.sh hover|figure8|yaw` 自动完成10秒悬停、8字轨迹或定点yaw激励及起降，保留当前仿真窗口供下一轮对比。
 
-已完成 M00～M07 的各阶段限定范围验收。M07仅完成ISTA解析内核、数值/独立对象验证及ESTA/PID回归，见 [M07报告](reports/M07.md)；MODE=2仍不可启用，没有ISTA飞行。M06在Iris固定悬停航向协议v2下完成PID/三轴ESTA各三轮，45项比值均≤1.25，最大1.175228，见 [M06报告](reports/M06.md)。默认仍为 PID。原始 motor_limits 仍丢样，不是完整全速 TV/频谱数据集。
+已完成 M00～M08 的各阶段限定范围验收。M08开放Iris SITL的MODE=2，按roll→R/P→三轴通过后，同固件PID/ESTA/ISTA各三轮，90项比值均≤1.25；ESTA最大1.233325、ISTA最大1.178393。重启/重载和armed暂存/取消回归通过，80个C++/45个Python用例通过，见 [M08报告](reports/M08.md)、[运行说明](m08/RUN_CN.md)及 [冻结配置](m08/FROZEN_BASELINE.json)。默认仍PID；未执行M09。原始motor_limits仍丢样，不是完整全速TV/频谱数据集。
+
+ISTA初始R/P候选因非命令pitch比值1.315543失败，完整保留。合格候选02仅把ISTA pitch lambda1改成2.0，ESTA仍为M06的2.4，因此不是同增益、纯离散化效应的论文实验。日常 `sim_scripts/switch.sh` 仍只支持PID/ESTA；ISTA请用M08说明中的显式候选02配置，不要误用保留的候选01默认文件。
 
 M04 已按用户授权修复 IMU 切换时间戳发布契约；协议 v3 下 PID/ESTA 同固件各三轮通过，最终注释修订构建另各一轮复核。M04 最终独立配置 `m04/iris_esta_roll.json`（lambda1=2.5、lambda2=0.05）达到该小幅场景门槛，五组候选和所有失败均保留。详见 [M04 报告](reports/M04.md)，历史暂停报告另存 `reports/M04_BLOCKED_20260914.md`。
 
@@ -10,7 +12,7 @@ M05 独立标定 g_P=112.763533，开放 AXES=3，组合场景 PID/ESTA 各三�
 
 M06独立标定gY=34.582326，开放AXES=7且正常运行不计算闲置PID；1/3/7、重启重载与disarm切换回归通过。冻结 [三轴参数基准](m06/FROZEN_BASELINE.json)，复现见 [三轴运行说明](m06/RUN_CN.md)。三组候选、v1/v2场景与全部失败均保留；不覆盖旧v1自动航向重捕获、强yaw饱和或实机任务。
 
-M07新增未链接至飞行控制路径的 `IstaRateControl`，采用有理化求根、double中间运算、float可表示范围及隐式方程校验。73个C++、39个Python用例，6011个独立参考样本、36组独立对象闭环通过；理想/扰动/噪声/饱和结果分开记录，MATLAB未运行。复跑：`python3 research/sta-rate-control/scripts/verify_m07.py --output <新的绝对路径>`。不会启动仿真、改参数或push；不代替M08接入验收。
+M07历史阶段新增当时未链接至飞行控制路径的 `IstaRateControl`，采用有理化求根、double中间运算、float可表示范围及隐式方程校验。73个C++、39个Python用例，6011个独立参考样本、36组独立对象闭环通过；理想/扰动/噪声/饱和结果分开记录，MATLAB未运行。M08已经链接该内核；当前总回归请用 `python3 research/sta-rate-control/scripts/verify_m08.py --output <新的绝对路径>`。M07旧入口保留历史“不得链接ISTA”断言，只适用于M07提交。
 
 - `plan/`：M00 开始时三份外部计划的历史快照。
 - `environment.md`：环境、模型、参数与启动约定。
@@ -21,6 +23,9 @@ M07新增未链接至飞行控制路径的 `IstaRateControl`，采用有理化�
 - `reports/M03.md`、`m03/`：公共保护、真实更新序号/实际 PID 消费的 mixer 反馈、高频诊断与原始话题丢样统计；30 个 C++、8 个 Python 用例和最终 PID 60.440 s 悬停证据。
 - `reports/M04.md`、`m04/`：roll 标定、协议修订、五组候选、上游 IMU 修复、44 个 C++/17 个 Python 用例、六轮比较和最终构建复核；复现使用 `run_m04.py`、`analyze_m04.py`、`compare_m04.py`。
 - `reports/M05.md`、`m05/`：pitch 标定、独立参数、R/P 激励及交叉轴验收；51 个 C++/21 个 Python 用例、六轮组合对照与两个 roll 回归；使用 `run_m05.py`、`analyze_m05.py`、`compare_m05.py`。
+- `reports/M06.md`、`m06/`：三轴ESTA与参数冻结，yaw标定及坐标变换/耦合/重启验证。
+- `reports/M07.md`、`m07/`：ISTA纯内核、数值域及独立对象验证的历史证据。
+- `reports/M08.md`、`m08/`：ISTA共用保护/日志接入、逐轴门槛、同固件九轮比较、失败候选、三模式配置与生命周期验证。
 - `M04_RUN_PLOTJUGGLER_CN.md`：Gazebo/PX4 启动、PID/roll ESTA 切换、三轮自动对比及 PlotJuggler 曲线选择快速指南。
 - `scripts/`：SITL 捕获、ULog 分析及证据索引生成器。
 

@@ -6,9 +6,11 @@ px4_add_unit_gtest(SRC StaRateControlTest.cpp LINKLIBS StaRateControl)
 px4_add_unit_gtest(SRC StaProtectionTest.cpp LINKLIBS StaRateControl)
 px4_add_unit_gtest(SRC StaAxesApplicationTest.cpp LINKLIBS StaRateControl)
 
-# M07 pure kernel: deliberately NOT a dependency of mc_rate_control / StaRateControl.
+# M08: selected by the shared protection adapter; never evaluated as idle output.
 px4_add_library(IstaRateControl IstaRateControl.cpp IstaRateControl.hpp)
 target_compile_features(IstaRateControl PUBLIC cxx_std_14)
 target_compile_options(IstaRateControl PRIVATE ${MAX_CUSTOM_OPT_LEVEL})
 target_include_directories(IstaRateControl PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(StaRateControl PUBLIC IstaRateControl)
 px4_add_unit_gtest(SRC IstaRateControlTest.cpp LINKLIBS IstaRateControl)
+px4_add_unit_gtest(SRC IstaIntegrationTest.cpp LINKLIBS StaRateControl RateControl)

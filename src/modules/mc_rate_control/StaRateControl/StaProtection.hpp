@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: BSD-3-Clause
 #pragma once
 #include "StaRateControl.hpp"
+#include "IstaRateControl.hpp"
 
-/** Research-only adapter. M05 enables validated Iris SITL R / R/P actuation.
+/** Shared ESTA/ISTA research adapter. M08 staged Iris SITL AXES=1/3/7 only.
  * PID does not pass through these limits/resets. A fault returns invalid output,
  * latches until explicit disarmed acknowledgement, and requests SITL abort.
  * No automatic PID takeover, zero-torque fallback or commander override.
@@ -31,9 +32,16 @@ public:
 		bool valid() const { return (bits & 1) && timestamp > 0 && now >= timestamp && now - timestamp <= 20000; }
 	};
 	struct Output {
-		Output() { const float nan = std::numeric_limits<float>::quiet_NaN(); a.fill(nan); c_raw.fill(nan); c_applied.fill(nan); }
+		Output()
+		{
+			const float nan = std::numeric_limits<float>::quiet_NaN();
+			a.fill(nan); c_raw.fill(nan); c_applied.fill(nan); nu_candidate.fill(nan);
+			xi.fill(nan); virtual_s.fill(nan); a_protected.fill(nan); branch.fill(255);
+		}
 		bool valid{false}, updated{false};
 		std::array<float, 3> a{}, c_raw{}, c_applied{}, nu{};
+		std::array<float, 3> nu_candidate{}, xi{}, virtual_s{}, a_protected{};
+		std::array<uint8_t, 3> branch{};
 		std::array<uint8_t, 3> limits{};
 	};
 
@@ -42,7 +50,7 @@ public:
 		    bool allow_frozen = false);
 	bool acknowledge(); // only disarmed; never silently clear a flight fault
 	const Config &config() const { return _config; }
-	const std::array<float, 3> &state() const { return _kernel.state(); }
+	const std::array<float, 3> &state() const { return _config.mode == 2 ? _ista.state() : _kernel.state(); }
 	float rawDt() const { return _raw_dt; }
 	Fault timing() const { return _timing; }
 	Fault fault() const { return _fault; }
@@ -56,11 +64,12 @@ public:
 
 private:
 	static bool same(const Config &a, const Config &b);
-	void clear(uint16_t reason) { _kernel.reset(); _reset |= reason; }
+	void clear(uint16_t reason) { _kernel.reset(); _ista.reset(); _reset |= reason; }
 	void latch(Fault fault) { if (_fault == None) { _fault = fault; } }
 	Config _config{};
 	Frame _previous{}, _frame{};
 	StaRateControl _kernel;
+	IstaRateControl _ista;
 	uint64_t _last_sample{0};
 	uint32_t _config_seq{0};
 	uint16_t _reset{0};

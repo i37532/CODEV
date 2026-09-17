@@ -29,8 +29,8 @@ bool StaProtection::same(const Config &a, const Config &b)
 
 bool StaProtection::validConfig(const Config &c)
 {
-	if (c.mode < 0 || c.mode > 1 || c.axes < 0 || c.axes > 7 || !std::isfinite(c.c_limit)
-	    || c.c_limit <= 0.f || c.c_limit > 1.f || (c.mode == 1 && c.axes == 0)) { return false; }
+	if (c.mode < 0 || c.mode > 2 || c.axes < 0 || c.axes > 7 || !std::isfinite(c.c_limit)
+	    || c.c_limit <= 0.f || c.c_limit > 1.f || (c.mode != 0 && c.axes == 0)) { return false; }
 
 	for (size_t i = 0; i < 3; ++i) {
 		if ((c.axes & (1 << i)) && (!StaRateControl::validParameters(c.gains[i])
@@ -54,7 +54,10 @@ void StaProtection::begin(const Config &requested, const Frame &frame)
 		_config = requested;
 
 		for (size_t i = 0; i < 3; ++i) {
-			if (requested.axes & (1 << i)) { _kernel.setParameters(i, requested.gains[i]); }
+			if (requested.axes & (1 << i)) {
+				_kernel.setParameters(i, requested.gains[i]);
+				_ista.setParameters(i, requested.gains[i]);
+			}
 		}
 
 		++_config_seq;
@@ -86,7 +89,7 @@ void StaProtection::begin(const Config &requested, const Frame &frame)
 	_allowed = frame.experiment_active && frame.armed && frame.rate_enabled && !frame.landed && !frame.maybe_landed;
 
 	if (frame.experiment_active && frame.armed && frame.rate_enabled) {
-		if (_config.mode != 1 || !validConfig(_config) || (!_previous.armed && !_request_valid)) { latch(Configuration); }
+		if ((_config.mode != 1 && _config.mode != 2) || !validConfig(_config) || (!_previous.armed && !_request_valid)) { latch(Configuration); }
 
 		else if (!frame.measurement_valid) { latch(Measurement); }
 
@@ -123,12 +126,23 @@ StaProtection::Output StaProtection::step(const std::array<float, 3> &rate, cons
 
 	_used = true;
 	StaRateControl proposal = _kernel; // all selected axes commit together, or none do
+	IstaRateControl implicit_proposal = _ista;
 	const auto failure = [this]() { Output invalid; invalid.nu = state(); return invalid; };
 
 	for (size_t i = 0; i < 3; ++i) {
 		if (!(_config.axes & (1 << i))) { continue; }
 
-		const auto candidate = proposal.update(i, rate[i], sp[i], _raw_dt);
+		StaRateControl::Result candidate;
+
+		if (_config.mode == 2) {
+			const auto implicit = implicit_proposal.update(i, rate[i], sp[i], _raw_dt);
+			candidate = implicit;
+			out.xi[i] = implicit.xi; out.virtual_s[i] = implicit.virtual_s;
+			out.branch[i] = static_cast<uint8_t>(implicit.branch);
+
+		} else {
+			candidate = proposal.update(i, rate[i], sp[i], _raw_dt);
+		}
 
 		if (!candidate.valid()) { latch(Numerical); return failure(); }
 
@@ -155,14 +169,35 @@ StaProtection::Output StaProtection::step(const std::array<float, 3> &rate, cons
 
 		if (bounded < nu || bounded > nu) { out.limits[i] |= NuLimit; }
 
-		proposal.reset(i, _allowed ? bounded : state()[i]);
-		out.a[i] = candidate.a; out.c_raw[i] = candidate.c_raw;
-		out.c_applied[i] = std::max(-_config.c_limit, std::min(_config.c_limit, candidate.c_raw));
+		const float applied_nu = _allowed ? bounded : state()[i];
+		float protected_a = candidate.a;
+		float protected_c = candidate.c_raw;
 
-		if (candidate.c_raw < -_config.c_limit || candidate.c_raw > _config.c_limit) { out.limits[i] |= OutputLimit; }
+		if (_config.mode == 2) {
+			implicit_proposal.reset(i, applied_nu);
+			// Keep the ideal root/xi for diagnostics, replace ONLY its additive
+			// nu_next by protected nu. This constrained law is NOT a new implicit
+			// solution; do not relabel its applied output as the ideal prediction.
+			if (!sameFloat(applied_nu, candidate.nu_next)) {
+				protected_a = candidate.a + (applied_nu - candidate.nu_next);
+				protected_c = protected_a / _config.gains[i].g;
+			}
+
+		} else {
+			proposal.reset(i, applied_nu); // preserve ESTA old-nu output EXACTLY
+		}
+
+		if (!std::isfinite(protected_a) || !std::isfinite(protected_c)) { latch(Numerical); return failure(); }
+
+		out.nu_candidate[i] = candidate.nu_next; out.a_protected[i] = protected_a;
+		out.a[i] = candidate.a; out.c_raw[i] = candidate.c_raw;
+		out.c_applied[i] = std::max(-_config.c_limit, std::min(_config.c_limit, protected_c));
+
+		if (protected_c < -_config.c_limit || protected_c > _config.c_limit) { out.limits[i] |= OutputLimit; }
 	}
 
 	_kernel = proposal;
+	_ista = implicit_proposal;
 	out.nu = state(); out.valid = true; out.updated = _allowed;
 	return out;
 }

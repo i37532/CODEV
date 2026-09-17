@@ -6,14 +6,17 @@
 #include <ControllerSelection.hpp>
 #include <RateControl.hpp>
 
-/** PID reference entry point; module composes protected ESTA on selected axes.
+/** PID reference entry point; module composes protected ESTA/ISTA on selected axes.
  * Lifecycle decisions remain in MulticopterRateControl at their original
  * call sites; this adapter adds no output limits, resets or float arithmetic.
  */
 class RateControlDispatcher
 {
 public:
-	bool select(int32_t mode, int32_t axes, bool armed, bool esta_ready = false) { return _selection.select(mode, axes, armed, esta_ready); }
+	bool select(int32_t mode, int32_t axes, bool armed, bool esta_ready = false, bool ista_ready = false)
+	{
+		return _selection.select(mode, axes, armed, esta_ready, ista_ready);
+	}
 	const ControllerSelection::Status &selectionStatus() const { return _selection.status(); }
 	bool pidRequired() const { return _selection.status().effective_axes != 7; }
 	uint32_t pidUpdateSequence() const { return _pid_update_seq; }
@@ -31,12 +34,12 @@ public:
 	matrix::Vector3f update(const matrix::Vector3f &rate, const matrix::Vector3f &rate_sp,
 				const matrix::Vector3f &angular_accel, float dt, bool landed)
 	{
-		// No idle PID integration in all-axis ESTA. NaNs are placeholders, NOT a
+		// No idle PID integration in all-axis ESTA/ISTA. NaNs are placeholders, NOT a
 		// safe actuator command: atomic application must replace all three axes.
 		// Faults suppress publication, never implicitly resume a stale PID.
 		if (!pidRequired()) { return matrix::Vector3f(NAN, NAN, NAN); }
 		// Mixed-axis stages compute complete PID once, retaining its state order.
-		// The module replaces selected axes using the separately protected ESTA output.
+		// The module replaces selected axes using the protected selected algorithm.
 		++_pid_update_seq;
 		return _pid.update(rate, rate_sp, angular_accel, dt, landed);
 	}

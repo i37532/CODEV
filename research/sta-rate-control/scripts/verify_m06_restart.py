@@ -16,10 +16,11 @@ from run_m03 import Checks
 from run_m04 import arrays
 
 
-def main(output):
+def main(output, config_path=None, modes=(1,)):
     if active_simulators(): raise RuntimeError('Existing simulator: '+str(active_simulators()))
     output.mkdir(parents=True,exist_ok=False)
-    config=json.loads((REPO/'research/sta-rate-control/m06/iris_esta_rpy.json').read_text())
+    config=json.loads((config_path or REPO/'research/sta-rate-control/m06/iris_esta_rpy.json').read_text())
+    configured_mode=int(config['MC_RTC_MODE'])
     eeprom=ROOTFS/'eeprom/parameters_10016'
     if eeprom.exists(): (output/'startup_parameters.bson').write_bytes(eeprom.read_bytes())
     original={}; proc=None; console=None
@@ -80,17 +81,19 @@ def main(output):
         if any(original[k] for k in ('MC_RTC_MODE','MC_STA_AXES','MC_RATT_TEST')): raise RuntimeError('Require inactive initial config')
         save(output/'original.json',original)
         for k,v in config.items(): cli('param','set',k,v)
-        accepted(1,7); cli('param','save'); cli('param','save',str(output/'saved_rpy.bson'))
+        accepted(configured_mode,7); cli('param','save'); cli('param','save',str(output/'saved_rpy.bson'))
         stop(); boot(2)
         loaded={k:Checks.get_param(cli,k) for k in config}
         # PX4 CLI prints rounded decimals; compare as it printed before reboot.
         for k,v in config.items():
             if abs(loaded[k]-v)>max(1e-5,abs(v)*1e-6): raise RuntimeError('Restart value mismatch '+k)
-        accepted(1,7); save(output/'restarted_values.json',loaded)
-        for mask in (1,3,7):
-            cli('param','set','MC_STA_AXES',mask); accepted(1,mask)
+        accepted(configured_mode,7); save(output/'restarted_values.json',loaded)
+        for mode in modes:
+            cli('param','set','MC_RTC_MODE',mode)
+            for mask in (1,3,7):
+                cli('param','set','MC_STA_AXES',mask); accepted(mode,mask)
         cli('param','set','MC_RTC_MODE',0); cli('param','set','MC_STA_AXES',0); accepted(0,0)
-        cli('param','load',str(output/'saved_rpy.bson')); accepted(1,7)
+        cli('param','load',str(output/'saved_rpy.bson')); accepted(configured_mode,7)
         reloaded={k:Checks.get_param(cli,k) for k in config}
         if reloaded!=loaded: raise RuntimeError('Reload mismatch')
         save(output/'reloaded_values.json',reloaded)

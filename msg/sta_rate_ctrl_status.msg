@@ -1,4 +1,4 @@
-# Research diagnostics. M05 permits PID or Iris SITL R / R/P ESTA. NaN = not applicable.
+# Research diagnostics. M08 permits PID or Iris SITL ESTA/ISTA AXES=1/3/7. NaN = not applicable.
 uint64 timestamp
 uint64 timestamp_sample
 uint64 motor_timestamp
@@ -42,25 +42,27 @@ float32[3] rate_sp
 float32[3] angular_accel
 float32[3] s # rate-rate_sp, rad/s
 float32[3] nu # experiment state rad/s^2, not PID integral
-float32[3] nu_before # state used to compute current ESTA a_raw
+float32[3] nu_before # selected algorithm state used to compute ideal a_raw
 float32[3] lambda1
 float32[3] lambda2
 float32[3] g
 float32 research_roll_addition # single mc_att_control publisher test input
 float32 research_pitch_addition # single mc_att_control publisher M05 pitch test input
 float32 research_yaw_addition # M06 world-z rate excitation, transformed to body before addition
-bool pid_updated # actual PID update this cycle, false for all-axis ESTA
-uint32 pid_update_seq # counts real PID update calls, not selected ESTA updates
+bool pid_updated # actual PID update this cycle, false for all-axis ESTA/ISTA
+uint32 pid_update_seq # counts real PID update calls, not experiment updates
 float32 research_elapsed # seconds since pulse trigger, -1 when inactive
-float32[3] a_raw # ESTA virtual angular acceleration; NaN on PID axes
-float32[3] c_raw # PID raw output, or armed ESTA a_raw/g BEFORE output clipping and battery scaling
+float32[3] a_raw # ideal selected algorithm virtual angular acceleration; NaN on PID axes
+float32[3] c_raw # PID raw output, or ideal armed experiment a_raw/g BEFORE nu protection/clipping/battery scaling
 float32[3] c_applied # actual emitted normalized command; NOT physical motor torque
 float32[3] pid_integral_before
 float32[3] pid_integral_after
 float32[3] pid_p
 float32[3] pid_d
 float32[3] pid_ff
-float32[3] xi # NaN unless ISTA; not implemented
+float32[3] nu_candidate # unconstrained candidate nu_next BEFORE freeze/limits
+float32[3] a_protected # after protected nu substitution (ISTA), before command clip and battery scale
+float32[3] xi # ideal ISTA only; NaN otherwise
 float32[3] virtual_state # NaN unless ISTA
 uint8[3] ista_branch # 255 not applicable; never label ESTA as sliding
 uint8 ORB_QUEUE_LENGTH = 32
