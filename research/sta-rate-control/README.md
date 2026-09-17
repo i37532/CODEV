@@ -1,10 +1,10 @@
 # PX4 STA 研究目录
 
-M10论文实验正在开发/训练，尚未正式验收。见 [预注册规范](m10/PROTOCOL_CN.md)、[运行入口](m10/RUN_CN.md) 和 [开发失败记录](m10/DEVELOPMENT_CN.md)。与下文已完成的M00～M09开发验证分开，正式结论最终以M10报告为准。
+M10正式实验与结果包已完成：600次尝试、576次接受、593次完成起降。15次PID降落指令越界、7次工程组ISTA飞行超限、2次日志无效全部保留；两次日志无效经用户明确授权不补飞续跑，协议偏离已披露。见 [M10报告](reports/M10.md)、[统计结果](m10/results/summary.json)、[预注册规范](m10/PROTOCOL_CN.md)、[运行入口](m10/RUN_CN.md)。ISTA并非全面更优；仅Iris SITL，不代表全部场景通过或实机验证。
 
 日常操作入口：[sim_scripts 中文说明](../../sim_scripts/README_CN.md)。三个入口：`start.sh` 启动Gazebo，`switch.sh pid|esta|ista` 选择算法，`fly.sh hover|figure8|yaw` 自动完成10秒悬停、8字轨迹或定点yaw激励及起降，保留当前仿真窗口供下一轮对比。
 
-已完成 M00～M09 的各阶段限定范围验收。M09新增 `MC_RTC_DIV=1/2/4`：同固件三算法九格起降/低幅激励通过，实测250/125/62.5Hz，传感器回调保持250Hz；90个C++/57个Python用例通过。见 [M09报告](reports/M09.md) 和 [分频运行/PlotJuggler说明](m09/RUN_CN.md)。默认仍PID/DIV1，未执行M10。ISTA/DIV4的pitch RMSE约为自身DIV1的2.23倍，功能通过不等于性能改善。原motor_limits仍丢样；M09命令TV/频谱使用完整的实际更新诊断序列，不冒充原motor话题无损。
+已完成 M00～M09 的各阶段限定范围验收。M09新增 `MC_RTC_DIV=1/2/4`：同固件三算法九格起降/低幅激励通过，实测250/125/62.5Hz，传感器回调保持250Hz；当时90个C++/57个Python用例通过。见 [M09报告](reports/M09.md) 和 [分频运行/PlotJuggler说明](m09/RUN_CN.md)。默认仍PID/DIV1；M09完成当时尚未执行M10。ISTA/DIV4的pitch RMSE约为自身DIV1的2.23倍，功能通过不等于性能改善。原motor_limits仍丢样；M09命令TV/频谱使用完整的实际更新诊断序列，不冒充原motor话题无损。
 
 M08历史验收：开放Iris SITL的MODE=2，按roll→R/P→三轴通过后，同固件PID/ESTA/ISTA各三轮，90项比值均≤1.25；ESTA最大1.233325、ISTA最大1.178393。重启/重载和armed暂存/取消通过，当时80个C++/45个Python用例通过，见 [M08报告](reports/M08.md)、[运行说明](m08/RUN_CN.md)及 [冻结配置](m08/FROZEN_BASELINE.json)。M09保留这些增益，不把M08历史三轮统计当成本次分频结论。
 
