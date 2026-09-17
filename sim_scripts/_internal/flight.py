@@ -172,9 +172,9 @@ def analyze(directory, result):
                    control_updates_missing=int(np.sum(np.maximum(sequence-1, 0))),
                    limits_fraction=[float(np.mean(d[f'limits[{i}]'][mask] != 0)) for i in range(3)],
                    pid_updates_in_task=int(np.sum(d['pid_updated'][mask])),
-                   scope='日常轨迹任务指标；不是M06原协议验收或独立统计结论')
-    if result['mode'] == 1 and summary['pid_updates_in_task'] != 0:
-        raise RuntimeError('全轴ESTA不应计算闲置PID。')
+                   scope='日常轨迹任务指标；不是M06/M08原协议验收或独立统计结论')
+    if result['mode'] in (1, 2) and summary['pid_updates_in_task'] != 0:
+        raise RuntimeError('全轴ESTA/ISTA不应计算闲置PID。')
     if result['task'] == 'figure8':
         reference_span = [float(np.ptp(sp[k][pi])) for k in ('x', 'y')]
         actual_span = [float(np.ptp(p[k][pm])) for k in ('x', 'y')]
@@ -218,14 +218,16 @@ def run(task):
     if t.processes({'QGroundControl'}):
         raise RuntimeError('请关闭QGC，自动任务需要本机14550端口。Gazebo保持打开。')
     mode, axes = int(t.parameter('MC_RTC_MODE')), int(t.parameter('MC_STA_AXES'))
-    if (mode, axes) not in ((0, 0), (1, 7)) or t.parameter('MC_RATT_TEST') != 0:
-        raise RuntimeError('请先执行 switch.sh pid 或 switch.sh esta。')
+    if (mode, axes) not in ((0, 0), (1, 7), (2, 7)) or t.parameter('MC_RATT_TEST') != 0:
+        raise RuntimeError('请先执行 switch.sh pid、switch.sh esta 或 switch.sh ista。')
     t.wait_selection(mode, axes)
-    directory = t.HERE / 'experiments' / (datetime.now().strftime('%Y%m%d-%H%M%S-%f') + '-' + ('pid' if mode == 0 else 'esta') + '-' + task)
+    algorithm = t.MODE_NAMES[mode]
+    directory = t.HERE / 'experiments' / (datetime.now().strftime('%Y%m%d-%H%M%S-%f') + '-' + algorithm + '-' + task)
     directory.mkdir(parents=True, exist_ok=False)
-    print('使用当前算法：' + ('PID' if mode == 0 else '三轴 ESTA') + '；任务：' + task, flush=True)
+    print('使用当前算法：' + ('PID' if mode == 0 else '三轴 ' + algorithm.upper()) + '；任务：' + task, flush=True)
     print('日志目录：' + str(directory), flush=True)
-    result = dict(success=False, task=task, mode=mode, axes=axes, protocol=PROTOCOL,
+    result = dict(success=False, task=task, mode=mode, axes=axes, algorithm=algorithm, protocol=PROTOCOL,
+                  controller_parameters={key: t.parameter(key) for key in t.controlled_names()},
                   source_head=subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=t.ROOT, text=True).strip(),
                   binary_sha256=sha(t.BIN / 'px4'), script_sha256=sha(Path(__file__)), events=[], logs=[])
     save(directory / 'result.json', result)
@@ -414,7 +416,7 @@ def run(task):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='使用当前PID/ESTA，在已经打开的Iris仿真中飞行。')
+    parser = argparse.ArgumentParser(description='使用当前PID/ESTA/ISTA，在已经打开的Iris仿真中飞行。')
     parser.add_argument('task', choices=('hover', 'figure8', 'yaw'))
     args = parser.parse_args()
     try:

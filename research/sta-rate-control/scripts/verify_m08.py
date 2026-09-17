@@ -7,6 +7,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import subprocess
 import sys
 import xml.etree.ElementTree as ET
@@ -41,8 +42,11 @@ def main():
         for name,folder,pattern,count in [('python_research','research/sta-rate-control/scripts','test_m*.py',33),
                                            ('python_convenience','sim_scripts/_internal','test_*.py',12)]:
             run(name,[sys.executable,'-m','unittest','discover','-s',folder,'-p',pattern])
-            assert f'Ran {count} tests' in (out/(name+'.log')).read_text()
-            evidence['tests'][name]={'tests':count}
+            # Later convenience-script additions may increase the suite size.
+            # Retain M08's minimum coverage, record actual nonzero executions.
+            match=re.search(r'Ran (\d+) tests', (out/(name+'.log')).read_text())
+            assert match is not None and int(match.group(1))>=count, name
+            evidence['tests'][name]={'tests':int(match.group(1))}
         kernel='src/modules/mc_rate_control/StaRateControl'
         run('probe_build',['g++','-std=c++14','-pedantic-errors','-Wall','-Wextra','-Werror','-Wdouble-promotion',
                            '-O2','-fno-exceptions','-fno-rtti','-I'+kernel,kernel+'/IstaRateControl.cpp',
@@ -62,7 +66,8 @@ def main():
         evidence['success']=True
     finally:
         (out/'evidence.json').write_text(json.dumps(evidence,indent=2)+'\n')
-    print('M08 offline verification passed; actual C++ cases=80, Python=45')
+    python_count=sum(v['tests'] for k,v in evidence['tests'].items() if k.startswith('python_'))
+    print(f'M08 offline verification passed; actual C++ cases=80, Python={python_count}')
 
 
 if __name__=='__main__':main()

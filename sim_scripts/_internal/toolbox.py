@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Daily Iris SITL commands; reuse the frozen M06 config and research runners."""
+"""Daily Iris SITL commands; frozen M06 ESTA / M08 ISTA configurations."""
 import argparse
 from contextlib import contextmanager
 from datetime import datetime
@@ -22,17 +22,27 @@ ROOTFS = ROOT / 'build/px4_sitl_default/tmp/rootfs'
 STATE = HERE / '.state'
 BACKUP = STATE / 'parameters-before.json'
 AXES = {'roll': 1, 'rp': 3, 'rpy': 7}
+MODES = {'pid': 0, 'esta': 1, 'ista': 2}
+MODE_NAMES = {value: name for name, value in MODES.items()}
 
 
 def load(path):
     return json.loads(path.read_text())
 
 
-def frozen_config():
-    path = RESEARCH / 'm06/iris_esta_rpy.json'
-    expected = load(RESEARCH / 'm06/FROZEN_BASELINE.json')['configuration_sha256']
+def frozen_config(mode=1):
+    if mode == 2:
+        path = RESEARCH / 'm08/iris_ista_rpy_candidate02.json'
+        expected = load(RESEARCH / 'm08/FROZEN_BASELINE.json')['accepted_configurations'][path.name]
+        milestone = 'M08 ISTA候选02'
+    elif mode in (0, 1):
+        path = RESEARCH / 'm06/iris_esta_rpy.json'
+        expected = load(RESEARCH / 'm06/FROZEN_BASELINE.json')['configuration_sha256']
+        milestone = 'M06 ESTA'
+    else:
+        raise ValueError('不支持的控制器模式。')
     if hashlib.sha256(path.read_bytes()).hexdigest() != expected:
-        raise RuntimeError('M06 冻结参数指纹不匹配，请先核实配置。')
+        raise RuntimeError(milestone + ' 冻结参数指纹不匹配，请先核实配置。')
     return load(path)
 
 
@@ -45,9 +55,9 @@ def environment():
         paths.append(env['PYTHONPATH'])
     env['PYTHONPATH'] = os.pathsep.join(paths)
     env['PATH'] = str(ROOT / '.px4-python/bin') + os.pathsep + env.get('PATH', '')
-    # These shortcuts always use the archived full M06 scene, not shell leftovers.
+    # Fixed local configuration, never inherited research-runner overrides.
     for name in list(env):
-        if name.startswith(('M04_', 'M05_', 'M06_')) or name in ('DONT_RUN', 'NO_PXH', 'PX4_SIM_SPEED_FACTOR', 'HEADLESS'):
+        if name.startswith(('M04_', 'M05_', 'M06_', 'M08_')) or name in ('DONT_RUN', 'NO_PXH', 'PX4_SIM_SPEED_FACTOR', 'HEADLESS'):
             env.pop(name)
     env['PX4_SITL_WORLD'] = str(ROOT / 'sitl/worlds/empty_grey.world')
     env['GAZEBO_MASTER_URI'] = 'http://127.0.0.1:11345'
@@ -224,7 +234,7 @@ def switch(mode, axes):
     ground()
     if not healthy(topic('sta_rate_ctrl_status')):
         raise RuntimeError('控制器故障尚未清除，请排查后重启仿真。')
-    config = frozen_config()
+    config = frozen_config(mode)
     if mode:
         for path, expected in load(RESEARCH / 'm06/calibration.json')['files'].items():
             if hashlib.sha256((ROOT / path).read_bytes()).hexdigest() != expected:
@@ -234,7 +244,9 @@ def switch(mode, axes):
     values.update(load(RESEARCH / 'm06/protocol.json')['scenario_parameters'])
     values.update(MC_RTC_MODE=mode, MC_STA_AXES=axes, MC_RATT_TEST=0)
     apply_parameters(values)
-    print(f'已生效：{"PID" if mode == 0 else "ESTA"}，AXES={axes}；已应用 M06 场景参数。')
+    print(f'已生效：{MODE_NAMES[mode].upper()}，AXES={axes}；已应用相同场景参数。')
+    if mode == 2:
+        print('ISTA使用M08候选02：pitch lambda1=2.0；ESTA冻结值为2.4，非同增益离散化比较。')
     print('现在可以执行 ./sim_scripts/fly.sh hover、figure8 或 yaw。')
 
 
@@ -244,7 +256,7 @@ def restore():
         raise RuntimeError('没有本工具保存的参数备份。')
     backup()  # Validate ownership and schema without overwriting the backup.
     values = load(BACKUP)['parameters']
-    if values['MC_RTC_MODE'] not in (0, 1) or values['MC_STA_AXES'] not in (0, 1, 3, 7):
+    if values['MC_RTC_MODE'] not in MODE_NAMES or values['MC_STA_AXES'] not in (0, 1, 3, 7):
         raise RuntimeError('备份包含本工具不支持的模式/轴，请人工核查。')
     apply_parameters(values)
     ground()
@@ -260,7 +272,7 @@ def show_status():
     for name in ('requested_mode', 'effective_mode', 'requested_axes', 'effective_axes', 'armed', 'landed',
                  'config_valid', 'pending', 'config_pending', 'fault', 'abort_requested', 'nu', 'pid_updated'):
         print(f'{name}: {status.get(name, "缺失")}')
-    print('MODE: 0=PID，1=ESTA；AXES: 1=roll，3=roll/pitch，7=三轴')
+    print('MODE: 0=PID，1=ESTA，2=ISTA；AXES: 1=roll，3=roll/pitch，7=三轴')
 
 
 def stop_simulator():
@@ -322,7 +334,7 @@ def main():
     commands.add_parser('build', help='编译当前 SITL 固件')
     commands.add_parser('pid', help='地面切回 PID，并使用 M06 场景')
     select = commands.add_parser('switch', help='选择飞行任务使用的控制算法')
-    select.add_argument('algorithm', choices=('pid', 'esta'))
+    select.add_argument('algorithm', choices=MODES)
     flight = commands.add_parser('fly', help='使用当前算法，在已经打开的仿真中执行任务')
     flight.add_argument('task', choices=('hover', 'figure8', 'yaw'), nargs='?', default='hover')
     esta = commands.add_parser('esta', help='地面加载 M06 ESTA 参数')
@@ -350,12 +362,12 @@ def main():
             command = ['./sitl/run.sh', '--backend', 'gazebo', '--model', 'iris']
             if args.headless:
                 command.append('--headless')
-            print('启动后在另一个终端执行 switch.sh pid|esta，再执行 fly.sh hover|figure8|yaw。', flush=True)
+            print('启动后在另一个终端执行 switch.sh pid|esta|ista，再执行 fly.sh hover|figure8|yaw。', flush=True)
             # Release the short-operation lock before the foreground launcher.
         elif args.command == 'pid':
             switch(0, 0)
         elif args.command == 'switch':
-            switch(0, 0) if args.algorithm == 'pid' else switch(1, 7)
+            switch(MODES[args.algorithm], 0 if args.algorithm == 'pid' else 7)
         elif args.command == 'esta':
             switch(1, AXES[args.axes])
         elif args.command == 'restore':

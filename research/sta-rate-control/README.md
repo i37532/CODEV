@@ -1,10 +1,10 @@
 # PX4 STA 研究目录
 
-日常操作入口：[sim_scripts 中文说明](../../sim_scripts/README_CN.md)。三个入口：`start.sh` 启动Gazebo，`switch.sh pid|esta` 选择算法，`fly.sh hover|figure8|yaw` 自动完成10秒悬停、8字轨迹或定点yaw激励及起降，保留当前仿真窗口供下一轮对比。
+日常操作入口：[sim_scripts 中文说明](../../sim_scripts/README_CN.md)。三个入口：`start.sh` 启动Gazebo，`switch.sh pid|esta|ista` 选择算法，`fly.sh hover|figure8|yaw` 自动完成10秒悬停、8字轨迹或定点yaw激励及起降，保留当前仿真窗口供下一轮对比。
 
 已完成 M00～M08 的各阶段限定范围验收。M08开放Iris SITL的MODE=2，按roll→R/P→三轴通过后，同固件PID/ESTA/ISTA各三轮，90项比值均≤1.25；ESTA最大1.233325、ISTA最大1.178393。重启/重载和armed暂存/取消回归通过，80个C++/45个Python用例通过，见 [M08报告](reports/M08.md)、[运行说明](m08/RUN_CN.md)及 [冻结配置](m08/FROZEN_BASELINE.json)。默认仍PID；未执行M09。原始motor_limits仍丢样，不是完整全速TV/频谱数据集。
 
-ISTA初始R/P候选因非命令pitch比值1.315543失败，完整保留。合格候选02仅把ISTA pitch lambda1改成2.0，ESTA仍为M06的2.4，因此不是同增益、纯离散化效应的论文实验。日常 `sim_scripts/switch.sh` 仍只支持PID/ESTA；ISTA请用M08说明中的显式候选02配置，不要误用保留的候选01默认文件。
+ISTA初始R/P候选因非命令pitch比值1.315543失败，完整保留。合格候选02仅把ISTA pitch lambda1改成2.0，ESTA仍为M06的2.4，因此不是同增益、纯离散化效应的论文实验。M08之后追加的日常 `sim_scripts/switch.sh ista` 自动加载候选02；M08报告中“日常脚本只支持PID/ESTA”是完成当时的历史状态。日常10秒悬停/8字/yaw任务不等于M08原验收场景，验证记录见 `sim_scripts/_internal/VERIFY_TASKS_CN.md`。
 
 M04 已按用户授权修复 IMU 切换时间戳发布契约；协议 v3 下 PID/ESTA 同固件各三轮通过，最终注释修订构建另各一轮复核。M04 最终独立配置 `m04/iris_esta_roll.json`（lambda1=2.5、lambda2=0.05）达到该小幅场景门槛，五组候选和所有失败均保留。详见 [M04 报告](reports/M04.md)，历史暂停报告另存 `reports/M04_BLOCKED_20260914.md`。
 

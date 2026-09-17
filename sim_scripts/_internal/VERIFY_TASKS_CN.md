@@ -40,3 +40,46 @@
 | 三轴ESTA | 40.188秒 | 4.054° / 10.838° | .02306 rad/s | 89.492° | .00627 / .00521 rad/s |
 
 PID数据目录 `20260916-203620-822058-pid-yaw`，ULog SHA-256=`fc9121f920d30f9ac87b2bbe3f678e41fbe1c36fd957112994aa5d362fa010b5`；ESTA目录 `20260916-203807-332739-esta-yaw`，ULog SHA-256=`7cd37feb847718a3c0e1e4e9d149ff2f772d58ed105224a4bfc7fafd5cf0ad73`。这是功能性单轮比较，不能作为论文统计结论；正式比较应独立启动并各重复至少3次。最终共12个内部脚本用例通过，新增yaw参考的双向幅值、端点零速度与模式/故障门禁检查。测试收尾恢复最初参数，关闭仿真。
+
+## ISTA 日常脚本追加验证（2026-09-17）
+
+起点研究分支 HEAD=`4206cf8b302e2d5336727500923ccbf08a19e01c`，工作区原先干净。仅扩展日常脚本及说明，不修改飞控算法、冻结参数/历史证据，不开始M09。原三个入口不变，新增 `switch.sh ista`，读取M08 `iris_ista_rpy_candidate02.json` 并核对冻结SHA；MODE=2、AXES=7，P lambda1=2.0。ESTA继续读取M06冻结配置，P lambda1=2.4。
+
+切换继续要求本仓库唯一Iris SITL、落地上锁；先进入PID清状态、加载参数，再启用目标模式，等待requested/effective一致、无pending/fault及零nu。旧参数备份不覆盖，恢复入口兼容原备份为ISTA的情况。任务目录使用`ista`名称，result记录算法名及实际控制器参数，ULog核对MODE2和全轴无闲置PID。PID/ESTA逻辑和三个轨迹生成器不变。
+
+实际执行：`start.sh --headless`，依次`switch.sh ista`、`fly.sh hover`、`fly.sh figure8`、`fly.sh yaw`、`switch.sh esta`、`fly.sh hover`、`switch.sh pid`、`fly.sh hover`。五轮均退出0、降落上锁、result success=true，实际ULog解析通过：
+
+| 算法/任务 | 任务窗口 | 诊断样本/缺失 | 任务内PID更新 | 额外检查 |
+|---|---:|---:|---:|---|
+| ISTA hover | 10.120s | 2531 / 0 | 0 | MODE2/AXES7，P lambda1=2.0 |
+| ISTA figure8 | 40.140s | 10036 / 0 | 0 | 实际N/E覆盖3.944/2.076m |
+| ISTA yaw | 40.200s | 10051 / 0 | 0 | 实际yaw范围89.539°，姿态RMSE4.030°、峰值11.091° |
+| ESTA hover | 10.140s | 2536 / 0 | 0 | MODE1/AXES7，P lambda1=2.4 |
+| PID hover | 10.120s | 2531 / 0 | 2531 | MODE0/AXES0 |
+
+五轮任务窗口限制比例均为零。ISTA yaw的R/P角速度RMSE=.00649849/.00527266rad/s、yaw角速度RMSE=.02373995rad/s；所有完整指标保存在每轮metrics.json。ISTA首次10秒悬停pitch误差=.00950244rad/s，未把短暂调试任务冒充M08的60秒验收。五轮是在同一实例连续进行，不是独立随机试验，也不据此声称ISTA全面优于PID/ESTA。未重新比较三种算法各三轮8字/yaw，不覆盖正式论文统计。
+
+数据仍在 `sim_scripts/experiments/`，均保留且不提交大型日志：
+
+| 子目录 | ULog SHA-256 |
+|---|---|
+| `20260917-145807-107227-ista-hover` | `cda003e3dfbb2701b873f572515d9a6a5ea4559904479fc1c244ae28ae614a4e` |
+| `20260917-145901-285523-ista-figure8` | `24c50fa7e105b6c1083f6a76d4a35a3d7cb661c47e689eb92c36c800c43817ca` |
+| `20260917-150004-265565-ista-yaw` | `355c5c7f004255efdb86e1641a43ca8362d5c0269a193ea2695c7c8e19fff198` |
+| `20260917-150111-386737-esta-hover` | `8ccc15af5c783107e1863dbfbc7747a6eecb34349c91338bc727db5d9ab83dc2` |
+| `20260917-150145-505037-pid-hover` | `835c16777d24a45c38bbde0dea65fdc25fc100f7d46671cf2f9776f727858789` |
+
+五轮固件SHA-256同为`de1e7509cba7ead26ea328056aa7d30aec289949e8566d19a51168b1c9e1fc1f`。启动器按原流程重建了Git版本元数据，不改变M08算法；不是M08历史批次的b210二进制。已飞flight.py SHA=`9fc93567ad75808e9932dd0a142362033735fa3fa8b7404889213cf071b40e2d`，toolbox.py SHA=`e6a3e5ef7eb6c2dc1fe10fc3c7b13810c182e41a36d474e4d1464e8ab786f062`。每轮保存flight_source.py，源码HEAD是上述起点加本次未提交脚本改动。
+
+脚本18个单元用例、3个shell语法检查通过；新增覆盖ISTA候选02/指纹、三模式CLI分发、地面拒绝与半途加载失败、恢复ISTA备份、有效模式与闲置PID日志负例。M08离线验证入口只调整Python计数为“保留M08最低覆盖数并记录实际数量”，避免新增便捷测试被误报；不降低飞行验收阈值。实际运行：
+
+```bash
+python3 research/sta-rate-control/scripts/verify_m08.py \
+  --output '/home/yr/Desktop/codev doc/experiments/ISTA-shortcuts-20260917/verification01'
+```
+
+退出0：80个C++、33+18=51个Python、6011个独立参考样本/36组对象回归、SITL构建与原数学/模型未改检查通过。完整命令/退出码在该目录evidence.json。MATLAB未运行。
+
+第一次工具验证使用无交互stdin启动，PX4在收到EOF后正常退出，随后的switch按“无本仓库SITL”拒绝，未写参数/未起飞；改为保持交互终端后完成以上五轮。原始启动日志保留在rootfs日志目录，不将此启动方式错误算成控制器飞行失败。用户按README保持终端一开启即可。
+
+收尾执行内部restore并核实MODE/AXES=0/0、disarmed/landed、nu三轴零、无pending/fault，再stop正常关闭自有PX4/Gazebo。备份归档 `.state/restored-20260917-150223-650876.json`。只做headless验证，GUI仍复用原启动方式；仅Iris SITL，非实机。此追加任务未自行commit或push。
