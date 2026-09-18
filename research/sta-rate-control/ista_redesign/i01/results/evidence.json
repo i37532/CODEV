@@ -1,0 +1,541 @@
+{
+  "success": true,
+  "parent": "dd776d61710fa800b3374e75279ce244aa620d4b",
+  "branch": "research/sta-rate-control",
+  "submodules": " 7c2c623da9f5dcb3f01d32830af1a2ed958de363 Tools/flightgear_bridge (7c2c623)\n cbdb2fc7dd44331da1dcd04a891ed7f8c27b1ef0 Tools/flightgear_bridge/models/Rascal (remotes/origin/electric-14-gcbdb2fc)\n 4540de7ae8e71b9bd6e6f67d085695be0ab36bc3 Tools/flightgear_bridge/models/TF-G1 (4540de7)\n 562ee71388c493675269210f7692d8b7a8bb800d Tools/flightgear_bridge/models/TF-G2 (562ee71)\n 158e429a0110589b1e2adfe868e166271470e144 Tools/flightgear_bridge/models/TF-R1 (heads/master)\n 0a816d8100e9860a031ccfccfb9941bcd6eedc81 Tools/jMAVSim (0a816d8)\n c08380767b21938391bec676a43b36b837af9ba4 Tools/jMAVSim/jMAVlib (heads/master)\n e070c50d591541d440510b65c9da5cad1db5aa9a Tools/jsbsim_bridge (e070c50)\n 40571cd808a204f4062128daeb6bb6db8c134c48 Tools/jsbsim_bridge/models/ATI-Resolution (2019.1)\n d0d1db1961549e557885002cf9c3cff40cc27be2 Tools/jsbsim_bridge/models/Rascal (remotes/origin/preserve-this-branch-for-px4-submodules)\n 822050a7ab6fd87972e59f16312f451bce217a56 Tools/sitl_gazebo (822050a)\n 28ef45c1fcb532b2bfd54c16b059c6a545143b2f Tools/sitl_gazebo/external/OpticalFlow (28ef45c)\n 9b5b567ae77f93d1ef4d36151529ba2506a46e7a Tools/sitl_gazebo/external/OpticalFlow/external/klt_feature_tracker (heads/master)\n 08fd0a73045346448adf6969660196228b23e1fa boards/atlflight/cmake_hexagon (remotes/origin/px4)\n 636fae5ca34eff6007344718755d78fcdf94238e mavlink/include/mavlink/v2.0 (636fae5c)\n 979e27408fa90a3c3d6432190c8f65cc80c3e6b6 platforms/nuttx/NuttX/apps (nuttx-8.2-590-g979e27408)\n bf660cba2af81f055002b3817c87b1f63a78fd09 platforms/nuttx/NuttX/nuttx (nuttx-8.2-3070-gbf660cba2a)\n 0322a4e345e48ea28cb1cee14a33033cdaf0b16a platforms/qurt/dspal (heads/master)\n 07168bd5715818802b78f674816ec851307998a7 platforms/qurt/dspal/cmake_hexagon (remotes/origin/sdk3.1-4-g07168bd)\n c34ef0ce3100684a927c6aecebf0c904bee251b3 src/drivers/gps/devices (remotes/origin/codev_main_12.3_gps_update)\n 29e1aa6c12e3590252b102153d8c62155047a676 src/drivers/uavcan/libuavcan (remotes/origin/pr-nuttx_update_7.31+-4-g29e1aa6c)\n 192295c4f9b67f4a20b0eabf74757b6597415f2b src/drivers/uavcan/libuavcan/dsdl (192295c)\n c58477a644d20ccf95a20c151f3a0402f271c3b8 src/drivers/uavcan/libuavcan/libuavcan/dsdl_compiler/pyuavcan (v1.0.0dev3~7)\n fd12483ddd4e58242d61d74a163e7aeaa1e0f466 src/drivers/uavcan/libuavcan/libuavcan/dsdl_compiler/pyuavcan/dsdl (fd12483)\n 36a01e428b110ff84c8babe5b65667b5e3037d5e src/drivers/uavcan_v1/legacy_data_types (remotes/origin/legacy)\n 2a116170285fb47fcaae150ad21c2ccde0756a5f src/drivers/uavcan_v1/libcanard (1.1.0)\n 0a773b93ce5c94e1d2791b180058cb9897fab7e1 src/drivers/uavcan_v1/public_regulated_data_types (0a773b9)\n 2a116170285fb47fcaae150ad21c2ccde0756a5f src/drivers/uavcannode_gps_demo/libcanard (1.1.0)\n 0a773b93ce5c94e1d2791b180058cb9897fab7e1 src/drivers/uavcannode_gps_demo/public_regulated_data_types (0a773b9)\n baca5d31259c598540e4d1284bc8d8f793abf83a src/lib/crypto/monocypher (3.1.2)\n b3fed06fe822d08d19ab1d2c2f8daf7b7d21951c src/lib/ecl (v1.9.0-rc1-591-gb3fed06)\n b8568a89db8455d0ab2e2e391e2149ba2e5e10dd src/lib/matrix (v1.0.2-195-gb8568a8)\n 21d3cfe3ae570d1674da0105ab23b80958e0449a src/modules/micrortps_bridge/micro-CDR (v1.0.0beta2-54-g21d3cfe)\n",
+  "final_attempt": "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I01/attempt03",
+  "raw_root": "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I01",
+  "artifacts": 1033,
+  "artifact_bytes": 135146523,
+  "commands": [
+    {
+      "name": "diff_check",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "build_tests",
+      "argv": [
+        "make",
+        "tests",
+        "TESTFILTER=ProperIstaRateControl"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "cpp_tests",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-ProperIstaRateControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I01/attempt03/ProperIstaRateControl.xml"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "bridge_build",
+      "argv": [
+        "g++",
+        "-std=c++14",
+        "-pedantic-errors",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Wdouble-promotion",
+        "-O2",
+        "-fno-exceptions",
+        "-fno-rtti",
+        "-fPIC",
+        "-shared",
+        "-I/home/yr/Desktop/Codev-autopilot/src/modules/mc_rate_control/StaRateControl",
+        "/home/yr/Desktop/Codev-autopilot/src/modules/mc_rate_control/StaRateControl/ProperIstaRateControl.cpp",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-rate-control/ista_redesign/i01/kernel_bridge.cpp",
+        "-o",
+        "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I01/attempt03/kernel.so"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "python_tests",
+      "argv": [
+        "/usr/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-rate-control/ista_redesign/i01",
+        "-p",
+        "test_audit.py",
+        "-v"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "scalar",
+      "argv": [
+        "/usr/bin/python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-rate-control/ista_redesign/i01/audit.py",
+        "--library",
+        "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I01/attempt03/kernel.so",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I01/attempt03/scalar"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "sanitizer_build",
+      "argv": [
+        "g++",
+        "-std=c++14",
+        "-pedantic-errors",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Wdouble-promotion",
+        "-O2",
+        "-fno-exceptions",
+        "-fno-rtti",
+        "-fPIC",
+        "-shared",
+        "-I/home/yr/Desktop/Codev-autopilot/src/modules/mc_rate_control/StaRateControl",
+        "-fsanitize=undefined,float-cast-overflow",
+        "-fno-sanitize-recover=all",
+        "/home/yr/Desktop/Codev-autopilot/src/modules/mc_rate_control/StaRateControl/ProperIstaRateControl.cpp",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-rate-control/ista_redesign/i01/kernel_bridge.cpp",
+        "-o",
+        "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I01/attempt03/kernel_sanitized.so"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "sanitizer_scalar",
+      "argv": [
+        "/usr/bin/python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-rate-control/ista_redesign/i01/audit.py",
+        "--library",
+        "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I01/attempt03/kernel_sanitized.so",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I01/attempt03/sanitizer_scalar"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "m09_regression",
+      "argv": [
+        "/usr/bin/python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-rate-control/scripts/verify_m09.py",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I01/attempt03/m09"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "i00_regression",
+      "argv": [
+        "/usr/bin/python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-rate-control/ista_redesign/i00/verify.py",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I01/attempt03/i00"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "sitl_symbols",
+      "argv": [
+        "nm",
+        "-C",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/bin/px4"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "unchanged_runtime",
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "dd776d61710fa800b3374e75279ce244aa620d4b",
+        "--",
+        "src/modules/mc_rate_control/MulticopterRateControl.cpp",
+        "src/modules/mc_rate_control/MulticopterRateControl.hpp",
+        "src/modules/mc_rate_control/RateControl",
+        "/home/yr/Desktop/Codev-autopilot/src/modules/mc_rate_control/StaRateControl/StaProtection.cpp",
+        "/home/yr/Desktop/Codev-autopilot/src/modules/mc_rate_control/StaRateControl/StaProtection.hpp",
+        "/home/yr/Desktop/Codev-autopilot/src/modules/mc_rate_control/StaRateControl/IstaRateControl.cpp",
+        "/home/yr/Desktop/Codev-autopilot/src/modules/mc_rate_control/StaRateControl/IstaRateControl.hpp",
+        "/home/yr/Desktop/Codev-autopilot/src/modules/mc_rate_control/StaRateControl/StaRateControl.cpp",
+        "/home/yr/Desktop/Codev-autopilot/src/modules/mc_rate_control/StaRateControl/StaRateControl.hpp",
+        "src/modules/mc_rate_control/mc_rate_control_params.c",
+        "msg",
+        "boards",
+        "ROMFS",
+        "Tools",
+        "sitl",
+        "sim_scripts"
+      ],
+      "returncode": 0
+    }
+  ],
+  "regression_commands": [
+    {
+      "name": "diff",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "build_tests",
+      "argv": [
+        "make",
+        "tests",
+        "TESTFILTER=IstaIntegration"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "IstaIntegration",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-IstaIntegration",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I01/attempt03/m09/regression/IstaIntegration.xml"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "IstaRateControl",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-IstaRateControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I01/attempt03/m09/regression/IstaRateControl.xml"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "StaRateControl",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaRateControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I01/attempt03/m09/regression/StaRateControl.xml"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "StaProtection",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaProtection",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I01/attempt03/m09/regression/StaProtection.xml"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "StaAxesApplication",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaAxesApplication",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I01/attempt03/m09/regression/StaAxesApplication.xml"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "RateControl",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RateControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I01/attempt03/m09/regression/RateControl.xml"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "RateControlDispatcher",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RateControlDispatcher",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I01/attempt03/m09/regression/RateControlDispatcher.xml"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "ControllerSelection",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-ControllerSelection",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I01/attempt03/m09/regression/ControllerSelection.xml"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "GyroPublicationGuard",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-GyroPublicationGuard",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I01/attempt03/m09/regression/GyroPublicationGuard.xml"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "AttitudeControl",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-AttitudeControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I01/attempt03/m09/regression/AttitudeControl.xml"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "python_research",
+      "argv": [
+        "/usr/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "research/sta-rate-control/scripts",
+        "-p",
+        "test_m*.py"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "python_convenience",
+      "argv": [
+        "/usr/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "sim_scripts/_internal",
+        "-p",
+        "test_*.py"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "probe_build",
+      "argv": [
+        "g++",
+        "-std=c++14",
+        "-pedantic-errors",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Wdouble-promotion",
+        "-O2",
+        "-fno-exceptions",
+        "-fno-rtti",
+        "-Isrc/modules/mc_rate_control/StaRateControl",
+        "src/modules/mc_rate_control/StaRateControl/IstaRateControl.cpp",
+        "research/sta-rate-control/scripts/m07_kernel_probe.cpp",
+        "-o",
+        "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I01/attempt03/m09/regression/probe"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "m07_reference",
+      "argv": [
+        "/usr/bin/python3",
+        "research/sta-rate-control/scripts/reference_m07.py",
+        "--probe",
+        "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I01/attempt03/m09/regression/probe",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I01/attempt03/m09/regression/m07_reference"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "sitl_build",
+      "argv": [
+        "make",
+        "px4_sitl_default"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "symbols",
+      "argv": [
+        "nm",
+        "-C",
+        "build/px4_sitl_default/bin/px4"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "unchanged_math_model",
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "HEAD",
+        "--",
+        "src/modules/mc_rate_control/StaRateControl/IstaRateControl.cpp",
+        "src/modules/mc_rate_control/StaRateControl/IstaRateControl.hpp",
+        "src/modules/mc_rate_control/StaRateControl/StaRateControl.cpp",
+        "src/modules/mc_rate_control/StaRateControl/StaRateControl.hpp",
+        "src/modules/mc_rate_control/RateControl/RateControl.cpp",
+        "src/modules/mc_rate_control/RateControl/RateControl.hpp",
+        "src/modules/mc_att_control",
+        "sitl",
+        "boards",
+        "ROMFS",
+        "research/sta-rate-control/m06"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "ControlDecimation",
+      "returncode": 0
+    }
+  ],
+  "i00_commands": [
+    {
+      "name": "build",
+      "argv": [
+        "g++",
+        "-std=c++14",
+        "-pedantic-errors",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Wdouble-promotion",
+        "-O2",
+        "-fno-exceptions",
+        "-fno-rtti",
+        "-fPIC",
+        "-shared",
+        "-I/home/yr/Desktop/Codev-autopilot/src/modules/mc_rate_control/StaRateControl",
+        "/home/yr/Desktop/Codev-autopilot/src/modules/mc_rate_control/StaRateControl/IstaRateControl.cpp",
+        "/home/yr/Desktop/Codev-autopilot/src/modules/mc_rate_control/StaRateControl/StaRateControl.cpp",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-rate-control/ista_redesign/i00/kernel_bridge.cpp",
+        "-o",
+        "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I01/attempt03/i00/kernel.so"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "tests",
+      "argv": [
+        "/usr/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-rate-control/ista_redesign/i00",
+        "-p",
+        "test_audit.py",
+        "-v"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "scalar",
+      "argv": [
+        "/usr/bin/python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-rate-control/ista_redesign/i00/audit.py",
+        "--library",
+        "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I01/attempt03/i00/kernel.so",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I01/attempt03/i00/scalar"
+      ],
+      "returncode": 0
+    }
+  ],
+  "source_hashes": {
+    "research/sta-rate-control/ista_redesign/i01/audit.py": "61aa9d86348ffacea0e4f22e2f9997f4f3f07f28075f02c9163adadf6bd03563",
+    "research/sta-rate-control/ista_redesign/i01/test_audit.py": "cf62f106b4af6a075f4c67013bc124c8ca55ade0e2e131305b7c1e64ef3872e4",
+    "research/sta-rate-control/ista_redesign/i01/verify.py": "312796aee2be8729203bbe317e44b71e1a69f1688d39f69469ae9695c98773d2",
+    "research/sta-rate-control/ista_redesign/i01/kernel_bridge.cpp": "bd9297ef76dd28475ea95cbcd0dd874e447bd658c1f893a6299c20a9d2e10ffa",
+    "research/sta-rate-control/ista_redesign/i01/PROTOCOL_CN.md": "37c9ff597a21de0007a88e9c1516a3d6a92d543983a4214d3680df3f167945bf",
+    "src/modules/mc_rate_control/StaRateControl/ProperIstaRateControl.cpp": "e597ab02b5eb638d0e8affe4eeb313a9cbf6e2fbbed436d9af3a53d28b82b14c",
+    "src/modules/mc_rate_control/StaRateControl/ProperIstaRateControl.hpp": "98522ebc3055bf6152ef2d4590f0d8ea3d9ddd56e4e0672900027763b4dae1c7",
+    "src/modules/mc_rate_control/StaRateControl/ProperIstaRateControlTest.cpp": "bef1f236ef5148add15c1c285c2ae58ad7c863ea4c6273977bbf4d8feb999681",
+    "src/modules/mc_rate_control/StaRateControl/CMakeLists.txt": "fe8865c070c57bf5d2583425d4cb5d76006525c1b13d981de521d90f1d6a1727"
+  },
+  "firmware_sha256": "91ed373ff53453e0040ed2df041c7558523be02b719592c94d0ac75042bfb60c",
+  "new_cpp": {
+    "tests": 16,
+    "failures": 0,
+    "errors": 0,
+    "disabled": 0
+  },
+  "existing_cpp": 90,
+  "total_cpp": 106,
+  "new_python": 12,
+  "existing_python": 74,
+  "i00_python": 13,
+  "total_python": 99,
+  "new_reference": {
+    "count": 6019,
+    "branches": {
+      "1": 2246,
+      "2": 1533,
+      "3": 2240
+    },
+    "max_scaled_reference_error": 1.1920928955078125e-07,
+    "max_scaled_equation_residual": 1.0733504342116066e-07
+  },
+  "new_plant_cases": 84,
+  "new_updates": 532355,
+  "i00_reference_plant_cases": 138,
+  "matlab_executed": false,
+  "matlab_path": null,
+  "octave_path": null,
+  "flight_executed": false,
+  "new_kernel_in_final_firmware": false,
+  "index_sha256": "25b3802fb695c8b6175f115e46369ccb015162e9eb9400935beac115720acc04",
+  "packaging_checks": [
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "returncode": 0,
+      "output": ""
+    },
+    {
+      "argv": [
+        "git",
+        "submodule",
+        "foreach",
+        "--recursive",
+        "git status --porcelain"
+      ],
+      "returncode": 0,
+      "output": "Entering 'Tools/flightgear_bridge'\nEntering 'Tools/flightgear_bridge/models/Rascal'\nEntering 'Tools/flightgear_bridge/models/TF-G1'\nEntering 'Tools/flightgear_bridge/models/TF-G2'\nEntering 'Tools/flightgear_bridge/models/TF-R1'\nEntering 'Tools/jMAVSim'\nEntering 'Tools/jMAVSim/jMAVlib'\nEntering 'Tools/jsbsim_bridge'\nEntering 'Tools/jsbsim_bridge/models/ATI-Resolution'\nEntering 'Tools/jsbsim_bridge/models/Rascal'\nEntering 'Tools/sitl_gazebo'\nEntering 'Tools/sitl_gazebo/external/OpticalFlow'\nEntering 'Tools/sitl_gazebo/external/OpticalFlow/external/klt_feature_tracker'\nEntering 'boards/atlflight/cmake_hexagon'\nEntering 'mavlink/include/mavlink/v2.0'\nEntering 'platforms/nuttx/NuttX/apps'\nEntering 'platforms/nuttx/NuttX/nuttx'\nEntering 'platforms/qurt/dspal'\nEntering 'platforms/qurt/dspal/cmake_hexagon'\nEntering 'src/drivers/gps/devices'\nEntering 'src/drivers/uavcan/libuavcan'\nEntering 'src/drivers/uavcan/libuavcan/dsdl'\nEntering 'src/drivers/uavcan/libuavcan/libuavcan/dsdl_compiler/pyuavcan'\nEntering 'src/drivers/uavcan/libuavcan/libuavcan/dsdl_compiler/pyuavcan/dsdl'\nEntering 'src/drivers/uavcan_v1/legacy_data_types'\nEntering 'src/drivers/uavcan_v1/libcanard'\nEntering 'src/drivers/uavcan_v1/public_regulated_data_types'\nEntering 'src/drivers/uavcannode_gps_demo/libcanard'\nEntering 'src/drivers/uavcannode_gps_demo/public_regulated_data_types'\nEntering 'src/lib/crypto/monocypher'\nEntering 'src/lib/ecl'\nEntering 'src/lib/matrix'\nEntering 'src/modules/micrortps_bridge/micro-CDR'\n"
+    },
+    {
+      "argv": [
+        "g++",
+        "--version"
+      ],
+      "returncode": 0,
+      "output": "g++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0\nCopyright (C) 2021 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n"
+    },
+    {
+      "argv": [
+        "python3",
+        "--version"
+      ],
+      "returncode": 0,
+      "output": "Python 3.10.12\n"
+    },
+    {
+      "argv": [
+        "cmake",
+        "--version"
+      ],
+      "returncode": 0,
+      "output": "cmake version 3.22.1\n\nCMake suite maintained and supported by Kitware (kitware.com/cmake).\n"
+    },
+    {
+      "argv": [
+        "uname",
+        "-a"
+      ],
+      "returncode": 0,
+      "output": "Linux yr-G15 6.8.0-138-generic #138~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Aug  7 13:43:15 UTC  x86_64 x86_64 x86_64 GNU/Linux\n"
+    }
+  ],
+  "packager_sha256": "bbfe697a9abf1578e89a64cd6438b13d31890e93f041de83dc7fd4adf10d5338",
+  "fixed_paper": {
+    "path": "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I00/run01/sources/2406.16094v1.pdf",
+    "sha256": "9aa4a20ef2a0f562cfad897e18cb8db96cf174fd332592bb2887e19ddafdd73b",
+    "url": "https://arxiv.org/pdf/2406.16094v1"
+  }
+}

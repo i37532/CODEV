@@ -6,7 +6,9 @@
 - [I00 报告](../reports/I00.md)：原 ISTA 受扰偏差的离线审计与生产内核回归。
 - [理论与代码审计](i00/THEORY_AUDIT_CN.md)、[离线规格](i00/PROTOCOL_CN.md)、[证据摘要](i00/results/evidence.json)。
 
-当前没有 Proper-ISTA 内核，没有新飞行或保护变更。I01 必须另行下达。
+- [I01 报告](../reports/I01.md)、[Proper-ISTA 离线内核与复跑入口](i01/README_CN.md)：新内核已实现并离线验证，未连接执行器。
+
+当前原 MODE=0/1/2 不变，没有新飞行或保护变更；I02 尚未执行，须另行授权。
 
 ## 重复离线检查（不启动 Gazebo）
 
