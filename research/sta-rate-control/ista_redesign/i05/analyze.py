@@ -107,6 +107,13 @@ def analyze(run):
             np.testing.assert_array_equal(old[continuous],vector(d,'nu')[idx[previous],axis])
         act=log.get_dataset('actuator_controls_0').data; common,di,ai=np.intersect1d(t[updated],act['timestamp_sample'],return_indices=True)
         actual=np.column_stack([act[f'control[{i}]'] for i in range(3)])
+        # Surface topic coverage separately from ULog writer dropout. This does
+        # not relax the already-frozen formal03 full-coverage requirement.
+        hover_updates=t[hover&updated]
+        missing_updates=int(np.count_nonzero(~np.isin(hover_updates,common)))
+        out['actuator_log_coverage']=dict(hover_updates=len(hover_updates),
+            missing_updates=missing_updates,matched_updates=len(hover_updates)-missing_updates,
+            ulog_dropouts=len(log.dropouts),full_coverage=missing_updates==0)
         require(len(common)>10000/expected_div and np.array_equal(command[updated][di].copy().view(np.uint32),actual[ai].copy().view(np.uint32)),'Actuator mismatch')
         require(np.all(np.isin(t[hover&updated],common)),'Missing hover actuator update')
         elapsed=d['research_elapsed']; additions=np.column_stack([d['research_roll_addition'],d['research_pitch_addition'],d['research_yaw_addition']])
