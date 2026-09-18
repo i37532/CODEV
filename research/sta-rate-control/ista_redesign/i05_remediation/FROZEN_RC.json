@@ -1,0 +1,10 @@
+{
+  "milestone":"I05R-C","date":"2026-09-18","axes":7,"divisors":[1,2,4],"simulation_speed_requested":5,
+  "paired_seeds":[6801,6802,6803],"algorithms":["esta","proper_ista"],"planned_attempts":18,
+  "order_rule":"For each DIV in 1,2,4: seed1 ESTA/Proper, seed2 Proper/ESTA, seed3 ESTA/Proper",
+  "attempt_policy":"one attempt per immutable job; retain every failure; no retry",
+  "parameters":{"MC_STA_L1_R":2.2,"MC_STA_L2_R":0.05,"MC_STA_G_R":130.575283,"MC_STA_NU_R":3.0,"MC_STA_L1_P":2.4,"MC_STA_L2_P":0.08,"MC_STA_G_P":112.763533,"MC_STA_NU_P":3.0,"MC_STA_L1_Y":1.5,"MC_STA_L2_Y":0.02,"MC_STA_G_Y":34.582326,"MC_STA_NU_Y":3.0,"MC_STA_TKO_MGT":0},
+  "paired_gate":{"ratio_max_each":1.25,"absolute_margin_rad_s":0.001,"median_ratio_max_each_div":1.15,"required_pairs_each_div":3},
+  "sources":{"rb_summary":{"path":"/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I05R/RB-formal02/summary.json","sha256":"5caebdbe54ad1cc2d961b0fb90da78978fa07720bc68aa44363669cd597e7eaa"},"m10_frozen":{"path":"research/sta-rate-control/m10/FROZEN.json","sha256":"958e60d954f51d1189a54b73107c36bd744bfdda6bea9f4db052ea3381734842"},"plugins_manifest":{"path":"/home/yr/Desktop/codev doc/experiments/M10-20260917/plugins03/manifest.json","sha256":"e10aab329615926555f50fedd8a4392330c54fcec078df1bd2f234186d8981c2"}},
+  "scope":"Full-axis ESTA/Proper-ISTA DIV1/2/4 functional and paired development admission; fixed sensor/filter configuration; no hardware"
+}

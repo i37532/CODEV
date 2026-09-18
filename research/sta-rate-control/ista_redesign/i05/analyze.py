@@ -45,9 +45,10 @@ def analyze(run):
         index,path,log=research_log(run,result); analyze_base(run,log_index=index)
         metrics=json.loads((run/'metrics.json').read_text()); config=json.loads((run/'m04_config.json').read_text())
         protocol=json.loads((run/'m04_protocol.json').read_text()); limits=protocol['limits']; mode=int(job['mode'])
-        remediation=job.get('remediation_subgate'); expected_axes=7 if remediation=='R-B' else 3
+        remediation=job.get('remediation_subgate'); expected_axes=7 if remediation in ('R-B','R-C') else 3
         require(job['subgate']=='A' and mode in (1,3) and config['MC_STA_AXES']==expected_axes,'Wrong I05 mode/mask')
-        require(config['MC_STA_TKO_MGT']==0 and config['MC_RTC_DIV']==1,'Protection/divisor drift')
+        expected_div=int(config['MC_RTC_DIV'])
+        require(config['MC_STA_TKO_MGT']==0 and expected_div in (1,2,4),'Protection/divisor drift')
         require(log.msg_info_dict.get('ver_hw')=='PX4_SITL' and log.msg_info_dict.get('ver_sw')==job['frozen_head'],'Wrong SITL/source')
         for name,value in config.items():
             require(name in log.initial_parameters and np.isclose(log.initial_parameters[name],value,rtol=2e-6,atol=2e-6),'Parameter mismatch '+name)
@@ -57,12 +58,15 @@ def analyze(run):
         for field,expected in [('requested_mode',mode),('effective_mode',mode),('requested_axes',expected_axes),('effective_axes',expected_axes),
                                ('request_status',0),('pending',0),('fault',0),('abort_requested',0),('config_pending',0)]:
             require(np.all(d[field]==expected),'Unexpected '+field)
-        for field in ('measurement_valid','output_valid','updated'): require(np.all(d[field][armed]),'Invalid '+field)
+        for field in ('measurement_valid','output_valid'): require(np.all(d[field][armed]),'Invalid '+field)
         require(np.all(d['timing_status'][armed]==0) and np.all(np.diff(t)>0),'Timing/sample order')
-        require(np.all(d['div_eff']==1)&np.all(d['div_ok']),'DIV1 mismatch')
+        updated=d['updated'].astype(bool); held=d['held'].astype(bool)
+        require(np.all(updated[armed]^held[armed]),'Update/hold partition')
+        require(np.all(d['div_eff']==expected_div)&np.all(d['div_ok']),'DIV mismatch')
         status_seq=sequence_stats(d['publish_seq'][hover],t[hover]); update_seq=sequence_stats(d['update_seq'][hover],t[hover])
-        require(status_seq['missing']==update_seq['missing']==0 and len(log.dropouts)==0,'Diagnostic/ULog loss')
-        rate=vector(d,'rate'); error=vector(d,'s'); command=vector(d,'c_applied'); updated=d['updated'].astype(bool)
+        require(status_seq['missing']==0 and len(log.dropouts)==0,'Diagnostic/ULog loss')
+        require(np.all(np.diff(d['update_seq'].astype(np.int64))==updated[1:]),'Update counter')
+        rate=vector(d,'rate'); error=vector(d,'s'); command=vector(d,'c_applied')
         require(np.max(np.abs(rate[armed]))<=limits['rate_rad_s'],'Rate boundary')
         selected=range(3) if expected_axes==7 else range(2)
         require(np.max(np.abs(command[armed][:,selected]))<=limits['selected_command_abs']+1e-6,'Command boundary')
@@ -74,6 +78,12 @@ def analyze(run):
             require(np.all(d['pid_updated'][armed]),'Mixed path must update PID'); require(np.all(vector(d,'nu')[:,2]==0),'Yaw nu changed')
         else:
             require(not np.any(d['pid_updated'][armed]),'Full-axis path computed idle PID')
+        if expected_div>1:
+            require(np.all(np.isnan(d['dt'][held])) and np.all(d['kern_ns'][held]==0),'Held cycle evaluated kernel')
+            require(np.array_equal(vector(d,'nu')[held],vector(d,'nu_before')[held]),'Nu advanced on hold')
+            hidx=np.flatnonzero(held);hidx=hidx[hidx>0];cached=vector(d,'c_held')
+            require(np.array_equal(cached[hidx],cached[hidx-1]),'Held torque changed')
+            require(np.array_equal(command[armed],(cached*d['battery_scale'][:,None])[armed]),'Battery scale accumulated')
         for axis in selected:
             active=hover&d['experiment_updated'].astype(bool); old=vector(d,'nu_before')[:,axis]; candidate=vector(d,'nu_candidate')[:,axis]
             ideal_a=vector(d,'a_raw')[:,axis]; g=vector(d,'g')[:,axis]; s=error[:,axis]
@@ -91,8 +101,9 @@ def analyze(run):
             protected=ideal_a+factor*(vector(d,'nu')[:,axis]-candidate)
             np.testing.assert_allclose(vector(d,'a_protected')[active,axis],protected[active],rtol=2e-6,atol=2e-7)
             np.testing.assert_allclose(command[active,axis],np.clip(protected/g,-.15,.15)[active]*d['battery_scale'][active],rtol=2e-6,atol=2e-7)
-            contiguous=(np.diff(d['update_seq'].astype(np.int64))==1)&armed[1:]&armed[:-1]&(d['reset_reason'][1:]==0)
-            np.testing.assert_array_equal(old[1:][contiguous],vector(d,'nu')[:-1,axis][contiguous])
+            idx=np.flatnonzero(active); continuous=idx[1:][d['reset_reason'][idx[1:]]==0]
+            previous=np.searchsorted(idx,continuous)-1
+            np.testing.assert_array_equal(old[continuous],vector(d,'nu')[idx[previous],axis])
         act=log.get_dataset('actuator_controls_0').data; common,di,ai=np.intersect1d(t[updated],act['timestamp_sample'],return_indices=True)
         actual=np.column_stack([act[f'control[{i}]'] for i in range(3)])
         require(len(common)>10000 and np.array_equal(command[updated][di].copy().view(np.uint32),actual[ai].copy().view(np.uint32)),'Actuator mismatch')
@@ -109,11 +120,14 @@ def analyze(run):
                         require(np.max(v)>.119 and np.min(v)<-.119 and abs(float(np.trapz(v,elapsed[mask])))<.002,'Excitation '+name)
                     else: require(np.all(v==0),'Unexpected excitation '+name)
         rates_topics=[x for x in log.data_list if x.name=='vehicle_rates_setpoint']; require({x.multi_id for x in rates_topics}=={0},'Setpoint publisher multiplicity')
+        ui=np.flatnonzero(hover&updated);require(len(ui)>1000 and np.all(np.diff(ui)==expected_div),'Measured update spacing')
+        actual_update_hz=1/float(np.median(np.diff(t[ui]))*1e-6)
         out.update(success=True,analysis_success=True,ulog=str(path),ulog_sha256=hashlib.sha256(path.read_bytes()).hexdigest(),
                    metrics=stats,dropouts=len(log.dropouts),sequences=dict(status=status_seq,updates=update_seq),
                    max_tilt_deg=metrics['tilt_deg']['max_abs'],max_height_error_m=metrics['position_error_m']['max_abs'][2],
                    max_abs_command=np.max(np.abs(command[armed]),axis=0).tolist(),max_abs_nu=np.max(np.abs(vector(d,'nu')[armed]),axis=0).tolist(),
-                   saturation_fraction=float(np.mean((d['motor_saturation'][hover].astype(np.uint16)&0x1f8)!=0)),actuator_samples=len(common))
+                   saturation_fraction=float(np.mean((d['motor_saturation'][hover].astype(np.uint16)&0x1f8)!=0)),actuator_samples=len(common),
+                   divisor=expected_div,actual_update_hz=actual_update_hz,held_samples=int(np.count_nonzero(hover&held)))
     except Exception as exc:
         out.update(success=False,analysis_success=False,error=repr(exc),failure_class='flight' if not result.get('success') else 'analysis_or_data_quality')
         if any(x in str(exc).lower() for x in ('boundary','fault','abort')): out['failure_class']='control_boundary'

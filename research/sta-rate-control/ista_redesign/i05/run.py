@@ -13,7 +13,7 @@ class Checks(M10Checks):
     def __init__(self):
         super().__init__()
         remediation=self.job.get('remediation_subgate')
-        expected_axes=7 if remediation=='R-B' else 3
+        expected_axes=7 if remediation in ('R-B','R-C') else 3
         if self.job.get('subgate')!='A' or self.job['parameters']['MC_STA_AXES']!=expected_axes:
             raise ValueError('Unsupported I05 subgate/mask')
         self.protocol=self.job['flight_protocol']
