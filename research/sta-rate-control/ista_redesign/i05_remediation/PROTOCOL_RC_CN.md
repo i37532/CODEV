@@ -1,7 +1,7 @@
 # I05R-C：全轴分频准入
 
 前置 R-B 6/6 单轮、3/3配对通过，三轴窗口汇总比值中位数 .998835。固定模型、传感器、滤波、
-外环、参数和 trigger4，只改变 `MC_RTC_DIV=1→2→4`。每个 DIV 用种子6801–6803，ESTA/Proper
+外环、参数和 trigger4，只改变 `MC_RTC_DIV=1→2→4`。授权的 revision 2 使用全新种子6901–6903，ESTA/Proper
 各3次，共18次；顺序由 FROZEN_RC 固定，每项只尝试一次。
 
 每轮必须验证真实 sensor 时间差、更新/保持互斥、hold 不积分/不跑内核、缓存力矩不变、推力每回调、
@@ -14,3 +14,6 @@
 `RC-formal01` 的 inherited nominal scenario 在运行时把请求的 DIV2/4 覆盖为 DIV1；18/18 配置均实际
 为 DIV1，且旧分析没有核对 job 与实际 divisor，故整批标记无效，不能作为 R-C 通过。revision 2 在
 runner 后置恢复冻结 divisor，并增加 requested/actual 强校验；按一次尝试规则，新的18轮需用户明确授权。
+
+用户已于2026-09-18明确回复“继续”，授权 `RC-formal02` 的新18轮预算。该批不复用6801–6803；
+6901–6903在冻结前未用于本 remediation。`RC-formal01` 不进入任何配对、分频或通过率统计。
