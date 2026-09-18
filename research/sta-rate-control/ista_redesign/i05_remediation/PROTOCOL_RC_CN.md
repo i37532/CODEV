@@ -10,3 +10,7 @@
 每个 DIV 内逐 seed/window/axis 要求 Proper RMSE≤`max(1.25*ESTA, ESTA+.001)`，27项比值的配对
 平均再取三 seed 中位数≤1.15。每个 DIV 3/3配对、全部18轮有效才通过 remediation。失败立即停止，
 不放宽安全或性能阈值。
+
+`RC-formal01` 的 inherited nominal scenario 在运行时把请求的 DIV2/4 覆盖为 DIV1；18/18 配置均实际
+为 DIV1，且旧分析没有核对 job 与实际 divisor，故整批标记无效，不能作为 R-C 通过。revision 2 在
+runner 后置恢复冻结 divisor，并增加 requested/actual 强校验；按一次尝试规则，新的18轮需用户明确授权。

@@ -17,7 +17,7 @@ def main():
    with (root/(label+'.'+name+'.log')).open('x') as s:c=subprocess.run(argv,cwd=REPO,env=env,stdout=s,stderr=subprocess.STDOUT)
    cmds.append(dict(name=name,returncode=c.returncode,command=argv))
    if name=='flight' and not (run/'result.json').exists():break
-  ap=run/'i05_analysis.json';row=json.loads(ap.read_text()) if ap.exists() else dict(success=False,algorithm=job['algorithm'],seed=job['seed'],divisor=job['divisor'],failure_class='infrastructure',error='No analysis');row['divisor']=job['divisor'];now=(row.get('source_head'),row.get('binary_sha256'));anchor=now if anchor is None else anchor
+  ap=run/'i05_analysis.json';row=json.loads(ap.read_text()) if ap.exists() else dict(success=False,algorithm=job['algorithm'],seed=job['seed'],failure_class='infrastructure',error='No analysis');row['requested_divisor']=job['divisor'];now=(row.get('source_head'),row.get('binary_sha256'));anchor=now if anchor is None else anchor
   if now!=anchor:row.update(success=False,failure_class='infrastructure',error='Runtime source/binary changed')
   halt=row.get('failure_class') in ('infrastructure','analysis_or_data_quality');(root/(label+'.execution.json')).write_text(json.dumps(dict(job=job,commands=cmds,wall_seconds=time.time()-started,success=row.get('success',False),halt=halt),indent=2)+'\n');rows.append(row);(root/'progress.json').write_text(json.dumps(dict(rows=rows),indent=2)+'\n');print('END',label,'success=',row.get('success'),flush=True)
   if halt:raise RuntimeError('Infrastructure/data halt retained: '+label)

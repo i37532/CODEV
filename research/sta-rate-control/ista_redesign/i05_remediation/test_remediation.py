@@ -24,5 +24,9 @@ class TestRA(unittest.TestCase):
         for div in f['divisors']:
             for s in f['paired_seeds']:
                 for alg,val in [('esta',.004),('proper_ista',.0041)]:rows.append(dict(success=True,algorithm=alg,seed=s,divisor=div,metrics={w:{'rmse':[val,val,val]} for w in ('yaw_only','synchronous_low','synchronous_repeat')}))
-        self.assertTrue(summarize_rc(rows)['success']);rows[-1]['metrics']['synchronous_low']['rmse'][0]=.006;self.assertFalse(summarize_rc(rows)['success'])
+        self.assertTrue(summarize_rc(rows)['success'])
+        mislabeled=[dict(r,divisor=1) for r in rows]
+        self.assertFalse(summarize_rc(mislabeled)['success'])
+        rows[-1]['metrics']['synchronous_low']['rmse'][0]=.006
+        self.assertFalse(summarize_rc(rows)['success'])
 if __name__=='__main__':unittest.main()

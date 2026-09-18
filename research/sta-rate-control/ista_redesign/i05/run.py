@@ -18,5 +18,8 @@ class Checks(M10Checks):
             raise ValueError('Unsupported I05 subgate/mask')
         self.protocol=self.job['flight_protocol']
         for name,value in self.protocol['scenario_parameters'].items(): self.config[name]=value
+        # M10 maps a scenario name to its historical divisor. I05R-C freezes the
+        # divisor per job instead, so restore it after the inherited setup.
+        if remediation=='R-C': self.config['MC_RTC_DIV']=self.job['parameters']['MC_RTC_DIV']
 
 if __name__=='__main__': main(checks=Checks(),scenario_path=Path(__file__))

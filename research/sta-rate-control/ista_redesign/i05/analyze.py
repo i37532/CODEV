@@ -48,6 +48,7 @@ def analyze(run):
         remediation=job.get('remediation_subgate'); expected_axes=7 if remediation in ('R-B','R-C') else 3
         require(job['subgate']=='A' and mode in (1,3) and config['MC_STA_AXES']==expected_axes,'Wrong I05 mode/mask')
         expected_div=int(config['MC_RTC_DIV'])
+        require(expected_div==int(job['parameters']['MC_RTC_DIV']),'Requested/actual divisor mismatch')
         require(config['MC_STA_TKO_MGT']==0 and expected_div in (1,2,4),'Protection/divisor drift')
         require(log.msg_info_dict.get('ver_hw')=='PX4_SITL' and log.msg_info_dict.get('ver_sw')==job['frozen_head'],'Wrong SITL/source')
         for name,value in config.items():
