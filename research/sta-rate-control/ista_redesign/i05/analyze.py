@@ -107,7 +107,8 @@ def analyze(run):
             np.testing.assert_array_equal(old[continuous],vector(d,'nu')[idx[previous],axis])
         act=log.get_dataset('actuator_controls_0').data; common,di,ai=np.intersect1d(t[updated],act['timestamp_sample'],return_indices=True)
         actual=np.column_stack([act[f'control[{i}]'] for i in range(3)])
-        require(len(common)>10000 and np.array_equal(command[updated][di].copy().view(np.uint32),actual[ai].copy().view(np.uint32)),'Actuator mismatch')
+        require(len(common)>10000/expected_div and np.array_equal(command[updated][di].copy().view(np.uint32),actual[ai].copy().view(np.uint32)),'Actuator mismatch')
+        require(np.all(np.isin(t[hover&updated],common)),'Missing hover actuator update')
         elapsed=d['research_elapsed']; additions=np.column_stack([d['research_roll_addition'],d['research_pitch_addition'],d['research_yaw_addition']])
         commanded=({'yaw_only':(2,), 'synchronous_low':(0,1,2), 'synchronous_repeat':(0,1,2)}
                    if expected_axes==7 else {'roll_only':(0,), 'pitch_only':(1,), 'synchronous':(0,1)})

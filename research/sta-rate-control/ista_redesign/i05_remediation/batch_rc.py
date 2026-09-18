@@ -22,5 +22,9 @@ def main():
   if now!=anchor:row.update(success=False,failure_class='infrastructure',error='Runtime source/binary changed')
   halt=should_halt(row);(root/(label+'.execution.json')).write_text(json.dumps(dict(job=job,commands=cmds,wall_seconds=time.time()-started,success=row.get('success',False),halt=halt),indent=2)+'\n');rows.append(row);(root/'progress.json').write_text(json.dumps(dict(rows=rows),indent=2)+'\n');print('END',label,'success=',row.get('success'),flush=True)
   if halt:raise RuntimeError('Failed attempt retained; batch stopped: '+label)
+  if (n+1)%6==0:
+   partial=summarize(rows);div=job['divisor'];violations=[v for v in partial['violations'] if v.startswith(str(div)+':') or v in ('median:'+str(div)) or v.startswith('pair:'+str(div)+':')]
+   (root/('gate_div'+str(div)+'.json')).write_text(json.dumps(dict(divisor=div,success=not violations,violations=violations,metrics=partial['by_divisor'][str(div)]),indent=2)+'\n')
+   if violations:raise RuntimeError('Paired divisor gate failed; batch stopped: '+str(div))
  s=summarize(rows);s.update(source_head=head,binary_sha256=anchor[1] if anchor else None,frozen_sha256=hashlib.sha256(fp.read_bytes()).hexdigest());(root/'summary.json').write_text(json.dumps(s,indent=2)+'\n');print(json.dumps({k:s[k] for k in ('planned','attempted','accepted','by_divisor','success','violations')},indent=2));raise SystemExit(0 if s['success'] else 1)
 if __name__=='__main__':main()
