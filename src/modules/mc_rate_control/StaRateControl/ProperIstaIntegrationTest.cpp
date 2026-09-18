@@ -16,7 +16,9 @@ G::Config config()
 	c.axes = 1;
 	c.c_limit = .15f;
 	c.gains[0] = {2.2f, .05f, 130.575283f};
+	c.gains[1] = {2.4f, .08f, 112.763533f};
 	c.nu_limit[0] = 3.f;
+	c.nu_limit[1] = 3.f;
 	return c;
 }
 
@@ -41,18 +43,18 @@ void start(G &guard, const G::Config &c = config())
 }
 }
 
-TEST(ProperIstaIntegration, DedicatedModeAndRollOnlyCapability)
+TEST(ProperIstaIntegration, DedicatedModeAndRollPitchCapability)
 {
 	for (int axes : {1, 3, 7}) {
 		auto c = config(); c.axes = axes;
 		const bool ready = StaAxesApplication::ready(true, c);
-		EXPECT_EQ(ready, axes == 1);
+		EXPECT_EQ(ready, axes == 1 || axes == 3);
 		ControllerSelection selector;
 		selector.select(3, axes, false, false, false, ready);
 		EXPECT_EQ(selector.status().request_status,
-			  axes == 1 ? ControllerSelection::Accepted : ControllerSelection::Unsupported);
-		EXPECT_EQ(selector.status().effective_mode, axes == 1 ? 3 : 0);
-		EXPECT_EQ(selector.status().effective_axes, axes == 1 ? 1 : 0);
+			  axes != 7 ? ControllerSelection::Accepted : ControllerSelection::Unsupported);
+		EXPECT_EQ(selector.status().effective_mode, axes != 7 ? 3 : 0);
+		EXPECT_EQ(selector.status().effective_axes, axes != 7 ? axes : 0);
 	}
 	auto managed = config(); managed.takeoff.enabled = true;
 	EXPECT_FALSE(StaAxesApplication::ready(true, managed));
@@ -103,6 +105,24 @@ TEST(ProperIstaIntegration, PitchYawStayPidBitExact)
 	ASSERT_TRUE(StaAxesApplication::apply(1, true, out, pid, mixed));
 	EXPECT_FLOAT_EQ(mixed[0], out.c_applied[0]);
 	EXPECT_FLOAT_EQ(mixed[1], pid[1]);
+	EXPECT_FLOAT_EQ(mixed[2], pid[2]);
+}
+
+TEST(ProperIstaIntegration, RollPitchStatesAreIndependentAndYawStaysPid)
+{
+	auto c = config(); c.axes = 3;
+	G guard; start(guard, c);
+	const auto roll = guard.step({.1f, 0.f, .3f}, {}, feedback());
+	ASSERT_TRUE(roll.valid); EXPECT_NE(roll.nu[0], 0.f); EXPECT_FLOAT_EQ(roll.nu[1], 0.f);
+	guard.begin(c, frame(1008000));
+	const auto pitch = guard.step({0.f, -.1f, .3f}, {}, feedback());
+	ASSERT_TRUE(pitch.valid); EXPECT_NE(pitch.nu[1], 0.f); EXPECT_GT(pitch.c_applied[1], 0.f);
+	EXPECT_TRUE(std::isnan(pitch.c_raw[2])); EXPECT_FLOAT_EQ(pitch.nu[2], 0.f);
+	const std::array<float, 3> pid{{.1f, .2f, .345678f}};
+	std::array<float, 3> mixed{};
+	ASSERT_TRUE(StaAxesApplication::apply(3, true, pitch, pid, mixed));
+	EXPECT_FLOAT_EQ(mixed[0], pitch.c_applied[0]);
+	EXPECT_FLOAT_EQ(mixed[1], pitch.c_applied[1]);
 	EXPECT_FLOAT_EQ(mixed[2], pid[2]);
 }
 

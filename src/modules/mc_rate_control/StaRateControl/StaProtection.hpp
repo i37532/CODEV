@@ -5,8 +5,8 @@
 #include "ProperIstaRateControl.hpp"
 #include "TakeoffNuManager.hpp"
 
-/** Shared research adapter. ESTA/ISTA support Iris SITL AXES=1/3/7; I04 adds
- * Proper-ISTA on Iris SITL AXES=1 only.
+/** Shared research adapter. ESTA/ISTA support Iris SITL AXES=1/3/7; I05-A
+ * permits Proper-ISTA on calibrated Iris SITL AXES=1/3.
  * PID does not pass through these limits/resets. A fault returns invalid output,
  * latches until explicit disarmed acknowledgement, and requests SITL abort.
  * No automatic PID takeover, zero-torque fallback or commander override.

@@ -35,14 +35,13 @@ TEST(StaAxesApplication, CalibratedGateRejectsPitchAndYawMisconfiguration)
 	c = config(); c.axes = 1; c.gains[1] = {}; EXPECT_TRUE(StaAxesApplication::ready(true, c));
 }
 
-TEST(StaAxesApplication, ProperIstaGateIsRollOnlyAndUsesEstablishedLifecycle)
+TEST(StaAxesApplication, ProperIstaGateAllowsRollPitchAndUsesEstablishedLifecycle)
 {
 	auto c = config(); c.mode = 3; c.axes = 1; c.gains[1] = {}; c.nu_limit[1] = 0.f;
 	EXPECT_TRUE(StaAxesApplication::ready(true, c));
-	for (int axes : {3, 7}) {
-		c.axes = axes;
-		EXPECT_FALSE(StaAxesApplication::ready(true, c));
-	}
+	c = config(); c.mode = 3; c.axes = 3;
+	EXPECT_TRUE(StaAxesApplication::ready(true, c));
+	c.axes = 7; EXPECT_FALSE(StaAxesApplication::ready(true, c));
 	c.axes = 1; c.takeoff.enabled = true;
 	EXPECT_FALSE(StaAxesApplication::ready(true, c));
 	c.takeoff.enabled = false; c.gains[0].g = 112.763533f;

@@ -1,0 +1,13 @@
+{
+  "date": "2026-09-18",
+  "subgate": "A",
+  "candidate_seeds": [6301, 6302, 6303],
+  "scope": [
+    "research/sta-rate-control/**/*.json",
+    "/home/yr/Desktop/codev doc/experiments/**/*.json"
+  ],
+  "query": "JSON records whose seed field equals the candidate integer",
+  "excluded": ["research/sta-rate-control/ista_redesign/i05/**"],
+  "matches_before_freeze": {"6301": 0, "6302": 0, "6303": 0},
+  "conclusion": "No candidate was previously assigned as an experiment seed. Numeric coincidences inside signal CSV files are not seed assignments."
+}

@@ -1,4 +1,4 @@
-# Research diagnostics. I04 also permits Proper-ISTA MODE=3 on Iris SITL AXES=1 only. NaN = not applicable.
+# Research diagnostics. I05-A permits Proper-ISTA MODE=3 on Iris SITL AXES=1/3. NaN = not applicable.
 uint64 timestamp
 uint64 timestamp_sample
 uint64 motor_timestamp

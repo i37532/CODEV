@@ -1,0 +1,33 @@
+{
+  "milestone": "I05-A",
+  "date": "2026-09-18",
+  "axes": 3,
+  "divisor": 1,
+  "trigger": 2,
+  "simulation_speed_requested": 5,
+  "paired_seeds": [6301, 6302, 6303],
+  "ordered_jobs": [[6301, "esta"], [6301, "proper_ista"], [6302, "proper_ista"], [6302, "esta"], [6303, "esta"], [6303, "proper_ista"]],
+  "attempt_policy": "one attempt per immutable job; retain every failure; no retry",
+  "parameters": {
+    "MC_STA_L1_R": 2.2, "MC_STA_L2_R": 0.05, "MC_STA_G_R": 130.575283, "MC_STA_NU_R": 3.0,
+    "MC_STA_L1_P": 2.4, "MC_STA_L2_P": 0.08, "MC_STA_G_P": 112.763533, "MC_STA_NU_P": 3.0,
+    "MC_STA_L1_Y": 1.5, "MC_STA_L2_Y": 0.02, "MC_STA_G_Y": 34.582326, "MC_STA_NU_Y": 3.0,
+    "MC_STA_TKO_MGT": 0
+  },
+  "flight_protocol": {
+    "milestone": "I05-A", "version": 1, "model": "Iris 10016 quad_w; empty_grey.world",
+    "scenario_parameters": {"MPC_LAND_SPEED": 0.3, "LNDMC_Z_VEL_MAX": 0.3, "MPC_YAW_MODE": 3},
+    "hover_seconds": 60, "trigger": 2, "tracking_seconds": 36,
+    "windows": {"roll_only": [0, 12], "pitch_only": [12, 24], "synchronous": [24, 36]},
+    "excitation": {"publisher": "existing mc_att_control only", "amplitudes_rad_s": [0.04, 0.08, 0.12], "period_seconds": 4, "net_angle_per_phase": 0},
+    "limits": {"tilt_deg": 15.0, "height_error_m": 1.0, "rate_rad_s": 1.0, "selected_command_abs": 0.15, "nu_abs_rad_s2": 3.0, "rmse_ratio_max": 1.25, "uncommanded_absolute_margin_rad_s": 0.005, "ulog_dropouts": 0, "diagnostic_missing": 0},
+    "required": {"esta_repeats": 3, "proper_ista_repeats": 3, "fault": 0, "abort": 0, "failsafe": 0, "landed_disarmed": true}
+  },
+  "sources": {
+    "m10_frozen": {"path": "research/sta-rate-control/m10/FROZEN.json", "sha256": "958e60d954f51d1189a54b73107c36bd744bfdda6bea9f4db052ea3381734842"},
+    "pitch_calibration": {"path": "research/sta-rate-control/m05/calibration.json", "sha256": "faecde040e53a93d8ffa77c7ff8b29fc5e745a6375c05b8e8ba06340d3b255b3"},
+    "i04_summary": {"path": "research/sta-rate-control/ista_redesign/i04/results/summary.json", "sha256": "13dfe39a575f952115e33f8e70c994f7123cec634191d39aaefa64eb5aba350f"},
+    "plugins_manifest": {"path": "/home/yr/Desktop/codev doc/experiments/M10-20260917/plugins03/manifest.json", "sha256": "e10aab329615926555f50fedd8a4392330c54fcec078df1bd2f234186d8981c2"}
+  },
+  "scope": "Iris Gazebo Classic SITL development only; Proper-ISTA AXES=3; yaw PID; no full-axis or hardware"
+}
