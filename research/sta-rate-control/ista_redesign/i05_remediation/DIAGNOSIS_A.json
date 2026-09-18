@@ -1,0 +1,11 @@
+{
+  "source": "I05-A retained development data; not reused as remediation admission data",
+  "failed_old_rule": "each Proper run compared with the three-seed ESTA median",
+  "old_pitch_only_pitch": {
+    "6301": {"esta": 0.005464845237888474, "proper": 0.0052888913378542875, "paired_ratio": 0.9678044406},
+    "6302": {"esta": 0.0034447659416032444, "proper": 0.003402210966648589, "paired_ratio": 0.9876464912},
+    "6303": {"esta": 0.003980112504528776, "proper": 0.004051233719725395, "paired_ratio": 1.0178691471}
+  },
+  "diagnosis": "The sole failure was caused by comparing seed 6301 with the lower cross-seed ESTA median. Proper was better than ESTA for that same seed. Logs showed no fault, saturation, state sharing, mapping error, or calibration drift. This does not retroactively pass I05-A; it motivates a new paired-seed admission rule.",
+  "parameter_decision": "No gain or g change before R-A. Revalidate the unchanged controller with fresh paired seeds."
+}
