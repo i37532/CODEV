@@ -1,0 +1,1934 @@
+[
+  {
+    "mode": 2,
+    "scene": "inertia",
+    "seed": 4101,
+    "group": "C00",
+    "candidate": "C00",
+    "formal": true,
+    "frozen_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "success": false,
+    "flight_success": false,
+    "analysis_success": false,
+    "source_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "binary_sha256": "5452fb1a94358bf74ac3d096ec62c1759274f207a86a85a0013e40e38a57e6eb",
+    "logs": [
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_41_21.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0000_C00_m2_inertia_s4101/02_41_21.ulg",
+        "sha256": "f980f7ea624c9b081609272e478f72749f33e8cb5f63904b4cfd08f214985846",
+        "bytes": 143691
+      },
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_41_28.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0000_C00_m2_inertia_s4101/02_41_28.ulg",
+        "sha256": "567e336af59f3b43928c2ce0fc09c5fc393368eb7acaaa3cc1923aea813f99b6",
+        "bytes": 9744632
+      }
+    ],
+    "error": "RuntimeError(\"flight_failure: RuntimeError('Tilt boundary exceeded: 16.481332263275124')\")",
+    "failure_class": "control_boundary",
+    "failure_diagnostics": [
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0000_C00_m2_inertia_s4101/02_41_21.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          0
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.004183429758995771,
+          0.0022581350058317184,
+          0.002993229776620865
+        ],
+        "max_command_abs": [
+          0.0014729464892297983,
+          0.0014092369237914681,
+          0.0005986459436826408
+        ],
+        "command_peak_sample_us": [
+          400000,
+          576000,
+          772000
+        ],
+        "command_peak_last_event": [
+          "startup",
+          "startup",
+          "startup"
+        ]
+      },
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0000_C00_m2_inertia_s4101/02_41_28.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          2
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.01873617246747017,
+          1.0673969984054565,
+          0.026194587349891663
+        ],
+        "max_command_abs": [
+          0.003846620675176382,
+          0.029453497380018234,
+          0.08091984689235687
+        ],
+        "command_peak_sample_us": [
+          31204000,
+          47476000,
+          31200000
+        ],
+        "command_peak_last_event": [
+          "takeoff_command",
+          "hover_start",
+          "takeoff_command"
+        ]
+      }
+    ],
+    "path": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0000_C00_m2_inertia_s4101/m10_analysis.json",
+    "stage": "screen"
+  },
+  {
+    "mode": 2,
+    "scene": "inertia",
+    "seed": 4101,
+    "group": "C02",
+    "candidate": "C02",
+    "formal": true,
+    "frozen_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "success": false,
+    "flight_success": false,
+    "analysis_success": false,
+    "source_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "binary_sha256": "5452fb1a94358bf74ac3d096ec62c1759274f207a86a85a0013e40e38a57e6eb",
+    "logs": [
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_42_58.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0004_C02_m2_inertia_s4101/02_42_58.ulg",
+        "sha256": "7332f784c976d0ad13a78307e7a6f8feeec617dcc3b87a092efe15c56e5d4f9b",
+        "bytes": 140583
+      },
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_43_04.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0004_C02_m2_inertia_s4101/02_43_04.ulg",
+        "sha256": "e2d863d1ba1834f941b9993073280febae05370a6b5eb49fa6b4b276164ab8ca",
+        "bytes": 7788054
+      }
+    ],
+    "error": "RuntimeError(\"flight_failure: RuntimeError('Tilt boundary exceeded: 24.96954466274164')\")",
+    "failure_class": "control_boundary",
+    "failure_diagnostics": [
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0004_C02_m2_inertia_s4101/02_42_58.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          0
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.004183429758995771,
+          0.0031512933783233166,
+          0.004355644807219505
+        ],
+        "max_command_abs": [
+          0.0016118419589474797,
+          0.0014129714109003544,
+          0.0008711289847269654
+        ],
+        "command_peak_sample_us": [
+          424000,
+          424000,
+          928000
+        ],
+        "command_peak_last_event": [
+          "startup",
+          "startup",
+          "startup"
+        ]
+      },
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0004_C02_m2_inertia_s4101/02_43_04.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          2
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.13296151161193848,
+          1.3861750364303589,
+          0.059377577155828476
+        ],
+        "max_command_abs": [
+          0.007015938404947519,
+          0.04102920740842819,
+          0.0809502825140953
+        ],
+        "command_peak_sample_us": [
+          38428000,
+          38704000,
+          31608000
+        ],
+        "command_peak_last_event": [
+          "hold_command_after_takeoff",
+          "hold_command_after_takeoff",
+          "takeoff_command"
+        ]
+      }
+    ],
+    "path": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0004_C02_m2_inertia_s4101/m10_analysis.json",
+    "stage": "screen"
+  },
+  {
+    "mode": 2,
+    "scene": "div4",
+    "seed": 4101,
+    "group": "C02",
+    "candidate": "C02",
+    "formal": true,
+    "frozen_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "success": false,
+    "flight_success": false,
+    "analysis_success": false,
+    "source_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "binary_sha256": "5452fb1a94358bf74ac3d096ec62c1759274f207a86a85a0013e40e38a57e6eb",
+    "logs": [
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_43_08.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0005_C02_m2_div4_s4101/02_43_08.ulg",
+        "sha256": "a1e0679c65f568766d3415335fd32608225616b4ab3a35c7bf861aa7f818c787",
+        "bytes": 155428
+      },
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_43_15.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0005_C02_m2_div4_s4101/02_43_15.ulg",
+        "sha256": "45dfe7be4387a18b890f378c1d4ddf878cb304e90eeead236879669264972cda",
+        "bytes": 7600466
+      }
+    ],
+    "error": "RuntimeError(\"flight_failure: RuntimeError('Tilt boundary exceeded: 20.07606368411037')\")",
+    "failure_class": "control_boundary",
+    "failure_diagnostics": [
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0005_C02_m2_div4_s4101/02_43_08.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          0
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.0031335894018411636,
+          0.003248560708016157,
+          0.0029032230377197266
+        ],
+        "max_command_abs": [
+          0.0010944458190351725,
+          0.0014236574061214924,
+          0.0005806446424685419
+        ],
+        "command_peak_sample_us": [
+          420000,
+          424000,
+          416000
+        ],
+        "command_peak_last_event": [
+          "startup",
+          "startup",
+          "startup"
+        ]
+      },
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0005_C02_m2_div4_s4101/02_43_15.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          2
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.2308027297258377,
+          1.0174357891082764,
+          0.10650535672903061
+        ],
+        "max_command_abs": [
+          0.00869156327098608,
+          0.037852440029382706,
+          0.012899384833872318
+        ],
+        "command_peak_sample_us": [
+          38232000,
+          38344000,
+          37464000
+        ],
+        "command_peak_last_event": [
+          "hold_command_after_takeoff",
+          "hold_command_after_takeoff",
+          "takeoff_command"
+        ]
+      }
+    ],
+    "path": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0005_C02_m2_div4_s4101/m10_analysis.json",
+    "stage": "screen"
+  },
+  {
+    "mode": 2,
+    "scene": "inertia",
+    "seed": 4101,
+    "group": "C03",
+    "candidate": "C03",
+    "formal": true,
+    "frozen_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "success": false,
+    "flight_success": false,
+    "analysis_success": false,
+    "source_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "binary_sha256": "5452fb1a94358bf74ac3d096ec62c1759274f207a86a85a0013e40e38a57e6eb",
+    "logs": [
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_43_19.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0006_C03_m2_inertia_s4101/02_43_19.ulg",
+        "sha256": "7e65e8ad52144bc3ddacddb97d07e32ad6764629f8a8d43a54b26f9e76cc2734",
+        "bytes": 146936
+      },
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_43_25.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0006_C03_m2_inertia_s4101/02_43_25.ulg",
+        "sha256": "3aa9ed4cc2ff09d8b665a803514ae354854e17587fb379aec0b6b1942ba68f74",
+        "bytes": 6836686
+      }
+    ],
+    "error": "RuntimeError(\"flight_failure: RuntimeError('Tilt boundary exceeded: 16.449113744889807')\")",
+    "failure_class": "control_boundary",
+    "failure_diagnostics": [
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0006_C03_m2_inertia_s4101/02_43_19.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          0
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.0040559303015470505,
+          0.0029351231642067432,
+          0.0012777043739333749
+        ],
+        "max_command_abs": [
+          0.001313618617132306,
+          0.0011310004629194736,
+          0.00025554088642820716
+        ],
+        "command_peak_sample_us": [
+          1260000,
+          564000,
+          964000
+        ],
+        "command_peak_last_event": [
+          "startup",
+          "startup",
+          "startup"
+        ]
+      },
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0006_C03_m2_inertia_s4101/02_43_25.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          2
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.0363440215587616,
+          0.5300989747047424,
+          0.11192761361598969
+        ],
+        "max_command_abs": [
+          0.009948202408850193,
+          0.031649526208639145,
+          0.08096591383218765
+        ],
+        "command_peak_sample_us": [
+          33608000,
+          34312000,
+          31344000
+        ],
+        "command_peak_last_event": [
+          "takeoff_command",
+          "takeoff_command",
+          "takeoff_command"
+        ]
+      }
+    ],
+    "path": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0006_C03_m2_inertia_s4101/m10_analysis.json",
+    "stage": "screen"
+  },
+  {
+    "mode": 2,
+    "scene": "div4",
+    "seed": 4101,
+    "group": "C03",
+    "candidate": "C03",
+    "formal": true,
+    "frozen_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "success": false,
+    "flight_success": false,
+    "analysis_success": false,
+    "source_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "binary_sha256": "5452fb1a94358bf74ac3d096ec62c1759274f207a86a85a0013e40e38a57e6eb",
+    "logs": [
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_43_28.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0007_C03_m2_div4_s4101/02_43_28.ulg",
+        "sha256": "a99dbc5d1331ba06e3d1270be584895cb48695c20643d792c1017d9e04ff215c",
+        "bytes": 154194
+      },
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_43_34.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0007_C03_m2_div4_s4101/02_43_34.ulg",
+        "sha256": "d672d2f7ece0187bbff9264f28ef91a6597b15286a51370358b3e900575a7c52",
+        "bytes": 6835232
+      }
+    ],
+    "error": "RuntimeError(\"flight_failure: RuntimeError('Tilt boundary exceeded: 15.819766956063232')\")",
+    "failure_class": "control_boundary",
+    "failure_diagnostics": [
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0007_C03_m2_div4_s4101/02_43_28.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          0
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.0035816235467791557,
+          0.004209460690617561,
+          0.003347244346514344
+        ],
+        "max_command_abs": [
+          0.0015321401879191399,
+          0.0015368524473160505,
+          0.0006694488693028688
+        ],
+        "command_peak_sample_us": [
+          648000,
+          748000,
+          1348000
+        ],
+        "command_peak_last_event": [
+          "startup",
+          "startup",
+          "startup"
+        ]
+      },
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0007_C03_m2_div4_s4101/02_43_34.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          2
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.16875483095645905,
+          0.527352511882782,
+          0.030986927449703217
+        ],
+        "max_command_abs": [
+          0.014587494544684887,
+          0.030598245561122894,
+          0.012910600751638412
+        ],
+        "command_peak_sample_us": [
+          34612000,
+          34292000,
+          34532000
+        ],
+        "command_peak_last_event": [
+          "takeoff_command",
+          "takeoff_command",
+          "takeoff_command"
+        ]
+      }
+    ],
+    "path": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0007_C03_m2_div4_s4101/m10_analysis.json",
+    "stage": "screen"
+  },
+  {
+    "mode": 2,
+    "scene": "inertia",
+    "seed": 4101,
+    "group": "C04",
+    "candidate": "C04",
+    "formal": true,
+    "frozen_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "success": false,
+    "flight_success": false,
+    "analysis_success": false,
+    "source_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "binary_sha256": "5452fb1a94358bf74ac3d096ec62c1759274f207a86a85a0013e40e38a57e6eb",
+    "logs": [
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_43_38.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0008_C04_m2_inertia_s4101/02_43_38.ulg",
+        "sha256": "05b9fb10c4d20324073574678e4de1fb4bb131124208051dd5432d746d5dfac1",
+        "bytes": 134390
+      },
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_43_44.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0008_C04_m2_inertia_s4101/02_43_44.ulg",
+        "sha256": "85f02caaef5093e0df7314ecbd7d6fca7129794b434cf110042da9bb53db952a",
+        "bytes": 6954762
+      }
+    ],
+    "error": "RuntimeError(\"flight_failure: RuntimeError('Tilt boundary exceeded: 18.48286258087995')\")",
+    "failure_class": "control_boundary",
+    "failure_diagnostics": [
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0008_C04_m2_inertia_s4101/02_43_38.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          0
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.0035816235467791557,
+          0.0031512933783233166,
+          0.004358609206974506
+        ],
+        "max_command_abs": [
+          0.0016118419589474797,
+          0.0014129714109003544,
+          0.0008717218297533691
+        ],
+        "command_peak_sample_us": [
+          424000,
+          424000,
+          924000
+        ],
+        "command_peak_last_event": [
+          "startup",
+          "startup",
+          "startup"
+        ]
+      },
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0008_C04_m2_inertia_s4101/02_43_44.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          2
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.293122261762619,
+          0.51412433385849,
+          0.10939236730337143
+        ],
+        "max_command_abs": [
+          0.018106356263160706,
+          0.025903066620230675,
+          0.15000000596046448
+        ],
+        "command_peak_sample_us": [
+          34616000,
+          34676000,
+          31620000
+        ],
+        "command_peak_last_event": [
+          "takeoff_command",
+          "takeoff_command",
+          "takeoff_command"
+        ]
+      }
+    ],
+    "path": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0008_C04_m2_inertia_s4101/m10_analysis.json",
+    "stage": "screen"
+  },
+  {
+    "mode": 2,
+    "scene": "div4",
+    "seed": 4101,
+    "group": "C04",
+    "candidate": "C04",
+    "formal": true,
+    "frozen_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "success": false,
+    "flight_success": false,
+    "analysis_success": false,
+    "source_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "binary_sha256": "5452fb1a94358bf74ac3d096ec62c1759274f207a86a85a0013e40e38a57e6eb",
+    "logs": [
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_43_47.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0009_C04_m2_div4_s4101/02_43_47.ulg",
+        "sha256": "c47feabc156e57b042b9ff995d071dad251f9e1f9a00be0b68f97bdfee82f2c8",
+        "bytes": 260377
+      },
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_43_55.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0009_C04_m2_div4_s4101/02_43_55.ulg",
+        "sha256": "63431cd773f24b71d8e473a0f0fb64cd18dcaba7c529b7a4b00a70bb4a33d154",
+        "bytes": 6442856
+      }
+    ],
+    "error": "RuntimeError(\"flight_failure: RuntimeError('Tilt boundary exceeded: 15.99124148301702')\")",
+    "failure_class": "control_boundary",
+    "failure_diagnostics": [
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0009_C04_m2_div4_s4101/02_43_47.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          0
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.0029321028850972652,
+          0.003890745108947158,
+          0.0032395769376307726
+        ],
+        "max_command_abs": [
+          0.0012072522658854723,
+          0.001554757123813033,
+          0.0006479154108092189
+        ],
+        "command_peak_sample_us": [
+          2736000,
+          1036000,
+          452000
+        ],
+        "command_peak_last_event": [
+          "startup",
+          "startup",
+          "startup"
+        ]
+      },
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0009_C04_m2_div4_s4101/02_43_55.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          2
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.01677008718252182,
+          0.5345656275749207,
+          0.019342349842190742
+        ],
+        "max_command_abs": [
+          0.003383493749424815,
+          0.023819442838430405,
+          0.14991293847560883
+        ],
+        "command_peak_sample_us": [
+          32804000,
+          34740000,
+          31700000
+        ],
+        "command_peak_last_event": [
+          "takeoff_command",
+          "takeoff_command",
+          "takeoff_command"
+        ]
+      }
+    ],
+    "path": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0009_C04_m2_div4_s4101/m10_analysis.json",
+    "stage": "screen"
+  },
+  {
+    "mode": 2,
+    "scene": "inertia",
+    "seed": 4101,
+    "group": "C05",
+    "candidate": "C05",
+    "formal": true,
+    "frozen_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "success": false,
+    "flight_success": false,
+    "analysis_success": false,
+    "source_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "binary_sha256": "5452fb1a94358bf74ac3d096ec62c1759274f207a86a85a0013e40e38a57e6eb",
+    "logs": [
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_43_57.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0010_C05_m2_inertia_s4101/02_43_57.ulg",
+        "sha256": "c80e8295207a5d2e437a1a57f302f081da9aed0c3417e77a3656252e6040869b",
+        "bytes": 141597
+      },
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_44_04.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0010_C05_m2_inertia_s4101/02_44_04.ulg",
+        "sha256": "0b2f065c545af43321620923a24fb80ec40b5c049a97925f42530c6cbced89d0",
+        "bytes": 6930508
+      }
+    ],
+    "error": "RuntimeError(\"flight_failure: RuntimeError('Tilt boundary exceeded: 15.858602551759457')\")",
+    "failure_class": "control_boundary",
+    "failure_diagnostics": [
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0010_C05_m2_inertia_s4101/02_43_57.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          0
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.002647887449711561,
+          0.0019192143809050322,
+          0.002993229776620865
+        ],
+        "max_command_abs": [
+          0.001021915813907981,
+          0.0008636563434265554,
+          0.0005986459436826408
+        ],
+        "command_peak_sample_us": [
+          672000,
+          1172000,
+          772000
+        ],
+        "command_peak_last_event": [
+          "startup",
+          "startup",
+          "startup"
+        ]
+      },
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0010_C05_m2_inertia_s4101/02_44_04.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          2
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.07492333650588989,
+          0.4850391447544098,
+          0.1454862803220749
+        ],
+        "max_command_abs": [
+          0.010736090131103992,
+          0.024965399876236916,
+          0.05233943462371826
+        ],
+        "command_peak_sample_us": [
+          33604000,
+          34852000,
+          34776000
+        ],
+        "command_peak_last_event": [
+          "takeoff_command",
+          "takeoff_command",
+          "takeoff_command"
+        ]
+      }
+    ],
+    "path": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0010_C05_m2_inertia_s4101/m10_analysis.json",
+    "stage": "screen"
+  },
+  {
+    "mode": 2,
+    "scene": "div4",
+    "seed": 4101,
+    "group": "C05",
+    "candidate": "C05",
+    "formal": true,
+    "frozen_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "success": false,
+    "flight_success": false,
+    "analysis_success": false,
+    "source_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "binary_sha256": "5452fb1a94358bf74ac3d096ec62c1759274f207a86a85a0013e40e38a57e6eb",
+    "logs": [
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_44_07.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0011_C05_m2_div4_s4101/02_44_07.ulg",
+        "sha256": "90d0a2f9af769e2ab54cbaff0143b702537abbeafcd6363814c90a5f123b04f5",
+        "bytes": 155423
+      },
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_44_13.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0011_C05_m2_div4_s4101/02_44_13.ulg",
+        "sha256": "e76dccfe4600a839992f1493e99f60d53885594150b406cd6ab31fb7df9a03a8",
+        "bytes": 6954038
+      }
+    ],
+    "error": "RuntimeError(\"flight_failure: RuntimeError('Tilt boundary exceeded: 16.509667377880323')\")",
+    "failure_class": "control_boundary",
+    "failure_diagnostics": [
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0011_C05_m2_div4_s4101/02_44_07.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          0
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.0025523360818624496,
+          0.0036243507638573647,
+          0.0032377508468925953
+        ],
+        "max_command_abs": [
+          0.0012161056511104107,
+          0.002012865850701928,
+          0.0006475501577369869
+        ],
+        "command_peak_sample_us": [
+          860000,
+          560000,
+          456000
+        ],
+        "command_peak_last_event": [
+          "startup",
+          "startup",
+          "startup"
+        ]
+      },
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0011_C05_m2_div4_s4101/02_44_13.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          2
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.18363744020462036,
+          0.5215785503387451,
+          0.013586928136646748
+        ],
+        "max_command_abs": [
+          0.015364340506494045,
+          0.024144813418388367,
+          0.014809283427894115
+        ],
+        "command_peak_sample_us": [
+          34612000,
+          35060000,
+          34916000
+        ],
+        "command_peak_last_event": [
+          "takeoff_command",
+          "takeoff_command",
+          "takeoff_command"
+        ]
+      }
+    ],
+    "path": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0011_C05_m2_div4_s4101/m10_analysis.json",
+    "stage": "screen"
+  },
+  {
+    "mode": 2,
+    "scene": "inertia",
+    "seed": 4101,
+    "group": "C06",
+    "candidate": "C06",
+    "formal": true,
+    "frozen_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "success": false,
+    "flight_success": false,
+    "analysis_success": false,
+    "source_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "binary_sha256": "5452fb1a94358bf74ac3d096ec62c1759274f207a86a85a0013e40e38a57e6eb",
+    "logs": [
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_44_16.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0012_C06_m2_inertia_s4101/02_44_16.ulg",
+        "sha256": "e1100fa95a2bbbc206436eeeef8eda6a09dd309fb39a3746a0535692110153a7",
+        "bytes": 144977
+      },
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_44_22.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0012_C06_m2_inertia_s4101/02_44_22.ulg",
+        "sha256": "2734d35085f6416eec06aa4ec25f34cd1d8a8cfcacf1cd5ecee3f1cd09fc9b26",
+        "bytes": 7065704
+      }
+    ],
+    "error": "RuntimeError(\"flight_failure: RuntimeError('Tilt boundary exceeded: 17.752593302746977')\")",
+    "failure_class": "control_boundary",
+    "failure_diagnostics": [
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0012_C06_m2_inertia_s4101/02_44_16.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          0
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.004183429758995771,
+          0.0018961961613968015,
+          0.0037772005889564753
+        ],
+        "max_command_abs": [
+          0.001348104327917099,
+          0.0007449790136888623,
+          0.0007554401527158916
+        ],
+        "command_peak_sample_us": [
+          404000,
+          408000,
+          988000
+        ],
+        "command_peak_last_event": [
+          "startup",
+          "startup",
+          "startup"
+        ]
+      },
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0012_C06_m2_inertia_s4101/02_44_22.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          2
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.045574016869068146,
+          0.6180012226104736,
+          0.12285877764225006
+        ],
+        "max_command_abs": [
+          0.0060577914118766785,
+          0.025668619200587273,
+          0.05478968843817711
+        ],
+        "command_peak_sample_us": [
+          33316000,
+          34980000,
+          34916000
+        ],
+        "command_peak_last_event": [
+          "takeoff_command",
+          "takeoff_command",
+          "takeoff_command"
+        ]
+      }
+    ],
+    "path": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0012_C06_m2_inertia_s4101/m10_analysis.json",
+    "stage": "screen"
+  },
+  {
+    "mode": 2,
+    "scene": "div4",
+    "seed": 4101,
+    "group": "C06",
+    "candidate": "C06",
+    "formal": true,
+    "frozen_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "success": false,
+    "flight_success": false,
+    "analysis_success": false,
+    "source_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "binary_sha256": "5452fb1a94358bf74ac3d096ec62c1759274f207a86a85a0013e40e38a57e6eb",
+    "logs": [
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_44_26.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0013_C06_m2_div4_s4101/02_44_26.ulg",
+        "sha256": "eabd5ba91f7e04ca6a1e17f0f2fa8a1ed88229b75382280ae73b4b924179e5ab",
+        "bytes": 145884
+      },
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_44_33.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0013_C06_m2_div4_s4101/02_44_33.ulg",
+        "sha256": "6e194cb31bf2a747bb78190ed82918355d67c4fcfa8219c31c48032a8514ef58",
+        "bytes": 6938075
+      }
+    ],
+    "error": "RuntimeError(\"flight_failure: RuntimeError('Tilt boundary exceeded: 19.543388188855086')\")",
+    "failure_class": "control_boundary",
+    "failure_diagnostics": [
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0013_C06_m2_div4_s4101/02_44_26.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          0
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.0035816235467791557,
+          0.0029351231642067432,
+          0.0015461393631994724
+        ],
+        "max_command_abs": [
+          0.0013243678258731961,
+          0.0013143887044861913,
+          0.0003092278784606606
+        ],
+        "command_peak_sample_us": [
+          396000,
+          1164000,
+          964000
+        ],
+        "command_peak_last_event": [
+          "startup",
+          "startup",
+          "startup"
+        ]
+      },
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0013_C06_m2_div4_s4101/02_44_33.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          2
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.026523644104599953,
+          0.6784255504608154,
+          0.024354880675673485
+        ],
+        "max_command_abs": [
+          0.0056419349275529385,
+          0.024733614176511765,
+          0.017391780391335487
+        ],
+        "command_peak_sample_us": [
+          33204000,
+          34900000,
+          34916000
+        ],
+        "command_peak_last_event": [
+          "takeoff_command",
+          "takeoff_command",
+          "takeoff_command"
+        ]
+      }
+    ],
+    "path": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0013_C06_m2_div4_s4101/m10_analysis.json",
+    "stage": "screen"
+  },
+  {
+    "mode": 2,
+    "scene": "inertia",
+    "seed": 4101,
+    "group": "C07",
+    "candidate": "C07",
+    "formal": true,
+    "frozen_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "success": false,
+    "flight_success": false,
+    "analysis_success": false,
+    "source_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "binary_sha256": "5452fb1a94358bf74ac3d096ec62c1759274f207a86a85a0013e40e38a57e6eb",
+    "logs": [
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_44_36.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0014_C07_m2_inertia_s4101/02_44_36.ulg",
+        "sha256": "8dacae1150bb30c088861b0d728ebfaddf5e6d22107815d2a6217b0c992fe1d4",
+        "bytes": 143184
+      },
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_44_42.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0014_C07_m2_inertia_s4101/02_44_42.ulg",
+        "sha256": "9ddca239a81919cadf58a7ea0e55867b81a0122e2a7d6a1932ec1b5bfed969ba",
+        "bytes": 6939866
+      }
+    ],
+    "error": "RuntimeError(\"flight_failure: RuntimeError('Tilt boundary exceeded: 18.745120664006436')\")",
+    "failure_class": "control_boundary",
+    "failure_diagnostics": [
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0014_C07_m2_inertia_s4101/02_44_36.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          0
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.00255954428575933,
+          0.003205734770745039,
+          0.0037772005889564753
+        ],
+        "max_command_abs": [
+          0.0014732740819454193,
+          0.001138073275797069,
+          0.0007554401527158916
+        ],
+        "command_peak_sample_us": [
+          420000,
+          420000,
+          988000
+        ],
+        "command_peak_last_event": [
+          "startup",
+          "startup",
+          "startup"
+        ]
+      },
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0014_C07_m2_inertia_s4101/02_44_42.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          2
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.0685558095574379,
+          0.6143303513526917,
+          0.14190426468849182
+        ],
+        "max_command_abs": [
+          0.00607655243948102,
+          0.02569732256233692,
+          0.12952592968940735
+        ],
+        "command_peak_sample_us": [
+          33384000,
+          34852000,
+          31804000
+        ],
+        "command_peak_last_event": [
+          "takeoff_command",
+          "takeoff_command",
+          "takeoff_command"
+        ]
+      }
+    ],
+    "path": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0014_C07_m2_inertia_s4101/m10_analysis.json",
+    "stage": "screen"
+  },
+  {
+    "mode": 2,
+    "scene": "div4",
+    "seed": 4101,
+    "group": "C07",
+    "candidate": "C07",
+    "formal": true,
+    "frozen_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "success": false,
+    "flight_success": false,
+    "analysis_success": false,
+    "source_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "binary_sha256": "5452fb1a94358bf74ac3d096ec62c1759274f207a86a85a0013e40e38a57e6eb",
+    "logs": [
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_44_45.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0015_C07_m2_div4_s4101/02_44_45.ulg",
+        "sha256": "47244812e58a1241634bd2f7897099256057ae440b26fba46dadbbf41f4bda2e",
+        "bytes": 132702
+      },
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_44_51.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0015_C07_m2_div4_s4101/02_44_51.ulg",
+        "sha256": "e11039dd3df81da6d217bdd829617f4df8b9d7b9b44402024fa94c20b3094dd1",
+        "bytes": 6843906
+      }
+    ],
+    "error": "RuntimeError(\"flight_failure: RuntimeError('Tilt boundary exceeded: 19.887500662075798')\")",
+    "failure_class": "control_boundary",
+    "failure_diagnostics": [
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0015_C07_m2_div4_s4101/02_44_45.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          0
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.001816087169572711,
+          0.0036243507638573647,
+          0.0032377508468925953
+        ],
+        "max_command_abs": [
+          0.0012161056511104107,
+          0.002012865850701928,
+          0.0006475501577369869
+        ],
+        "command_peak_sample_us": [
+          860000,
+          560000,
+          456000
+        ],
+        "command_peak_last_event": [
+          "startup",
+          "startup",
+          "startup"
+        ]
+      },
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0015_C07_m2_div4_s4101/02_44_51.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          2
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.03699258714914322,
+          0.6181651949882507,
+          0.023208312690258026
+        ],
+        "max_command_abs": [
+          0.0058860015124082565,
+          0.02346234768629074,
+          0.12899714708328247
+        ],
+        "command_peak_sample_us": [
+          31988000,
+          34212000,
+          31156000
+        ],
+        "command_peak_last_event": [
+          "takeoff_command",
+          "takeoff_command",
+          "takeoff_command"
+        ]
+      }
+    ],
+    "path": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0015_C07_m2_div4_s4101/m10_analysis.json",
+    "stage": "screen"
+  },
+  {
+    "mode": 2,
+    "scene": "inertia",
+    "seed": 4101,
+    "group": "C08",
+    "candidate": "C08",
+    "formal": true,
+    "frozen_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "success": false,
+    "flight_success": false,
+    "analysis_success": false,
+    "source_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "binary_sha256": "5452fb1a94358bf74ac3d096ec62c1759274f207a86a85a0013e40e38a57e6eb",
+    "logs": [
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_44_55.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0016_C08_m2_inertia_s4101/02_44_55.ulg",
+        "sha256": "ca9737fcfa297a6e33ed2e94546113967ea8cbd180396cdd037eb6b22a08db0c",
+        "bytes": 153951
+      },
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_45_02.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0016_C08_m2_inertia_s4101/02_45_02.ulg",
+        "sha256": "c2a7b1faf5d73f4b7d801f82594e5c8742f262d205574f930772ff38600c1d70",
+        "bytes": 6957459
+      }
+    ],
+    "error": "RuntimeError(\"flight_failure: RuntimeError('Tilt boundary exceeded: 15.85173645257019')\")",
+    "failure_class": "control_boundary",
+    "failure_diagnostics": [
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0016_C08_m2_inertia_s4101/02_44_55.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          0
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.0036591843236237764,
+          0.003944276832044125,
+          0.002911049872636795
+        ],
+        "max_command_abs": [
+          0.0014729464892297983,
+          0.0010621887631714344,
+          0.0005822099628858268
+        ],
+        "command_peak_sample_us": [
+          400000,
+          516000,
+          416000
+        ],
+        "command_peak_last_event": [
+          "startup",
+          "startup",
+          "startup"
+        ]
+      },
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0016_C08_m2_inertia_s4101/02_45_02.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          2
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.09739133715629578,
+          0.49246835708618164,
+          0.11191389709711075
+        ],
+        "max_command_abs": [
+          0.010114212520420551,
+          0.024927867576479912,
+          0.05006352439522743
+        ],
+        "command_peak_sample_us": [
+          33604000,
+          34996000,
+          34916000
+        ],
+        "command_peak_last_event": [
+          "takeoff_command",
+          "takeoff_command",
+          "takeoff_command"
+        ]
+      }
+    ],
+    "path": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0016_C08_m2_inertia_s4101/m10_analysis.json",
+    "stage": "screen"
+  },
+  {
+    "mode": 2,
+    "scene": "div4",
+    "seed": 4101,
+    "group": "C08",
+    "candidate": "C08",
+    "formal": true,
+    "frozen_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "success": false,
+    "flight_success": false,
+    "analysis_success": false,
+    "source_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "binary_sha256": "5452fb1a94358bf74ac3d096ec62c1759274f207a86a85a0013e40e38a57e6eb",
+    "logs": [
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_45_05.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0017_C08_m2_div4_s4101/02_45_05.ulg",
+        "sha256": "886946d410209808bb6de2ea55d5fa9b4f39c446c6226857b4a6af88c40dcb75",
+        "bytes": 145640
+      },
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_45_11.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0017_C08_m2_div4_s4101/02_45_11.ulg",
+        "sha256": "82e37165369299026161a7e1850861f25de2d5dcaa5f4a8a9a3c54a51f32f003",
+        "bytes": 7190335
+      }
+    ],
+    "error": "RuntimeError(\"flight_failure: RuntimeError('Tilt boundary exceeded: 35.85489301909067')\")",
+    "failure_class": "control_boundary",
+    "failure_diagnostics": [
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0017_C08_m2_div4_s4101/02_45_05.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          0
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.0035816235467791557,
+          0.0019348260248079896,
+          0.0018842618446797132
+        ],
+        "max_command_abs": [
+          0.0014052994083613157,
+          0.0014092369237914681,
+          0.00037685237475670874
+        ],
+        "command_peak_sample_us": [
+          400000,
+          576000,
+          776000
+        ],
+        "command_peak_last_event": [
+          "startup",
+          "startup",
+          "startup"
+        ]
+      },
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0017_C08_m2_div4_s4101/02_45_11.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          2
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.03973964601755142,
+          1.400371789932251,
+          0.02302195504307747
+        ],
+        "max_command_abs": [
+          0.006264036055654287,
+          0.04168793559074402,
+          0.017010467126965523
+        ],
+        "command_peak_sample_us": [
+          33616000,
+          36192000,
+          34288000
+        ],
+        "command_peak_last_event": [
+          "takeoff_command",
+          "takeoff_command",
+          "takeoff_command"
+        ]
+      }
+    ],
+    "path": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0017_C08_m2_div4_s4101/m10_analysis.json",
+    "stage": "screen"
+  },
+  {
+    "mode": 2,
+    "scene": "inertia",
+    "seed": 4101,
+    "group": "C09",
+    "candidate": "C09",
+    "formal": true,
+    "frozen_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "success": false,
+    "flight_success": false,
+    "analysis_success": false,
+    "source_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "binary_sha256": "5452fb1a94358bf74ac3d096ec62c1759274f207a86a85a0013e40e38a57e6eb",
+    "logs": [
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_45_15.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0018_C09_m2_inertia_s4101/02_45_15.ulg",
+        "sha256": "ee014178ef1ebd8970d4dde2a42e2618dc8b2a5f3dfb7f4326ecdd206fc32f21",
+        "bytes": 158956
+      },
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_45_21.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0018_C09_m2_inertia_s4101/02_45_21.ulg",
+        "sha256": "292e0a06510f5b530968126e163768778ade06e0c63c9fa89aef743ad212470f",
+        "bytes": 6960152
+      }
+    ],
+    "error": "RuntimeError(\"flight_failure: RuntimeError('Tilt boundary exceeded: 23.511692718531993')\")",
+    "failure_class": "control_boundary",
+    "failure_diagnostics": [
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0018_C09_m2_inertia_s4101/02_45_15.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          0
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.0035816235467791557,
+          0.0031512933783233166,
+          0.004358609206974506
+        ],
+        "max_command_abs": [
+          0.0016118419589474797,
+          0.0014129714109003544,
+          0.0008717218297533691
+        ],
+        "command_peak_sample_us": [
+          424000,
+          424000,
+          924000
+        ],
+        "command_peak_last_event": [
+          "startup",
+          "startup",
+          "startup"
+        ]
+      },
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0018_C09_m2_inertia_s4101/02_45_21.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          2
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.44303104281425476,
+          0.5055869221687317,
+          0.10837840288877487
+        ],
+        "max_command_abs": [
+          0.01930401660501957,
+          0.025770781561732292,
+          0.04940858110785484
+        ],
+        "command_peak_sample_us": [
+          34936000,
+          34908000,
+          34776000
+        ],
+        "command_peak_last_event": [
+          "takeoff_command",
+          "takeoff_command",
+          "takeoff_command"
+        ]
+      }
+    ],
+    "path": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0018_C09_m2_inertia_s4101/m10_analysis.json",
+    "stage": "screen"
+  },
+  {
+    "mode": 2,
+    "scene": "div4",
+    "seed": 4101,
+    "group": "C09",
+    "candidate": "C09",
+    "formal": true,
+    "frozen_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "success": false,
+    "flight_success": false,
+    "analysis_success": false,
+    "source_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "binary_sha256": "5452fb1a94358bf74ac3d096ec62c1759274f207a86a85a0013e40e38a57e6eb",
+    "logs": [
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_45_25.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0019_C09_m2_div4_s4101/02_45_25.ulg",
+        "sha256": "64e5eca4c89788887ab7045f971f68a440aa546644e51e50eaf0e42ace7b53e4",
+        "bytes": 144733
+      },
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_45_31.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0019_C09_m2_div4_s4101/02_45_31.ulg",
+        "sha256": "a0a270dc78858a70dcc4058793e136bac52acc2d5fd18d37ea381c44d6c20fd4",
+        "bytes": 6811390
+      }
+    ],
+    "error": "RuntimeError(\"flight_failure: RuntimeError('Tilt boundary exceeded: 16.702355558076768')\")",
+    "failure_class": "control_boundary",
+    "failure_diagnostics": [
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0019_C09_m2_div4_s4101/02_45_25.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          0
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.004896648693829775,
+          0.0026570591144263744,
+          0.0029032230377197266
+        ],
+        "max_command_abs": [
+          0.0020104050636291504,
+          0.001058204798027873,
+          0.0005806446424685419
+        ],
+        "command_peak_sample_us": [
+          1264000,
+          1168000,
+          416000
+        ],
+        "command_peak_last_event": [
+          "startup",
+          "startup",
+          "startup"
+        ]
+      },
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0019_C09_m2_div4_s4101/02_45_31.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          2
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.04612576961517334,
+          0.5436146259307861,
+          0.03413330763578415
+        ],
+        "max_command_abs": [
+          0.0046315183863043785,
+          0.0257750004529953,
+          0.12945988774299622
+        ],
+        "command_peak_sample_us": [
+          33312000,
+          34432000,
+          31392000
+        ],
+        "command_peak_last_event": [
+          "takeoff_command",
+          "takeoff_command",
+          "takeoff_command"
+        ]
+      }
+    ],
+    "path": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0019_C09_m2_div4_s4101/m10_analysis.json",
+    "stage": "screen"
+  },
+  {
+    "mode": 2,
+    "scene": "inertia",
+    "seed": 4101,
+    "group": "C10",
+    "candidate": "C10",
+    "formal": true,
+    "frozen_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "success": false,
+    "flight_success": false,
+    "analysis_success": false,
+    "source_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "binary_sha256": "5452fb1a94358bf74ac3d096ec62c1759274f207a86a85a0013e40e38a57e6eb",
+    "logs": [
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_45_34.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0020_C10_m2_inertia_s4101/02_45_34.ulg",
+        "sha256": "4f8b1f9bc58b4309d66803c673897a9fccf127a03f65d5cf022dcb53c143ac1f",
+        "bytes": 136772
+      },
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_45_40.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0020_C10_m2_inertia_s4101/02_45_40.ulg",
+        "sha256": "8a9ae9b29789c24c694e869ecdb54febb54355217a7fe1f08c8e089996f27418",
+        "bytes": 6957064
+      }
+    ],
+    "error": "RuntimeError(\"flight_failure: RuntimeError('Tilt boundary exceeded: 21.526799360174262')\")",
+    "failure_class": "control_boundary",
+    "failure_diagnostics": [
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0020_C10_m2_inertia_s4101/02_45_34.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          0
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.004183429758995771,
+          0.0019348260248079896,
+          0.0018842618446797132
+        ],
+        "max_command_abs": [
+          0.0014729464892297983,
+          0.0014092369237914681,
+          0.00037685237475670874
+        ],
+        "command_peak_sample_us": [
+          400000,
+          576000,
+          776000
+        ],
+        "command_peak_last_event": [
+          "startup",
+          "startup",
+          "startup"
+        ]
+      },
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0020_C10_m2_inertia_s4101/02_45_40.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          2
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.4710642099380493,
+          0.5790456533432007,
+          0.08490509539842606
+        ],
+        "max_command_abs": [
+          0.020264726132154465,
+          0.023079605773091316,
+          0.04851476103067398
+        ],
+        "command_peak_sample_us": [
+          34704000,
+          34696000,
+          34652000
+        ],
+        "command_peak_last_event": [
+          "takeoff_command",
+          "takeoff_command",
+          "takeoff_command"
+        ]
+      }
+    ],
+    "path": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0020_C10_m2_inertia_s4101/m10_analysis.json",
+    "stage": "screen"
+  },
+  {
+    "mode": 2,
+    "scene": "div4",
+    "seed": 4101,
+    "group": "C10",
+    "candidate": "C10",
+    "formal": true,
+    "frozen_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "success": false,
+    "flight_success": false,
+    "analysis_success": false,
+    "source_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "binary_sha256": "5452fb1a94358bf74ac3d096ec62c1759274f207a86a85a0013e40e38a57e6eb",
+    "logs": [
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_45_44.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0021_C10_m2_div4_s4101/02_45_44.ulg",
+        "sha256": "1d241ec049fd0f5622e83939484734f512d799af3f86fb9ac5f7ba848d77332e",
+        "bytes": 141959
+      },
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_45_50.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0021_C10_m2_div4_s4101/02_45_50.ulg",
+        "sha256": "7d268c4dad9e4edf18efb06ba0c4e928bbbf44ef78c74dfcd2f018ccb48bb00b",
+        "bytes": 6959917
+      }
+    ],
+    "error": "RuntimeError(\"flight_failure: RuntimeError('Tilt boundary exceeded: 21.582817716566428')\")",
+    "failure_class": "control_boundary",
+    "failure_diagnostics": [
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0021_C10_m2_div4_s4101/02_45_44.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          0
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.0033495675306767225,
+          0.0036416298244148493,
+          0.003192358184605837
+        ],
+        "max_command_abs": [
+          0.0015331052709370852,
+          0.0014236574061214924,
+          0.0006384716252796352
+        ],
+        "command_peak_sample_us": [
+          624000,
+          424000,
+          624000
+        ],
+        "command_peak_last_event": [
+          "startup",
+          "startup",
+          "startup"
+        ]
+      },
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0021_C10_m2_div4_s4101/02_45_50.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          2
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.3275754749774933,
+          0.6304785013198853,
+          0.021870842203497887
+        ],
+        "max_command_abs": [
+          0.014980948530137539,
+          0.02377796173095703,
+          0.15000000596046448
+        ],
+        "command_peak_sample_us": [
+          34856000,
+          34808000,
+          31752000
+        ],
+        "command_peak_last_event": [
+          "takeoff_command",
+          "takeoff_command",
+          "takeoff_command"
+        ]
+      }
+    ],
+    "path": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0021_C10_m2_div4_s4101/m10_analysis.json",
+    "stage": "screen"
+  },
+  {
+    "mode": 2,
+    "scene": "inertia",
+    "seed": 4101,
+    "group": "C11",
+    "candidate": "C11",
+    "formal": true,
+    "frozen_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "success": false,
+    "flight_success": false,
+    "analysis_success": false,
+    "source_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "binary_sha256": "5452fb1a94358bf74ac3d096ec62c1759274f207a86a85a0013e40e38a57e6eb",
+    "logs": [
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_45_53.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0022_C11_m2_inertia_s4101/02_45_53.ulg",
+        "sha256": "1559118b880711adeaa76e84b47c03ce1dd94fe09b8da475c0aabf995941e420",
+        "bytes": 262579
+      },
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_46_02.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0022_C11_m2_inertia_s4101/02_46_02.ulg",
+        "sha256": "b6601427053bf5780da6cec69bf5dbada51fbb84c06fdefe5c3bd97152657437",
+        "bytes": 6360092
+      }
+    ],
+    "error": "RuntimeError(\"flight_failure: RuntimeError('Tilt boundary exceeded: 19.396601229264828')\")",
+    "failure_class": "control_boundary",
+    "failure_diagnostics": [
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0022_C11_m2_inertia_s4101/02_45_53.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          0
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.0038964091800153255,
+          0.004755041096359491,
+          0.003240520367398858
+        ],
+        "max_command_abs": [
+          0.00164147955365479,
+          0.002363436622545123,
+          0.0006481040618382394
+        ],
+        "command_peak_sample_us": [
+          2756000,
+          556000,
+          456000
+        ],
+        "command_peak_last_event": [
+          "startup",
+          "startup",
+          "startup"
+        ]
+      },
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0022_C11_m2_inertia_s4101/02_46_02.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          2
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.1389668881893158,
+          0.5758593082427979,
+          0.11475242674350739
+        ],
+        "max_command_abs": [
+          0.006466470193117857,
+          0.024637414142489433,
+          0.1295066475868225
+        ],
+        "command_peak_sample_us": [
+          34320000,
+          34268000,
+          31216000
+        ],
+        "command_peak_last_event": [
+          "takeoff_command",
+          "takeoff_command",
+          "takeoff_command"
+        ]
+      }
+    ],
+    "path": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0022_C11_m2_inertia_s4101/m10_analysis.json",
+    "stage": "screen"
+  },
+  {
+    "mode": 2,
+    "scene": "div4",
+    "seed": 4101,
+    "group": "C11",
+    "candidate": "C11",
+    "formal": true,
+    "frozen_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "success": false,
+    "flight_success": false,
+    "analysis_success": false,
+    "source_head": "6c90422d6fb7d3e815bdf758ab252ac8d4e914dc",
+    "binary_sha256": "5452fb1a94358bf74ac3d096ec62c1759274f207a86a85a0013e40e38a57e6eb",
+    "logs": [
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_46_03.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0023_C11_m2_div4_s4101/02_46_03.ulg",
+        "sha256": "ce1e4228c99337c813b18c6fc4b9cb66036bd92ebc592d895886386c33c4227f",
+        "bytes": 146211
+      },
+      {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-18/02_46_09.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0023_C11_m2_div4_s4101/02_46_09.ulg",
+        "sha256": "df9bd86e049b0cc7a144de21660915bf04f5bc39b4482c367b4d4448c6aba084",
+        "bytes": 6973413
+      }
+    ],
+    "error": "RuntimeError(\"flight_failure: RuntimeError('Tilt boundary exceeded: 23.797513484431498')\")",
+    "failure_class": "control_boundary",
+    "failure_diagnostics": [
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0023_C11_m2_div4_s4101/02_46_03.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          0
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.0035816235467791557,
+          0.003944276832044125,
+          0.0029032230377197266
+        ],
+        "max_command_abs": [
+          0.0013243678258731961,
+          0.0010621881810948253,
+          0.0005806446424685419
+        ],
+        "command_peak_sample_us": [
+          396000,
+          516000,
+          416000
+        ],
+        "command_peak_last_event": [
+          "startup",
+          "startup",
+          "startup"
+        ]
+      },
+      {
+        "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0023_C11_m2_div4_s4101/02_46_09.ulg",
+        "fault_samples": 0,
+        "abort_samples": 0,
+        "effective_modes": [
+          2
+        ],
+        "dropouts": 0,
+        "max_rate_abs": [
+          0.4937821924686432,
+          0.5986195206642151,
+          0.04311876371502876
+        ],
+        "max_command_abs": [
+          0.02002035826444626,
+          0.02240738458931446,
+          0.12956759333610535
+        ],
+        "command_peak_sample_us": [
+          34960000,
+          34912000,
+          31872000
+        ],
+        "command_peak_last_event": [
+          "takeoff_command",
+          "takeoff_command",
+          "takeoff_command"
+        ]
+      }
+    ],
+    "path": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT01-20260918/search01/screen/0023_C11_m2_div4_s4101/m10_analysis.json",
+    "stage": "screen"
+  }
+]

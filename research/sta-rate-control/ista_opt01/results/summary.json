@@ -1,0 +1,1608 @@
+{
+  "stages": [
+    {
+      "stage": "reference",
+      "attempted": 12,
+      "accepted": 12
+    },
+    {
+      "stage": "screen",
+      "attempted": 24,
+      "accepted": 3
+    },
+    {
+      "stage": "training",
+      "attempted": 10,
+      "accepted": 10
+    }
+  ],
+  "attempted": 46,
+  "accepted": 25,
+  "failure_classes": {
+    "control_boundary": 21
+  },
+  "conclusion": {
+    "status": "no_training_eligible_candidate",
+    "scores": [
+      {
+        "id": "C01",
+        "eligible": false,
+        "scenes": [
+          "nominal",
+          "torque",
+          "inertia",
+          "noise",
+          "div2",
+          "div4"
+        ],
+        "ratios": [
+          1.0267437966409878,
+          1.028854587545392,
+          1.0491734307009142,
+          1.0301033077411668,
+          1.111377679980404,
+          1.259265458736823
+        ],
+        "axis_ratios": [
+          [
+            0.9942668858228983,
+            1.0671942645643937,
+            1.0241415949463841
+          ],
+          [
+            0.9988433247222777,
+            1.0625694094767952,
+            1.0333101741609303
+          ],
+          [
+            1.0276223594333826,
+            1.0593347444297327,
+            1.0707004249794843
+          ],
+          [
+            1.0186659560524198,
+            1.0544356424000259,
+            1.0174084913118022
+          ],
+          [
+            1.0463771014893801,
+            1.2192732474621708,
+            1.0589767024395758
+          ],
+          [
+            0.9464217226246452,
+            1.7449494447894027,
+            1.1274614138472774
+          ]
+        ],
+        "wins": 0,
+        "geometric_ratio": 1.0812360539308314,
+        "worst_ratio": 1.259265458736823,
+        "max_axis_ratio": 1.7449494447894027,
+        "goal_met": false
+      }
+    ]
+  },
+  "cells": [
+    {
+      "candidate": "C00",
+      "scene": "inertia",
+      "attempted": 1,
+      "accepted": 0,
+      "seeds": [
+        4101
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": null,
+      "iae_tracking_rad_mean": null,
+      "rmse_steady_mean": null,
+      "control_rms_mean": null,
+      "control_peak_mean": null,
+      "protected_fraction_mean": null,
+      "native_highband_rms_mean": null,
+      "common_0_20hz_rms_mean": null,
+      "mixer_saturation_fraction_mean": null,
+      "kernel_wall_ns_per_sim_second_mean": null,
+      "module_wall_ns_per_sim_second_mean": null
+    },
+    {
+      "candidate": "C00",
+      "scene": "div4",
+      "attempted": 1,
+      "accepted": 1,
+      "seeds": [
+        4101
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": [
+        0.00591383198917606,
+        0.008765772430183583,
+        0.003584912837585997
+      ],
+      "iae_tracking_rad_mean": [
+        0.16100214284908726,
+        0.2807373392157024,
+        0.10315074399509468
+      ],
+      "rmse_steady_mean": [
+        0.0042633978793657976,
+        0.012540068470134148,
+        0.0018038006559595835
+      ],
+      "control_rms_mean": [
+        0.0009028997412292935,
+        0.0043716963269173495,
+        0.0019265934531271017
+      ],
+      "control_peak_mean": [
+        0.002115517621859908,
+        0.006407489534467459,
+        0.004046422429382801
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.00017213142391433079,
+        0.0002166010702971643,
+        0.0005844580466896024
+      ],
+      "common_0_20hz_rms_mean": [
+        0.000908241357081434,
+        0.0007901104317957844,
+        0.0018080255642746726
+      ],
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 78094.63136239964,
+      "module_wall_ns_per_sim_second_mean": 797699.1339836752,
+      "tv_per_s_mean": [
+        0.023794497294981436,
+        0.027836559715473816,
+        0.0675227794513123
+      ],
+      "kernel_cost": {
+        "median_ns": 841.0,
+        "p95_ns": 3707.5499999999975,
+        "p99_ns": 4899.249999999998
+      },
+      "module_cost": {
+        "median_ns": 1868.0,
+        "p95_ns": 8673.399999999994,
+        "p99_ns": 15117.649999999992
+      },
+      "max_tilt_deg": 2.548760981966863,
+      "max_height_error_m": 0.11756658554077148,
+      "motor_original_missing": 1409
+    },
+    {
+      "candidate": "C01",
+      "scene": "nominal",
+      "attempted": 2,
+      "accepted": 2,
+      "seeds": [
+        4101,
+        4102
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": [
+        0.0050575761219846145,
+        0.0045659904850535345,
+        0.0030957031665693993
+      ],
+      "iae_tracking_rad_mean": [
+        0.1392624267678766,
+        0.12880175941868222,
+        0.08960870302730473
+      ],
+      "rmse_steady_mean": [
+        0.003862303947857342,
+        0.005381035725595751,
+        0.0017662624822042572
+      ],
+      "control_rms_mean": [
+        0.0009856242922988746,
+        0.004454917708856024,
+        0.0020648693254756243
+      ],
+      "control_peak_mean": [
+        0.002423924393951893,
+        0.006941427942365408,
+        0.004556927364319563
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.00029359130919951555,
+        0.0003716979649711105,
+        0.0008347686585845894
+      ],
+      "common_0_20hz_rms_mean": [
+        0.0008918484460678877,
+        0.0010884179726670749,
+        0.0018843771015138806
+      ],
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 209244.35775735677,
+      "module_wall_ns_per_sim_second_mean": 892141.5137379577,
+      "tv_per_s_mean": [
+        0.05278786631026833,
+        0.0704472825746052,
+        0.1452919914528934
+      ],
+      "kernel_cost": {
+        "median_ns": 560.5,
+        "p95_ns": 2483.5249999999996,
+        "p99_ns": 3724.635000000001
+      },
+      "module_cost": {
+        "median_ns": 2285.25,
+        "p95_ns": 9579.025,
+        "p99_ns": 15011.015
+      },
+      "max_tilt_deg": 1.681853170359169,
+      "max_height_error_m": 0.11699140071868896,
+      "motor_original_missing": 2755
+    },
+    {
+      "candidate": "C01",
+      "scene": "torque",
+      "attempted": 2,
+      "accepted": 2,
+      "seeds": [
+        4101,
+        4102
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": [
+        0.005244947582240622,
+        0.004534525078687828,
+        0.0031798703535749857
+      ],
+      "iae_tracking_rad_mean": [
+        0.1440362142140439,
+        0.12855864855300753,
+        0.09171094109666592
+      ],
+      "rmse_steady_mean": [
+        0.004241612670975795,
+        0.005459500224956556,
+        0.0017600723935689894
+      ],
+      "control_rms_mean": [
+        0.0010030890146766123,
+        0.004452006861682459,
+        0.0020888563084738763
+      ],
+      "control_peak_mean": [
+        0.002470139297656715,
+        0.006897567538544536,
+        0.004379171179607511
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.0002919505951855787,
+        0.00037935759883423955,
+        0.0008344914641510812
+      ],
+      "common_0_20hz_rms_mean": [
+        0.0009116015235434269,
+        0.001056866721698866,
+        0.0019135022127040216
+      ],
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 208664.58873057703,
+      "module_wall_ns_per_sim_second_mean": 910774.6251807488,
+      "tv_per_s_mean": [
+        0.052331366408110355,
+        0.07094698759869465,
+        0.14453508554518318
+      ],
+      "kernel_cost": {
+        "median_ns": 556.0,
+        "p95_ns": 2487.0,
+        "p99_ns": 3831.55
+      },
+      "module_cost": {
+        "median_ns": 2297.0,
+        "p95_ns": 9556.25,
+        "p99_ns": 15503.900000000003
+      },
+      "max_tilt_deg": 1.6882116592262875,
+      "max_height_error_m": 0.11773049831390381,
+      "motor_original_missing": 2836
+    },
+    {
+      "candidate": "C01",
+      "scene": "inertia",
+      "attempted": 2,
+      "accepted": 2,
+      "seeds": [
+        4101,
+        4102
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": [
+        0.005470647362568712,
+        0.004328114124348369,
+        0.003641448504860843
+      ],
+      "iae_tracking_rad_mean": [
+        0.15109039748313807,
+        0.12254941739450442,
+        0.10471429799695034
+      ],
+      "rmse_steady_mean": [
+        0.003975036148405532,
+        0.005340878286857718,
+        0.0016995410898018991
+      ],
+      "control_rms_mean": [
+        0.001029077804361369,
+        0.0044375081581300236,
+        0.002242233286181337
+      ],
+      "control_peak_mean": [
+        0.0024333301698789,
+        0.006926670437678695,
+        0.004697637632489204
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.0002810245341317097,
+        0.00038588239206826044,
+        0.0007906250005482525
+      ],
+      "common_0_20hz_rms_mean": [
+        0.000970972919262115,
+        0.0010183681761010068,
+        0.0020995844230845143
+      ],
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 205961.18982588587,
+      "module_wall_ns_per_sim_second_mean": 894828.1586221751,
+      "tv_per_s_mean": [
+        0.0504755964592947,
+        0.07300219644093886,
+        0.1357274867144661
+      ],
+      "kernel_cost": {
+        "median_ns": 549.0,
+        "p95_ns": 2468.1749999999993,
+        "p99_ns": 3811.17
+      },
+      "module_cost": {
+        "median_ns": 2289.75,
+        "p95_ns": 9562.199999999997,
+        "p99_ns": 15223.255000000012
+      },
+      "max_tilt_deg": 1.866668028529979,
+      "max_height_error_m": 0.12035214900970459,
+      "motor_original_missing": 2830
+    },
+    {
+      "candidate": "C01",
+      "scene": "noise",
+      "attempted": 2,
+      "accepted": 2,
+      "seeds": [
+        4101,
+        4102
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": [
+        0.006552477600033529,
+        0.005767092743259929,
+        0.004769560023872443
+      ],
+      "iae_tracking_rad_mean": [
+        0.18426563936251478,
+        0.16423817933799728,
+        0.13780457454291173
+      ],
+      "rmse_steady_mean": [
+        0.006159095414614302,
+        0.00641784515418776,
+        0.0035261859305256004
+      ],
+      "control_rms_mean": [
+        0.0011416059429974,
+        0.004522668703166005,
+        0.0025743233076752463
+      ],
+      "control_peak_mean": [
+        0.00268723804038018,
+        0.007416986394673586,
+        0.005475726909935474
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.0004658400041835448,
+        0.0006111960776929684,
+        0.0013255853530564957
+      ],
+      "common_0_20hz_rms_mean": [
+        0.0010277393986543853,
+        0.0011540403063492045,
+        0.0022069029260196097
+      ],
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 208702.5898367444,
+      "module_wall_ns_per_sim_second_mean": 924884.9355945901,
+      "tv_per_s_mean": [
+        0.0812053389346056,
+        0.11042466432101922,
+        0.23440294453409177
+      ],
+      "kernel_cost": {
+        "median_ns": 558.0,
+        "p95_ns": 2475.95,
+        "p99_ns": 3694.165
+      },
+      "module_cost": {
+        "median_ns": 2279.5,
+        "p95_ns": 9538.325,
+        "p99_ns": 15262.095000000001
+      },
+      "max_tilt_deg": 1.7574450428564352,
+      "max_height_error_m": 0.14759278297424316,
+      "motor_original_missing": 2746
+    },
+    {
+      "candidate": "C01",
+      "scene": "div2",
+      "attempted": 2,
+      "accepted": 2,
+      "seeds": [
+        4101,
+        4102
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": [
+        0.005596198733938318,
+        0.005726613997194845,
+        0.0032157517248372473
+      ],
+      "iae_tracking_rad_mean": [
+        0.15618980862924947,
+        0.16771553825898444,
+        0.09347170063015074
+      ],
+      "rmse_steady_mean": [
+        0.004828002625321463,
+        0.006571242215005666,
+        0.001905261175520504
+      ],
+      "control_rms_mean": [
+        0.0009879044132146825,
+        0.004430328511858786,
+        0.0020054894734910286
+      ],
+      "control_peak_mean": [
+        0.002414333401247859,
+        0.006744678132236004,
+        0.004185456084087491
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.0002660103493388025,
+        0.0003436478560959035,
+        0.0007783258345350429
+      ],
+      "common_0_20hz_rms_mean": [
+        0.000896894822595646,
+        0.0010203404085902246,
+        0.0018464453758446713
+      ],
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 115255.45758148964,
+      "module_wall_ns_per_sim_second_mean": 770572.8829361822,
+      "tv_per_s_mean": [
+        0.04055214097533938,
+        0.05522760711674993,
+        0.11760790491362944
+      ],
+      "kernel_cost": {
+        "median_ns": 668.25,
+        "p95_ns": 2733.3249999999985,
+        "p99_ns": 4141.0599999999995
+      },
+      "module_cost": {
+        "median_ns": 2034.0,
+        "p95_ns": 8300.299999999996,
+        "p99_ns": 14002.069999999992
+      },
+      "max_tilt_deg": 1.5237663126821583,
+      "max_height_error_m": 0.13103151321411133,
+      "motor_original_missing": 3041
+    },
+    {
+      "candidate": "C01",
+      "scene": "div4",
+      "attempted": 2,
+      "accepted": 2,
+      "seeds": [
+        4101,
+        4102
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": [
+        0.006267702373865732,
+        0.008939120509489057,
+        0.003560822764600064
+      ],
+      "iae_tracking_rad_mean": [
+        0.1744986737789004,
+        0.28513354418741077,
+        0.10312290439245408
+      ],
+      "rmse_steady_mean": [
+        0.005137986500915563,
+        0.010912653174742232,
+        0.0017790139610936082
+      ],
+      "control_rms_mean": [
+        0.0009436523429028768,
+        0.004404898760968759,
+        0.0019268984096403822
+      ],
+      "control_peak_mean": [
+        0.002267252537421882,
+        0.006532606668770313,
+        0.004062428371980786
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.000187238797752296,
+        0.00024605116600012365,
+        0.0005728332685691671
+      ],
+      "common_0_20hz_rms_mean": [
+        0.0008504944063015909,
+        0.0009511775706726002,
+        0.0018233829176873915
+      ],
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 78804.58744791172,
+      "module_wall_ns_per_sim_second_mean": 775578.4166019689,
+      "tv_per_s_mean": [
+        0.02330360081847576,
+        0.031659684166596785,
+        0.0649990556170271
+      ],
+      "kernel_cost": {
+        "median_ns": 873.5,
+        "p95_ns": 3687.8999999999996,
+        "p99_ns": 4956.500000000008
+      },
+      "module_cost": {
+        "median_ns": 1911.75,
+        "p95_ns": 8586.599999999999,
+        "p99_ns": 14143.500000000007
+      },
+      "max_tilt_deg": 2.154178932207689,
+      "max_height_error_m": 0.11602461338043213,
+      "motor_original_missing": 2626
+    },
+    {
+      "candidate": "C02",
+      "scene": "inertia",
+      "attempted": 1,
+      "accepted": 0,
+      "seeds": [
+        4101
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": null,
+      "iae_tracking_rad_mean": null,
+      "rmse_steady_mean": null,
+      "control_rms_mean": null,
+      "control_peak_mean": null,
+      "protected_fraction_mean": null,
+      "native_highband_rms_mean": null,
+      "common_0_20hz_rms_mean": null,
+      "mixer_saturation_fraction_mean": null,
+      "kernel_wall_ns_per_sim_second_mean": null,
+      "module_wall_ns_per_sim_second_mean": null
+    },
+    {
+      "candidate": "C02",
+      "scene": "div4",
+      "attempted": 1,
+      "accepted": 0,
+      "seeds": [
+        4101
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": null,
+      "iae_tracking_rad_mean": null,
+      "rmse_steady_mean": null,
+      "control_rms_mean": null,
+      "control_peak_mean": null,
+      "protected_fraction_mean": null,
+      "native_highband_rms_mean": null,
+      "common_0_20hz_rms_mean": null,
+      "mixer_saturation_fraction_mean": null,
+      "kernel_wall_ns_per_sim_second_mean": null,
+      "module_wall_ns_per_sim_second_mean": null
+    },
+    {
+      "candidate": "C03",
+      "scene": "inertia",
+      "attempted": 1,
+      "accepted": 0,
+      "seeds": [
+        4101
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": null,
+      "iae_tracking_rad_mean": null,
+      "rmse_steady_mean": null,
+      "control_rms_mean": null,
+      "control_peak_mean": null,
+      "protected_fraction_mean": null,
+      "native_highband_rms_mean": null,
+      "common_0_20hz_rms_mean": null,
+      "mixer_saturation_fraction_mean": null,
+      "kernel_wall_ns_per_sim_second_mean": null,
+      "module_wall_ns_per_sim_second_mean": null
+    },
+    {
+      "candidate": "C03",
+      "scene": "div4",
+      "attempted": 1,
+      "accepted": 0,
+      "seeds": [
+        4101
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": null,
+      "iae_tracking_rad_mean": null,
+      "rmse_steady_mean": null,
+      "control_rms_mean": null,
+      "control_peak_mean": null,
+      "protected_fraction_mean": null,
+      "native_highband_rms_mean": null,
+      "common_0_20hz_rms_mean": null,
+      "mixer_saturation_fraction_mean": null,
+      "kernel_wall_ns_per_sim_second_mean": null,
+      "module_wall_ns_per_sim_second_mean": null
+    },
+    {
+      "candidate": "C04",
+      "scene": "inertia",
+      "attempted": 1,
+      "accepted": 0,
+      "seeds": [
+        4101
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": null,
+      "iae_tracking_rad_mean": null,
+      "rmse_steady_mean": null,
+      "control_rms_mean": null,
+      "control_peak_mean": null,
+      "protected_fraction_mean": null,
+      "native_highband_rms_mean": null,
+      "common_0_20hz_rms_mean": null,
+      "mixer_saturation_fraction_mean": null,
+      "kernel_wall_ns_per_sim_second_mean": null,
+      "module_wall_ns_per_sim_second_mean": null
+    },
+    {
+      "candidate": "C04",
+      "scene": "div4",
+      "attempted": 1,
+      "accepted": 0,
+      "seeds": [
+        4101
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": null,
+      "iae_tracking_rad_mean": null,
+      "rmse_steady_mean": null,
+      "control_rms_mean": null,
+      "control_peak_mean": null,
+      "protected_fraction_mean": null,
+      "native_highband_rms_mean": null,
+      "common_0_20hz_rms_mean": null,
+      "mixer_saturation_fraction_mean": null,
+      "kernel_wall_ns_per_sim_second_mean": null,
+      "module_wall_ns_per_sim_second_mean": null
+    },
+    {
+      "candidate": "C05",
+      "scene": "inertia",
+      "attempted": 1,
+      "accepted": 0,
+      "seeds": [
+        4101
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": null,
+      "iae_tracking_rad_mean": null,
+      "rmse_steady_mean": null,
+      "control_rms_mean": null,
+      "control_peak_mean": null,
+      "protected_fraction_mean": null,
+      "native_highband_rms_mean": null,
+      "common_0_20hz_rms_mean": null,
+      "mixer_saturation_fraction_mean": null,
+      "kernel_wall_ns_per_sim_second_mean": null,
+      "module_wall_ns_per_sim_second_mean": null
+    },
+    {
+      "candidate": "C05",
+      "scene": "div4",
+      "attempted": 1,
+      "accepted": 0,
+      "seeds": [
+        4101
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": null,
+      "iae_tracking_rad_mean": null,
+      "rmse_steady_mean": null,
+      "control_rms_mean": null,
+      "control_peak_mean": null,
+      "protected_fraction_mean": null,
+      "native_highband_rms_mean": null,
+      "common_0_20hz_rms_mean": null,
+      "mixer_saturation_fraction_mean": null,
+      "kernel_wall_ns_per_sim_second_mean": null,
+      "module_wall_ns_per_sim_second_mean": null
+    },
+    {
+      "candidate": "C06",
+      "scene": "inertia",
+      "attempted": 1,
+      "accepted": 0,
+      "seeds": [
+        4101
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": null,
+      "iae_tracking_rad_mean": null,
+      "rmse_steady_mean": null,
+      "control_rms_mean": null,
+      "control_peak_mean": null,
+      "protected_fraction_mean": null,
+      "native_highband_rms_mean": null,
+      "common_0_20hz_rms_mean": null,
+      "mixer_saturation_fraction_mean": null,
+      "kernel_wall_ns_per_sim_second_mean": null,
+      "module_wall_ns_per_sim_second_mean": null
+    },
+    {
+      "candidate": "C06",
+      "scene": "div4",
+      "attempted": 1,
+      "accepted": 0,
+      "seeds": [
+        4101
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": null,
+      "iae_tracking_rad_mean": null,
+      "rmse_steady_mean": null,
+      "control_rms_mean": null,
+      "control_peak_mean": null,
+      "protected_fraction_mean": null,
+      "native_highband_rms_mean": null,
+      "common_0_20hz_rms_mean": null,
+      "mixer_saturation_fraction_mean": null,
+      "kernel_wall_ns_per_sim_second_mean": null,
+      "module_wall_ns_per_sim_second_mean": null
+    },
+    {
+      "candidate": "C07",
+      "scene": "inertia",
+      "attempted": 1,
+      "accepted": 0,
+      "seeds": [
+        4101
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": null,
+      "iae_tracking_rad_mean": null,
+      "rmse_steady_mean": null,
+      "control_rms_mean": null,
+      "control_peak_mean": null,
+      "protected_fraction_mean": null,
+      "native_highband_rms_mean": null,
+      "common_0_20hz_rms_mean": null,
+      "mixer_saturation_fraction_mean": null,
+      "kernel_wall_ns_per_sim_second_mean": null,
+      "module_wall_ns_per_sim_second_mean": null
+    },
+    {
+      "candidate": "C07",
+      "scene": "div4",
+      "attempted": 1,
+      "accepted": 0,
+      "seeds": [
+        4101
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": null,
+      "iae_tracking_rad_mean": null,
+      "rmse_steady_mean": null,
+      "control_rms_mean": null,
+      "control_peak_mean": null,
+      "protected_fraction_mean": null,
+      "native_highband_rms_mean": null,
+      "common_0_20hz_rms_mean": null,
+      "mixer_saturation_fraction_mean": null,
+      "kernel_wall_ns_per_sim_second_mean": null,
+      "module_wall_ns_per_sim_second_mean": null
+    },
+    {
+      "candidate": "C08",
+      "scene": "inertia",
+      "attempted": 1,
+      "accepted": 0,
+      "seeds": [
+        4101
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": null,
+      "iae_tracking_rad_mean": null,
+      "rmse_steady_mean": null,
+      "control_rms_mean": null,
+      "control_peak_mean": null,
+      "protected_fraction_mean": null,
+      "native_highband_rms_mean": null,
+      "common_0_20hz_rms_mean": null,
+      "mixer_saturation_fraction_mean": null,
+      "kernel_wall_ns_per_sim_second_mean": null,
+      "module_wall_ns_per_sim_second_mean": null
+    },
+    {
+      "candidate": "C08",
+      "scene": "div4",
+      "attempted": 1,
+      "accepted": 0,
+      "seeds": [
+        4101
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": null,
+      "iae_tracking_rad_mean": null,
+      "rmse_steady_mean": null,
+      "control_rms_mean": null,
+      "control_peak_mean": null,
+      "protected_fraction_mean": null,
+      "native_highband_rms_mean": null,
+      "common_0_20hz_rms_mean": null,
+      "mixer_saturation_fraction_mean": null,
+      "kernel_wall_ns_per_sim_second_mean": null,
+      "module_wall_ns_per_sim_second_mean": null
+    },
+    {
+      "candidate": "C09",
+      "scene": "inertia",
+      "attempted": 1,
+      "accepted": 0,
+      "seeds": [
+        4101
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": null,
+      "iae_tracking_rad_mean": null,
+      "rmse_steady_mean": null,
+      "control_rms_mean": null,
+      "control_peak_mean": null,
+      "protected_fraction_mean": null,
+      "native_highband_rms_mean": null,
+      "common_0_20hz_rms_mean": null,
+      "mixer_saturation_fraction_mean": null,
+      "kernel_wall_ns_per_sim_second_mean": null,
+      "module_wall_ns_per_sim_second_mean": null
+    },
+    {
+      "candidate": "C09",
+      "scene": "div4",
+      "attempted": 1,
+      "accepted": 0,
+      "seeds": [
+        4101
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": null,
+      "iae_tracking_rad_mean": null,
+      "rmse_steady_mean": null,
+      "control_rms_mean": null,
+      "control_peak_mean": null,
+      "protected_fraction_mean": null,
+      "native_highband_rms_mean": null,
+      "common_0_20hz_rms_mean": null,
+      "mixer_saturation_fraction_mean": null,
+      "kernel_wall_ns_per_sim_second_mean": null,
+      "module_wall_ns_per_sim_second_mean": null
+    },
+    {
+      "candidate": "C10",
+      "scene": "inertia",
+      "attempted": 1,
+      "accepted": 0,
+      "seeds": [
+        4101
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": null,
+      "iae_tracking_rad_mean": null,
+      "rmse_steady_mean": null,
+      "control_rms_mean": null,
+      "control_peak_mean": null,
+      "protected_fraction_mean": null,
+      "native_highband_rms_mean": null,
+      "common_0_20hz_rms_mean": null,
+      "mixer_saturation_fraction_mean": null,
+      "kernel_wall_ns_per_sim_second_mean": null,
+      "module_wall_ns_per_sim_second_mean": null
+    },
+    {
+      "candidate": "C10",
+      "scene": "div4",
+      "attempted": 1,
+      "accepted": 0,
+      "seeds": [
+        4101
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": null,
+      "iae_tracking_rad_mean": null,
+      "rmse_steady_mean": null,
+      "control_rms_mean": null,
+      "control_peak_mean": null,
+      "protected_fraction_mean": null,
+      "native_highband_rms_mean": null,
+      "common_0_20hz_rms_mean": null,
+      "mixer_saturation_fraction_mean": null,
+      "kernel_wall_ns_per_sim_second_mean": null,
+      "module_wall_ns_per_sim_second_mean": null
+    },
+    {
+      "candidate": "C11",
+      "scene": "inertia",
+      "attempted": 1,
+      "accepted": 0,
+      "seeds": [
+        4101
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": null,
+      "iae_tracking_rad_mean": null,
+      "rmse_steady_mean": null,
+      "control_rms_mean": null,
+      "control_peak_mean": null,
+      "protected_fraction_mean": null,
+      "native_highband_rms_mean": null,
+      "common_0_20hz_rms_mean": null,
+      "mixer_saturation_fraction_mean": null,
+      "kernel_wall_ns_per_sim_second_mean": null,
+      "module_wall_ns_per_sim_second_mean": null
+    },
+    {
+      "candidate": "C11",
+      "scene": "div4",
+      "attempted": 1,
+      "accepted": 0,
+      "seeds": [
+        4101
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": null,
+      "iae_tracking_rad_mean": null,
+      "rmse_steady_mean": null,
+      "control_rms_mean": null,
+      "control_peak_mean": null,
+      "protected_fraction_mean": null,
+      "native_highband_rms_mean": null,
+      "common_0_20hz_rms_mean": null,
+      "mixer_saturation_fraction_mean": null,
+      "kernel_wall_ns_per_sim_second_mean": null,
+      "module_wall_ns_per_sim_second_mean": null
+    },
+    {
+      "candidate": "ESTA",
+      "scene": "nominal",
+      "attempted": 2,
+      "accepted": 2,
+      "seeds": [
+        4101,
+        4102
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": [
+        0.005086738977330765,
+        0.004278499835189122,
+        0.0030227296516859717
+      ],
+      "iae_tracking_rad_mean": [
+        0.14082139640055538,
+        0.12136587175876049,
+        0.08786053671831906
+      ],
+      "rmse_steady_mean": [
+        0.0043665489714388665,
+        0.004963688892834822,
+        0.001789898340762489
+      ],
+      "control_rms_mean": [
+        0.0010550670140256138,
+        0.004485826358677118,
+        0.002154725613611782
+      ],
+      "control_peak_mean": [
+        0.002533850143663585,
+        0.0070015802048146725,
+        0.004438339965417981
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.0003214643794238781,
+        0.0004038196765937499,
+        0.0008922778389549132
+      ],
+      "common_0_20hz_rms_mean": [
+        0.0009641234583214714,
+        0.0011937592464592106,
+        0.0019577539027426784
+      ],
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 114255.26873023574,
+      "module_wall_ns_per_sim_second_mean": 808331.4287517599,
+      "tv_per_s_mean": [
+        0.05652307346779947,
+        0.07509292543464754,
+        0.15340361206880793
+      ],
+      "kernel_cost": {
+        "median_ns": 310.0,
+        "p95_ns": 1328.75,
+        "p99_ns": 2081.1500000000005
+      },
+      "module_cost": {
+        "median_ns": 2036.0,
+        "p95_ns": 8447.5,
+        "p99_ns": 13914.800000000021
+      },
+      "max_tilt_deg": 1.7017571054092688,
+      "max_height_error_m": 0.11432468891143799,
+      "motor_original_missing": 2875
+    },
+    {
+      "candidate": "ESTA",
+      "scene": "torque",
+      "attempted": 2,
+      "accepted": 2,
+      "seeds": [
+        4101,
+        4102
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": [
+        0.0052510213087712705,
+        0.004267509527608751,
+        0.0030773628607277653
+      ],
+      "iae_tracking_rad_mean": [
+        0.1469705101602813,
+        0.12083878657373134,
+        0.0889468173927744
+      ],
+      "rmse_steady_mean": [
+        0.004372318793147153,
+        0.004684673491698117,
+        0.0017731213393071539
+      ],
+      "control_rms_mean": [
+        0.001077314029908782,
+        0.0044880204077007236,
+        0.002167153755907816
+      ],
+      "control_peak_mean": [
+        0.0024523154133930802,
+        0.0069067208096385,
+        0.004532019142061472
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.0003098695103238704,
+        0.0004138226255284879,
+        0.0008831069521341453
+      ],
+      "common_0_20hz_rms_mean": [
+        0.000984491427381444,
+        0.0011560403216175743,
+        0.0019757382250278326
+      ],
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 112101.63920996875,
+      "module_wall_ns_per_sim_second_mean": 830083.2119594276,
+      "tv_per_s_mean": [
+        0.054305920000264976,
+        0.0745987133640382,
+        0.15213483217877882
+      ],
+      "kernel_cost": {
+        "median_ns": 306.0,
+        "p95_ns": 1294.0,
+        "p99_ns": 2008.0550000000003
+      },
+      "module_cost": {
+        "median_ns": 2002.0,
+        "p95_ns": 8364.324999999997,
+        "p99_ns": 14250.230000000003
+      },
+      "max_tilt_deg": 1.6801831252841402,
+      "max_height_error_m": 0.13412559032440186,
+      "motor_original_missing": 2651
+    },
+    {
+      "candidate": "ESTA",
+      "scene": "inertia",
+      "attempted": 2,
+      "accepted": 2,
+      "seeds": [
+        4101,
+        4102
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": [
+        0.005323597051338154,
+        0.004085690710237494,
+        0.00340099659989452
+      ],
+      "iae_tracking_rad_mean": [
+        0.14537345163947613,
+        0.11566094658606743,
+        0.09834709555393784
+      ],
+      "rmse_steady_mean": [
+        0.004018225764126776,
+        0.004971455191900382,
+        0.0020156671145559833
+      ],
+      "control_rms_mean": [
+        0.0010723107216826667,
+        0.004469425649384271,
+        0.002283547831129826
+      ],
+      "control_peak_mean": [
+        0.002462497795931995,
+        0.007015339797362685,
+        0.004648214904591441
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.00032079667350202903,
+        0.00042481882626307726,
+        0.0008604283806791037
+      ],
+      "common_0_20hz_rms_mean": [
+        0.0009827008165314178,
+        0.0011688827818257474,
+        0.0021163077151141116
+      ],
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 95791.97644227519,
+      "module_wall_ns_per_sim_second_mean": 676792.4691256721,
+      "tv_per_s_mean": [
+        0.05697881485981861,
+        0.07847712618402308,
+        0.14630303408473033
+      ],
+      "kernel_cost": {
+        "median_ns": 291.5,
+        "p95_ns": 1087.0499999999993,
+        "p99_ns": 1826.4300000000012
+      },
+      "module_cost": {
+        "median_ns": 1893.0,
+        "p95_ns": 7445.949999999995,
+        "p99_ns": 12307.115000000007
+      },
+      "max_tilt_deg": 1.6902586610004195,
+      "max_height_error_m": 0.11751317977905273,
+      "motor_original_missing": 3189
+    },
+    {
+      "candidate": "ESTA",
+      "scene": "noise",
+      "attempted": 2,
+      "accepted": 2,
+      "seeds": [
+        4101,
+        4102
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": [
+        0.006432410508176778,
+        0.005469364379729533,
+        0.004687949888960314
+      ],
+      "iae_tracking_rad_mean": [
+        0.18144005992716122,
+        0.15538491839695054,
+        0.13572605910513086
+      ],
+      "rmse_steady_mean": [
+        0.006228647270780725,
+        0.006207781883276719,
+        0.0036178392831143174
+      ],
+      "control_rms_mean": [
+        0.0011961701566814546,
+        0.004553897454731086,
+        0.002669926389231892
+      ],
+      "control_peak_mean": [
+        0.0026756107108667493,
+        0.0073368432931602,
+        0.005850756540894508
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.0005025871975426989,
+        0.0006520994699062148,
+        0.0013970600177422151
+      ],
+      "common_0_20hz_rms_mean": [
+        0.0010728177904336766,
+        0.0012508773918996378,
+        0.0022684484652087467
+      ],
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 118628.2040563711,
+      "module_wall_ns_per_sim_second_mean": 830912.4997839816,
+      "tv_per_s_mean": [
+        0.08580804651630874,
+        0.11597190191322523,
+        0.24441288651963886
+      ],
+      "kernel_cost": {
+        "median_ns": 321.0,
+        "p95_ns": 1371.5999999999995,
+        "p99_ns": 2114.9699999999966
+      },
+      "module_cost": {
+        "median_ns": 2066.5,
+        "p95_ns": 8579.799999999996,
+        "p99_ns": 14637.23999999999
+      },
+      "max_tilt_deg": 2.187197137290626,
+      "max_height_error_m": 0.12101852893829346,
+      "motor_original_missing": 2911
+    },
+    {
+      "candidate": "ESTA",
+      "scene": "div2",
+      "attempted": 2,
+      "accepted": 2,
+      "seeds": [
+        4101,
+        4102
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": [
+        0.0053481662834296215,
+        0.004696743743959263,
+        0.0030366595576928994
+      ],
+      "iae_tracking_rad_mean": [
+        0.15081375274270975,
+        0.13446768981951757,
+        0.08822783378468012
+      ],
+      "rmse_steady_mean": [
+        0.005120245622765793,
+        0.005218282208624169,
+        0.0020030336460937965
+      ],
+      "control_rms_mean": [
+        0.0010906233603577076,
+        0.004506179183305802,
+        0.0021559262093876824
+      ],
+      "control_peak_mean": [
+        0.002434316207654774,
+        0.0069608904886990786,
+        0.004359167302027345
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.0003047112713554913,
+        0.0003875137255157853,
+        0.000880103992530799
+      ],
+      "common_0_20hz_rms_mean": [
+        0.0010135456217917494,
+        0.0012530099839362886,
+        0.0019658842156490275
+      ],
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 65175.727370812136,
+      "module_wall_ns_per_sim_second_mean": 703953.3817911863,
+      "tv_per_s_mean": [
+        0.0460977430069123,
+        0.06117550516501069,
+        0.1338401453787128
+      ],
+      "kernel_cost": {
+        "median_ns": 370.5,
+        "p95_ns": 1531.6499999999978,
+        "p99_ns": 2431.865000000001
+      },
+      "module_cost": {
+        "median_ns": 1817.0,
+        "p95_ns": 7637.774999999999,
+        "p99_ns": 12737.159999999996
+      },
+      "max_tilt_deg": 1.7492475321148777,
+      "max_height_error_m": 0.13691413402557373,
+      "motor_original_missing": 2886
+    },
+    {
+      "candidate": "ESTA",
+      "scene": "div4",
+      "attempted": 2,
+      "accepted": 2,
+      "seeds": [
+        4101,
+        4102
+      ],
+      "conditional_on_accepted": true,
+      "rmse_tracking_mean": [
+        0.006622525903657358,
+        0.005122853579616409,
+        0.003158265747161439
+      ],
+      "iae_tracking_rad_mean": [
+        0.18766712779046793,
+        0.14924424577661558,
+        0.0919326012076781
+      ],
+      "rmse_steady_mean": [
+        0.005417526934660051,
+        0.005768398983681744,
+        0.0019602389588027585
+      ],
+      "control_rms_mean": [
+        0.0012130203457340254,
+        0.0045202979147770436,
+        0.0021997316176600315
+      ],
+      "control_peak_mean": [
+        0.002521021058782935,
+        0.007084290497004986,
+        0.0043043578043580055
+      ],
+      "protected_fraction_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_highband_rms_mean": [
+        0.00023686403098548625,
+        0.00029827287955602397,
+        0.0007378977182834255
+      ],
+      "common_0_20hz_rms_mean": [
+        0.0011360014608753346,
+        0.0013568422818128183,
+        0.0020468231888980956
+      ],
+      "mixer_saturation_fraction_mean": 0.0,
+      "kernel_wall_ns_per_sim_second_mean": 45604.76497453321,
+      "module_wall_ns_per_sim_second_mean": 729383.0124174252,
+      "tv_per_s_mean": [
+        0.03013372119726733,
+        0.041082759956932724,
+        0.08301741218437858
+      ],
+      "kernel_cost": {
+        "median_ns": 501.0,
+        "p95_ns": 2088.2999999999997,
+        "p99_ns": 2817.339999999998
+      },
+      "module_cost": {
+        "median_ns": 1827.5,
+        "p95_ns": 7912.749999999998,
+        "p99_ns": 13335.304999999991
+      },
+      "max_tilt_deg": 1.7645448548204357,
+      "max_height_error_m": 0.11972284317016602,
+      "motor_original_missing": 2687
+    }
+  ],
+  "seed_pairing": [
+    {
+      "scene": "nominal",
+      "seed": 4101,
+      "runs": 2,
+      "samples": 5000,
+      "max_difference": 0.0
+    },
+    {
+      "scene": "nominal",
+      "seed": 4102,
+      "runs": 2,
+      "samples": 5000,
+      "max_difference": 0.0
+    },
+    {
+      "scene": "torque",
+      "seed": 4101,
+      "runs": 2,
+      "samples": 5000,
+      "max_difference": 0.0
+    },
+    {
+      "scene": "torque",
+      "seed": 4102,
+      "runs": 2,
+      "samples": 5000,
+      "max_difference": 0.0
+    },
+    {
+      "scene": "inertia",
+      "seed": 4101,
+      "runs": 2,
+      "samples": 5000,
+      "max_difference": 0.0
+    },
+    {
+      "scene": "inertia",
+      "seed": 4102,
+      "runs": 2,
+      "samples": 5000,
+      "max_difference": 0.0
+    },
+    {
+      "scene": "noise",
+      "seed": 4101,
+      "runs": 2,
+      "samples": 5000,
+      "max_difference": 0.0
+    },
+    {
+      "scene": "noise",
+      "seed": 4102,
+      "runs": 2,
+      "samples": 5000,
+      "max_difference": 0.0
+    },
+    {
+      "scene": "div2",
+      "seed": 4101,
+      "runs": 2,
+      "samples": 5000,
+      "max_difference": 0.0
+    },
+    {
+      "scene": "div2",
+      "seed": 4102,
+      "runs": 2,
+      "samples": 5000,
+      "max_difference": 0.0
+    },
+    {
+      "scene": "div4",
+      "seed": 4101,
+      "runs": 3,
+      "samples": 5000,
+      "max_difference": 0.0
+    },
+    {
+      "scene": "div4",
+      "seed": 4102,
+      "runs": 2,
+      "samples": 5000,
+      "max_difference": 0.0
+    }
+  ],
+  "seed_diversity": [
+    {
+      "scene": "nominal",
+      "max_between_seed_difference": 0.016458097916820458,
+      "axis_correlations": [
+        -0.010371147536697973,
+        -0.007095896012511169,
+        0.011227968615510632
+      ]
+    },
+    {
+      "scene": "torque",
+      "max_between_seed_difference": 0.016458097916820458,
+      "axis_correlations": [
+        -0.010371147536697973,
+        -0.007095896012511169,
+        0.011227968615510632
+      ]
+    },
+    {
+      "scene": "inertia",
+      "max_between_seed_difference": 0.016458097916820458,
+      "axis_correlations": [
+        -0.010371147536697973,
+        -0.007095896012511165,
+        0.011227968615510635
+      ]
+    },
+    {
+      "scene": "noise",
+      "max_between_seed_difference": 0.03293202769889074,
+      "axis_correlations": [
+        -0.009464318355695953,
+        -0.007063375890541645,
+        0.011271384760699174
+      ]
+    },
+    {
+      "scene": "div2",
+      "max_between_seed_difference": 0.016458097916820458,
+      "axis_correlations": [
+        -0.010371147536697973,
+        -0.007095896012511169,
+        0.011227968615510632
+      ]
+    },
+    {
+      "scene": "div4",
+      "max_between_seed_difference": 0.016458097916820458,
+      "axis_correlations": [
+        -0.010371147536697973,
+        -0.007095896012511169,
+        0.011227968615510632
+      ]
+    }
+  ],
+  "verified_ulog_count": 92,
+  "limitations": "Training-only adaptive candidate selection; no independent validation/holdout inference. Seeded gyro/torque only; other original random sources unchanged."
+}

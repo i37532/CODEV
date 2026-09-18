@@ -1,6 +1,6 @@
 # PX4 STA 研究目录
 
-新增后续研究 ISTA-OPT01：固定 M10 ESTA、仅优化 ISTA 六个增益，训练/验证/留出使用新种子，不属于等预算 B 组。见 [协议](ista_opt01/PROTOCOL_CN.md) 和 [运行说明](ista_opt01/RUN_CN.md)。状态以外部实验记录和后续报告为准，不预先宣称优胜。
+ISTA-OPT01专项搜索已结束：12套候选、46次尝试（25接受/21倾角超限），未找到满足目标的参数；唯一完整候选C01的六场景RMSE均不优于固定ESTA，按预注册停止，未运行验证/留出、不更换默认参数。见 [结果报告](reports/ISTA_OPT01.md)、[协议](ista_opt01/PROTOCOL_CN.md) 和 [运行说明](ista_opt01/RUN_CN.md)。这是固定ESTA、额外ISTA调参预算的后续研究，不属于等预算B组，不覆盖原M10结论。
 
 M10正式实验与结果包已完成：600次尝试、576次接受、593次完成起降。15次PID降落指令越界、7次工程组ISTA飞行超限、2次日志无效全部保留；两次日志无效经用户明确授权不补飞续跑，协议偏离已披露。见 [M10报告](reports/M10.md)、[统计结果](m10/results/summary.json)、[预注册规范](m10/PROTOCOL_CN.md)、[运行入口](m10/RUN_CN.md)。ISTA并非全面更优；仅Iris SITL，不代表全部场景通过或实机验证。
 
