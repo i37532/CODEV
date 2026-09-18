@@ -12,8 +12,10 @@ class Checks(M10Checks):
     allowed_modes=(1,3)
     def __init__(self):
         super().__init__()
-        if self.job.get('subgate')!='A' or self.job['parameters']['MC_STA_AXES']!=3:
-            raise ValueError('This frozen source permits I05-A AXES=3 only')
+        remediation=self.job.get('remediation_subgate')
+        expected_axes=7 if remediation=='R-B' else 3
+        if self.job.get('subgate')!='A' or self.job['parameters']['MC_STA_AXES']!=expected_axes:
+            raise ValueError('Unsupported I05 subgate/mask')
         self.protocol=self.job['flight_protocol']
         for name,value in self.protocol['scenario_parameters'].items(): self.config[name]=value
 

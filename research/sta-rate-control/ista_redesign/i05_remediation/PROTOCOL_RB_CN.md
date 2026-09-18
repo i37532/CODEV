@@ -9,3 +9,6 @@ trigger4 先 12秒 yaw-only，再两个 12秒 R/P/Y 同步零净转角窗口；�
 
 每个窗口/轴逐 seed 要求 Proper RMSE ≤ `max(1.25*同seed ESTA, ESTA+.001)`；每一对的三个窗口×三轴
 RMSE 几何/算术总比值取算术平均，三配对中位数≤1.10。3/3 配对和6/6单轮有效才进入 R-C。
+
+`RB-formal01` 在首轮飞行前被旧 R-A runner 的静态 AXES=3 检查拒绝，没有启动 SITL 或产生数据。
+revision 2 仅修正 runner capability，与参数、种子、顺序和门槛无关；正式数据改用新目录。
