@@ -1,0 +1,284 @@
+{
+  "commands": [
+    {
+      "name": "diff",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "build_tests",
+      "argv": [
+        "make",
+        "tests",
+        "TESTFILTER=IstaIntegration"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "IstaIntegration",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-IstaIntegration",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I00/run01/regression/regression/IstaIntegration.xml"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "IstaRateControl",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-IstaRateControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I00/run01/regression/regression/IstaRateControl.xml"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "StaRateControl",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaRateControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I00/run01/regression/regression/StaRateControl.xml"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "StaProtection",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaProtection",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I00/run01/regression/regression/StaProtection.xml"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "StaAxesApplication",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaAxesApplication",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I00/run01/regression/regression/StaAxesApplication.xml"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "RateControl",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RateControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I00/run01/regression/regression/RateControl.xml"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "RateControlDispatcher",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RateControlDispatcher",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I00/run01/regression/regression/RateControlDispatcher.xml"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "ControllerSelection",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-ControllerSelection",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I00/run01/regression/regression/ControllerSelection.xml"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "GyroPublicationGuard",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-GyroPublicationGuard",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I00/run01/regression/regression/GyroPublicationGuard.xml"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "AttitudeControl",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-AttitudeControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I00/run01/regression/regression/AttitudeControl.xml"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "python_research",
+      "argv": [
+        "/usr/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "research/sta-rate-control/scripts",
+        "-p",
+        "test_m*.py"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "python_convenience",
+      "argv": [
+        "/usr/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "sim_scripts/_internal",
+        "-p",
+        "test_*.py"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "probe_build",
+      "argv": [
+        "g++",
+        "-std=c++14",
+        "-pedantic-errors",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Wdouble-promotion",
+        "-O2",
+        "-fno-exceptions",
+        "-fno-rtti",
+        "-Isrc/modules/mc_rate_control/StaRateControl",
+        "src/modules/mc_rate_control/StaRateControl/IstaRateControl.cpp",
+        "research/sta-rate-control/scripts/m07_kernel_probe.cpp",
+        "-o",
+        "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I00/run01/regression/regression/probe"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "m07_reference",
+      "argv": [
+        "/usr/bin/python3",
+        "research/sta-rate-control/scripts/reference_m07.py",
+        "--probe",
+        "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I00/run01/regression/regression/probe",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I00/run01/regression/regression/m07_reference"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "sitl_build",
+      "argv": [
+        "make",
+        "px4_sitl_default"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "symbols",
+      "argv": [
+        "nm",
+        "-C",
+        "build/px4_sitl_default/bin/px4"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "unchanged_math_model",
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "HEAD",
+        "--",
+        "src/modules/mc_rate_control/StaRateControl/IstaRateControl.cpp",
+        "src/modules/mc_rate_control/StaRateControl/IstaRateControl.hpp",
+        "src/modules/mc_rate_control/StaRateControl/StaRateControl.cpp",
+        "src/modules/mc_rate_control/StaRateControl/StaRateControl.hpp",
+        "src/modules/mc_rate_control/RateControl/RateControl.cpp",
+        "src/modules/mc_rate_control/RateControl/RateControl.hpp",
+        "src/modules/mc_att_control",
+        "sitl",
+        "boards",
+        "ROMFS",
+        "research/sta-rate-control/m06"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "ControlDecimation",
+      "returncode": 0
+    }
+  ],
+  "tests": {
+    "IstaIntegration": {
+      "tests": 7,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0
+    },
+    "IstaRateControl": {
+      "tests": 13,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0
+    },
+    "StaRateControl": {
+      "tests": 11,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0
+    },
+    "StaProtection": {
+      "tests": 18,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0
+    },
+    "StaAxesApplication": {
+      "tests": 12,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0
+    },
+    "RateControl": {
+      "tests": 1,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0
+    },
+    "RateControlDispatcher": {
+      "tests": 4,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0
+    },
+    "ControllerSelection": {
+      "tests": 5,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0
+    },
+    "GyroPublicationGuard": {
+      "tests": 6,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0
+    },
+    "AttitudeControl": {
+      "tests": 3,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0
+    },
+    "python_research": {
+      "tests": 56
+    },
+    "python_convenience": {
+      "tests": 18
+    },
+    "ControlDecimation": {
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    }
+  },
+  "success": true,
+  "head": "d45383a419908db1620e51c9a1a0f03b932f00fc",
+  "firmware_sha256": "d110795590f02d52495ccbc87c70ea8086df14ab2eac085e8e94a7b923195b80",
+  "logger_format_length": 1492
+}

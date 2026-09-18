@@ -22,6 +22,7 @@ M06独立标定gY=34.582326，开放AXES=7且正常运行不计算闲置PID；1/
 
 M07历史阶段新增当时未链接至飞行控制路径的 `IstaRateControl`，采用有理化求根、double中间运算、float可表示范围及隐式方程校验。73个C++、39个Python用例，6011个独立参考样本、36组独立对象闭环通过；理想/扰动/噪声/饱和结果分开记录，MATLAB未运行。M08已经链接该内核；当前总回归请用 `python3 research/sta-rate-control/scripts/verify_m09.py --output <新的绝对路径>`。M07旧入口保留历史“不得链接ISTA”断言，只适用于M07提交。
 
+- `ista_redesign/`：[I 系列研究入口](ista_redesign/README_CN.md)；[I00 原 ISTA 偏差审计](reports/I00.md)，仅离线验证，保留原 MODE=2 与历史实验，尚未实现 Proper-ISTA。
 - `plan/`：M00 开始时三份外部计划的历史快照。
 - `environment.md`：环境、模型、参数与启动约定。
 - `baseline/`：版本指纹、参数和指标摘要；不存大型日志。
