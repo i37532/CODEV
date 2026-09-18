@@ -62,6 +62,7 @@ void LoggedTopics::add_default_topics()
 	add_topic("rate_ctrl_selection"); // Low-rate, on-change controller selection diagnostics.
 	add_topic("gyro_sample_status"); // Event-only IMU switch / rejected timestamp evidence.
 	add_topic("sta_rate_ctrl_status", 100); // Full rate is selected via HIGH_RATE, not forced in every profile.
+	add_topic("sta_takeoff_status", 100);
 	add_topic("cpuload");
 	add_topic("esc_status", 250);
 	add_topic("follow_target", 500);
@@ -197,6 +198,7 @@ void LoggedTopics::add_default_topics()
 void LoggedTopics::add_high_rate_topics()
 {
 	add_topic("sta_rate_ctrl_status");
+	add_topic("sta_takeoff_status");
 	add_topic_multi("multirotor_motor_limits", 0, 2);
 	// maximum rate to analyze fast maneuvers (e.g. for racing)
 	add_topic("actuator_controls_0");

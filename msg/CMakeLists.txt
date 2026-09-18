@@ -119,6 +119,7 @@ set(msg_files
 	rate_ctrl_status.msg
 	rate_ctrl_selection.msg
 	sta_rate_ctrl_status.msg
+	sta_takeoff_status.msg
 	gyro_sample_status.msg
 	rc_channels.msg
 	rc_parameter_map.msg

@@ -1,0 +1,64 @@
+{
+  "protocol_version": 1,
+  "date": "2026-09-18",
+  "source_algorithms": {
+    "esta": {"mode": 1, "m10_selection": "1"},
+    "original_ista": {"mode": 2, "m10_selection": "2"}
+  },
+  "protection_variants": {
+    "established": 0,
+    "takeoff_nu_manager": 1
+  },
+  "ordered_jobs": [
+    [6101, "esta", "established"],
+    [6101, "esta", "takeoff_nu_manager"],
+    [6101, "original_ista", "established"],
+    [6101, "original_ista", "takeoff_nu_manager"],
+    [6102, "esta", "takeoff_nu_manager"],
+    [6102, "original_ista", "takeoff_nu_manager"],
+    [6102, "esta", "established"],
+    [6102, "original_ista", "established"],
+    [6103, "original_ista", "established"],
+    [6103, "esta", "established"],
+    [6103, "original_ista", "takeoff_nu_manager"],
+    [6103, "esta", "takeoff_nu_manager"]
+  ],
+  "scene": "nominal",
+  "simulation_speed_requested": 5,
+  "flight_attempts_per_configuration": 3,
+  "attempt_policy": "one attempt per immutable job; retain every failure; no automatic retry",
+  "m10_frozen": {
+    "path": "research/sta-rate-control/m10/FROZEN.json",
+    "sha256": "958e60d954f51d1189a54b73107c36bd744bfdda6bea9f4db052ea3381734842"
+  },
+  "plugins_manifest": {
+    "path": "/home/yr/Desktop/codev doc/experiments/M10-20260917/plugins03/manifest.json",
+    "sha256": "e10aab329615926555f50fedd8a4392330c54fcec078df1bd2f234186d8981c2"
+  },
+  "analysis_windows": {
+    "truth_liftoff_height_m": 0.02,
+    "stationary_height_m": 0.002,
+    "stationary_vertical_speed_m_s": 0.02,
+    "early_after_liftoff_s": 5.0
+  },
+  "per_run_limits": {
+    "tilt_deg": 15.0,
+    "height_error_m": 1.0,
+    "manager_release_early_tolerance_s": 0.05,
+    "manager_release_late_s": 1.5,
+    "pre_release_nu_abs_rad_s2": 0.000001,
+    "diagnostic_missing_fraction": 0.01,
+    "ulog_dropouts": 0
+  },
+  "paired_selection_limits": {
+    "combined_median_liftoff_nu_reduction": 0.8,
+    "per_algorithm_median_liftoff_nu_reduction": 0.7,
+    "early_rate_rmse_ratio": 1.25,
+    "peak_tilt_increase_deg": 1.0
+  },
+  "known_unsafe_not_flown": [
+    "ISTA_OPT02 original-ISTA lambda2 x4",
+    "ISTA_OPT02 original-ISTA lambda2 x16"
+  ],
+  "proper_ista_actuator_path": false
+}

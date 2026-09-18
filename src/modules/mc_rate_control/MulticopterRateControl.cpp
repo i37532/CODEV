@@ -116,7 +116,9 @@ MulticopterRateControl::parameters_updated()
 	_research_ff = Vector3f(_param_mc_rollrate_ff.get(), _param_mc_pitchrate_ff.get(), _param_mc_yawrate_ff.get());
 	_sta_requested.mode = _param_mc_rtc_mode.get();
 	_sta_requested.axes = _param_mc_sta_axes.get();
-	_sta_requested.c_limit = 0.15f; // frozen normalized R/P command bound
+	const int32_t takeoff_manager = _param_mc_sta_tko_mgt.get();
+	_sta_requested.takeoff.enabled = takeoff_manager == 1;
+	_sta_requested.c_limit = (takeoff_manager == 0 || takeoff_manager == 1) ? 0.15f : 0.f;
 #if defined(CONFIG_ARCH_BOARD_PX4_SITL)
 	int32_t airframe = 0;
 	param_get(param_find("SYS_AUTOSTART"), &airframe);
@@ -290,6 +292,15 @@ MulticopterRateControl::Run()
 		frame.sample = now; frame.armed = _v_control_mode.flag_armed;
 		frame.rate_enabled = _v_control_mode.flag_control_rates_enabled && !_actuators_0_circuit_breaker_enabled;
 		frame.landed = _landed; frame.maybe_landed = _maybe_landed;
+		vehicle_local_position_s local_position{};
+		_vehicle_local_position_sub.copy(&local_position);
+		const uint64_t clock_now = hrt_absolute_time();
+		frame.local_position_valid = local_position.timestamp > 0 && clock_now >= local_position.timestamp
+					     && clock_now - local_position.timestamp < 200000
+					     && local_position.z_valid && local_position.v_z_valid
+					     && PX4_ISFINITE(local_position.z) && PX4_ISFINITE(local_position.vz);
+		frame.local_z = local_position.z;
+		frame.local_vz = local_position.vz;
 
 		for (int i = 0; i < 3; ++i) {
 			frame.measurement_valid = frame.measurement_valid && PX4_ISFINITE(rates(i))
@@ -299,7 +310,6 @@ MulticopterRateControl::Run()
 		frame.experiment_active = _rate_control.selectionStatus().effective_mode != ControllerSelection::PID;
 
 		if (frame.experiment_active) {
-			const uint64_t clock_now = hrt_absolute_time();
 			frame.measurement_valid = frame.measurement_valid && _research_input_valid
 						  && _research_sp_timestamp > 0 && clock_now >= _research_sp_timestamp
 						  && clock_now - _research_sp_timestamp < 100000;
@@ -310,6 +320,27 @@ MulticopterRateControl::Run()
 		if (staged.mode != 0 && !experiment_ready) { staged.c_limit = 0.f; }
 
 		_sta_guard.begin(staged, frame);
+		const auto &takeoff = _sta_guard.takeoffDecision();
+		sta_takeoff_status_s takeoff_status{};
+		takeoff_status.timestamp = clock_now;
+		takeoff_status.timestamp_sample = now;
+		takeoff_status.publish_seq = ++_research_takeoff_publish_seq;
+		takeoff_status.config_seq = _sta_guard.configSequence();
+		takeoff_status.requested_enable = _param_mc_sta_tko_mgt.get();
+		takeoff_status.effective_enable = _sta_guard.config().takeoff.enabled;
+		takeoff_status.config_pending = _sta_guard.pending();
+		takeoff_status.state = static_cast<uint8_t>(takeoff.state);
+		takeoff_status.event = static_cast<uint8_t>(takeoff.event);
+		takeoff_status.freeze = takeoff.freeze;
+		takeoff_status.reset = takeoff.reset;
+		takeoff_status.abort = takeoff.abort;
+		takeoff_status.estimate_valid = frame.local_position_valid;
+		takeoff_status.local_z = frame.local_z;
+		takeoff_status.local_vz = frame.local_vz;
+		takeoff_status.armed = frame.armed;
+		takeoff_status.landed = frame.landed;
+		takeoff_status.maybe_landed = frame.maybe_landed;
+		_sta_takeoff_status_pub.publish(takeoff_status);
 		// Safety/lifecycle invalidates a held command immediately. Termination is
 		// still handled by the original rate-disabled commander branch below.
 		_decimation.lifecycle(frame, _sta_guard.resetReason() != 0, _sta_guard.abortRequested());

@@ -432,6 +432,22 @@ PARAM_DEFINE_INT32(MC_RTC_MODE, 0);
 PARAM_DEFINE_INT32(MC_STA_AXES, 0);
 
 /**
+ * Experimental takeoff nu-state manager
+ *
+ * Default 0 preserves the established protection lifecycle exactly. Value 1
+ * freezes and resets experimental nu state from arm until onboard local-position
+ * and land-detector evidence confirms takeoff. Changes while armed are staged
+ * until disarm. Iris SITL research only; simulator truth is never consumed.
+ *
+ * @value 0 Established protection lifecycle
+ * @value 1 Enable takeoff nu-state manager
+ * @min 0
+ * @max 1
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_INT32(MC_STA_TKO_MGT, 0);
+
+/**
  * Experimental R root-error gain
  *
  * Units: (rad/s^2)/sqrt(rad/s). Zero means unconfigured. Staged while armed.

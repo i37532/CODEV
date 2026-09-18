@@ -58,10 +58,12 @@
 #include <uORB/topics/rate_ctrl_status.h>
 #include <uORB/topics/rate_ctrl_selection.h>
 #include <uORB/topics/sta_rate_ctrl_status.h>
+#include <uORB/topics/sta_takeoff_status.h>
 #include <uORB/topics/vehicle_angular_acceleration.h>
 #include <uORB/topics/vehicle_angular_velocity.h>
 #include <uORB/topics/vehicle_control_mode.h>
 #include <uORB/topics/vehicle_land_detected.h>
+#include <uORB/topics/vehicle_local_position.h>
 #include <uORB/topics/vehicle_rates_setpoint.h>
 #include <uORB/topics/vehicle_status.h>
 
@@ -106,7 +108,9 @@ private:
 	float _research_yaw_addition{0.f};
 	multirotor_motor_limits_s _research_motor{};
 	uORB::Publication<sta_rate_ctrl_status_s> _sta_status_pub{ORB_ID(sta_rate_ctrl_status)};
+	uORB::Publication<sta_takeoff_status_s> _sta_takeoff_status_pub{ORB_ID(sta_takeoff_status)};
 	uint32_t _research_publish_seq{0}, _research_update_seq{0};
+	uint32_t _research_takeoff_publish_seq{0};
 	matrix::Vector3f _research_p{}, _research_d{}, _research_ff{};
 
 	uORB::Subscription _battery_status_sub{ORB_ID(battery_status)};
@@ -117,6 +121,7 @@ private:
 	uORB::Subscription _v_rates_sp_sub{ORB_ID(vehicle_rates_setpoint)};
 	uORB::Subscription _vehicle_angular_acceleration_sub{ORB_ID(vehicle_angular_acceleration)};
 	uORB::Subscription _vehicle_land_detected_sub{ORB_ID(vehicle_land_detected)};
+	uORB::Subscription _vehicle_local_position_sub{ORB_ID(vehicle_local_position)};
 	uORB::Subscription _vehicle_status_sub{ORB_ID(vehicle_status)};
 
 	uORB::SubscriptionInterval _parameter_update_sub{ORB_ID(parameter_update), 1_s};
@@ -151,6 +156,7 @@ private:
 		(ParamInt<px4::params::MC_RTC_MODE>) _param_mc_rtc_mode,
 		(ParamInt<px4::params::MC_RTC_DIV>) _param_mc_rtc_div,
 		(ParamInt<px4::params::MC_STA_AXES>) _param_mc_sta_axes,
+		(ParamInt<px4::params::MC_STA_TKO_MGT>) _param_mc_sta_tko_mgt,
 
 		(ParamFloat<px4::params::MC_ROLLRATE_P>) _param_mc_rollrate_p,
 		(ParamFloat<px4::params::MC_ROLLRATE_I>) _param_mc_rollrate_i,
