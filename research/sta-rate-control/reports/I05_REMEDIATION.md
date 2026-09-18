@@ -4,7 +4,7 @@
 
 分支：`research/sta-rate-control`
 
-结论：**R-A 与 R-B 通过；R-C 的首批 18 次因 divisor 被 runner 覆盖而整批无效。remediation 尚未完成，等待是否授权全新的 18 次 R-C；I06 仍 blocked。**
+结论：**R-A 与 R-B 通过；R-C formal01 整批无效，获授权的 formal02 又因继承预检仍比较陈旧 DIV1 而停止。remediation 尚未完成；I06 仍 blocked。**
 
 ## 1. R-A：pitch 诊断与重新准入
 
@@ -48,6 +48,21 @@
 修复已加入三层防线：runner 在 inherited setup 后恢复 job divisor；分析强制 requested=actual；batch
 不再用 requested 标签覆盖 actual。按冻结的“一项一次、不自动补飞”规则，本轮不自行再跑18次。
 
+用户随后授权使用新种子6901–6903执行 `RC-formal02`，冻结提交
+`adff2d0913d3c5cf82631a4953a62b13f50a6400`。DIV1 六轮全部单轮有效；进入DIV2后，三轮在起飞前
+被第二层预检报 `Divisor not accepted`，第四轮由人工中止，其余8轮未开始。三份
+`preflight_selection.json` 均明确为 `div_req=2, div_eff=2, div_ok=true, div_wait=false`，所以PX4实际
+已接受DIV2；假失败来自 runner 只恢复 `config[MC_RTC_DIV]`，没有同步继承 M10 用来比较的
+`setting[div]`，后者仍为场景默认DIV1。
+
+旧 batch 只对 infrastructure/data failure 自动停止，违反协议的“任何单轮失败立即停止”：首个假失败后
+又完成两次同类预检，并启动第四次，随后人工中断。该偏离、411文件/273504536字节、jobs/progress指纹
+已收入 `RC_FORMAL02_STOP_AUDIT.json`。整个 formal02 保留但不作为 R-C 准入，也不从中挑出DIV1结果
+拼接下一批。
+
+修复将同时同步命令 divisor 与预检期望，并把 batch 改为任何 `success=false` 都立即停止。由于6901–6903
+已被观察，若再运行完整矩阵必须使用新的未见种子、重新冻结准确18轮预算，并再次取得用户明确授权。
+
 ## 4. 测试、失败与停止点
 
 最终回归命令及退出码：`py_compile`=0；`test_remediation.py` 4/4=0；`make tests
@@ -59,5 +74,11 @@ Proper内核用例重叠，因此共执行11个C++ test invocation、10个唯一
 ControlDecimation 测试初始化笔误、一次缺 PYTHONPATH 导致 empy 导入失败、R-B 0-flight runner门禁失败，
 以及 R-C 全批配置无效。前四项修复并回归；R-C 不重跑。
 
-未做实机、DP1000、I06训练或I07正式留出；没有 push。解除阻塞需要用户明确授权新的 R-C v2 预算
-（18次，原种子是否复用也需冻结决定）；通过后才能把 remediation 标记完成并重新启动 I06。
+formal02 停止后的 runner 修复再次执行 `py_compile`=0、`test_remediation.py` 5/5=0、JSON与外部
+jobs/progress指纹核对=0、`git diff --check`=0。新增测试同时覆盖 command/expected divisor 同步及任何
+单轮失败立即停止。测试装配先后出现两次导入路径失败（一次0测试、一次1/5失败），修正搜索顺序后完整
+通过；没有把失败入口记为覆盖通过。该修复不改C++、参数、模型或固件，所以未把此前C++回归重复记为
+新的算法覆盖。
+
+未做实机、DP1000、I06训练或I07正式留出；没有 push。解除阻塞需要在本次 runner 修复提交后再次
+明确授权新的 R-C 批次；通过后才能把 remediation 标记完成并重新启动 I06。

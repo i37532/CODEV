@@ -4,6 +4,7 @@ from pathlib import Path
 from design_rc import HERE,REPO,jobs,load
 from summary_rc import summarize
 I05=HERE.parent/'i05'
+def should_halt(row):return not row.get('success',False)
 def main():
  p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);a=p.parse_args()
  if subprocess.check_output(['git','status','--porcelain'],cwd=REPO,text=True).strip():raise RuntimeError('Clean worktree required')
@@ -19,7 +20,7 @@ def main():
    if name=='flight' and not (run/'result.json').exists():break
   ap=run/'i05_analysis.json';row=json.loads(ap.read_text()) if ap.exists() else dict(success=False,algorithm=job['algorithm'],seed=job['seed'],failure_class='infrastructure',error='No analysis');row['requested_divisor']=job['divisor'];now=(row.get('source_head'),row.get('binary_sha256'));anchor=now if anchor is None else anchor
   if now!=anchor:row.update(success=False,failure_class='infrastructure',error='Runtime source/binary changed')
-  halt=row.get('failure_class') in ('infrastructure','analysis_or_data_quality');(root/(label+'.execution.json')).write_text(json.dumps(dict(job=job,commands=cmds,wall_seconds=time.time()-started,success=row.get('success',False),halt=halt),indent=2)+'\n');rows.append(row);(root/'progress.json').write_text(json.dumps(dict(rows=rows),indent=2)+'\n');print('END',label,'success=',row.get('success'),flush=True)
-  if halt:raise RuntimeError('Infrastructure/data halt retained: '+label)
+  halt=should_halt(row);(root/(label+'.execution.json')).write_text(json.dumps(dict(job=job,commands=cmds,wall_seconds=time.time()-started,success=row.get('success',False),halt=halt),indent=2)+'\n');rows.append(row);(root/'progress.json').write_text(json.dumps(dict(rows=rows),indent=2)+'\n');print('END',label,'success=',row.get('success'),flush=True)
+  if halt:raise RuntimeError('Failed attempt retained; batch stopped: '+label)
  s=summarize(rows);s.update(source_head=head,binary_sha256=anchor[1] if anchor else None,frozen_sha256=hashlib.sha256(fp.read_bytes()).hexdigest());(root/'summary.json').write_text(json.dumps(s,indent=2)+'\n');print(json.dumps({k:s[k] for k in ('planned','attempted','accepted','by_divisor','success','violations')},indent=2));raise SystemExit(0 if s['success'] else 1)
 if __name__=='__main__':main()

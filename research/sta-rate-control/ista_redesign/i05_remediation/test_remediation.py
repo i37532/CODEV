@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
+import sys
 import unittest
+from pathlib import Path
+sys.path.append(str(Path(__file__).resolve().parents[1]/'i05'))
 from design import jobs
 from summary import summarize
 from design_rb import jobs as jobs_rb
 from summary_rb import summarize as summarize_rb
 from design_rc import jobs as jobs_rc
 from summary_rc import summarize as summarize_rc
+from run import apply_remediation_divisor
+from batch_rc import should_halt
 class TestRA(unittest.TestCase):
     def test_manifest(self):
         f,j=jobs('a'*40);self.assertEqual(len(j),10);self.assertEqual({x['seed'] for x in j},set(f['paired_seeds']))
@@ -29,4 +34,14 @@ class TestRA(unittest.TestCase):
         self.assertFalse(summarize_rc(mislabeled)['success'])
         rows[-1]['metrics']['synchronous_low']['rmse'][0]=.006
         self.assertFalse(summarize_rc(rows)['success'])
+    def test_rc_divisor_updates_command_and_expectation(self):
+        config={'MC_RTC_DIV':1};setting={'div':1};job={'parameters':{'MC_RTC_DIV':4}}
+        apply_remediation_divisor('R-C',job,config,setting)
+        self.assertEqual(config['MC_RTC_DIV'],4)
+        self.assertEqual(setting['div'],4)
+        apply_remediation_divisor('R-B',job,config,setting)
+        self.assertEqual((config['MC_RTC_DIV'],setting['div']),(4,4))
+        self.assertFalse(should_halt({'success':True}))
+        self.assertTrue(should_halt({'success':False,'failure_class':'flight'}))
+        self.assertTrue(should_halt({}))
 if __name__=='__main__':unittest.main()

@@ -1,0 +1,18 @@
+{
+  "batch": "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I05R/RC-formal02",
+  "source_head": "adff2d0913d3c5cf82631a4953a62b13f50a6400",
+  "jobs_sha256": "79ad93dc7a5bc3374e33483faa683244717ab5565e7aebccb94ad2540aacb248",
+  "progress_sha256": "1b31cffa437b39a4f80a2f4cb6f7d3aa1c84ff04c5cd8b92a169779219af1bb9",
+  "files": 411,
+  "bytes": 273504536,
+  "planned_attempts": 18,
+  "completed_progress_rows": 9,
+  "div1_valid": 6,
+  "div2_false_preflight_failures": 3,
+  "div2_interrupted": 1,
+  "not_started": 8,
+  "observed_div2_preflight": {"div_req": 2, "div_eff": 2, "div_ok": true, "div_wait": false},
+  "root_cause": "The R-C runner restored config MC_RTC_DIV but did not update the inherited M10 setting['div'] used by the second preflight check. PX4 accepted DIV2; the runner compared it with stale DIV1 and reported a false failure.",
+  "protocol_deviation": "The batch halted only infrastructure/data classes, so it started two additional false-failure attempts and a fourth attempt before manual interruption after the first single-run failure.",
+  "disposition": "Retain the full stopped batch. Do not count it as R-C admission and do not resume or rerun without a newly frozen budget and explicit user authorization."
+}
