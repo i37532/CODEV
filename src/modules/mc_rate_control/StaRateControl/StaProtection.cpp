@@ -32,7 +32,7 @@ bool StaProtection::validConfig(const Config &c)
 {
 	if (c.mode < 0 || c.mode > 3 || c.axes < 0 || c.axes > 7 || !std::isfinite(c.c_limit)
 	    || c.c_limit <= 0.f || c.c_limit > 1.f || (c.mode != 0 && c.axes == 0)
-	    || (c.mode == 3 && c.axes != 1 && c.axes != 3)
+	    || (c.mode == 3 && c.axes != 1 && c.axes != 3 && c.axes != 7)
 	    || !TakeoffNuManager::validConfig(c.takeoff)) { return false; }
 
 	for (size_t i = 0; i < 3; ++i) {

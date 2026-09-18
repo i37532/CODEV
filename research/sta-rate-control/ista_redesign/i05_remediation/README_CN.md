@@ -9,4 +9,6 @@ export PYTHONPATH="$PWD/.px4-python:/home/yr/Desktop/codev doc/experiments/M00-2
 export PATH="$PWD/.px4-python/bin:$PATH"
 python3 research/sta-rate-control/ista_redesign/i05_remediation/batch.py \
   --output '/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I05R/RA-formal01'
+python3 research/sta-rate-control/ista_redesign/i05_remediation/batch_rb.py \
+  --output '/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I05R/RB-formal01'
 ```

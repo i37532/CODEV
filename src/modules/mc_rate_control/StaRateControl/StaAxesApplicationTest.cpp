@@ -41,7 +41,9 @@ TEST(StaAxesApplication, ProperIstaGateAllowsRollPitchAndUsesEstablishedLifecycl
 	EXPECT_TRUE(StaAxesApplication::ready(true, c));
 	c = config(); c.mode = 3; c.axes = 3;
 	EXPECT_TRUE(StaAxesApplication::ready(true, c));
-	c.axes = 7; EXPECT_FALSE(StaAxesApplication::ready(true, c));
+	c.axes = 7; c.gains[2] = {1.5f, .02f, 34.582326f}; c.nu_limit[2] = 3.f;
+	EXPECT_TRUE(StaAxesApplication::ready(true, c));
+	c.gains[2].g = 112.763533f; EXPECT_FALSE(StaAxesApplication::ready(true, c));
 	c.axes = 1; c.takeoff.enabled = true;
 	EXPECT_FALSE(StaAxesApplication::ready(true, c));
 	c.takeoff.enabled = false; c.gains[0].g = 112.763533f;

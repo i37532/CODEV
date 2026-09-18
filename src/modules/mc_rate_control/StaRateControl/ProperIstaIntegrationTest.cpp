@@ -17,8 +17,10 @@ G::Config config()
 	c.c_limit = .15f;
 	c.gains[0] = {2.2f, .05f, 130.575283f};
 	c.gains[1] = {2.4f, .08f, 112.763533f};
+	c.gains[2] = {1.5f, .02f, 34.582326f};
 	c.nu_limit[0] = 3.f;
 	c.nu_limit[1] = 3.f;
+	c.nu_limit[2] = 3.f;
 	return c;
 }
 
@@ -43,18 +45,18 @@ void start(G &guard, const G::Config &c = config())
 }
 }
 
-TEST(ProperIstaIntegration, DedicatedModeAndRollPitchCapability)
+TEST(ProperIstaIntegration, DedicatedModeAndThreeAxisCapability)
 {
 	for (int axes : {1, 3, 7}) {
 		auto c = config(); c.axes = axes;
 		const bool ready = StaAxesApplication::ready(true, c);
-		EXPECT_EQ(ready, axes == 1 || axes == 3);
+		EXPECT_TRUE(ready);
 		ControllerSelection selector;
 		selector.select(3, axes, false, false, false, ready);
 		EXPECT_EQ(selector.status().request_status,
-			  axes != 7 ? ControllerSelection::Accepted : ControllerSelection::Unsupported);
-		EXPECT_EQ(selector.status().effective_mode, axes != 7 ? 3 : 0);
-		EXPECT_EQ(selector.status().effective_axes, axes != 7 ? axes : 0);
+			  ControllerSelection::Accepted);
+		EXPECT_EQ(selector.status().effective_mode, 3);
+		EXPECT_EQ(selector.status().effective_axes, axes);
 	}
 	auto managed = config(); managed.takeoff.enabled = true;
 	EXPECT_FALSE(StaAxesApplication::ready(true, managed));

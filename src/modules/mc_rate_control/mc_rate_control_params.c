@@ -403,14 +403,14 @@ PARAM_DEFINE_INT32(MC_BAT_SCALE_EN, 0);
  * Rate controller research mode
  *
  * M08 supports calibrated Iris SITL ESTA/ISTA AXES=1/3/7. I04 adds the
- * separately named Proper-ISTA on roll or roll/pitch (AXES=1/3). Other requests
+ * separately named Proper-ISTA on calibrated AXES=1/3/7. Other requests
  * are unsupported. Requests changed while armed remain
  * pending until disarm. Existing PID gains keep their live update semantics.
  *
  * @value 0 PID
  * @value 1 ESTA (Iris SITL roll, roll/pitch or all axes)
  * @value 2 ISTA (Iris SITL roll, roll/pitch or all axes)
- * @value 3 Proper-ISTA (Iris SITL roll or roll/pitch)
+ * @value 3 Proper-ISTA (calibrated Iris SITL AXES=1/3/7)
  * @min 0
  * @max 3
  * @group Multicopter Rate Control
