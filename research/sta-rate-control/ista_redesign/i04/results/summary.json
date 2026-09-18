@@ -1,0 +1,612 @@
+{
+  "success": true,
+  "planned": 8,
+  "attempted": 8,
+  "accepted": 8,
+  "violations": [],
+  "proper_to_esta_ratios": [
+    {
+      "seed": 6201,
+      "hover_roll": 0.9878218700700697,
+      "tracking_roll": 0.9524852566644484
+    },
+    {
+      "seed": 6202,
+      "hover_roll": 0.9147001551040926,
+      "tracking_roll": 0.898885885170277
+    },
+    {
+      "seed": 6203,
+      "hover_roll": 1.0345380506794415,
+      "tracking_roll": 1.0451338806420638
+    }
+  ],
+  "noncommand_checks": [
+    {
+      "seed": 6201,
+      "window": "hover_rmse",
+      "axis": 1,
+      "value": 0.0034657464894831823,
+      "threshold": 0.008627531882820177
+    },
+    {
+      "seed": 6201,
+      "window": "hover_rmse",
+      "axis": 2,
+      "value": 0.0015391789849654774,
+      "threshold": 0.006548246576647847
+    },
+    {
+      "seed": 6201,
+      "window": "tracking_rmse",
+      "axis": 1,
+      "value": 0.003666518671656836,
+      "threshold": 0.009035901140664779
+    },
+    {
+      "seed": 6201,
+      "window": "tracking_rmse",
+      "axis": 2,
+      "value": 0.001552460589337451,
+      "threshold": 0.0065767907857193055
+    },
+    {
+      "seed": 6202,
+      "window": "hover_rmse",
+      "axis": 1,
+      "value": 0.004319407466593791,
+      "threshold": 0.008627531882820177
+    },
+    {
+      "seed": 6202,
+      "window": "hover_rmse",
+      "axis": 2,
+      "value": 0.0015330780107724105,
+      "threshold": 0.006548246576647847
+    },
+    {
+      "seed": 6202,
+      "window": "tracking_rmse",
+      "axis": 1,
+      "value": 0.005342434673366692,
+      "threshold": 0.009035901140664779
+    },
+    {
+      "seed": 6202,
+      "window": "tracking_rmse",
+      "axis": 2,
+      "value": 0.0015598298175579328,
+      "threshold": 0.0065767907857193055
+    },
+    {
+      "seed": 6203,
+      "window": "hover_rmse",
+      "axis": 1,
+      "value": 0.003535635046062972,
+      "threshold": 0.008627531882820177
+    },
+    {
+      "seed": 6203,
+      "window": "hover_rmse",
+      "axis": 2,
+      "value": 0.001533593532220922,
+      "threshold": 0.006548246576647847
+    },
+    {
+      "seed": 6203,
+      "window": "tracking_rmse",
+      "axis": 1,
+      "value": 0.0039303430563822385,
+      "threshold": 0.009035901140664779
+    },
+    {
+      "seed": 6203,
+      "window": "tracking_rmse",
+      "axis": 2,
+      "value": 0.001513588860022252,
+      "threshold": 0.0065767907857193055
+    }
+  ],
+  "rows": [
+    {
+      "success": true,
+      "flight_success": true,
+      "mode": 0,
+      "algorithm": "pid_smoke",
+      "seed": 6201,
+      "source_head": "de3f6f0eb081369dd189e3fa865da7dae61ebfe3",
+      "binary_sha256": "67cff7332e28c2515ca675712fb4beb99c7864607bbbe297397170b66d8aac4a",
+      "analysis_success": true,
+      "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I04/formal01/0000_I04_pid_smoke_m0_nominal_s6201/10_46_02.ulg",
+      "ulog_sha256": "4143093e8b8343cdb989939bb1b4f7692f1fdbf68cfa95665eff6f2ae910cc28",
+      "dropouts": 0,
+      "hover_rmse": [
+        0.0035818394592280717,
+        0.003597738934137365,
+        0.0015499115589261612
+      ],
+      "tracking_rmse": [
+        0.004012097480682975,
+        0.003906544036795936,
+        0.001568983119575299
+      ],
+      "max_abs_command": [
+        0.044716957956552505,
+        0.024621590971946716,
+        0.8022719621658325
+      ],
+      "max_abs_nu": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "max_tilt_deg": 1.329426646232605,
+      "max_height_error_m": 0.15939342975616455,
+      "limit_fraction": {
+        "1": 0.0,
+        "2": 0.0,
+        "4": 0.0,
+        "8": 0.0
+      },
+      "saturation_fraction": 0.0,
+      "sequences": {
+        "status": {
+          "count": 15096,
+          "missing": 0,
+          "logged_hz": 250.00000000000003,
+          "producer_hz": 250.00000000000003,
+          "max_interval_s": 0.004
+        },
+        "updates": {
+          "count": 15096,
+          "missing": 0,
+          "logged_hz": 250.00000000000003,
+          "producer_hz": 250.00000000000003,
+          "max_interval_s": 0.004
+        }
+      },
+      "actuator_matched_samples": 24925,
+      "setpoint_instances": [
+        0
+      ]
+    },
+    {
+      "success": true,
+      "flight_success": true,
+      "mode": 2,
+      "algorithm": "original_ista_regression",
+      "seed": 6201,
+      "source_head": "de3f6f0eb081369dd189e3fa865da7dae61ebfe3",
+      "binary_sha256": "67cff7332e28c2515ca675712fb4beb99c7864607bbbe297397170b66d8aac4a",
+      "analysis_success": true,
+      "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I04/formal01/0001_I04_original_ista_regression_m2_nominal_s6201/10_46_28.ulg",
+      "ulog_sha256": "ad511721dd86b0508a65a23066b52ecbccbec76cd46dd3c87af220ff4a96a269",
+      "dropouts": 0,
+      "hover_rmse": [
+        0.0038548413502532417,
+        0.003704417392497888,
+        0.0015530354440852123
+      ],
+      "tracking_rmse": [
+        0.00413193921439532,
+        0.004035144611231733,
+        0.001571045796025354
+      ],
+      "max_abs_command": [
+        0.00416229385882616,
+        0.11881484091281891,
+        0.6983832716941833
+      ],
+      "max_abs_nu": [
+        0.17360179126262665,
+        0.0,
+        0.0
+      ],
+      "max_tilt_deg": 1.356817603111267,
+      "max_height_error_m": 0.16027534008026123,
+      "limit_fraction": {
+        "1": 0.0,
+        "2": 0.0,
+        "4": 0.0,
+        "8": 0.0
+      },
+      "saturation_fraction": 0.0,
+      "sequences": {
+        "status": {
+          "count": 15077,
+          "missing": 0,
+          "logged_hz": 250.00000000000003,
+          "producer_hz": 250.00000000000003,
+          "max_interval_s": 0.004
+        },
+        "updates": {
+          "count": 15077,
+          "missing": 0,
+          "logged_hz": 250.00000000000003,
+          "producer_hz": 250.00000000000003,
+          "max_interval_s": 0.004
+        }
+      },
+      "actuator_matched_samples": 24847,
+      "setpoint_instances": [
+        0
+      ]
+    },
+    {
+      "success": true,
+      "flight_success": true,
+      "mode": 1,
+      "algorithm": "esta",
+      "seed": 6201,
+      "source_head": "de3f6f0eb081369dd189e3fa865da7dae61ebfe3",
+      "binary_sha256": "67cff7332e28c2515ca675712fb4beb99c7864607bbbe297397170b66d8aac4a",
+      "analysis_success": true,
+      "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I04/formal01/0002_I04_esta_m1_nominal_s6201/10_46_56.ulg",
+      "ulog_sha256": "5b7aecfa25f69f8478f4c0bf4942f05bed577a19da52cb594140407993a83752",
+      "dropouts": 0,
+      "hover_rmse": [
+        0.003846651055612499,
+        0.003576356755366496,
+        0.001548246576647847
+      ],
+      "tracking_rmse": [
+        0.004071059092300658,
+        0.003964188988061809,
+        0.0015672339765090896
+      ],
+      "max_abs_command": [
+        0.005443057045340538,
+        0.019058790057897568,
+        0.6979038119316101
+      ],
+      "max_abs_nu": [
+        0.17640183866024017,
+        0.0,
+        0.0
+      ],
+      "max_tilt_deg": 1.3594112396240234,
+      "max_height_error_m": 0.16465461254119873,
+      "limit_fraction": {
+        "1": 0.0,
+        "2": 0.0,
+        "4": 0.0,
+        "8": 0.0
+      },
+      "saturation_fraction": 0.0,
+      "sequences": {
+        "status": {
+          "count": 15110,
+          "missing": 0,
+          "logged_hz": 250.0,
+          "producer_hz": 250.0,
+          "max_interval_s": 0.004
+        },
+        "updates": {
+          "count": 15110,
+          "missing": 0,
+          "logged_hz": 250.0,
+          "producer_hz": 250.0,
+          "max_interval_s": 0.004
+        }
+      },
+      "actuator_matched_samples": 25128,
+      "setpoint_instances": [
+        0
+      ]
+    },
+    {
+      "success": true,
+      "flight_success": true,
+      "mode": 3,
+      "algorithm": "proper_ista",
+      "seed": 6201,
+      "source_head": "de3f6f0eb081369dd189e3fa865da7dae61ebfe3",
+      "binary_sha256": "67cff7332e28c2515ca675712fb4beb99c7864607bbbe297397170b66d8aac4a",
+      "analysis_success": true,
+      "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I04/formal01/0003_I04_proper_ista_m3_nominal_s6201/10_47_23.ulg",
+      "ulog_sha256": "a955be8be75e97f788e882681948cedefb4b5556218d922594dce20c7df14382",
+      "dropouts": 0,
+      "hover_rmse": [
+        0.003913450085859563,
+        0.0034657464894831823,
+        0.0015391789849654774
+      ],
+      "tracking_rmse": [
+        0.003994293979703856,
+        0.003666518671656836,
+        0.001552460589337451
+      ],
+      "max_abs_command": [
+        0.004291711375117302,
+        0.024737298488616943,
+        0.0017475708154961467
+      ],
+      "max_abs_nu": [
+        0.17340178787708282,
+        0.0,
+        0.0
+      ],
+      "max_tilt_deg": 1.439806342124939,
+      "max_height_error_m": 0.1604856252670288,
+      "limit_fraction": {
+        "1": 0.0,
+        "2": 0.0,
+        "4": 0.0,
+        "8": 0.0
+      },
+      "saturation_fraction": 0.0,
+      "sequences": {
+        "status": {
+          "count": 15107,
+          "missing": 0,
+          "logged_hz": 250.0,
+          "producer_hz": 250.0,
+          "max_interval_s": 0.004
+        },
+        "updates": {
+          "count": 15107,
+          "missing": 0,
+          "logged_hz": 250.0,
+          "producer_hz": 250.0,
+          "max_interval_s": 0.004
+        }
+      },
+      "actuator_matched_samples": 24759,
+      "setpoint_instances": [
+        0
+      ]
+    },
+    {
+      "success": true,
+      "flight_success": true,
+      "mode": 3,
+      "algorithm": "proper_ista",
+      "seed": 6202,
+      "source_head": "de3f6f0eb081369dd189e3fa865da7dae61ebfe3",
+      "binary_sha256": "67cff7332e28c2515ca675712fb4beb99c7864607bbbe297397170b66d8aac4a",
+      "analysis_success": true,
+      "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I04/formal01/0004_I04_proper_ista_m3_nominal_s6202/10_47_59.ulg",
+      "ulog_sha256": "042d6beba486d4fc094d31e01d720c5ae31d797eedc3674d926c165a15064b02",
+      "dropouts": 0,
+      "hover_rmse": [
+        0.003623764070210301,
+        0.004319407466593791,
+        0.0015330780107724105
+      ],
+      "tracking_rmse": [
+        0.003769522367359097,
+        0.005342434673366692,
+        0.0015598298175579328
+      ],
+      "max_abs_command": [
+        0.009836006909608841,
+        0.013068662025034428,
+        0.6984073519706726
+      ],
+      "max_abs_nu": [
+        0.09073035418987274,
+        0.0,
+        0.0
+      ],
+      "max_tilt_deg": 1.1909117698669434,
+      "max_height_error_m": 0.11482870578765869,
+      "limit_fraction": {
+        "1": 0.0,
+        "2": 0.0,
+        "4": 0.0,
+        "8": 0.0
+      },
+      "saturation_fraction": 0.0,
+      "sequences": {
+        "status": {
+          "count": 15095,
+          "missing": 0,
+          "logged_hz": 250.0,
+          "producer_hz": 250.0,
+          "max_interval_s": 0.004
+        },
+        "updates": {
+          "count": 15095,
+          "missing": 0,
+          "logged_hz": 250.0,
+          "producer_hz": 250.0,
+          "max_interval_s": 0.004
+        }
+      },
+      "actuator_matched_samples": 24773,
+      "setpoint_instances": [
+        0
+      ]
+    },
+    {
+      "success": true,
+      "flight_success": true,
+      "mode": 1,
+      "algorithm": "esta",
+      "seed": 6202,
+      "source_head": "de3f6f0eb081369dd189e3fa865da7dae61ebfe3",
+      "binary_sha256": "67cff7332e28c2515ca675712fb4beb99c7864607bbbe297397170b66d8aac4a",
+      "analysis_success": true,
+      "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I04/formal01/0005_I04_esta_m1_nominal_s6202/10_48_34.ulg",
+      "ulog_sha256": "b38d3df87fac6f805dc46300aef4ee2ff33228ef02bd1f77af651a6848672bae",
+      "dropouts": 0,
+      "hover_rmse": [
+        0.003961696136148482,
+        0.004266345080621075,
+        0.0015445262032020733
+      ],
+      "tracking_rmse": [
+        0.004193549403264945,
+        0.0051876042107099766,
+        0.0015767907857193054
+      ],
+      "max_abs_command": [
+        0.007442171685397625,
+        0.06937853246927261,
+        0.003195487894117832
+      ],
+      "max_abs_nu": [
+        0.15540148317813873,
+        0.0,
+        0.0
+      ],
+      "max_tilt_deg": 1.2143425941467285,
+      "max_height_error_m": 0.12395823001861572,
+      "limit_fraction": {
+        "1": 0.0,
+        "2": 0.0,
+        "4": 0.0,
+        "8": 0.0
+      },
+      "saturation_fraction": 0.0,
+      "sequences": {
+        "status": {
+          "count": 15123,
+          "missing": 0,
+          "logged_hz": 250.0,
+          "producer_hz": 250.0,
+          "max_interval_s": 0.004
+        },
+        "updates": {
+          "count": 15123,
+          "missing": 0,
+          "logged_hz": 250.0,
+          "producer_hz": 250.0,
+          "max_interval_s": 0.004
+        }
+      },
+      "actuator_matched_samples": 24848,
+      "setpoint_instances": [
+        0
+      ]
+    },
+    {
+      "success": true,
+      "flight_success": true,
+      "mode": 1,
+      "algorithm": "esta",
+      "seed": 6203,
+      "source_head": "de3f6f0eb081369dd189e3fa865da7dae61ebfe3",
+      "binary_sha256": "67cff7332e28c2515ca675712fb4beb99c7864607bbbe297397170b66d8aac4a",
+      "analysis_success": true,
+      "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I04/formal01/0006_I04_esta_m1_nominal_s6203/10_49_00.ulg",
+      "ulog_sha256": "ba736ca1f1e38162fc5730fd270fbdca8745645a5efe9050b69d2a3f551577a8",
+      "dropouts": 0,
+      "hover_rmse": [
+        0.004456893775785695,
+        0.0036275318828201766,
+        0.0017665426877622353
+      ],
+      "tracking_rmse": [
+        0.004712047767715506,
+        0.004035901140664779,
+        0.0017348903201560894
+      ],
+      "max_abs_command": [
+        0.004936170764267445,
+        0.023814551532268524,
+        0.0036722749937325716
+      ],
+      "max_abs_nu": [
+        0.166401669383049,
+        0.0,
+        0.0
+      ],
+      "max_tilt_deg": 1.2359057664871216,
+      "max_height_error_m": 0.13547801971435547,
+      "limit_fraction": {
+        "1": 0.0,
+        "2": 0.0,
+        "4": 0.0,
+        "8": 0.0
+      },
+      "saturation_fraction": 0.0,
+      "sequences": {
+        "status": {
+          "count": 15059,
+          "missing": 0,
+          "logged_hz": 250.0,
+          "producer_hz": 250.0,
+          "max_interval_s": 0.004
+        },
+        "updates": {
+          "count": 15059,
+          "missing": 0,
+          "logged_hz": 250.0,
+          "producer_hz": 250.0,
+          "max_interval_s": 0.004
+        }
+      },
+      "actuator_matched_samples": 24476,
+      "setpoint_instances": [
+        0
+      ]
+    },
+    {
+      "success": true,
+      "flight_success": true,
+      "mode": 3,
+      "algorithm": "proper_ista",
+      "seed": 6203,
+      "source_head": "de3f6f0eb081369dd189e3fa865da7dae61ebfe3",
+      "binary_sha256": "67cff7332e28c2515ca675712fb4beb99c7864607bbbe297397170b66d8aac4a",
+      "analysis_success": true,
+      "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I04/formal01/0007_I04_proper_ista_m3_nominal_s6203/10_49_27.ulg",
+      "ulog_sha256": "93029c3f776c8a39512802ab5598f414af2cfa8c236580efbb0e62089f8ed44a",
+      "dropouts": 0,
+      "hover_rmse": [
+        0.004098525398075326,
+        0.003535635046062972,
+        0.001533593532220922
+      ],
+      "tracking_rmse": [
+        0.004382820561498503,
+        0.0039303430563822385,
+        0.001513588860022252
+      ],
+      "max_abs_command": [
+        0.004794321022927761,
+        0.12035037577152252,
+        0.002315106801688671
+      ],
+      "max_abs_nu": [
+        0.14380128681659698,
+        0.0,
+        0.0
+      ],
+      "max_tilt_deg": 1.133841633796692,
+      "max_height_error_m": 0.13535094261169434,
+      "limit_fraction": {
+        "1": 0.0,
+        "2": 0.0,
+        "4": 0.0,
+        "8": 0.0
+      },
+      "saturation_fraction": 0.0,
+      "sequences": {
+        "status": {
+          "count": 15108,
+          "missing": 0,
+          "logged_hz": 250.0,
+          "producer_hz": 250.0,
+          "max_interval_s": 0.004
+        },
+        "updates": {
+          "count": 15108,
+          "missing": 0,
+          "logged_hz": 250.0,
+          "producer_hz": 250.0,
+          "max_interval_s": 0.004
+        }
+      },
+      "actuator_matched_samples": 24810,
+      "setpoint_instances": [
+        0
+      ]
+    }
+  ],
+  "source_head": "de3f6f0eb081369dd189e3fa865da7dae61ebfe3",
+  "frozen_sha256": "97acbc8c20b86bb8e5fb50fd81af41821d23ff1092c3255b4c1602b4fe93de81",
+  "jobs_sha256": "de7ce3156250f5639e28f00e93fd03f4e75e1cbc64cac6a83b52a21935f30d09",
+  "binary_sha256": "67cff7332e28c2515ca675712fb4beb99c7864607bbbe297397170b66d8aac4a"
+}
