@@ -1,0 +1,1131 @@
+{
+  "planned": 12,
+  "attempted": 12,
+  "accepted": 10,
+  "configurations": {
+    "esta_established": {
+      "planned": 3,
+      "attempted": 3,
+      "accepted": 3
+    },
+    "esta_takeoff_nu_manager": {
+      "planned": 3,
+      "attempted": 3,
+      "accepted": 2
+    },
+    "original_ista_established": {
+      "planned": 3,
+      "attempted": 3,
+      "accepted": 3
+    },
+    "original_ista_takeoff_nu_manager": {
+      "planned": 3,
+      "attempted": 3,
+      "accepted": 2
+    }
+  },
+  "paired": [
+    {
+      "algorithm": "esta",
+      "seed": 6101,
+      "old_nu": 0.11364422135617117,
+      "new_nu": 0.04096561384732667,
+      "reduction": 0.6395275240706101,
+      "rmse_ratio": [
+        0.8663716011693544,
+        1.7230588376763167,
+        0.8447233915326946
+      ],
+      "tilt_increase_deg": 0.1486942959848515
+    },
+    {
+      "algorithm": "esta",
+      "seed": 6102,
+      "old_nu": 0.08111578174812237,
+      "new_nu": 0.0,
+      "reduction": 1.0,
+      "rmse_ratio": [
+        0.8297169254497526,
+        0.8219611357536207,
+        0.980774741654104
+      ],
+      "tilt_increase_deg": -0.20104640598475276
+    },
+    {
+      "algorithm": "esta",
+      "seed": 6103,
+      "old_nu": 0.16745435465387828,
+      "new_nu": 0.0,
+      "reduction": 1.0,
+      "rmse_ratio": [
+        1.194405573815153,
+        0.5182031352843622,
+        1.149224774004465
+      ],
+      "tilt_increase_deg": -0.2646500796658352
+    },
+    {
+      "algorithm": "original_ista",
+      "seed": 6101,
+      "old_nu": 0.2961659568482353,
+      "new_nu": 0.1023483795918742,
+      "reduction": 0.6544222007112022,
+      "rmse_ratio": [
+        0.7947159832529107,
+        2.2742559044020667,
+        1.0639339179644929
+      ],
+      "tilt_increase_deg": -0.11328464331304455
+    },
+    {
+      "algorithm": "original_ista",
+      "seed": 6102,
+      "old_nu": 0.05959364254180245,
+      "new_nu": 0.0,
+      "reduction": 1.0,
+      "rmse_ratio": [
+        1.1820644645933855,
+        1.0691266732362144,
+        1.0435542856605358
+      ],
+      "tilt_increase_deg": 0.16698386424407663
+    },
+    {
+      "algorithm": "original_ista",
+      "seed": 6103,
+      "old_nu": 0.2129782895364775,
+      "new_nu": 0.0,
+      "reduction": 1.0,
+      "rmse_ratio": [
+        1.2490972844096175,
+        0.3280846917766616,
+        0.5608570524543274
+      ],
+      "tilt_increase_deg": -1.2763302107959376
+    }
+  ],
+  "combined_liftoff_nu_reduction_median": 1.0,
+  "algorithms": {
+    "esta": {
+      "liftoff_nu_reduction_median": 1.0,
+      "early_rmse_ratio_median_axis": [
+        0.8663716011693544,
+        0.8219611357536207,
+        0.980774741654104
+      ],
+      "peak_tilt_increase_median_deg": -0.20104640598475276
+    },
+    "original_ista": {
+      "liftoff_nu_reduction_median": 1.0,
+      "early_rmse_ratio_median_axis": [
+        1.1820644645933855,
+        1.0691266732362144,
+        1.0435542856605358
+      ],
+      "peak_tilt_increase_median_deg": -0.11328464331304455
+    }
+  },
+  "all_accepted": false,
+  "manager_correct": false,
+  "mechanism": true,
+  "no_degradation": true,
+  "selected_common_protection": "established",
+  "stop_future_flight": false,
+  "conclusion_scope": "Iris SITL three paired development seeds; not hardware or statistical significance",
+  "source_head": "0344a80967ae96270e9a31ba5bf56666c1f64e9c",
+  "frozen_sha256": "a71a22b494d1d02caeb5890244b952b40599aadb813fddc0a891a7025f047e76",
+  "jobs_sha256": "1a503a1f21e57245410cb05244bea4fb437015c381cf19996a493df88adcb30f",
+  "rows": [
+    {
+      "algorithm": "esta",
+      "protection": "established",
+      "mode": 1,
+      "seed": 6101,
+      "frozen_head": "0344a80967ae96270e9a31ba5bf56666c1f64e9c",
+      "accepted": true,
+      "flight_success": true,
+      "m10_success": true,
+      "inherited_m09_audit_adjudicated": false,
+      "ulog_truth_usage": "post-hoc only",
+      "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I03/formal01/0000_I03_esta_established_m1_nominal_s6101/09_40_55.ulg",
+      "ulog_sha256": "53a3d09888436e6f7513a27f0e7a5f34b372dd58206456539ea0f5f752909706",
+      "checks": {
+        "flight_complete": true,
+        "mode_axes": true,
+        "no_fault_abort": true,
+        "tilt": true,
+        "ulog_dropouts": true,
+        "main_sequence": true,
+        "takeoff_sequence": true,
+        "manager_disabled": true
+      },
+      "truth_liftoff_s": 35.484,
+      "manager_release_s": null,
+      "manager_release_after_truth_liftoff_s": null,
+      "stationary_samples": 1122,
+      "stationary_nu_max_abs": [
+        0.08300025761127472,
+        0.15584060549736023,
+        0.055680278688669205
+      ],
+      "liftoff_nu": [
+        0.07400010526180267,
+        0.06975995004177094,
+        -0.05072024092078209
+      ],
+      "liftoff_nu_l2": 0.11364422135617117,
+      "prerelease_nu_max_abs": [
+        0.08400027453899384,
+        0.15584060549736023,
+        0.055680278688669205
+      ],
+      "early_rate_rmse": [
+        0.005484920984508402,
+        0.018437812080807567,
+        0.0020444889057985183
+      ],
+      "peak_tilt_deg": 1.4224375708314945,
+      "early_peak_tilt_deg": 0.6511403057674992,
+      "height_min_max_m": [
+        0.0,
+        2.20001220703125
+      ],
+      "protected_fraction": [
+        0.03598947116535056,
+        0.03598947116535056,
+        0.03598947116535056
+      ],
+      "mixer_saturation_fraction": 0.03598947116535056,
+      "sequence": {
+        "main_missing": 0,
+        "main_missing_fraction": 0.0,
+        "takeoff_missing": 0,
+        "takeoff_missing_fraction": 0.0
+      },
+      "ulog_dropouts": 0,
+      "ulog_dropout_ms": 0,
+      "manager_states": [
+        0
+      ],
+      "manager_events": [
+        0
+      ]
+    },
+    {
+      "algorithm": "esta",
+      "protection": "takeoff_nu_manager",
+      "mode": 1,
+      "seed": 6101,
+      "frozen_head": "0344a80967ae96270e9a31ba5bf56666c1f64e9c",
+      "accepted": false,
+      "flight_success": true,
+      "m10_success": false,
+      "inherited_m09_audit_adjudicated": true,
+      "ulog_truth_usage": "post-hoc only",
+      "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I03/formal01/0001_I03_esta_takeoff_nu_manager_m1_nominal_s6101/09_41_23.ulg",
+      "ulog_sha256": "fc250d7acbd8dfcc806dd397dff7ec3b8f16312feeff30abaa3dda9afa1fac4a",
+      "checks": {
+        "flight_complete": true,
+        "mode_axes": true,
+        "no_fault_abort": true,
+        "tilt": true,
+        "ulog_dropouts": true,
+        "main_sequence": true,
+        "takeoff_sequence": true,
+        "manager_effective": true,
+        "manager_waiting": true,
+        "manager_one_release": true,
+        "manager_no_fault": true,
+        "manager_release_window": false,
+        "manager_pre_release_nu": true,
+        "manager_no_airborne_refreeze": true
+      },
+      "truth_liftoff_s": 34.888,
+      "manager_release_s": 33.955999999999996,
+      "manager_release_after_truth_liftoff_s": -0.9320000000000022,
+      "stationary_samples": 1117,
+      "stationary_nu_max_abs": [
+        0.0355999581515789,
+        0.05183993652462959,
+        0.013359982520341873
+      ],
+      "liftoff_nu": [
+        0.026399973779916763,
+        -0.028800014406442642,
+        -0.012319986708462238
+      ],
+      "liftoff_nu_l2": 0.04096561384732667,
+      "prerelease_nu_max_abs": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "early_rate_rmse": [
+        0.004751979775635936,
+        0.03176943505325064,
+        0.0017270276024570921
+      ],
+      "peak_tilt_deg": 1.4512756464389145,
+      "early_peak_tilt_deg": 0.7998346017523507,
+      "height_min_max_m": [
+        0.0,
+        2.196014404296875
+      ],
+      "protected_fraction": [
+        0.03597741842885848,
+        0.03597741842885848,
+        0.03597741842885848
+      ],
+      "mixer_saturation_fraction": 0.03597741842885848,
+      "sequence": {
+        "main_missing": 0,
+        "main_missing_fraction": 0.0,
+        "takeoff_missing": 0,
+        "takeoff_missing_fraction": 0.0
+      },
+      "ulog_dropouts": 0,
+      "ulog_dropout_ms": 0,
+      "manager_states": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "manager_events": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        7
+      ]
+    },
+    {
+      "algorithm": "original_ista",
+      "protection": "established",
+      "mode": 2,
+      "seed": 6101,
+      "frozen_head": "0344a80967ae96270e9a31ba5bf56666c1f64e9c",
+      "accepted": true,
+      "flight_success": true,
+      "m10_success": true,
+      "inherited_m09_audit_adjudicated": false,
+      "ulog_truth_usage": "post-hoc only",
+      "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I03/formal01/0002_I03_original_ista_established_m2_nominal_s6101/09_43_12.ulg",
+      "ulog_sha256": "73939f2ddce0140f3a052be8a9a4f48342e60c5bd0c12bdf1f031537c62effee",
+      "checks": {
+        "flight_complete": true,
+        "mode_axes": true,
+        "no_fault_abort": true,
+        "tilt": true,
+        "ulog_dropouts": true,
+        "main_sequence": true,
+        "takeoff_sequence": true,
+        "manager_disabled": true
+      },
+      "truth_liftoff_s": 35.519999999999996,
+      "manager_release_s": null,
+      "manager_release_after_truth_liftoff_s": null,
+      "stationary_samples": 1111,
+      "stationary_nu_max_abs": [
+        0.0846002846956253,
+        0.2742403745651245,
+        0.05448026955127716
+      ],
+      "liftoff_nu": [
+        -0.007200004532933235,
+        0.29183968901634216,
+        -0.04992023482918739
+      ],
+      "liftoff_nu_l2": 0.2961659568482353,
+      "prerelease_nu_max_abs": [
+        0.0846002846956253,
+        0.29183968901634216,
+        0.05448026955127716
+      ],
+      "early_rate_rmse": [
+        0.006997038875878743,
+        0.009459548140130296,
+        0.001976467237158816
+      ],
+      "peak_tilt_deg": 1.4262947454225041,
+      "early_peak_tilt_deg": 0.5300563331813751,
+      "height_min_max_m": [
+        0.0,
+        2.052001953125
+      ],
+      "protected_fraction": [
+        0.036205404365804404,
+        0.036205404365804404,
+        0.036205404365804404
+      ],
+      "mixer_saturation_fraction": 0.036205404365804404,
+      "sequence": {
+        "main_missing": 0,
+        "main_missing_fraction": 0.0,
+        "takeoff_missing": 0,
+        "takeoff_missing_fraction": 0.0
+      },
+      "ulog_dropouts": 0,
+      "ulog_dropout_ms": 0,
+      "manager_states": [
+        0
+      ],
+      "manager_events": [
+        0
+      ]
+    },
+    {
+      "algorithm": "original_ista",
+      "protection": "takeoff_nu_manager",
+      "mode": 2,
+      "seed": 6101,
+      "frozen_head": "0344a80967ae96270e9a31ba5bf56666c1f64e9c",
+      "accepted": false,
+      "flight_success": true,
+      "m10_success": false,
+      "inherited_m09_audit_adjudicated": true,
+      "ulog_truth_usage": "post-hoc only",
+      "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I03/formal01/0003_I03_original_ista_takeoff_nu_manager_m2_nominal_s6101/09_43_41.ulg",
+      "ulog_sha256": "eadcbf58f3a5388373b27fb7f5ffc21d378cecf824b768cc534e21d1e167c94a",
+      "checks": {
+        "flight_complete": true,
+        "mode_axes": true,
+        "no_fault_abort": true,
+        "tilt": true,
+        "ulog_dropouts": true,
+        "main_sequence": true,
+        "takeoff_sequence": true,
+        "manager_effective": true,
+        "manager_waiting": true,
+        "manager_one_release": true,
+        "manager_no_fault": true,
+        "manager_release_window": false,
+        "manager_pre_release_nu": true,
+        "manager_no_airborne_refreeze": true
+      },
+      "truth_liftoff_s": 35.62,
+      "manager_release_s": 34.44,
+      "manager_release_after_truth_liftoff_s": -1.1799999999999997,
+      "stationary_samples": 1123,
+      "stationary_nu_max_abs": [
+        0.04599994048476219,
+        0.0777600109577179,
+        0.017119985073804855
+      ],
+      "liftoff_nu": [
+        -0.0355999581515789,
+        0.09472014009952545,
+        -0.015359975397586823
+      ],
+      "liftoff_nu_l2": 0.1023483795918742,
+      "prerelease_nu_max_abs": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "early_rate_rmse": [
+        0.005560658630102817,
+        0.021513433210666916,
+        0.002102830531358836
+      ],
+      "peak_tilt_deg": 1.5044013775408218,
+      "early_peak_tilt_deg": 0.4167716898683306,
+      "height_min_max_m": [
+        0.0,
+        2.21600341796875
+      ],
+      "protected_fraction": [
+        0.035778770312648485,
+        0.035778770312648485,
+        0.035778770312648485
+      ],
+      "mixer_saturation_fraction": 0.035778770312648485,
+      "sequence": {
+        "main_missing": 0,
+        "main_missing_fraction": 0.0,
+        "takeoff_missing": 0,
+        "takeoff_missing_fraction": 0.0
+      },
+      "ulog_dropouts": 0,
+      "ulog_dropout_ms": 0,
+      "manager_states": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "manager_events": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        7
+      ]
+    },
+    {
+      "algorithm": "esta",
+      "protection": "takeoff_nu_manager",
+      "mode": 1,
+      "seed": 6102,
+      "frozen_head": "0344a80967ae96270e9a31ba5bf56666c1f64e9c",
+      "accepted": true,
+      "flight_success": true,
+      "m10_success": false,
+      "inherited_m09_audit_adjudicated": true,
+      "ulog_truth_usage": "post-hoc only",
+      "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I03/formal01/0004_I03_esta_takeoff_nu_manager_m1_nominal_s6102/09_44_36.ulg",
+      "ulog_sha256": "c59a3e25b42982191883521600cb12f1511f7902f1269f11be912b0e00fe7c0f",
+      "checks": {
+        "flight_complete": true,
+        "mode_axes": true,
+        "no_fault_abort": true,
+        "tilt": true,
+        "ulog_dropouts": true,
+        "main_sequence": true,
+        "takeoff_sequence": true,
+        "manager_effective": true,
+        "manager_waiting": true,
+        "manager_one_release": true,
+        "manager_no_fault": true,
+        "manager_release_window": true,
+        "manager_pre_release_nu": true,
+        "manager_no_airborne_refreeze": true
+      },
+      "truth_liftoff_s": 35.272,
+      "manager_release_s": 35.344,
+      "manager_release_after_truth_liftoff_s": 0.07200000000000273,
+      "stationary_samples": 1094,
+      "stationary_nu_max_abs": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "liftoff_nu": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "liftoff_nu_l2": 0.0,
+      "prerelease_nu_max_abs": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "early_rate_rmse": [
+        0.003829893472537775,
+        0.03617338605823148,
+        0.0021063270971936744
+      ],
+      "peak_tilt_deg": 1.4947435047865856,
+      "early_peak_tilt_deg": 0.9077216127477665,
+      "height_min_max_m": [
+        0.0,
+        2.131011962890625
+      ],
+      "protected_fraction": [
+        0.036198442457456015,
+        0.036198442457456015,
+        0.036198442457456015
+      ],
+      "mixer_saturation_fraction": 0.036198442457456015,
+      "sequence": {
+        "main_missing": 0,
+        "main_missing_fraction": 0.0,
+        "takeoff_missing": 0,
+        "takeoff_missing_fraction": 0.0
+      },
+      "ulog_dropouts": 0,
+      "ulog_dropout_ms": 0,
+      "manager_states": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "manager_events": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        7
+      ]
+    },
+    {
+      "algorithm": "original_ista",
+      "protection": "takeoff_nu_manager",
+      "mode": 2,
+      "seed": 6102,
+      "frozen_head": "0344a80967ae96270e9a31ba5bf56666c1f64e9c",
+      "accepted": true,
+      "flight_success": true,
+      "m10_success": false,
+      "inherited_m09_audit_adjudicated": true,
+      "ulog_truth_usage": "post-hoc only",
+      "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I03/formal01/0005_I03_original_ista_takeoff_nu_manager_m2_nominal_s6102/09_45_29.ulg",
+      "ulog_sha256": "2b236bc6ab80fd26938fd1c2970a51eb29c2950140587686064e887f883383f4",
+      "checks": {
+        "flight_complete": true,
+        "mode_axes": true,
+        "no_fault_abort": true,
+        "tilt": true,
+        "ulog_dropouts": true,
+        "main_sequence": true,
+        "takeoff_sequence": true,
+        "manager_effective": true,
+        "manager_waiting": true,
+        "manager_one_release": true,
+        "manager_no_fault": true,
+        "manager_release_window": true,
+        "manager_pre_release_nu": true,
+        "manager_no_airborne_refreeze": true
+      },
+      "truth_liftoff_s": 35.516,
+      "manager_release_s": 35.928,
+      "manager_release_after_truth_liftoff_s": 0.41199999999999903,
+      "stationary_samples": 1083,
+      "stationary_nu_max_abs": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "liftoff_nu": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "liftoff_nu_l2": 0.0,
+      "prerelease_nu_max_abs": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "early_rate_rmse": [
+        0.003967794404076301,
+        0.07729392527747989,
+        0.0021479748840821573
+      ],
+      "peak_tilt_deg": 1.4547384660274505,
+      "early_peak_tilt_deg": 1.4547384660274505,
+      "height_min_max_m": [
+        0.0,
+        2.17901611328125
+      ],
+      "protected_fraction": [
+        0.0361791730474732,
+        0.0361791730474732,
+        0.0361791730474732
+      ],
+      "mixer_saturation_fraction": 0.0361791730474732,
+      "sequence": {
+        "main_missing": 0,
+        "main_missing_fraction": 0.0,
+        "takeoff_missing": 0,
+        "takeoff_missing_fraction": 0.0
+      },
+      "ulog_dropouts": 0,
+      "ulog_dropout_ms": 0,
+      "manager_states": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "manager_events": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        7
+      ]
+    },
+    {
+      "algorithm": "esta",
+      "protection": "established",
+      "mode": 1,
+      "seed": 6102,
+      "frozen_head": "0344a80967ae96270e9a31ba5bf56666c1f64e9c",
+      "accepted": true,
+      "flight_success": true,
+      "m10_success": true,
+      "inherited_m09_audit_adjudicated": false,
+      "ulog_truth_usage": "post-hoc only",
+      "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I03/formal01/0006_I03_esta_established_m1_nominal_s6102/09_46_34.ulg",
+      "ulog_sha256": "5599108c5fe8edb7605a3afe837224e761c348fbf99aa1ee5b7aa2339e17f71d",
+      "checks": {
+        "flight_complete": true,
+        "mode_axes": true,
+        "no_fault_abort": true,
+        "tilt": true,
+        "ulog_dropouts": true,
+        "main_sequence": true,
+        "takeoff_sequence": true,
+        "manager_disabled": true
+      },
+      "truth_liftoff_s": 34.635999999999996,
+      "manager_release_s": null,
+      "manager_release_after_truth_liftoff_s": null,
+      "stationary_samples": 1090,
+      "stationary_nu_max_abs": [
+        0.07280008494853973,
+        0.11200027167797089,
+        0.04432019218802452
+      ],
+      "liftoff_nu": [
+        -0.06699998676776886,
+        -0.020800000056624413,
+        0.04072016477584839
+      ],
+      "liftoff_nu_l2": 0.08111578174812237,
+      "prerelease_nu_max_abs": [
+        0.07560013234615326,
+        0.11200027167797089,
+        0.04432019218802452
+      ],
+      "early_rate_rmse": [
+        0.004615903755924661,
+        0.04400863311507503,
+        0.0021476155611851247
+      ],
+      "peak_tilt_deg": 1.294994733304728,
+      "early_peak_tilt_deg": 1.1087680187325193,
+      "height_min_max_m": [
+        0.0,
+        2.1669921875
+      ],
+      "protected_fraction": [
+        0.03609311255099592,
+        0.03609311255099592,
+        0.03609311255099592
+      ],
+      "mixer_saturation_fraction": 0.03609311255099592,
+      "sequence": {
+        "main_missing": 0,
+        "main_missing_fraction": 0.0,
+        "takeoff_missing": 0,
+        "takeoff_missing_fraction": 0.0
+      },
+      "ulog_dropouts": 0,
+      "ulog_dropout_ms": 0,
+      "manager_states": [
+        0
+      ],
+      "manager_events": [
+        0
+      ]
+    },
+    {
+      "algorithm": "original_ista",
+      "protection": "established",
+      "mode": 2,
+      "seed": 6102,
+      "frozen_head": "0344a80967ae96270e9a31ba5bf56666c1f64e9c",
+      "accepted": true,
+      "flight_success": true,
+      "m10_success": true,
+      "inherited_m09_audit_adjudicated": false,
+      "ulog_truth_usage": "post-hoc only",
+      "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I03/formal01/0007_I03_original_ista_established_m2_nominal_s6102/09_47_04.ulg",
+      "ulog_sha256": "4fd3aa30c6b4146a87d6ccb55a76346d637bf8c4cd0eb5ebd9e29e060158dd9b",
+      "checks": {
+        "flight_complete": true,
+        "mode_axes": true,
+        "no_fault_abort": true,
+        "tilt": true,
+        "ulog_dropouts": true,
+        "main_sequence": true,
+        "takeoff_sequence": true,
+        "manager_disabled": true
+      },
+      "truth_liftoff_s": 35.028,
+      "manager_release_s": null,
+      "manager_release_after_truth_liftoff_s": null,
+      "stationary_samples": 1090,
+      "stationary_nu_max_abs": [
+        0.0760001391172409,
+        0.1043202131986618,
+        0.05288025736808777
+      ],
+      "liftoff_nu": [
+        0.006200003903359175,
+        -0.034880004823207855,
+        0.04792021960020065
+      ],
+      "liftoff_nu_l2": 0.05959364254180245,
+      "prerelease_nu_max_abs": [
+        0.0760001391172409,
+        0.1043202131986618,
+        0.05288025736808777
+      ],
+      "early_rate_rmse": [
+        0.0033566649898752942,
+        0.0722963211118038,
+        0.0020583259669357395
+      ],
+      "peak_tilt_deg": 1.352974175479151,
+      "early_peak_tilt_deg": 1.2877546017833739,
+      "height_min_max_m": [
+        0.0,
+        2.191009521484375
+      ],
+      "protected_fraction": [
+        0.03610073733601456,
+        0.03610073733601456,
+        0.03610073733601456
+      ],
+      "mixer_saturation_fraction": 0.03610073733601456,
+      "sequence": {
+        "main_missing": 0,
+        "main_missing_fraction": 0.0,
+        "takeoff_missing": 0,
+        "takeoff_missing_fraction": 0.0
+      },
+      "ulog_dropouts": 0,
+      "ulog_dropout_ms": 0,
+      "manager_states": [
+        0
+      ],
+      "manager_events": [
+        0
+      ]
+    },
+    {
+      "algorithm": "original_ista",
+      "protection": "established",
+      "mode": 2,
+      "seed": 6103,
+      "frozen_head": "0344a80967ae96270e9a31ba5bf56666c1f64e9c",
+      "accepted": true,
+      "flight_success": true,
+      "m10_success": true,
+      "inherited_m09_audit_adjudicated": false,
+      "ulog_truth_usage": "post-hoc only",
+      "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I03/formal01/0008_I03_original_ista_established_m2_nominal_s6103/09_47_33.ulg",
+      "ulog_sha256": "5a7bcb468fe1af86a954cf60da592af65704412e31b27b2fe5569d165b6a7ca5",
+      "checks": {
+        "flight_complete": true,
+        "mode_axes": true,
+        "no_fault_abort": true,
+        "tilt": true,
+        "ulog_dropouts": true,
+        "main_sequence": true,
+        "takeoff_sequence": true,
+        "manager_disabled": true
+      },
+      "truth_liftoff_s": 35.516,
+      "manager_release_s": null,
+      "manager_release_after_truth_liftoff_s": null,
+      "stationary_samples": 1106,
+      "stationary_nu_max_abs": [
+        0.052799928933382034,
+        0.22816115617752075,
+        0.009999996051192284
+      ],
+      "liftoff_nu": [
+        0.03659995645284653,
+        -0.2096010148525238,
+        -0.009359998628497124
+      ],
+      "liftoff_nu_l2": 0.2129782895364775,
+      "prerelease_nu_max_abs": [
+        0.052799928933382034,
+        0.22816115617752075,
+        0.009999996051192284
+      ],
+      "early_rate_rmse": [
+        0.003991608884057966,
+        0.1794438085556329,
+        0.0033615106703882677
+      ],
+      "peak_tilt_deg": 2.4422594823813255,
+      "early_peak_tilt_deg": 2.4422594823813255,
+      "height_min_max_m": [
+        0.0,
+        2.05401611328125
+      ],
+      "protected_fraction": [
+        0.036052037828236766,
+        0.036052037828236766,
+        0.036052037828236766
+      ],
+      "mixer_saturation_fraction": 0.036052037828236766,
+      "sequence": {
+        "main_missing": 0,
+        "main_missing_fraction": 0.0,
+        "takeoff_missing": 0,
+        "takeoff_missing_fraction": 0.0
+      },
+      "ulog_dropouts": 0,
+      "ulog_dropout_ms": 0,
+      "manager_states": [
+        0
+      ],
+      "manager_events": [
+        0
+      ]
+    },
+    {
+      "algorithm": "esta",
+      "protection": "established",
+      "mode": 1,
+      "seed": 6103,
+      "frozen_head": "0344a80967ae96270e9a31ba5bf56666c1f64e9c",
+      "accepted": true,
+      "flight_success": true,
+      "m10_success": true,
+      "inherited_m09_audit_adjudicated": false,
+      "ulog_truth_usage": "post-hoc only",
+      "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I03/formal01/0009_I03_esta_established_m1_nominal_s6103/09_48_02.ulg",
+      "ulog_sha256": "f2208e90e41cecde2416941371446ee8cb45022a61a6eb34eeec9286e997c47f",
+      "checks": {
+        "flight_complete": true,
+        "mode_axes": true,
+        "no_fault_abort": true,
+        "tilt": true,
+        "ulog_dropouts": true,
+        "main_sequence": true,
+        "takeoff_sequence": true,
+        "manager_disabled": true
+      },
+      "truth_liftoff_s": 35.46,
+      "manager_release_s": null,
+      "manager_release_after_truth_liftoff_s": null,
+      "stationary_samples": 1090,
+      "stationary_nu_max_abs": [
+        0.09160040318965912,
+        0.18656083941459656,
+        0.010719993151724339
+      ],
+      "liftoff_nu": [
+        -0.02119998261332512,
+        -0.16576068103313446,
+        -0.010719993151724339
+      ],
+      "liftoff_nu_l2": 0.16745435465387828,
+      "prerelease_nu_max_abs": [
+        0.09160040318965912,
+        0.18656083941459656,
+        0.011039991863071918
+      ],
+      "early_rate_rmse": [
+        0.00348369289766131,
+        0.0678017304178071,
+        0.001930648948756444
+      ],
+      "peak_tilt_deg": 1.3523171587839955,
+      "early_peak_tilt_deg": 1.1629063390212724,
+      "height_min_max_m": [
+        0.0,
+        2.0679931640625
+      ],
+      "protected_fraction": [
+        0.0359557025744283,
+        0.0359557025744283,
+        0.0359557025744283
+      ],
+      "mixer_saturation_fraction": 0.0359557025744283,
+      "sequence": {
+        "main_missing": 0,
+        "main_missing_fraction": 0.0,
+        "takeoff_missing": 0,
+        "takeoff_missing_fraction": 0.0
+      },
+      "ulog_dropouts": 0,
+      "ulog_dropout_ms": 0,
+      "manager_states": [
+        0
+      ],
+      "manager_events": [
+        0
+      ]
+    },
+    {
+      "algorithm": "original_ista",
+      "protection": "takeoff_nu_manager",
+      "mode": 2,
+      "seed": 6103,
+      "frozen_head": "0344a80967ae96270e9a31ba5bf56666c1f64e9c",
+      "accepted": true,
+      "flight_success": true,
+      "m10_success": false,
+      "inherited_m09_audit_adjudicated": true,
+      "ulog_truth_usage": "post-hoc only",
+      "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I03/formal01/0010_I03_original_ista_takeoff_nu_manager_m2_nominal_s6103/09_48_32.ulg",
+      "ulog_sha256": "c675cad50563e52c0114d9f6d4f85f968578ef8d49aa2fa38e36ee033627e189",
+      "checks": {
+        "flight_complete": true,
+        "mode_axes": true,
+        "no_fault_abort": true,
+        "tilt": true,
+        "ulog_dropouts": true,
+        "main_sequence": true,
+        "takeoff_sequence": true,
+        "manager_effective": true,
+        "manager_waiting": true,
+        "manager_one_release": true,
+        "manager_no_fault": true,
+        "manager_release_window": true,
+        "manager_pre_release_nu": true,
+        "manager_no_airborne_refreeze": true
+      },
+      "truth_liftoff_s": 35.296,
+      "manager_release_s": 35.64,
+      "manager_release_after_truth_liftoff_s": 0.3440000000000012,
+      "stationary_samples": 1091,
+      "stationary_nu_max_abs": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "liftoff_nu": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "liftoff_nu_l2": 0.0,
+      "prerelease_nu_max_abs": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "early_rate_rmse": [
+        0.00498590781750211,
+        0.058872766621205094,
+        0.0018853269663877338
+      ],
+      "peak_tilt_deg": 1.350720103332437,
+      "early_peak_tilt_deg": 1.165929271585388,
+      "height_min_max_m": [
+        0.0,
+        2.0670166015625
+      ],
+      "protected_fraction": [
+        0.03598639129809766,
+        0.03598639129809766,
+        0.03598639129809766
+      ],
+      "mixer_saturation_fraction": 0.03598639129809766,
+      "sequence": {
+        "main_missing": 0,
+        "main_missing_fraction": 0.0,
+        "takeoff_missing": 0,
+        "takeoff_missing_fraction": 0.0
+      },
+      "ulog_dropouts": 0,
+      "ulog_dropout_ms": 0,
+      "manager_states": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "manager_events": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        7
+      ]
+    },
+    {
+      "algorithm": "esta",
+      "protection": "takeoff_nu_manager",
+      "mode": 1,
+      "seed": 6103,
+      "frozen_head": "0344a80967ae96270e9a31ba5bf56666c1f64e9c",
+      "accepted": true,
+      "flight_success": true,
+      "m10_success": false,
+      "inherited_m09_audit_adjudicated": true,
+      "ulog_truth_usage": "post-hoc only",
+      "ulog": "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I03/formal01/0011_I03_esta_takeoff_nu_manager_m1_nominal_s6103/09_49_26.ulg",
+      "ulog_sha256": "9f05f90ac07565450a16904551e77b410a40d97f6ca0ae42b7328bf278a4e07b",
+      "checks": {
+        "flight_complete": true,
+        "mode_axes": true,
+        "no_fault_abort": true,
+        "tilt": true,
+        "ulog_dropouts": true,
+        "main_sequence": true,
+        "takeoff_sequence": true,
+        "manager_effective": true,
+        "manager_waiting": true,
+        "manager_one_release": true,
+        "manager_no_fault": true,
+        "manager_release_window": true,
+        "manager_pre_release_nu": true,
+        "manager_no_airborne_refreeze": true
+      },
+      "truth_liftoff_s": 35.448,
+      "manager_release_s": 35.484,
+      "manager_release_after_truth_liftoff_s": 0.036000000000001364,
+      "stationary_samples": 1100,
+      "stationary_nu_max_abs": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "liftoff_nu": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "liftoff_nu_l2": 0.0,
+      "prerelease_nu_max_abs": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "early_rate_rmse": [
+        0.00416094221442693,
+        0.035135069280212754,
+        0.002218749601816582
+      ],
+      "peak_tilt_deg": 1.322686940383078,
+      "early_peak_tilt_deg": 0.8982562593554372,
+      "height_min_max_m": [
+        0.0,
+        2.0679931640625
+      ],
+      "protected_fraction": [
+        0.03607137731426111,
+        0.03607137731426111,
+        0.03607137731426111
+      ],
+      "mixer_saturation_fraction": 0.03607137731426111,
+      "sequence": {
+        "main_missing": 0,
+        "main_missing_fraction": 0.0,
+        "takeoff_missing": 0,
+        "takeoff_missing_fraction": 0.0
+      },
+      "ulog_dropouts": 0,
+      "ulog_dropout_ms": 0,
+      "manager_states": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "manager_events": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        7
+      ]
+    }
+  ]
+}

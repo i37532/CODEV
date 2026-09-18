@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 import unittest
+import hashlib
+import json
+import tempfile
+from pathlib import Path
 import numpy as np
-from analyze import missing_fraction, summarize
+from analyze import inherited_audit_adjudicated, missing_fraction, summarize
 from design import build_jobs
 
 
@@ -45,6 +49,20 @@ class I03DesignTest(unittest.TestCase):
         self.assertEqual(summarize(rows)['selected_common_protection'], 'takeoff_nu_manager')
         rows[-1]['accepted'] = False
         self.assertEqual(summarize(rows)['selected_common_protection'], 'established')
+
+    def test_adjudication_is_exact_and_does_not_hide_other_failure(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            run = Path(temporary)/'case'; run.mkdir()
+            analysis = run/'m10_analysis.json'; analysis.write_text('{}\n')
+            digest = hashlib.sha256(analysis.read_bytes()).hexdigest()
+            review = run.parent/(run.name+'.adjudication.json')
+            review.write_text(json.dumps(dict(analysis_resolved_without_reflight=True,
+                                              flight_result_success=True,
+                                              new_analysis_sha256=digest)))
+            exact = dict(success=False, error="ValueError('Protected nu/freeze is inconsistent')")
+            self.assertTrue(inherited_audit_adjudicated(run, exact, dict(success=True)))
+            exact['error'] = "ValueError('another failure')"
+            self.assertFalse(inherited_audit_adjudicated(run, exact, dict(success=True)))
 
 
 if __name__ == '__main__': unittest.main()

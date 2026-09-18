@@ -25,14 +25,31 @@ def file_digest(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
+def inherited_audit_adjudicated(run, m10, result):
+    """Accept only the exact, reviewed M09 freeze-model mismatch; never hide another failure."""
+    if m10.get('success') or not result.get('success'):
+        return False
+    if m10.get('error') != "ValueError('Protected nu/freeze is inconsistent')":
+        return False
+    path = run.parent/(run.name+'.adjudication.json')
+    if not path.exists():
+        return False
+    review = json.loads(path.read_text())
+    return bool(review.get('analysis_resolved_without_reflight') and
+                review.get('flight_result_success') and
+                review.get('new_analysis_sha256') == file_digest(run/'m10_analysis.json'))
+
+
 def analyze(run):
     run = Path(run).resolve()
     frozen, _, _ = load_frozen()
     job = json.loads((run/'m10_job.json').read_text())
     result = json.loads((run/'result.json').read_text())
     m10 = json.loads((run/'m10_analysis.json').read_text())
+    audit_adjudicated = inherited_audit_adjudicated(run, m10, result)
     out = {k: job[k] for k in ('algorithm', 'protection', 'mode', 'seed', 'frozen_head')}
     out.update(accepted=False, flight_success=bool(result.get('success')), m10_success=bool(m10.get('success')),
+               inherited_m09_audit_adjudicated=audit_adjudicated,
                ulog_truth_usage='post-hoc only')
     try:
         logs = []
@@ -94,7 +111,7 @@ def analyze(run):
         states = takeoff['state'][ti].astype(int)
         events = takeoff['event'][ti].astype(int)
         checks = dict(
-            flight_complete=bool(result.get('success') and m10.get('success')),
+            flight_complete=bool(result.get('success') and (m10.get('success') or audit_adjudicated)),
             mode_axes=bool(np.all(d['effective_mode'][ai] == job['mode']) and np.all(d['effective_axes'][ai] == 7)),
             no_fault_abort=bool(not np.any(d['fault'][ai]) and not np.any(d['abort_requested'][ai]) and not np.any(takeoff['abort'][ti])),
             tilt=bool(np.max(tilt[armed]) <= frozen['per_run_limits']['tilt_deg']),
