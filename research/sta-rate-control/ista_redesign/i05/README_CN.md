@@ -8,8 +8,10 @@ export PYTHONPATH="$PWD/.px4-python:/home/yr/Desktop/codev doc/experiments/M00-2
 export PATH="$PWD/.px4-python/bin:$PATH"
 python3 research/sta-rate-control/ista_redesign/i05/batch.py --subgate A \
   --output '/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I05/A-formal01'
+python3 research/sta-rate-control/ista_redesign/i05/package_evidence.py --subgate A \
+  --root '/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I05/A-formal01'
 ```
 
-大型 ULog 留在外部目录。A 未通过时不得加入或运行 B/C。
+大型 ULog 留在外部目录。A 的正式结果未通过冻结门槛，B/C 因而没有加入或运行；不得把 A 重跑为补飞。
 
 `SEED_HISTORY_AUDIT_A.json` 保存正式飞行前的种子历史审计。`restart.py` 只做两次不解锁冷启动，验证参数保存、MODE=3、AXES=1/3 接受、AXES=7 拒绝和切回 PID，不执行飞行。
