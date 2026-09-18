@@ -127,9 +127,14 @@ ProperIstaRateControl::Candidate ProperIstaRateControl::evaluate(size_t axis, fl
 
 bool ProperIstaRateControl::commit(const Candidate &candidate)
 {
+	return commitProtected(candidate, candidate._result.nu_next);
+}
+
+bool ProperIstaRateControl::commitProtected(const Candidate &candidate, float applied_nu)
+{
 	if (candidate._owner != this || candidate._axis >= _nu.size() || !candidate._result.valid()
-	    || candidate._generation != _generation[candidate._axis]) { return false; }
-	_nu[candidate._axis] = candidate._result.nu_next;
+	    || candidate._generation != _generation[candidate._axis] || !representable(static_cast<double>(applied_nu))) { return false; }
+	_nu[candidate._axis] = applied_nu;
 	++_generation[candidate._axis];
 	return true;
 }

@@ -2,6 +2,7 @@
 #pragma once
 #include "StaRateControl.hpp"
 #include "IstaRateControl.hpp"
+#include "TakeoffNuManager.hpp"
 
 /** Shared ESTA/ISTA research adapter. M08 staged Iris SITL AXES=1/3/7 only.
  * PID does not pass through these limits/resets. A fault returns invalid output,
@@ -12,20 +13,31 @@ class StaProtection
 {
 public:
 
-	enum Fault : uint8_t { None, FirstSample, DuplicateTime, BackwardTime, LongGap, ShortDt, Measurement, Configuration, Numerical };
-	enum Reset : uint16_t { Startup = 1, Disarm = 2, Exit = 4, Landed = 8, ConfigChanged = 16, Acknowledge = 32 };
+	enum Fault : uint8_t { None, FirstSample, DuplicateTime, BackwardTime, LongGap, ShortDt, Measurement, Configuration, Numerical,
+			       TakeoffManagement };
+	enum Reset : uint16_t { Startup = 1, Disarm = 2, Exit = 4, Landed = 8, ConfigChanged = 16, Acknowledge = 32,
+				TakeoffManaged = 64 };
 	enum Limit : uint8_t { MixerFreeze = 1, FeedbackInvalid = 2, NuLimit = 4, OutputLimit = 8 };
 	struct Config {
 		int32_t mode{0}, axes{0};
 		std::array<StaRateControl::Parameters, 3> gains{};
 		std::array<float, 3> nu_limit{}; // rad/s^2; zero is unconfigured, not a flight default
 		float c_limit{1.f};
+		TakeoffNuManager::Config takeoff{}; // experimental and default-off
 	};
 	struct Frame {
 		uint64_t sample{0};
 		bool armed{false}, rate_enabled{false}, landed{true}, maybe_landed{true};
 		bool measurement_valid{true}, experiment_active{false};
 		bool decimated{false}; // timing/measurement latch also protects decimated PID
+		bool local_position_valid{false};
+		float local_z{std::numeric_limits<float>::quiet_NaN()}; // onboard NED estimate only
+		float local_vz{std::numeric_limits<float>::quiet_NaN()};
+	};
+	struct StateDecision {
+		float nu{std::numeric_limits<float>::quiet_NaN()};
+		uint8_t limits{0};
+		bool valid{false};
 	};
 	struct Feedback {
 		uint64_t timestamp{0}, now{0}; // publication-clock age, not sensor-clock age
@@ -60,8 +72,12 @@ public:
 	bool configValid() const { return _request_valid; }
 	bool canUpdate() const { return _allowed && !_used && _fault == None; }
 	bool abortRequested() const { return _fault != None; }
+	TakeoffNuManager::State takeoffState() const { return _takeoff.state(); }
+	const TakeoffNuManager::Decision &takeoffDecision() const { return _takeoff_decision; }
 	uint32_t configSequence() const { return _config_seq; }
 	static bool validConfig(const Config &config);
+	static StateDecision protectState(float old_nu, float candidate_nu, float candidate_c, float g,
+					 float nu_limit, float c_limit, const Feedback &feedback);
 
 private:
 	static bool same(const Config &a, const Config &b);
@@ -71,6 +87,8 @@ private:
 	Frame _previous{}, _frame{};
 	StaRateControl _kernel;
 	IstaRateControl _ista;
+	TakeoffNuManager _takeoff;
+	TakeoffNuManager::Decision _takeoff_decision{};
 	uint64_t _last_sample{0};
 	uint32_t _config_seq{0};
 	uint16_t _reset{0};

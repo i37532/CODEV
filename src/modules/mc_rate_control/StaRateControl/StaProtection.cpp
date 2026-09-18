@@ -17,7 +17,8 @@ bool sameFloat(float a, float b)
 
 bool StaProtection::same(const Config &a, const Config &b)
 {
-	if (a.mode != b.mode || a.axes != b.axes || !sameFloat(a.c_limit, b.c_limit)) { return false; }
+	if (a.mode != b.mode || a.axes != b.axes || !sameFloat(a.c_limit, b.c_limit)
+	    || !TakeoffNuManager::sameConfig(a.takeoff, b.takeoff)) { return false; }
 
 	for (size_t i = 0; i < 3; ++i) {
 		if (!sameFloat(a.gains[i].lambda1, b.gains[i].lambda1) || !sameFloat(a.gains[i].lambda2, b.gains[i].lambda2)
@@ -30,7 +31,8 @@ bool StaProtection::same(const Config &a, const Config &b)
 bool StaProtection::validConfig(const Config &c)
 {
 	if (c.mode < 0 || c.mode > 2 || c.axes < 0 || c.axes > 7 || !std::isfinite(c.c_limit)
-	    || c.c_limit <= 0.f || c.c_limit > 1.f || (c.mode != 0 && c.axes == 0)) { return false; }
+	    || c.c_limit <= 0.f || c.c_limit > 1.f || (c.mode != 0 && c.axes == 0)
+	    || !TakeoffNuManager::validConfig(c.takeoff)) { return false; }
 
 	for (size_t i = 0; i < 3; ++i) {
 		if ((c.axes & (1 << i)) && (!StaRateControl::validParameters(c.gains[i])
@@ -38,6 +40,44 @@ bool StaProtection::validConfig(const Config &c)
 	}
 
 	return true;
+}
+
+StaProtection::StateDecision StaProtection::protectState(float old_nu, float candidate_nu, float candidate_c, float g,
+		float nu_limit, float c_limit, const Feedback &feedback)
+{
+	StateDecision out;
+	if (!std::isfinite(old_nu) || !std::isfinite(candidate_nu) || !std::isfinite(candidate_c)
+	    || !std::isfinite(g) || g <= 0.f || !std::isfinite(nu_limit) || nu_limit <= 0.f
+	    || !std::isfinite(c_limit) || c_limit <= 0.f) { return out; }
+
+	float nu = candidate_nu;
+	const float delta_c = (candidate_nu - old_nu) / g;
+	if (!std::isfinite(delta_c)) { return out; }
+
+	if (!feedback.valid()) {
+		nu = old_nu;
+		out.limits |= FeedbackInvalid;
+	} else {
+		// Mixer bits: 3/4 roll +/-, 5/6 pitch +/-, 7/8 yaw +/-.
+		// The caller supplies one-axis feedback by shifting the relevant pair
+		// into the roll positions before using this common scalar policy.
+		if ((delta_c > 0.f && (feedback.bits & (1 << 3)))
+		    || (delta_c < 0.f && (feedback.bits & (1 << 4)))) {
+			nu = old_nu;
+			out.limits |= MixerFreeze;
+		}
+	}
+
+	if ((candidate_c > c_limit && delta_c > 0.f) || (candidate_c < -c_limit && delta_c < 0.f)) {
+		nu = old_nu;
+		out.limits |= OutputLimit;
+	}
+
+	if (nu > nu_limit) { nu = nu_limit; out.limits |= NuLimit; }
+	if (nu < -nu_limit) { nu = -nu_limit; out.limits |= NuLimit; }
+	out.nu = nu;
+	out.valid = std::isfinite(nu);
+	return out;
 }
 
 void StaProtection::begin(const Config &requested, const Frame &frame)
@@ -63,12 +103,29 @@ void StaProtection::begin(const Config &requested, const Frame &frame)
 		++_config_seq;
 		clear(ConfigChanged);
 	}
+	_takeoff.setConfig(_config.takeoff);
 
 	if (_previous.armed && !frame.armed) { clear(Disarm); }
 
 	if ((_previous.rate_enabled && !frame.rate_enabled) || (_previous.experiment_active && !frame.experiment_active)) { clear(Exit); }
 
-	if (frame.landed && (!_started || !_previous.landed)) { clear(Landed); }
+	TakeoffNuManager::Input takeoff_input;
+	takeoff_input.sample = frame.sample;
+	takeoff_input.selected = frame.experiment_active;
+	takeoff_input.armed = frame.armed;
+	takeoff_input.rate_enabled = frame.rate_enabled;
+	takeoff_input.landed = frame.landed;
+	takeoff_input.maybe_landed = frame.maybe_landed;
+	takeoff_input.estimate_valid = frame.local_position_valid;
+	takeoff_input.z_m = frame.local_z;
+	takeoff_input.vz_m_s = frame.local_vz;
+	_takeoff_decision = _takeoff.update(takeoff_input);
+
+	if (!_config.takeoff.enabled) {
+		if (frame.landed && (!_started || !_previous.landed)) { clear(Landed); }
+	} else {
+		if (_takeoff_decision.reset) { clear(TakeoffManaged); }
+	}
 
 	_raw_dt = _last_sample ? static_cast<float>((static_cast<double>(frame.sample) - static_cast<double>
 			(_last_sample)) * 1e-6)
@@ -86,7 +143,8 @@ void StaProtection::begin(const Config &requested, const Frame &frame)
 	else if (frame.sample - _last_sample < 125) { _timing = ShortDt; }
 
 	_last_sample = frame.sample;
-	_allowed = frame.experiment_active && frame.armed && frame.rate_enabled && !frame.landed && !frame.maybe_landed;
+	_allowed = frame.experiment_active && frame.armed && frame.rate_enabled && !frame.landed && !frame.maybe_landed
+		   && (!_config.takeoff.enabled || !_takeoff_decision.freeze);
 
 	if ((frame.experiment_active || frame.decimated) && frame.armed && frame.rate_enabled) {
 		if (frame.experiment_active && ((_config.mode != 1 && _config.mode != 2) || !validConfig(_config)
@@ -96,6 +154,10 @@ void StaProtection::begin(const Config &requested, const Frame &frame)
 
 		else if (_timing != None) { latch(_timing); }
 	}
+
+	// Preserve the existing measurement/timing fault precedence. The manager's
+	// own estimator-jump/timeout latch is considered only after common checks.
+	if (_config.takeoff.enabled && _takeoff_decision.abort) { latch(TakeoffManagement); }
 
 	_previous = frame;
 	_started = true;
@@ -150,30 +212,14 @@ StaProtection::Output StaProtection::step(const std::array<float, 3> &rate, cons
 
 		if (!candidate.valid()) { latch(Numerical); return failure(); }
 
-		float nu = candidate.nu_next;
-		const float delta_c = (nu - state()[i]) / _config.gains[i].g;
-
-		if (!std::isfinite(delta_c)) { latch(Numerical); return failure(); }
-
-		if (!feedback.valid()) {
-			nu = state()[i]; out.limits[i] |= FeedbackInvalid;
-
-		} else if ((delta_c > 0.f && (feedback.bits & (1 << (3 + 2 * i))))
-			   || (delta_c < 0.f && (feedback.bits & (1 << (4 + 2 * i))))) {
-			nu = state()[i]; out.limits[i] |= MixerFreeze;
-		}
-
-		// Also prevent further windup in the direction of our own command limit.
-		if ((candidate.c_raw > _config.c_limit && delta_c > 0.f)
-		    || (candidate.c_raw < -_config.c_limit && delta_c < 0.f)) {
-			nu = state()[i]; out.limits[i] |= OutputLimit;
-		}
-
-		const float bounded = std::max(-_config.nu_limit[i], std::min(_config.nu_limit[i], nu));
-
-		if (bounded < nu || bounded > nu) { out.limits[i] |= NuLimit; }
-
-		const float applied_nu = _allowed ? bounded : state()[i];
+		Feedback scalar_feedback = feedback;
+		scalar_feedback.bits = static_cast<uint16_t>((feedback.bits & 1)
+				       | ((feedback.bits >> (2 * i)) & ((1 << 3) | (1 << 4))));
+		const auto protected_state = protectState(state()[i], candidate.nu_next, candidate.c_raw,
+					     _config.gains[i].g, _config.nu_limit[i], _config.c_limit, scalar_feedback);
+		if (!protected_state.valid) { latch(Numerical); return failure(); }
+		out.limits[i] = protected_state.limits;
+		const float applied_nu = _allowed ? protected_state.nu : state()[i];
 		float protected_a = candidate.a;
 		float protected_c = candidate.c_raw;
 

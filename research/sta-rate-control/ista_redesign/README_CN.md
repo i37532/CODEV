@@ -7,8 +7,10 @@
 - [理论与代码审计](i00/THEORY_AUDIT_CN.md)、[离线规格](i00/PROTOCOL_CN.md)、[证据摘要](i00/results/evidence.json)。
 
 - [I01 报告](../reports/I01.md)、[Proper-ISTA 离线内核与复跑入口](i01/README_CN.md)：新内核已实现并离线验证，未连接执行器。
+- [I02 报告](../reports/I02.md)、[保护/起飞状态离线复跑入口](i02/README_CN.md)：保护映射和默认关闭的起飞状态管理已离线验证。
 
-当前原 MODE=0/1/2 不变，没有新飞行或保护变更；I02 尚未执行，须另行授权。
+当前原 MODE=0/1/2 不变，没有新飞行；Proper-ISTA 仍无执行器路径。起飞管理没有参数接线、默认关闭，
+不得在 I03 授权和消融协议冻结前用于仿真飞行。
 
 ## 重复离线检查（不启动 Gazebo）
 

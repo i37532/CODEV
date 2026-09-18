@@ -49,6 +49,10 @@ public:
 	bool setParameters(size_t axis, const Parameters &parameters); // preserves nu
 	Candidate evaluate(size_t axis, float rate, float rate_sp, float dt) const;
 	bool commit(const Candidate &candidate);
+	// I02 protection may freeze or clamp nu after evaluating the ideal candidate.
+	// This commits only that state; it does not turn a constrained output into a
+	// new solution of the ideal implicit equations.
+	bool commitProtected(const Candidate &candidate, float applied_nu);
 	Result update(size_t axis, float rate, float rate_sp, float dt); // evaluate + one commit
 	bool reset(size_t axis, float nu = 0.f);
 	void reset(); // all axes; preserves parameters
