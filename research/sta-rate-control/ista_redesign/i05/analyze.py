@@ -2,6 +2,8 @@
 import argparse, hashlib, json, math
 from pathlib import Path
 import sys
+import shutil
+import subprocess
 import numpy as np
 from pyulog import ULog
 
@@ -9,6 +11,7 @@ HERE=Path(__file__).resolve().parent
 sys.path.insert(0,str(HERE.parents[1]/'scripts'))
 from analyze_m00 import analyze as analyze_base, plain
 from analyze_m03 import pid_output, require, sequence_stats, vector
+from logging_acceptance import validate as validate_logging
 
 def proper_reference(s,nu,h,l1,l2,g,iterations=100):
     q=h*h*l2
@@ -36,11 +39,31 @@ def windows(protocol,d,hover):
     for name,(lo,hi) in protocol['windows'].items(): result[name]=hover&(d['research_elapsed']>=lo)&(d['research_elapsed']<hi)
     return result
 
-def analyze(run):
+def analyze(run, analysis_protocol='strict', output=None):
+    if analysis_protocol not in ('strict','amended-v1'): raise ValueError('Unknown analysis protocol')
+    if analysis_protocol=='amended-v1' and output is None: raise ValueError('Amended analysis needs a new output directory')
+    provenance={}
+    if output is not None:
+        source=run.resolve();output=output.resolve()
+        if output==source or source in output.parents: raise ValueError('Output must be outside original run')
+        output.mkdir(parents=True,exist_ok=False)
+        names=('result.json','m10_job.json','m03_logging.json','m04_config.json','m04_protocol.json',
+               'perf_hover_start.txt','perf_hover_end.txt','console.log')
+        hashes={}
+        for name in names:
+            p=source/name;hashes[name]=hashlib.sha256(p.read_bytes()).hexdigest();shutil.copyfile(p,output/name)
+        old=source/'i05_analysis.json'
+        provenance=dict(original_run=str(source),input_sha256=hashes,
+            original_acceptance=json.loads(old.read_text()).get('success') if old.exists() else None,
+            original_analysis_sha256=hashlib.sha256(old.read_bytes()).hexdigest() if old.exists() else None,
+            analyzer_head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=HERE,text=True).strip(),
+            analyzer_worktree=subprocess.check_output(['git','status','--porcelain'],cwd=HERE,text=True).strip())
+        run=output
     result=json.loads((run/'result.json').read_text()); job=json.loads((run/'m10_job.json').read_text())
     out=dict(success=False,algorithm=job['algorithm'],mode=job['mode'],seed=job['seed'],subgate=job['subgate'],
              source_head=result.get('source_head'),binary_sha256=result.get('binary_sha256'))
     try:
+        if analysis_protocol=='amended-v1': require(job.get('remediation_subgate')=='R-C','Amended protocol only for R-C')
         require(result['success'],'Flight failed: '+str(result.get('error',result.get('cleanup_error'))))
         index,path,log=research_log(run,result); analyze_base(run,log_index=index)
         metrics=json.loads((run/'metrics.json').read_text()); config=json.loads((run/'m04_config.json').read_text())
@@ -115,10 +138,15 @@ def analyze(run):
             missing_updates=missing_updates,matched_updates=len(hover_updates)-missing_updates,
             ulog_dropouts=len(log.dropouts),full_coverage=missing_updates==0)
         require(len(common)>10000/expected_div and np.array_equal(command[updated][di].copy().view(np.uint32),actual[ai].copy().view(np.uint32)),'Actuator mismatch')
-        require(np.all(np.isin(t[hover&updated],common)),'Missing hover actuator update')
+        if analysis_protocol=='strict': require(np.all(np.isin(t[hover&updated],common)),'Missing hover actuator update')
         elapsed=d['research_elapsed']; additions=np.column_stack([d['research_roll_addition'],d['research_pitch_addition'],d['research_yaw_addition']])
         commanded=({'yaw_only':(2,), 'synchronous_low':(0,1,2), 'synchronous_repeat':(0,1,2)}
                    if expected_axes==7 else {'roll_only':(0,), 'pitch_only':(1,), 'synchronous':(0,1)})
+        if analysis_protocol=='amended-v1':
+            events={e['name']:e['timestamp_us'] for e in result['events']}
+            flight=(t>=events['takeoff_command'])&(t<=events['landed_disarmed'])
+            out['amended_logging']=validate_logging(d,act,dict(masks,flight=flight),expected_div,commanded)
+            out['logger_message_gaps_max']=max((int(np.max(x.data['message_gaps'])) for x in log.data_list if x.name=='logger_status'),default=None)
         stats={}
         for name,mask in masks.items():
             stats[name]=dict(rmse=np.sqrt(np.mean(error[mask].astype(float)**2,axis=0)).tolist(),samples=int(np.count_nonzero(mask)))
@@ -140,6 +168,8 @@ def analyze(run):
     except Exception as exc:
         out.update(success=False,analysis_success=False,error=repr(exc),failure_class='flight' if not result.get('success') else 'analysis_or_data_quality')
         if any(x in str(exc).lower() for x in ('boundary','fault','abort')): out['failure_class']='control_boundary'
+    out.update(analysis_protocol=analysis_protocol,provenance=provenance)
+    if analysis_protocol=='amended-v1':out['revised_acceptance']=out['success']
     (run/'i05_analysis.json').write_text(json.dumps(out,indent=2,default=plain)+'\n'); print(json.dumps(out,indent=2,default=plain)); return out
 
 def summarize(rows,name='A'):
@@ -162,4 +192,6 @@ def summarize(rows,name='A'):
     return dict(success=not violations,subgate=name,planned=len(frozen['ordered_jobs']),attempted=len(rows),accepted=sum(bool(r.get('success')) for r in rows),violations=violations,checks=checks,rows=rows)
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('run',type=Path);a=p.parse_args();raise SystemExit(0 if analyze(a.run.resolve())['success'] else 1)
+    p=argparse.ArgumentParser();p.add_argument('run',type=Path)
+    p.add_argument('--protocol',choices=['strict','amended-v1'],default='strict');p.add_argument('--output',type=Path)
+    a=p.parse_args();raise SystemExit(0 if analyze(a.run.resolve(),a.protocol,a.output)['success'] else 1)
