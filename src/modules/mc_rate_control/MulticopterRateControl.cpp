@@ -58,6 +58,7 @@ using namespace time_literals;
 using math::radians;
 
 static_assert(ControllerSelection::PID == rate_ctrl_selection_s::MODE_PID, "selection mode ABI");
+static_assert(ControllerSelection::PROPER_ISTA == rate_ctrl_selection_s::MODE_PROPER_ISTA, "selection mode ABI");
 static_assert(ControllerSelection::Accepted == rate_ctrl_selection_s::REQUEST_ACCEPTED, "selection status ABI");
 static_assert(ControllerSelection::Unsupported == rate_ctrl_selection_s::REQUEST_UNSUPPORTED, "selection status ABI");
 static_assert(ControllerSelection::InvalidMode == rate_ctrl_selection_s::REQUEST_INVALID_MODE, "selection status ABI");
@@ -205,7 +206,8 @@ MulticopterRateControl::Run()
 		const bool experiment_ready = StaAxesApplication::ready(_research_iris, _sta_requested);
 		const bool selection_changed = _rate_control.select(_param_mc_rtc_mode.get(), _param_mc_sta_axes.get(),
 					       _v_control_mode.flag_armed, experiment_ready && _sta_requested.mode == 1,
-					       experiment_ready && _sta_requested.mode == 2);
+					       experiment_ready && _sta_requested.mode == 2,
+					       experiment_ready && _sta_requested.mode == 3);
 
 		if (selection_changed || !_selection_published) {
 			const auto &selection = _rate_control.selectionStatus();

@@ -30,8 +30,9 @@ bool StaProtection::same(const Config &a, const Config &b)
 
 bool StaProtection::validConfig(const Config &c)
 {
-	if (c.mode < 0 || c.mode > 2 || c.axes < 0 || c.axes > 7 || !std::isfinite(c.c_limit)
+	if (c.mode < 0 || c.mode > 3 || c.axes < 0 || c.axes > 7 || !std::isfinite(c.c_limit)
 	    || c.c_limit <= 0.f || c.c_limit > 1.f || (c.mode != 0 && c.axes == 0)
+	    || (c.mode == 3 && c.axes != 1)
 	    || !TakeoffNuManager::validConfig(c.takeoff)) { return false; }
 
 	for (size_t i = 0; i < 3; ++i) {
@@ -97,6 +98,7 @@ void StaProtection::begin(const Config &requested, const Frame &frame)
 			if (requested.axes & (1 << i)) {
 				_kernel.setParameters(i, requested.gains[i]);
 				_ista.setParameters(i, requested.gains[i]);
+				_proper.setParameters(i, requested.gains[i]);
 			}
 		}
 
@@ -147,7 +149,8 @@ void StaProtection::begin(const Config &requested, const Frame &frame)
 		   && (!_config.takeoff.enabled || !_takeoff_decision.freeze);
 
 	if ((frame.experiment_active || frame.decimated) && frame.armed && frame.rate_enabled) {
-		if (frame.experiment_active && ((_config.mode != 1 && _config.mode != 2) || !validConfig(_config)
+		if (frame.experiment_active && ((_config.mode != 1 && _config.mode != 2 && _config.mode != 3)
+					      || !validConfig(_config)
 					      || (!_previous.armed && !_request_valid))) { latch(Configuration); }
 
 		else if (!frame.measurement_valid) { latch(Measurement); }
@@ -193,6 +196,8 @@ StaProtection::Output StaProtection::step(const std::array<float, 3> &rate, cons
 	if (!std::isfinite(h) || h < 0.000125f || h > 0.08f) { latch(Numerical); return out; }
 	StaRateControl proposal = _kernel; // all selected axes commit together, or none do
 	IstaRateControl implicit_proposal = _ista;
+	std::array<ProperIstaRateControl::Candidate, 3> proper_candidates{};
+	std::array<float, 3> proper_applied_nu{};
 	const auto failure = [this]() { Output invalid; invalid.nu = state(); return invalid; };
 
 	for (size_t i = 0; i < 3; ++i) {
@@ -200,7 +205,14 @@ StaProtection::Output StaProtection::step(const std::array<float, 3> &rate, cons
 
 		StaRateControl::Result candidate;
 
-		if (_config.mode == 2) {
+		if (_config.mode == 3) {
+			proper_candidates[i] = _proper.evaluate(i, rate[i], sp[i], h);
+			const auto &proper = proper_candidates[i].result();
+			candidate = proper;
+			out.xi[i] = proper.xi; out.virtual_s[i] = proper.virtual_s;
+			out.branch[i] = static_cast<uint8_t>(proper.branch);
+
+		} else if (_config.mode == 2) {
 			const auto implicit = implicit_proposal.update(i, rate[i], sp[i], h);
 			candidate = implicit;
 			out.xi[i] = implicit.xi; out.virtual_s[i] = implicit.virtual_s;
@@ -220,10 +232,21 @@ StaProtection::Output StaProtection::step(const std::array<float, 3> &rate, cons
 		if (!protected_state.valid) { latch(Numerical); return failure(); }
 		out.limits[i] = protected_state.limits;
 		const float applied_nu = _allowed ? protected_state.nu : state()[i];
+		proper_applied_nu[i] = applied_nu;
 		float protected_a = candidate.a;
 		float protected_c = candidate.c_raw;
 
-		if (_config.mode == 2) {
+		if (_config.mode == 3) {
+			// Proper PDF (11a) contains 2*nu_next. If protection freezes or
+			// clamps the state, map that state change with coefficient two.
+			// The constrained tuple is diagnostic/applied output, not a new
+			// strict solution of the ideal implicit equations.
+			if (!sameFloat(applied_nu, candidate.nu_next)) {
+				protected_a = candidate.a + 2.f * (applied_nu - candidate.nu_next);
+				protected_c = protected_a / _config.gains[i].g;
+			}
+
+		} else if (_config.mode == 2) {
 			implicit_proposal.reset(i, applied_nu);
 			// Keep the ideal root/xi for diagnostics, replace ONLY its additive
 			// nu_next by protected nu. This constrained law is NOT a new implicit
@@ -244,6 +267,15 @@ StaProtection::Output StaProtection::step(const std::array<float, 3> &rate, cons
 		out.c_applied[i] = std::max(-_config.c_limit, std::min(_config.c_limit, protected_c));
 
 		if (protected_c < -_config.c_limit || protected_c > _config.c_limit) { out.limits[i] |= OutputLimit; }
+	}
+
+	if (_config.mode == 3) {
+		for (size_t i = 0; i < 3; ++i) {
+			if ((_config.axes & (1 << i)) && !_proper.commitProtected(proper_candidates[i], proper_applied_nu[i])) {
+				latch(Numerical);
+				return failure();
+			}
+		}
 	}
 
 	_kernel = proposal;

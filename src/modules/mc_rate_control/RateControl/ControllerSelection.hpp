@@ -9,7 +9,7 @@
 class ControllerSelection
 {
 public:
-	enum Mode : uint8_t { PID = 0, ESTA = 1, ISTA = 2 };
+	enum Mode : uint8_t { PID = 0, ESTA = 1, ISTA = 2, PROPER_ISTA = 3 };
 	enum RequestStatus : uint8_t {
 		Accepted = 0,
 		Unsupported = 1,
@@ -32,9 +32,11 @@ public:
 	 * last evaluated request while armed cancels the pending change.
 	 * No request or rejection resets the PID integrator.
 	 */
-	bool select(int32_t mode, int32_t axes, bool armed, bool esta_ready = false, bool ista_ready = false)
+	bool select(int32_t mode, int32_t axes, bool armed, bool esta_ready = false, bool ista_ready = false,
+		    bool proper_ista_ready = false)
 	{
-		const bool ready = (mode == ESTA && esta_ready) || (mode == ISTA && ista_ready);
+		const bool ready = (mode == ESTA && esta_ready) || (mode == ISTA && ista_ready)
+				   || (mode == PROPER_ISTA && proper_ista_ready);
 		const RequestStatus reason = ready && (axes == 1 || axes == 3 || axes == 7) ? Accepted : validate(mode, axes);
 		const uint8_t effective = !armed && reason == Accepted ? static_cast<uint8_t>(mode) : _status.effective_mode;
 		const uint8_t effective_axes = effective == PID ? 0 :
@@ -81,7 +83,7 @@ private:
 	static RequestStatus validate(int32_t mode, int32_t axes)
 	{
 		// Check raw signed values before any narrowing conversion/bit masking.
-		if (mode < 0 || mode > 2) {
+		if (mode < 0 || mode > PROPER_ISTA) {
 			return InvalidMode;
 		}
 

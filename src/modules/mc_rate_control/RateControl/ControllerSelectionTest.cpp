@@ -21,7 +21,7 @@ TEST(ControllerSelection, DefaultPid)
 
 TEST(ControllerSelection, EveryValidMaskForEveryKnownMode)
 {
-	for (int mode = 0; mode <= 2; ++mode) {
+	for (int mode = 0; mode <= 3; ++mode) {
 		for (int axes = 0; axes <= 7; ++axes) {
 			SCOPED_TRACE(::testing::Message() << "mode=" << mode << " axes=" << axes);
 			ControllerSelection selector;
@@ -54,7 +54,7 @@ TEST(ControllerSelection, RejectsRawInvalidValuesWithoutTruncation)
 		EXPECT_EQ(selector.status().effective_axes, 0);
 	}
 
-	selector.select(3, 0, false);
+	selector.select(4, 0, false);
 	EXPECT_EQ(selector.status().request_status, ControllerSelection::InvalidMode);
 	selector.select(1, 8, false);
 	EXPECT_EQ(selector.status().request_status, ControllerSelection::InvalidAxes);

@@ -2,9 +2,11 @@
 #pragma once
 #include "StaRateControl.hpp"
 #include "IstaRateControl.hpp"
+#include "ProperIstaRateControl.hpp"
 #include "TakeoffNuManager.hpp"
 
-/** Shared ESTA/ISTA research adapter. M08 staged Iris SITL AXES=1/3/7 only.
+/** Shared research adapter. ESTA/ISTA support Iris SITL AXES=1/3/7; I04 adds
+ * Proper-ISTA on Iris SITL AXES=1 only.
  * PID does not pass through these limits/resets. A fault returns invalid output,
  * latches until explicit disarmed acknowledgement, and requests SITL abort.
  * No automatic PID takeover, zero-torque fallback or commander override.
@@ -63,7 +65,10 @@ public:
 		    bool allow_frozen = false, float update_dt = 0.f);
 	bool acknowledge(); // only disarmed; never silently clear a flight fault
 	const Config &config() const { return _config; }
-	const std::array<float, 3> &state() const { return _config.mode == 2 ? _ista.state() : _kernel.state(); }
+	const std::array<float, 3> &state() const
+	{
+		return _config.mode == 2 ? _ista.state() : (_config.mode == 3 ? _proper.state() : _kernel.state());
+	}
 	float rawDt() const { return _raw_dt; }
 	Fault timing() const { return _timing; }
 	Fault fault() const { return _fault; }
@@ -81,12 +86,13 @@ public:
 
 private:
 	static bool same(const Config &a, const Config &b);
-	void clear(uint16_t reason) { _kernel.reset(); _ista.reset(); _reset |= reason; }
+	void clear(uint16_t reason) { _kernel.reset(); _ista.reset(); _proper.reset(); _reset |= reason; }
 	void latch(Fault fault) { if (_fault == None) { _fault = fault; } }
 	Config _config{};
 	Frame _previous{}, _frame{};
 	StaRateControl _kernel;
 	IstaRateControl _ista;
+	ProperIstaRateControl _proper;
 	TakeoffNuManager _takeoff;
 	TakeoffNuManager::Decision _takeoff_decision{};
 	uint64_t _last_sample{0};

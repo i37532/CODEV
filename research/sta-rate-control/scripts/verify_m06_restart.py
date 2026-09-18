@@ -16,11 +16,12 @@ from run_m03 import Checks
 from run_m04 import arrays
 
 
-def main(output, config_path=None, modes=(1,)):
+def main(output, config_path=None, modes=(1,), accepted_masks=(1, 3, 7), rejected_masks=()):
     if active_simulators(): raise RuntimeError('Existing simulator: '+str(active_simulators()))
     output.mkdir(parents=True,exist_ok=False)
     config=json.loads((config_path or REPO/'research/sta-rate-control/m06/iris_esta_rpy.json').read_text())
     configured_mode=int(config['MC_RTC_MODE'])
+    configured_axes=int(config['MC_STA_AXES'])
     eeprom=ROOTFS/'eeprom/parameters_10016'
     if eeprom.exists(): (output/'startup_parameters.bson').write_bytes(eeprom.read_bytes())
     original={}; proc=None; console=None
@@ -49,6 +50,21 @@ def main(output, config_path=None, modes=(1,)):
                 result['events'].append(dict(mode=mode,axes=axes,status=raw)); return
             time.sleep(.2)
         raise RuntimeError('Selection timeout')
+
+    def rejected(mode, axes, effective_mode, effective_axes):
+        deadline=time.monotonic()+15
+        while time.monotonic()<deadline:
+            disarmed(); raw=cli('listener','sta_rate_ctrl_status','-n','1')
+            checks=(re.search(r'requested_mode:\s+'+str(mode)+r'\b',raw),
+                    re.search(r'requested_axes:\s+'+str(axes)+r'\b',raw),
+                    re.search(r'effective_mode:\s+'+str(effective_mode)+r'\b',raw),
+                    re.search(r'effective_axes:\s+'+str(effective_axes)+r'\b',raw),
+                    re.search(r'request_status:\s+1\b',raw))
+            if all(checks):
+                if any(arrays(raw,'nu')): raise RuntimeError('Rejected request changed disarmed nu')
+                result['events'].append(dict(rejected_mode=mode,rejected_axes=axes,status=raw)); return
+            time.sleep(.2)
+        raise RuntimeError('Rejection timeout')
 
     def stop():
         nonlocal proc,console
@@ -81,19 +97,22 @@ def main(output, config_path=None, modes=(1,)):
         if any(original[k] for k in ('MC_RTC_MODE','MC_STA_AXES','MC_RATT_TEST')): raise RuntimeError('Require inactive initial config')
         save(output/'original.json',original)
         for k,v in config.items(): cli('param','set',k,v)
-        accepted(configured_mode,7); cli('param','save'); cli('param','save',str(output/'saved_rpy.bson'))
+        accepted(configured_mode,configured_axes); cli('param','save'); cli('param','save',str(output/'saved_config.bson'))
         stop(); boot(2)
         loaded={k:Checks.get_param(cli,k) for k in config}
         # PX4 CLI prints rounded decimals; compare as it printed before reboot.
         for k,v in config.items():
             if abs(loaded[k]-v)>max(1e-5,abs(v)*1e-6): raise RuntimeError('Restart value mismatch '+k)
-        accepted(configured_mode,7); save(output/'restarted_values.json',loaded)
+        accepted(configured_mode,configured_axes); save(output/'restarted_values.json',loaded)
         for mode in modes:
             cli('param','set','MC_RTC_MODE',mode)
-            for mask in (1,3,7):
+            for mask in accepted_masks:
                 cli('param','set','MC_STA_AXES',mask); accepted(mode,mask)
+            for mask in rejected_masks:
+                cli('param','set','MC_STA_AXES',mask); rejected(mode,mask,mode,accepted_masks[-1])
+                cli('param','set','MC_STA_AXES',accepted_masks[-1]); accepted(mode,accepted_masks[-1])
         cli('param','set','MC_RTC_MODE',0); cli('param','set','MC_STA_AXES',0); accepted(0,0)
-        cli('param','load',str(output/'saved_rpy.bson')); accepted(configured_mode,7)
+        cli('param','load',str(output/'saved_config.bson')); accepted(configured_mode,configured_axes)
         reloaded={k:Checks.get_param(cli,k) for k in config}
         if reloaded!=loaded: raise RuntimeError('Reload mismatch')
         save(output/'reloaded_values.json',reloaded)

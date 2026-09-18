@@ -3,11 +3,12 @@
 
 #include "StaRateControl.hpp"
 
-/** Offline-only, unconstrained Proper Implicit STA (arXiv:2406.16094v1,
+/** Proper Implicit STA mathematical core (arXiv:2406.16094v1,
  * PDF (11a), (12), (13)). Not the original IstaRateControl / MODE=2.
  * s=rate-rate_sp [rad/s], a/nu [rad/s^2], c_raw=a/g [normalized].
  * virtual_s = s + dt*(a-nu_next), NOT the next physical plant state.
- * No clipping, protection, feedforward or actuator connection.
+ * No clipping, protection, feedforward or direct actuator connection. I04
+ * composes this core through StaProtection for roll-only Iris SITL use.
  * Positive normal gains/dt; finite normal-or-zero states and results.
  * Binary64 intermediates, checked binary32 narrowing, no iterative solve.
  * Numerical validity is not the theorem's gain condition or flight approval.

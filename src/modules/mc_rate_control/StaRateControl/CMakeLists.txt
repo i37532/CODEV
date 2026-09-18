@@ -18,12 +18,14 @@ px4_add_unit_gtest(SRC IstaRateControlTest.cpp LINKLIBS IstaRateControl)
 px4_add_unit_gtest(SRC IstaIntegrationTest.cpp LINKLIBS StaRateControl RateControl)
 px4_add_unit_gtest(SRC ControlDecimationTest.cpp LINKLIBS StaRateControl RateControl)
 
-# I01: standalone offline kernel. NO dependency from module, dispatcher or protection.
+# I01 standalone core; I04 links it through StaProtection for roll-only SITL.
 px4_add_library(ProperIstaRateControl ProperIstaRateControl.cpp ProperIstaRateControl.hpp)
 target_compile_features(ProperIstaRateControl PUBLIC cxx_std_14)
 target_compile_options(ProperIstaRateControl PRIVATE ${MAX_CUSTOM_OPT_LEVEL})
 target_include_directories(ProperIstaRateControl PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(StaRateControl PUBLIC ProperIstaRateControl)
 px4_add_unit_gtest(SRC ProperIstaRateControlTest.cpp LINKLIBS ProperIstaRateControl)
+px4_add_unit_gtest(SRC ProperIstaIntegrationTest.cpp LINKLIBS StaRateControl RateControl)
 
 # I02: offline-only common-protection adapter. Still no module dependency.
 px4_add_library(ProperIstaProtection ProperIstaProtection.cpp ProperIstaProtection.hpp)

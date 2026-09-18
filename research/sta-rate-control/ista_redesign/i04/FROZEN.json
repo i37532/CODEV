@@ -1,0 +1,95 @@
+{
+  "protocol_version": 1,
+  "date": "2026-09-18",
+  "mode": {
+    "pid": 0,
+    "esta": 1,
+    "original_ista": 2,
+    "proper_ista": 3
+  },
+  "selected_common_protection": "established",
+  "MC_STA_TKO_MGT": 0,
+  "axes": 1,
+  "divisor": 1,
+  "scene": "nominal",
+  "simulation_speed_requested": 5,
+  "paired_seeds": [6201, 6202, 6203],
+  "ordered_jobs": [
+    [6201, "pid_smoke"],
+    [6201, "original_ista_regression"],
+    [6201, "esta"],
+    [6201, "proper_ista"],
+    [6202, "proper_ista"],
+    [6202, "esta"],
+    [6203, "esta"],
+    [6203, "proper_ista"]
+  ],
+  "attempt_policy": "one attempt per immutable job; retain every failure; no automatic retry",
+  "roll_parameters": {
+    "MC_STA_L1_R": 2.2,
+    "MC_STA_L2_R": 0.05,
+    "MC_STA_G_R": 130.575283,
+    "MC_STA_NU_R": 3.0
+  },
+  "flight_protocol": {
+    "milestone": "I04",
+    "version": 1,
+    "model": "Iris 10016 quad_w; empty_grey.world",
+    "scenario_parameters": {
+      "MPC_LAND_SPEED": 0.3,
+      "LNDMC_Z_VEL_MAX": 0.3,
+      "MPC_YAW_MODE": 3
+    },
+    "hover_seconds": 60,
+    "trigger": 1,
+    "tracking_seconds": 24,
+    "excitation": {
+      "publisher": "existing mc_att_control only",
+      "axis": "roll",
+      "amplitudes_rad_s": [0.04, 0.08, 0.12],
+      "period_seconds": 4,
+      "start_after_hover_seconds": 15,
+      "net_angle": 0
+    },
+    "limits": {
+      "tilt_deg": 15.0,
+      "height_error_m": 1.0,
+      "rate_rad_s": 1.0,
+      "roll_command_abs": 0.15,
+      "nu_abs_rad_s2": 3.0,
+      "rmse_ratio_max": 1.25,
+      "noncommand_rmse_absolute_margin_rad_s": 0.005,
+      "ulog_dropouts": 0,
+      "diagnostic_missing": 0
+    },
+    "required": {
+      "esta_repeats": 3,
+      "proper_ista_repeats": 3,
+      "pid_smoke": 1,
+      "original_ista_regression": 1,
+      "nan": 0,
+      "fallback": 0,
+      "abort": 0,
+      "failsafe": 0,
+      "landed_disarmed": true
+    }
+  },
+  "m10_frozen": {
+    "path": "research/sta-rate-control/m10/FROZEN.json",
+    "sha256": "958e60d954f51d1189a54b73107c36bd744bfdda6bea9f4db052ea3381734842"
+  },
+  "calibration": {
+    "path": "research/sta-rate-control/m04/calibration.json",
+    "sha256": "0319442f9713db69272b8b5af3739e65618ad575328b01baf282da60d1f2a6fa"
+  },
+  "plugins_manifest": {
+    "path": "/home/yr/Desktop/codev doc/experiments/M10-20260917/plugins03/manifest.json",
+    "sha256": "e10aab329615926555f50fedd8a4392330c54fcec078df1bd2f234186d8981c2"
+  },
+  "setpoint_and_thrust": {
+    "rate_setpoint": "single existing mc_att_control publisher with ResearchPulse trigger=1",
+    "pitch_yaw": "unchanged PID axes from RateControlDispatcher",
+    "thrust": "unchanged mc_pos_control -> mc_att_control vehicle_rates_setpoint thrust_body"
+  },
+  "scope": "Iris Gazebo Classic SITL development only; no pitch expansion, no hardware"
+}

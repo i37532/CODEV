@@ -231,7 +231,7 @@ TEST(ProperIstaRateControlTest, VariableDtIsNumericallyValidNotATheorem)
 	}
 }
 
-TEST(ProperIstaRateControlTest, RuntimeHasNoNewModeEvenWithBothOldCapabilities)
+TEST(ProperIstaRateControlTest, RuntimeModeThreeNeedsIndependentCapability)
 {
 	for (int mode : {0, 1, 2}) {
 		for (int axes : {1, 3, 7}) {
@@ -239,7 +239,7 @@ TEST(ProperIstaRateControlTest, RuntimeHasNoNewModeEvenWithBothOldCapabilities)
 			selector.select(mode, axes, false, true, true);
 			ASSERT_EQ(selector.status().effective_mode, mode);
 			for (bool armed : {false, true}) {
-				for (int unsupported : {3, 4, 255, 256}) {
+				for (int unsupported : {4, 255, 256}) {
 					selector.select(unsupported, axes, armed, true, true);
 					EXPECT_EQ(selector.status().request_status, ControllerSelection::InvalidMode);
 					EXPECT_EQ(selector.status().effective_mode, mode);
@@ -247,4 +247,11 @@ TEST(ProperIstaRateControlTest, RuntimeHasNoNewModeEvenWithBothOldCapabilities)
 			}
 		}
 	}
+	ControllerSelection selector;
+	selector.select(3, 1, false, true, true, false);
+	EXPECT_EQ(selector.status().request_status, ControllerSelection::Unsupported);
+	EXPECT_EQ(selector.status().effective_mode, ControllerSelection::PID);
+	selector.select(3, 1, false, true, true, true);
+	EXPECT_EQ(selector.status().request_status, ControllerSelection::Accepted);
+	EXPECT_EQ(selector.status().effective_mode, ControllerSelection::PROPER_ISTA);
 }

@@ -7,7 +7,11 @@
 struct StaAxesApplication {
 	static bool ready(bool iris_sitl, const StaProtection::Config &c)
 	{
-		return iris_sitl && (c.mode == 1 || c.mode == 2) && (c.axes == 1 || c.axes == 3 || c.axes == 7)
+		const bool legacy_ready = (c.mode == 1 || c.mode == 2) && (c.axes == 1 || c.axes == 3 || c.axes == 7);
+		// I04 intentionally exposes Proper-ISTA only on roll and only with the
+		// established lifecycle selected by I03. Pitch/yaw expansion belongs to I05.
+		const bool proper_ready = c.mode == 3 && c.axes == 1 && !c.takeoff.enabled;
+		return iris_sitl && (legacy_ready || proper_ready)
 		       && StaProtection::validConfig(c) && fabsf(c.gains[0].g - 130.575283f) < .01f
 		       && (c.axes == 1 || fabsf(c.gains[1].g - 112.763533f) < .01f)
 		       && (c.axes != 7 || fabsf(c.gains[2].g - 34.582326f) < .01f);

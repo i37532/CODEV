@@ -112,9 +112,9 @@ TEST(ControlDecimation, N1PidBitwiseSequenceAndIntegral)
 
 TEST(ControlDecimation, SafetyCheckedDuringHoldForAllModes)
 {
-	for (int mode : {0,1,2}) {
+	for (int mode : {0,1,2,3}) {
 		for (int fault : {0,1,2,3}) {
-			StaProtection g; StaProtection::Config c; c.mode=mode; c.axes=mode ? 7 : 0;
+			StaProtection g; StaProtection::Config c; c.mode=mode; c.axes=mode == 3 ? 1 : (mode ? 7 : 0);
 			c.gains={{{2.f,.1f,100.f},{2.f,.1f,100.f},{2.f,.1f,100.f}}}; c.nu_limit={{3.f,3.f,3.f}};
 			StaProtection::Frame f; f.sample=100000; f.rate_enabled=true; f.decimated=true; f.experiment_active=mode!=0;
 			g.begin(c,f); f.sample+=4000; f.armed=true; f.landed=false; f.maybe_landed=false; g.begin(c,f);
@@ -129,9 +129,9 @@ TEST(ControlDecimation, SafetyCheckedDuringHoldForAllModes)
 
 TEST(ControlDecimation, EstaIstaUseMeasuredIntervalAndNoHoldIntegration)
 {
-	for (int mode : {1,2}) {
+	for (int mode : {1,2,3}) {
 		for (int div : {2,4}) {
-			StaProtection g; StaProtection::Config c; c.mode=mode; c.axes=7;
+			StaProtection g; StaProtection::Config c; c.mode=mode; c.axes=mode == 3 ? 1 : 7;
 			c.gains={{{2.f,.1f,100.f},{2.f,.1f,100.f},{2.f,.1f,100.f}}}; c.nu_limit={{3.f,3.f,3.f}};
 			StaProtection::Frame f; f.sample=100000; f.rate_enabled=true; f.experiment_active=true;
 			g.begin(c,f); f.armed=true; f.landed=false; f.maybe_landed=false;

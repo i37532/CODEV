@@ -13,9 +13,10 @@
 class RateControlDispatcher
 {
 public:
-	bool select(int32_t mode, int32_t axes, bool armed, bool esta_ready = false, bool ista_ready = false)
+	bool select(int32_t mode, int32_t axes, bool armed, bool esta_ready = false, bool ista_ready = false,
+		    bool proper_ista_ready = false)
 	{
-		return _selection.select(mode, axes, armed, esta_ready, ista_ready);
+		return _selection.select(mode, axes, armed, esta_ready, ista_ready, proper_ista_ready);
 	}
 	const ControllerSelection::Status &selectionStatus() const { return _selection.status(); }
 	bool pidRequired() const { return _selection.status().effective_axes != 7; }

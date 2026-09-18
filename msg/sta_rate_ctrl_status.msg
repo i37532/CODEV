@@ -1,4 +1,4 @@
-# Research diagnostics. M08 permits PID or Iris SITL ESTA/ISTA AXES=1/3/7. NaN = not applicable.
+# Research diagnostics. I04 also permits Proper-ISTA MODE=3 on Iris SITL AXES=1 only. NaN = not applicable.
 uint64 timestamp
 uint64 timestamp_sample
 uint64 motor_timestamp
