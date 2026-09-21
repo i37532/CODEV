@@ -2,7 +2,7 @@
 
 分支：research/sta-velocity-control；规划起点866bba6e0d200d7a5137146c2a67a1a751e01233。
 
-V00、V01已通过。V01增加仅PID可生效的速度选择框架、独立参数和选择日志；44个C++、37个Python用例通过，两组2048步与V00参考一致，一次60秒悬停起降及日志验收通过。历史失败保留。速度ESTA尚未实现。默认研究范围为XY速度PID/ESTA比较，Z速度PID、原位置P/姿态/rate PID保持；Z、Proper-ISTA与双层组合须单独授权。
+V00、V01、V02已通过。V02新增仅测试构建的速度 ESTA 纯内核：独立三轴 `nu`、evaluate/commit/reset、8/12ms双精度参考和ZOH对象测试；不接实际输出，MODE=1仍拒绝。原速度 PID、Z速度PID、位置P/姿态/rate PID保持。V01的44个C++、37个Python用例和一次60秒PID悬停基线保留；V02新增7个C++内核用例及原速度/角速度回归均通过。历史失败保留。默认研究范围为XY速度PID/ESTA比较；Z、Proper-ISTA与双层组合须单独授权。
 
 - [初始TODO快照](plan/v1/VELOCITY_STA_TODO_CN.md)
 - [初始阶段提示词](plan/v1/VELOCITY_STA_PROMPTS_CN.md)
@@ -10,10 +10,11 @@ V00、V01已通过。V01增加仅PID可生效的速度选择框架、独立参�
 - [外部实时进度表](</home/yr/Desktop/codev doc/plan/VELOCITY_STA_STATUS_CN.md>)
 - [V00报告（基线通过）](reports/V00.md)
 - [V01报告：选择框架、逐样本等价及一次冒烟](reports/V01.md)
+- [V02报告：离线 ESTA 速度内核](reports/V02.md)
 - [V00恢复批次02：三轮指标、覆盖与勘误](reports/V00_RESUME02.md)
 - [V00恢复批次：测试已修订，启动预检失败](reports/V00_RESUME01.md)
 - [V00接口审计、Takeoff勘误与恢复条件](v00/INTERFACE_AUDIT_CN.md)
 
 V00核对后将计划和基线工具纳入明确范围提交。后续reports/、scripts/、configs/、evidence/按阶段创建，不预填成功报告。plan/v1为初始快照，修订另存版本，已执行依据以对应提交协议/阶段报告为准。大型日志放仓库外VELOCITY-STA实验目录。
 
-当前有效速度配置仅MPC_VC_MODE=0/MPC_VC_AXES=0；其他请求显式拒绝，原PID数学和参数更新语义保持。V01未push，V02尚未开始。
+当前有效速度配置仅MPC_VC_MODE=0/MPC_VC_AXES=0；其他请求显式拒绝，原PID数学和参数更新语义保持。V02未push，V03尚未开始。
