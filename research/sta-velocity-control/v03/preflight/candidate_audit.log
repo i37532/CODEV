@@ -1,0 +1,62 @@
+Running main() from /home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/googletest-src/googletest/src/gtest_main.cc
+[==========] Running 10 tests from 2 test suites.
+[----------] Global test environment set-up.
+[----------] 7 tests from StaVelocityControlTest
+[ RUN      ] StaVelocityControlTest.EvaluateUsesOldNuAndAdapterAddsFeedForwardOnce
+[       OK ] StaVelocityControlTest.EvaluateUsesOldNuAndAdapterAddsFeedForwardOnce (0 ms)
+[ RUN      ] StaVelocityControlTest.PositiveNegativeAndZeroError
+[       OK ] StaVelocityControlTest.PositiveNegativeAndZeroError (0 ms)
+[ RUN      ] StaVelocityControlTest.StatesAreThreeAxisIndependentAndCandidatesAreOneShot
+[       OK ] StaVelocityControlTest.StatesAreThreeAxisIndependentAndCandidatesAreOneShot (0 ms)
+[ RUN      ] StaVelocityControlTest.InvalidInputsAndNumericsAreAtomic
+[       OK ] StaVelocityControlTest.InvalidInputsAndNumericsAreAtomic (0 ms)
+[ RUN      ] StaVelocityControlTest.FrozenEightTwelveMillisecondSequenceMatchesIndependentDoubleReference
+[       OK ] StaVelocityControlTest.FrozenEightTwelveMillisecondSequenceMatchesIndependentDoubleReference (0 ms)
+[ RUN      ] StaVelocityControlTest.ZohObjectsSeparateIdealAndLaggedConstrainedConclusions
+[       OK ] StaVelocityControlTest.ZohObjectsSeparateIdealAndLaggedConstrainedConclusions (0 ms)
+[ RUN      ] StaVelocityControlTest.ModeOneRemainsRejectedAndKernelHasNoDispatcherPath
+[       OK ] StaVelocityControlTest.ModeOneRemainsRejectedAndKernelHasNoDispatcherPath (0 ms)
+[----------] 7 tests from StaVelocityControlTest (0 ms total)
+
+[----------] 3 tests from V03CandidateAudit
+[ RUN      ] V03CandidateAudit.ForeignInstanceCannotCommitIntoAnotherController
+/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v03/preflight/CandidateAuditTest.cpp:19: Failure
+Expected: (target.commit(proposal)) != (Kernel::Status::Ok), actual: 1-byte object <00> vs 1-byte object <00>
+/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v03/preflight/CandidateAuditTest.cpp:20: Failure
+Expected equality of these values:
+  target.state()[0]
+    Which is: 0.49200001
+  -.5f
+    Which is: -0.5
+[  FAILED  ] V03CandidateAudit.ForeignInstanceCannotCommitIntoAnotherController (0 ms)
+[ RUN      ] V03CandidateAudit.AxisRetargetCannotCommitWrongAxisState
+/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v03/preflight/CandidateAuditTest.cpp:33: Failure
+Expected: (kernel.commit(proposal)) != (Kernel::Status::Ok), actual: 1-byte object <00> vs 1-byte object <00>
+/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v03/preflight/CandidateAuditTest.cpp:34: Failure
+Expected equality of these values:
+  kernel.state()[1]
+    Which is: 0.49200001
+  -.5f
+    Which is: -0.5
+[  FAILED  ] V03CandidateAudit.AxisRetargetCannotCommitWrongAxisState (0 ms)
+[ RUN      ] V03CandidateAudit.InvalidOutputCannotCommitAnOtherwiseFiniteState
+/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v03/preflight/CandidateAuditTest.cpp:45: Failure
+Expected: (kernel.commit(proposal)) != (Kernel::Status::Ok), actual: 1-byte object <00> vs 1-byte object <00>
+/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v03/preflight/CandidateAuditTest.cpp:46: Failure
+Expected equality of these values:
+  kernel.state()[0]
+    Which is: 0.49200001
+  .5f
+    Which is: 0.5
+[  FAILED  ] V03CandidateAudit.InvalidOutputCannotCommitAnOtherwiseFiniteState (0 ms)
+[----------] 3 tests from V03CandidateAudit (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 10 tests from 2 test suites ran. (0 ms total)
+[  PASSED  ] 7 tests.
+[  FAILED  ] 3 tests, listed below:
+[  FAILED  ] V03CandidateAudit.ForeignInstanceCannotCommitIntoAnotherController
+[  FAILED  ] V03CandidateAudit.AxisRetargetCannotCommitWrongAxisState
+[  FAILED  ] V03CandidateAudit.InvalidOutputCannotCommitAnOtherwiseFiniteState
+
+ 3 FAILED TESTS
