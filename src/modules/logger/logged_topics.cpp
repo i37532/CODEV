@@ -197,6 +197,11 @@ void LoggedTopics::add_default_topics()
 
 void LoggedTopics::add_high_rate_topics()
 {
+	// Velocity baseline: request full publication rate without changing control
+	// timing. Actual topic coverage must still be measured from each ULog.
+	add_topic("vehicle_local_position");
+	add_topic("vehicle_local_position_setpoint");
+	add_topic("trajectory_setpoint");
 	add_topic("sta_rate_ctrl_status");
 	add_topic("sta_takeoff_status");
 	add_topic_multi("multirotor_motor_limits", 0, 2);

@@ -69,7 +69,10 @@ def main():
         for name in ('VELOCITY_STA_TODO_CN.md', 'VELOCITY_STA_PROMPTS_CN.md', 'VELOCITY_STA_STATUS_CN.md'):
             external = Path('/home/yr/Desktop/codev doc/plan') / name
             snapshot = REPO / 'research/sta-velocity-control/plan/v1' / name
-            assert external.read_bytes() == snapshot.read_bytes(), name
+            # v1 is immutable; the live progress table is expected to evolve.
+            if name != 'VELOCITY_STA_STATUS_CN.md':
+                assert external.read_bytes() == snapshot.read_bytes(), name
+            shutil.copyfile(external, out / name)
             evidence.setdefault('initial_plan_sha256', {})[name] = sha(snapshot)
         save()
         run('build_sitl', ['make', 'px4_sitl_default', '-j4'])
@@ -84,6 +87,8 @@ def main():
             evidence['tests'][name] = {k: int(attrs[k]) for k in ('tests', 'failures', 'errors', 'disabled')}
             save()
         evidence['binary_sha256'] = sha(REPO / 'build/px4_sitl_default/bin/px4')
+        run('python_tools', ['python3', '-m', 'unittest', 'discover', '-s',
+                            'research/sta-velocity-control/scripts', '-p', 'test_*.py', '-v'])
         evidence['success'] = all(t['tests'] > 0 and not (t['failures'] or t['errors'] or t['disabled'])
                                   for t in evidence['tests'].values())
         evidence['success'] &= all(c['exit_code'] == 0 for c in evidence['commands'])
