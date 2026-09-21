@@ -219,6 +219,36 @@ PARAM_DEFINE_FLOAT(MPC_Z_VEL_MAX_DN, 1.0f);
 PARAM_DEFINE_FLOAT(MPC_XY_P, 0.95f);
 
 /**
+ * Velocity controller request
+ *
+ * V01 only accepts PID with MPC_VC_AXES=0. Modes 1 and 2 are reserved
+ * and explicitly rejected. Differing armed requests are pending until
+ * disarm; requesting the effective configuration cancels pending changes.
+ * Original PID gain updates are unaffected.
+ *
+ * @value 0 PID
+ * @value 1 ESTA (unavailable)
+ * @value 2 Reserved (unavailable)
+ * @min 0
+ * @max 2
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_INT32(MPC_VC_MODE, 0);
+
+/**
+ * Experimental velocity axes request
+ *
+ * Local NED axes, not body rates. V01 accepts only 0; all nonzero
+ * masks are rejected. Future X/XY/XYZ masks are 1/3/7, not enabled here.
+ * This does not disable any original PID axis.
+ *
+ * @min 0
+ * @max 7
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_INT32(MPC_VC_AXES, 0);
+
+/**
  * Proportional gain for horizontal velocity error
  *
  * defined as correction acceleration in m/s^2 per m/s velocity error

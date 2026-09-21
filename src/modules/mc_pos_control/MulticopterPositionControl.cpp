@@ -275,6 +275,8 @@ void MulticopterPositionControl::Run()
 
 		_control_mode_sub.update(&_control_mode);
 		_vehicle_land_detected_sub.update(&_vehicle_land_detected);
+		_control.configureVelocityControl(_param_mpc_vc_mode.get(), _param_mpc_vc_axes.get(), _control_mode.flag_armed);
+		uint8_t pid_calls = 0;
 
 		if (_param_mpc_use_hte.get()) {
 			hover_thrust_estimate_s hte;
@@ -418,6 +420,7 @@ void MulticopterPositionControl::Run()
 			_control.setState(states);
 
 			// Run position control
+			++pid_calls;
 			if (_control.update(dt)) {
 				_failsafe_land_hysteresis.set_state_and_update(false, time_stamp_now);
 
@@ -437,6 +440,7 @@ void MulticopterPositionControl::Run()
 
 				_control.setInputSetpoint(failsafe_setpoint);
 				_control.setVelocityLimits(_param_mpc_xy_vel_max.get(), _param_mpc_z_vel_max_up.get(), _param_mpc_z_vel_max_dn.get());
+				++pid_calls;
 				_control.update(dt);
 			}
 
@@ -458,6 +462,24 @@ void MulticopterPositionControl::Run()
 			// an update is necessary here because otherwise the takeoff state doesn't get skiped with non-altitude-controlled modes
 			_takeoff.updateTakeoffState(_control_mode.flag_armed, _vehicle_land_detected.landed, false, 10.f, true, time_stamp_now);
 		}
+
+		// Record selection after the actual controller calls for this input sample.
+		const auto &selection = _control.velocitySelection();
+		velocity_ctrl_selection_s selection_status{};
+		selection_status.timestamp = hrt_absolute_time();
+		selection_status.timestamp_sample = local_pos.timestamp_sample;
+		selection_status.input_timestamp = local_pos.timestamp;
+		selection_status.publish_seq = ++_velocity_selection_seq;
+		selection_status.requested_mode = selection.requestedMode();
+		selection_status.requested_axes = selection.requestedAxes();
+		selection_status.effective_mode = selection.effectiveMode();
+		selection_status.effective_axes = selection.effectiveAxes();
+		selection_status.pending = selection.pending();
+		selection_status.reject = selection.reject();
+		selection_status.armed = _control_mode.flag_armed;
+		selection_status.enabled = _control_mode.flag_multicopter_position_control_enabled;
+		selection_status.pid_calls = pid_calls;
+		_velocity_selection_pub.publish(selection_status);
 
 		// Publish takeoff status
 		const uint8_t takeoff_state = static_cast<uint8_t>(_takeoff.getTakeoffState());

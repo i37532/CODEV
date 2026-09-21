@@ -41,3 +41,14 @@ target_include_directories(PositionControl PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 px4_add_unit_gtest(SRC ControlMathTest.cpp LINKLIBS PositionControl)
 px4_add_unit_gtest(SRC PositionControlTest.cpp LINKLIBS PositionControl)
+
+if(BUILD_TESTING)
+	px4_add_library(V00PositionReference
+		test/v00/V00PositionControl.cpp
+		test/v00/V00ControlMath.cpp
+		test/v00/V00Takeoff.cpp
+	)
+	target_link_libraries(V00PositionReference PRIVATE hysteresis)
+endif()
+px4_add_unit_gtest(SRC VelocityControlTest.cpp LINKLIBS PositionControl V00PositionReference Takeoff)
+px4_add_functional_gtest(SRC VelocitySelectionParamTest.cpp LINKLIBS PositionControl parameters)

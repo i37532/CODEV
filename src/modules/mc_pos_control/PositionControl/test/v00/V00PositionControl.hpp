@@ -32,7 +32,7 @@
  ****************************************************************************/
 
 /**
- * @file PositionControl.hpp
+ * @file V00PositionControl.hpp
  *
  * A cascaded position controller for position/velocity control only.
  */
@@ -43,9 +43,8 @@
 #include <matrix/matrix/math.hpp>
 #include <uORB/topics/vehicle_attitude_setpoint.h>
 #include <uORB/topics/vehicle_local_position_setpoint.h>
-#include "VelocityControlSelector.hpp"
 
-struct PositionControlStates {
+struct V00PositionControlStates {
 	matrix::Vector3f position;
 	matrix::Vector3f velocity;
 	matrix::Vector3f acceleration;
@@ -72,12 +71,12 @@ struct PositionControlStates {
  * 	If there is a position/velocity- and thrust-setpoint present, then
  *  the thrust-setpoint is ommitted and recomputed from position-velocity-PID-loop.
  */
-class PositionControl
+class V00PositionControl
 {
 public:
 
-	PositionControl() = default;
-	~PositionControl() = default;
+	V00PositionControl() = default;
+	~V00PositionControl() = default;
 
 	/**
 	 * Set the position control gains
@@ -129,9 +128,9 @@ public:
 
 	/**
 	 * Pass the current vehicle state to the controller
-	 * @param PositionControlStates structure
+	 * @param V00PositionControlStates structure
 	 */
-	void setState(const PositionControlStates &states);
+	void setState(const V00PositionControlStates &states);
 
 	/**
 	 * Pass the desired setpoints
@@ -150,9 +149,6 @@ public:
 	 * @return true if update succeeded and output setpoint is executable, false if not
 	 */
 	bool update(const float dt);
-
-	void configureVelocityControl(int32_t mode, int32_t axes, bool armed) { _velocity_selector.configure(mode, axes, armed); }
-	const VelocityControlSelector &velocitySelection() const { return _velocity_selector; }
 
 	/**
 	 * Set the integral term in xy to 0.
@@ -178,12 +174,10 @@ public:
 
 private:
 	friend class VelocityControlTestAccess;
-	VelocityControlSelector _velocity_selector;
 	bool _updateSuccessful();
 
 	void _positionControl(); ///< Position proportional control
 	void _velocityControl(const float dt); ///< Velocity PID control
-	void _velocityControlPid(const float dt); ///< V00 PID operations, unchanged order
 	void _accelerationControl(); ///< Acceleration setpoint processing
 
 	// Gains

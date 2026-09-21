@@ -64,6 +64,7 @@
 #include <uORB/topics/vehicle_land_detected.h>
 #include <uORB/topics/vehicle_local_position.h>
 #include <uORB/topics/vehicle_local_position_setpoint.h>
+#include <uORB/topics/velocity_ctrl_selection.h>
 
 using namespace time_literals;
 
@@ -93,6 +94,8 @@ private:
 	orb_advert_t _mavlink_log_pub{nullptr};
 
 	uORB::PublicationData<takeoff_status_s> _takeoff_status_pub{ORB_ID(takeoff_status)};
+	uORB::Publication<velocity_ctrl_selection_s> _velocity_selection_pub{ORB_ID(velocity_ctrl_selection)};
+	uint32_t _velocity_selection_seq{0};
 	uORB::Publication<vehicle_attitude_setpoint_s>	_vehicle_attitude_setpoint_pub;
 	uORB::Publication<vehicle_local_position_setpoint_s> _local_pos_sp_pub{ORB_ID(vehicle_local_position_setpoint)};	/**< vehicle local position setpoint publication */
 
@@ -131,6 +134,8 @@ private:
 
 	DEFINE_PARAMETERS(
 		// Position Control
+		(ParamInt<px4::params::MPC_VC_MODE>) _param_mpc_vc_mode,
+		(ParamInt<px4::params::MPC_VC_AXES>) _param_mpc_vc_axes,
 		(ParamFloat<px4::params::MPC_XY_P>) _param_mpc_xy_p,
 		(ParamFloat<px4::params::MPC_Z_P>) _param_mpc_z_p,
 		(ParamFloat<px4::params::MPC_XY_VEL_P_ACC>) _param_mpc_xy_vel_p_acc,

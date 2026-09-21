@@ -32,11 +32,11 @@
  ****************************************************************************/
 
 /**
- * @file PositionControl.cpp
+ * @file V00PositionControl.cpp
  */
 
-#include "PositionControl.hpp"
-#include "ControlMath.hpp"
+#include "V00PositionControl.hpp"
+#include "V00ControlMath.hpp"
 #include <float.h>
 #include <mathlib/mathlib.h>
 #include <px4_platform_common/defines.h>
@@ -44,34 +44,34 @@
 
 using namespace matrix;
 
-void PositionControl::setVelocityGains(const Vector3f &P, const Vector3f &I, const Vector3f &D)
+void V00PositionControl::setVelocityGains(const Vector3f &P, const Vector3f &I, const Vector3f &D)
 {
 	_gain_vel_p = P;
 	_gain_vel_i = I;
 	_gain_vel_d = D;
 }
 
-void PositionControl::setVelocityLimits(const float vel_horizontal, const float vel_up, const float vel_down)
+void V00PositionControl::setVelocityLimits(const float vel_horizontal, const float vel_up, const float vel_down)
 {
 	_lim_vel_horizontal = vel_horizontal;
 	_lim_vel_up = vel_up;
 	_lim_vel_down = vel_down;
 }
 
-void PositionControl::setThrustLimits(const float min, const float max)
+void V00PositionControl::setThrustLimits(const float min, const float max)
 {
 	// make sure there's always enough thrust vector length to infer the attitude
 	_lim_thr_min = math::max(min, 10e-4f);
 	_lim_thr_max = max;
 }
 
-void PositionControl::updateHoverThrust(const float hover_thrust_new)
+void V00PositionControl::updateHoverThrust(const float hover_thrust_new)
 {
 	_vel_int(2) += (hover_thrust_new - _hover_thrust) * (CONSTANTS_ONE_G / hover_thrust_new);
 	setHoverThrust(hover_thrust_new);
 }
 
-void PositionControl::setState(const PositionControlStates &states)
+void V00PositionControl::setState(const V00PositionControlStates &states)
 {
 	_pos = states.position;
 	_vel = states.velocity;
@@ -79,7 +79,7 @@ void PositionControl::setState(const PositionControlStates &states)
 	_vel_dot = states.acceleration;
 }
 
-void PositionControl::setInputSetpoint(const vehicle_local_position_setpoint_s &setpoint)
+void V00PositionControl::setInputSetpoint(const vehicle_local_position_setpoint_s &setpoint)
 {
 	_pos_sp = Vector3f(setpoint.x, setpoint.y, setpoint.z);
 	_vel_sp = Vector3f(setpoint.vx, setpoint.vy, setpoint.vz);
@@ -88,7 +88,7 @@ void PositionControl::setInputSetpoint(const vehicle_local_position_setpoint_s &
 	_yawspeed_sp = setpoint.yawspeed;
 }
 
-bool PositionControl::update(const float dt)
+bool V00PositionControl::update(const float dt)
 {
 	// x and y input setpoints always have to come in pairs
 	const bool valid = (PX4_ISFINITE(_pos_sp(0)) == PX4_ISFINITE(_pos_sp(1)))
@@ -104,40 +104,30 @@ bool PositionControl::update(const float dt)
 	return valid && _updateSuccessful();
 }
 
-void PositionControl::_positionControl()
+void V00PositionControl::_positionControl()
 {
 	// P-position controller
 	Vector3f vel_sp_position = (_pos_sp - _pos).emult(_gain_pos_p);
 	// Position and feed-forward velocity setpoints or position states being NAN results in them not having an influence
-	ControlMath::addIfNotNanVector3f(_vel_sp, vel_sp_position);
+	V00ControlMath::addIfNotNanVector3f(_vel_sp, vel_sp_position);
 	// make sure there are no NAN elements for further reference while constraining
-	ControlMath::setZeroIfNanVector3f(vel_sp_position);
+	V00ControlMath::setZeroIfNanVector3f(vel_sp_position);
 
 	// Constrain horizontal velocity by prioritizing the velocity component along the
 	// the desired position setpoint over the feed-forward term.
-	_vel_sp.xy() = ControlMath::constrainXY(vel_sp_position.xy(), (_vel_sp - vel_sp_position).xy(), _lim_vel_horizontal);
+	_vel_sp.xy() = V00ControlMath::constrainXY(vel_sp_position.xy(), (_vel_sp - vel_sp_position).xy(), _lim_vel_horizontal);
 	// Constrain velocity in z-direction.
 	_vel_sp(2) = math::constrain(_vel_sp(2), -_lim_vel_up, _lim_vel_down);
 }
 
-void PositionControl::_velocityControl(const float dt)
-{
-	// Only accepted configurations reach dispatch. V01 has exactly one backend.
-	switch (_velocity_selector.effectiveMode()) {
-	case 0:
-		_velocityControlPid(dt);
-		break;
-	}
-}
-
-void PositionControl::_velocityControlPid(const float dt)
+void V00PositionControl::_velocityControl(const float dt)
 {
 	// PID velocity control
 	Vector3f vel_error = _vel_sp - _vel;
 	Vector3f acc_sp_velocity = vel_error.emult(_gain_vel_p) + _vel_int - _vel_dot.emult(_gain_vel_d);
 
 	// No control input from setpoints or corresponding states which are NAN
-	ControlMath::addIfNotNanVector3f(_acc_sp, acc_sp_velocity);
+	V00ControlMath::addIfNotNanVector3f(_acc_sp, acc_sp_velocity);
 
 	_accelerationControl();
 
@@ -175,7 +165,7 @@ void PositionControl::_velocityControlPid(const float dt)
 	vel_error.xy() = Vector2f(vel_error) - (arw_gain * (Vector2f(_acc_sp) - acc_sp_xy_limited));
 
 	// Make sure integral doesn't get NAN
-	ControlMath::setZeroIfNanVector3f(vel_error);
+	V00ControlMath::setZeroIfNanVector3f(vel_error);
 	// Update integral part of velocity control
 	_vel_int += vel_error.emult(_gain_vel_i) * dt;
 
@@ -183,11 +173,11 @@ void PositionControl::_velocityControlPid(const float dt)
 	_vel_int(2) = math::min(fabsf(_vel_int(2)), CONSTANTS_ONE_G) * sign(_vel_int(2));
 }
 
-void PositionControl::_accelerationControl()
+void V00PositionControl::_accelerationControl()
 {
 	// Assume standard acceleration due to gravity in vertical direction for attitude generation
 	Vector3f body_z = Vector3f(-_acc_sp(0), -_acc_sp(1), CONSTANTS_ONE_G).normalized();
-	ControlMath::limitTilt(body_z, Vector3f(0, 0, 1), _lim_tilt);
+	V00ControlMath::limitTilt(body_z, Vector3f(0, 0, 1), _lim_tilt);
 	// Scale thrust assuming hover thrust produces standard gravity
 	float collective_thrust = _acc_sp(2) * (_hover_thrust / CONSTANTS_ONE_G) - _hover_thrust;
 	// Project thrust to planned body attitude
@@ -196,7 +186,7 @@ void PositionControl::_accelerationControl()
 	_thr_sp = body_z * collective_thrust;
 }
 
-bool PositionControl::_updateSuccessful()
+bool V00PositionControl::_updateSuccessful()
 {
 	bool valid = true;
 
@@ -218,7 +208,7 @@ bool PositionControl::_updateSuccessful()
 	return valid;
 }
 
-void PositionControl::getLocalPositionSetpoint(vehicle_local_position_setpoint_s &local_position_setpoint) const
+void V00PositionControl::getLocalPositionSetpoint(vehicle_local_position_setpoint_s &local_position_setpoint) const
 {
 	local_position_setpoint.x = _pos_sp(0);
 	local_position_setpoint.y = _pos_sp(1);
@@ -232,8 +222,8 @@ void PositionControl::getLocalPositionSetpoint(vehicle_local_position_setpoint_s
 	_thr_sp.copyTo(local_position_setpoint.thrust);
 }
 
-void PositionControl::getAttitudeSetpoint(vehicle_attitude_setpoint_s &attitude_setpoint) const
+void V00PositionControl::getAttitudeSetpoint(vehicle_attitude_setpoint_s &attitude_setpoint) const
 {
-	ControlMath::thrustToAttitude(_thr_sp, _yaw_sp, attitude_setpoint);
+	V00ControlMath::thrustToAttitude(_thr_sp, _yaw_sp, attitude_setpoint);
 	attitude_setpoint.yaw_sp_move_rate = _yawspeed_sp;
 }

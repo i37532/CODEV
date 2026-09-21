@@ -1,0 +1,95 @@
+{
+  "stage": "V01-protocol01",
+  "scope": "Iris Gazebo SITL; original position P, XYZ velocity PID, attitude and rate PID",
+  "attempt_order": [
+    "run01"
+  ],
+  "maximum_attempts": 1,
+  "stop_on_any_required_failure": true,
+  "automatic_retry": false,
+  "seeds": [
+    null
+  ],
+  "randomness": "Unmodified default-constructed sensor engines, not independent random seeds",
+  "simulation_speed": 1,
+  "startup_overrides": {
+    "MC_RTC_MODE": 0,
+    "MC_STA_AXES": 0,
+    "MC_RTC_DIV": 1,
+    "MC_RATT_TEST": 0,
+    "MC_STA_TKO_MGT": 0,
+    "MIS_TAKEOFF_ALT": 2.5,
+    "SDLOG_DIRS_MAX": 1000,
+    "SDLOG_MODE": 1,
+    "MPC_VC_MODE": 0,
+    "MPC_VC_AXES": 0
+  },
+  "logging": "Preserve startup SDLOG_PROFILE bits, OR 16; restart logger -b 256 -r 1000 -t -f before warmup",
+  "target_source": "Original flight_mode_manager/position/attitude chain; only local commander mode commands, GCS heartbeat and neutral RC",
+  "sequence": "Fresh start; estimator warmup >=30 simulated seconds; takeoff; explicit Hold after CODEV POSCTL transition; stable 3s; hover60s; land and automatic disarm",
+  "wall_timeouts_s": {
+    "startup": 180,
+    "warmup": 180,
+    "takeoff": 150,
+    "hover": 240,
+    "landing": 150
+  },
+  "bounds": {
+    "tilt_deg": 15,
+    "height_flight_m": [
+      -0.5,
+      4
+    ],
+    "height_hover_error_m": 1,
+    "height_at_hover_entry_error_m": 0.5,
+    "xy_speed_m_s": 1,
+    "xy_from_start_m": 2,
+    "vz_hover_m_s": 0.6,
+    "vz_takeoff_landing_m_s": 3.5,
+    "hover_yaw_error_deg": 20,
+    "normalized_command_abs": 1.001
+  },
+  "data_gate": {
+    "hover_duration_s": [
+      60,
+      62
+    ],
+    "maximum_topic_gap_s": 0.25,
+    "minimum_hover_samples": 600,
+    "maximum_pairing_age_us": 20000,
+    "minimum_metric_window_s": 59.75,
+    "required_rate_sequence_missing": 0,
+    "maximum_ulog_dropouts": 0,
+    "minimum_actuator_match_fraction": 0.8,
+    "maximum_actuator_match_gap_s": 0.25
+  },
+  "metric": "60s hover; per-axis time-weighted velocity and position error from final published setpoint vs latest preceding measured state; expose pairing age, no exact consumed-state claim",
+  "failure_action": "Stop owned SITL via original runner; preserve all logs and failure; no fallback controller, zero-thrust safety claim, retry or remaining attempt",
+  "parameter_restore": "Archive original complete EEPROM bytes before experiment, restore exact bytes after each stopped run; save runtime full parameters before/after",
+  "not_authorized": [
+    "V02",
+    "hardware",
+    "ESTA",
+    "ISTA",
+    "Proper-ISTA",
+    "old I05 continuation",
+    "push"
+  ],
+  "authorization": "User authorized V01 selector implementation, offline regression and one PID takeoff/hover/landing smoke attempt, no retries.",
+  "world_verification": "Exactly one live gzserver, same session as launch session leader; exact absolute .world argv, PX4_SITL_WORLD and master URI; frozen file SHA-256. Model path checked separately from launcher console.",
+  "selection_gate": {
+    "requested_mode": 0,
+    "requested_axes": 0,
+    "effective_mode": 0,
+    "effective_axes": 0,
+    "pending": 0,
+    "reject": 0,
+    "maximum_gap_us": 250000,
+    "minimum_flight_samples": 600,
+    "publish_sequence_missing": 0,
+    "pid_calls_when_enabled": 1,
+    "pid_calls_when_disabled": 0,
+    "positive_input_timestamp_deltas": true,
+    "armed_active_samples_required": true
+  }
+}
