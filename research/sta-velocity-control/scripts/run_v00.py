@@ -19,8 +19,9 @@ sys.path.insert(0, str(REPO / 'research/sta-rate-control/scripts'))
 from run_m00 import main as legacy_run, active_simulators, ROOTFS, save, digest
 from run_m04 import arrays
 from capture_v00 import persisted_bson
+from world_v00 import snapshot, validate_world
 
-CONFIG = REPO / 'research/sta-velocity-control/v00/resume01'
+CONFIG = REPO / 'research/sta-velocity-control/v00/resume02'
 
 
 def git(*args):
@@ -80,8 +81,17 @@ class Checks:
             save(output / 'runtime_parameters_start.json', params)
             console = (output / 'console.log').read_text()
             model = str(REPO / 'Tools/sitl_gazebo/models/iris/iris.sdf')
-            if 'Using: ' + model not in console or 'empty_grey.world' not in console:
-                raise RuntimeError('Actual model/world not confirmed')
+            if 'Using: ' + model not in console:
+                raise RuntimeError('Actual model not confirmed')
+            launcher_pid = json.loads((output / 'result.json').read_text())['launcher_pid']
+            world = REPO / 'sitl/worlds/empty_grey.world'
+            evidence = snapshot(launcher_pid, world)
+            save(output / 'world_process.json', evidence)
+            validate_world(evidence['servers'], launcher_pid, evidence['launcher_sid'],
+                           world, 'http://127.0.0.1:11345')
+            expected_hash = json.loads((CONFIG / 'frozen.json').read_text())['assets'][str(world.relative_to(REPO))]
+            if evidence['world_sha256'] != expected_hash:
+                raise RuntimeError('World changed after frozen-asset check')
             (output / 'uorb_start.txt').write_text(cli('uorb', 'status'))
             cli('logger', 'stop')
             time.sleep(1.1)
