@@ -1,0 +1,215 @@
+{
+  "attempts": 1,
+  "takeoff_commands": 0,
+  "accepted_flights": 0,
+  "unrun_attempts": 2,
+  "error": "RuntimeError('Actual model/world not confirmed')",
+  "ulog_sha256": "75d7d67c7ba05fc9d6b69e84cc8dcda1b0a70b63c776cb4be84c07e93edbb05c",
+  "ulog_dropout_count": 0,
+  "ulog_topics": [
+    {
+      "name": "actuator_armed",
+      "instance": 0,
+      "count": 2
+    },
+    {
+      "name": "actuator_controls_0",
+      "instance": 0,
+      "count": 108
+    },
+    {
+      "name": "actuator_outputs",
+      "instance": 0,
+      "count": 105
+    },
+    {
+      "name": "commander_state",
+      "instance": 0,
+      "count": 2
+    },
+    {
+      "name": "ekf2_timestamps",
+      "instance": 0,
+      "count": 127
+    },
+    {
+      "name": "gyro_sample_status",
+      "instance": 0,
+      "count": 1
+    },
+    {
+      "name": "manual_control_setpoint",
+      "instance": 0,
+      "count": 4
+    },
+    {
+      "name": "multirotor_motor_limits",
+      "instance": 0,
+      "count": 105
+    },
+    {
+      "name": "parameter_update",
+      "instance": 0,
+      "count": 1
+    },
+    {
+      "name": "position_setpoint_triplet",
+      "instance": 0,
+      "count": 1
+    },
+    {
+      "name": "rate_ctrl_selection",
+      "instance": 0,
+      "count": 1
+    },
+    {
+      "name": "rate_ctrl_status",
+      "instance": 0,
+      "count": 27
+    },
+    {
+      "name": "sensor_combined",
+      "instance": 0,
+      "count": 124
+    },
+    {
+      "name": "sensor_preflight_mag",
+      "instance": 0,
+      "count": 1
+    },
+    {
+      "name": "sensor_selection",
+      "instance": 0,
+      "count": 1
+    },
+    {
+      "name": "sensors_status_imu",
+      "instance": 0,
+      "count": 3
+    },
+    {
+      "name": "sta_rate_ctrl_status",
+      "instance": 0,
+      "count": 126
+    },
+    {
+      "name": "sta_takeoff_status",
+      "instance": 0,
+      "count": 126
+    },
+    {
+      "name": "test_motor",
+      "instance": 0,
+      "count": 1
+    },
+    {
+      "name": "vehicle_acceleration",
+      "instance": 0,
+      "count": 12
+    },
+    {
+      "name": "vehicle_air_data",
+      "instance": 0,
+      "count": 8
+    },
+    {
+      "name": "vehicle_angular_acceleration",
+      "instance": 0,
+      "count": 113
+    },
+    {
+      "name": "vehicle_angular_velocity",
+      "instance": 0,
+      "count": 113
+    },
+    {
+      "name": "vehicle_attitude_groundtruth",
+      "instance": 0,
+      "count": 52
+    },
+    {
+      "name": "vehicle_control_mode",
+      "instance": 0,
+      "count": 2
+    },
+    {
+      "name": "vehicle_global_position_groundtruth",
+      "instance": 0,
+      "count": 6
+    },
+    {
+      "name": "vehicle_gps_position",
+      "instance": 0,
+      "count": 1
+    },
+    {
+      "name": "vehicle_imu",
+      "instance": 0,
+      "count": 1
+    },
+    {
+      "name": "vehicle_imu",
+      "instance": 1,
+      "count": 1
+    },
+    {
+      "name": "vehicle_imu",
+      "instance": 2,
+      "count": 1
+    },
+    {
+      "name": "vehicle_local_position_groundtruth",
+      "instance": 0,
+      "count": 6
+    },
+    {
+      "name": "vehicle_magnetometer",
+      "instance": 0,
+      "count": 22
+    },
+    {
+      "name": "vehicle_magnetometer",
+      "instance": 1,
+      "count": 1
+    },
+    {
+      "name": "vehicle_status",
+      "instance": 0,
+      "count": 2
+    },
+    {
+      "name": "vehicle_status_flags",
+      "instance": 0,
+      "count": 2
+    }
+  ],
+  "runtime_pid_parameters": {
+    "MC_RTC_MODE": 0.0,
+    "MC_STA_AXES": 0.0,
+    "MC_RTC_DIV": 1.0,
+    "MC_RATT_TEST": 0.0,
+    "MC_STA_TKO_MGT": 0.0,
+    "SYS_AUTOSTART": 10016.0,
+    "MIS_TAKEOFF_ALT": 2.5,
+    "SDLOG_DIRS_MAX": 1000.0,
+    "SDLOG_PROFILE": 147.0
+  },
+  "startup_diagnostic": {
+    "effective_mode": [
+      0
+    ],
+    "effective_axes": [
+      0
+    ],
+    "div_eff": [
+      1
+    ],
+    "armed": [
+      0
+    ],
+    "fault": [
+      0
+    ]
+  },
+  "no_flight_metrics": "No takeoff/hover/landing; startup data cannot form baseline RMSE or flight cadence"
+}

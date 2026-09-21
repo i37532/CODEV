@@ -1,0 +1,36 @@
+{
+  "source_head": "178c9a41c9dd19031f6b4c9202c19d1db2c6231e",
+  "branch": "research/sta-velocity-control",
+  "binary_sha256": "8525398de7f0723479795841f86d4c18c8c1a468bd494a579ff8036fe71548b5",
+  "runner_sha256": "88c542a410f8021343c797d6626156791ff75a35170eec9e283ee555313402fd",
+  "command": [
+    "./sitl/run.sh",
+    "--headless",
+    "--backend",
+    "gazebo",
+    "--model",
+    "iris"
+  ],
+  "pid_parameters_modified": false,
+  "success": false,
+  "events": [],
+  "scenario_sha256": "055381ff2d22a4e70c832a5905f241c07e9c0df490af704a3b35733906577183",
+  "scenario_path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v00/resume01/protocol.json",
+  "simulation_speed_requested": 1.0,
+  "explicit_environment": {
+    "PX4_SITL_WORLD": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world",
+    "GAZEBO_MASTER_URI": "http://127.0.0.1:11345"
+  },
+  "launcher_pid": 945018,
+  "error": "RuntimeError('Actual model/world not confirmed')",
+  "launcher_returncode": 0,
+  "logs": [
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-21/01_48_37.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260921/V00/series01/run01/01_48_37.ulg",
+      "sha256": "75d7d67c7ba05fc9d6b69e84cc8dcda1b0a70b63c776cb4be84c07e93edbb05c",
+      "bytes": 181541
+    }
+  ],
+  "finished_utc": "2026-09-21T01:48:37Z"
+}
