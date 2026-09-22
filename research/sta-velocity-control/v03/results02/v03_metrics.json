@@ -1,0 +1,96 @@
+{
+  "accepted": true,
+  "baseline_accepted": true,
+  "diagnostic": {
+    "n": 6020,
+    "hz": 99.99667729930889,
+    "maximum_gap_s": 0.012,
+    "consumed_velocity_error": {
+      "rmse": [
+        0.03377819389401198,
+        0.007185873440930151,
+        0.005412892061390419
+      ],
+      "mean": [
+        0.003992931821020176,
+        -0.0021295206653459825,
+        -0.0011481619083042282
+      ],
+      "std": [
+        0.03354136070904334,
+        0.006863083770793565,
+        0.005289718773298107
+      ],
+      "max_abs": [
+        0.1164686307311058,
+        0.02233891375362873,
+        0.0339340940117836
+      ]
+    },
+    "sequence_complete": true,
+    "inner": {
+      "max_age_us": 4000,
+      "median_age_us": 0.0,
+      "maximum_reads": 4
+    },
+    "clock": 0,
+    "controller_time_max_us": 0,
+    "module_time_max_us": 0,
+    "excitation_error": {
+      "rmse": [
+        0.04557277711965954,
+        0.0076657331635127035,
+        0.003353522898728982
+      ],
+      "mean": [
+        0.003681188341055537,
+        -0.002193414872403075,
+        -2.147699499619216e-05
+      ],
+      "std": [
+        0.045423857903043006,
+        0.007345229481214284,
+        0.0033534541253736525
+      ],
+      "max_abs": [
+        0.1164686307311058,
+        0.02233891375362873,
+        0.010454928502440453
+      ]
+    },
+    "excitation_samples": 3200,
+    "excitation_seconds": 32.0,
+    "constraint_fraction": 0.0,
+    "maximum_continuous_constraint_s": 0.0,
+    "excitation_iae_m": [
+      1.1440387047678235,
+      0.19330270746559783,
+      0.0870771509902551
+    ],
+    "acceleration_tv": [
+      3.376591682434082,
+      2.676439046859741,
+      4.351978778839111
+    ],
+    "excitation_peak_m_s": 0.19261831045150757
+  },
+  "local_output": {
+    "matched": 6020,
+    "denominator": 6020,
+    "coverage": 1.0,
+    "max_gap_s": 0.012,
+    "max_abs_error": 0.0
+  },
+  "attitude_output": {
+    "matched": 6020,
+    "denominator": 6020,
+    "coverage": 1.0,
+    "max_gap_s": 0.012,
+    "max_abs_error": 0.0
+  },
+  "limitations": [
+    "Thrust-map proxy is not measured acceleration; HRT is simulation clock.",
+    "One PID development flight, default unseeded engines, no STA performance claim.",
+    "Async output checks use exact available matches, not fabricated full downstream coverage."
+  ]
+}

@@ -2,7 +2,7 @@
 
 分支：research/sta-velocity-control；规划起点866bba6e0d200d7a5137146c2a67a1a751e01233。
 
-V00、V01已通过；V02前置缺口已修复，历史失败保留。V03 **needs_revision**：唯一一次PID任务在离地前被诊断消息过期检查中止；已修复队列读取，82个C++/50个Python离线通过，尚未补飞。需明确新预算后另冻协议，V04不准入。默认研究范围为XY速度PID/ESTA比较；Z、Proper-ISTA与双层组合须单独授权。
+V00、V01已通过；V02前置缺口已修复，历史失败保留。V03 **passed**：用户另授权的protocol02单次PID任务完成起飞、60.2秒观察（含完整32秒小速度激励）、降落上锁及真实ULog验收；82个C++/52个Python通过。旧protocol01离地前中止保留，不改判。V04尚未开始，ESTA仍不可生效。默认研究范围为XY速度PID/ESTA比较；Z、Proper-ISTA与双层组合须单独授权。
 
 - [初始TODO快照](plan/v1/VELOCITY_STA_TODO_CN.md)
 - [初始阶段提示词](plan/v1/VELOCITY_STA_PROMPTS_CN.md)
@@ -14,6 +14,7 @@ V00、V01已通过；V02前置缺口已修复，历史失败保留。V03 **needs
 - [V03：公共保护、日志与一次PID验证](reports/V03.md)
 - [V03历史前置审计：失败复现与V02勘误](reports/V03_PREFLIGHT.md)
 - [V03冻结协议与日志说明](v03/protocol01/README_CN.md)
+- [V03修复后单次验证协议及运行入口](v03/protocol02/README_CN.md)
 - [V00恢复批次02：三轮指标、覆盖与勘误](reports/V00_RESUME02.md)
 - [V00恢复批次：测试已修订，启动预检失败](reports/V00_RESUME01.md)
 - [V00接口审计、Takeoff勘误与恢复条件](v00/INTERFACE_AUDIT_CN.md)
