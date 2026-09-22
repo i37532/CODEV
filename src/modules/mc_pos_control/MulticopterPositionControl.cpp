@@ -293,10 +293,10 @@ void MulticopterPositionControl::Run()
 				     | (local_pos.xy_reset_counter != _xy_reset_counter ? 4 : 0)
 				     | (local_pos.z_reset_counter != _z_reset_counter ? 8 : 0)
 				     | (local_pos.heading_reset_counter != _heading_reset_counter ? 16 : 0);
-		_rate_diagnostic_sub.update(&_rate_diagnostic);
+		const uint8_t inner_reads = VelocityDiagnosticInput::drain(_rate_diagnostic_sub, _rate_diagnostic);
+		const uint64_t inner_check_timestamp = hrt_absolute_time();
 		_velocity_vehicle_status_sub.update(&_velocity_vehicle_status);
-		const bool inner_valid = _rate_diagnostic.timestamp && module_started >= _rate_diagnostic.timestamp
-					 && module_started - _rate_diagnostic.timestamp < 100000;
+		const bool inner_valid = VelocityDiagnosticInput::fresh(inner_check_timestamp, _rate_diagnostic.timestamp);
 
 		if (_param_mpc_use_hte.get()) {
 			hover_thrust_estimate_s hte;
@@ -560,6 +560,10 @@ void MulticopterPositionControl::Run()
 		diagnostic.inner_axes = _rate_diagnostic.effective_axes;
 		diagnostic.inner_divisor = _rate_diagnostic.div_eff;
 		diagnostic.inner_valid = inner_valid;
+		diagnostic.inner_timestamp = _rate_diagnostic.timestamp;
+		diagnostic.inner_check_timestamp = inner_check_timestamp;
+		diagnostic.inner_seq = _rate_diagnostic.publish_seq;
+		diagnostic.inner_reads = inner_reads;
 		diagnostic.updated = pid_calls > 0;
 		diagnostic.pending = selection.pending();
 		diagnostic.armed = _control_mode.flag_armed;

@@ -1,0 +1,51 @@
+{
+  "source_head": "d5fb5c5c2b89c33a23cac7af1c2e79d1d5c89e5b",
+  "branch": "research/sta-velocity-control",
+  "binary_sha256": "51a1040645c60db004ebd5eba39f6a057cff77507a1853d9b0dceda1ed5c7a1f",
+  "runner_sha256": "88c542a410f8021343c797d6626156791ff75a35170eec9e283ee555313402fd",
+  "command": [
+    "./sitl/run.sh",
+    "--headless",
+    "--backend",
+    "gazebo",
+    "--model",
+    "iris"
+  ],
+  "pid_parameters_modified": false,
+  "success": false,
+  "events": [
+    {
+      "name": "ready",
+      "timestamp_us": 30916000.0
+    },
+    {
+      "name": "takeoff_command",
+      "timestamp_us": 30916000.0
+    }
+  ],
+  "scenario_sha256": "e8a17e2f8fa305ac94d403373ec7e0a152b3e17af3bc4ecd62dbc5a906865267",
+  "scenario_path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v03/protocol01/protocol.json",
+  "simulation_speed_requested": 1.0,
+  "explicit_environment": {
+    "PX4_SITL_WORLD": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world",
+    "GAZEBO_MASTER_URI": "http://127.0.0.1:11345"
+  },
+  "launcher_pid": 1053939,
+  "error": "RuntimeError('V03 monitor: inner_mode=-1.0')",
+  "launcher_returncode": 0,
+  "logs": [
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-22/01_25_20.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260922/V03/series01/run01/01_25_20.ulg",
+      "sha256": "99883783cfff92cb1cc6b2e11d606d8ed2c5b52e79201955127d1e0e6dc5ebf2",
+      "bytes": 155537
+    },
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-22/01_25_21.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260922/V03/series01/run01/01_25_21.ulg",
+      "sha256": "b576c517ba9d8965214ff41238ed3d2dd1aab2923266167bbac8dbdd6194fc2f",
+      "bytes": 9181060
+    }
+  ],
+  "finished_utc": "2026-09-22T01:25:51Z"
+}

@@ -16,11 +16,24 @@ def vector(d, field, width=3):
     return np.column_stack([d[f'{field}[{i}]'] for i in range(width)])
 
 
+def check_inner_evidence(d):
+    age = d['inner_check_timestamp'].astype(np.int64)-d['inner_timestamp'].astype(np.int64)
+    if np.any(d['inner_timestamp']==0) or np.any(age<0) or np.any(age>=100000):
+        raise ValueError('Consumed inner diagnostic really stale/future/missing')
+    if np.any(d['inner_reads']<0) or np.any(d['inner_reads']>32):
+        raise ValueError('Unbounded inner queue drain')
+    if np.any(np.diff(d['inner_seq'].astype(np.int64))<0):
+        raise ValueError('Reversed inner diagnostic sequence')
+    return dict(max_age_us=int(age.max()),median_age_us=float(np.median(age)),
+                maximum_reads=int(d['inner_reads'].max()))
+
+
 def check_diagnostic(d, start, end, require_excitation=True):
     m = (d['timestamp'] >= start) & (d['timestamp'] < end)
     x = {k:v[m] for k,v in d.items()}
     n = len(x['timestamp'])
     if n < 600: raise ValueError('Missing diagnostic window')
+    inner = check_inner_evidence(x)
     if x['timestamp'][0]-start > 40000 or end-x['timestamp'][-1] > 40000:
         raise ValueError('Missing diagnostic window boundary')
     for field in ('timestamp', 'timestamp_sample', 'input_timestamp'):
@@ -59,7 +72,7 @@ def check_diagnostic(d, start, end, require_excitation=True):
     tm = x['timestamp_sample'].astype(np.int64)
     weights = np.diff(np.r_[tm, tm[-1]+int(np.median(np.diff(tm)))])*1e-6
     result = dict(n=n,hz=(n-1)*1e6/(tm[-1]-tm[0]), maximum_gap_s=float(np.diff(tm).max()*1e-6),
-                  consumed_velocity_error=stats(vector(x,'s'),weights), sequence_complete=True,
+                  consumed_velocity_error=stats(vector(x,'s'),weights), sequence_complete=True, inner=inner,
                   clock=int(x['clock'][0]), controller_time_max_us=int(x['controller_time_us'].max()),
                   module_time_max_us=int(x['module_time_us'].max()))
     if require_excitation:

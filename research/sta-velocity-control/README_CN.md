@@ -2,7 +2,7 @@
 
 分支：research/sta-velocity-control；规划起点866bba6e0d200d7a5137146c2a67a1a751e01233。
 
-V00、V01已通过；V02前置缺口已在用户授权继续后修复，历史失败保留。V03 **in_progress**：离线保护、PID诊断日志及验证已完成，唯一一次PID小速度飞行待执行；不能先写最终通过。默认研究范围为XY速度PID/ESTA比较；Z、Proper-ISTA与双层组合须单独授权。
+V00、V01已通过；V02前置缺口已修复，历史失败保留。V03 **needs_revision**：唯一一次PID任务在离地前被诊断消息过期检查中止；已修复队列读取，82个C++/50个Python离线通过，尚未补飞。需明确新预算后另冻协议，V04不准入。默认研究范围为XY速度PID/ESTA比较；Z、Proper-ISTA与双层组合须单独授权。
 
 - [初始TODO快照](plan/v1/VELOCITY_STA_TODO_CN.md)
 - [初始阶段提示词](plan/v1/VELOCITY_STA_PROMPTS_CN.md)

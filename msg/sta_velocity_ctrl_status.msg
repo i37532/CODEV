@@ -11,8 +11,11 @@ uint64 input_timestamp
 uint64 setpoint_timestamp
 uint64 output_timestamp
 uint64 attitude_timestamp
+uint64 inner_timestamp
+uint64 inner_check_timestamp
 uint32 publish_seq
 uint32 update_seq
+uint32 inner_seq
 int32 requested_mode
 int32 requested_axes
 int32 effective_mode
@@ -55,6 +58,7 @@ uint8 reject
 int8 inner_mode # -1 means unavailable
 uint8 inner_axes
 uint8 inner_divisor
+uint8 inner_reads
 bool inner_valid
 bool updated
 bool valid

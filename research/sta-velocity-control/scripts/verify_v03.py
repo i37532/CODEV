@@ -33,9 +33,10 @@ def main():
     try:
         run('v01_regression', ['python3', 'research/sta-velocity-control/scripts/verify_v01.py', '--output', str(out/'v01')])
         e['tests'].update(json.loads((out/'v01/evidence.json').read_text())['tests'])
-        for name in ('StaVelocityControl', 'StaVelocityProtection', 'StaRateControl'):
+        for name in ('StaVelocityControl', 'StaVelocityProtection', 'StaRateControl', 'VelocityDiagnosticInput'):
             xml = out/(name+'.xml')
-            run(name, [str(REPO/'build/px4_sitl_test'/('unit-'+name)), '--gtest_output=xml:'+str(xml)])
+            prefix = 'functional-' if name == 'VelocityDiagnosticInput' else 'unit-'
+            run(name, [str(REPO/'build/px4_sitl_test'/(prefix+name)), '--gtest_output=xml:'+str(xml)])
             a = ET.parse(xml).getroot().attrib
             e['tests'][name] = {k:int(a[k]) for k in ('tests','failures','errors','disabled')}
             assert e['tests'][name]['tests'] > 0 and not any(e['tests'][name][k] for k in ('failures','errors','disabled'))

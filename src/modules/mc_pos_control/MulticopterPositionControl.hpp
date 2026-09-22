@@ -69,6 +69,7 @@
 #include <uORB/topics/sta_rate_ctrl_status.h>
 #include <uORB/topics/vehicle_status.h>
 #include "PositionControl/VelocityDiagnosticExcitation.hpp"
+#include "PositionControl/VelocityDiagnosticInput.hpp"
 
 using namespace time_literals;
 

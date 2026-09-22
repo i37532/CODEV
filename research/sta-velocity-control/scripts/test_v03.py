@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-from analyze_v03 import check_diagnostic, exact_output_match
+from analyze_v03 import check_diagnostic, exact_output_match, check_inner_evidence
 
 
 class DiagnosticTest(unittest.TestCase):
@@ -13,6 +13,8 @@ class DiagnosticTest(unittest.TestCase):
         d.update(timestamp=t,timestamp_sample=t.copy(),input_timestamp=t.copy(),output_timestamp=t.copy(),
                  publish_seq=np.arange(n),update_seq=np.arange(n),raw_dt=np.full(n,.01),
                  input_dt=np.full(n,.01),used_dt=np.full(n,.01))
+        d.update(inner_timestamp=t-4000,inner_check_timestamp=t.copy(),inner_seq=np.arange(n)*2,
+                 inner_reads=np.full(n,2))
         et = np.arange(n)*.01-10
         d['excitation_time'] = et
         d['excitation'] = np.where((et>0)&(et<32),.2*np.sin(2*np.pi*et/8)*np.sin(np.pi*et/32)**2,0)
@@ -75,3 +77,12 @@ class DiagnosticTest(unittest.TestCase):
         for field in ('a_proxy[0]','constraint_bits'):
             d = self.data(); d[field][:] = 1
             with self.subTest(field=field), self.assertRaises(ValueError): check_diagnostic(d,1000000,61000000)
+
+    def test_claimed_valid_but_really_stale_inner(self):
+        for offset in (100000,124000,-1):
+            d=self.data(); d['inner_timestamp']=d['inner_check_timestamp']-offset
+            with self.subTest(offset=offset), self.assertRaises(ValueError): check_inner_evidence(d)
+
+    def test_unbounded_inner_drain(self):
+        d=self.data(); d['inner_reads'][10]=33
+        with self.assertRaises(ValueError): check_inner_evidence(d)
