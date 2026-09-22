@@ -53,6 +53,20 @@
 PARAM_DEFINE_FLOAT(MPC_THR_MIN, 0.12f);
 
 /**
+ * Default-off velocity diagnostic excitation (SITL only)
+ *
+ * One X/North 32 second smooth sine after 12 seconds airborne settling.
+ * PID-only V03 protocol; never use on hardware. Not a controller mode.
+ *
+ * @value 0 Disabled
+ * @value 1 Single shot PID X excitation
+ * @min 0
+ * @max 1
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_INT32(MPC_VCT_TEST, 0);
+
+/**
  * Hover thrust
  *
  * Vertical thrust required to hover.

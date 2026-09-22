@@ -1,0 +1,68 @@
+# V03: exact final controller invocation per local-position input, no interpolation.
+# Modes 1/2 unavailable. nu/a_sta are NaN in PID, NOT estimated STA states.
+# a_proxy is thrust * g / hover_thrust + gravity: model proxy, not measured acceleration.
+# constraint_bits: 1 tilt, 2 minimum thrust, 4 maximum Z, 8 XY remainder.
+# reset_bits: 1 vxy,2 vz,4 xy,8 z,16 heading,32 ground suppression.
+# timing: 0 valid,1 first,2 repeated/reversed,3 out of 2..40ms domain.
+# timing faults here are observational; PID retains legacy clamped input timestamp dt.
+uint64 timestamp
+uint64 timestamp_sample
+uint64 input_timestamp
+uint64 setpoint_timestamp
+uint64 output_timestamp
+uint64 attitude_timestamp
+uint32 publish_seq
+uint32 update_seq
+int32 requested_mode
+int32 requested_axes
+int32 effective_mode
+int32 effective_axes
+float32 raw_dt
+float32 input_dt
+float32 used_dt
+float32 excitation
+float32 excitation_time
+float32 hover_thrust
+float32 tilt_limit
+float32 thrust_min
+float32 thrust_max
+float32[3] p_sp
+float32[3] v_ff
+float32[3] v_sp
+float32[3] v
+float32[3] v_dot
+float32[3] a_ff
+float32[3] s
+float32[3] nu_before
+float32[3] nu_ideal
+float32[3] nu_applied
+float32[3] a_sta
+float32[3] a_req
+float32[3] a_proxy
+float32[3] thrust
+float32[4] q_sp
+uint32 controller_time_us
+uint32 module_time_us
+uint8 clock # 0=HRT (simulation time in lockstep), not board CPU cost
+uint8 pid_calls
+uint8 pid_axes
+uint8 active_axes
+uint8 reset_bits
+uint8 constraint_bits
+uint8 timing
+uint8 takeoff_state
+uint8 reject
+int8 inner_mode # -1 means unavailable
+uint8 inner_axes
+uint8 inner_divisor
+bool inner_valid
+bool updated
+bool valid
+bool pending
+bool armed
+bool enabled
+bool landed
+bool contact
+bool failsafe
+bool fault # V03 PID observer does not introduce a new control fault latch
+uint8 ORB_QUEUE_LENGTH = 8

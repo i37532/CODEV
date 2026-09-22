@@ -90,18 +90,61 @@ void PositionControl::setInputSetpoint(const vehicle_local_position_setpoint_s &
 
 bool PositionControl::update(const float dt)
 {
+	// Observe only; PID operations and integration order remain untouched.
+	_pos_sp.copyTo(_diagnostic.p_sp);
+	_vel_sp.copyTo(_diagnostic.v_ff);
+	_acc_sp.copyTo(_diagnostic.a_ff);
 	// x and y input setpoints always have to come in pairs
 	const bool valid = (PX4_ISFINITE(_pos_sp(0)) == PX4_ISFINITE(_pos_sp(1)))
 			   && (PX4_ISFINITE(_vel_sp(0)) == PX4_ISFINITE(_vel_sp(1)))
 			   && (PX4_ISFINITE(_acc_sp(0)) == PX4_ISFINITE(_acc_sp(1)));
 
 	_positionControl();
+	// Explicit, default-off SITL test input. Original position P is unchanged.
+#if defined(CONFIG_ARCH_BOARD_PX4_SITL)
+	if (fabsf(_diagnostic_excitation) > 0.f) {
+		_vel_sp.xy() = ControlMath::constrainXY(_vel_sp.xy(), Vector2f(_diagnostic_excitation, 0.f), _lim_vel_horizontal);
+	}
+#endif
 	_velocityControl(dt);
 
 	_yawspeed_sp = PX4_ISFINITE(_yawspeed_sp) ? _yawspeed_sp : 0.f;
 	_yaw_sp = PX4_ISFINITE(_yaw_sp) ? _yaw_sp : _yaw; // TODO: better way to disable yaw control
 
-	return valid && _updateSuccessful();
+	const bool success = valid && _updateSuccessful();
+	_recordDiagnostic(success);
+	return success;
+}
+
+void PositionControl::_recordDiagnostic(bool success)
+{
+	_diagnostic.valid = success;
+	_vel_sp.copyTo(_diagnostic.v_sp);
+	_vel.copyTo(_diagnostic.v);
+	_vel_dot.copyTo(_diagnostic.v_dot);
+	_acc_sp.copyTo(_diagnostic.a_req);
+	_thr_sp.copyTo(_diagnostic.thrust);
+	_diagnostic.hover_thrust = _hover_thrust;
+	_diagnostic.tilt_limit = _lim_tilt;
+	_diagnostic.thrust_min = _lim_thr_min;
+	_diagnostic.thrust_max = _lim_thr_max;
+	_diagnostic.pid_axes = 0;
+	_diagnostic.constraint_bits = 0;
+	for (int i = 0; i < 3; ++i) {
+		_diagnostic.s[i] = _vel(i) - _vel_sp(i);
+		_diagnostic.nu_before[i] = _diagnostic.nu_ideal[i] = _diagnostic.nu_applied[i] = _diagnostic.a_sta[i] = NAN;
+		_diagnostic.a_proxy[i] = _thr_sp(i) * (CONSTANTS_ONE_G / _hover_thrust) + (i == 2 ? CONSTANTS_ONE_G : 0.f);
+		if (PX4_ISFINITE(_vel_sp(i)) && PX4_ISFINITE(_vel(i)) && PX4_ISFINITE(_vel_dot(i))) { _diagnostic.pid_axes |= 1 << i; }
+	}
+	// Reconstruct mapping constraints for evidence only; no second PID update.
+	Vector3f body_z = Vector3f(-_acc_sp(0), -_acc_sp(1), CONSTANTS_ONE_G).normalized();
+	if (acosf(math::constrain(body_z(2), -1.f, 1.f)) > _lim_tilt) { _diagnostic.constraint_bits |= 1; }
+	ControlMath::limitTilt(body_z, Vector3f(0, 0, 1), _lim_tilt);
+	const float collective = (_acc_sp(2) * (_hover_thrust / CONSTANTS_ONE_G) - _hover_thrust) / body_z(2);
+	if (collective > -_lim_thr_min) { _diagnostic.constraint_bits |= 2; }
+	const Vector3f mapped = body_z * math::min(collective, -_lim_thr_min);
+	if (mapped(2) < -_lim_thr_max) { _diagnostic.constraint_bits |= 4; }
+	if (mapped.xy().norm() > _thr_sp.xy().norm() + 1e-6f) { _diagnostic.constraint_bits |= 8; }
 }
 
 void PositionControl::_positionControl()

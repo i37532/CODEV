@@ -45,7 +45,7 @@ px4_add_unit_gtest(SRC PositionControlTest.cpp LINKLIBS PositionControl)
 if(BUILD_TESTING)
 	# V02 is an offline-only kernel.  Keeping it out of the PositionControl
 	# production target is an intentional proof that MODE=1 cannot drive SITL.
-	px4_add_library(StaVelocityControl StaVelocityControl.cpp StaVelocityControl.hpp)
+	px4_add_library(StaVelocityControl StaVelocityControl.cpp StaVelocityControl.hpp StaVelocityProtection.cpp StaVelocityProtection.hpp)
 	target_compile_features(StaVelocityControl PUBLIC cxx_std_14)
 	target_include_directories(StaVelocityControl PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
@@ -59,3 +59,4 @@ endif()
 px4_add_unit_gtest(SRC VelocityControlTest.cpp LINKLIBS PositionControl V00PositionReference Takeoff)
 px4_add_functional_gtest(SRC VelocitySelectionParamTest.cpp LINKLIBS PositionControl parameters)
 px4_add_unit_gtest(SRC StaVelocityControlTest.cpp LINKLIBS StaVelocityControl)
+px4_add_unit_gtest(SRC StaVelocityProtectionTest.cpp LINKLIBS StaVelocityControl PositionControl)

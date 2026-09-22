@@ -27,6 +27,9 @@
 class StaVelocityControl
 {
 public:
+	StaVelocityControl() = default;
+	StaVelocityControl(const StaVelocityControl &) = delete;
+	StaVelocityControl &operator=(const StaVelocityControl &) = delete;
 
 	struct Parameters {
 		float lambda1{0.f};
@@ -52,6 +55,12 @@ public:
 		float nu_next{std::numeric_limits<float>::quiet_NaN()};
 		uint64_t revision{0};
 		bool valid() const { return status == Status::Ok; }
+	private:
+		friend class StaVelocityControl;
+		const StaVelocityControl *owner{nullptr};
+		size_t sealed_axis{0};
+		uint64_t sealed_revision{0};
+		std::array<float, 4> sealed{};
 	};
 
 	// Configuration values must be finite positive normal floats.  Updating a
@@ -63,6 +72,10 @@ public:
 	// a reset, parameter update or prior commit makes it stale.
 	Candidate evaluate(size_t axis, float velocity, float velocity_sp, float dt) const;
 	Status commit(const Candidate &candidate);
+	bool current(const Candidate &candidate) const;
+	// Separate applied state from the immutable ideal proposal. Output still
+	// uses old nu; modifying nu_next must never recompute this step's a_sta.
+	Status commitProtected(const Candidate &candidate, float applied_nu);
 
 	bool reset(size_t axis, float nu = 0.f);
 	void reset();

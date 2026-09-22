@@ -8,6 +8,7 @@
 #include <array>
 #include <cmath>
 #include <limits>
+#include <cstdio>
 
 namespace
 {
@@ -254,4 +255,107 @@ TEST(StaVelocityControlTest, ModeOneRemainsRejectedAndKernelHasNoDispatcherPath)
 	EXPECT_EQ(selector.effectiveMode(), 0);
 	EXPECT_EQ(selector.effectiveAxes(), 0);
 	EXPECT_EQ(selector.reject(), VelocityControlSelector::ModeUnimplemented | VelocityControlSelector::AxesUnavailable);
+}
+
+TEST(StaVelocityControlTest, CandidateOriginPayloadAndProtectedCommit)
+{
+	Controller a, b;
+	for (size_t i = 0; i < 3; ++i) {
+		ASSERT_TRUE(a.setParameters(i, {2.f, 1.f}));
+		ASSERT_TRUE(b.setParameters(i, {3.f, 2.f}));
+		ASSERT_TRUE(a.reset(i, .5f));
+		ASSERT_TRUE(b.reset(i, -.5f));
+	}
+	const auto c = a.evaluate(0, 1.f, 0.f, .008f);
+	EXPECT_EQ(b.commit(c), Status::StaleCandidate);
+	EXPECT_FLOAT_EQ(b.state()[0], -.5f);
+	auto wrong = c; wrong.axis = 1;
+	EXPECT_EQ(a.commit(wrong), Status::StaleCandidate);
+	EXPECT_FLOAT_EQ(a.state()[1], .5f);
+	wrong = c; wrong.a_sta = kNan;
+	EXPECT_EQ(a.commit(wrong), Status::StaleCandidate);
+	wrong = c; wrong.nu_next = 99.f;
+	EXPECT_EQ(a.commit(wrong), Status::StaleCandidate);
+	EXPECT_EQ(a.commitProtected(c, kNan), Status::StaleCandidate);
+	EXPECT_TRUE(a.current(c));
+	EXPECT_EQ(a.commitProtected(c, c.nu_before), Status::Ok);
+	EXPECT_FLOAT_EQ(a.state()[0], .5f);
+	EXPECT_EQ(a.commit(c), Status::StaleCandidate);
+}
+
+namespace
+{
+// Solve q*|q|=s by bisection, then use a+lambda1*q=nu_old and
+// (nu_next-nu_old)/h=-lambda2*sign(s). Independent double state below.
+DoubleStep residualReference(double v, double sp, double nu, double h)
+{
+	const double s = v - sp;
+	double lo = 0., hi = std::max(1., std::fabs(s));
+	for (int i = 0; i < 64; ++i) {
+		const double mid = .5 * (lo + hi);
+		if (mid * mid > std::fabs(s)) { hi = mid; } else { lo = mid; }
+	}
+	const double sigma = s > 0. ? 1. : (s < 0. ? -1. : 0.);
+	const double q = .5 * (lo + hi) * sigma;
+	return {s, nu - 4. * q, nu - 2. * h * sigma};
+}
+
+double zohStep(double command, double h, bool constrained, double &lag)
+{
+	if (!constrained) { return command * h; }
+	const double bounded = std::max(-.8, std::min(.8, command));
+	const double decay = std::exp(-h / .05);
+	const double impulse = bounded * h + (lag - bounded) * .05 * (1. - decay);
+	lag = bounded + (lag - bounded) * decay;
+	return impulse;
+}
+}
+
+TEST(StaVelocityControlTest, SeparateDoubleClosedLoopsWithExactZohAndRampIntegral)
+{
+	unsigned cases = 0;
+	for (int cadence = 0; cadence < 3; ++cadence) {
+		for (int disturbance = -1; disturbance <= 1; ++disturbance) {
+			for (int ff_case = 0; ff_case < 3; ++ff_case) {
+				for (int model = 0; model < 2; ++model) {
+					Controller core; ASSERT_TRUE(core.setParameters(0, {4.f, 2.f}));
+					ASSERT_TRUE(core.reset(0, .25f));
+					double vf = .4, vd = .4, nd = .25, lf = 0., ld = 0., t = 0.;
+					double ef = 0., ed = 0., weight = 0.;
+					unsigned k = 0;
+					while (t < 12.) {
+						const float hf = cadence == 0 ? .008f : cadence == 1 ? .012f : ((k & 1U) ? .012f : .008f);
+						const double h = hf;
+						const double sp = .15 * std::sin(.5 * t);
+						// Absent, derivative-matched, and deliberately mismatched FF.
+						const double ff = ff_case == 0 ? 0. : .075 * std::cos(.5 * t) + (ff_case == 2 ? .03 : 0.);
+						const auto cf = core.evaluate(0, static_cast<float>(vf), static_cast<float>(sp), hf);
+						ASSERT_TRUE(cf.valid());
+						const auto cd = residualReference(vd, sp, nd, h);
+						// Known exogenous disturbance: constant negative/zero or positive ramp.
+						const double impulse = disturbance < 0 ? -.18 * h : disturbance == 0 ? 0. :
+							.1 * h + .01 * (t * h + .5 * h * h);
+						vf += zohStep(static_cast<double>(cf.a_sta) + ff, h, model != 0, lf) + impulse;
+						vd += zohStep(cd.a + ff, h, model != 0, ld) + impulse;
+						ASSERT_EQ(core.commit(cf), Status::Ok); nd = cd.nu_next;
+						t += h; ++k;
+						ASSERT_TRUE(std::isfinite(vf)); ASSERT_TRUE(std::isfinite(vd));
+						if (t >= 10.) {
+							const double target = .15 * std::sin(.5 * t);
+							ef += h * (vf - target) * (vf - target);
+							ed += h * (vd - target) * (vd - target); weight += h;
+						}
+					}
+					ASSERT_GT(weight, 1.9);
+					const double rf = std::sqrt(ef / weight), rd = std::sqrt(ed / weight);
+					std::printf("V03 object cadence=%d disturbance=%d ff=%d model=%d steps=%u rmse_float=%.9g rmse_double=%.9g\n",
+						cadence, disturbance, ff_case, model, k, rf, rd);
+					if (model == 0) { EXPECT_LT(rf, .03); EXPECT_LT(rd, .03); EXPECT_NEAR(rf, rd, .01); }
+					else { EXPECT_LT(rf, .3); EXPECT_LT(rd, .3); EXPECT_NEAR(rf, rd, .1); }
+					++cases;
+				}
+			}
+		}
+	}
+	EXPECT_EQ(cases, 54U);
 }

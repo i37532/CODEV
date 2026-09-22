@@ -263,7 +263,14 @@ void MulticopterPositionControl::Run()
 	vehicle_local_position_s local_pos;
 
 	if (_local_pos_sub.update(&local_pos)) {
+		const hrt_abstime module_started = hrt_absolute_time();
 		const hrt_abstime time_stamp_now = local_pos.timestamp;
+		const float input_dt = _time_stamp_last_loop ? static_cast<float>((static_cast<int64_t>(time_stamp_now)
+				- static_cast<int64_t>(_time_stamp_last_loop)) * 1e-6) : NAN;
+		const float raw_dt = _velocity_sample_last ? static_cast<float>((static_cast<int64_t>(local_pos.timestamp_sample)
+				- static_cast<int64_t>(_velocity_sample_last)) * 1e-6) : NAN;
+		const uint8_t timing = !_velocity_sample_last ? 1 : (raw_dt <= 0.f ? 2 : (raw_dt < .002f || raw_dt > .04f ? 3 : 0));
+		_velocity_sample_last = local_pos.timestamp_sample;
 		const float dt = math::constrain(((time_stamp_now - _time_stamp_last_loop) * 1e-6f), 0.002f, 0.04f);
 		_time_stamp_last_loop = time_stamp_now;
 
@@ -277,6 +284,19 @@ void MulticopterPositionControl::Run()
 		_vehicle_land_detected_sub.update(&_vehicle_land_detected);
 		_control.configureVelocityControl(_param_mpc_vc_mode.get(), _param_mpc_vc_axes.get(), _control_mode.flag_armed);
 		uint8_t pid_calls = 0;
+		uint32_t controller_time_us = 0;
+		uint64_t output_timestamp = 0, attitude_timestamp = 0;
+		float q_sp[4] = {NAN, NAN, NAN, NAN};
+		float excitation = 0.f;
+		uint8_t reset_bits = (local_pos.vxy_reset_counter != _vxy_reset_counter ? 1 : 0)
+				     | (local_pos.vz_reset_counter != _vz_reset_counter ? 2 : 0)
+				     | (local_pos.xy_reset_counter != _xy_reset_counter ? 4 : 0)
+				     | (local_pos.z_reset_counter != _z_reset_counter ? 8 : 0)
+				     | (local_pos.heading_reset_counter != _heading_reset_counter ? 16 : 0);
+		_rate_diagnostic_sub.update(&_rate_diagnostic);
+		_velocity_vehicle_status_sub.update(&_velocity_vehicle_status);
+		const bool inner_valid = _rate_diagnostic.timestamp && module_started >= _rate_diagnostic.timestamp
+					 && module_started - _rate_diagnostic.timestamp < 100000;
 
 		if (_param_mpc_use_hte.get()) {
 			hover_thrust_estimate_s hte;
@@ -372,6 +392,7 @@ void MulticopterPositionControl::Run()
 			}
 
 			if (not_taken_off || flying_but_ground_contact) {
+				reset_bits |= 32;
 				// we are not flying yet and need to avoid any corrections
 				reset_setpoint_to_nan(_setpoint);
 				Vector3f(0.f, 0.f, 100.f).copyTo(_setpoint.acceleration); // High downwards acceleration to make sure there's no thrust
@@ -419,7 +440,19 @@ void MulticopterPositionControl::Run()
 
 			_control.setState(states);
 
+#if defined(CONFIG_ARCH_BOARD_PX4_SITL)
+			const bool excitation_gate = _param_mpc_vct_test.get() == 1 && flying
+				&& _velocity_vehicle_status.nav_state == vehicle_status_s::NAVIGATION_STATE_AUTO_LOITER
+				&& !_vehicle_land_detected.landed && !_vehicle_land_detected.ground_contact
+				&& _control_mode.flag_control_auto_enabled && _param_mpc_vc_mode.get() == 0 && _param_mpc_vc_axes.get() == 0
+				&& inner_valid && _rate_diagnostic.effective_mode == 0 && _rate_diagnostic.effective_axes == 0
+				&& _rate_diagnostic.div_eff == 1 && !_rate_diagnostic.fault;
+			excitation = _velocity_excitation.update(local_pos.timestamp_sample, _control_mode.flag_armed, excitation_gate);
+#endif
+			_control.setDiagnosticExcitation(excitation);
+
 			// Run position control
+			const hrt_abstime controller_started = hrt_absolute_time();
 			++pid_calls;
 			if (_control.update(dt)) {
 				_failsafe_land_hysteresis.set_state_and_update(false, time_stamp_now);
@@ -432,6 +465,9 @@ void MulticopterPositionControl::Run()
 				}
 
 				vehicle_local_position_setpoint_s failsafe_setpoint{};
+				_velocity_excitation.update(local_pos.timestamp_sample, _control_mode.flag_armed, false);
+				excitation = 0.f;
+				_control.setDiagnosticExcitation(0.f);
 
 				failsafe(time_stamp_now, failsafe_setpoint, states, !was_in_failsafe);
 
@@ -443,6 +479,8 @@ void MulticopterPositionControl::Run()
 				++pid_calls;
 				_control.update(dt);
 			}
+			controller_time_us = hrt_elapsed_time(&controller_started);
+			_velocity_update_seq += pid_calls;
 
 			// Publish internal position control setpoints
 			// on top of the input/feed-forward setpoints these containt the PID corrections
@@ -450,16 +488,20 @@ void MulticopterPositionControl::Run()
 			vehicle_local_position_setpoint_s local_pos_sp{};
 			_control.getLocalPositionSetpoint(local_pos_sp);
 			local_pos_sp.timestamp = hrt_absolute_time();
+			output_timestamp = local_pos_sp.timestamp;
 			_local_pos_sp_pub.publish(local_pos_sp);
 
 			// Publish attitude setpoint output
 			vehicle_attitude_setpoint_s attitude_setpoint{};
 			_control.getAttitudeSetpoint(attitude_setpoint);
 			attitude_setpoint.timestamp = hrt_absolute_time();
+			attitude_timestamp = attitude_setpoint.timestamp;
+			memcpy(q_sp, attitude_setpoint.q_d, sizeof(q_sp));
 			_vehicle_attitude_setpoint_pub.publish(attitude_setpoint);
 
 		} else {
 			// an update is necessary here because otherwise the takeoff state doesn't get skiped with non-altitude-controlled modes
+			_velocity_excitation.update(local_pos.timestamp_sample, _control_mode.flag_armed, false);
 			_takeoff.updateTakeoffState(_control_mode.flag_armed, _vehicle_land_detected.landed, false, 10.f, true, time_stamp_now);
 		}
 
@@ -480,6 +522,53 @@ void MulticopterPositionControl::Run()
 		selection_status.enabled = _control_mode.flag_multicopter_position_control_enabled;
 		selection_status.pid_calls = pid_calls;
 		_velocity_selection_pub.publish(selection_status);
+
+		// Final invocation only: failed-first-call output is never labelled as final.
+		sta_velocity_ctrl_status_s diagnostic = pid_calls ? _control.diagnostic() : sta_velocity_ctrl_status_s{};
+		if (!pid_calls) {
+			for (int i = 0; i < 3; ++i) {
+				diagnostic.p_sp[i] = diagnostic.v_ff[i] = diagnostic.v_sp[i] = diagnostic.v[i] = diagnostic.v_dot[i] = NAN;
+				diagnostic.a_ff[i] = diagnostic.s[i] = diagnostic.nu_before[i] = diagnostic.nu_ideal[i] = NAN;
+				diagnostic.nu_applied[i] = diagnostic.a_sta[i] = diagnostic.a_req[i] = diagnostic.a_proxy[i] = diagnostic.thrust[i] = NAN;
+			}
+		}
+		diagnostic.timestamp = hrt_absolute_time();
+		diagnostic.timestamp_sample = local_pos.timestamp_sample;
+		diagnostic.input_timestamp = local_pos.timestamp;
+		diagnostic.setpoint_timestamp = _setpoint.timestamp;
+		diagnostic.output_timestamp = output_timestamp;
+		diagnostic.attitude_timestamp = attitude_timestamp;
+		diagnostic.publish_seq = _velocity_selection_seq;
+		diagnostic.update_seq = _velocity_update_seq;
+		diagnostic.requested_mode = selection.requestedMode();
+		diagnostic.requested_axes = selection.requestedAxes();
+		diagnostic.effective_mode = selection.effectiveMode();
+		diagnostic.effective_axes = selection.effectiveAxes();
+		diagnostic.raw_dt = raw_dt;
+		diagnostic.input_dt = input_dt;
+		diagnostic.used_dt = dt;
+		diagnostic.excitation = excitation;
+		diagnostic.excitation_time = _velocity_excitation.time();
+		diagnostic.controller_time_us = controller_time_us;
+		diagnostic.module_time_us = hrt_elapsed_time(&module_started);
+		diagnostic.pid_calls = pid_calls;
+		diagnostic.reset_bits = reset_bits;
+		diagnostic.timing = timing;
+		diagnostic.takeoff_state = static_cast<uint8_t>(_takeoff.getTakeoffState());
+		diagnostic.reject = selection.reject();
+		diagnostic.inner_mode = inner_valid ? _rate_diagnostic.effective_mode : -1;
+		diagnostic.inner_axes = _rate_diagnostic.effective_axes;
+		diagnostic.inner_divisor = _rate_diagnostic.div_eff;
+		diagnostic.inner_valid = inner_valid;
+		diagnostic.updated = pid_calls > 0;
+		diagnostic.pending = selection.pending();
+		diagnostic.armed = _control_mode.flag_armed;
+		diagnostic.enabled = _control_mode.flag_multicopter_position_control_enabled;
+		diagnostic.landed = _vehicle_land_detected.landed;
+		diagnostic.contact = _vehicle_land_detected.ground_contact;
+		diagnostic.failsafe = _in_failsafe;
+		memcpy(diagnostic.q_sp, q_sp, sizeof(q_sp));
+		_velocity_diagnostic_pub.publish(diagnostic);
 
 		// Publish takeoff status
 		const uint8_t takeoff_state = static_cast<uint8_t>(_takeoff.getTakeoffState());

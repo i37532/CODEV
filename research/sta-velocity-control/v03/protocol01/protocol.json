@@ -1,0 +1,154 @@
+{
+  "stage": "V03-protocol01",
+  "scope": "Iris Gazebo SITL; original position P, XYZ velocity PID, attitude and rate PID",
+  "attempt_order": [
+    "run01"
+  ],
+  "maximum_attempts": 1,
+  "stop_on_any_required_failure": true,
+  "automatic_retry": false,
+  "seeds": [
+    null
+  ],
+  "randomness": "Unmodified default-constructed sensor engines, not independent random seeds",
+  "simulation_speed": 1,
+  "startup_overrides": {
+    "MC_RTC_MODE": 0,
+    "MC_STA_AXES": 0,
+    "MC_RTC_DIV": 1,
+    "MC_RATT_TEST": 0,
+    "MC_STA_TKO_MGT": 0,
+    "MIS_TAKEOFF_ALT": 2.5,
+    "SDLOG_DIRS_MAX": 1000,
+    "SDLOG_MODE": 1,
+    "MPC_VC_MODE": 0,
+    "MPC_VC_AXES": 0,
+    "MPC_VCT_TEST": 1
+  },
+  "logging": "Preserve startup SDLOG_PROFILE bits, OR 16; restart logger -b 256 -r 1000 -t -f before warmup",
+  "target_source": "Original flight_mode_manager is sole trajectory publisher. Default-off SITL module test adds X/NED velocity after original position P using ControlMath constrainXY; no MAVLink/offboard/attitude/rate setpoint publisher. Z/yaw untouched.",
+  "sequence": "Fresh start; warmup>=30s; original takeoff and Hold; 60s observation. First airborne AUTO_LOITER opens single-shot timer: 12s settle, 32s smooth zero-integral X velocity waveform, rest; land/disarm. Gate break inhibits until disarm, not restart.",
+  "wall_timeouts_s": {
+    "startup": 180,
+    "warmup": 180,
+    "takeoff": 150,
+    "hover": 240,
+    "landing": 150
+  },
+  "bounds": {
+    "tilt_deg": 15,
+    "height_flight_m": [
+      -0.5,
+      4
+    ],
+    "height_hover_error_m": 1,
+    "height_at_hover_entry_error_m": 0.5,
+    "xy_speed_m_s": 1,
+    "xy_from_start_m": 2,
+    "vz_hover_m_s": 0.6,
+    "vz_takeoff_landing_m_s": 3.5,
+    "hover_yaw_error_deg": 20,
+    "normalized_command_abs": 1.001
+  },
+  "data_gate": {
+    "hover_duration_s": [
+      60,
+      62
+    ],
+    "maximum_topic_gap_s": 0.25,
+    "minimum_hover_samples": 600,
+    "maximum_pairing_age_us": 20000,
+    "minimum_metric_window_s": 59.75,
+    "required_rate_sequence_missing": 0,
+    "maximum_ulog_dropouts": 0,
+    "minimum_actuator_match_fraction": 0.8,
+    "maximum_actuator_match_gap_s": 0.25
+  },
+  "metric": "Primary: actual consumed v-v_sp time-weighted per-axis RMSE/IAE within complete excitation_time in [0,32). Separate 60s hover diagnostics and historical V00 async baseline metrics. No fabricated interpolation. TV on consecutive actual updates.",
+  "failure_action": "Stop owned SITL via original runner; preserve all logs and failure; no fallback controller, zero-thrust safety claim, retry or remaining attempt",
+  "parameter_restore": "Archive original complete EEPROM bytes before experiment, restore exact bytes after each stopped run; save runtime full parameters before/after",
+  "not_authorized": [
+    "V04",
+    "hardware",
+    "ESTA flight",
+    "ISTA",
+    "Proper-ISTA",
+    "old I05 continuation",
+    "push"
+  ],
+  "authorization": "V03 user request + continue authorized prerequisite repair, offline protection/logging, exactly one PID small velocity flight. No retries.",
+  "world_verification": "Exactly one live gzserver, same session as launch session leader; exact absolute .world argv, PX4_SITL_WORLD and master URI; frozen file SHA-256. Model path checked separately from launcher console.",
+  "selection_gate": {
+    "requested_mode": 0,
+    "requested_axes": 0,
+    "effective_mode": 0,
+    "effective_axes": 0,
+    "pending": 0,
+    "reject": 0,
+    "maximum_gap_us": 250000,
+    "minimum_flight_samples": 600,
+    "publish_sequence_missing": 0,
+    "pid_calls_when_enabled": 1,
+    "pid_calls_when_disabled": 0,
+    "positive_input_timestamp_deltas": true,
+    "armed_active_samples_required": true
+  },
+  "excitation": {
+    "parameter": "MPC_VCT_TEST=1 (default0, SITLonly)",
+    "direction": "local NED X/North",
+    "amplitude_m_s": 0.2,
+    "period_s": 8,
+    "duration_s": 32,
+    "envelope": "sin(pi*t/32)^2",
+    "formula": "0.2*sin(2*pi*t/8)*sin(pi*t/32)^2",
+    "settle_after_auto_loiter_s": 12,
+    "axes_unmodified": "Y/Z; original position P remains active",
+    "instant_integral_bound_m": 0.55
+  },
+  "diagnostic_gate": {
+    "minimum_samples": 600,
+    "sequence_missing": 0,
+    "maximum_gap_s": 0.04,
+    "raw_dt_domain_s": [
+      0.002,
+      0.04
+    ],
+    "mode": 0,
+    "axes": 0,
+    "minimum_excitation_samples": 2500,
+    "minimum_excitation_span_s": 31.96,
+    "full_window_inside_hover": true,
+    "output_exact_minimum_coverage": 0.8,
+    "output_exact_maximum_gap_s": 0.25,
+    "accepted_output_difference": 0,
+    "nu_in_pid": "NaN",
+    "pid_calls": 1,
+    "strict_failures": "Any required check fails: stop and preserve, no additional flight."
+  },
+  "v04_prefreeze": {
+    "relative_rmse_limit": 1.25,
+    "absolute_velocity_rmse_allowance_m_s": [
+      0.02,
+      0.02,
+      0.01
+    ],
+    "absolute_yaw_rmse_allowance_rad": 0.02,
+    "absolute_position_rmse_allowance_m": 0.05,
+    "source": "V00/V01 PID noise scale (X .010751,Y .008080,Z .005138m/s); V03 provides consumed-state baseline. Fixed before any ESTA data.",
+    "per_pair_rule": "candidate_rmse <= 1.25*paired_PID_rmse + frozen absolute allowance; each commanded/noncommanded axis separately",
+    "maximum_constraint_fraction": 0.05,
+    "maximum_continuous_constraint_s": 0.5,
+    "maximum_faults": 0,
+    "maximum_failsafe": 0,
+    "maximum_hover_yaw_error_deg": 20,
+    "maximum_hover_height_error_m": 1,
+    "maximum_position_deviation_m": 2,
+    "maximum_tilt_deg": 15,
+    "maximum_xy_speed_m_s": 1,
+    "maximum_hover_vz_m_s": 0.6,
+    "maximum_candidate_flights_before_reauthorization": 6,
+    "candidates": 1,
+    "order": "future V04: PID/ESTA paired x3; needs user authorization and gains/seed freeze",
+    "parameter_search_flights": 0
+  }
+}

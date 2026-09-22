@@ -2,6 +2,7 @@
 #include "StaVelocityControl.hpp"
 
 #include <cmath>
+#include <cstring>
 
 namespace
 {
@@ -84,21 +85,38 @@ StaVelocityControl::Candidate StaVelocityControl::evaluate(size_t axis, float ve
 	candidate.nu_before = nu_before;
 	candidate.nu_next = nu_next;
 	candidate.revision = _revision[axis];
+	candidate.owner = this;
+	candidate.sealed_axis = axis;
+	candidate.sealed_revision = candidate.revision;
+	candidate.sealed = {{s, a_sta, nu_before, nu_next}};
 	return candidate;
 }
 
+bool StaVelocityControl::current(const Candidate &candidate) const
+{
+	const std::array<float, 4> payload{{candidate.s, candidate.a_sta, candidate.nu_before, candidate.nu_next}};
+	return candidate.valid() && candidate.owner == this && candidate.axis < _nu.size()
+	       && candidate.axis == candidate.sealed_axis && candidate.revision == candidate.sealed_revision
+	       && _configured[candidate.axis] && candidate.revision == _revision[candidate.axis]
+	       && std::memcmp(payload.data(), candidate.sealed.data(), sizeof(float) * payload.size()) == 0;
+}
+
 StaVelocityControl::Status StaVelocityControl::commit(const Candidate &candidate)
+{
+	return commitProtected(candidate, candidate.nu_next);
+}
+
+StaVelocityControl::Status StaVelocityControl::commitProtected(const Candidate &candidate, float applied_nu)
 {
 	if (!candidate.valid() || candidate.axis >= _nu.size()) {
 		return candidate.status == Status::Ok ? Status::InvalidAxis : candidate.status;
 	}
 
-	if (!_configured[candidate.axis] || candidate.revision != _revision[candidate.axis]
-	    || !std::isfinite(candidate.nu_next)) {
+	if (!current(candidate) || !std::isfinite(applied_nu)) {
 		return Status::StaleCandidate;
 	}
 
-	_nu[candidate.axis] = candidate.nu_next;
+	_nu[candidate.axis] = applied_nu;
 	++_revision[candidate.axis];
 	return Status::Ok;
 }

@@ -144,6 +144,16 @@ static void sequence(int variant)
 		a.setInputSetpoint(sp); b.setInputSetpoint(sp);
 		const bool ok=a.update(dt);
 		ASSERT_EQ(ok,b.update(dt));
+		const auto &diagnostic = a.diagnostic();
+		EXPECT_EQ(diagnostic.valid, ok);
+		const float raw_v[3] = {sp.vx, sp.vy, sp.vz};
+		for (int i = 0; i < 3; ++i) {
+			sameFloat(diagnostic.v[i], state.velocity(i));
+			sameFloat(diagnostic.v_dot[i], state.acceleration(i));
+			sameFloat(diagnostic.v_ff[i], raw_v[i]);
+			sameFloat(diagnostic.a_ff[i], sp.acceleration[i]);
+			EXPECT_TRUE(std::isnan(diagnostic.nu_applied[i]));
+		}
 		compareOutputs(a,b);
 		if (!ok) {
 			++retries;
@@ -151,6 +161,9 @@ static void sequence(int variant)
 			a.setInputSetpoint(fallback); b.setInputSetpoint(fallback);
 			a.setVelocityLimits(2.f,1.5f,1.f); b.setVelocityLimits(2.f,1.5f,1.f);
 			const bool retry_ok=a.update(dt); ASSERT_EQ(retry_ok,b.update(dt));
+			EXPECT_EQ(a.diagnostic().valid, retry_ok);
+			EXPECT_TRUE(std::isnan(a.diagnostic().v_ff[0]));
+			sameFloat(a.diagnostic().a_ff[2], .2f);
 			EXPECT_TRUE(retry_ok);
 			compareOutputs(a,b);
 		} else { ++accepted; }

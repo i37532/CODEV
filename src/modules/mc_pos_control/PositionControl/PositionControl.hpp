@@ -44,6 +44,7 @@
 #include <uORB/topics/vehicle_attitude_setpoint.h>
 #include <uORB/topics/vehicle_local_position_setpoint.h>
 #include "VelocityControlSelector.hpp"
+#include <uORB/topics/sta_velocity_ctrl_status.h>
 
 struct PositionControlStates {
 	matrix::Vector3f position;
@@ -153,6 +154,8 @@ public:
 
 	void configureVelocityControl(int32_t mode, int32_t axes, bool armed) { _velocity_selector.configure(mode, axes, armed); }
 	const VelocityControlSelector &velocitySelection() const { return _velocity_selector; }
+	const sta_velocity_ctrl_status_s &diagnostic() const { return _diagnostic; }
+	void setDiagnosticExcitation(float velocity) { _diagnostic_excitation = velocity; }
 
 	/**
 	 * Set the integral term in xy to 0.
@@ -179,6 +182,9 @@ public:
 private:
 	friend class VelocityControlTestAccess;
 	VelocityControlSelector _velocity_selector;
+	sta_velocity_ctrl_status_s _diagnostic{};
+	float _diagnostic_excitation{0.f};
+	void _recordDiagnostic(bool success);
 	bool _updateSuccessful();
 
 	void _positionControl(); ///< Position proportional control

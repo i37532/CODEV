@@ -65,6 +65,10 @@
 #include <uORB/topics/vehicle_local_position.h>
 #include <uORB/topics/vehicle_local_position_setpoint.h>
 #include <uORB/topics/velocity_ctrl_selection.h>
+#include <uORB/topics/sta_velocity_ctrl_status.h>
+#include <uORB/topics/sta_rate_ctrl_status.h>
+#include <uORB/topics/vehicle_status.h>
+#include "PositionControl/VelocityDiagnosticExcitation.hpp"
 
 using namespace time_literals;
 
@@ -96,6 +100,14 @@ private:
 	uORB::PublicationData<takeoff_status_s> _takeoff_status_pub{ORB_ID(takeoff_status)};
 	uORB::Publication<velocity_ctrl_selection_s> _velocity_selection_pub{ORB_ID(velocity_ctrl_selection)};
 	uint32_t _velocity_selection_seq{0};
+	uORB::Publication<sta_velocity_ctrl_status_s> _velocity_diagnostic_pub{ORB_ID(sta_velocity_ctrl_status)};
+	uORB::Subscription _rate_diagnostic_sub{ORB_ID(sta_rate_ctrl_status)};
+	sta_rate_ctrl_status_s _rate_diagnostic{};
+	uORB::Subscription _velocity_vehicle_status_sub{ORB_ID(vehicle_status)};
+	vehicle_status_s _velocity_vehicle_status{};
+	uint32_t _velocity_update_seq{0};
+	uint64_t _velocity_sample_last{0};
+	VelocityDiagnosticExcitation _velocity_excitation;
 	uORB::Publication<vehicle_attitude_setpoint_s>	_vehicle_attitude_setpoint_pub;
 	uORB::Publication<vehicle_local_position_setpoint_s> _local_pos_sp_pub{ORB_ID(vehicle_local_position_setpoint)};	/**< vehicle local position setpoint publication */
 
@@ -136,6 +148,7 @@ private:
 		// Position Control
 		(ParamInt<px4::params::MPC_VC_MODE>) _param_mpc_vc_mode,
 		(ParamInt<px4::params::MPC_VC_AXES>) _param_mpc_vc_axes,
+		(ParamInt<px4::params::MPC_VCT_TEST>) _param_mpc_vct_test,
 		(ParamFloat<px4::params::MPC_XY_P>) _param_mpc_xy_p,
 		(ParamFloat<px4::params::MPC_Z_P>) _param_mpc_z_p,
 		(ParamFloat<px4::params::MPC_XY_VEL_P_ACC>) _param_mpc_xy_vel_p_acc,
