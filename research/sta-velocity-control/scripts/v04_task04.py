@@ -39,8 +39,27 @@ def freeze_reference(p):
 
 
 def check_reference(p, ref):
+    # Historical protocol04 comparison retained for reproducible failure audits.
     for k in REFERENCE:
         if not math.isfinite(p.get(k, math.nan)) or abs(p[k]-ref['position'][k]) > (1e-3 if k=='ref_alt' else 1e-7 if k in ('ref_lat','ref_lon') else 0): raise ValueError('Coordinate/reset changed: '+k)
+
+
+def check_cli_reference(p, ref):
+    """Compare listener representations, NOT raw coordinate invariance.
+
+    The pinned uORB printer uses %.6f for doubles and %.4f for floats.
+    Exact raw invariance (including changes hidden by that printing) remains
+    mandatory in v04_heading_stream.replay, online and in final ULog analysis.
+    Never round/rebase ref itself, nor use a tolerance to accept raw changes.
+    """
+    decimals = {'ref_lat': 6, 'ref_lon': 6, 'ref_alt': 4}
+    for key in REFERENCE:
+        actual, raw = p.get(key, math.nan), ref['position'].get(key, math.nan)
+        if not math.isfinite(actual) or not math.isfinite(raw):
+            raise ValueError('Missing/nonfinite CLI reference: '+key)
+        expected = float(format(raw, '.'+str(decimals[key])+'f')) if key in decimals else raw
+        if actual != expected:
+            raise ValueError('CLI reference representation changed: '+key)
 
 
 def command_params(ref):
@@ -65,7 +84,7 @@ def accepted_ack(record, sent):
 
 
 def entry_ok(p, status, land, target, ref):
-    check_reference(p, ref)
+    check_cli_reference(p, ref)
     h = ref['position']['z'] - p['z']
     return (status.get('arming_state') == 2 and status.get('nav_state') == 4
             and not status.get('failsafe') and not land.get('landed', True)

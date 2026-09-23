@@ -15,7 +15,7 @@ from run_v00 import REPO, ROOTFS, git, save, digest, active_simulators, persiste
 from world_v00 import snapshot, validate_world
 from analyze_v04_protocol04 import analyze, compare, CONFIG
 from run_v04_flight04 import main as flight
-from v04_task04 import check_reference, excitation_class
+from v04_task04 import check_cli_reference, excitation_class
 from capture_v04_protocol04 import fresh_seeds
 from v04_protocol04 import load_protocol, require_authorization
 from v04_heading_stream import LiveLog, data, row, replay
@@ -78,7 +78,7 @@ class Checks(base.Checks):
         d=topic('sta_velocity_ctrl_status'); self.selection(d)
         self.latest_diagnostic=d
         if self.reference and state['status'].get('arming_state')==2:
-            check_reference(state['position'],self.reference)
+            check_cli_reference(state['position'],self.reference)
         for key in ('first_fail','retry_result','first_input','excitation_fault'):
             if key not in d: raise RuntimeError('Missing diagnostic '+key)
         if d.get('armed') and d.get('enabled'):
