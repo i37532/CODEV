@@ -1,0 +1,134 @@
+{
+  "accepted": false,
+  "job": {
+    "id": "run01",
+    "seed": 9501,
+    "mode": 0,
+    "axes": 0,
+    "parameters": {
+      "MPC_VC_L1_X": 1,
+      "MPC_VC_L2_X": 0.2,
+      "MPC_VC_NU_X": 0.4,
+      "MPC_VC_A_X": 0.8,
+      "MPC_VC_MODE": 0,
+      "MPC_VC_AXES": 0
+    }
+  },
+  "baseline_accepted": true,
+  "flight": {
+    "n": 8524,
+    "inner": {
+      "max_age_us": 4000,
+      "median_age_us": 0.0,
+      "maximum_reads": 4
+    },
+    "maximum_gap_s": 0.012,
+    "hz": 99.99765346348786
+  },
+  "diagnostic": {
+    "n": 6016,
+    "inner": {
+      "max_age_us": 4000,
+      "median_age_us": 0.0,
+      "maximum_reads": 4
+    },
+    "maximum_gap_s": 0.012,
+    "hz": 100.00332513134269,
+    "error": {
+      "rmse": [
+        0.04606695686770029,
+        0.008180909247889931,
+        0.0021717685372561395
+      ],
+      "mean": [
+        0.008119064909114971,
+        0.0015756660769220537,
+        6.713193087944108e-05
+      ],
+      "std": [
+        0.04534584104471034,
+        0.0080277364515938,
+        0.002170730725647949
+      ],
+      "max_abs": [
+        0.09956454485654831,
+        0.02077488601207733,
+        0.008310945704579353
+      ]
+    },
+    "iae_m": [
+      1.1885576902981843,
+      0.21555864840291894,
+      0.05260318283442764
+    ],
+    "acceleration_tv": [
+      3.294008731842041,
+      2.98368501663208,
+      2.228543519973755
+    ],
+    "samples": 3200,
+    "seconds": 32.0,
+    "constraint_fraction": 0.0,
+    "maximum_continuous_constraint_s": 0.0,
+    "nu_peak": null
+  },
+  "local_output": {
+    "matched": 6016,
+    "denominator": 6016,
+    "coverage": 1.0,
+    "max_gap_s": 0.012,
+    "max_abs_error": 0.0
+  },
+  "attitude_output": {
+    "matched": 6016,
+    "denominator": 6016,
+    "coverage": 1.0,
+    "max_gap_s": 0.012,
+    "max_abs_error": 0.0
+  },
+  "mixer": {
+    "count": 15040,
+    "bit_histogram": {
+      "1": 15040
+    },
+    "feedback_valid_fraction": 1.0,
+    "raw_nonzero_fraction": 1.0,
+    "saturation_fraction_among_valid": 0.0,
+    "rate_direction_saturation_fraction_among_valid": 0.0
+  },
+  "position_rmse": [
+    0.07832438579508821,
+    0.02357217223098584,
+    0.029731767524512148
+  ],
+  "yaw_rmse": 0.00016031334224825053,
+  "height": {
+    "rmse": 0.02920545503391358,
+    "mean": 0.003538609026594365,
+    "std": 0.028990288889468706,
+    "max_abs": 0.06674027442932129
+  },
+  "first_invocation": {
+    "samples": 8524,
+    "first_failures": 0,
+    "retries": 0,
+    "first_input_masks": [
+      32511,
+      32704,
+      32763,
+      32767
+    ]
+  },
+  "exit": {
+    "raw_fault_counts": {
+      "0": 7821,
+      "2": 704
+    },
+    "classification": {
+      "clear": 7821,
+      "expected_planned_landing_gate": 704
+    },
+    "raw_values_preserved": true
+  },
+  "error": "Empty/nonmonotonic vehicle_command"
+}

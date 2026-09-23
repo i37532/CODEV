@@ -1,0 +1,619 @@
+{
+  "accepted": false,
+  "original_acceptance": false,
+  "acceptance_changed": false,
+  "original_error": "Empty/nonmonotonic vehicle_command",
+  "source_head": "c9030688efffce4984f39f3aa08fe270eda7206c",
+  "events": [
+    {
+      "name": "ready",
+      "timestamp_us": 30064000.0
+    },
+    {
+      "name": "takeoff_command",
+      "timestamp_us": 30084000
+    },
+    {
+      "name": "reposition_command",
+      "timestamp_us": 38744000.0
+    },
+    {
+      "name": "handoff_ready",
+      "timestamp_us": 39064000.0
+    },
+    {
+      "name": "hover_start",
+      "timestamp_us": 47576000.0
+    },
+    {
+      "name": "hover_end",
+      "timestamp_us": 107736000.0
+    },
+    {
+      "name": "land_command",
+      "timestamp_us": 107736000.0
+    },
+    {
+      "name": "landed_disarmed",
+      "timestamp_us": 115324000.0
+    }
+  ],
+  "logs": [
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/09_49_32.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series05/run01/09_49_32.ulg",
+      "sha256": "b1c0bcb78b6b9180c1047db4a6bc402d6325e771c68347efd452d86b123ce340",
+      "bytes": 205136,
+      "dropouts": 0,
+      "corruption": false
+    },
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/09_49_33.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series05/run01/09_49_33.ulg",
+      "sha256": "d8d97dfd7b54fb512c42669e1b874ea49911abe332495b893a269f0ce5e82f16",
+      "bytes": 36005502,
+      "dropouts": 0,
+      "corruption": false
+    }
+  ],
+  "checks": [
+    {
+      "name": "completed_task_not_accepted",
+      "passed": true
+    },
+    {
+      "name": "reported_error_matches",
+      "passed": true
+    },
+    {
+      "name": "vehicle_command_distinct_takeoff_arm_share_timestamp",
+      "passed": true
+    },
+    {
+      "name": "vehicle_command_never_goes_backwards",
+      "passed": true
+    },
+    {
+      "name": "vehicle_command_ack_distinct_takeoff_arm_share_timestamp",
+      "passed": true
+    },
+    {
+      "name": "vehicle_command_ack_never_goes_backwards",
+      "passed": true
+    },
+    {
+      "name": "source_provenance_exact",
+      "passed": true
+    },
+    {
+      "name": "exactly_one_reposition",
+      "passed": true
+    },
+    {
+      "name": "unique_accepted_reposition_ack",
+      "passed": true
+    },
+    {
+      "name": "reposition_and_ack_before_handoff",
+      "passed": true
+    },
+    {
+      "name": "actual_receiver_flags_reproduce_raw_coordinates",
+      "passed": true
+    },
+    {
+      "name": "additional_exact_comparison_mismatch_observed",
+      "passed": true
+    },
+    {
+      "name": "ulog_no_reported_dropout_or_corruption",
+      "passed": true
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "g++",
+        "-std=c++14",
+        "-O2",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/results06/ReceiverScaleProbe.cpp",
+        "-o",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/protocol06_audit01/strict"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/protocol06_audit01/strict",
+        "473977504"
+      ],
+      "exit_code": 0,
+      "stdout": "47.3977504 0x1.7b2e97c2ffc47p+5\n"
+    },
+    {
+      "argv": [
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/protocol06_audit01/strict",
+        "85456078"
+      ],
+      "exit_code": 0,
+      "stdout": "8.5456078000000009 0x1.11759e7d2e291p+3\n"
+    },
+    {
+      "argv": [
+        "g++",
+        "-std=c++14",
+        "-O2",
+        "-fno-signed-zeros",
+        "-fno-trapping-math",
+        "-freciprocal-math",
+        "-fno-math-errno",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/results06/ReceiverScaleProbe.cpp",
+        "-o",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/protocol06_audit01/receiver_flags"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/protocol06_audit01/receiver_flags",
+        "473977504"
+      ],
+      "exit_code": 0,
+      "stdout": "47.3977504 0x1.7b2e97c2ffc47p+5\n"
+    },
+    {
+      "argv": [
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/protocol06_audit01/receiver_flags",
+        "85456078"
+      ],
+      "exit_code": 0,
+      "stdout": "8.5456077999999991 0x1.11759e7d2e29p+3\n"
+    }
+  ],
+  "event_topics": {
+    "vehicle_command": {
+      "rows": [
+        {
+          "timestamp": 30200000,
+          "param5": NaN,
+          "param6": NaN,
+          "param1": NaN,
+          "param2": NaN,
+          "param3": NaN,
+          "param4": NaN,
+          "param7": NaN,
+          "command": 22,
+          "target_system": 1,
+          "target_component": 1,
+          "source_system": 1,
+          "source_component": 1,
+          "confirmation": 0,
+          "from_external": 0
+        },
+        {
+          "timestamp": 30200000,
+          "param5": NaN,
+          "param6": NaN,
+          "param1": 1.0,
+          "param2": 0.0,
+          "param3": NaN,
+          "param4": NaN,
+          "param7": NaN,
+          "command": 400,
+          "target_system": 1,
+          "target_component": 1,
+          "source_system": 1,
+          "source_component": 1,
+          "confirmation": 0,
+          "from_external": 0
+        },
+        {
+          "timestamp": 38756000,
+          "param5": 47.3977504,
+          "param6": 8.545607799999999,
+          "param1": -1.0,
+          "param2": 1.0,
+          "param3": 0.0,
+          "param4": 1.5672825574874878,
+          "param7": 490.49090576171875,
+          "command": 192,
+          "target_system": 1,
+          "target_component": 1,
+          "source_system": 255,
+          "source_component": 190,
+          "confirmation": 0,
+          "from_external": 1
+        },
+        {
+          "timestamp": 107864000,
+          "param5": NaN,
+          "param6": NaN,
+          "param1": 1.0,
+          "param2": 4.0,
+          "param3": 6.0,
+          "param4": NaN,
+          "param7": NaN,
+          "command": 176,
+          "target_system": 1,
+          "target_component": 1,
+          "source_system": 1,
+          "source_component": 1,
+          "confirmation": 0,
+          "from_external": 0
+        }
+      ],
+      "equal_indices": [
+        0
+      ],
+      "backwards_indices": [],
+      "strict_accessor_error": "Empty/nonmonotonic vehicle_command"
+    },
+    "vehicle_command_ack": {
+      "rows": [
+        {
+          "timestamp": 30208000,
+          "command": 22,
+          "result_param2": 0,
+          "result": 0,
+          "from_external": 0,
+          "result_param1": 0,
+          "target_system": 1,
+          "target_component": 1
+        },
+        {
+          "timestamp": 30208000,
+          "command": 400,
+          "result_param2": 0,
+          "result": 0,
+          "from_external": 0,
+          "result_param1": 0,
+          "target_system": 1,
+          "target_component": 1
+        },
+        {
+          "timestamp": 38764000,
+          "command": 192,
+          "result_param2": 0,
+          "result": 0,
+          "from_external": 0,
+          "result_param1": 0,
+          "target_system": 255,
+          "target_component": 190
+        },
+        {
+          "timestamp": 107872000,
+          "command": 176,
+          "result_param2": 0,
+          "result": 0,
+          "from_external": 0,
+          "result_param1": 0,
+          "target_system": 1,
+          "target_component": 1
+        }
+      ],
+      "equal_indices": [
+        0
+      ],
+      "backwards_indices": [],
+      "strict_accessor_error": "Empty/nonmonotonic vehicle_command_ack"
+    }
+  },
+  "heading": {
+    "primary": 0,
+    "through_us": 115324000,
+    "position_samples": 8525,
+    "confirmed": true,
+    "pending": false,
+    "quiet_s": 1.248,
+    "ready": true,
+    "latest_position": {
+      "timestamp": 115324000,
+      "timestamp_sample": 115324000,
+      "ref_timestamp": 1196000,
+      "ref_lat": 47.3977508,
+      "ref_lon": 8.5456073,
+      "x": 0.0002376495103817433,
+      "y": -0.04071453586220741,
+      "z": 0.3186298906803131,
+      "delta_xy[0]": -2.280339685967192e-07,
+      "delta_xy[1]": 0.009871243499219418,
+      "delta_z": 0.0,
+      "vx": 0.00947023369371891,
+      "vy": -0.05970394238829613,
+      "vz": -0.07301657646894455,
+      "z_deriv": -0.041336800903081894,
+      "delta_vxy[0]": -0.002034640870988369,
+      "delta_vxy[1]": 0.020978964865207672,
+      "delta_vz": -0.026013623923063278,
+      "ax": -0.012230250984430313,
+      "ay": -0.011026029475033283,
+      "az": -0.02219807170331478,
+      "heading": 1.5656812191009521,
+      "delta_heading": 0.004951005335897207,
+      "ref_alt": 488.45709228515625,
+      "dist_bottom": 0.10935455560684204,
+      "eph": 0.4752545952796936,
+      "epv": 0.46735677123069763,
+      "evh": 0.18920943140983582,
+      "evv": 0.10803387314081192,
+      "vxy_max": Infinity,
+      "vz_max": Infinity,
+      "hagl_min": Infinity,
+      "hagl_max": Infinity,
+      "xy_valid": 1,
+      "z_valid": 1,
+      "v_xy_valid": 1,
+      "v_z_valid": 1,
+      "xy_reset_counter": 2,
+      "z_reset_counter": 0,
+      "vxy_reset_counter": 2,
+      "vz_reset_counter": 1,
+      "heading_reset_counter": 3,
+      "xy_global": 1,
+      "z_global": 1,
+      "dist_bottom_valid": 1,
+      "dist_bottom_sensor_bitfield": 0
+    },
+    "confirmation_us": 37128000,
+    "event_us": 37124000,
+    "packet": {
+      "phase": "TAKEOFF_PREPARATION",
+      "armed": true,
+      "airborne": true,
+      "contact": false,
+      "command_sent": false,
+      "excitation_started": false,
+      "primary_constant": true,
+      "primary_healthy": true,
+      "reference_unchanged": true,
+      "pv_counters_unchanged": true,
+      "controller_ok": true,
+      "aligned_before": false,
+      "aligned_after": true,
+      "yaw_aligned": true,
+      "mag_fault": false,
+      "mag_disturbed": false,
+      "emergency_reset": false,
+      "other_yaw_source": false,
+      "filter_fault": false,
+      "nav_state": 17,
+      "previous_events": 0,
+      "heading_before": 2,
+      "heading_after": 3,
+      "quat_before": 2,
+      "quat_after": 3,
+      "delta_rad": 0.004951005335897207,
+      "quat_delta_rad": 0.004951005390244546,
+      "quat_pair_offset_s": 0.004,
+      "sample_gap_s": 0.008,
+      "metadata_age_s": 0.06799999999999999,
+      "selector_age_s": 1.0,
+      "status_flags_age_s": 0.6799999999999999,
+      "event_stream_observable": true,
+      "event_counter_gaps": 0,
+      "alignment_lag_s": 0.0,
+      "height_m": 1.5777330100536346,
+      "missing_samples": 0
+    },
+    "freeze_candidate": {
+      "timestamp": 38624000,
+      "timestamp_sample": 38624000,
+      "yaw": 1.5672825574874878,
+      "existing_target_yaw": 1.567745327949524,
+      "primary": 0,
+      "heading_counter": 3,
+      "prearm_heading": 1.5722945928573608
+    }
+  },
+  "receiver_build_command": "/usr/bin/c++ -DCONFIG_ARCH_BOARD_PX4_SITL -DENABLE_LOCKSTEP_SCHEDULER -DMODULE_NAME=\\\"mavlink\\\" -DPX4_BOARD_NAME=\\\"PX4_SITL\\\" -DPX4_MAIN=mavlink_app_main -D__CUSTOM_FILE_IO__ -D__PX4_LINUX -D__PX4_POSIX -D__STDC_FORMAT_MACROS -Dnoreturn_function=\"__attribute__((noreturn))\" -I/home/yr/Desktop/Codev-autopilot/boards/px4/sitl/src -I/home/yr/Desktop/Codev-autopilot/platforms/posix/src/px4/common/include -I/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default -I/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/src/lib -I/home/yr/Desktop/Codev-autopilot/platforms/posix/src/px4/generic/generic/include -I/home/yr/Desktop/Codev-autopilot/platforms/common -I/home/yr/Desktop/Codev-autopilot/platforms/common/include -I/home/yr/Desktop/Codev-autopilot/src -I/home/yr/Desktop/Codev-autopilot/src/include -I/home/yr/Desktop/Codev-autopilot/src/lib -I/home/yr/Desktop/Codev-autopilot/src/lib/matrix -I/home/yr/Desktop/Codev-autopilot/src/modules -I/home/yr/Desktop/Codev-autopilot/platforms/posix/include -I/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/external/Install/include -I/home/yr/Desktop/Codev-autopilot/mavlink/include/mavlink -I/home/yr/Desktop/Codev-autopilot/src/lib/ecl -O2 -g -DNDEBUG -fPIC -g -fdata-sections -ffunction-sections -fomit-frame-pointer -fmerge-all-constants -fno-signed-zeros -fno-trapping-math -freciprocal-math -fno-math-errno -fno-strict-aliasing -fvisibility=hidden -include visibility.h -Wall -Wextra -Werror -Warray-bounds -Wcast-align -Wdisabled-optimization -Wdouble-promotion -Wfatal-errors -Wfloat-equal -Wformat-security -Winit-self -Wlogical-op -Wpointer-arith -Wshadow -Wuninitialized -Wunknown-pragmas -Wunused-variable -Wno-missing-field-initializers -Wno-missing-include-dirs -Wno-unused-parameter -fdiagnostics-color=always -Wno-stringop-truncation -fno-builtin-printf -fno-strength-reduce -Wformat=1 -Wunused-but-set-variable -Wno-format-truncation -fcheck-new -fno-exceptions -fno-rtti -fno-threadsafe-statics -Wreorder -Wno-overloaded-virtual -Wno-cast-align -Wno-address-of-packed-member -Wno-enum-compare -std=gnu++14 -o src/modules/mavlink/CMakeFiles/modules__mavlink.dir/mavlink_receiver.cpp.o -c /home/yr/Desktop/Codev-autopilot/src/modules/mavlink/mavlink_receiver.cpp",
+  "coordinate_probe_flags": [
+    "-O2",
+    "-fno-signed-zeros",
+    "-fno-trapping-math",
+    "-freciprocal-math",
+    "-fno-math-errno"
+  ],
+  "source_sha256": {
+    "research/sta-velocity-control/v04/results06/ReceiverScaleProbe.cpp": "36193ada1dad5aaed9ea114b26fd8649acafb826ddbeab05b254de9b69a5b164",
+    "src/modules/mavlink/mavlink_receiver.cpp": "0b0a1bb51923d6858a55f1609fa365ae31876bd2c5191ff62ee7515d38664f16",
+    "src/modules/commander/Commander.cpp": "9efa6d03cebef77063d7b0caed8fc317c354f28ff0c5f6cab39841b3f70f7d2b",
+    "research/sta-velocity-control/scripts/analyze_v04_handoff06.py": "c11c66e66495095d92ece5ee0228698b6e3bb8cadfbc4f0a430edb59319d7768",
+    "research/sta-velocity-control/scripts/v04_heading_stream.py": "380216c5adf0c1a7e401e30aabeb6a50b69a41c712e8a175d79b32a211452d0e"
+  },
+  "coordinate_checks": [
+    {
+      "variant": "strict",
+      "wire": "x",
+      "value": 47.3977504,
+      "hex": "0x1.7b2e97c2ffc47p+5",
+      "raw_value": 47.3977504,
+      "raw_hex": "0x1.7b2e97c2ffc47p+5",
+      "original_python": 47.3977504,
+      "original_python_hex": "0x1.7b2e97c2ffc47p+5",
+      "raw_matches_probe": true,
+      "difference_deg": 0.0,
+      "difference_ulp": 0.0
+    },
+    {
+      "variant": "strict",
+      "wire": "y",
+      "value": 8.5456078,
+      "hex": "0x1.11759e7d2e291p+3",
+      "raw_value": 8.545607799999999,
+      "raw_hex": "0x1.11759e7d2e290p+3",
+      "original_python": 8.5456078,
+      "original_python_hex": "0x1.11759e7d2e291p+3",
+      "raw_matches_probe": false,
+      "difference_deg": -1.7763568394002505e-15,
+      "difference_ulp": -1.0
+    },
+    {
+      "variant": "receiver_flags",
+      "wire": "x",
+      "value": 47.3977504,
+      "hex": "0x1.7b2e97c2ffc47p+5",
+      "raw_value": 47.3977504,
+      "raw_hex": "0x1.7b2e97c2ffc47p+5",
+      "original_python": 47.3977504,
+      "original_python_hex": "0x1.7b2e97c2ffc47p+5",
+      "raw_matches_probe": true,
+      "difference_deg": 0.0,
+      "difference_ulp": 0.0
+    },
+    {
+      "variant": "receiver_flags",
+      "wire": "y",
+      "value": 8.545607799999999,
+      "hex": "0x1.11759e7d2e290p+3",
+      "raw_value": 8.545607799999999,
+      "raw_hex": "0x1.11759e7d2e290p+3",
+      "original_python": 8.5456078,
+      "original_python_hex": "0x1.11759e7d2e291p+3",
+      "raw_matches_probe": true,
+      "difference_deg": -1.7763568394002505e-15,
+      "difference_ulp": -1.0
+    }
+  ],
+  "flight_metrics_descriptive_only": {
+    "accepted": false,
+    "job": {
+      "id": "run01",
+      "seed": 9501,
+      "mode": 0,
+      "axes": 0,
+      "parameters": {
+        "MPC_VC_L1_X": 1,
+        "MPC_VC_L2_X": 0.2,
+        "MPC_VC_NU_X": 0.4,
+        "MPC_VC_A_X": 0.8,
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0
+      }
+    },
+    "baseline_accepted": true,
+    "flight": {
+      "n": 8524,
+      "inner": {
+        "max_age_us": 4000,
+        "median_age_us": 0.0,
+        "maximum_reads": 4
+      },
+      "maximum_gap_s": 0.012,
+      "hz": 99.99765346348786
+    },
+    "diagnostic": {
+      "n": 6016,
+      "inner": {
+        "max_age_us": 4000,
+        "median_age_us": 0.0,
+        "maximum_reads": 4
+      },
+      "maximum_gap_s": 0.012,
+      "hz": 100.00332513134269,
+      "error": {
+        "rmse": [
+          0.04606695686770029,
+          0.008180909247889931,
+          0.0021717685372561395
+        ],
+        "mean": [
+          0.008119064909114971,
+          0.0015756660769220537,
+          6.713193087944108e-05
+        ],
+        "std": [
+          0.04534584104471034,
+          0.0080277364515938,
+          0.002170730725647949
+        ],
+        "max_abs": [
+          0.09956454485654831,
+          0.02077488601207733,
+          0.008310945704579353
+        ]
+      },
+      "iae_m": [
+        1.1885576902981843,
+        0.21555864840291894,
+        0.05260318283442764
+      ],
+      "acceleration_tv": [
+        3.294008731842041,
+        2.98368501663208,
+        2.228543519973755
+      ],
+      "samples": 3200,
+      "seconds": 32.0,
+      "constraint_fraction": 0.0,
+      "maximum_continuous_constraint_s": 0.0,
+      "nu_peak": null
+    },
+    "local_output": {
+      "matched": 6016,
+      "denominator": 6016,
+      "coverage": 1.0,
+      "max_gap_s": 0.012,
+      "max_abs_error": 0.0
+    },
+    "attitude_output": {
+      "matched": 6016,
+      "denominator": 6016,
+      "coverage": 1.0,
+      "max_gap_s": 0.012,
+      "max_abs_error": 0.0
+    },
+    "mixer": {
+      "count": 15040,
+      "bit_histogram": {
+        "1": 15040
+      },
+      "feedback_valid_fraction": 1.0,
+      "raw_nonzero_fraction": 1.0,
+      "saturation_fraction_among_valid": 0.0,
+      "rate_direction_saturation_fraction_among_valid": 0.0
+    },
+    "position_rmse": [
+      0.07832438579508821,
+      0.02357217223098584,
+      0.029731767524512148
+    ],
+    "yaw_rmse": 0.00016031334224825053,
+    "height": {
+      "rmse": 0.02920545503391358,
+      "mean": 0.003538609026594365,
+      "std": 0.028990288889468706,
+      "max_abs": 0.06674027442932129
+    },
+    "first_invocation": {
+      "samples": 8524,
+      "first_failures": 0,
+      "retries": 0,
+      "first_input_masks": [
+        32511,
+        32704,
+        32763,
+        32767
+      ]
+    },
+    "exit": {
+      "raw_fault_counts": {
+        "0": 7821,
+        "2": 704
+      },
+      "classification": {
+        "clear": 7821,
+        "expected_planned_landing_gate": 704
+      },
+      "raw_values_preserved": true
+    },
+    "error": "Empty/nonmonotonic vehicle_command"
+  },
+  "unexecuted_checks": "Full height_task/check_handoff acceptance stops at strict event accessor; not retroactively completed or accepted here. No paired metrics or seed comparison.",
+  "live_transport": {
+    "observations": 171,
+    "min_age_us": 28000.0,
+    "max_age_us": 220000.0
+  },
+  "diagnostic_passed": true,
+  "original_artifact_count": 50
+}

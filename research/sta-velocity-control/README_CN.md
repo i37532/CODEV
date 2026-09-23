@@ -2,6 +2,8 @@
 
 分支：research/sta-velocity-control；规划起点866bba6e0d200d7a5137146c2a67a1a751e01233。
 
+当前：[protocol06 / series05结果](reports/V04_PROTOCOL06_RESULTS.md)。新授权六次批次首轮PID完成起飞、60.160秒观察/32秒激励及降落上锁，但最终命令日志验收未通过；1尝试/1完整/0接受、余5停止、ESTA0。定位到事件同刻时间与接收器浮点参考两处工具适配问题，未修订或续飞。109个C++/180个Python及干净构建通过，不等于V04验收通过；不push、不V05。以下各“最新/最近”条目保留为历史记录。
+
 最新离线修订：[目标交接修订报告](reports/V04_HANDOFF06_REPAIR.md)。改为保留原POSCTL本地XY目标、明确整数经纬度单次COMMAND_INT、应答及原始下游读回；25项新增测试，最终109个C++/172个Python及构建通过。新入口禁用、预算0、无飞行；旧失败不改判，V04仍未飞行验收。需要另冻结并获准新批次，不能续跑旧五轮。
 
 最近飞行：[protocol05 / series04结果](reports/V04_PROTOCOL05_RESULTS.md)。获准新六次后，干净提交109个C++/147个Python及构建通过；首轮PID离地并完成航向准入，但POSCTL正常清空Navigator航点，运行器错误依赖该航点而中止。1尝试/0接受、余5停止、ESTA0；未发高度命令，V04仍未验收。当时仅只读诊断，未修复或续飞。
