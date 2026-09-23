@@ -1,0 +1,80 @@
+{
+  "seeds": [
+    9501,
+    9502,
+    9503
+  ],
+  "files_parsed": 21317,
+  "matches": [],
+  "invalid_json": [],
+  "exceptions": [
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/M06-20260916/c02_regression_roll_diagnostic.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Previously audited empty diagnostic, not a seed registry; unchanged"
+    }
+  ],
+  "scan_manifest_sha256": "9a4801b19c6911409ad4f5b893ddfa8f5bb27995ead738311669b4e994d078dd",
+  "roots": [
+    "/home/yr/Desktop/Codev-autopilot/research",
+    "/home/yr/Desktop/codev doc/experiments",
+    "/home/yr/Desktop/codev doc/plan"
+  ],
+  "excluded": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/protocol02",
+  "scope": "Structured seed/seed-list keys in JSON, plus separate source text audit; recheck before flight",
+  "accepted": true,
+  "design_registrations": [
+    {
+      "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/protocol06/execution.json",
+      "field": "seeds",
+      "seeds": [
+        9501,
+        9502,
+        9503
+      ]
+    },
+    {
+      "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/protocol06/execution.json",
+      "field": "jobs.0.seed",
+      "seeds": [
+        9501
+      ]
+    },
+    {
+      "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/protocol06/execution.json",
+      "field": "jobs.1.seed",
+      "seeds": [
+        9501
+      ]
+    },
+    {
+      "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/protocol06/execution.json",
+      "field": "jobs.2.seed",
+      "seeds": [
+        9502
+      ]
+    },
+    {
+      "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/protocol06/execution.json",
+      "field": "jobs.3.seed",
+      "seeds": [
+        9502
+      ]
+    },
+    {
+      "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/protocol06/execution.json",
+      "field": "jobs.4.seed",
+      "seeds": [
+        9503
+      ]
+    },
+    {
+      "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/protocol06/execution.json",
+      "field": "jobs.5.seed",
+      "seeds": [
+        9503
+      ]
+    }
+  ]
+}
