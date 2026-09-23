@@ -1,5 +1,7 @@
 # V04 protocol04：起飞航向对齐准入（仅离线设计）
 
+更新：本轮已实现独立运行器/分析器，见 [实现及离线验证报告](../../reports/V04_PROTOCOL04_IMPLEMENTATION.md)。下文与 `protocol.json` 保留最初设计记录；实际展开规范由 `execution.json` + 原设计组成。实现就绪不等于飞行授权，当前仍无新飞行。准确拟议为种子9301/9302/9303各PID→ESTA，共6次，目录series03。
+
 2026-09-23。当前 `flight_authorized=false`、`execution_ready=false`、新飞行预算 **0**。本目录不是可执行飞行协议；旧 protocol03 / series02 已失败停止，不得直接续跑。
 
 机器可读约定为 [protocol.json](protocol.json)，依据见 [离线审计](../../reports/V04_HEADING_AUDIT.md)。明确继承 protocol03 的候选、性能/安全/日志门槛和正常计划降落分类；不继承旧种子、授权、任务清单或剩余预算。

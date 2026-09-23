@@ -19,6 +19,7 @@ V00–V03已通过，历史失败保留。V04 **failed / needs_revision**：SITL
 - [V04 protocol03实现与日志修订](reports/V04_PROTOCOL03.md)
 - [V04新批次：起飞航向reset失败及停止记录](reports/V04_PROTOCOL03_RESULTS.md)
 - [V04起飞航向对齐离线审计与新准入设计](reports/V04_HEADING_AUDIT.md)：109个C++/99个Python通过，未改生产控制；protocol04仅设计，无新飞行授权，V04仍未通过。
+- [V04 protocol04运行器/日志分析器与新批次申请](reports/V04_PROTOCOL04_IMPLEMENTATION.md)：独立接线、只读连续ULog取证、一次任务yaw冻结；完成离线验证后申请9301–9303共6次，不自动飞行。
 - [V04新高度任务/验证协议（设计冻结，飞行待授权）](v04/protocol02/README_CN.md)
 - [V04协议修订记录及飞前待办](reports/V04_PROTOCOL02.md)
 - [V04飞前生命周期审计：正常降落与零fault规范冲突](reports/V04_PROTOCOL02_PREFLIGHT.md)
