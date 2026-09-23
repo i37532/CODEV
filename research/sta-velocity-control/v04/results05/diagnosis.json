@@ -1,0 +1,348 @@
+{
+  "accepted": false,
+  "source_head": "95cc6fe33db5051774174219e73a724a851c64ad",
+  "original_error": "ValueError('Invalid navigator target')",
+  "events": [
+    {
+      "name": "ready",
+      "timestamp_us": 30076000.0
+    },
+    {
+      "name": "takeoff_command",
+      "timestamp_us": 30076000
+    }
+  ],
+  "logs": [
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/08_27_37.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series04/run01/08_27_37.ulg",
+      "sha256": "07f2dff288574f49f5b9f1a18b1ad1a77fb7af5bb444d0601031684fa122d833",
+      "bytes": 206779,
+      "dropouts": 0,
+      "corruption": false
+    },
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/08_27_38.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series04/run01/08_27_38.ulg",
+      "sha256": "88b9cd401f5e410dac6b50f6ee07073597b01a7a7e910646fe89d321f429e086",
+      "bytes": 11545414,
+      "dropouts": 0,
+      "corruption": false
+    }
+  ],
+  "diagnostic_checks": [
+    {
+      "name": "archived_cli_reproduces_original_rejection",
+      "passed": true
+    },
+    {
+      "name": "raw_ulog_confirms_invalid_posctl_triplet",
+      "passed": true
+    },
+    {
+      "name": "posctl_has_separate_legal_local_target",
+      "passed": true
+    },
+    {
+      "name": "actual_liftoff_detected",
+      "passed": true
+    },
+    {
+      "name": "heading_alignment_and_quiet_gate_completed",
+      "passed": true
+    },
+    {
+      "name": "raw_origin_and_pv_counters_unchanged",
+      "passed": true
+    },
+    {
+      "name": "no_reposition_sent",
+      "passed": true
+    },
+    {
+      "name": "no_complete_performance_or_landing_window",
+      "passed": true
+    },
+    {
+      "name": "recorded_pid_controls_no_first_update_or_latched_fault",
+      "passed": true
+    },
+    {
+      "name": "raw_logs_have_no_reported_dropout_or_corruption",
+      "passed": true
+    }
+  ],
+  "reproduced_exception": "Invalid navigator target",
+  "final_navigator_target": {
+    "timestamp": 36916000,
+    "nav_state": 2,
+    "current": {
+      "valid": 0.0,
+      "type": 5.0,
+      "lat": NaN,
+      "lon": NaN,
+      "alt": 0.0,
+      "yaw_valid": 0.0
+    }
+  },
+  "posctl_trajectory": {
+    "samples": 59,
+    "finite_fields": {
+      "x": true,
+      "y": true,
+      "z": false,
+      "yaw": true
+    },
+    "final": {
+      "timestamp": 38084000.0,
+      "x": -0.013065318576991558,
+      "y": 0.03298546001315117,
+      "z": -1.309957504272461,
+      "vz": -3.4924596548080444e-10,
+      "yaw": 1.5760154724121094
+    },
+    "z_velocity_fallback_samples": 35,
+    "z_or_vz_valid": true
+  },
+  "nav_transitions": [
+    {
+      "timestamp": 30208000,
+      "nav_state": 17
+    },
+    {
+      "timestamp": 36916000,
+      "nav_state": 2
+    }
+  ],
+  "first_takeoff_time": 31228000,
+  "heading_replay": {
+    "primary": 0,
+    "through_us": 38096000,
+    "position_samples": 803,
+    "confirmed": true,
+    "pending": false,
+    "quiet_s": 1.128,
+    "ready": true,
+    "latest_position": {
+      "timestamp": 38096000,
+      "timestamp_sample": 38096000,
+      "ref_timestamp": 1192000,
+      "ref_lat": 47.3977508,
+      "ref_lon": 8.5456073,
+      "x": -0.013242313638329506,
+      "y": 0.031880248337984085,
+      "z": -1.3531914949417114,
+      "delta_xy[0]": -0.0022647788282483816,
+      "delta_xy[1]": 0.006415080279111862,
+      "delta_z": 0.0,
+      "vx": 0.002766941674053669,
+      "vy": -0.003832431510090828,
+      "vz": -0.22357884049415588,
+      "z_deriv": -0.31593024730682373,
+      "delta_vxy[0]": -0.009946957230567932,
+      "delta_vxy[1]": 0.005463160574436188,
+      "delta_vz": 0.0660344660282135,
+      "ax": -0.01273945439606905,
+      "ay": 1.3804309674014803e-05,
+      "az": -0.13362987339496613,
+      "heading": 1.5755943059921265,
+      "delta_heading": -0.002531767589971423,
+      "ref_alt": 488.4862060546875,
+      "dist_bottom": 2.1156091690063477,
+      "eph": 0.475257933139801,
+      "epv": 0.4766428470611572,
+      "evh": 0.20606689155101776,
+      "evv": 0.12252624332904816,
+      "vxy_max": Infinity,
+      "vz_max": Infinity,
+      "hagl_min": Infinity,
+      "hagl_max": Infinity,
+      "xy_valid": 1,
+      "z_valid": 1,
+      "v_xy_valid": 1,
+      "v_z_valid": 1,
+      "xy_reset_counter": 2,
+      "z_reset_counter": 0,
+      "vxy_reset_counter": 2,
+      "vz_reset_counter": 1,
+      "heading_reset_counter": 3,
+      "xy_global": 1,
+      "z_global": 1,
+      "dist_bottom_valid": 0,
+      "dist_bottom_sensor_bitfield": 0
+    },
+    "confirmation_us": 36688000,
+    "event_us": 36684000,
+    "packet": {
+      "phase": "TAKEOFF_PREPARATION",
+      "armed": true,
+      "airborne": true,
+      "contact": false,
+      "command_sent": false,
+      "excitation_started": false,
+      "primary_constant": true,
+      "primary_healthy": true,
+      "reference_unchanged": true,
+      "pv_counters_unchanged": true,
+      "controller_ok": true,
+      "aligned_before": false,
+      "aligned_after": true,
+      "yaw_aligned": true,
+      "mag_fault": false,
+      "mag_disturbed": false,
+      "emergency_reset": false,
+      "other_yaw_source": false,
+      "filter_fault": false,
+      "nav_state": 17,
+      "previous_events": 0,
+      "heading_before": 2,
+      "heading_after": 3,
+      "quat_before": 2,
+      "quat_after": 3,
+      "delta_rad": -0.002531767589971423,
+      "quat_delta_rad": -0.002531768018155488,
+      "quat_pair_offset_s": 0.004,
+      "sample_gap_s": 0.008,
+      "metadata_age_s": 0.027999999999999997,
+      "selector_age_s": 0.608,
+      "status_flags_age_s": 0.508,
+      "event_stream_observable": true,
+      "event_counter_gaps": 0,
+      "alignment_lag_s": 0.0,
+      "height_m": 1.5571004152297974,
+      "missing_samples": 0
+    },
+    "freeze_candidate": {
+      "timestamp": 38044000,
+      "timestamp_sample": 38044000,
+      "yaw": 1.5756663084030151,
+      "existing_target_yaw": 1.5760154724121094,
+      "primary": 0,
+      "heading_counter": 3,
+      "prearm_heading": 1.5749040842056274
+    }
+  },
+  "reference_unique": {
+    "ref_timestamp": [
+      1192000
+    ],
+    "ref_alt": [
+      488.4862060546875
+    ],
+    "xy_reset_counter": [
+      2
+    ],
+    "z_reset_counter": [
+      0
+    ],
+    "vxy_reset_counter": [
+      2
+    ],
+    "vz_reset_counter": [
+      1
+    ],
+    "ref_lat": [
+      47.3977508
+    ],
+    "ref_lon": [
+      8.5456073
+    ]
+  },
+  "height_range_m": [
+    -0.13565325736999512,
+    1.8865761756896973
+  ],
+  "last_position_timestamp": 38096000,
+  "reposition_commands_after_takeoff": 0,
+  "topics": {
+    "sta_velocity_ctrl_status": {
+      "samples": 803,
+      "max_gap_us": 12000,
+      "requested_mode": [
+        0
+      ],
+      "effective_mode": [
+        0
+      ],
+      "effective_axes": [
+        0
+      ],
+      "inner_mode": [
+        0
+      ],
+      "inner_axes": [
+        0
+      ],
+      "inner_divisor": [
+        1
+      ],
+      "inner_valid": [
+        1
+      ],
+      "first_fail": [
+        0
+      ],
+      "retry_result": [
+        0
+      ],
+      "fault": [
+        0
+      ],
+      "sta_fault": [
+        0
+      ],
+      "timing": [
+        0
+      ],
+      "failsafe": [
+        0
+      ],
+      "pid_calls": [
+        1
+      ],
+      "valid": [
+        1
+      ],
+      "excitation_fault": [
+        0
+      ],
+      "excitation": [
+        0.0
+      ],
+      "excitation_time": [
+        -1.0
+      ],
+      "publish_seq_nonunit_deltas": 0,
+      "update_seq_nonunit_deltas": 0
+    },
+    "sta_rate_ctrl_status": {
+      "samples": 2007,
+      "max_gap_us": 4000,
+      "requested_mode": [
+        0
+      ],
+      "effective_mode": [
+        0
+      ],
+      "effective_axes": [
+        0
+      ],
+      "div_eff": [
+        1
+      ],
+      "fault": [
+        0
+      ],
+      "publish_seq_nonunit_deltas": 0,
+      "update_seq_nonunit_deltas": 0
+    }
+  },
+  "live_transport": {
+    "observations": 27,
+    "min_age_us": 28000.0,
+    "max_age_us": 68000.0
+  },
+  "interpretation": "POSCTL intentionally clears the navigator triplet while its local trajectory has finite XY/yaw and legal mixed Z/vz targets. The runner requires POSCTL, then wrongly requires a valid navigator triplet before the height command. The altitude-only NaN XY command copies curr->current.lat/lon in the pinned navigator; skipping this gate would not fix the target contract. No runner/controller repair, protocol revision or new flight is performed; original acceptance remains false.",
+  "diagnostic_passed": true,
+  "original_artifact_count": 34
+}
