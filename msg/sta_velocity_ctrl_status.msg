@@ -1,5 +1,6 @@
 # V03: exact final controller invocation per local-position input, no interpolation.
-# Modes 1/2 unavailable. nu/a_sta are NaN in PID, NOT estimated STA states.
+# V04 mode1/axes1 is SITL X ESTA; mode2 and axes3/7 unavailable.
+# nu/a_sta are NaN on PID axes, NOT estimated STA states.
 # a_proxy is thrust * g / hover_thrust + gravity: model proxy, not measured acceleration.
 # constraint_bits: 1 tilt, 2 minimum thrust, 4 maximum Z, 8 XY remainder.
 # reset_bits: 1 vxy,2 vz,4 xy,8 z,16 heading,32 ground suppression.
@@ -16,6 +17,7 @@ uint64 inner_check_timestamp
 uint32 publish_seq
 uint32 update_seq
 uint32 inner_seq
+uint32 config_generation
 int32 requested_mode
 int32 requested_axes
 int32 effective_mode
@@ -50,6 +52,10 @@ uint8 clock # 0=HRT (simulation time in lockstep), not board CPU cost
 uint8 pid_calls
 uint8 pid_axes
 uint8 active_axes
+uint8 committed_axes
+uint16 sta_flags
+uint16 sta_fault
+bool config_pending
 uint8 reset_bits
 uint8 constraint_bits
 uint8 timing
@@ -68,5 +74,5 @@ bool enabled
 bool landed
 bool contact
 bool failsafe
-bool fault # V03 PID observer does not introduce a new control fault latch
+bool fault # PID observer unchanged; X ESTA invalid transactions latch until disarm
 uint8 ORB_QUEUE_LENGTH = 8

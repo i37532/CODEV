@@ -2,7 +2,7 @@
 #pragma once
 #include "StaVelocityControl.hpp"
 
-/** Offline V03 adapter, not an actuator path. All vectors are local NED.
+/** V03-tested adapter; V04 PositionControl connects only SITL X. Local NED.
  * Caller supplies the complete constrained thrust-map proxy, NOT measured
  * acceleration or body-frame mixer signs. Existing PID ARW is unrelated.
  * begin/evaluate/finish is one transaction per sensor sample, including retries.
@@ -20,6 +20,7 @@ public:
 	struct Frame {
 		uint64_t sample{0};
 		bool armed{false}, enabled{false}, flying{false}, landed{true}, contact{true};
+		bool inner_valid{true}; // Caller verifies measured inner PID, not requested params.
 		// Post-position-control target and ACTUALLY consumed (possibly Z-blended) velocity.
 		Vec velocity{}, target{}, ff{};
 		// Non-covariant EKF reset: target and estimate not translated together.

@@ -282,6 +282,12 @@ void MulticopterPositionControl::Run()
 
 		_control_mode_sub.update(&_control_mode);
 		_vehicle_land_detected_sub.update(&_vehicle_land_detected);
+		StaVelocityProtection::Config esta_config{};
+		esta_config.axes = 1;
+		esta_config.gains[0] = {_param_mpc_vc_l1_x.get(), _param_mpc_vc_l2_x.get()};
+		esta_config.nu_limit[0] = _param_mpc_vc_nu_x.get();
+		esta_config.acceleration_limit[0] = _param_mpc_vc_a_x.get();
+		_control.configureVelocityEsta(esta_config, _control_mode.flag_armed);
 		_control.configureVelocityControl(_param_mpc_vc_mode.get(), _param_mpc_vc_axes.get(), _control_mode.flag_armed);
 		uint8_t pid_calls = 0;
 		uint32_t controller_time_us = 0;
@@ -439,12 +445,27 @@ void MulticopterPositionControl::Run()
 			}
 
 			_control.setState(states);
+			StaVelocityProtection::Frame velocity_frame{};
+			velocity_frame.sample = local_pos.timestamp_sample;
+			velocity_frame.armed = _control_mode.flag_armed;
+			velocity_frame.enabled = true;
+			velocity_frame.flying = flying;
+			velocity_frame.landed = _vehicle_land_detected.landed;
+			velocity_frame.contact = _vehicle_land_detected.ground_contact;
+			velocity_frame.inner_valid = inner_valid && _rate_diagnostic.effective_mode == 0
+				&& _rate_diagnostic.effective_axes == 0 && _rate_diagnostic.div_eff == 1
+				&& _rate_diagnostic.measurement_valid && _rate_diagnostic.output_valid
+				&& !_rate_diagnostic.fault && !_rate_diagnostic.termination;
+			// A reset with a freshly replaced target has no evidence of a matching delta.
+			velocity_frame.unmatched_reset_axes = (reset_bits & 1) && _setpoint.timestamp >= local_pos.timestamp ? 3 : 0;
+			_control.setVelocityFrame(velocity_frame);
 
 #if defined(CONFIG_ARCH_BOARD_PX4_SITL)
 			const bool excitation_gate = _param_mpc_vct_test.get() == 1 && flying
 				&& _velocity_vehicle_status.nav_state == vehicle_status_s::NAVIGATION_STATE_AUTO_LOITER
 				&& !_vehicle_land_detected.landed && !_vehicle_land_detected.ground_contact
-				&& _control_mode.flag_control_auto_enabled && _param_mpc_vc_mode.get() == 0 && _param_mpc_vc_axes.get() == 0
+				&& _control_mode.flag_control_auto_enabled && !_control.velocitySelection().pending()
+				&& !_control.velocitySelection().reject()
 				&& inner_valid && _rate_diagnostic.effective_mode == 0 && _rate_diagnostic.effective_axes == 0
 				&& _rate_diagnostic.div_eff == 1 && !_rate_diagnostic.fault;
 			excitation = _velocity_excitation.update(local_pos.timestamp_sample, _control_mode.flag_armed, excitation_gate);
@@ -483,25 +504,33 @@ void MulticopterPositionControl::Run()
 			_velocity_update_seq += pid_calls;
 
 			// Publish internal position control setpoints
-			// on top of the input/feed-forward setpoints these containt the PID corrections
-			// This message is used by other modules (such as Landdetector) to determine vehicle intention.
-			vehicle_local_position_setpoint_s local_pos_sp{};
-			_control.getLocalPositionSetpoint(local_pos_sp);
-			local_pos_sp.timestamp = hrt_absolute_time();
-			output_timestamp = local_pos_sp.timestamp;
-			_local_pos_sp_pub.publish(local_pos_sp);
+			// Experimental invalid output is never published; original failsafe above
+			// still runs. This is a SITL abort condition, NOT a safe hover/takeover.
+			if (_control.velocityOutputPublishable()) {
+				// on top of the input/feed-forward setpoints these containt the PID corrections
+				// This message is used by other modules (such as Landdetector) to determine vehicle intention.
+				vehicle_local_position_setpoint_s local_pos_sp{};
+				_control.getLocalPositionSetpoint(local_pos_sp);
+				local_pos_sp.timestamp = hrt_absolute_time();
+				output_timestamp = local_pos_sp.timestamp;
+				_local_pos_sp_pub.publish(local_pos_sp);
 
-			// Publish attitude setpoint output
-			vehicle_attitude_setpoint_s attitude_setpoint{};
-			_control.getAttitudeSetpoint(attitude_setpoint);
-			attitude_setpoint.timestamp = hrt_absolute_time();
-			attitude_timestamp = attitude_setpoint.timestamp;
-			memcpy(q_sp, attitude_setpoint.q_d, sizeof(q_sp));
-			_vehicle_attitude_setpoint_pub.publish(attitude_setpoint);
+				// Publish attitude setpoint output
+				vehicle_attitude_setpoint_s attitude_setpoint{};
+				_control.getAttitudeSetpoint(attitude_setpoint);
+				attitude_setpoint.timestamp = hrt_absolute_time();
+				attitude_timestamp = attitude_setpoint.timestamp;
+				memcpy(q_sp, attitude_setpoint.q_d, sizeof(q_sp));
+				_vehicle_attitude_setpoint_pub.publish(attitude_setpoint);
+			}
 
 		} else {
 			// an update is necessary here because otherwise the takeoff state doesn't get skiped with non-altitude-controlled modes
 			_velocity_excitation.update(local_pos.timestamp_sample, _control_mode.flag_armed, false);
+			StaVelocityProtection::Frame inactive{};
+			inactive.sample = local_pos.timestamp_sample;
+			inactive.armed = _control_mode.flag_armed;
+			_control.setVelocityFrame(inactive);
 			_takeoff.updateTakeoffState(_control_mode.flag_armed, _vehicle_land_detected.landed, false, 10.f, true, time_stamp_now);
 		}
 

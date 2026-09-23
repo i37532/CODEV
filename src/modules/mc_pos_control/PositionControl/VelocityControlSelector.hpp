@@ -5,7 +5,8 @@
 
 /** Configuration gate only. PID gains and integrator lifecycle are independent.
  * Requests use signed parameter-width values: validate before any narrowing.
- * V01 accepts only (PID, no experimental axes). Rejected requests never become
+ * Default admission is PID only; V04 callers may admit configured SITL X ESTA.
+ * Rejected requests never become
  * effective; while armed a differing request remains pending until cancelled
  * or considered on disarm. Rejection describes the current request immediately.
  */
@@ -15,16 +16,16 @@ public:
 
 	enum Reject : uint8_t { None = 0, ModeRange = 1, ModeUnimplemented = 2, AxesUnavailable = 4 };
 
-	void configure(int32_t mode, int32_t axes, bool armed)
+	void configure(int32_t mode, int32_t axes, bool armed, bool esta_ready = false)
 	{
 		_requested_mode = mode;
 		_requested_axes = axes;
 		_reject = None;
 
 		if (mode < 0 || mode > 2) { _reject |= ModeRange; }
-		else if (mode != 0) { _reject |= ModeUnimplemented; }
+		else if (mode == 2 || (mode == 1 && !esta_ready)) { _reject |= ModeUnimplemented; }
 
-		if (axes != 0) { _reject |= AxesUnavailable; }
+		if ((mode == 1 && esta_ready) ? axes != 1 : axes != 0) { _reject |= AxesUnavailable; }
 
 		_pending = armed && (mode != _effective_mode || axes != _effective_axes);
 

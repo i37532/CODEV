@@ -102,6 +102,7 @@ const StaVelocityProtection::Result &StaVelocityProtection::begin(const Frame &f
 	}
 
 	if (_fault) { _result.flags |= Latched; return _result; }
+	if (!f.inner_valid) { latch(Feedback); return _result; }
 
 	if (!f.sample || (previous && (_result.raw_dt < .002f || _result.raw_dt > .04f))) {
 		latch(Time); return _result;

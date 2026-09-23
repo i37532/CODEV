@@ -44,6 +44,49 @@
 
 using namespace matrix;
 
+void PositionControl::configureVelocityEsta(const StaVelocityProtection::Config &c, bool armed)
+{
+	_esta_requested = c;
+	_esta_config_valid = c.axes == 1 && StaVelocityProtection::validConfig(c);
+	const bool different = memcmp(&c.gains[0], &_esta_effective.gains[0], sizeof(c.gains[0]))
+			       || memcmp(&c.nu_limit[0], &_esta_effective.nu_limit[0], sizeof(float))
+			       || memcmp(&c.acceleration_limit[0], &_esta_effective.acceleration_limit[0], sizeof(float));
+	_esta_pending = armed && different;
+	if (!armed && _esta_config_valid && different) {
+		_esta_effective = c;
+		++_esta_config_generation;
+	}
+}
+
+void PositionControl::configureVelocityControl(int32_t mode, int32_t axes, bool armed)
+{
+	const int32_t previous = _velocity_selector.effectiveMode();
+	bool ready = false;
+#if defined(CONFIG_ARCH_BOARD_PX4_SITL)
+	ready = _esta_config_valid;
+#endif
+	_velocity_selector.configure(mode, axes, armed, ready);
+	if (previous != _velocity_selector.effectiveMode()) {
+		++_esta_config_generation;
+		// Only experimental-axis PID state is reset on disarmed algorithm change.
+		_vel_int(0) = 0.f;
+	}
+	StaVelocityProtection::Config c = _esta_effective;
+	c.axes = _velocity_selector.effectiveMode() == 1 ? 1 : 0;
+	_velocity_protection.configure(c, armed);
+}
+
+void PositionControl::setVelocityFrame(const StaVelocityProtection::Frame &frame)
+{
+	_velocity_frame = frame;
+	if (!frame.armed || !frame.enabled || _velocity_selector.effectiveMode() == 0) {
+		auto inactive = frame;
+		inactive.enabled = false;
+		_velocity_protection.begin(inactive);
+		if (!frame.armed) { _esta_failed = false; }
+	}
+}
+
 void PositionControl::setVelocityGains(const Vector3f &P, const Vector3f &I, const Vector3f &D)
 {
 	_gain_vel_p = P;
@@ -111,14 +154,40 @@ bool PositionControl::update(const float dt)
 	_yawspeed_sp = PX4_ISFINITE(_yawspeed_sp) ? _yawspeed_sp : 0.f;
 	_yaw_sp = PX4_ISFINITE(_yaw_sp) ? _yaw_sp : _yaw; // TODO: better way to disable yaw control
 
-	const bool success = valid && _updateSuccessful();
+	bool success = valid && _updateSuccessful();
 	_recordDiagnostic(success);
+	if (_velocity_selector.effectiveMode() == 1) {
+		StaVelocityProtection::Vec proxy{};
+		for (int i = 0; i < 3; ++i) { proxy[i] = _diagnostic.a_proxy[i]; }
+		const uint8_t constrained_axes = _diagnostic.constraint_bits ? 3 : 0;
+		const auto &r = _velocity_protection.finish(proxy, constrained_axes, success && !_esta_failed);
+		_esta_failed = _esta_failed || !success || r.fault;
+		success = success && !_esta_failed;
+		_diagnostic.valid = success;
+		_diagnostic.fault = _esta_failed;
+		_diagnostic.active_axes = r.active_axes;
+		_diagnostic.pid_axes &= ~1u;
+		_diagnostic.sta_flags = r.flags;
+		_diagnostic.sta_fault = r.fault;
+		_diagnostic.committed_axes = r.committed_axes;
+		_diagnostic.config_pending = _esta_pending;
+		_diagnostic.config_generation = _esta_config_generation;
+		_diagnostic.nu_before[0] = r.nu_before[0];
+		_diagnostic.nu_ideal[0] = r.nu_ideal[0];
+		_diagnostic.nu_applied[0] = r.nu_applied[0];
+		_diagnostic.a_sta[0] = r.a_sta[0];
+	}
 	return success;
 }
 
 void PositionControl::_recordDiagnostic(bool success)
 {
 	_diagnostic.valid = success;
+	_diagnostic.fault = false;
+	_diagnostic.active_axes = _diagnostic.committed_axes = 0;
+	_diagnostic.sta_flags = _diagnostic.sta_fault = 0;
+	_diagnostic.config_pending = _esta_pending;
+	_diagnostic.config_generation = _esta_config_generation;
 	_vel_sp.copyTo(_diagnostic.v_sp);
 	_vel.copyTo(_diagnostic.v);
 	_vel_dot.copyTo(_diagnostic.v_dot);
@@ -169,6 +238,9 @@ void PositionControl::_velocityControl(const float dt)
 	switch (_velocity_selector.effectiveMode()) {
 	case 0:
 		_velocityControlPid(dt);
+		break;
+	case 1:
+		_velocityControlEstaX(dt);
 		break;
 	}
 }
@@ -221,6 +293,75 @@ void PositionControl::_velocityControlPid(const float dt)
 	ControlMath::setZeroIfNanVector3f(vel_error);
 	// Update integral part of velocity control
 	_vel_int += vel_error.emult(_gain_vel_i) * dt;
+
+	// limit thrust integral
+	_vel_int(2) = math::min(fabsf(_vel_int(2)), CONSTANTS_ONE_G) * sign(_vel_int(2));
+}
+
+void PositionControl::_velocityControlEstaX(const float dt)
+{
+	// Y/Z preserve PID arithmetic and common limits. X has no PID contribution.
+	auto frame = _velocity_frame;
+	for (int i = 0; i < 3; ++i) {
+		frame.velocity[i] = _vel(i); frame.target[i] = _vel_sp(i); frame.ff[i] = _acc_sp(i);
+	}
+	const auto &candidate = _velocity_protection.begin(frame);
+	_esta_failed = _esta_failed || candidate.fault || (candidate.flags & StaVelocityProtection::Duplicate);
+	Vector3f vel_error = _vel_sp - _vel;
+	Vector3f acc_sp_velocity(NAN, NAN, NAN);
+	for (int i = 1; i < 3; ++i) {
+		acc_sp_velocity(i) = vel_error(i) * _gain_vel_p(i) + _vel_int(i) - _vel_dot(i) * _gain_vel_d(i);
+	}
+	// Inactive/priming X uses original acceleration-only FF and zero correction.
+	// It never substitutes X PID. An invalid transaction is not publishable.
+	_acc_sp(0) = PX4_ISFINITE(_acc_sp(0)) ? _acc_sp(0) : 0.f;
+	if (candidate.active_axes && !(candidate.flags & (StaVelocityProtection::Priming | StaVelocityProtection::Latched))) {
+		_acc_sp(0) = candidate.a_req[0];
+	}
+
+	// No control input from setpoints or corresponding states which are NAN
+	ControlMath::addIfNotNanVector3f(_acc_sp, acc_sp_velocity);
+
+	_accelerationControl();
+
+	// Integrator anti-windup in vertical direction
+	if ((_thr_sp(2) >= -_lim_thr_min && vel_error(2) >= 0.0f) ||
+	    (_thr_sp(2) <= -_lim_thr_max && vel_error(2) <= 0.0f)) {
+		vel_error(2) = 0.f;
+	}
+
+	// Saturate maximal vertical thrust
+	_thr_sp(2) = math::max(_thr_sp(2), -_lim_thr_max);
+
+	// Get allowed horizontal thrust after prioritizing vertical control
+	const float thrust_max_squared = _lim_thr_max * _lim_thr_max;
+	const float thrust_z_squared = _thr_sp(2) * _thr_sp(2);
+	const float thrust_max_xy_squared = thrust_max_squared - thrust_z_squared;
+	float thrust_max_xy = 0;
+
+	if (thrust_max_xy_squared > 0) {
+		thrust_max_xy = sqrtf(thrust_max_xy_squared);
+	}
+
+	// Saturate thrust in horizontal direction
+	const Vector2f thrust_sp_xy(_thr_sp);
+	const float thrust_sp_xy_norm = thrust_sp_xy.norm();
+
+	if (thrust_sp_xy_norm > thrust_max_xy) {
+		_thr_sp.xy() = thrust_sp_xy / thrust_sp_xy_norm * thrust_max_xy;
+	}
+
+	// Use tracking Anti-Windup for horizontal direction: during saturation, the integrator is used to unsaturate the output
+	// see Anti-Reset Windup for PID controllers, L.Rundqwist, 1990
+	const Vector2f acc_sp_xy_limited = Vector2f(_thr_sp) * (CONSTANTS_ONE_G / _hover_thrust);
+	const float arw_gain = 2.f / _gain_vel_p(0);
+	vel_error.xy() = Vector2f(vel_error) - (arw_gain * (Vector2f(_acc_sp) - acc_sp_xy_limited));
+
+	// Make sure integral doesn't get NAN
+	ControlMath::setZeroIfNanVector3f(vel_error);
+	// Update integral part of velocity control
+	for (int i = 1; i < 3; ++i) { _vel_int(i) += vel_error(i) * _gain_vel_i(i) * dt; }
+	_vel_int(0) = 0.f;
 
 	// limit thrust integral
 	_vel_int(2) = math::min(fabsf(_vel_int(2)), CONSTANTS_ONE_G) * sign(_vel_int(2));

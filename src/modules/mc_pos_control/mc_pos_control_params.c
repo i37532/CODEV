@@ -235,13 +235,13 @@ PARAM_DEFINE_FLOAT(MPC_XY_P, 0.95f);
 /**
  * Velocity controller request
  *
- * V01 only accepts PID with MPC_VC_AXES=0. Modes 1 and 2 are reserved
- * and explicitly rejected. Differing armed requests are pending until
+ * V04 accepts PID/AXES=0 or SITL ESTA/AXES=1 with valid gains.
+ * MODE2 and AXES3/7 remain rejected. Differing armed requests are pending until
  * disarm; requesting the effective configuration cancels pending changes.
  * Original PID gain updates are unaffected.
  *
  * @value 0 PID
- * @value 1 ESTA (unavailable)
+ * @value 1 ESTA X (SITL only)
  * @value 2 Reserved (unavailable)
  * @min 0
  * @max 2
@@ -252,15 +252,51 @@ PARAM_DEFINE_INT32(MPC_VC_MODE, 0);
 /**
  * Experimental velocity axes request
  *
- * Local NED axes, not body rates. V01 accepts only 0; all nonzero
- * masks are rejected. Future X/XY/XYZ masks are 1/3/7, not enabled here.
- * This does not disable any original PID axis.
+ * Local NED axes, not body rates. MODE0 requires 0; MODE1 permits
+ * only 1 (North/X) with valid gains in SITL. Y/Z remain PID.
+ * XY/XYZ masks 3/7 remain rejected.
  *
  * @min 0
  * @max 7
  * @group Multicopter Position Control
  */
 PARAM_DEFINE_INT32(MPC_VC_AXES, 0);
+
+/**
+ * ESTA North velocity square-root gain
+ *
+ * Units (m/s^2)/sqrt(m/s). Zero disables admission. Disarmed changes only.
+ * @min 0
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_FLOAT(MPC_VC_L1_X, 0.f);
+
+/**
+ * ESTA North velocity integral gain
+ *
+ * Units m/s^3. Zero disables admission. Disarmed changes only.
+ * @min 0
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_FLOAT(MPC_VC_L2_X, 0.f);
+
+/**
+ * ESTA North nu absolute limit
+ *
+ * Units m/s^2. Zero disables admission. Disarmed changes only.
+ * @min 0
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_FLOAT(MPC_VC_NU_X, 0.f);
+
+/**
+ * ESTA North acceleration correction absolute limit
+ *
+ * Units m/s^2 before original acceleration feed-forward. Disarmed changes only.
+ * @min 0
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_FLOAT(MPC_VC_A_X, 0.f);
 
 /**
  * Proportional gain for horizontal velocity error

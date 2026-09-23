@@ -149,6 +149,10 @@ private:
 		// Position Control
 		(ParamInt<px4::params::MPC_VC_MODE>) _param_mpc_vc_mode,
 		(ParamInt<px4::params::MPC_VC_AXES>) _param_mpc_vc_axes,
+		(ParamFloat<px4::params::MPC_VC_L1_X>) _param_mpc_vc_l1_x,
+		(ParamFloat<px4::params::MPC_VC_L2_X>) _param_mpc_vc_l2_x,
+		(ParamFloat<px4::params::MPC_VC_NU_X>) _param_mpc_vc_nu_x,
+		(ParamFloat<px4::params::MPC_VC_A_X>) _param_mpc_vc_a_x,
 		(ParamInt<px4::params::MPC_VCT_TEST>) _param_mpc_vct_test,
 		(ParamFloat<px4::params::MPC_XY_P>) _param_mpc_xy_p,
 		(ParamFloat<px4::params::MPC_Z_P>) _param_mpc_z_p,

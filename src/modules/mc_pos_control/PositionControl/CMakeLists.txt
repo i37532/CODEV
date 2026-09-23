@@ -31,6 +31,10 @@
 #
 ############################################################################
 
+px4_add_library(StaVelocityControl StaVelocityControl.cpp StaVelocityControl.hpp StaVelocityProtection.cpp StaVelocityProtection.hpp)
+target_compile_features(StaVelocityControl PUBLIC cxx_std_14)
+target_include_directories(StaVelocityControl PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
 px4_add_library(PositionControl
 	ControlMath.cpp
 	ControlMath.hpp
@@ -38,17 +42,12 @@ px4_add_library(PositionControl
 	PositionControl.hpp
 )
 target_include_directories(PositionControl PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(PositionControl PUBLIC StaVelocityControl)
 
 px4_add_unit_gtest(SRC ControlMathTest.cpp LINKLIBS PositionControl)
 px4_add_unit_gtest(SRC PositionControlTest.cpp LINKLIBS PositionControl)
 
 if(BUILD_TESTING)
-	# V02 is an offline-only kernel.  Keeping it out of the PositionControl
-	# production target is an intentional proof that MODE=1 cannot drive SITL.
-	px4_add_library(StaVelocityControl StaVelocityControl.cpp StaVelocityControl.hpp StaVelocityProtection.cpp StaVelocityProtection.hpp)
-	target_compile_features(StaVelocityControl PUBLIC cxx_std_14)
-	target_include_directories(StaVelocityControl PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-
 	px4_add_library(V00PositionReference
 		test/v00/V00PositionControl.cpp
 		test/v00/V00ControlMath.cpp
@@ -61,3 +60,4 @@ px4_add_functional_gtest(SRC VelocitySelectionParamTest.cpp LINKLIBS PositionCon
 px4_add_functional_gtest(SRC VelocityDiagnosticInputTest.cpp LINKLIBS PositionControl parameters)
 px4_add_unit_gtest(SRC StaVelocityControlTest.cpp LINKLIBS StaVelocityControl)
 px4_add_unit_gtest(SRC StaVelocityProtectionTest.cpp LINKLIBS StaVelocityControl PositionControl)
+px4_add_unit_gtest(SRC VelocityEstaTest.cpp LINKLIBS PositionControl)
