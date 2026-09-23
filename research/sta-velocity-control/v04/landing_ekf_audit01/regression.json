@@ -1,0 +1,560 @@
+{
+  "success": true,
+  "scope": "offline_only_no_flight",
+  "base": "640a5857a28b8045ea91690a33748446ba4ce275",
+  "commands": [
+    {
+      "name": "head",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "status",
+      "argv": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "submodules",
+      "argv": [
+        "git",
+        "submodule",
+        "status",
+        "--recursive"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "build_sitl",
+      "argv": [
+        "make",
+        "px4_sitl_default",
+        "-j4"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "build_tests",
+      "argv": [
+        "make",
+        "tests",
+        "TESTFILTER=VelocityModule",
+        "-j4"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "PositionControl",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-PositionControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/landing_ekf_verification01/regression/PositionControl.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "ControlMath",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-ControlMath",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/landing_ekf_verification01/regression/ControlMath.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "Takeoff",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-Takeoff",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/landing_ekf_verification01/regression/Takeoff.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "RateControl",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RateControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/landing_ekf_verification01/regression/RateControl.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "RateControlDispatcher",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RateControlDispatcher",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/landing_ekf_verification01/regression/RateControlDispatcher.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "VelocityControl",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-VelocityControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/landing_ekf_verification01/regression/VelocityControl.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "VelocitySelectionParam",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/functional-VelocitySelectionParam",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/landing_ekf_verification01/regression/VelocitySelectionParam.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "StaVelocityControl",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaVelocityControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/landing_ekf_verification01/regression/StaVelocityControl.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "StaVelocityProtection",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaVelocityProtection",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/landing_ekf_verification01/regression/StaVelocityProtection.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "StaRateControl",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaRateControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/landing_ekf_verification01/regression/StaRateControl.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "VelocityDiagnosticInput",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/functional-VelocityDiagnosticInput",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/landing_ekf_verification01/regression/VelocityDiagnosticInput.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "VelocityEsta",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-VelocityEsta",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/landing_ekf_verification01/regression/VelocityEsta.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "VelocityModule",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/functional-VelocityModule",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/landing_ekf_verification01/regression/VelocityModule.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "candidate_compile",
+      "argv": [
+        "g++",
+        "-std=c++14",
+        "-O2",
+        "-fno-rtti",
+        "-fno-exceptions",
+        "-pthread",
+        "-I/home/yr/Desktop/Codev-autopilot/src/modules/mc_pos_control/PositionControl",
+        "-I/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/googletest-src/googletest/include",
+        "/home/yr/Desktop/Codev-autopilot/src/modules/mc_pos_control/PositionControl/StaVelocityControl.cpp",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v03/preflight/CandidateAuditTest.cpp",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/lib/libgtest_main.a",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/lib/libgtest.a",
+        "-o",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/landing_ekf_verification01/regression/candidate_audit"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "candidate_audit",
+      "argv": [
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/landing_ekf_verification01/regression/candidate_audit",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/landing_ekf_verification01/regression/candidate_audit.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "python_tools",
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "research/sta-velocity-control/scripts",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "gazebo_build_only",
+      "argv": [
+        "env",
+        "DONT_RUN=1",
+        "make",
+        "px4_sitl_default",
+        "gazebo_iris",
+        "-j4"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "diff_check",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "tests": {
+    "PositionControl": {
+      "tests": 15,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "ControlMath": {
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "Takeoff": {
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "RateControl": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "RateControlDispatcher": {
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocityControl": {
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocitySelectionParam": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "StaVelocityControl": {
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "StaVelocityProtection": {
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "StaRateControl": {
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocityDiagnosticInput": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocityEsta": {
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocityModule": {
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "candidate_audit": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    }
+  },
+  "unchanged": {
+    "int MulticopterPositionControl::parameters_update": true,
+    "PositionControlStates MulticopterPositionControl::set_vehicle_states": true,
+    "void PositionControl::_positionControl()": true,
+    "void PositionControl::_velocityControlPid(": true,
+    "void PositionControl::_velocityControlEstaX(": true,
+    "void PositionControl::_accelerationControl()": true,
+    "bool PositionControl::_updateSuccessful()": true,
+    "Takeoff/Takeoff.cpp": "e8040562fb7d31d359e6ae5822f46e9f98ae01d7ea5a1d95a8ee7f0e81a74a6b",
+    "Takeoff/Takeoff.hpp": "7723fee15bacdfe9a97e6960136eaf96c397a4323263a03b94ce2bbd8ae09cfa",
+    "mc_pos_control_params.c": "ba8acff24beb8d3d89a55ac6b0d09f2e6449db379ae1411fdf14d55bb82409de"
+  },
+  "failsafe_semantics_intentionally_changed": true,
+  "ulog_format_bytes": 1403,
+  "unique_cpp_tests": 106,
+  "firmware_sha256": "9a8fd1d606c456e50ab2ca230250c8d8b8195681f83e8524927ae26686180d71",
+  "changed_files": {
+    "msg/sta_velocity_ctrl_status.msg": "1e2d1f9485ad8a431486ab861cda3b951a7290378687386c551bc83750c35f5e",
+    "research/sta-velocity-control/README_CN.md": "44b48b0b1dc5cc9232374ce5db58f834f49f47265b174847b03646303a6421c6",
+    "research/sta-velocity-control/reports/V04.md": "707e69ea08368b4eef867f3407181c76caaa35aa10b6f0b6a853344861276ba2",
+    "research/sta-velocity-control/reports/V04_CLI_PRECISION_REPAIR.md": "8ba80f8209464c70ae0c134f73c5a2366cd17adc6b3c4e254feeda0bbf22cef7",
+    "research/sta-velocity-control/reports/V04_HANDOFF06_REPAIR.md": "e5f3537447908d6a10a1d0a67accb71291987ff7dbc8b97bd2fddfd9b69644f5",
+    "research/sta-velocity-control/reports/V04_HEADING_AUDIT.md": "ec3d3d0c37b35110894a03b3a4b6d492a0d0bcb1c3c9d9a8f290611c54484f5b",
+    "research/sta-velocity-control/reports/V04_LOGCHECK07_REPAIR.md": "5fc3fb197b6186261a84f9f1192676828b4009df0a4bc1d3ea0ec6c116d9d0b9",
+    "research/sta-velocity-control/reports/V04_PROTOCOL02.md": "0933927bf8994a0ebe59163de1e80e9ccceeed4b6b409f89496a0161575b74a0",
+    "research/sta-velocity-control/reports/V04_PROTOCOL02_PREFLIGHT.md": "4bc2beafed39f765e524b4a5f6906ff086d48a397c7e587a98f5e5581aa9849d",
+    "research/sta-velocity-control/reports/V04_PROTOCOL03.md": "02c37cabdfa74a2bba4fc63a8e18e6e846ecd565aed7342319a2f9d16e8d7551",
+    "research/sta-velocity-control/reports/V04_PROTOCOL03_RESULTS.md": "a0e70c8b335137a0b22750004ee8f5211bb4d1c601c8cb3062764931c465d759",
+    "research/sta-velocity-control/reports/V04_PROTOCOL04_IMPLEMENTATION.md": "05c162e891869497100870c01f3e093135ea1ac6c2177ca3a3c51bfffc9426c2",
+    "research/sta-velocity-control/reports/V04_PROTOCOL04_RESULTS.md": "be130d0050fc9a2344266bc10e5db26b092fd2b7fb092bf3ef7db3cb6850b02f",
+    "research/sta-velocity-control/reports/V04_PROTOCOL05_RESULTS.md": "8ebbcf06818ba2a3d0e0c4deebdfbe05e0c141bee514106d87f525e89d4d3753",
+    "research/sta-velocity-control/reports/V04_PROTOCOL06_RESULTS.md": "b7cd31dfbe9fca7a2e1d0c5584ad83e23303ad3d5cfd0d08ef6571372baa8bbf",
+    "research/sta-velocity-control/reports/V04_PROTOCOL07_RESULTS.md": "6597abd7f8b3a66582335035b2479ddd11b2a3b4c4e7e04c99825f9a5ab52c5c",
+    "research/sta-velocity-control/reports/V04_REPAIR01.md": "f85ada86b9d9914f2e84b8016dfa175e9de2001f5cc2fb040e7d423021e4546f",
+    "research/sta-velocity-control/scripts/analyze_v04_core04.py": "e7503dfe381bd425888e8f75ad681cff499b5dedd1b83d1b25ef130e2528b30a",
+    "research/sta-velocity-control/scripts/analyze_v04_flight06.py": "be0ea5f9ceb1eb7665eb4f8ba2c3c2f83a9c34f78155d9d40d7c3ed1aac211c4",
+    "research/sta-velocity-control/scripts/analyze_v04_handoff06.py": "c11c66e66495095d92ece5ee0228698b6e3bb8cadfbc4f0a430edb59319d7768",
+    "research/sta-velocity-control/scripts/analyze_v04_handoff07.py": "5eb9960a1dc828ec145cf03bf6bfeb40da6d2c9955e12ff128b27d8489eb3fce",
+    "research/sta-velocity-control/scripts/analyze_v04_logcheck07.py": "0e0a7f8cc9bba943aef96e55114a308a25df0babbe6e4dfb3424faf2e6397e5c",
+    "research/sta-velocity-control/scripts/analyze_v04_protocol03.py": "47325691a7292c0252ab4aae338e3199b730a069737325fe8afa0b5d15eee6a4",
+    "research/sta-velocity-control/scripts/analyze_v04_protocol04.py": "8378bd1ceb926812c7f59859eca5dbe08ec37314995612b103a04ff747624041",
+    "research/sta-velocity-control/scripts/analyze_v04_protocol05.py": "07b2a9752c6c3b3f68e95334bdb515d5f4026325d8837694333f4d94db5fdfd2",
+    "research/sta-velocity-control/scripts/analyze_v04_protocol06.py": "e8338bb684f75308d53c53cc70b28167cce24adf14b08b601d587021be90582c",
+    "research/sta-velocity-control/scripts/analyze_v04_protocol07.py": "5896850bebf6bab83fcc373f66ddcd2014c410792dd2afac9b2a207a582b6611",
+    "research/sta-velocity-control/scripts/audit_v04_handoff06.py": "292941df7af5a338c01bf000bec7035535df8642b3deca10130c98b9b191e8ee",
+    "research/sta-velocity-control/scripts/audit_v04_heading.py": "52f6106492eafeec5e039312f280ae7fda6b181017dafd2f670b83a5ec754dc0",
+    "research/sta-velocity-control/scripts/audit_v04_landing_ekf.py": "805bb64e802b1b7b0196310d9735a4b5d194261953cd73c5d8e84b57ef6818dd",
+    "research/sta-velocity-control/scripts/audit_v04_protocol02_lifecycle.py": "3430059c500a64a5d43352e2f527a06d9e38c2accec989a649041df9514a4e68",
+    "research/sta-velocity-control/scripts/audit_v04_protocol03_failure.py": "2c38a74a3a57cfd9683ec94f7cbd599df3ed04c84b83d202fbd255142af515d6",
+    "research/sta-velocity-control/scripts/audit_v04_protocol04_failure.py": "778834b19e9131414e1bfa9bd839194fcca0ff6ca4d710c140caf0d07d0a442e",
+    "research/sta-velocity-control/scripts/audit_v04_protocol05_failure.py": "e3e66567b41355dab565143185045d22318ba3f97e8fd1584f7ed0adadbf4163",
+    "research/sta-velocity-control/scripts/audit_v04_protocol06_failure.py": "aa34891c521d476b83096eae99b8eda771624af29cf260ee0ec1b2a789dbabcc",
+    "research/sta-velocity-control/scripts/audit_v04_protocol07_failure.py": "9a8369d9b2d46bfc773111a9e1505b037507b485f4c4ca0b57e1db354ae16da4",
+    "research/sta-velocity-control/scripts/capture_v04_protocol03.py": "1e1288e5d30ff97b0908b7b0912af2afdcad7d5914992cbb60063378af60bd61",
+    "research/sta-velocity-control/scripts/capture_v04_protocol04.py": "55f0806b2f51a160c0a233b5e7239af7f64f6866a682822c86afb7c9c64de0f7",
+    "research/sta-velocity-control/scripts/capture_v04_protocol05.py": "521ee0c9094601865a43e6eec7722d549539b05a4743de6559cc7e42557fd381",
+    "research/sta-velocity-control/scripts/capture_v04_protocol06.py": "38a1ed980cec570d42b969a7cf501e08a24c906401f6b32e72ec0cc9b964f75b",
+    "research/sta-velocity-control/scripts/capture_v04_protocol07.py": "bca94ee152a7e5177b366c8e50cf66eda8ea9455ba7bd66b2fe585674eb377df",
+    "research/sta-velocity-control/scripts/check_v04_protocol02.py": "ad890643a84ed359c2c027d6141f8e4909428ded47ac96d4b105de54f23314b4",
+    "research/sta-velocity-control/scripts/run_v04_flight03.py": "8cf454ba96e9e726cdb86c72072a30b3e5b2e4ce776b42b156a85f5c51b9e253",
+    "research/sta-velocity-control/scripts/run_v04_flight04.py": "eb41d7947f7b72b10567eda9651ff2bca1da26d3c5cb532b7f38c7f316fb2eb6",
+    "research/sta-velocity-control/scripts/run_v04_flight06.py": "85ee33d9199e65196d8f463ab30fa1e46920fd69fd5e757ca9ffeb24d0e4286a",
+    "research/sta-velocity-control/scripts/run_v04_flight07.py": "aa1ac422c96f244455030761ec0190a706ad55bc6d2a7d59c42bc4682f83a3b4",
+    "research/sta-velocity-control/scripts/run_v04_flight08.py": "77e654c2b6aef12ab1f732727cbd0a012e48b2e462a21709b0420de981ac4d9e",
+    "research/sta-velocity-control/scripts/run_v04_protocol03.py": "ffd3016503072f5030a72a2849c4ce4d2f7646e7027a546f377d3b8dace4bd70",
+    "research/sta-velocity-control/scripts/run_v04_protocol04.py": "4cd2ca8a72bcfe738c1443b9304a19b4d7c5045af70e88841ba0871114a7c7cc",
+    "research/sta-velocity-control/scripts/run_v04_protocol05.py": "5641706598819f9a247886376d540a2e71a741ea3ac1436cc288e2b4acf8fc44",
+    "research/sta-velocity-control/scripts/run_v04_protocol06.py": "14cb8f1fe58c17ed56c64dde494d26b271484570cdc4e1c67bb67e872d40363a",
+    "research/sta-velocity-control/scripts/run_v04_protocol07.py": "82a2f15b698fb8222605be74c6767b041a0a92b6faf42368ae94ed29717b0fff",
+    "research/sta-velocity-control/scripts/test_v04_cli_reference.py": "bca36e70e19ee894e4f2f1ea289070f65644f0ae72309101f14b2efbb9e315cb",
+    "research/sta-velocity-control/scripts/test_v04_handoff06.py": "b8d757704d0c381dbc344eeae6392211d66923d2f15cdfd144f6dc92e995fcc5",
+    "research/sta-velocity-control/scripts/test_v04_heading_policy.py": "0fd50de496bd96663b1dfb49c8fad76a0b0760a382afaafb365a5c3e0171f386",
+    "research/sta-velocity-control/scripts/test_v04_landing_ekf_audit.py": "00d30cd02ac123088df6a4d85a653eb25507372e80bfebbfd59aff916b1d0fba",
+    "research/sta-velocity-control/scripts/test_v04_logcheck07.py": "797a649f2f9b0c40e2c4b4c316b525275447857d2e36d6a2cbf7d4eac692815a",
+    "research/sta-velocity-control/scripts/test_v04_protocol02.py": "d1453d55a2f179ecfcba680a9fca134984017911bd0dcc715ab89fd49941514d",
+    "research/sta-velocity-control/scripts/test_v04_protocol03.py": "0e49ebf600804cfe10e5af77252510525994ea53019901feaa3bc571b9a7015c",
+    "research/sta-velocity-control/scripts/test_v04_protocol04.py": "4f58b774741201e82b5a834134cb63f177d6946a406bc5dae8ebae88fb590a29",
+    "research/sta-velocity-control/scripts/test_v04_protocol05.py": "b9ca999bc6a5daa4047fa069a6572d7763f0f9311cb699e737cce5a2d9a7236f",
+    "research/sta-velocity-control/scripts/test_v04_protocol06.py": "9a2ab21a4da55d7ac84e1466e6ce4a73e0ae46da85dfb33c6039dcba7f6d4ac2",
+    "research/sta-velocity-control/scripts/test_v04_protocol07.py": "ea9cde1420ffa359e7c507524db0c9b5d5ad4124e6de865639af25b5c51d475e",
+    "research/sta-velocity-control/scripts/test_v04_repair.py": "44cef0bcfc0b41005359239f64b8f0b76719b84e43309f1ef61f3b39ea394b1c",
+    "research/sta-velocity-control/scripts/v04_handoff06.py": "ab7ba64a1b56b10b10cfded3b700a34bd9463ce9c54024b3ef3ca51e16c57d8f",
+    "research/sta-velocity-control/scripts/v04_heading_policy.py": "5931dd416bbc7f416c45b5cead6cb893a5112323151b801a044d5fd96a084308",
+    "research/sta-velocity-control/scripts/v04_heading_stream.py": "380216c5adf0c1a7e401e30aabeb6a50b69a41c712e8a175d79b32a211452d0e",
+    "research/sta-velocity-control/scripts/v04_logcheck07.py": "ebf8ddce4fd87aa3dcc61f51da756f52bef8ae4ddbc3657454266e3992d9e752",
+    "research/sta-velocity-control/scripts/v04_protocol04.py": "5589c3a872b9ffa52eeef37cb039e02ace157b22ac28788c9d755fbd86578e91",
+    "research/sta-velocity-control/scripts/v04_protocol05.py": "7bd1684a64a58d183fbddc73944ce25064afa89bf077a3b8360d1a8599cb8053",
+    "research/sta-velocity-control/scripts/v04_protocol06.py": "68d461d8585a36852acdaea1e33785cc6991b4c4fb4f0924fe2669bff2c2bbe0",
+    "research/sta-velocity-control/scripts/v04_protocol07.py": "c58e26a07375a40b1d3723b0fab35f72060440a91c4bf9482a34c0770fad9565",
+    "research/sta-velocity-control/scripts/v04_task03.py": "2276761a144f30014be3d869cc786ef856fc3571cefdebf988403fb2b49a7c19",
+    "research/sta-velocity-control/scripts/v04_task04.py": "32581042abed4c683267bd949fc18f0d72f9a3e8160b4ce05470f717d81c1d91",
+    "research/sta-velocity-control/scripts/verify_v04_landing_ekf_audit.py": "0f06a5fecfd7e5ad030179ca2ac98ff71d28275a5b8eb6a3b365777e0ff515d1",
+    "research/sta-velocity-control/scripts/verify_v04_protocol04.py": "e17f7e63b5b8078793e2c17139674bbe58dfcb007b7daed4262f193d7c240e1a",
+    "research/sta-velocity-control/scripts/verify_v04_repair.py": "fae3589d00b9195abef2a8d8e635a88b8d530f124412f9051ff8fa3cb80e8ac3",
+    "research/sta-velocity-control/v04/cli_precision_repair01/artifacts.sha256": "001174a941c72042235a4df5cd62f48ed4d0b0a268d24ec0f7e7211a602e0334",
+    "research/sta-velocity-control/v04/cli_precision_repair01/old_run_reanalysis.json": "36ed8c6aa422102a0a42358d066a9e42eb9dac1d520683d24df4d63737fbd979",
+    "research/sta-velocity-control/v04/cli_precision_repair01/proposal.json": "f00ed18f23e6469df6ee52c05641b6e71243945c5021a92f6865196c85cda7dd",
+    "research/sta-velocity-control/v04/cli_precision_repair01/python_tools.log": "cdd55456ee37187d034053f36f9684b19097bd1ff22f7aef5da5af9ff8a7bac3",
+    "research/sta-velocity-control/v04/cli_precision_repair01/seed_audit.json": "e846759830158c8253f3dbb5e09203e365609ccd4c6b91bbcb9c2ee5fd7cf0a8",
+    "research/sta-velocity-control/v04/cli_precision_repair01/targeted_tests.log": "deb6ca92cc07c14cb7b1eb5a759217bd929926794114450a75b957d0eef9c374",
+    "research/sta-velocity-control/v04/cli_precision_repair01/verification.json": "6cae14ce4487224c8b90869b10509608c22b674dcabb14549f39e0da33d041fd",
+    "research/sta-velocity-control/v04/handoff06/ProjectionWireProbe.cpp": "c810a74febbdf41b3acb419fa0f9815f8074a372b163af34dcf7fa168ab768ae",
+    "research/sta-velocity-control/v04/handoff06/README_CN.md": "7470df9311cae6beb4b7f4f51dfaddf26831b2046d01698f704bb5492b686931",
+    "research/sta-velocity-control/v04/handoff06/artifacts.sha256": "7812c8a27ed605c2cdd3fc594b2b5eb9b9958aeee7d9b15ae355b5e45879a2bc",
+    "research/sta-velocity-control/v04/handoff06/evidence.json": "9808ce335447fa3730c7b637563a1912167a6cf20934dbfef421e61b96da253d",
+    "research/sta-velocity-control/v04/handoff06/historical_reanalysis.json": "28ee894baf6153ed835dfb9d0075a91596ae8052be5f0bb8aba37e61ae415281",
+    "research/sta-velocity-control/v04/handoff06/protocol.json": "073f24c82a98ba108f418e6a163a5563af53f86634c05ac7071c32c80648eae9",
+    "research/sta-velocity-control/v04/handoff06/python_tools.log": "7c4e119716a3b6de44157db5e8a3f7b030af71ef158211df5204af50454d9fd3",
+    "research/sta-velocity-control/v04/handoff06/source_assets.sha256": "04a02b5e6417ff6d14e3721283d08d7dee5486b38fb84f82fe7022b434dcfce7",
+    "research/sta-velocity-control/v04/handoff06/verification.json": "99ab79c5ec812fedec42262dc0fb1827691854a8cfbb9af46afe20a1adcd4b30",
+    "research/sta-velocity-control/v04/heading_audit01/AttitudeControl.xml": "96919dc19e7ee5d5c0aad392e0acfe764e8e457167e270ebb6487085536d6c24",
+    "research/sta-velocity-control/v04/heading_audit01/artifacts.sha256": "e4401fa681619d8ace1541c74e00f1591499b7224b6ce31b83faa5aa1fe3a18f",
+    "research/sta-velocity-control/v04/heading_audit01/audit.json": "67f41fa91a37ed12f2b6ed115009e931298c192e0c69316ef55ac938def2d53a",
+    "research/sta-velocity-control/v04/heading_audit01/evidence.json": "9d9669acfc027238f90ab16b9feb70cb5b6347022bc722d96e547e283ceb0f89",
+    "research/sta-velocity-control/v04/heading_audit01/python_tools.log": "c1ce4193f02795dfdd173bc07a792f518e024a322055d5e53e19ff2239321265",
+    "research/sta-velocity-control/v04/landing_ekf_audit01/fifo_narrowing_probe.cpp": "7a1e48f40e749eea4a01e954295640d63b800e16d85eb6abe3f4691149eb07ae",
+    "research/sta-velocity-control/v04/logcheck07/ReceiverCoordinateProbe.cpp": "023e023e99059f765b1874f188b224e0e624c3856205be6a9443c1be8f541234",
+    "research/sta-velocity-control/v04/logcheck07/artifacts.sha256": "decbe9631eb9f684112b45d1e405c9f0be3544807325f0cc87a4d6fe30eaf592",
+    "research/sta-velocity-control/v04/logcheck07/historical_rejection.json": "d85f4ad74e6c4140100de74d927ccfb3ab9fd3313703798e8e6f151b0d9a3585",
+    "research/sta-velocity-control/v04/logcheck07/protocol.json": "10651d176d45b69c54544bab8fa445b5f6b3c9ba2a174596efbc4b1068de3a0d",
+    "research/sta-velocity-control/v04/logcheck07/python_tools.log": "7970554202fd509ee9a27278878de489418586f7d9e27c8f97d2c8bb673e178c",
+    "research/sta-velocity-control/v04/logcheck07/reanalysis.json": "42c4e01bc7d10a47dd70ae31ef0f2b4aa42fa979af82d3a56ea20f9e02a14708",
+    "research/sta-velocity-control/v04/logcheck07/receiver_profile.json": "4d47236291cd3c6d67d2ce66578275e4780244b9134ce4cf1e0cb0c2ac6576cc",
+    "research/sta-velocity-control/v04/logcheck07/verification.json": "3f0f69dcc3f4ada2db86c1ceb572d9c11b97f863d8958638cbdafd1357e8b384",
+    "research/sta-velocity-control/v04/protocol02/README_CN.md": "f7db1696219bccc30f6274e334c2f0bf327966ed70f3b272c1f56530a2a7036e",
+    "research/sta-velocity-control/v04/protocol02/design_snapshot.json": "7d473200545357cab7d9cbcab14b6e093c37e8cf7836d89e2ce9c56799da4d57",
+    "research/sta-velocity-control/v04/protocol02/protocol.json": "4d81ace6bd989f77eb042be87f34fea6bdadee5d3da664002b275ad6cff8c5bf",
+    "research/sta-velocity-control/v04/protocol02/python_tests.log": "18d1880f6097c4da7959f8baa95bd053cc459f509e867323b5e9ae01f9fd6b74",
+    "research/sta-velocity-control/v04/protocol02/seed_audit.json": "0a2a13ab9c1d81b817def900072a6f95aefdb9c658e55a18433556e2cf306d93",
+    "research/sta-velocity-control/v04/protocol02_audit01/ExcitationLandingAudit.cpp": "4f6642a6fada928f340803b9362009052cab4447431e9554e4cdb927b0284375",
+    "research/sta-velocity-control/v04/protocol02_audit01/artifacts.sha256": "9158b0146791e24fbc0adc1173fb3692c1637ca741197e76c5ba830ea13411f2",
+    "research/sta-velocity-control/v04/protocol02_audit01/evidence.json": "e1e10de8af4ffc7e6c008feae7ba8a7807b8bf32f1e4f5f791781a2c264d0257",
+    "research/sta-velocity-control/v04/protocol02_audit01/python_tests.log": "65830ac6669d87e4a460f8d63bbc91ece085c98b363bc1b33f653fdbb141b90d",
+    "research/sta-velocity-control/v04/protocol03/ExcitationExitTrace.cpp": "4cee93bc9f79da6610dc727300ce2098542c38e9b9d1bb0ef8e576e14ebff624",
+    "research/sta-velocity-control/v04/protocol03/README_CN.md": "a739d01f328c9379d8515fdd6a5e0cf3e4e2ff2db2e81cf0c692a3559220dfc6",
+    "research/sta-velocity-control/v04/protocol03/esta/frozen.json": "3b68fc3ef2cde5db3bf848d1e92c9989e5125857f560ed04ad8fbfcec49ffa1c",
+    "research/sta-velocity-control/v04/protocol03/frozen.json": "e5c85b5747c1fdafd8da78cb86d0f088ab6f08c8505405c892d385325362ca62",
+    "research/sta-velocity-control/v04/protocol03/pid/frozen.json": "75f48016deedae9b5611e1f20b05b65dccc63103011ced13961522708809988c",
+    "research/sta-velocity-control/v04/protocol03/protocol.json": "bcc85869426017b4fa36b3c03eae40474f9acdb878788b06fccf72c1de3ceb0a",
+    "research/sta-velocity-control/v04/protocol04/README_CN.md": "724535c7b712af7a5bdba1529a25df2a53f920ac0b4894fc259c000b41c6d93d",
+    "research/sta-velocity-control/v04/protocol04/esta/frozen.json": "3b68fc3ef2cde5db3bf848d1e92c9989e5125857f560ed04ad8fbfcec49ffa1c",
+    "research/sta-velocity-control/v04/protocol04/execution.json": "d910b97a31075d609668d6b955d1dc2f2c779a7ff164a06b03afeda2337d7238",
+    "research/sta-velocity-control/v04/protocol04/frozen.json": "001cdd319bca80873e6e42c5683532deb114f6230daf7d219fd2b91cba7f45c7",
+    "research/sta-velocity-control/v04/protocol04/implementation01/AttitudeControl.xml": "7ab17b4a04cb1033c08cb854e2818170ba8b64bc93867edc25b8187e9ed236de",
+    "research/sta-velocity-control/v04/protocol04/implementation01/artifacts.sha256": "62e2e8de2856255a79ee2f7a86983bce5466e4a1d136a5bfd7d0eaa015d3659b",
+    "research/sta-velocity-control/v04/protocol04/implementation01/evidence.json": "3193cbd363a7de4ff7a07f18db24ccea822f79c82b781402d1368939153b57ce",
+    "research/sta-velocity-control/v04/protocol04/implementation01/python_tools.log": "b06c01853e76199844778f6bc689b39c394e9a115dcf067831cdf2ce63029d1a",
+    "research/sta-velocity-control/v04/protocol04/implementation01/regression.json": "242f3c2b4b23b65d35c02938d98cd138fa43d467b6037425557fc3d04b0cca78",
+    "research/sta-velocity-control/v04/protocol04/pid/frozen.json": "75f48016deedae9b5611e1f20b05b65dccc63103011ced13961522708809988c",
+    "research/sta-velocity-control/v04/protocol04/protocol.json": "c071d1648ee260fcfde411514d11feef6926cf165113739c61bbfd63b4d1db8d",
+    "research/sta-velocity-control/v04/protocol04/seed_audit.json": "deec7cc80156ab894d62669c65d759a12d24fad9ab85a3a60bb99572ece6c422",
+    "research/sta-velocity-control/v04/protocol05/README_CN.md": "8687cbc13554e0594a97245b8e97f0512155df7a22a6b2b318091f5aa1bba02a",
+    "research/sta-velocity-control/v04/protocol05/esta/frozen.json": "3b68fc3ef2cde5db3bf848d1e92c9989e5125857f560ed04ad8fbfcec49ffa1c",
+    "research/sta-velocity-control/v04/protocol05/execution.json": "a61ffac6b782ad91d744a1cf1af65c0150a8b4ebc088c64611cf9f060248a143",
+    "research/sta-velocity-control/v04/protocol05/frozen.json": "0e876083273d02968108296ed68c32c4613a2b693206d5ae8ab4a50f5c4e3ce1",
+    "research/sta-velocity-control/v04/protocol05/pid/frozen.json": "75f48016deedae9b5611e1f20b05b65dccc63103011ced13961522708809988c",
+    "research/sta-velocity-control/v04/protocol05/seed_audit.json": "6ac3ba3a8c218e8fcee478026c6589e3476dacad1312f42a7b98b12637469bbd",
+    "research/sta-velocity-control/v04/protocol06/README_CN.md": "d0fc1008d67eb32159ccb755fac13c9f62047eddf78e905738af4500c30c841b",
+    "research/sta-velocity-control/v04/protocol06/esta/frozen.json": "3b68fc3ef2cde5db3bf848d1e92c9989e5125857f560ed04ad8fbfcec49ffa1c",
+    "research/sta-velocity-control/v04/protocol06/execution.json": "77617c14d3c0ee13e0d7a1dc60e87e7ffccdf4a14b41e062f84b54e718da0af8",
+    "research/sta-velocity-control/v04/protocol06/frozen.json": "34735620d2cb903354c097029186c4afa44d129c88eb9452fdfdca1c7e678478",
+    "research/sta-velocity-control/v04/protocol06/pid/frozen.json": "75f48016deedae9b5611e1f20b05b65dccc63103011ced13961522708809988c",
+    "research/sta-velocity-control/v04/protocol06/seed_audit.json": "fe38d611418d87ff2850eac67ce66b91d1581733eb02b8768205ab3c7dafbfe0",
+    "research/sta-velocity-control/v04/protocol07/README_CN.md": "a10a7c844105d84238bf3a1961a0e7781b13d6185cca26a73f90c681b9a90549",
+    "research/sta-velocity-control/v04/protocol07/esta/frozen.json": "3b68fc3ef2cde5db3bf848d1e92c9989e5125857f560ed04ad8fbfcec49ffa1c",
+    "research/sta-velocity-control/v04/protocol07/execution.json": "b26942a6c63f009657585cd80b4e4d3b023a053cf62fcd037408d3bffcb87466",
+    "research/sta-velocity-control/v04/protocol07/frozen.json": "4051d5fad43e724db9b3792f55831ecfbfb81eb2ba53279edac36f1ed5420fac",
+    "research/sta-velocity-control/v04/protocol07/pid/frozen.json": "75f48016deedae9b5611e1f20b05b65dccc63103011ced13961522708809988c",
+    "research/sta-velocity-control/v04/protocol07/seed_audit.json": "b6cd269b1d07d9018361766325e4ce3d5bfadebccc14a1991a56574fa73e46fd",
+    "research/sta-velocity-control/v04/repair01/VelocityModule.log": "1b51f7e91360e95fd3d3a6a980f2450e25eb2585c3ef8e2de76e1ca1efd0fd5e",
+    "research/sta-velocity-control/v04/repair01/VelocityModule.xml": "178a1c28c78dd69db7daed0d9e253e5617c523860ba58b2436454bf4cd66e86c",
+    "research/sta-velocity-control/v04/repair01/artifacts.sha256": "ff79b1dac7e94be24e6679eb960574484a5e36b1ae21050a696d26d6c4c8ee24",
+    "research/sta-velocity-control/v04/repair01/evidence.json": "93d890278a53fd3569756b99bd3b599bf3859b3ce02e6411f3b45178b7e340eb",
+    "research/sta-velocity-control/v04/repair01/python_tools.log": "b7879ca9af4493bcdcde01cdc86233a1f1e59bdbd988d7352bd0a19187bb4a2c",
+    "research/sta-velocity-control/v04/repair01/submodules.log": "20028a594d20cfd6abf4713c4767d687b7d2e82c2d0ab6f2f3530b1ee3396b55",
+    "research/sta-velocity-control/v04/results03/artifacts.sha256": "4f4b0ac5942c480f9fef0e2ccc66621dd24f98fb0fc2536fd893e771a6b99d08",
+    "research/sta-velocity-control/v04/results03/diagnosis.json": "b6311bbb21cde44f9c2c429a4f12e14c87df25221b17d6ba30383702757d7c9d",
+    "research/sta-velocity-control/v04/results03/ledger.json": "9c7ea26d4aeb465e3c3e2e10c51672e2c6bf06aab0e4dc428bdc4303fef6554e",
+    "research/sta-velocity-control/v04/results03/run01.json": "7f5f86e70fe256a78c20cd46131a80bcb71f57093bd3b3a46541915f48f5c5b6",
+    "research/sta-velocity-control/v04/results03/verification_committed.json": "4363143ffc2a101019da47049708c231bc5d2dd69cd9667700e5379601406c2c",
+    "research/sta-velocity-control/v04/results04/artifacts.sha256": "93d445c1f725b75c148138c32be651d9aea1ccaf4c9de3cf50221360f71cf1d4",
+    "research/sta-velocity-control/v04/results04/diagnosis.json": "5703a1e6e620d054a65aef18fe7f8a0bb31f91f5778e9976d94ca9d256b989c6",
+    "research/sta-velocity-control/v04/results04/ledger.json": "144abb1a7d06635da77b12f5ca111a6b76ec9611f94e35e29ffeb9b9b95a47a8",
+    "research/sta-velocity-control/v04/results04/original_artifacts.sha256": "592adebfcf2e4a9bc15334787e16e73a34b292e36b8dcb112da891aa9f0d5db7",
+    "research/sta-velocity-control/v04/results04/preflight_verification.json": "f89a48bf45781e68d9c141b8fa21f17fd19ab12ca1e4b51a41405ddcdf1b93f7",
+    "research/sta-velocity-control/v04/results04/python_tools.log": "9c5696439b4e33b2afbedb1eecb2fc68d58a3474a782ff0218afa321d7c64d93",
+    "research/sta-velocity-control/v04/results04/reanalysis.json": "36ed8c6aa422102a0a42358d066a9e42eb9dac1d520683d24df4d63737fbd979",
+    "research/sta-velocity-control/v04/results04/run01.json": "88c15ed848056066ca03d71a84a54f9d838e153d43774342bb8974cbe1d2bd4f",
+    "research/sta-velocity-control/v04/results04/submodules.log": "20028a594d20cfd6abf4713c4767d687b7d2e82c2d0ab6f2f3530b1ee3396b55",
+    "research/sta-velocity-control/v04/results05/artifacts.sha256": "a825928a9c32925aa11c40bcf9a38d779231768b8f78ac261e4da248d9e3c06a",
+    "research/sta-velocity-control/v04/results05/diagnosis.json": "0f461593ba405798f8b4e54202a8bb02ca0a7199eaa85973794bfbb19906fa14",
+    "research/sta-velocity-control/v04/results05/ledger.json": "29b9a73c039310066065e1b62d1dc022bdcd86be9b86baa7f3d6b889d59be988",
+    "research/sta-velocity-control/v04/results05/original_artifacts.sha256": "905e1ca1bf5acbbf74668af4d720b0a71b6213f5182979ce3354c8672711a67e",
+    "research/sta-velocity-control/v04/results05/preflight_verification.json": "a5f8e326aa4410105ac4dedc01e0609e1dbd4d59042f99859f87e31d55a8689b",
+    "research/sta-velocity-control/v04/results05/python_tools.log": "a32911cc9177647cef67a31b21a19328e9ab23654a19dd1d96f85a9fa03e522a",
+    "research/sta-velocity-control/v04/results05/reanalysis.json": "28ee894baf6153ed835dfb9d0075a91596ae8052be5f0bb8aba37e61ae415281",
+    "research/sta-velocity-control/v04/results05/run01.json": "6c74c85781ef60c1c5992fe4702eb740b8af2c025474025f9d80cc59c842c56b",
+    "research/sta-velocity-control/v04/results05/submodules.log": "20028a594d20cfd6abf4713c4767d687b7d2e82c2d0ab6f2f3530b1ee3396b55",
+    "research/sta-velocity-control/v04/results05/triplet_before.txt": "19740180ab299fa4c9013fc9e74f00ca41454986dd2d606246f0f9442c86b080",
+    "research/sta-velocity-control/v04/results06/ReceiverScaleProbe.cpp": "36193ada1dad5aaed9ea114b26fd8649acafb826ddbeab05b254de9b69a5b164",
+    "research/sta-velocity-control/v04/results06/artifacts.sha256": "0587642a4dd1a172320841ee10896b5c96c5d55d42c010d615f20b09a721d5d6",
+    "research/sta-velocity-control/v04/results06/diagnosis.json": "266b9715651b4ec0044a8d4046e25c4ca896120f32eae2cb6c9ff23dee336854",
+    "research/sta-velocity-control/v04/results06/ledger.json": "efff25adc9e6bd0516dcd382044515936388621b2b7582c5d263195a9d4828f2",
+    "research/sta-velocity-control/v04/results06/metrics.json": "d85f4ad74e6c4140100de74d927ccfb3ab9fd3313703798e8e6f151b0d9a3585",
+    "research/sta-velocity-control/v04/results06/original_artifacts.sha256": "20fb1b88f85f457acf3637d361fc0361f8913f44110d92db873dbb30fc22686e",
+    "research/sta-velocity-control/v04/results06/preflight_verification.json": "71f4f5e9aa733c5c2389d3f58e97165270385f2190bcec01a7ec61eaef55c556",
+    "research/sta-velocity-control/v04/results06/python_tools.log": "a722421edd79e9c91d3d536cb266c764fa276f8a6aa7cf53b7bcc2ba6532338a",
+    "research/sta-velocity-control/v04/results06/reanalysis.json": "d85f4ad74e6c4140100de74d927ccfb3ab9fd3313703798e8e6f151b0d9a3585",
+    "research/sta-velocity-control/v04/results06/run01.json": "47f0eda3b536953bceebdae9ac90b055a6a4d449db02149b3cd28bbeb95184a0",
+    "research/sta-velocity-control/v04/results07/artifacts.sha256": "a6c29c568bf0fe6fc74ba4b42a9bf99a96b2bfe50a3c090e300e35b740b5afaf",
+    "research/sta-velocity-control/v04/results07/diagnosis.json": "92fa20e6fcabbbf10f9c61fb10d420b5dc46dfb1b70c91ac1ee79679d675fbce",
+    "research/sta-velocity-control/v04/results07/ledger.json": "4fcd003dd3b0deb990f393b74de01679f497a827c7cbbea22c014479c813479b",
+    "research/sta-velocity-control/v04/results07/original_artifacts.sha256": "4bf1ca3dc0f75f16c0a6b3a1c90b22f981c34aa017e182abd44c973e049043c9",
+    "research/sta-velocity-control/v04/results07/python_tools.log": "2b5a0d2a8c3fb8dc5374bcfce8393902a6fe1b5282746ccb52731f52ad4c8cbc",
+    "research/sta-velocity-control/v04/results07/reanalysis.json": "fa1bde2e315611a55f933e538962214fc32b9c75bd6b0d049b3ed462e6257e47",
+    "research/sta-velocity-control/v04/results07/run01.json": "6d463f26b229be3781993c0782cf9088c98f0385ccc63ac37de1c91c9b925df2",
+    "research/sta-velocity-control/v04/results07/verification.json": "caea2d2e0d51a0c12cf07000ec3818bf96e9926e6daa98b71873dc40e086a694",
+    "src/modules/logger/logged_topics.cpp": "d3947ebe4664f83e02dc38912b32010e3d8e9a74591bdde4f6705be1af1f4902",
+    "src/modules/mc_pos_control/CMakeLists.txt": "7983bb168bea164ca227a9a485d4f7f5841b2ba4eacd0b91ce54eb1c3ee52605",
+    "src/modules/mc_pos_control/MulticopterPositionControl.cpp": "4983b598062f78d6a562c67c95a9b0bb5848fb141a70c45a22f631b66ca687fb",
+    "src/modules/mc_pos_control/MulticopterPositionControl.hpp": "90790fcc9f27829a544116c18a427fba47d66677a445ff140872300f3e8ccebc",
+    "src/modules/mc_pos_control/PositionControl/PositionControl.cpp": "9f246c0cfec4db5f957d85b665e0e213acd4cf79e911e71815950961cde5acf6",
+    "src/modules/mc_pos_control/PositionControl/PositionControl.hpp": "c4c380b6c91acf3c67e9811f23486278d566886dcfdcdb8632fb525db6f4aecd",
+    "src/modules/mc_pos_control/PositionControl/VelocityDiagnosticExcitation.hpp": "54610f65d4b176fa7ad0c08404900e8e7c302de8ce1c552db10bf3d92ec08ef0",
+    "src/modules/mc_pos_control/VelocityModuleTest.cpp": "52909c62b2cafb703f23d03c64cc2a8f78f39bde7ced4c34bf9332e819af7563"
+  }
+}
