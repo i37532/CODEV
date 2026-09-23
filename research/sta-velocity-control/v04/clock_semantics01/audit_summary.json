@@ -1,0 +1,507 @@
+{
+  "kind": "offline_clock_audit_not_acceptance",
+  "head": "7cad95b02ead3362f8955da4ca78e78b017ddfae",
+  "new_flights": 0,
+  "new_seeds": 0,
+  "flight_authorized": false,
+  "acceptance_changed": false,
+  "compiled_clock_flags": [
+    {
+      "file": "/home/yr/Desktop/Codev-autopilot/platforms/posix/src/px4/common/drv_hrt.cpp",
+      "lockstep": true,
+      "command_sha256": "0d2b9c659a084f45f653818aa31475d81c434db8ed054ae7d469bdb7ed84a57d"
+    }
+  ],
+  "sources": {
+    "msg/vehicle_attitude.msg": "1156b015c6d9300b3bc254c4c52c508e773b8d8f99733ed4cd272dd819018634",
+    "src/modules/ekf2/EKF2.cpp": "5f632b6c1d4dc50eb07c6ea6d5fd11937c95689649e90a74bcfb8c0ff686e5b2",
+    "src/modules/ekf2/EKF2Selector.cpp": "330e181b9cd9e3f6ac9de5ca91cab225e386dfb4724a2b2fbfa2c13221c0f0bf",
+    "src/modules/simulator/simulator_mavlink.cpp": "faad1a51786e9ebfbd21bb9ab61f2e895e22e50004e75cf4a7adad81ccf90320",
+    "platforms/posix/src/px4/common/drv_hrt.cpp": "9d94ce57569fb031a2537ae5be534d3888ed30f3cfd9814e8ba7c038af4d15df",
+    "platforms/posix/src/px4/common/lockstep_scheduler/src/lockstep_scheduler.cpp": "5705cc22a09bbae5744800cd3a288f7a486d7d1249370cd5720f975876c7b6b6",
+    "platforms/posix/src/px4/common/lockstep_scheduler/include/lockstep_scheduler/lockstep_scheduler.h": "6a0f669ff705f7c9a96286a14bf79589f6be76ee90e2ff4beb83f55adb09f872",
+    "platforms/common/uORB/Subscription.hpp": "6d77768b9a096af7849d249c23b4deace7239bd3a0b02bdb5a378fe748eb5989",
+    "platforms/common/uORB/uORBDeviceNode.cpp": "ca4ce3fbb8e186c5c795206d58cdcce6ec970ed4c5a2b5b3ed1240453f879889",
+    "src/modules/logger/logger.cpp": "dc752672ef6a2dd02ec2f14735a9840d57876e2f3449000cade6ca22df219623",
+    "src/modules/logger/logged_topics.cpp": "d3947ebe4664f83e02dc38912b32010e3d8e9a74591bdde4f6705be1af1f4902",
+    "src/modules/mc_att_control/mc_att_control_main.cpp": "7bcd6afca7df77c380669932dd94ab8a678218cb4db5d047fbfe2f672682b3a1",
+    "src/modules/mc_pos_control/MulticopterPositionControl.cpp": "4983b598062f78d6a562c67c95a9b0bb5848fb141a70c45a22f631b66ca687fb",
+    "research/sta-velocity-control/scripts/v04_heading_stream.py": "380216c5adf0c1a7e401e30aabeb6a50b69a41c712e8a175d79b32a211452d0e",
+    "research/sta-velocity-control/scripts/analyze_v00.py": "a6c3cdcf68c001ad4c5975ceed4ac8327dda33b7618af8ac0a34bebcb9762d91",
+    "research/sta-velocity-control/scripts/analyze_v03.py": "eacfed3d1a8f3819215d555e2a91e7183013d975658ab0fb3c0e0b4adc9ba85d",
+    "research/sta-velocity-control/scripts/analyze_v04_core04.py": "e7503dfe381bd425888e8f75ad681cff499b5dedd1b83d1b25ef130e2528b30a",
+    "research/sta-velocity-control/scripts/analyze_v04_protocol08.py": "147e30a111bb77855e0009902d139526bf617d4eb96b868e77c05c5ae7010439",
+    "research/sta-velocity-control/scripts/v04_logcheck07.py": "ebf8ddce4fd87aa3dcc61f51da756f52bef8ae4ddbc3657454266e3992d9e752"
+  },
+  "frozen_asset_count": 253,
+  "frozen_asset_mismatches": [],
+  "input_fingerprints": {
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series01/run01/02_41_19.ulg": "264c87938aefcb2beed91cce6f3955813a37fbeae1a73c2e26aa57bd55bb30e9",
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/results01/run01_result.json": "035333e3b0b2a3d629bd6c78e4c121bdcec1ce57c4f205f4b5abcf246cf36cd2",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series02/run01/06_58_19.ulg": "f41c005af1008fbd6fb1441e15b576b5ed2181e86a736141708905da9ca5ccae",
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/results03/run01.json": "7f5f86e70fe256a78c20cd46131a80bcb71f57093bd3b3a46541915f48f5c5b6",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series03/run01/07_58_30.ulg": "e31d4e5fe706d36d6ddf245d1596fef44808ef5a7e179362b501caeefa4cfaa3",
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/results04/run01.json": "88c15ed848056066ca03d71a84a54f9d838e153d43774342bb8974cbe1d2bd4f",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series04/run01/08_27_38.ulg": "88b9cd401f5e410dac6b50f6ee07073597b01a7a7e910646fe89d321f429e086",
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/results05/run01.json": "6c74c85781ef60c1c5992fe4702eb740b8af2c025474025f9d80cc59c842c56b",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series05/run01/09_49_33.ulg": "d8d97dfd7b54fb512c42669e1b874ea49911abe332495b893a269f0ce5e82f16",
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/results06/run01.json": "47f0eda3b536953bceebdae9ac90b055a6a4d449db02149b3cd28bbeb95184a0",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series06/run01/11_01_38.ulg": "46a50a2c0678ead8efd093ee7ad193144a46a0f5c116e202fc1ed6f26b0c523b",
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/results07/run01.json": "6d463f26b229be3781993c0782cf9088c98f0385ccc63ac37de1c91c9b925df2",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series07/run01/12_25_16.ulg": "de1f5a137d2d583621d684e751004cc18bc620d41850412368e39f6cb7380d34",
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/results08/run01.json": "6e522dc206dc8cd3be404839b35a53147dee40aef107c25df21fa862a0bab081"
+  },
+  "eeprom_sha256": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+  "limitations": [
+    "No revised admission rule or timestamp bound has been enabled.",
+    "Raw ULog inter-topic order is logger polling order, not proof of consumer causal order.",
+    "No complete EKF/selector scheduling reproduction or inference of actual attitude controller dt.",
+    "Historical incomplete windows/failed runs remain failed; no RMSE recomputation."
+  ],
+  "external_audit": {
+    "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/clock_semantics_audit01/audit.json",
+    "sha256": "42aa7836835a6d670cd5bc7b61cceef48e7fdc86ab78ed72ddff078739555153"
+  },
+  "runs": [
+    {
+      "record": "research/sta-velocity-control/v04/results01/run01_result.json",
+      "source_head": "67b07d75a98bc3ddf502a779e6cf80f068a1e0e6",
+      "ulog": {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/02_41_19.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series01/run01/02_41_19.ulg",
+        "sha256": "264c87938aefcb2beed91cce6f3955813a37fbeae1a73c2e26aa57bd55bb30e9",
+        "bytes": 12967151
+      },
+      "original_runner_success": false,
+      "original_error": "RuntimeError('Did not reach target altitude 2.5 +/- .5m')",
+      "dropouts": 0,
+      "corruption": false,
+      "nonincreasing_attitude_pairs": [
+        {
+          "raw": [
+            {
+              "offset": 8086800,
+              "timestamp": 27324000,
+              "timestamp_sample": 27320000,
+              "payload_sha256": "341e2eb0b2602e97f454d3e07f41fe08f14cd64fb96bba6bff2f0b2df865ad22"
+            },
+            {
+              "offset": 8088301,
+              "timestamp": 27324000,
+              "timestamp_sample": 27324000,
+              "payload_sha256": "9c7350f9ede1ed63a5a19750a9b6d3e5642145c1532fd284ae3f54731f2797c9"
+            }
+          ],
+          "quat_reset": [
+            2,
+            2
+          ],
+          "max_quaternion_component_change": 5.364418029785156e-07
+        }
+      ],
+      "unchanged_strict_accessor": "Empty/nonmonotonic vehicle_attitude",
+      "attitude_clocks": {
+        "full": {
+          "records": 8575,
+          "equal_publish": 1,
+          "backward_publish": 0,
+          "min_publish_gap_us": 0,
+          "max_publish_gap_us": 8000,
+          "equal_sample": 0,
+          "backward_sample": 0,
+          "min_sample_gap_us": 4000,
+          "max_sample_gap_us": 8000,
+          "future_sample_count": 0,
+          "min_age_us": 0,
+          "max_age_us": 4000,
+          "same_publish_different_forward_sample": 1
+        },
+        "after_takeoff": {
+          "records": 2613,
+          "equal_publish": 0,
+          "backward_publish": 0,
+          "min_publish_gap_us": 4000,
+          "max_publish_gap_us": 8000,
+          "equal_sample": 0,
+          "backward_sample": 0,
+          "min_sample_gap_us": 4000,
+          "max_sample_gap_us": 8000,
+          "future_sample_count": 0,
+          "min_age_us": 0,
+          "max_age_us": 0,
+          "same_publish_different_forward_sample": 0
+        }
+      }
+    },
+    {
+      "record": "research/sta-velocity-control/v04/results03/run01.json",
+      "source_head": "965052446cf0d52c32e1e5641d90db0f96e9a5b4",
+      "ulog": {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/06_58_19.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series02/run01/06_58_19.ulg",
+        "sha256": "f41c005af1008fbd6fb1441e15b576b5ed2181e86a736141708905da9ca5ccae",
+        "bytes": 11181921
+      },
+      "original_runner_success": false,
+      "original_error": "ValueError('Coordinate/reset changed: heading_reset_counter')",
+      "dropouts": 0,
+      "corruption": false,
+      "nonincreasing_attitude_pairs": [],
+      "unchanged_strict_accessor": "passes attitude timestamp check only; not flight acceptance",
+      "attitude_clocks": {
+        "full": {
+          "records": 7295,
+          "equal_publish": 0,
+          "backward_publish": 0,
+          "min_publish_gap_us": 4000,
+          "max_publish_gap_us": 8000,
+          "equal_sample": 0,
+          "backward_sample": 0,
+          "min_sample_gap_us": 4000,
+          "max_sample_gap_us": 8000,
+          "future_sample_count": 0,
+          "min_age_us": 0,
+          "max_age_us": 0,
+          "same_publish_different_forward_sample": 0
+        },
+        "after_takeoff": {
+          "records": 1638,
+          "equal_publish": 0,
+          "backward_publish": 0,
+          "min_publish_gap_us": 4000,
+          "max_publish_gap_us": 8000,
+          "equal_sample": 0,
+          "backward_sample": 0,
+          "min_sample_gap_us": 4000,
+          "max_sample_gap_us": 8000,
+          "future_sample_count": 0,
+          "min_age_us": 0,
+          "max_age_us": 0,
+          "same_publish_different_forward_sample": 0
+        }
+      }
+    },
+    {
+      "record": "research/sta-velocity-control/v04/results04/run01.json",
+      "source_head": "5b5dc2c0d05986cc7cded7e4477ad79ae4315ce9",
+      "ulog": {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/07_58_30.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series03/run01/07_58_30.ulg",
+        "sha256": "e31d4e5fe706d36d6ddf245d1596fef44808ef5a7e179362b501caeefa4cfaa3",
+        "bytes": 9115271
+      },
+      "original_runner_success": false,
+      "original_error": "ValueError('Coordinate/reset changed: ref_lat')",
+      "dropouts": 0,
+      "corruption": false,
+      "nonincreasing_attitude_pairs": [],
+      "unchanged_strict_accessor": "passes attitude timestamp check only; not flight acceptance",
+      "attitude_clocks": {
+        "full": {
+          "records": 5966,
+          "equal_publish": 0,
+          "backward_publish": 0,
+          "min_publish_gap_us": 4000,
+          "max_publish_gap_us": 8000,
+          "equal_sample": 0,
+          "backward_sample": 0,
+          "min_sample_gap_us": 4000,
+          "max_sample_gap_us": 8000,
+          "future_sample_count": 0,
+          "min_age_us": 0,
+          "max_age_us": 0,
+          "same_publish_different_forward_sample": 0
+        },
+        "after_takeoff": {
+          "records": 97,
+          "equal_publish": 0,
+          "backward_publish": 0,
+          "min_publish_gap_us": 4000,
+          "max_publish_gap_us": 8000,
+          "equal_sample": 0,
+          "backward_sample": 0,
+          "min_sample_gap_us": 4000,
+          "max_sample_gap_us": 8000,
+          "future_sample_count": 0,
+          "min_age_us": 0,
+          "max_age_us": 0,
+          "same_publish_different_forward_sample": 0
+        }
+      }
+    },
+    {
+      "record": "research/sta-velocity-control/v04/results05/run01.json",
+      "source_head": "95cc6fe33db5051774174219e73a724a851c64ad",
+      "ulog": {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/08_27_38.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series04/run01/08_27_38.ulg",
+        "sha256": "88b9cd401f5e410dac6b50f6ee07073597b01a7a7e910646fe89d321f429e086",
+        "bytes": 11545414
+      },
+      "original_runner_success": false,
+      "original_error": "ValueError('Invalid navigator target')",
+      "dropouts": 0,
+      "corruption": false,
+      "nonincreasing_attitude_pairs": [],
+      "unchanged_strict_accessor": "passes attitude timestamp check only; not flight acceptance",
+      "attitude_clocks": {
+        "full": {
+          "records": 7718,
+          "equal_publish": 0,
+          "backward_publish": 0,
+          "min_publish_gap_us": 4000,
+          "max_publish_gap_us": 8000,
+          "equal_sample": 0,
+          "backward_sample": 0,
+          "min_sample_gap_us": 4000,
+          "max_sample_gap_us": 8000,
+          "future_sample_count": 0,
+          "min_age_us": 0,
+          "max_age_us": 0,
+          "same_publish_different_forward_sample": 0
+        },
+        "after_takeoff": {
+          "records": 1826,
+          "equal_publish": 0,
+          "backward_publish": 0,
+          "min_publish_gap_us": 4000,
+          "max_publish_gap_us": 8000,
+          "equal_sample": 0,
+          "backward_sample": 0,
+          "min_sample_gap_us": 4000,
+          "max_sample_gap_us": 8000,
+          "future_sample_count": 0,
+          "min_age_us": 0,
+          "max_age_us": 0,
+          "same_publish_different_forward_sample": 0
+        }
+      }
+    },
+    {
+      "record": "research/sta-velocity-control/v04/results06/run01.json",
+      "source_head": "c9030688efffce4984f39f3aa08fe270eda7206c",
+      "ulog": {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/09_49_33.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series05/run01/09_49_33.ulg",
+        "sha256": "d8d97dfd7b54fb512c42669e1b874ea49911abe332495b893a269f0ce5e82f16",
+        "bytes": 36005502
+      },
+      "original_runner_success": true,
+      "original_error": null,
+      "dropouts": 0,
+      "corruption": false,
+      "nonincreasing_attitude_pairs": [],
+      "unchanged_strict_accessor": "passes attitude timestamp check only; not flight acceptance",
+      "attitude_clocks": {
+        "full": {
+          "records": 24932,
+          "equal_publish": 0,
+          "backward_publish": 0,
+          "min_publish_gap_us": 4000,
+          "max_publish_gap_us": 8000,
+          "equal_sample": 0,
+          "backward_sample": 0,
+          "min_sample_gap_us": 4000,
+          "max_sample_gap_us": 8000,
+          "future_sample_count": 0,
+          "min_age_us": 0,
+          "max_age_us": 0,
+          "same_publish_different_forward_sample": 0
+        },
+        "after_takeoff": {
+          "records": 19066,
+          "equal_publish": 0,
+          "backward_publish": 0,
+          "min_publish_gap_us": 4000,
+          "max_publish_gap_us": 8000,
+          "equal_sample": 0,
+          "backward_sample": 0,
+          "min_sample_gap_us": 4000,
+          "max_sample_gap_us": 8000,
+          "future_sample_count": 0,
+          "min_age_us": 0,
+          "max_age_us": 0,
+          "same_publish_different_forward_sample": 0
+        }
+      }
+    },
+    {
+      "record": "research/sta-velocity-control/v04/results07/run01.json",
+      "source_head": "658e57e8ff549cdb89780c61c53ca8b3ec4faa0d",
+      "ulog": {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/11_01_38.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series06/run01/11_01_38.ulg",
+        "sha256": "46a50a2c0678ead8efd093ee7ad193144a46a0f5c116e202fc1ed6f26b0c523b",
+        "bytes": 35055648
+      },
+      "original_runner_success": false,
+      "original_error": "ValueError('CLI reference representation changed: ref_timestamp')",
+      "dropouts": 0,
+      "corruption": false,
+      "nonincreasing_attitude_pairs": [],
+      "unchanged_strict_accessor": "passes attitude timestamp check only; not flight acceptance",
+      "attitude_clocks": {
+        "full": {
+          "records": 24414,
+          "equal_publish": 0,
+          "backward_publish": 0,
+          "min_publish_gap_us": 4000,
+          "max_publish_gap_us": 8000,
+          "equal_sample": 0,
+          "backward_sample": 0,
+          "min_sample_gap_us": 4000,
+          "max_sample_gap_us": 8000,
+          "future_sample_count": 0,
+          "min_age_us": 0,
+          "max_age_us": 0,
+          "same_publish_different_forward_sample": 0
+        },
+        "after_takeoff": {
+          "records": 18568,
+          "equal_publish": 0,
+          "backward_publish": 0,
+          "min_publish_gap_us": 4000,
+          "max_publish_gap_us": 8000,
+          "equal_sample": 0,
+          "backward_sample": 0,
+          "min_sample_gap_us": 4000,
+          "max_sample_gap_us": 8000,
+          "future_sample_count": 0,
+          "min_age_us": 0,
+          "max_age_us": 0,
+          "same_publish_different_forward_sample": 0
+        }
+      }
+    },
+    {
+      "record": "research/sta-velocity-control/v04/results08/run01.json",
+      "source_head": "8df90c62a148d9b4b18c18e0c96796f1cebf932b",
+      "ulog": {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/12_25_16.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series07/run01/12_25_16.ulg",
+        "sha256": "de1f5a137d2d583621d684e751004cc18bc620d41850412368e39f6cb7380d34",
+        "bytes": 18543593
+      },
+      "original_runner_success": false,
+      "original_error": "ValueError('Empty/nonmonotonic vehicle_attitude')",
+      "dropouts": 0,
+      "corruption": false,
+      "nonincreasing_attitude_pairs": [
+        {
+          "raw": [
+            {
+              "offset": 18470941,
+              "timestamp": 60128000,
+              "timestamp_sample": 60124000,
+              "payload_sha256": "db33840d42f6c6d54b92d2f2e496f5aed82da6fbb81c4f474fc0b7dfb8b3ef52"
+            },
+            {
+              "offset": 18472270,
+              "timestamp": 60128000,
+              "timestamp_sample": 60128000,
+              "payload_sha256": "6f455b4fe416b6377dab2d9824ba37708425a103e1f47682e9404f2fc89a56ee"
+            }
+          ],
+          "quat_reset": [
+            3,
+            3
+          ],
+          "max_quaternion_component_change": 4.287692718207836e-06
+        }
+      ],
+      "unchanged_strict_accessor": "Empty/nonmonotonic vehicle_attitude",
+      "attitude_clocks": {
+        "full": {
+          "records": 12536,
+          "equal_publish": 1,
+          "backward_publish": 0,
+          "min_publish_gap_us": 0,
+          "max_publish_gap_us": 8000,
+          "equal_sample": 0,
+          "backward_sample": 0,
+          "min_sample_gap_us": 4000,
+          "max_sample_gap_us": 8000,
+          "future_sample_count": 0,
+          "min_age_us": 0,
+          "max_age_us": 4000,
+          "same_publish_different_forward_sample": 1
+        },
+        "after_takeoff": {
+          "records": 6809,
+          "equal_publish": 1,
+          "backward_publish": 0,
+          "min_publish_gap_us": 0,
+          "max_publish_gap_us": 8000,
+          "equal_sample": 0,
+          "backward_sample": 0,
+          "min_sample_gap_us": 4000,
+          "max_sample_gap_us": 8000,
+          "future_sample_count": 0,
+          "min_age_us": 0,
+          "max_age_us": 4000,
+          "same_publish_different_forward_sample": 1
+        }
+      }
+    }
+  ],
+  "last_run_consumption": {
+    "live_arrays_equal": 1049,
+    "tied_attitude_candidates_at_failure": [
+      12487,
+      12488
+    ],
+    "rate_setpoint_schema": [
+      "timestamp",
+      "roll",
+      "pitch",
+      "yaw",
+      "research_roll_addition",
+      "research_pitch_addition",
+      "research_yaw_addition",
+      "research_elapsed",
+      "thrust_body[0]",
+      "thrust_body[1]",
+      "thrust_body[2]"
+    ],
+    "nearby_rate_setpoints": [
+      {
+        "timestamp": 60120000,
+        "roll": 0.002121240831911564,
+        "pitch": -0.005535239353775978,
+        "yaw": -7.092952728271484e-06
+      },
+      {
+        "timestamp": 60128000,
+        "roll": 0.0020614040549844503,
+        "pitch": -0.006541150622069836,
+        "yaw": -2.3365020751953125e-05
+      },
+      {
+        "timestamp": 60136000,
+        "roll": 0.0018892004154622555,
+        "pitch": -0.006519448012113571,
+        "yaw": -7.176399230957031e-05
+      }
+    ],
+    "actual_attitude_consumption_identifiable_from_these_fields": false
+  },
+  "historical_integrity": [
+    {
+      "index": "results08/original_artifacts.sha256",
+      "files": 41,
+      "mismatches": []
+    },
+    {
+      "index": "results08/artifacts.sha256",
+      "files": 263,
+      "mismatches": []
+    },
+    {
+      "index": "results07/original_artifacts.sha256",
+      "files": 42,
+      "mismatches": []
+    }
+  ],
+  "artifact_count": 65,
+  "artifact_index_sha256": "9c1c12b559c928bf64e53c437ed269ace4461f27ef58d98de891794815bb6e8c"
+}
