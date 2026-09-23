@@ -1,0 +1,297 @@
+{
+  "accepted": false,
+  "original_error": "ValueError('Coordinate/reset changed: heading_reset_counter')",
+  "source_head": "965052446cf0d52c32e1e5641d90db0f96e9a5b4",
+  "flight_attempts": 1,
+  "accepted_attempts": 0,
+  "esta_attempts": 0,
+  "paired_comparisons": 0,
+  "height_command_sent": false,
+  "logs": [
+    {
+      "ulog": {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/06_58_18.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series02/run01/06_58_18.ulg",
+        "sha256": "1bfc0c2faea80d1982e53ba0305b38b0ab49609de0827c3747380b31cd49312c",
+        "bytes": 183932
+      },
+      "dropouts": 0,
+      "topics": {
+        "vehicle_status": {
+          "total": 2,
+          "post_command": 0
+        },
+        "sta_rate_ctrl_status": {
+          "total": 125,
+          "post_command": 0
+        },
+        "vehicle_land_detected": {
+          "total": 1,
+          "post_command": 0
+        }
+      },
+      "estimator_alignment_transitions": [],
+      "new_logging_topics": {
+        "position_setpoint_triplet": 1,
+        "vehicle_command_ack": 0
+      }
+    },
+    {
+      "ulog": {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/06_58_19.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series02/run01/06_58_19.ulg",
+        "sha256": "f41c005af1008fbd6fb1441e15b576b5ed2181e86a736141708905da9ca5ccae",
+        "bytes": 11181921
+      },
+      "dropouts": 0,
+      "topics": {
+        "vehicle_local_position": {
+          "total": 3535,
+          "post_command": 713,
+          "first_timestamp": 30008000,
+          "last_timestamp": 37128000,
+          "max_gap_us": 12000,
+          "reference_transitions": [
+            {
+              "field": "heading_reset_counter",
+              "timestamp": 36860000,
+              "before": 2,
+              "after": 3,
+              "heading": 1.5821300745010376,
+              "delta_heading_rad": 0.006559979170560837,
+              "delta_heading_deg": 0.3758591115474701,
+              "height_from_ground_m": 1.599520828819275,
+              "dist_bottom_m": 1.6965676546096802,
+              "dist_bottom_valid": false
+            }
+          ],
+          "height_range_m": [
+            -0.0014479756355285645,
+            1.7612169981002808
+          ]
+        },
+        "vehicle_status": {
+          "total": 73,
+          "post_command": 15,
+          "first_timestamp": 30028000,
+          "last_timestamp": 37036000,
+          "max_gap_us": 504000,
+          "failsafe": [
+            0
+          ],
+          "arming_state": [
+            2
+          ],
+          "nav_state": [
+            2,
+            17
+          ]
+        },
+        "sta_velocity_ctrl_status": {
+          "total": 3534,
+          "post_command": 712,
+          "first_timestamp": 30008000,
+          "last_timestamp": 37120000,
+          "max_gap_us": 12000,
+          "requested_mode": [
+            0
+          ],
+          "requested_axes": [
+            0
+          ],
+          "effective_mode": [
+            0
+          ],
+          "effective_axes": [
+            0
+          ],
+          "inner_mode": [
+            0
+          ],
+          "inner_axes": [
+            0
+          ],
+          "inner_divisor": [
+            1
+          ],
+          "inner_valid": [
+            1
+          ],
+          "fault": [
+            0
+          ],
+          "sta_fault": [
+            0
+          ],
+          "first_fail": [
+            0
+          ],
+          "first_input": [
+            32511,
+            32704,
+            32763,
+            32767
+          ],
+          "retry_result": [
+            0
+          ],
+          "excitation_fault": [
+            0
+          ],
+          "pid_calls": [
+            1
+          ],
+          "valid": [
+            1
+          ],
+          "timing": [
+            0
+          ],
+          "failsafe": [
+            0
+          ],
+          "armed": [
+            0,
+            1
+          ],
+          "landed": [
+            0,
+            1
+          ],
+          "publish_seq_nonunit_deltas": 0,
+          "update_seq_nonunit_deltas": 0,
+          "first_invocation_offline_check": {
+            "samples": 712,
+            "first_failures": 0,
+            "retries": 0,
+            "first_input_masks": [
+              32511,
+              32704,
+              32763,
+              32767
+            ]
+          },
+          "excitation_peak": 0,
+          "excitation_time_range": [
+            -1,
+            -1
+          ],
+          "all_pid_nu_nan": true
+        },
+        "sta_rate_ctrl_status": {
+          "total": 8836,
+          "post_command": 1781,
+          "first_timestamp": 30008000,
+          "last_timestamp": 37128000,
+          "max_gap_us": 4000,
+          "requested_mode": [
+            0
+          ],
+          "requested_axes": [
+            0
+          ],
+          "effective_mode": [
+            0
+          ],
+          "effective_axes": [
+            0
+          ],
+          "div_eff": [
+            1
+          ],
+          "div_req": [
+            1
+          ],
+          "fault": [
+            0
+          ],
+          "armed": [
+            0,
+            1
+          ],
+          "landed": [
+            0,
+            1
+          ],
+          "publish_seq_nonunit_deltas": 0,
+          "update_seq_nonunit_deltas": 0
+        },
+        "vehicle_land_detected": {
+          "total": 37,
+          "post_command": 8,
+          "first_timestamp": 30060000,
+          "last_timestamp": 37040000,
+          "max_gap_us": 1000000,
+          "landed": [
+            0,
+            1
+          ],
+          "ground_contact": [
+            0,
+            1
+          ]
+        }
+      },
+      "estimator_alignment_transitions": [
+        {
+          "instance": 0,
+          "timestamp": 36976000,
+          "mag_aligned_in_flight_before": 0,
+          "mag_aligned_in_flight_after": 1,
+          "control_mode_flags": 8389271
+        },
+        {
+          "instance": 1,
+          "timestamp": 36980000,
+          "mag_aligned_in_flight_before": 0,
+          "mag_aligned_in_flight_after": 1,
+          "control_mode_flags": 8389271
+        },
+        {
+          "instance": 2,
+          "timestamp": 36980000,
+          "mag_aligned_in_flight_before": 0,
+          "mag_aligned_in_flight_after": 1,
+          "control_mode_flags": 8389271
+        },
+        {
+          "instance": 3,
+          "timestamp": 36984000,
+          "mag_aligned_in_flight_before": 0,
+          "mag_aligned_in_flight_after": 1,
+          "control_mode_flags": 8389271
+        },
+        {
+          "instance": 4,
+          "timestamp": 36984000,
+          "mag_aligned_in_flight_before": 0,
+          "mag_aligned_in_flight_after": 1,
+          "control_mode_flags": 8389271
+        },
+        {
+          "instance": 5,
+          "timestamp": 36988000,
+          "mag_aligned_in_flight_before": 0,
+          "mag_aligned_in_flight_after": 1,
+          "control_mode_flags": 8389271
+        }
+      ],
+      "primary_estimator_instances": [
+        1
+      ],
+      "new_logging_topics": {
+        "position_setpoint_triplet": 4,
+        "vehicle_command_ack": 2
+      }
+    }
+  ],
+  "missing": [
+    "explicit height task",
+    "3s height admission",
+    "32s excitation",
+    "60s observation",
+    "normal landing/disarm",
+    "PID/ESTA pairs"
+  ],
+  "interpretation": "Frozen reset-counter gate failed during PID takeoff; no completed performance window. Alignment mechanism assessment uses pinned ECL code and recorded estimator flags, not a new acceptance rule."
+}

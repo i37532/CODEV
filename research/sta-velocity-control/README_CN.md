@@ -4,7 +4,7 @@
 
 V00–V03已通过，历史失败保留。V04 **failed / needs_revision**：SITL X单轴接入及92个C++/57个Python测试通过，但首轮PID未满足冻结的悬停入口高度，并发现起飞同帧二次update和激励锁止；按协议停止剩余5轮。ESTA实际飞行0次，不能宣称性能或飞行安全验收通过。默认仍PID，不进入V05。默认研究范围为XY速度PID/ESTA比较；Z、Proper-ISTA与双层组合须单独授权。
 
-2026-09-23上游修复已离线验证，随后冻结protocol02设计并获用户有条件执行授权。但接线前实际C++探针发现：正常AUTO_LAND会锁存激励Gate=2，与协议全armed要求excitation_fault=0冲突。6项探针5通过/1兼容失败，Python70通过；**新批次0次启动、6次均未消耗，暂停等待日志分类修订批准**。不修改生产控制或旧冻结规则，不把失败记为飞行失稳，V04仍未通过。
+2026-09-23更新：用户批准正常计划降落Gate=2分类后，protocol03运行器/分析器完成，104个C++/89个Python及干净构建通过。新series02第一轮PID已起飞，但在约1.60m发生EKF航向reset（约0.376°），触发冻结的reset计数不变检查；**1尝试/0接受、后续5停止、ESTA仍0**。没有控制器故障或首次失败重算证据，但不改判通过、不补飞。旧protocol02兼容失败与旧飞行数据全部保留。
 
 - [初始TODO快照](plan/v1/VELOCITY_STA_TODO_CN.md)
 - [初始阶段提示词](plan/v1/VELOCITY_STA_PROMPTS_CN.md)
@@ -16,6 +16,8 @@ V00–V03已通过，历史失败保留。V04 **failed / needs_revision**：SITL
 - [V03：公共保护、日志与一次PID验证](reports/V03.md)
 - [V04：X单轴接入、首轮PID失败与停止记录](reports/V04.md)
 - [V04修复：上游目标缓存与同帧重算离线回归](reports/V04_REPAIR01.md)
+- [V04 protocol03实现与日志修订](reports/V04_PROTOCOL03.md)
+- [V04新批次：起飞航向reset失败及停止记录](reports/V04_PROTOCOL03_RESULTS.md)
 - [V04新高度任务/验证协议（设计冻结，飞行待授权）](v04/protocol02/README_CN.md)
 - [V04协议修订记录及飞前待办](reports/V04_PROTOCOL02.md)
 - [V04飞前生命周期审计：正常降落与零fault规范冲突](reports/V04_PROTOCOL02_PREFLIGHT.md)
