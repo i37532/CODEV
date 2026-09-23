@@ -2,6 +2,8 @@
 
 分支：research/sta-velocity-control；规划起点866bba6e0d200d7a5137146c2a67a1a751e01233。
 
+最新离线验证：[IMU0真实转换链](reports/V04_IMU0_CHAIN_AUDIT.md)。原Simulator→FIFO驱动→VehicleIMU的合成三轴冲击复现反向积分且clipping丢失；4个正常用例、1个缺陷复现、10个预期sanitizer拒绝，原109C++/211Python及构建通过。已证实链路缺陷，未证实旧飞行唯一根因；没有生产修复/协议修改/新飞行，V04仍未通过。下方保留历史结论。
+
 最新离线审计：[降落期EKF切换与目标补偿](reports/V04_LANDING_EKF_AUDIT.md)。本次旧缓存目标只补偿一次、新目标不重复补偿；切换符合较低相对误差选择，切换前真值已有垂向回升。发现IMU0整数转换风险并合成复现，尚未证明是旧飞行根因。109个C++/211个Python通过；无生产修改、无协议豁免、无新飞行，V04仍未通过。
 
 最新批次：[protocol07 / series06结果](reports/V04_PROTOCOL07_RESULTS.md)。重新冻结授权9601–9603共6次、干净协议提交109C++/204Python通过后，首轮PID完成60.388秒观察/32秒激励；降落时真实EKF primary 0→1，伴随参考及多类reset变化，按原门槛停止。1尝试/0完整起降/0接受、余5停止，ESTA0；两项日志修复在本轮部分窗口中通过，不能据此改判整轮。参数已恢复，未push、未V05。以下均保留历史状态。

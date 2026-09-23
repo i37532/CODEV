@@ -1,0 +1,103 @@
+{
+  "kind": "offline_only_no_flight",
+  "new_flights": 0,
+  "commands": [
+    {
+      "name": "regression",
+      "argv": [
+        "python3",
+        "research/sta-velocity-control/scripts/verify_v04_repair.py",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/imu0_chain_regression01/regression"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0
+    },
+    {
+      "name": "attitude",
+      "argv": [
+        "build/px4_sitl_test/unit-AttitudeControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/imu0_chain_regression01/attitude.xml"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0
+    },
+    {
+      "name": "compiler",
+      "argv": [
+        "c++",
+        "--version"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0
+    },
+    {
+      "name": "compile_probe",
+      "argv": [
+        "c++",
+        "-std=c++14",
+        "-O2",
+        "research/sta-velocity-control/v04/landing_ekf_audit01/fifo_narrowing_probe.cpp",
+        "-o",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/imu0_chain_regression01/fifo_probe"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0
+    },
+    {
+      "name": "probe_in_range",
+      "argv": [
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/imu0_chain_regression01/fifo_probe",
+        "-9.81"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0
+    },
+    {
+      "name": "probe_out_of_range_nonportable",
+      "argv": [
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/imu0_chain_regression01/fifo_probe",
+        "-250"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0
+    },
+    {
+      "name": "compile_sanitized",
+      "argv": [
+        "c++",
+        "-std=c++14",
+        "-O2",
+        "-fsanitize=float-cast-overflow",
+        "-fno-sanitize-recover=float-cast-overflow",
+        "research/sta-velocity-control/v04/landing_ekf_audit01/fifo_narrowing_probe.cpp",
+        "-o",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/imu0_chain_regression01/fifo_sanitized"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0
+    },
+    {
+      "name": "sanitized_in_range",
+      "argv": [
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/imu0_chain_regression01/fifo_sanitized",
+        "-9.81"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0
+    },
+    {
+      "name": "sanitized_out_of_range_expected_failure",
+      "argv": [
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/imu0_chain_regression01/fifo_sanitized",
+        "-250"
+      ],
+      "exit_code": 1,
+      "expected_exit": 1
+    }
+  ],
+  "cpp_gtests": 109,
+  "python_tests": 211,
+  "probe_scope": "Synthetic -250 m/s\u00b2 only. UB in conversion reproduced, not proof that the old HIL input had this value.",
+  "passed": true
+}
