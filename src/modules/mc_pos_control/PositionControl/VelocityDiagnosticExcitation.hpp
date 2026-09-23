@@ -11,13 +11,17 @@
 class VelocityDiagnosticExcitation
 {
 public:
+	enum Fault : uint8_t { Clock = 1, Gate = 2, Controller = 4 };
+	// Same-frame failure notification: does not advance the sample clock.
+	void abort() { _fault |= Controller; }
+	uint8_t fault() const { return _fault; }
 	float update(uint64_t sample, bool armed, bool gate)
 	{
-		if (!armed) { _start = _last = 0; _inhibited = false; _time = -1.f; return 0.f; }
-		if (_last && (sample <= _last || sample - _last > 40000)) { _inhibited = true; }
+		if (!armed) { _start = _last = 0; _fault = 0; _time = -1.f; return 0.f; }
+		if (_last && (sample <= _last || sample - _last > 40000)) { _fault |= Clock; }
 		_last = sample;
-		if (!gate) { if (_start) { _inhibited = true; } return 0.f; }
-		if (_inhibited) { return 0.f; }
+		if (!gate) { if (_start) { _fault |= Gate; } return 0.f; }
+		if (_fault) { return 0.f; }
 		if (!_start) { _start = sample; }
 		_time = static_cast<float>((sample - _start) * 1e-6) - 12.f;
 		return waveform(_time);
@@ -32,5 +36,5 @@ public:
 private:
 	uint64_t _start{0}, _last{0};
 	float _time{-1.f};
-	bool _inhibited{false};
+	uint8_t _fault{0};
 };

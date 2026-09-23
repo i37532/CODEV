@@ -1,0 +1,35 @@
+[==========] Running 12 tests from 2 test suites.
+[----------] Global test environment set-up.
+[----------] 10 tests from VelocityModule
+[ RUN      ] VelocityModule.FiftyHzTargetHundredHzCallbacksRampWithoutNewTarget
+[       OK ] VelocityModule.FiftyHzTargetHundredHzCallbacksRampWithoutNewTarget (0 ms)
+[ RUN      ] VelocityModule.EstimatorResetsAdjustCacheOnceNotSuppressedCopy
+[       OK ] VelocityModule.EstimatorResetsAdjustCacheOnceNotSuppressedCopy (0 ms)
+[ RUN      ] VelocityModule.GroundContactAndExitDoNotPoisonLatestTarget
+[       OK ] VelocityModule.GroundContactAndExitDoNotPoisonLatestTarget (1 ms)
+[ RUN      ] VelocityModule.FreshTargetAtEstimatorResetIsNotTranslatedAgain
+[       OK ] VelocityModule.FreshTargetAtEstimatorResetIsNotTranslatedAgain (0 ms)
+[ RUN      ] VelocityModule.GenuineInvalidTargetLogsFirstFailureAndExplicitAbortNotClock
+[       OK ] VelocityModule.GenuineInvalidTargetLogsFirstFailureAndExplicitAbortNotClock (0 ms)
+[ RUN      ] VelocityModule.FallbackImmediatelyUsesVelocityStopAndPreservesYaw
+[       OK ] VelocityModule.FallbackImmediatelyUsesVelocityStopAndPreservesYaw (0 ms)
+[ RUN      ] VelocityModule.MissingMeasurementLoggedBeforeRecoveryWithoutFalseClockFault
+[       OK ] VelocityModule.MissingMeasurementLoggedBeforeRecoveryWithoutFalseClockFault (0 ms)
+[ RUN      ] VelocityModule.FallbackInvalidVelocityOrDerivativeUsesExplicitAcceleration
+[       OK ] VelocityModule.FallbackInvalidVelocityOrDerivativeUsesExplicitAcceleration (0 ms)
+[ RUN      ] VelocityModule.InvalidRetryCannotPublishEvenInPid
+[       OK ] VelocityModule.InvalidRetryCannotPublishEvenInPid (0 ms)
+[ RUN      ] VelocityModule.EstaFailureNeverDoubleCommitsOrPublishesRetry
+[       OK ] VelocityModule.EstaFailureNeverDoubleCommitsOrPublishesRetry (0 ms)
+[----------] 10 tests from VelocityModule (1 ms total)
+
+[----------] 2 tests from VelocityExcitationRepair
+[ RUN      ] VelocityExcitationRepair.AbortDoesNotAdvanceClockAndStillLatchesRealFailure
+[       OK ] VelocityExcitationRepair.AbortDoesNotAdvanceClockAndStillLatchesRealFailure (0 ms)
+[ RUN      ] VelocityExcitationRepair.BackwardsGapGateAndDisarmRemainDistinct
+[       OK ] VelocityExcitationRepair.BackwardsGapGateAndDisarmRemainDistinct (0 ms)
+[----------] 2 tests from VelocityExcitationRepair (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 12 tests from 2 test suites ran. (52 ms total)
+[  PASSED  ] 12 tests.

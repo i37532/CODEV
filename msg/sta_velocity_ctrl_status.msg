@@ -75,4 +75,11 @@ bool landed
 bool contact
 bool failsafe
 bool fault # PID observer unchanged; X ESTA invalid transactions latch until disarm
+# First invocation, preserved even when the final retry is valid.
+# first_fail: 1 XY pairing,2 position estimate,4 velocity/derivative,8 acceleration,16 thrust,32 STA latch
+# first_input: bits0..2 p_sp,3..5 v_ff,6..8 a_ff,9..11 v,12..14 v_dot finite
+uint16 first_fail
+uint16 first_input
+uint8 retry_result # 0 not attempted,1 valid,2 invalid
+uint8 excitation_fault # latched: 1 sensor clock,2 gate lost after start,4 controller failure
 uint8 ORB_QUEUE_LENGTH = 8

@@ -4,6 +4,8 @@
 
 V00–V03已通过，历史失败保留。V04 **failed / needs_revision**：SITL X单轴接入及92个C++/57个Python测试通过，但首轮PID未满足冻结的悬停入口高度，并发现起飞同帧二次update和激励锁止；按协议停止剩余5轮。ESTA实际飞行0次，不能宣称性能或飞行安全验收通过。默认仍PID，不进入V05。默认研究范围为XY速度PID/ESTA比较；Z、Proper-ISTA与双层组合须单独授权。
 
+2026-09-23另获授权的上游修复已离线验证：目标缓存/本帧抑制分离、明确fallback目标、激励失败通知与采样时钟分离、首次失败诊断和最终输出检查；104个C++/58个Python通过。没有新增飞行或新协议，不改判V04。旧协议不能直接在修复后的源码上续跑；下一步需另冻高度任务与新预算。
+
 - [初始TODO快照](plan/v1/VELOCITY_STA_TODO_CN.md)
 - [初始阶段提示词](plan/v1/VELOCITY_STA_PROMPTS_CN.md)
 - [初始状态快照](plan/v1/VELOCITY_STA_STATUS_CN.md)：只是2026-09-19编制状态，后续不可据此推断实际进度。
@@ -13,6 +15,7 @@ V00–V03已通过，历史失败保留。V04 **failed / needs_revision**：SITL
 - [V02报告：离线 ESTA 速度内核](reports/V02.md)
 - [V03：公共保护、日志与一次PID验证](reports/V03.md)
 - [V04：X单轴接入、首轮PID失败与停止记录](reports/V04.md)
+- [V04修复：上游目标缓存与同帧重算离线回归](reports/V04_REPAIR01.md)
 - [V04冻结协议（本批已停止，不得直接续跑）](v04/protocol01/README_CN.md)
 - [V03历史前置审计：失败复现与V02勘误](reports/V03_PREFLIGHT.md)
 - [V03冻结协议与日志说明](v03/protocol01/README_CN.md)

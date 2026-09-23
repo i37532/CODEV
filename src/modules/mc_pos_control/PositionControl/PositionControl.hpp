@@ -158,6 +158,8 @@ public:
 	void setVelocityFrame(const StaVelocityProtection::Frame &frame);
 	const VelocityControlSelector &velocitySelection() const { return _velocity_selector; }
 	const sta_velocity_ctrl_status_s &diagnostic() const { return _diagnostic; }
+	uint16_t inputValidity() const;
+	uint16_t failureReason() const;
 	bool velocityOutputPublishable() const { return _velocity_selector.effectiveMode() == 0 || _diagnostic.valid; }
 	void setDiagnosticExcitation(float velocity) { _diagnostic_excitation = velocity; }
 

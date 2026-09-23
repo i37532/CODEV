@@ -92,6 +92,7 @@ public:
 	bool init();
 
 private:
+	friend class VelocityModuleTestAccess;
 	void Run() override;
 
 	Takeoff _takeoff; /**< state machine and ramp to bring the vehicle off the ground without jumps */

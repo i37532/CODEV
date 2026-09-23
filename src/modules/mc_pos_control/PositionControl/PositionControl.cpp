@@ -180,6 +180,35 @@ bool PositionControl::update(const float dt)
 	return success;
 }
 
+uint16_t PositionControl::inputValidity() const
+{
+	uint16_t mask = 0;
+	for (int i = 0; i < 3; ++i) {
+		if (PX4_ISFINITE(_diagnostic.p_sp[i])) { mask |= 1u << i; }
+		if (PX4_ISFINITE(_diagnostic.v_ff[i])) { mask |= 1u << (i + 3); }
+		if (PX4_ISFINITE(_diagnostic.a_ff[i])) { mask |= 1u << (i + 6); }
+		if (PX4_ISFINITE(_vel(i))) { mask |= 1u << (i + 9); }
+		if (PX4_ISFINITE(_vel_dot(i))) { mask |= 1u << (i + 12); }
+	}
+	return mask;
+}
+
+uint16_t PositionControl::failureReason() const
+{
+	uint16_t reason = 0;
+	if ((PX4_ISFINITE(_diagnostic.p_sp[0]) != PX4_ISFINITE(_diagnostic.p_sp[1]))
+	    || (PX4_ISFINITE(_diagnostic.v_ff[0]) != PX4_ISFINITE(_diagnostic.v_ff[1]))
+	    || (PX4_ISFINITE(_diagnostic.a_ff[0]) != PX4_ISFINITE(_diagnostic.a_ff[1]))) { reason |= 1; }
+	for (int i = 0; i < 3; ++i) {
+		if (PX4_ISFINITE(_pos_sp(i)) && !PX4_ISFINITE(_pos(i))) { reason |= 2; }
+		if (PX4_ISFINITE(_vel_sp(i)) && (!PX4_ISFINITE(_vel(i)) || !PX4_ISFINITE(_vel_dot(i)))) { reason |= 4; }
+		if (!PX4_ISFINITE(_acc_sp(i))) { reason |= 8; }
+		if (!PX4_ISFINITE(_thr_sp(i))) { reason |= 16; }
+	}
+	if (_velocity_selector.effectiveMode() == 1 && _esta_failed) { reason |= 32; }
+	return reason;
+}
+
 void PositionControl::_recordDiagnostic(bool success)
 {
 	_diagnostic.valid = success;

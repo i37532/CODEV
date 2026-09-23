@@ -290,6 +290,8 @@ void MulticopterPositionControl::Run()
 		_control.configureVelocityEsta(esta_config, _control_mode.flag_armed);
 		_control.configureVelocityControl(_param_mpc_vc_mode.get(), _param_mpc_vc_axes.get(), _control_mode.flag_armed);
 		uint8_t pid_calls = 0;
+		uint16_t first_fail = 0, first_input = 0;
+		uint8_t retry_result = 0;
 		uint32_t controller_time_us = 0;
 		uint64_t output_timestamp = 0, attitude_timestamp = 0;
 		float q_sp[4] = {NAN, NAN, NAN, NAN};
@@ -391,17 +393,20 @@ void MulticopterPositionControl::Run()
 			const bool not_taken_off = (_takeoff.getTakeoffState() < TakeoffState::rampup);
 			const bool flying = (_takeoff.getTakeoffState() >= TakeoffState::flight);
 			const bool flying_but_ground_contact = (flying && _vehicle_land_detected.ground_contact);
+			// Keep the EKF-adjusted trajectory cache intact across callbacks without
+			// a new trajectory message. Takeoff suppression is local to this frame.
+			vehicle_local_position_setpoint_s frame_setpoint = _setpoint;
 
 			// make sure takeoff ramp is not amended by acceleration feed-forward
 			if (!flying) {
-				_setpoint.acceleration[2] = NAN;
+				frame_setpoint.acceleration[2] = NAN;
 			}
 
 			if (not_taken_off || flying_but_ground_contact) {
 				reset_bits |= 32;
 				// we are not flying yet and need to avoid any corrections
-				reset_setpoint_to_nan(_setpoint);
-				Vector3f(0.f, 0.f, 100.f).copyTo(_setpoint.acceleration); // High downwards acceleration to make sure there's no thrust
+				reset_setpoint_to_nan(frame_setpoint);
+				Vector3f(0.f, 0.f, 100.f).copyTo(frame_setpoint.acceleration); // High downwards acceleration to make sure there's no thrust
 
 				// prevent any integrator windup
 				_control.resetIntegral();
@@ -429,18 +434,18 @@ void MulticopterPositionControl::Run()
 				math::min(speed_up, _param_mpc_z_vel_max_up.get()), // takeoff ramp starts with negative velocity limit
 				math::constrain(speed_down, 0.f, _param_mpc_z_vel_max_dn.get()));
 
-			_control.setInputSetpoint(_setpoint);
+			_control.setInputSetpoint(frame_setpoint);
 
 			// update states
-			if (!PX4_ISFINITE(_setpoint.z)
-			    && PX4_ISFINITE(_setpoint.vz) && (fabsf(_setpoint.vz) > FLT_EPSILON)
+			if (!PX4_ISFINITE(frame_setpoint.z)
+			    && PX4_ISFINITE(frame_setpoint.vz) && (fabsf(frame_setpoint.vz) > FLT_EPSILON)
 			    && PX4_ISFINITE(local_pos.z_deriv) && local_pos.z_valid && local_pos.v_z_valid) {
 				// A change in velocity is demanded and the altitude is not controlled.
 				// Set velocity to the derivative of position
 				// because it has less bias but blend it in across the landing speed range
 				//  <  MPC_LAND_SPEED: ramp up using altitude derivative without a step
 				//  >= MPC_LAND_SPEED: use altitude derivative
-				float weighting = fminf(fabsf(_setpoint.vz) / _param_mpc_land_speed.get(), 1.f);
+				float weighting = fminf(fabsf(frame_setpoint.vz) / _param_mpc_land_speed.get(), 1.f);
 				states.velocity(2) = local_pos.z_deriv * weighting + local_pos.vz * (1.f - weighting);
 			}
 
@@ -475,7 +480,10 @@ void MulticopterPositionControl::Run()
 			// Run position control
 			const hrt_abstime controller_started = hrt_absolute_time();
 			++pid_calls;
-			if (_control.update(dt)) {
+			bool output_valid = _control.update(dt);
+			first_fail = _control.failureReason();
+			first_input = _control.inputValidity();
+			if (output_valid) {
 				_failsafe_land_hysteresis.set_state_and_update(false, time_stamp_now);
 
 			} else {
@@ -486,7 +494,7 @@ void MulticopterPositionControl::Run()
 				}
 
 				vehicle_local_position_setpoint_s failsafe_setpoint{};
-				_velocity_excitation.update(local_pos.timestamp_sample, _control_mode.flag_armed, false);
+				_velocity_excitation.abort();
 				excitation = 0.f;
 				_control.setDiagnosticExcitation(0.f);
 
@@ -498,15 +506,16 @@ void MulticopterPositionControl::Run()
 				_control.setInputSetpoint(failsafe_setpoint);
 				_control.setVelocityLimits(_param_mpc_xy_vel_max.get(), _param_mpc_z_vel_max_up.get(), _param_mpc_z_vel_max_dn.get());
 				++pid_calls;
-				_control.update(dt);
+				output_valid = _control.update(dt);
+				retry_result = output_valid ? 1 : 2;
 			}
 			controller_time_us = hrt_elapsed_time(&controller_started);
 			_velocity_update_seq += pid_calls;
 
 			// Publish internal position control setpoints
-			// Experimental invalid output is never published; original failsafe above
-			// still runs. This is a SITL abort condition, NOT a safe hover/takeover.
-			if (_control.velocityOutputPublishable()) {
+			// Never publish a failed final invocation, including a failed PID retry.
+			// No publication is NOT a safe hover/takeover; experiments must abort.
+			if (output_valid && _control.velocityOutputPublishable()) {
 				// on top of the input/feed-forward setpoints these containt the PID corrections
 				// This message is used by other modules (such as Landdetector) to determine vehicle intention.
 				vehicle_local_position_setpoint_s local_pos_sp{};
@@ -581,6 +590,10 @@ void MulticopterPositionControl::Run()
 		diagnostic.controller_time_us = controller_time_us;
 		diagnostic.module_time_us = hrt_elapsed_time(&module_started);
 		diagnostic.pid_calls = pid_calls;
+		diagnostic.first_fail = first_fail;
+		diagnostic.first_input = first_input;
+		diagnostic.retry_result = retry_result;
+		diagnostic.excitation_fault = _velocity_excitation.fault();
 		diagnostic.reset_bits = reset_bits;
 		diagnostic.timing = timing;
 		diagnostic.takeoff_state = static_cast<uint8_t>(_takeoff.getTakeoffState());
@@ -633,47 +646,48 @@ void MulticopterPositionControl::failsafe(const hrt_abstime &now, vehicle_local_
 		warn = false;
 	}
 
-	// Only react after a short delay
+	// Retain the reporting hysteresis, but NEVER leave the caller's zero-
+	// initialized struct as an accidental world-origin/yaw-zero command.
+	// Select the existing stop/descend strategy from the first failed frame.
 	_failsafe_land_hysteresis.set_state_and_update(true, now);
+	warn = warn && _failsafe_land_hysteresis.get_state();
+	_in_failsafe = _failsafe_land_hysteresis.get_state();
 
-	if (_failsafe_land_hysteresis.get_state()) {
-		reset_setpoint_to_nan(setpoint);
+	reset_setpoint_to_nan(setpoint);
 
-		if (PX4_ISFINITE(states.velocity(0)) && PX4_ISFINITE(states.velocity(1))) {
-			// don't move along xy
-			setpoint.vx = setpoint.vy = 0.f;
+	if (PX4_ISFINITE(states.velocity(0)) && PX4_ISFINITE(states.velocity(1))
+	    && PX4_ISFINITE(states.acceleration(0)) && PX4_ISFINITE(states.acceleration(1))) {
+		// don't move along xy
+		setpoint.vx = setpoint.vy = 0.f;
 
-			if (warn) {
-				PX4_WARN("Failsafe: stop and wait");
-			}
-
-		} else {
-			// descend with land speed since we can't stop
-			setpoint.acceleration[0] = setpoint.acceleration[1] = 0.f;
-			setpoint.vz = _param_mpc_land_speed.get();
-
-			if (warn) {
-				PX4_WARN("Failsafe: blind land");
-			}
+		if (warn) {
+			PX4_WARN("Failsafe: stop and wait");
 		}
 
-		if (PX4_ISFINITE(states.velocity(2))) {
-			// don't move along z if we can stop in all dimensions
-			if (!PX4_ISFINITE(setpoint.vz)) {
-				setpoint.vz = 0.f;
-			}
+	} else {
+		// descend with land speed since we can't stop
+		setpoint.acceleration[0] = setpoint.acceleration[1] = 0.f;
+		setpoint.vz = _param_mpc_land_speed.get();
 
-		} else {
-			// emergency descend with a bit below hover thrust
-			setpoint.vz = NAN;
-			setpoint.acceleration[2] = .3f;
+		if (warn) {
+			PX4_WARN("Failsafe: blind land");
+		}
+	}
 
-			if (warn) {
-				PX4_WARN("Failsafe: blind descend");
-			}
+	if (PX4_ISFINITE(states.velocity(2)) && PX4_ISFINITE(states.acceleration(2))) {
+		// don't move along z if we can stop in all dimensions
+		if (!PX4_ISFINITE(setpoint.vz)) {
+			setpoint.vz = 0.f;
 		}
 
-		_in_failsafe = true;
+	} else {
+		// emergency descend with a bit below hover thrust
+		setpoint.vz = NAN;
+		setpoint.acceleration[2] = .3f;
+
+		if (warn) {
+			PX4_WARN("Failsafe: blind descend");
+		}
 	}
 }
 
