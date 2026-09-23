@@ -18,6 +18,7 @@ V00–V03已通过，历史失败保留。V04 **failed / needs_revision**：SITL
 - [V04修复：上游目标缓存与同帧重算离线回归](reports/V04_REPAIR01.md)
 - [V04 protocol03实现与日志修订](reports/V04_PROTOCOL03.md)
 - [V04新批次：起飞航向reset失败及停止记录](reports/V04_PROTOCOL03_RESULTS.md)
+- [V04起飞航向对齐离线审计与新准入设计](reports/V04_HEADING_AUDIT.md)：109个C++/99个Python通过，未改生产控制；protocol04仅设计，无新飞行授权，V04仍未通过。
 - [V04新高度任务/验证协议（设计冻结，飞行待授权）](v04/protocol02/README_CN.md)
 - [V04协议修订记录及飞前待办](reports/V04_PROTOCOL02.md)
 - [V04飞前生命周期审计：正常降落与零fault规范冲突](reports/V04_PROTOCOL02_PREFLIGHT.md)

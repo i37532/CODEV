@@ -1,0 +1,81 @@
+{
+  "stage": "V04-protocol04",
+  "status": "design_frozen_offline_only_runner_not_implemented",
+  "flight_authorized": false,
+  "execution_ready": false,
+  "authorized_new_attempts": 0,
+  "source_audited_head": "bf98350bfdc50e5c4af5e01dbd48b06a167322a0",
+  "parent": {
+    "path": "research/sta-velocity-control/v04/protocol03/protocol.json",
+    "sha256": "bcc85869426017b4fa36b3c03eae40474f9acdb878788b06fccf72c1de3ceb0a",
+    "inherit_unchanged": ["scope", "randomness", "simulation_speed", "startup_overrides", "logging", "bounds", "data_gate", "selection_gate", "excitation", "diagnostic_gate", "candidate", "pair_gate", "parameter_restore", "failure_action", "world_verification", "not_authorized", "plugins", "metrics", "additional_log_gates"],
+    "height_task_inherit_except": ["ground_freeze", "reposition.param4", "reposition.coordinate_reference_change", "entry.require"],
+    "never_inherit": ["jobs", "seeds", "budget", "flight_authorized", "execution_ready", "artifacts", "authorization"]
+  },
+  "scope_change": "Only classify one evidenced takeoff magnetic heading realignment and explicitly choose task yaw after it. No estimator, navigator, controller, reset-counter or nu modifications. No retroactive acceptance changes.",
+  "reference_policy": {
+    "before_arm": "Preserve immutable original xyz, heading, heading counter, ref_timestamp/ref_lat/ref_lon/ref_alt and all p/v reset counters. Height remains ground_z minus local z; global altitude target uses the same pre-arm ref_alt.",
+    "always_reject_after_arm": ["ref_timestamp/ref_lat/ref_lon/ref_alt change", "xy/z/vxy/vz reset", "primary estimator switch", "invalid measurements", "controller/first update/retry/failsafe/time fault"],
+    "heading_exception_phase": "TAKEOFF_PREPARATION only: armed, airborne, no ground contact, actual AUTO_TAKEOFF or POSCTL, before any DO_REPOSITION/AUTO_LOITER/excitation/observation",
+    "heading_count_increment": 1,
+    "heading_max_events": 1,
+    "heading_delta_abs_max_deg": 5.0,
+    "heading_delta_limit_basis": "New conservative engineering admission cap, one quarter of unchanged 20deg yaw envelope; not a theoretical bound or held-out estimate. Chosen after historical PID diagnostic knowledge; disclose this development use.",
+    "event_height_m": [1.0, 3.0],
+    "height_limit_basis": "Broad preparation envelope, not an exact reproduction of private delayed terrain>1.5m test. dist_bottom_valid=false is not proof of a valid range observation.",
+    "evidence": {
+      "primary_instance_constant": true,
+      "primary_healthy": true,
+      "mag_aligned_in_flight": "same primary 0->1; yaw_align true; not mag_fault, mag_field_disturbed, emergency reset, EV/GPS yaw takeover or filter fault",
+      "alignment_confirmation_max_lag_s": 0.5,
+      "quat_heading_pair_max_offset_s": 0.04,
+      "quat_heading_delta_tolerance_rad": 0.0001,
+      "require_quat_single_increment": true,
+      "sample_max_gap_s": 0.04,
+      "sequence_missing": 0,
+      "metadata_max_age_s": 0.5,
+      "metadata_max_age_scope": "Periodic estimator_status only; do not apply 0.5s to all metadata topics.",
+      "selector_max_age_s": 1.2,
+      "status_flags_max_age_s": 1.2,
+      "events_freshness": "estimator_event_flags is event-only, no periodic heartbeat. Require pre-arm last event/counter snapshot and uninterrupted subscription/decoded history, contiguous information/warning change counters for new messages, no forbidden events. An old last event is not a new reset nor automatically stale failure; a missing topic or unobservable event interval is not zero. Do not force extra EKF publications.",
+      "metadata_age_basis": "Pinned sources: estimator_status requested at 200ms logger interval; selector/status_flags publish about 1Hz or on change; events publish only on events. Separate 0.5/1.2s engineering guards, not claimed common sample rates.",
+      "pending": "On first candidate, inhibit height command/admission while awaiting asynchronous alignment evidence for <=0.5s. Missing/late/contradictory evidence fails; do not silently accept immediately.",
+      "record": "Original counters/delta/time/primary/alignment flags, pending and confirmation timestamps, actual status/land and controller diagnostics; no zero replacement for missing fields. No Gazebo truth."
+    },
+    "after_exception": "Any second heading event, including counter jump or estimator switch, fails. No heading changes after task_yaw_freeze through landing/disarm. Do not exempt landing resets."
+  },
+  "task_yaw_policy": {
+    "precondition": "Confirmed first in-air alignment; primary healthy/aligned; no pending event; unchanged reference and p/v counters; armed airborne POSCTL, no faults. If no admissible alignment arrives, timeout; do not command one or force the flag.",
+    "quiet_interval_s": 1.0,
+    "quiet_rule": "Continuously stable counters/primary and valid estimates/targets in POSCTL for >=1s before height command; no heading reset anywhere in this interval.",
+    "heading_to_existing_target_abs_max_deg": 1.0,
+    "target_max_age_s": 0.04,
+    "freeze": "Once only: task_yaw=wrap_pi(latest valid measured local heading) after quiet gate, record timestamp/sample/counters and existing trajectory yaw. Original prearm_heading is retained, never overwritten. This changes experimental task heading from pre-arm to post-alignment convention; not a claim of identical prearm physical direction.",
+    "command": "One original navigator DO_REPOSITION with param4=task_yaw radians for this pinned receiver; no external attitude/rate/trajectory publisher. Do not add delta_heading again to this fresh post-alignment value.",
+    "no_rebase": "Neither ground xyz nor global reference is re-frozen. Task yaw cannot track measurements or be recaptured after command. Later reset always fails.",
+    "existing_compensation": "Preserve FlightTask/MPC/attitude reset handling. Same-timestamp target is treated fresh by MPC; older cache may receive delta once. Do not assume all published targets jump by delta or that internal attitude target is fully logged."
+  },
+  "timing": {
+    "preparation_wall_timeout_s": 150,
+    "preparation_timeout_scope": "Original takeoff plus alignment confirmation, POSCTL quiet interval, height command/ACK and 3s height entry; no extra timeout extension.",
+    "after_loiter": "Unchanged 12s settle, height ready by gate+10s, continuous 3s entry, 32s waveform fully within 60s observation. Preparation cannot restart excitation clock or shift windows."
+  },
+  "proposed_next_batch": {
+    "maximum_attempts": 6,
+    "order": "three fresh paired development seeds; each PID then ESTA; pair gate before next pair",
+    "seeds": null,
+    "jobs": [],
+    "output_root": null,
+    "status": "NOT AUTHORIZED; exact fresh seeds, order entries, unique output and execution assets must be audited/frozen before requesting flight",
+    "old_remaining_attempts_reused": 0,
+    "no_auto_retry": true
+  },
+  "before_execution": [
+    "Implement isolated protocol04 runner/analyzer; do not patch historical analyzers or bypass old reset gate in place",
+    "Add live sample/metadata acquisition with actual primary instance binding, bounded pending evidence, once-only yaw freeze and offline ULog replay",
+    "Test phase transitions, positive/negative/wrapped deltas, no/double/late resets, counter wrap/jump, selector switch, coupled p/v reset, missing/stale logs, fresh versus old target, double-compensation and shutdown",
+    "Regression PID/ESTA X and original rate; clean source commit/build, actual nonzero tests and message/logging checks",
+    "Freeze exact new six-attempt proposal and apply for explicit flight authorization; earlier failed batches remain closed"
+  ],
+  "current_turn_not_run": ["new flight", "new seed use", "production code changes", "full EKF simulation", "MATLAB", "push", "V05"]
+}

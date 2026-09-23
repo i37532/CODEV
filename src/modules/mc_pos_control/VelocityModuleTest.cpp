@@ -150,6 +150,37 @@ TEST_F(VelocityModule, FreshTargetAtEstimatorResetIsNotTranslatedAgain)
 	d=step(12000); EXPECT_FLOAT_EQ(d.p_sp[0],target.x); EXPECT_FLOAT_EQ(d.p_sp[1],target.y);
 }
 
+// V04 heading audit: test the real cache policy, not a copied yaw formula.
+TEST_F(VelocityModule, HeadingOldCachePositiveNegativeWrapAndSingleApplication)
+{
+	step();
+	for (float delta : {.2f, -.3f, 3.2f, -6.3f}) {
+		const float before = VelocityModuleTestAccess::cache(*m).yaw;
+		++lp.heading_reset_counter; lp.delta_heading = delta;
+		auto d = step(8000);
+		EXPECT_EQ(d.reset_bits & 16, 16); EXPECT_EQ(d.first_fail, 0); EXPECT_EQ(d.retry_result, 0);
+		EXPECT_FLOAT_EQ(VelocityModuleTestAccess::cache(*m).yaw, before + delta);
+		step(12000); // Persistent delta field must not be applied again without a new counter.
+		EXPECT_FLOAT_EQ(VelocityModuleTestAccess::cache(*m).yaw, before + delta);
+	}
+}
+
+TEST_F(VelocityModule, HeadingFreshSameTimestampAndNewerTargetNotDoubleCompensated)
+{
+	step();
+	for (uint64_t lead : {uint64_t(0), uint64_t(1000)}) {
+		++lp.heading_reset_counter; lp.delta_heading = .2f;
+		target.yaw = -3.12f; target.timestamp = lp.timestamp + 8000 + lead;
+		ASSERT_TRUE(target_pub.publish(target));
+		auto d = step(8000);
+		EXPECT_EQ(d.reset_bits & 16, 16); EXPECT_EQ(d.first_fail, 0); EXPECT_EQ(d.retry_result, 0);
+		EXPECT_EQ(d.setpoint_timestamp, target.timestamp);
+		EXPECT_FLOAT_EQ(VelocityModuleTestAccess::cache(*m).yaw, target.yaw);
+		step(12000);
+		EXPECT_FLOAT_EQ(VelocityModuleTestAccess::cache(*m).yaw, target.yaw);
+	}
+}
+
 TEST_F(VelocityModule, GenuineInvalidTargetLogsFirstFailureAndExplicitAbortNotClock)
 {
 	step(); step(8000); target.x=1.f; target.y=NAN;
