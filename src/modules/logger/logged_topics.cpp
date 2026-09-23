@@ -204,6 +204,9 @@ void LoggedTopics::add_high_rate_topics()
 	add_topic("vehicle_local_position");
 	add_topic("vehicle_local_position_setpoint");
 	add_topic("trajectory_setpoint");
+	// V04 explicit height command: retain command acknowledgement and navigator evidence.
+	add_topic("position_setpoint_triplet");
+	add_topic("vehicle_command_ack");
 	add_topic("sta_rate_ctrl_status");
 	add_topic("velocity_ctrl_selection");
 	add_topic("sta_velocity_ctrl_status");
