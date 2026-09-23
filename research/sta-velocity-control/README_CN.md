@@ -2,6 +2,8 @@
 
 分支：research/sta-velocity-control；规划起点866bba6e0d200d7a5137146c2a67a1a751e01233。
 
+最新获准修复：[IMU0转换链离线修复](reports/V04_IMU0_CHAIN_REPAIR.md)。只改Simulator加速度块：有限超量程先限幅再转整数，非有限向量拒绝并累计错误，保留原有效路径和clipping机制。真实链11个C++用例及sanitizer通过，2048帧与冻结旧源码等价；原109C++/211Python及构建通过。无新飞行，V04仍未验收；不能据此保证EKF不切换，旧预算不续跑。
+
 最新离线验证：[IMU0真实转换链](reports/V04_IMU0_CHAIN_AUDIT.md)。原Simulator→FIFO驱动→VehicleIMU的合成三轴冲击复现反向积分且clipping丢失；4个正常用例、1个缺陷复现、10个预期sanitizer拒绝，原109C++/211Python及构建通过。已证实链路缺陷，未证实旧飞行唯一根因；没有生产修复/协议修改/新飞行，V04仍未通过。下方保留历史结论。
 
 最新离线审计：[降落期EKF切换与目标补偿](reports/V04_LANDING_EKF_AUDIT.md)。本次旧缓存目标只补偿一次、新目标不重复补偿；切换符合较低相对误差选择，切换前真值已有垂向回升。发现IMU0整数转换风险并合成复现，尚未证明是旧飞行根因。109个C++/211个Python通过；无生产修改、无协议豁免、无新飞行，V04仍未通过。
