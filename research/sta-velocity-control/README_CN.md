@@ -2,6 +2,8 @@
 
 分支：research/sta-velocity-control；规划起点866bba6e0d200d7a5137146c2a67a1a751e01233。
 
+最新：protocol04获准后执行series03，首轮PID因CLI经纬度打印舍入与原始ULog参考的精度不一致而中止；原始坐标未变，已解锁但未检测离地。1尝试/0接受、余5停止、ESTA0；参数恢复、旧失败保留，工具尚未修复。见[protocol04实际结果](reports/V04_PROTOCOL04_RESULTS.md)，V04仍未验收。以下为历史记录。
+
 V00–V03已通过，历史失败保留。V04 **failed / needs_revision**：SITL X单轴接入及92个C++/57个Python测试通过，但首轮PID未满足冻结的悬停入口高度，并发现起飞同帧二次update和激励锁止；按协议停止剩余5轮。ESTA实际飞行0次，不能宣称性能或飞行安全验收通过。默认仍PID，不进入V05。默认研究范围为XY速度PID/ESTA比较；Z、Proper-ISTA与双层组合须单独授权。
 
 2026-09-23更新：用户批准正常计划降落Gate=2分类后，protocol03运行器/分析器完成，104个C++/89个Python及干净构建通过。新series02第一轮PID已起飞，但在约1.60m发生EKF航向reset（约0.376°），触发冻结的reset计数不变检查；**1尝试/0接受、后续5停止、ESTA仍0**。没有控制器故障或首次失败重算证据，但不改判通过、不补飞。旧protocol02兼容失败与旧飞行数据全部保留。

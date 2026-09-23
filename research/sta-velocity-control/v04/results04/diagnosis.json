@@ -1,0 +1,424 @@
+{
+  "accepted": false,
+  "original_error": "ValueError('Coordinate/reset changed: ref_lat')",
+  "source_head": "5b5dc2c0d05986cc7cded7e4477ad79ae4315ce9",
+  "planned": 6,
+  "attempts": 1,
+  "accepted_attempts": 0,
+  "unexecuted": 5,
+  "esta_attempts": 0,
+  "original_events": [
+    {
+      "name": "ready",
+      "timestamp_us": 30036000.0
+    },
+    {
+      "name": "takeoff_command",
+      "timestamp_us": 30056000
+    }
+  ],
+  "failure_sample": {
+    "phase": "takeoff",
+    "position": {
+      "timestamp": 30456000.0,
+      "timestamp_sample": 30456000.0,
+      "ref_timestamp": 1192000.0,
+      "ref_lat": 47.397751,
+      "ref_lon": 8.545607,
+      "x": -0.0232,
+      "y": 0.0123,
+      "z": 0.4575,
+      "delta_z": 0.0,
+      "vx": -0.0515,
+      "vy": -0.0081,
+      "vz": -0.0264,
+      "z_deriv": -0.0151,
+      "delta_vz": -0.0289,
+      "ax": -0.0258,
+      "ay": -0.0353,
+      "az": 0.0002,
+      "heading": 1.5652,
+      "delta_heading": -0.0063,
+      "ref_alt": 488.4582,
+      "dist_bottom": 0.1058,
+      "eph": 0.4683,
+      "epv": 0.4757,
+      "evh": 0.1756,
+      "evv": 0.122,
+      "vxy_max": Infinity,
+      "vz_max": Infinity,
+      "hagl_min": Infinity,
+      "hagl_max": Infinity,
+      "xy_valid": true,
+      "z_valid": true,
+      "v_xy_valid": true,
+      "v_z_valid": true,
+      "xy_reset_counter": 2.0,
+      "z_reset_counter": 0.0,
+      "vxy_reset_counter": 2.0,
+      "vz_reset_counter": 1.0,
+      "heading_reset_counter": 2.0,
+      "xy_global": true,
+      "z_global": true,
+      "dist_bottom_valid": true,
+      "dist_bottom_sensor_bitfield": 0.0
+    },
+    "status": {
+      "timestamp": 30172000.0,
+      "nav_state_timestamp": 30172000.0,
+      "failsafe_timestamp": 0.0,
+      "armed_time": 30172000.0,
+      "takeoff_time": 0.0,
+      "onboard_control_sensors_present": 271122476.0,
+      "onboard_control_sensors_enabled": 270598156.0,
+      "onboard_control_sensors_health": 271515695.0,
+      "nav_state": 17.0,
+      "arming_state": 2.0,
+      "hil_state": 0.0,
+      "failsafe": false,
+      "system_type": 2.0,
+      "system_id": 1.0,
+      "component_id": 1.0,
+      "vehicle_type": 1.0,
+      "is_vtol": false,
+      "is_vtol_tailsitter": false,
+      "vtol_fw_permanent_stab": false,
+      "in_transition_mode": false,
+      "in_transition_to_fw": false,
+      "rc_signal_lost": false,
+      "rc_input_mode": 1.0,
+      "data_link_lost": false,
+      "data_link_lost_counter": 0.0,
+      "high_latency_data_link_lost": false,
+      "engine_failure": false,
+      "mission_failure": false,
+      "geofence_violated": false,
+      "failure_detector_status": 0.0,
+      "latest_arming_reason": 3.0,
+      "latest_disarming_reason": 0.0
+    },
+    "land": {
+      "timestamp": 30196000.0,
+      "alt_max": Infinity,
+      "freefall": false,
+      "ground_contact": true,
+      "maybe_landed": true,
+      "landed": true,
+      "in_ground_effect": true,
+      "in_descend": true,
+      "has_low_throttle": true,
+      "vertical_movement": false,
+      "horizontal_movement": false,
+      "close_to_ground_or_skipped_check": true
+    }
+  },
+  "logs": [
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/07_58_29.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series03/run01/07_58_29.ulg",
+      "sha256": "34d2dc25a3529fa613991714cd106c99e3cdeb5b540ff5192aa87d5ce7a10d63",
+      "bytes": 196307,
+      "dropouts": 0,
+      "corruption": false
+    },
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/07_58_30.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series03/run01/07_58_30.ulg",
+      "sha256": "e31d4e5fe706d36d6ddf245d1596fef44808ef5a7e179362b501caeefa4cfaa3",
+      "bytes": 9115271,
+      "dropouts": 0,
+      "corruption": false
+    }
+  ],
+  "reproduced_exception": "Coordinate/reset changed: ref_lat",
+  "coordinate_printing": {
+    "ref_lat": {
+      "raw": 47.3977508,
+      "cli": 47.397751,
+      "formatted_six_decimals": 47.397751,
+      "absolute_difference": 2.0000000233721948e-07,
+      "old_limit": 1e-07
+    },
+    "ref_lon": {
+      "raw": 8.5456073,
+      "cli": 8.545607,
+      "formatted_six_decimals": 8.545607,
+      "absolute_difference": 2.9999999995311555e-07,
+      "old_limit": 1e-07
+    }
+  },
+  "raw_reference_unique": {
+    "ref_timestamp": [
+      1192000
+    ],
+    "ref_alt": [
+      488.4582214355469
+    ],
+    "xy_reset_counter": [
+      2
+    ],
+    "z_reset_counter": [
+      0
+    ],
+    "vxy_reset_counter": [
+      2
+    ],
+    "vz_reset_counter": [
+      1
+    ],
+    "ref_lat": [
+      47.3977508
+    ],
+    "ref_lon": [
+      8.5456073
+    ],
+    "heading_reset_counter": [
+      2
+    ]
+  },
+  "raw_heading_replay": {
+    "primary": 0,
+    "through_us": 30464000,
+    "position_samples": 42,
+    "confirmed": false,
+    "pending": false,
+    "quiet_s": 0.0,
+    "ready": false,
+    "latest_position": {
+      "timestamp": 30464000,
+      "timestamp_sample": 30464000,
+      "ref_timestamp": 1192000,
+      "ref_lat": 47.3977508,
+      "ref_lon": 8.5456073,
+      "x": -0.023045387119054794,
+      "y": 0.012308209203183651,
+      "z": 0.45744022727012634,
+      "delta_xy[0]": -0.003452151082456112,
+      "delta_xy[1]": 0.00797104649245739,
+      "delta_z": 0.0,
+      "vx": -0.05139421299099922,
+      "vy": -0.008113914169371128,
+      "vz": -0.026444297283887863,
+      "z_deriv": -0.015176467597484589,
+      "delta_vxy[0]": -0.012923936359584332,
+      "delta_vxy[1]": 0.013627810403704643,
+      "delta_vz": -0.028928186744451523,
+      "ax": -0.03872876986861229,
+      "ay": 0.006365661974996328,
+      "az": -0.019202006980776787,
+      "heading": 1.5651566982269287,
+      "delta_heading": -0.00629026722162962,
+      "ref_alt": 488.4582214355469,
+      "dist_bottom": 0.10556402802467346,
+      "eph": 0.4694118797779083,
+      "epv": 0.47655537724494934,
+      "evh": 0.17623436450958252,
+      "evv": 0.12221581488847733,
+      "vxy_max": Infinity,
+      "vz_max": Infinity,
+      "hagl_min": Infinity,
+      "hagl_max": Infinity,
+      "xy_valid": 1,
+      "z_valid": 1,
+      "v_xy_valid": 1,
+      "v_z_valid": 1,
+      "xy_reset_counter": 2,
+      "z_reset_counter": 0,
+      "vxy_reset_counter": 2,
+      "vz_reset_counter": 1,
+      "heading_reset_counter": 2,
+      "xy_global": 1,
+      "z_global": 1,
+      "dist_bottom_valid": 1,
+      "dist_bottom_sensor_bitfield": 0
+    }
+  },
+  "topics": {
+    "vehicle_status": {
+      "samples": 1,
+      "max_gap_us": null,
+      "arming_state": [
+        2
+      ],
+      "nav_state": [
+        17
+      ],
+      "takeoff_time": [
+        0
+      ],
+      "failsafe": [
+        0
+      ]
+    },
+    "vehicle_land_detected": {
+      "samples": 1,
+      "max_gap_us": null,
+      "landed": [
+        1
+      ],
+      "ground_contact": [
+        1
+      ]
+    },
+    "sta_velocity_ctrl_status": {
+      "samples": 42,
+      "max_gap_us": 12000,
+      "landed": [
+        1
+      ],
+      "requested_mode": [
+        0
+      ],
+      "requested_axes": [
+        0
+      ],
+      "effective_mode": [
+        0
+      ],
+      "effective_axes": [
+        0
+      ],
+      "inner_mode": [
+        0
+      ],
+      "inner_axes": [
+        0
+      ],
+      "inner_divisor": [
+        1
+      ],
+      "inner_valid": [
+        1
+      ],
+      "armed": [
+        0,
+        1
+      ],
+      "enabled": [
+        1
+      ],
+      "first_fail": [
+        0
+      ],
+      "retry_result": [
+        0
+      ],
+      "fault": [
+        0
+      ],
+      "sta_fault": [
+        0
+      ],
+      "timing": [
+        0
+      ],
+      "failsafe": [
+        0
+      ],
+      "valid": [
+        1
+      ],
+      "pid_calls": [
+        1
+      ],
+      "excitation_fault": [
+        0
+      ],
+      "excitation": [
+        0.0
+      ],
+      "excitation_time": [
+        -1.0
+      ],
+      "publish_seq_nonunit_deltas": 0,
+      "update_seq_nonunit_deltas": 0,
+      "first_invocation": {
+        "samples": 42,
+        "first_failures": 0,
+        "retries": 0,
+        "first_input_masks": [
+          32704
+        ]
+      }
+    },
+    "sta_rate_ctrl_status": {
+      "samples": 104,
+      "max_gap_us": 4000,
+      "landed": [
+        1
+      ],
+      "requested_mode": [
+        0
+      ],
+      "requested_axes": [
+        0
+      ],
+      "effective_mode": [
+        0
+      ],
+      "effective_axes": [
+        0
+      ],
+      "div_eff": [
+        1
+      ],
+      "armed": [
+        0,
+        1
+      ],
+      "fault": [
+        0
+      ],
+      "publish_seq_nonunit_deltas": 0,
+      "update_seq_nonunit_deltas": 0
+    }
+  },
+  "raw_position": {
+    "samples": 42,
+    "first_timestamp": 30056000,
+    "last_timestamp": 30464000,
+    "max_gap_us": 12000,
+    "height_range_m": [
+      -1.3262033462524414e-05,
+      0.0056648850440979
+    ]
+  },
+  "diagnostic_checks": [
+    {
+      "name": "raw_sample_reference_accepted",
+      "passed": true
+    },
+    {
+      "name": "original_cli_reference_rejected",
+      "passed": true
+    },
+    {
+      "name": "ref_lat_six_decimal_output_matches",
+      "passed": true
+    },
+    {
+      "name": "ref_lon_six_decimal_output_matches",
+      "passed": true
+    },
+    {
+      "name": "archived_cli_stdout_matches",
+      "passed": true
+    },
+    {
+      "name": "raw_reference_all_samples_unchanged",
+      "passed": true
+    },
+    {
+      "name": "no_flight_detected",
+      "passed": true
+    },
+    {
+      "name": "no_task_or_excitation",
+      "passed": true
+    }
+  ],
+  "diagnostic_passed": true,
+  "interpretation": "CLI %.6f rounding is inconsistent with the 1e-7 CLI/raw comparison. No raw origin/reset change in the recorded interval; no detected liftoff or complete performance window. This audit does not fix the monitor or reclassify the failed attempt.",
+  "original_artifact_count": 32,
+  "original_artifact_index_sha256": "592adebfcf2e4a9bc15334787e16e73a34b292e36b8dcb112da891aa9f0d5db7"
+}
