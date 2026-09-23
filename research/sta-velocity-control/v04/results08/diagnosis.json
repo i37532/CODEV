@@ -1,0 +1,375 @@
+{
+  "accepted": false,
+  "acceptance_changed": false,
+  "new_flights": 0,
+  "source_head": "8df90c62a148d9b4b18c18e0c96796f1cebf932b",
+  "original_error": "ValueError('Empty/nonmonotonic vehicle_attitude')",
+  "events": [
+    {
+      "name": "ready",
+      "timestamp_us": 30056000.0
+    },
+    {
+      "name": "takeoff_command",
+      "timestamp_us": 30056000
+    },
+    {
+      "name": "reposition_command",
+      "timestamp_us": 38436000.0
+    },
+    {
+      "name": "handoff_ready",
+      "timestamp_us": 38756000.0
+    },
+    {
+      "name": "hover_start",
+      "timestamp_us": 47016000.0
+    }
+  ],
+  "checks": [
+    {
+      "name": "ulog_no_reported_dropout_or_corruption",
+      "passed": true
+    },
+    {
+      "name": "failed_before_complete_observation_and_landing",
+      "passed": true
+    },
+    {
+      "name": "independent_raw_record_clocks_equal_pyulog",
+      "passed": true
+    },
+    {
+      "name": "one_equal_publish_time_not_sample_regression",
+      "passed": true
+    },
+    {
+      "name": "two_different_payloads_and_samples",
+      "passed": true
+    },
+    {
+      "name": "duplicate_is_inside_incomplete_hover",
+      "passed": true
+    },
+    {
+      "name": "live_reader_preserves_original_arrays",
+      "passed": true
+    },
+    {
+      "name": "same_failure_in_complete_log",
+      "passed": true
+    },
+    {
+      "name": "no_recorded_primary_switch",
+      "passed": true
+    },
+    {
+      "name": "no_reference_or_position_velocity_reset_after_takeoff",
+      "passed": true
+    },
+    {
+      "name": "no_heading_reset_after_yaw_freeze",
+      "passed": true
+    },
+    {
+      "name": "actual_PID_and_no_recorded_controller_fault",
+      "passed": true
+    },
+    {
+      "name": "no_missing_velocity_publication",
+      "passed": true
+    },
+    {
+      "name": "no_missing_rate_publication",
+      "passed": true
+    },
+    {
+      "name": "no_complete_32s_excitation",
+      "passed": true
+    }
+  ],
+  "logs": [
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/12_25_15.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series07/run01/12_25_15.ulg",
+      "sha256": "1ef6a9fd58ae673d6c297a04a6cec1f9488bde5bf6f1b7440c4db8f0af1220ae",
+      "bytes": 192990,
+      "dropouts": 0,
+      "corruption": false
+    },
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/12_25_16.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series07/run01/12_25_16.ulg",
+      "sha256": "de1f5a137d2d583621d684e751004cc18bc620d41850412368e39f6cb7380d34",
+      "bytes": 18543593,
+      "dropouts": 0,
+      "corruption": false
+    }
+  ],
+  "attitude": {
+    "samples": 12536,
+    "equal_publish_times": 1,
+    "backwards_publish_times": 0,
+    "nonpositive_sample_intervals": 0,
+    "sample_dt_min_us": 4000,
+    "sample_dt_max_us": 8000,
+    "bad_records": [
+      [
+        {
+          "offset": 18470941,
+          "timestamp": 60128000,
+          "timestamp_sample": 60124000,
+          "payload_sha256": "db33840d42f6c6d54b92d2f2e496f5aed82da6fbb81c4f474fc0b7dfb8b3ef52"
+        },
+        {
+          "offset": 18472270,
+          "timestamp": 60128000,
+          "timestamp_sample": 60128000,
+          "payload_sha256": "6f455b4fe416b6377dab2d9824ba37708425a103e1f47682e9404f2fc89a56ee"
+        }
+      ]
+    ],
+    "bad_quaternions": [
+      [
+        {
+          "timestamp": 60128000,
+          "timestamp_sample": 60124000,
+          "q[0]": 0.7060735821723938,
+          "q[1]": -0.0036564432084560394,
+          "q[2]": 0.0013929131673648953,
+          "q[3]": 0.7081277370452881,
+          "delta_q_reset[0]": 0.9999992847442627,
+          "delta_q_reset[1]": -2.3283064365386963e-10,
+          "delta_q_reset[2]": 0.0,
+          "delta_q_reset[3]": 0.0012134909629821777,
+          "quat_reset_counter": 3
+        },
+        {
+          "timestamp": 60128000,
+          "timestamp_sample": 60128000,
+          "q[0]": 0.7060726284980774,
+          "q[1]": -0.0036528680939227343,
+          "q[2]": 0.0013972008600831032,
+          "q[3]": 0.7081286311149597,
+          "delta_q_reset[0]": 0.9999992847442627,
+          "delta_q_reset[1]": -2.3283064365386963e-10,
+          "delta_q_reset[2]": 0.0,
+          "delta_q_reset[3]": 0.0012134909629821777,
+          "quat_reset_counter": 3
+        }
+      ]
+    ]
+  },
+  "live_vs_independent_field_arrays_equal": 1049,
+  "independent_full_log_rejection": "Empty/nonmonotonic vehicle_attitude",
+  "primary_instances": [
+    0
+  ],
+  "reference_and_pv_counters": {
+    "ref_timestamp": [
+      1196000
+    ],
+    "ref_lat": [
+      47.3977508
+    ],
+    "ref_lon": [
+      8.5456073
+    ],
+    "ref_alt": [
+      488.4620056152344
+    ],
+    "xy_reset_counter": [
+      2
+    ],
+    "z_reset_counter": [
+      0
+    ],
+    "vxy_reset_counter": [
+      2
+    ],
+    "vz_reset_counter": [
+      1
+    ]
+  },
+  "heading_counter_after_yaw_freeze": [
+    3
+  ],
+  "actual_states_until_abort": {
+    "effective_mode": [
+      0
+    ],
+    "effective_axes": [
+      0
+    ],
+    "inner_mode": [
+      0
+    ],
+    "inner_axes": [
+      0
+    ],
+    "inner_divisor": [
+      1
+    ],
+    "inner_valid": [
+      1
+    ],
+    "first_fail": [
+      0
+    ],
+    "retry_result": [
+      0
+    ],
+    "fault": [
+      0
+    ],
+    "sta_fault": [
+      0
+    ],
+    "failsafe": [
+      0
+    ],
+    "timing": [
+      0
+    ],
+    "pid_calls": [
+      1
+    ],
+    "valid": [
+      1
+    ]
+  },
+  "first_invocation_until_abort": {
+    "samples": 3027,
+    "first_failures": 0,
+    "retries": 0,
+    "first_input_masks": [
+      32511,
+      32704,
+      32763,
+      32767
+    ]
+  },
+  "diagnostic_sample_period_us": [
+    8000,
+    12000
+  ],
+  "rate_sample_period_us": [
+    4000
+  ],
+  "excitation_time_range_s": [
+    0.0,
+    9.860000610351562
+  ],
+  "last_host_sample": {
+    "phase": "hover",
+    "position": {
+      "timestamp": 60244000.0,
+      "timestamp_sample": 60244000.0,
+      "ref_timestamp": 1196000.0,
+      "ref_lat": 47.397751,
+      "ref_lon": 8.545607,
+      "x": -0.0346,
+      "y": 0.0252,
+      "z": -2.0298,
+      "delta_z": 0.0,
+      "vx": 0.1012,
+      "vy": 0.0387,
+      "vz": 0.0565,
+      "z_deriv": 0.0048,
+      "delta_vz": -0.0673,
+      "ax": -0.0319,
+      "ay": 0.0679,
+      "az": -0.0032,
+      "heading": 1.5737,
+      "delta_heading": 0.0024,
+      "ref_alt": 488.462,
+      "dist_bottom": 2.6999,
+      "eph": 0.4879,
+      "epv": 0.4784,
+      "evh": 0.18,
+      "evv": 0.1241,
+      "vxy_max": Infinity,
+      "vz_max": Infinity,
+      "hagl_min": Infinity,
+      "hagl_max": Infinity,
+      "xy_valid": true,
+      "z_valid": true,
+      "v_xy_valid": true,
+      "v_z_valid": true,
+      "xy_reset_counter": 2.0,
+      "z_reset_counter": 0.0,
+      "vxy_reset_counter": 2.0,
+      "vz_reset_counter": 1.0,
+      "heading_reset_counter": 3.0,
+      "xy_global": true,
+      "z_global": true,
+      "dist_bottom_valid": false,
+      "dist_bottom_sensor_bitfield": 0.0
+    },
+    "status": {
+      "timestamp": 60124000.0,
+      "nav_state_timestamp": 38452000.0,
+      "failsafe_timestamp": 0.0,
+      "armed_time": 30184000.0,
+      "takeoff_time": 31216000.0,
+      "onboard_control_sensors_present": 271122476.0,
+      "onboard_control_sensors_enabled": 270598156.0,
+      "onboard_control_sensors_health": 271515695.0,
+      "nav_state": 4.0,
+      "arming_state": 2.0,
+      "hil_state": 0.0,
+      "failsafe": false,
+      "system_type": 2.0,
+      "system_id": 1.0,
+      "component_id": 1.0,
+      "vehicle_type": 1.0,
+      "is_vtol": false,
+      "is_vtol_tailsitter": false,
+      "vtol_fw_permanent_stab": false,
+      "in_transition_mode": false,
+      "in_transition_to_fw": false,
+      "rc_signal_lost": false,
+      "rc_input_mode": 1.0,
+      "data_link_lost": false,
+      "data_link_lost_counter": 0.0,
+      "high_latency_data_link_lost": false,
+      "engine_failure": false,
+      "mission_failure": false,
+      "geofence_violated": false,
+      "failure_detector_status": 0.0,
+      "latest_arming_reason": 3.0,
+      "latest_disarming_reason": 0.0
+    },
+    "land": {
+      "timestamp": 60204000.0,
+      "alt_max": Infinity,
+      "freefall": false,
+      "ground_contact": false,
+      "maybe_landed": false,
+      "landed": false,
+      "in_ground_effect": false,
+      "in_descend": false,
+      "has_low_throttle": false,
+      "vertical_movement": false,
+      "horizontal_movement": false,
+      "close_to_ground_or_skipped_check": true
+    }
+  },
+  "host_observation_before_abort_s": 13.228,
+  "parameters": {
+    "MC_RTC_MODE": 0.0,
+    "MC_STA_AXES": 0.0,
+    "MC_RTC_DIV": 1.0,
+    "MC_RATT_TEST": 0.0,
+    "MC_STA_TKO_MGT": 0.0,
+    "MPC_VC_MODE": 0.0,
+    "MPC_VC_AXES": 0.0,
+    "MPC_VCT_TEST": 1.0,
+    "SDLOG_PROFILE": 147.0
+  },
+  "not_evaluated": "No complete 60s observation, 32s excitation, landing, ESTA or paired metrics. No inference about landing IMU repair effectiveness; no production or checker change; no removal/deduplication of records.",
+  "source_interpretation": "EKF2Selector::PublishVehicleAttitude checks increasing timestamp_sample, then stamps timestamp using hrt_absolute_time. Observed distinct samples at the same publish time are consistent with this design, not proof of a sensor clock regression or flight instability. Exact scheduling cause was not traced.",
+  "original_artifact_count": 41,
+  "original_index_sha256": "f9738998cf36f140e52da8334b89b6285370b28a5270eaead7f08831c9ab7d33",
+  "diagnostic_passed": true
+}

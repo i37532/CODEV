@@ -2,6 +2,8 @@
 
 分支：research/sta-velocity-control；规划起点866bba6e0d200d7a5137146c2a67a1a751e01233。
 
+最新批次：[protocol08 / series07结果](reports/V04_PROTOCOL08_RESULTS.md)。IMU0修复后重新授权9701–9703最多6次，协议提交8df90c62a1及干净构建、120个不同C++/222Python通过。首轮PID起飞/交接后悬停约13.228s，两条姿态发布时间同为60.128s而采样时间递增，触发冻结日志检查，余5停止。1尝试/0接受、ESTA0；未完成激励/降落，不能评价IMU0修复降落效果。独立原始记录复核，无本轮生产或检查器修改，参数恢复、不push、不V05。下方记录保留历史时点含义。
+
 最新获准修复：[IMU0转换链离线修复](reports/V04_IMU0_CHAIN_REPAIR.md)。只改Simulator加速度块：有限超量程先限幅再转整数，非有限向量拒绝并累计错误，保留原有效路径和clipping机制。真实链11个C++用例及sanitizer通过，2048帧与冻结旧源码等价；原109C++/211Python及构建通过。无新飞行，V04仍未验收；不能据此保证EKF不切换，旧预算不续跑。
 
 最新离线验证：[IMU0真实转换链](reports/V04_IMU0_CHAIN_AUDIT.md)。原Simulator→FIFO驱动→VehicleIMU的合成三轴冲击复现反向积分且clipping丢失；4个正常用例、1个缺陷复现、10个预期sanitizer拒绝，原109C++/211Python及构建通过。已证实链路缺陷，未证实旧飞行唯一根因；没有生产修复/协议修改/新飞行，V04仍未通过。下方保留历史结论。
