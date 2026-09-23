@@ -2,7 +2,7 @@
 
 分支：research/sta-velocity-control；规划起点866bba6e0d200d7a5137146c2a67a1a751e01233。
 
-V00、V01已通过；V02前置缺口已修复，历史失败保留。V03 **passed**：用户另授权的protocol02单次PID任务完成起飞、60.2秒观察（含完整32秒小速度激励）、降落上锁及真实ULog验收；82个C++/52个Python通过。旧protocol01离地前中止保留，不改判。V04尚未开始，ESTA仍不可生效。默认研究范围为XY速度PID/ESTA比较；Z、Proper-ISTA与双层组合须单独授权。
+V00–V03已通过，历史失败保留。V04 **failed / needs_revision**：SITL X单轴接入及92个C++/57个Python测试通过，但首轮PID未满足冻结的悬停入口高度，并发现起飞同帧二次update和激励锁止；按协议停止剩余5轮。ESTA实际飞行0次，不能宣称性能或飞行安全验收通过。默认仍PID，不进入V05。默认研究范围为XY速度PID/ESTA比较；Z、Proper-ISTA与双层组合须单独授权。
 
 - [初始TODO快照](plan/v1/VELOCITY_STA_TODO_CN.md)
 - [初始阶段提示词](plan/v1/VELOCITY_STA_PROMPTS_CN.md)
@@ -12,6 +12,8 @@ V00、V01已通过；V02前置缺口已修复，历史失败保留。V03 **passe
 - [V01报告：选择框架、逐样本等价及一次冒烟](reports/V01.md)
 - [V02报告：离线 ESTA 速度内核](reports/V02.md)
 - [V03：公共保护、日志与一次PID验证](reports/V03.md)
+- [V04：X单轴接入、首轮PID失败与停止记录](reports/V04.md)
+- [V04冻结协议（本批已停止，不得直接续跑）](v04/protocol01/README_CN.md)
 - [V03历史前置审计：失败复现与V02勘误](reports/V03_PREFLIGHT.md)
 - [V03冻结协议与日志说明](v03/protocol01/README_CN.md)
 - [V03修复后单次验证协议及运行入口](v03/protocol02/README_CN.md)
@@ -21,4 +23,4 @@ V00、V01已通过；V02前置缺口已修复，历史失败保留。V03 **passe
 
 V00核对后将计划和基线工具纳入明确范围提交。后续reports/、scripts/、configs/、evidence/按阶段创建，不预填成功报告。plan/v1为初始快照，修订另存版本，已执行依据以对应提交协议/阶段报告为准。大型日志放仓库外VELOCITY-STA实验目录。
 
-当前有效速度配置仅MPC_VC_MODE=0/MPC_VC_AXES=0；其他请求显式拒绝，原PID数学和参数更新语义保持。V02历史提交已push；本次V03不push。
+默认速度配置为MPC_VC_MODE=0/MPC_VC_AXES=0。实验MODE1/AXES1仅在SITL且配置有效时准入，尚未飞行验收；MODE2及AXES3/7拒绝。X是本地NED北向，不是roll。V03及以前已按用户要求push；本次V04不push。

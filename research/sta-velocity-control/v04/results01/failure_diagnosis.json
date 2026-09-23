@@ -1,0 +1,182 @@
+{
+  "accepted": false,
+  "original_error": "RuntimeError('Did not reach target altitude 2.5 +/- .5m')",
+  "events": {
+    "ready": 30968000.0,
+    "takeoff_command": 30968000.0,
+    "hold_command_after_takeoff": 38120000.0,
+    "hover_start": 42708000.0
+  },
+  "ground": [
+    -0.0074,
+    0.0007,
+    0.5666
+  ],
+  "last_position_queries": [
+    {
+      "timestamp": 41680000.0,
+      "z": -1.4102,
+      "vz": 0.0637,
+      "height_from_ground_m": 1.9768
+    },
+    {
+      "timestamp": 42200000.0,
+      "z": -1.4074,
+      "vz": 0.0692,
+      "height_from_ground_m": 1.974
+    },
+    {
+      "timestamp": 42708000.0,
+      "z": -1.4007,
+      "vz": 0.068,
+      "height_from_ground_m": 1.9673
+    },
+    {
+      "timestamp": 42720000.0,
+      "z": -1.4003,
+      "vz": 0.0682,
+      "height_from_ground_m": 1.9669
+    }
+  ],
+  "hover_entry_required_height_m": [
+    2.0,
+    3.0
+  ],
+  "logs": [
+    {
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series01/run01/02_41_18.ulg",
+      "sha256": "0f365d2b0a35046d3f3519f1bc8923cd46588dba75610c6bb4086437c8bd7868",
+      "bytes": 170387,
+      "dropouts": 0,
+      "sta_velocity_ctrl_status": {
+        "missing": true
+      },
+      "sta_rate_ctrl_status": {
+        "n": 110,
+        "first": 168000,
+        "last": 604000,
+        "flight_samples": 0
+      },
+      "vehicle_local_position": {
+        "missing": true
+      },
+      "vehicle_status": {
+        "n": 2,
+        "first": 20000,
+        "last": 176000,
+        "flight_samples": 0
+      }
+    },
+    {
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series01/run01/02_41_19.ulg",
+      "sha256": "264c87938aefcb2beed91cce6f3955813a37fbeae1a73c2e26aa57bd55bb30e9",
+      "bytes": 12967151,
+      "dropouts": 0,
+      "sta_velocity_ctrl_status": {
+        "n": 4100,
+        "first": 1720000,
+        "last": 42708000,
+        "flight_samples": 1175,
+        "effective_mode": [
+          0
+        ],
+        "effective_axes": [
+          0
+        ],
+        "fault": [
+          0
+        ],
+        "failsafe": [
+          0
+        ],
+        "inner_valid": [
+          1
+        ],
+        "inner_mode": [
+          0
+        ],
+        "sta_fault": [
+          0
+        ],
+        "timing": [
+          0
+        ],
+        "pid_calls": [
+          1,
+          2
+        ],
+        "valid": [
+          1
+        ],
+        "committed_axes": [
+          0
+        ],
+        "active_axes": [
+          0
+        ],
+        "publish_seq_non_unit_deltas": 0,
+        "update_seq_non_unit_deltas": 1,
+        "inner_age_max_us": 4000,
+        "excitation_peak": 0.0,
+        "excitation_time_range": [
+          -1.0,
+          -1.0
+        ],
+        "all_pid_nu_nan": true,
+        "pid_retry_timestamps": [
+          31988000
+        ],
+        "update_counter_note": "A delta of 2 at pid_calls=2 is two actual calls, not a lost publication."
+      },
+      "sta_rate_ctrl_status": {
+        "n": 10251,
+        "first": 1720000,
+        "last": 42720000,
+        "flight_samples": 2939,
+        "effective_mode": [
+          0
+        ],
+        "effective_axes": [
+          0
+        ],
+        "div_eff": [
+          1
+        ],
+        "fault": [
+          0
+        ],
+        "publish_seq_non_unit_deltas": 0,
+        "update_seq_non_unit_deltas": 0
+      },
+      "vehicle_local_position": {
+        "n": 4100,
+        "first": 1720000,
+        "last": 42708000,
+        "flight_samples": 1175,
+        "last_height_m": 1.9672638526916504,
+        "last_vz_m_s": 0.0680280551314354
+      },
+      "vehicle_status": {
+        "n": 85,
+        "first": 1520000,
+        "last": 42668000,
+        "flight_samples": 25,
+        "failsafe": [
+          0
+        ],
+        "nav_state": [
+          2,
+          4,
+          17
+        ],
+        "arming_state": [
+          2
+        ]
+      }
+    }
+  ],
+  "no_complete_metric_window": true,
+  "sta_flights": 0,
+  "paired_comparisons": 0,
+  "conclusion": "First PID seed9101 failed frozen hover-entry height gate; recorded one same-sample PID retry also violates normal-call gate. No ESTA performance/safety inference; preserve failure, stop remaining five attempts."
+}
