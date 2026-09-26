@@ -22,6 +22,7 @@ public:
 	static void fallback(MulticopterPositionControl &m, uint64_t t, vehicle_local_position_setpoint_s &sp,
 		const PositionControlStates &s) { m.failsafe(t,sp,s,false); }
 	static bool failsafe(const MulticopterPositionControl &m) { return m._in_failsafe; }
+	static float internalLandSpeed(const MulticopterPositionControl &m) { return m._param_mpc_land_speed.get(); }
 	static void recovered(MulticopterPositionControl &m, uint64_t t) { m._failsafe_land_hysteresis.set_state_and_update(false,t); }
 	static void invalidateGains(MulticopterPositionControl &m)
 	{
@@ -111,6 +112,35 @@ TEST_F(VelocityModule, FiftyHzTargetHundredHzCallbacksRampWithoutNewTarget)
 	EXPECT_EQ(d.first_fail,0); EXPECT_EQ(d.retry_result,0); EXPECT_EQ(d.excitation_fault,0);
 	EXPECT_FLOAT_EQ(d.p_sp[2],target.z); EXPECT_TRUE(std::isnan(d.a_ff[2]));
 	for(int k=0;k<40;++k) { d=step(k%2 ? 8000 : 12000,k%2==0); EXPECT_EQ(d.pid_calls,1); EXPECT_EQ(d.first_fail,0); }
+}
+
+TEST_F(VelocityModule, LegalDescentCapLimitsLandingWithoutChangingStoredLandParameter)
+{
+	const param_t down_key = param_find("MPC_Z_VEL_MAX_DN"), land_key = param_find("MPC_LAND_SPEED");
+	ASSERT_NE(down_key, PARAM_INVALID); ASSERT_NE(land_key, PARAM_INVALID);
+	for (float cap : {1.f, .5f, 1.f}) {
+		delete m; m = nullptr;
+		float requested_land = .7f;
+		ASSERT_EQ(param_set(down_key, &cap), 0); ASSERT_EQ(param_set(land_key, &requested_land), 0);
+		m = new MulticopterPositionControl(); VelocityModuleTestAccess::fastSpool(*m);
+		EXPECT_FLOAT_EQ(VelocityModuleTestAccess::internalLandSpeed(*m), math::min(cap, .7f));
+		float stored_land = 0.f; ASSERT_EQ(param_get(land_key, &stored_land), 0);
+		EXPECT_FLOAT_EQ(stored_land, .7f); // no out-of-metadata param write to .5
+		land.landed = land.ground_contact = true; ASSERT_TRUE(land_pub.publish(land));
+		step(8000, true); VelocityModuleTestAccess::airborne(*m, lp.timestamp);
+		land.landed = land.ground_contact = false; ASSERT_TRUE(land_pub.publish(land));
+		target.z = NAN; target.vz = .7f; target.acceleration[2] = 0.f;
+		target.vx = .1f; lp.z_deriv = .2f; lp.vz = .1f;
+		for (float constraint : {1.f, NAN, .4f}) {
+			limits.speed_down = constraint; ASSERT_TRUE(limits_pub.publish(limits));
+			const auto d = step(12000, true);
+			ASSERT_TRUE(d.valid); EXPECT_EQ(d.first_fail, 0); EXPECT_EQ(d.retry_result, 0);
+			EXPECT_EQ(d.effective_mode, 0); EXPECT_EQ(d.pid_axes, 7);
+			const float expected = math::min(.7f, math::min(cap, std::isfinite(constraint) ? constraint : cap));
+			EXPECT_FLOAT_EQ(d.v_sp[2], expected); EXPECT_NEAR(d.v_sp[0], .1f, 1e-6f);
+			EXPECT_FLOAT_EQ(d.v[2], .2f); // existing landing mixed-velocity path retained
+		}
+	}
 }
 
 TEST_F(VelocityModule, EstimatorResetsAdjustCacheOnceNotSuppressedCopy)
