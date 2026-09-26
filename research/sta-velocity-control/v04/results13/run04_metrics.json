@@ -1,0 +1,134 @@
+{
+  "accepted": false,
+  "job": {
+    "id": "run04",
+    "seed": 13002,
+    "mode": 1,
+    "axes": 1,
+    "parameters": {
+      "MPC_VC_L1_X": 1,
+      "MPC_VC_L2_X": 0.2,
+      "MPC_VC_NU_X": 0.4,
+      "MPC_VC_A_X": 0.8,
+      "MPC_VC_MODE": 1,
+      "MPC_VC_AXES": 1
+    }
+  },
+  "baseline_accepted": true,
+  "flight": {
+    "n": 8711,
+    "inner": {
+      "max_age_us": 4000,
+      "median_age_us": 0.0,
+      "maximum_reads": 4
+    },
+    "maximum_gap_s": 0.012,
+    "hz": 99.99999999999999
+  },
+  "diagnostic": {
+    "n": 6044,
+    "inner": {
+      "max_age_us": 4000,
+      "median_age_us": 0.0,
+      "maximum_reads": 4
+    },
+    "maximum_gap_s": 0.012,
+    "hz": 99.99669049510192,
+    "error": {
+      "rmse": [
+        0.014801241275106219,
+        0.006364151031267385,
+        0.0024558421719208558
+      ],
+      "mean": [
+        0.0004573096494350475,
+        -0.0016932406517153138,
+        -4.556283494457604e-05
+      ],
+      "std": [
+        0.01479417490664625,
+        0.006134766046407991,
+        0.002455419475661288
+      ],
+      "max_abs": [
+        0.033744603395462036,
+        0.017742350697517395,
+        0.008039101958274841
+      ]
+    },
+    "iae_m": [
+      0.40665883318683993,
+      0.1614343719026074,
+      0.06460632522404189
+    ],
+    "acceleration_tv": [
+      22.200767517089844,
+      2.7670342922210693,
+      3.055258274078369
+    ],
+    "samples": 3200,
+    "seconds": 32.0,
+    "constraint_fraction": 0.0,
+    "maximum_continuous_constraint_s": 0.0,
+    "nu_peak": 0.1919999122619629
+  },
+  "local_output": {
+    "matched": 6044,
+    "denominator": 6044,
+    "coverage": 1.0,
+    "max_gap_s": 0.012,
+    "max_abs_error": 0.0
+  },
+  "attitude_output": {
+    "matched": 6044,
+    "denominator": 6044,
+    "coverage": 1.0,
+    "max_gap_s": 0.012,
+    "max_abs_error": 0.0
+  },
+  "mixer": {
+    "count": 15110,
+    "bit_histogram": {
+      "1": 15110
+    },
+    "feedback_valid_fraction": 1.0,
+    "raw_nonzero_fraction": 1.0,
+    "saturation_fraction_among_valid": 0.0,
+    "rate_direction_saturation_fraction_among_valid": 0.0
+  },
+  "position_rmse": [
+    0.05878655654159552,
+    0.024151323465957983,
+    0.04233412216814284
+  ],
+  "yaw_rmse": 0.00014310185053982997,
+  "height": {
+    "rmse": 0.04254959718483616,
+    "mean": -0.037901574022165596,
+    "std": 0.019337500025445875,
+    "max_abs": 0.06837177276611328
+  },
+  "first_invocation": {
+    "samples": 8711,
+    "first_failures": 0,
+    "retries": 0,
+    "first_input_masks": [
+      32511,
+      32704,
+      32763,
+      32767
+    ]
+  },
+  "exit": {
+    "raw_fault_counts": {
+      "0": 7797,
+      "2": 915
+    },
+    "classification": {
+      "clear": 7797,
+      "expected_planned_landing_gate": 915
+    },
+    "raw_values_preserved": true
+  },
+  "error": "Wrong entry trajectory"
+}

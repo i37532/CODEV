@@ -1,0 +1,1592 @@
+[
+  {
+    "run": "run01",
+    "original_accepted": true,
+    "original_error": null,
+    "results_are_diagnostic_only": true,
+    "landing": {
+      "kind": "diagnosis_not_acceptance",
+      "formal_accepted": false,
+      "runtime_success": true,
+      "runtime_error": null,
+      "ulog": {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-26/09_50_38.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series11/run01/09_50_38.ulg",
+        "sha256": "923ff8034c7de0e598638d43d341be73c38244271ad0063a3a58f56a36e5d1ff",
+        "bytes": 81789651
+      },
+      "events": {
+        "ready": 30964000.0,
+        "takeoff_command": 30964000,
+        "reposition_command": 39524000.0,
+        "handoff_ready": 39904000.0,
+        "hover_start": 48304000.0,
+        "hover_end": 109004000.0,
+        "land_command": 109004000.0,
+        "landed_disarmed": 118844000.0
+      },
+      "dropout_count": 0,
+      "corruption": false,
+      "topics": {
+        "estimator_attitude:0": {
+          "samples": 25552,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_attitude:1": {
+          "samples": 25736,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_attitude:2": {
+          "samples": 25598,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_attitude:3": {
+          "samples": 24668,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_attitude:4": {
+          "samples": 24708,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_attitude:5": {
+          "samples": 24765,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_local_position:0": {
+          "samples": 11747,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_local_position:1": {
+          "samples": 11747,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_local_position:2": {
+          "samples": 11747,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_local_position:3": {
+          "samples": 11747,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_local_position:4": {
+          "samples": 11747,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_local_position:5": {
+          "samples": 11747,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_selector_status:0": {
+          "samples": 118,
+          "median_interval_us": 1008000.0,
+          "max_interval_us": 1012000,
+          "duplicate_publish_times": 0
+        },
+        "estimator_status:0": {
+          "samples": 11747,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status:1": {
+          "samples": 11747,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status:2": {
+          "samples": 11747,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status:3": {
+          "samples": 11747,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status:4": {
+          "samples": 11747,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status:5": {
+          "samples": 11747,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status_flags:0": {
+          "samples": 123,
+          "median_interval_us": 1000000.0,
+          "max_interval_us": 1000000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status_flags:1": {
+          "samples": 126,
+          "median_interval_us": 1000000.0,
+          "max_interval_us": 1004000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status_flags:2": {
+          "samples": 126,
+          "median_interval_us": 1000000.0,
+          "max_interval_us": 1004000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status_flags:3": {
+          "samples": 123,
+          "median_interval_us": 1000000.0,
+          "max_interval_us": 1000000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status_flags:4": {
+          "samples": 124,
+          "median_interval_us": 1000000.0,
+          "max_interval_us": 1008000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status_flags:5": {
+          "samples": 123,
+          "median_interval_us": 1000000.0,
+          "max_interval_us": 1000000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "sensor_accel:0": {
+          "samples": 29367,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 4000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "sensor_accel:1": {
+          "samples": 29367,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 4000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "sensor_accel:2": {
+          "samples": 29367,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 4000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "sta_rate_ctrl_status:0": {
+          "samples": 29367,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 4000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "sta_velocity_ctrl_status:0": {
+          "samples": 11747,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "vehicle_imu:0": {
+          "samples": 25997,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "vehicle_imu:1": {
+          "samples": 25935,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "vehicle_imu:2": {
+          "samples": 25736,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "vehicle_imu_status:0": {
+          "samples": 1176,
+          "median_interval_us": 100000.0,
+          "max_interval_us": 100000,
+          "duplicate_publish_times": 0
+        },
+        "vehicle_imu_status:1": {
+          "samples": 1176,
+          "median_interval_us": 100000.0,
+          "max_interval_us": 100000,
+          "duplicate_publish_times": 0
+        },
+        "vehicle_imu_status:2": {
+          "samples": 1176,
+          "median_interval_us": 100000.0,
+          "max_interval_us": 100000,
+          "duplicate_publish_times": 0
+        },
+        "vehicle_land_detected:0": {
+          "samples": 122,
+          "median_interval_us": 1000000.0,
+          "max_interval_us": 1000000,
+          "duplicate_publish_times": 0
+        },
+        "vehicle_local_position:0": {
+          "samples": 11747,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "vehicle_local_position_groundtruth:0": {
+          "samples": 28471,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 28470
+        }
+      },
+      "faults": [],
+      "clipping": [],
+      "selector": [],
+      "reset_changes": [],
+      "timing_faults": [],
+      "initial_parameters": {
+        "MPC_LAND_SPEED": 0.6000000238418579,
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MC_RTC_MODE": 0,
+        "MC_STA_AXES": 0,
+        "MC_RTC_DIV": 1,
+        "SDLOG_PROFILE": 1171
+      },
+      "effective_mode": [
+        0
+      ],
+      "effective_axes": [
+        0
+      ],
+      "inner_mode": [
+        0
+      ],
+      "inner_axes": [
+        0
+      ],
+      "inner_divisor": [
+        1
+      ],
+      "timing": [
+        0
+      ],
+      "excitation_fault": [
+        0,
+        2
+      ],
+      "contact_window": []
+    },
+    "recorded_entry": {
+      "ready": true,
+      "start": 45304000.0,
+      "end": 48304000.0,
+      "samples": 301,
+      "minimum_height": 2.5408883094787598,
+      "maximum_height": 2.564502239227295
+    },
+    "first_cli_valid": {
+      "position_time": 45264000.0,
+      "target_time": 45376000.0,
+      "future_target_us": 112000.0
+    },
+    "z_entry": {
+      "maximum_error": 0.043274879455566406,
+      "rejected_samples": 0,
+      "first_bad_time": null,
+      "last_bad_time": null
+    },
+    "earliest_later_ready_diagnostic": {
+      "ready": true,
+      "start": 45304000.0,
+      "end": 48304000,
+      "samples": 301,
+      "minimum_height": 2.5408883094787598,
+      "maximum_height": 2.564502239227295
+    }
+  },
+  {
+    "run": "run02",
+    "original_accepted": true,
+    "original_error": null,
+    "results_are_diagnostic_only": true,
+    "landing": {
+      "kind": "diagnosis_not_acceptance",
+      "formal_accepted": false,
+      "runtime_success": true,
+      "runtime_error": null,
+      "ulog": {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-26/09_52_45.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series11/run02/09_52_45.ulg",
+        "sha256": "394d8a380ee154a485998927990a16f76c929928853d54535a45e3faf24b7036",
+        "bytes": 80647168
+      },
+      "events": {
+        "ready": 30116000.0,
+        "takeoff_command": 30124000,
+        "reposition_command": 39004000.0,
+        "handoff_ready": 39364000.0,
+        "hover_start": 47376000.0,
+        "hover_end": 107436000.0,
+        "land_command": 107436000.0,
+        "landed_disarmed": 117216000.0
+      },
+      "dropout_count": 0,
+      "corruption": false,
+      "topics": {
+        "estimator_attitude:0": {
+          "samples": 25271,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_attitude:1": {
+          "samples": 25452,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_attitude:2": {
+          "samples": 25406,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_attitude:3": {
+          "samples": 24348,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_attitude:4": {
+          "samples": 24518,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_attitude:5": {
+          "samples": 24518,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_local_position:0": {
+          "samples": 11572,
+          "median_interval_us": 8000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_local_position:1": {
+          "samples": 11572,
+          "median_interval_us": 12000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_local_position:2": {
+          "samples": 11572,
+          "median_interval_us": 8000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_local_position:3": {
+          "samples": 11572,
+          "median_interval_us": 12000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_local_position:4": {
+          "samples": 11573,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_local_position:5": {
+          "samples": 11572,
+          "median_interval_us": 8000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_selector_status:0": {
+          "samples": 115,
+          "median_interval_us": 1010000.0,
+          "max_interval_us": 1012000,
+          "duplicate_publish_times": 0
+        },
+        "estimator_status:0": {
+          "samples": 11572,
+          "median_interval_us": 8000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status:1": {
+          "samples": 11572,
+          "median_interval_us": 12000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status:2": {
+          "samples": 11572,
+          "median_interval_us": 8000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status:3": {
+          "samples": 11572,
+          "median_interval_us": 12000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status:4": {
+          "samples": 11573,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status:5": {
+          "samples": 11572,
+          "median_interval_us": 8000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status_flags:0": {
+          "samples": 121,
+          "median_interval_us": 1000000.0,
+          "max_interval_us": 1000000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status_flags:1": {
+          "samples": 122,
+          "median_interval_us": 1000000.0,
+          "max_interval_us": 1000000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status_flags:2": {
+          "samples": 122,
+          "median_interval_us": 1000000.0,
+          "max_interval_us": 1000000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status_flags:3": {
+          "samples": 122,
+          "median_interval_us": 1000000.0,
+          "max_interval_us": 1000000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status_flags:4": {
+          "samples": 120,
+          "median_interval_us": 1000000.0,
+          "max_interval_us": 1000000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status_flags:5": {
+          "samples": 121,
+          "median_interval_us": 1000000.0,
+          "max_interval_us": 1000000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "sensor_accel:0": {
+          "samples": 28931,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 4000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "sensor_accel:1": {
+          "samples": 28931,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 4000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "sensor_accel:2": {
+          "samples": 28931,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 4000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "sta_rate_ctrl_status:0": {
+          "samples": 28931,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 4000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "sta_velocity_ctrl_status:0": {
+          "samples": 11572,
+          "median_interval_us": 8000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "vehicle_imu:0": {
+          "samples": 25582,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "vehicle_imu:1": {
+          "samples": 25575,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "vehicle_imu:2": {
+          "samples": 25447,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "vehicle_imu_status:0": {
+          "samples": 1158,
+          "median_interval_us": 100000.0,
+          "max_interval_us": 100000,
+          "duplicate_publish_times": 0
+        },
+        "vehicle_imu_status:1": {
+          "samples": 1158,
+          "median_interval_us": 100000.0,
+          "max_interval_us": 100000,
+          "duplicate_publish_times": 0
+        },
+        "vehicle_imu_status:2": {
+          "samples": 1158,
+          "median_interval_us": 100000.0,
+          "max_interval_us": 100000,
+          "duplicate_publish_times": 0
+        },
+        "vehicle_land_detected:0": {
+          "samples": 119,
+          "median_interval_us": 1000000.0,
+          "max_interval_us": 1000000,
+          "duplicate_publish_times": 0
+        },
+        "vehicle_local_position:0": {
+          "samples": 11572,
+          "median_interval_us": 8000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "vehicle_local_position_groundtruth:0": {
+          "samples": 28057,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 28056
+        }
+      },
+      "faults": [],
+      "clipping": [],
+      "selector": [],
+      "reset_changes": [],
+      "timing_faults": [],
+      "initial_parameters": {
+        "MPC_LAND_SPEED": 0.6000000238418579,
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MC_RTC_MODE": 0,
+        "MC_STA_AXES": 0,
+        "MC_RTC_DIV": 1,
+        "SDLOG_PROFILE": 1171
+      },
+      "effective_mode": [
+        1
+      ],
+      "effective_axes": [
+        1
+      ],
+      "inner_mode": [
+        0
+      ],
+      "inner_axes": [
+        0
+      ],
+      "inner_divisor": [
+        1
+      ],
+      "timing": [
+        0
+      ],
+      "excitation_fault": [
+        0,
+        2
+      ],
+      "contact_window": []
+    },
+    "recorded_entry": {
+      "ready": true,
+      "start": 44376000.0,
+      "end": 47376000.0,
+      "samples": 301,
+      "minimum_height": 2.5439090728759766,
+      "maximum_height": 2.5582470893859863
+    },
+    "first_cli_valid": {
+      "position_time": 44376000.0,
+      "target_time": 44476000.0,
+      "future_target_us": 100000.0
+    },
+    "z_entry": {
+      "maximum_error": 0.04989337921142578,
+      "rejected_samples": 0,
+      "first_bad_time": null,
+      "last_bad_time": null
+    },
+    "earliest_later_ready_diagnostic": {
+      "ready": true,
+      "start": 44376000.0,
+      "end": 47376000,
+      "samples": 301,
+      "minimum_height": 2.5439090728759766,
+      "maximum_height": 2.5582470893859863
+    }
+  },
+  {
+    "run": "run03",
+    "original_accepted": true,
+    "original_error": null,
+    "results_are_diagnostic_only": true,
+    "landing": {
+      "kind": "diagnosis_not_acceptance",
+      "formal_accepted": false,
+      "runtime_success": true,
+      "runtime_error": null,
+      "ulog": {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-26/09_54_50.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series11/run03/09_54_50.ulg",
+        "sha256": "032ba5dfda8d4e12061d677a8d73dff6d1999d449d5a5fdb591ffab9be1be8bc",
+        "bytes": 81487673
+      },
+      "events": {
+        "ready": 30864000.0,
+        "takeoff_command": 30876000,
+        "reposition_command": 39464000.0,
+        "handoff_ready": 39836000.0,
+        "hover_start": 48324000.0,
+        "hover_end": 108696000.0,
+        "land_command": 108696000.0,
+        "landed_disarmed": 118104000.0
+      },
+      "dropout_count": 0,
+      "corruption": false,
+      "topics": {
+        "estimator_attitude:0": {
+          "samples": 25541,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_attitude:1": {
+          "samples": 25720,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_attitude:2": {
+          "samples": 25625,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_attitude:3": {
+          "samples": 24658,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_attitude:4": {
+          "samples": 24728,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_attitude:5": {
+          "samples": 24649,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_local_position:0": {
+          "samples": 11683,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_local_position:1": {
+          "samples": 11683,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_local_position:2": {
+          "samples": 11683,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_local_position:3": {
+          "samples": 11683,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_local_position:4": {
+          "samples": 11683,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_local_position:5": {
+          "samples": 11683,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_selector_status:0": {
+          "samples": 117,
+          "median_interval_us": 1008000.0,
+          "max_interval_us": 1012000,
+          "duplicate_publish_times": 0
+        },
+        "estimator_status:0": {
+          "samples": 11683,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status:1": {
+          "samples": 11683,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status:2": {
+          "samples": 11683,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status:3": {
+          "samples": 11683,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status:4": {
+          "samples": 11683,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status:5": {
+          "samples": 11683,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status_flags:0": {
+          "samples": 122,
+          "median_interval_us": 1000000.0,
+          "max_interval_us": 1000000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status_flags:1": {
+          "samples": 125,
+          "median_interval_us": 1000000.0,
+          "max_interval_us": 1008000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status_flags:2": {
+          "samples": 126,
+          "median_interval_us": 1000000.0,
+          "max_interval_us": 1000000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status_flags:3": {
+          "samples": 125,
+          "median_interval_us": 1000000.0,
+          "max_interval_us": 1000000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status_flags:4": {
+          "samples": 125,
+          "median_interval_us": 1000000.0,
+          "max_interval_us": 1000000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status_flags:5": {
+          "samples": 125,
+          "median_interval_us": 1000000.0,
+          "max_interval_us": 1004000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "sensor_accel:0": {
+          "samples": 29207,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 4000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "sensor_accel:1": {
+          "samples": 29207,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 4000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "sensor_accel:2": {
+          "samples": 29207,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 4000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "sta_rate_ctrl_status:0": {
+          "samples": 29206,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 4000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "sta_velocity_ctrl_status:0": {
+          "samples": 11683,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "vehicle_imu:0": {
+          "samples": 25991,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "vehicle_imu:1": {
+          "samples": 25868,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "vehicle_imu:2": {
+          "samples": 25856,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "vehicle_imu_status:0": {
+          "samples": 1169,
+          "median_interval_us": 100000.0,
+          "max_interval_us": 100000,
+          "duplicate_publish_times": 0
+        },
+        "vehicle_imu_status:1": {
+          "samples": 1169,
+          "median_interval_us": 100000.0,
+          "max_interval_us": 100000,
+          "duplicate_publish_times": 0
+        },
+        "vehicle_imu_status:2": {
+          "samples": 1169,
+          "median_interval_us": 100000.0,
+          "max_interval_us": 100000,
+          "duplicate_publish_times": 0
+        },
+        "vehicle_land_detected:0": {
+          "samples": 120,
+          "median_interval_us": 1000000.0,
+          "max_interval_us": 1000000,
+          "duplicate_publish_times": 0
+        },
+        "vehicle_local_position:0": {
+          "samples": 11683,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "vehicle_local_position_groundtruth:0": {
+          "samples": 28457,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 28456
+        }
+      },
+      "faults": [],
+      "clipping": [],
+      "selector": [],
+      "reset_changes": [],
+      "timing_faults": [],
+      "initial_parameters": {
+        "MPC_LAND_SPEED": 0.6000000238418579,
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MC_RTC_MODE": 0,
+        "MC_STA_AXES": 0,
+        "MC_RTC_DIV": 1,
+        "SDLOG_PROFILE": 1171
+      },
+      "effective_mode": [
+        0
+      ],
+      "effective_axes": [
+        0
+      ],
+      "inner_mode": [
+        0
+      ],
+      "inner_axes": [
+        0
+      ],
+      "inner_divisor": [
+        1
+      ],
+      "timing": [
+        0
+      ],
+      "excitation_fault": [
+        0,
+        2
+      ],
+      "contact_window": []
+    },
+    "recorded_entry": {
+      "ready": true,
+      "start": 45324000.0,
+      "end": 48324000.0,
+      "samples": 301,
+      "minimum_height": 2.4715518951416016,
+      "maximum_height": 2.480990171432495
+    },
+    "first_cli_valid": {
+      "position_time": 45264000.0,
+      "target_time": 45364000.0,
+      "future_target_us": 100000.0
+    },
+    "z_entry": {
+      "maximum_error": 0.04334759712219238,
+      "rejected_samples": 0,
+      "first_bad_time": null,
+      "last_bad_time": null
+    },
+    "earliest_later_ready_diagnostic": {
+      "ready": true,
+      "start": 45324000.0,
+      "end": 48324000,
+      "samples": 301,
+      "minimum_height": 2.4715518951416016,
+      "maximum_height": 2.480990171432495
+    }
+  },
+  {
+    "run": "run04",
+    "original_accepted": false,
+    "original_error": "Wrong entry trajectory",
+    "results_are_diagnostic_only": true,
+    "landing": {
+      "kind": "diagnosis_not_acceptance",
+      "formal_accepted": false,
+      "runtime_success": true,
+      "runtime_error": null,
+      "ulog": {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-26/09_56_56.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series11/run04/09_56_56.ulg",
+        "sha256": "e31f8ad81a3f2fb396dc6641163cf8b05aa33ee681b11c578bd5c2e94ab78001",
+        "bytes": 80793312
+      },
+      "events": {
+        "ready": 30016000.0,
+        "takeoff_command": 30024000,
+        "reposition_command": 38704000.0,
+        "handoff_ready": 39076000.0,
+        "hover_start": 47084000.0,
+        "hover_end": 107524000.0,
+        "land_command": 107524000.0,
+        "landed_disarmed": 117136000.0
+      },
+      "dropout_count": 0,
+      "corruption": false,
+      "topics": {
+        "estimator_attitude:0": {
+          "samples": 25408,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_attitude:1": {
+          "samples": 25498,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_attitude:2": {
+          "samples": 25424,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_attitude:3": {
+          "samples": 24611,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_attitude:4": {
+          "samples": 24645,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_attitude:5": {
+          "samples": 24599,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_local_position:0": {
+          "samples": 11566,
+          "median_interval_us": 12000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_local_position:1": {
+          "samples": 11567,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_local_position:2": {
+          "samples": 11567,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_local_position:3": {
+          "samples": 11567,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_local_position:4": {
+          "samples": 11566,
+          "median_interval_us": 8000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_local_position:5": {
+          "samples": 11566,
+          "median_interval_us": 12000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_selector_status:0": {
+          "samples": 116,
+          "median_interval_us": 1008000.0,
+          "max_interval_us": 1012000,
+          "duplicate_publish_times": 0
+        },
+        "estimator_status:0": {
+          "samples": 11566,
+          "median_interval_us": 12000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status:1": {
+          "samples": 11567,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status:2": {
+          "samples": 11567,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status:3": {
+          "samples": 11567,
+          "median_interval_us": 10000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status:4": {
+          "samples": 11566,
+          "median_interval_us": 8000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status:5": {
+          "samples": 11566,
+          "median_interval_us": 12000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status_flags:0": {
+          "samples": 121,
+          "median_interval_us": 1000000.0,
+          "max_interval_us": 1000000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status_flags:1": {
+          "samples": 122,
+          "median_interval_us": 1000000.0,
+          "max_interval_us": 1000000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status_flags:2": {
+          "samples": 123,
+          "median_interval_us": 1000000.0,
+          "max_interval_us": 1004000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status_flags:3": {
+          "samples": 121,
+          "median_interval_us": 1000000.0,
+          "max_interval_us": 1000000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status_flags:4": {
+          "samples": 121,
+          "median_interval_us": 1000000.0,
+          "max_interval_us": 1008000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "estimator_status_flags:5": {
+          "samples": 122,
+          "median_interval_us": 1000000.0,
+          "max_interval_us": 1000000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "sensor_accel:0": {
+          "samples": 28916,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 4000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "sensor_accel:1": {
+          "samples": 28916,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 4000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "sensor_accel:2": {
+          "samples": 28916,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 4000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "sta_rate_ctrl_status:0": {
+          "samples": 28916,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 4000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "sta_velocity_ctrl_status:0": {
+          "samples": 11566,
+          "median_interval_us": 12000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "vehicle_imu:0": {
+          "samples": 25761,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "vehicle_imu:1": {
+          "samples": 25688,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "vehicle_imu:2": {
+          "samples": 25557,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "vehicle_imu_status:0": {
+          "samples": 1158,
+          "median_interval_us": 100000.0,
+          "max_interval_us": 100000,
+          "duplicate_publish_times": 0
+        },
+        "vehicle_imu_status:1": {
+          "samples": 1158,
+          "median_interval_us": 100000.0,
+          "max_interval_us": 100000,
+          "duplicate_publish_times": 0
+        },
+        "vehicle_imu_status:2": {
+          "samples": 1158,
+          "median_interval_us": 100000.0,
+          "max_interval_us": 100000,
+          "duplicate_publish_times": 0
+        },
+        "vehicle_land_detected:0": {
+          "samples": 119,
+          "median_interval_us": 1000000.0,
+          "max_interval_us": 1000000,
+          "duplicate_publish_times": 0
+        },
+        "vehicle_local_position:0": {
+          "samples": 11566,
+          "median_interval_us": 12000.0,
+          "max_interval_us": 12000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 0
+        },
+        "vehicle_local_position_groundtruth:0": {
+          "samples": 28135,
+          "median_interval_us": 4000.0,
+          "max_interval_us": 8000,
+          "duplicate_publish_times": 0,
+          "sample_reversals": 0,
+          "sample_equal": 28134
+        }
+      },
+      "faults": [],
+      "clipping": [],
+      "selector": [],
+      "reset_changes": [],
+      "timing_faults": [],
+      "initial_parameters": {
+        "MPC_LAND_SPEED": 0.6000000238418579,
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MC_RTC_MODE": 0,
+        "MC_STA_AXES": 0,
+        "MC_RTC_DIV": 1,
+        "SDLOG_PROFILE": 1171
+      },
+      "effective_mode": [
+        1
+      ],
+      "effective_axes": [
+        1
+      ],
+      "inner_mode": [
+        0
+      ],
+      "inner_axes": [
+        0
+      ],
+      "inner_divisor": [
+        1
+      ],
+      "timing": [
+        0
+      ],
+      "excitation_fault": [
+        0,
+        2
+      ],
+      "contact_window": []
+    },
+    "recorded_entry": {
+      "ready": false,
+      "start": 44084000.0,
+      "end": 47084000.0,
+      "reason": "Wrong entry trajectory"
+    },
+    "first_cli_valid": {
+      "position_time": 44084000.0,
+      "target_time": 44196000.0,
+      "future_target_us": 112000.0
+    },
+    "z_entry": {
+      "maximum_error": 0.05264866352081299,
+      "rejected_samples": 11,
+      "first_bad_time": 44084000,
+      "last_bad_time": 44184000
+    },
+    "earliest_later_ready_diagnostic": {
+      "ready": true,
+      "start": 44196000.0,
+      "end": 47196000,
+      "samples": 301,
+      "minimum_height": 2.471020221710205,
+      "maximum_height": 2.485194444656372
+    }
+  }
+]
