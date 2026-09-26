@@ -61,3 +61,4 @@ px4_add_functional_gtest(SRC VelocityDiagnosticInputTest.cpp LINKLIBS PositionCo
 px4_add_unit_gtest(SRC StaVelocityControlTest.cpp LINKLIBS StaVelocityControl)
 px4_add_unit_gtest(SRC StaVelocityProtectionTest.cpp LINKLIBS StaVelocityControl PositionControl)
 px4_add_unit_gtest(SRC VelocityEstaTest.cpp LINKLIBS PositionControl)
+px4_add_unit_gtest(SRC VelocityEstaZTest.cpp LINKLIBS PositionControl)

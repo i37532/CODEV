@@ -2,6 +2,8 @@
 
 分支：research/sta-velocity-control；规划起点866bba6e0d200d7a5137146c2a67a1a751e01233。
 
+当前优先：[Z速度ESTA离线原型Z01](reports/Z01.md)，用户追加提前开展Z-only测试。新增16项Z测试及106项既有C++/347Python、构建通过；生产仍拒绝Z/XYZ，尚未模块接线或飞行。后续按[Z路线](z_velocity/PLAN_CN.md)推进，V04仍未通过；普通相关修复/新批次授权沿用用户最新指令，但须新冻协议预算，不恢复旧余量。以下均为历史时点记录。
+
 最新实际结果：[protocol10 / series09](reports/V04_PROTOCOL10_RESULTS.md)。源码d7090c4bc17eae80b88181c8e32dd0ac59d1b868干净验证120个不同C++/347Python后获准执行；首轮PID观察60.120s/激励32s完成，新降落匹配19次正常，随后真实EKF 0→1→3→0、reset与raw_dt=−4ms触发拒绝。1尝试/0接受、ESTA0、余5停止，累计9/0；原日志/参数恢复/失败诊断保留。V04仍未通过，不push、不V05，不自动续飞或修上游。下方状态保留历史时点含义。
 
 2026-09-26 新批次接线：[protocol10 / series09](reports/V04_PROTOCOL10_IMPLEMENTATION.md)。用户条件确认9901–9903各PID→ESTA X最多6次；新降落匹配已接入独立运行/完整分析链。提交前120个不同C++、347 Python及八批回放通过；必须再于干净提交复核才能飞行，首必需失败停批，不push、不V05。下方状态保留历史时点含义。
