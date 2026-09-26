@@ -1,0 +1,56 @@
+{
+  "seeds": [
+    14001,
+    14002,
+    14003
+  ],
+  "files_parsed": 24007,
+  "matches": [],
+  "invalid_json": [],
+  "exceptions": [
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/M06-20260916/c02_regression_roll_diagnostic.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Previously audited empty diagnostic, not a seed registry; unchanged"
+    }
+  ],
+  "scan_manifest_sha256": "1ecd964d75674b1f02efd335b21befe9261b8113b2186df4a1540e30cd298767",
+  "roots": [
+    "/home/yr/Desktop/Codev-autopilot/research",
+    "/home/yr/Desktop/codev doc/experiments",
+    "/home/yr/Desktop/codev doc/plan"
+  ],
+  "excluded": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/protocol02",
+  "scope": "Structured seed/seed-list keys in JSON, plus separate source text audit; recheck before flight",
+  "accepted": true,
+  "design_registrations": [
+    {
+      "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/protocol14/execution.json",
+      "field": "seeds",
+      "seeds": [
+        14001,
+        14002,
+        14003
+      ]
+    },
+    {
+      "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/protocol14/seed_audit.json",
+      "field": "seeds",
+      "seeds": [
+        14001,
+        14002,
+        14003
+      ]
+    },
+    {
+      "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/protocol14/seed_audit.json",
+      "field": "design_registrations.0.seeds",
+      "seeds": [
+        14001,
+        14002,
+        14003
+      ]
+    }
+  ]
+}
