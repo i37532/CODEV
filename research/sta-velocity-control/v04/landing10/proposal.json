@@ -1,0 +1,25 @@
+{
+  "kind": "conditional_new_batch_request_not_execution_protocol",
+  "flight_authorized": false,
+  "execution_ready": false,
+  "proposed_stage": "V04-protocol10-series09",
+  "seeds": [9901, 9902, 9903],
+  "maximum_attempts": 6,
+  "order": ["9901 PID", "9901 ESTA X", "9902 PID", "9902 ESTA X", "9903 PID", "9903 ESTA X"],
+  "parameters_tasks_and_numeric_gates": "inherit protocol09 unchanged, except the explicitly reviewed landing10 observational contract",
+  "new_run_root": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09",
+  "must_complete_before_launch": [
+    "user explicitly approves this conditional new budget",
+    "freeze new protocol10 config, isolated executable runner and final analyzer bindings; do not enable offline flight11 by deleting only its guard",
+    "register and recheck exact seeds, order, scope, limits, unique directory and authorization receipt",
+    "freeze source/firmware/model/plugin/build/analysis assets in explicit commit",
+    "clean-commit regression, source version, parameter backup and process preflight"
+  ],
+  "first_required_failure": "stop entire batch, preserve all evidence",
+  "retry_replacement_extra_smoke_tuning": false,
+  "reuse_prior_remaining_five": false,
+  "only_iris_sitl": true,
+  "push": false,
+  "enter_v05": false,
+  "randomness_limit": "IMU only; other RNGs/host scheduling not independently controlled; PID-first order bias disclosed"
+}
