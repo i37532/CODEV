@@ -1,0 +1,11 @@
+{
+  "stage": "V04-selector11-PID-diagnostic",
+  "purpose": "One bounded PID landing diagnosis after selector fix; not formal paired acceptance",
+  "seed": 11001,
+  "maximum_attempts": 1,
+  "logging_bit": 1024,
+  "new_run_root": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/diagnostic11",
+  "inherit": "protocol10 task, parameters, guards, windows and thresholds unchanged",
+  "authorization_basis": "用户要求持续修复和修复后SITL批次，不再逐次授权；限Iris SITL，不push、不实机、不放宽门槛",
+  "formal_acceptance": false
+}

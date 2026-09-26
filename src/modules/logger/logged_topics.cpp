@@ -498,4 +498,26 @@ void LoggedTopics::initialize_configured_topics(SDLogProfileMask profile)
 	if (profile & SDLogProfileMask::RAW_IMU_ACCEL_FIFO) {
 		add_raw_imu_accel_fifo();
 	}
+
+	// Explicit opt-in. Preserve every other selected profile and do not change
+	// sensor/control rates or the FIFO-profile logger scheduling policy.
+	if (profile & SDLogProfileMask::ESTIMATOR_SWITCH_DIAGNOSTICS) {
+#if CONSTRAINED_MEMORY
+		static constexpr uint8_t MAX_ESTIMATOR_INSTANCES = 1;
+#else
+		static constexpr uint8_t MAX_ESTIMATOR_INSTANCES = 6;
+#endif
+		add_topic_multi("estimator_attitude", 0, MAX_ESTIMATOR_INSTANCES);
+		add_topic_multi("estimator_local_position", 0, MAX_ESTIMATOR_INSTANCES);
+		add_topic_multi("estimator_status", 0, MAX_ESTIMATOR_INSTANCES);
+		add_topic_multi("estimator_status_flags", 0, MAX_ESTIMATOR_INSTANCES);
+		add_topic_multi("vehicle_imu", 0, 3);
+		add_topic_multi("vehicle_imu_status", 0, 3);
+		add_topic_multi("sensor_accel", 0, 3);
+		add_topic("sensors_status_imu");
+		add_topic("estimator_selector_status");
+#if defined(CONFIG_ARCH_BOARD_PX4_SITL)
+		add_topic("vehicle_local_position_groundtruth"); // Offline diagnostics only.
+#endif
+	}
 }

@@ -125,9 +125,10 @@ PARAM_DEFINE_INT32(SDLOG_MISSION, 0);
  * 7 : Topics for computer vision and collision avoidance
  * 8 : Raw FIFO high-rate IMU (Gyro)
  * 9 : Raw FIFO high-rate IMU (Accel)
+ * 10 : Estimator switch and IMU clipping diagnostics (high data rate)
  *
  * @min 0
- * @max 1023
+ * @max 2047
  * @bit 0 Default set (general log analysis)
  * @bit 1 Estimator replay (EKF2)
  * @bit 2 Thermal calibration
@@ -138,6 +139,7 @@ PARAM_DEFINE_INT32(SDLOG_MISSION, 0);
  * @bit 7 Computer Vision and Avoidance
  * @bit 8 Raw FIFO high-rate IMU (Gyro)
  * @bit 9 Raw FIFO high-rate IMU (Accel)
+ * @bit 10 Estimator switch and IMU clipping diagnostics (high data rate)
  * @reboot_required true
  * @group SD Logging
  */
