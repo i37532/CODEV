@@ -121,7 +121,7 @@ def delta_yaw(d, i):
     return math.atan2(2*(w*z+x*y),1-2*(y*y+z*z))
 
 
-def replay(log, ref, end=None, frozen=None, allow_pending=False):
+def replay(log, ref, end=None, frozen=None, allow_pending=False, *, attitude_policy=None):
     """Reconstruct from raw streams, not host-provided qualification booleans.
 
     ref.position is an exact pre-arm ULog sample. Complete intervals are checked
@@ -129,7 +129,10 @@ def replay(log, ref, end=None, frozen=None, allow_pending=False):
     frozen is the once-written task_yaw.json, verified against raw samples.
     """
     if log.dropouts: raise ValueError('ULog dropout')
-    pos = data(log,'vehicle_local_position'); att = data(log,'vehicle_attitude')
+    pos = data(log,'vehicle_local_position')
+    # Opt-in offline revision only; all historical callers retain strict clocks.
+    att = (data(log,'vehicle_attitude') if attitude_policy is None
+           else attitude_policy.data(log,'vehicle_attitude'))
     start = ref['position']['timestamp']
     end = int(pos['timestamp'][-1]) if end is None else int(end)
     if end < start or end > int(pos['timestamp'][-1]): raise ValueError('Invalid replay interval')
@@ -191,8 +194,11 @@ def replay(log, ref, end=None, frozen=None, allow_pending=False):
                     inner_mode=0,inner_axes=0,inner_divisor=1,inner_valid=1).items():
         if np.any(diag[k][active]!=v): raise ValueError('Controller '+k)
     resets = ix[1:][np.diff(pos['heading_reset_counter'][ix].astype(int))!=0]
-    ai = span(att,start,end)
-    qr = ai[1:][np.diff(att['quat_reset_counter'][ai].astype(int))!=0]
+    if attitude_policy is None:
+        ai = span(att,start,end)
+        qr = ai[1:][np.diff(att['quat_reset_counter'][ai].astype(int))!=0]
+    else:
+        qr = attitude_policy.reset_indices(att,start,end)
     if len(resets)>1 or len(qr)>1: raise ValueError('Repeated heading/quaternion reset')
     result = dict(primary=primary,through_us=end,position_samples=len(ix),confirmed=False,pending=False,
                   quiet_s=0.,ready=False,latest_position=row(pos,ix[-1]))

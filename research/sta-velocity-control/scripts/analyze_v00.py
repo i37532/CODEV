@@ -31,7 +31,7 @@ def previous_indices(source_time, targets, max_age_us=None):
     return i, age
 
 
-def analyze(run, protocol):
+def analyze(run, protocol, *, attitude_policy=None):
     result = json.loads((run / 'result.json').read_text())
     events = {e['name']: e['timestamp_us'] for e in result['events']}
     start, end = events['hover_start'], events['hover_end']
@@ -56,6 +56,8 @@ def analyze(run, protocol):
                   topic_rates={}, metrics={}, limitations=[])
 
     def data(name):
+        if attitude_policy is not None and name == 'vehicle_attitude':
+            return attitude_policy.data(log, name)
         return log.get_dataset(name).data
 
     def mask(d, a=start, b=end):
@@ -93,6 +95,11 @@ def analyze(run, protocol):
                  'vehicle_attitude', 'vehicle_attitude_setpoint', 'actuator_controls_0',
                  'sta_rate_ctrl_status', 'multirotor_motor_limits'):
         d = data(name)
+        if attitude_policy is not None and name == 'vehicle_attitude':
+            rates, covered = attitude_policy.topic_rates(d, mask(d))
+            output['topic_rates'][name] = rates
+            checks[name + '_coverage'] = covered
+            continue
         t = d['timestamp'][mask(d)].astype(np.int64)
         if len(t) < 2 or np.any(np.diff(t) <= 0):
             raise ValueError('Missing/nonmonotonic topic: ' + name)
@@ -160,6 +167,15 @@ def analyze(run, protocol):
     ye = np.angle(np.exp(1j*(yaw[mask(qd)]-ay['yaw_body'][j])))
     output['metrics']['yaw_error_rad'] = stats(ye)
     checks['yaw_error'] = bool(np.max(np.abs(ye)) <= math_radians_20())
+    if attitude_policy is not None:
+        # Both boundaries/all tied records checked; descriptive yaw metric keeps
+        # its old one-record-one-weight convention. No change to velocity dt.
+        output['attitude_clock_safety'] = dict(
+            flight=attitude_policy.safety(qd, ay, flight_start, flight_end, check_yaw=False),
+            hover=attitude_policy.safety(qd, ay, start, end))
+        revised = attitude_policy.yaw_metrics(qd, ay, start, end)
+        output['metrics']['yaw_error_rad'] = revised['stats']
+        output['attitude_yaw_semantics'] = {k:v for k,v in revised.items() if k != 'stats'}
     act = data('actuator_controls_0')
     af = vec(act,[f'control[{i}]' for i in range(4)])[mask(act,flight_start,flight_end)]
     checks['finite_bounded_commands'] = bool(np.all(np.isfinite(af)) and np.max(np.abs(af)) <= 1.001)
@@ -167,6 +183,10 @@ def analyze(run, protocol):
     # disclosed, never interpolated into a false equality claim.
     at = act['timestamp_sample'].astype(np.int64)
     dt = d['timestamp_sample'][hm].astype(np.int64)
+    if attitude_policy is not None:
+        from v04_attitude_clock09 import strict_clock
+        strict_clock(at)
+        strict_clock(dt)
     common, ia, ib = np.intersect1d(at, dt, return_indices=True)
     if not len(common):
         raise ValueError('No actual actuator matches')

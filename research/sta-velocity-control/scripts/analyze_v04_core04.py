@@ -105,9 +105,12 @@ def check_diagnostic(d, start, end, mode, require_excitation=True):
     return result
 
 
-def analyze(run, protocol, job):
+def analyze(run, protocol, job, *, attitude_policy=None):
     analyze_v00.CONFIG=CONFIG/('esta' if job['mode'] else 'pid')
-    base=analyze_v00.analyze(run,protocol)
+    base=analyze_v00.analyze(run,protocol,attitude_policy=attitude_policy)
+    match_output = exact_output_match
+    if attitude_policy is not None:
+        from v04_attitude_clock09 import exact_output_match as match_output
     r=json.loads((run/'result.json').read_text()); e={x['name']:x['timestamp_us'] for x in r['events']}
     u=ULog(base['ulog']['archive']); d=u.get_dataset('sta_velocity_ctrl_status').data
     out=dict(accepted=False,job=job,baseline_accepted=base['accepted'])
@@ -126,8 +129,8 @@ def analyze(run, protocol, job):
         pairs=[(f'v_sp[{i}]',v) for i,v in enumerate(('vx','vy','vz'))]
         pairs +=[(f'a_req[{i}]',f'acceleration[{i}]') for i in range(3)]
         pairs +=[(f'thrust[{i}]',f'thrust[{i}]') for i in range(3)]
-        out['local_output']=exact_output_match(d,u.get_dataset('vehicle_local_position_setpoint').data,'output_timestamp',pairs,e['hover_start'],e['hover_end'])
-        out['attitude_output']=exact_output_match(d,u.get_dataset('vehicle_attitude_setpoint').data,'attitude_timestamp',
+        out['local_output']=match_output(d,u.get_dataset('vehicle_local_position_setpoint').data,'output_timestamp',pairs,e['hover_start'],e['hover_end'])
+        out['attitude_output']=match_output(d,u.get_dataset('vehicle_attitude_setpoint').data,'attitude_timestamp',
             [(f'q_sp[{i}]',f'q_d[{i}]') for i in range(4)],e['hover_start'],e['hover_end'])
         rate=u.get_dataset('sta_rate_ctrl_status').data; hm=(rate['timestamp']>=e['hover_start'])&(rate['timestamp']<e['hover_end'])
         out['mixer']=saturation_summary(rate['sat_bits'][hm],rate['sat_valid'][hm])
