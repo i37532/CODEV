@@ -1,0 +1,76 @@
+{
+  "success": true,
+  "commands": [
+    {
+      "name": "build_log_test",
+      "argv": [
+        "make",
+        "tests",
+        "TESTFILTER=EstimatorDiagnosticTopics",
+        "-j4"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "build_landing_test",
+      "argv": [
+        "make",
+        "tests",
+        "TESTFILTER=LandingDescentContract",
+        "-j4"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "landing_test",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/functional-LandingDescentContract",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/protocol16_precommit01/landing.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "logger_test",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/functional-EstimatorDiagnosticTopics",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/protocol16_precommit01/logger.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "python_binding",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/protocol16/test_protocol.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "dry_run",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/protocol16/run.py",
+        "--source-head",
+        "a1465336513128ce04c1ac45a6cdbea00c235c8e",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/protocol16_precommit01/NOT_CREATED"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "selector_and_controls",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/scripts/verify_v04_selector11.py",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/protocol16_precommit01/selector"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "new_flights": 0,
+  "head": "a1465336513128ce04c1ac45a6cdbea00c235c8e",
+  "cpp_tests": 140,
+  "python_tests": 385,
+  "assets_checked": 401
+}
