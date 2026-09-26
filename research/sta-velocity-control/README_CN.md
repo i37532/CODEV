@@ -42,6 +42,8 @@ V00–V03已通过，历史失败保留。V04 **failed / needs_revision**：SITL
 - [V03：公共保护、日志与一次PID验证](reports/V03.md)
 - [V04：X单轴接入、首轮PID失败与停止记录](reports/V04.md)
 - [V04修复：上游目标缓存与同帧重算离线回归](reports/V04_REPAIR01.md)
+- [V04 protocol09接线回归与待授权新批次](reports/V04_PROTOCOL09_IMPLEMENTATION.md)：新实时/完整分析链与clock09接通；9801–9803、最多6次，仅申请，未飞行。
+- [V04 protocol09冻结清单/门禁/命令](v04/protocol09/README_CN.md)
 - [V04 protocol03实现与日志修订](reports/V04_PROTOCOL03.md)
 - [V04新批次：起飞航向reset失败及停止记录](reports/V04_PROTOCOL03_RESULTS.md)
 - [V04起飞航向对齐离线审计与新准入设计](reports/V04_HEADING_AUDIT.md)：109个C++/99个Python通过，未改生产控制；protocol04仅设计，无新飞行授权，V04仍未通过。
