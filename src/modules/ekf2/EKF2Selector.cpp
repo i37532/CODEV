@@ -363,6 +363,13 @@ void EKF2Selector::PublishVehicleAttitude()
 	vehicle_attitude_s attitude;
 
 	if (_instance[_selected_instance].estimator_attitude_sub.update(&attitude)) {
+		// Rejected input must not change the last-published sample, instance or
+		// reset baseline. Otherwise a later stale sample can pass this guard.
+		if ((attitude.timestamp_sample <= _attitude_last.timestamp_sample)
+		    || (attitude.timestamp_sample < _instance[_selected_instance].timestamp_sample_last)) {
+			return;
+		}
+
 		bool instance_change = false;
 
 		if (_instance[_selected_instance].estimator_attitude_sub.get_instance() != _attitude_instance_prev) {
@@ -387,27 +394,15 @@ void EKF2Selector::PublishVehicleAttitude()
 			_delta_q_reset = Quatf{attitude.delta_q_reset};
 		}
 
-		bool publish = true;
-
-		// ensure monotonically increasing timestamp_sample through reset, don't publish
-		//  estimator's attitude for system (vehicle_attitude) if it's stale
-		if ((attitude.timestamp_sample <= _attitude_last.timestamp_sample)
-		    || (attitude.timestamp_sample < _instance[_selected_instance].timestamp_sample_last)) {
-
-			publish = false;
-		}
-
 		// save last primary estimator_attitude as published with original resets
 		_attitude_last = attitude;
 
-		if (publish) {
-			// republish with total reset count and current timestamp
-			attitude.quat_reset_counter = _quat_reset_counter;
-			_delta_q_reset.copyTo(attitude.delta_q_reset);
+		// republish with total reset count and current timestamp
+		attitude.quat_reset_counter = _quat_reset_counter;
+		_delta_q_reset.copyTo(attitude.delta_q_reset);
 
-			attitude.timestamp = hrt_absolute_time();
-			_vehicle_attitude_pub.publish(attitude);
-		}
+		attitude.timestamp = hrt_absolute_time();
+		_vehicle_attitude_pub.publish(attitude);
 	}
 }
 
@@ -417,6 +412,13 @@ void EKF2Selector::PublishVehicleLocalPosition()
 	vehicle_local_position_s local_position;
 
 	if (_instance[_selected_instance].estimator_local_position_sub.update(&local_position)) {
+		// Rejected input must not change the last-published sample, instance or
+		// reset baseline. Otherwise a later stale sample can pass this guard.
+		if ((local_position.timestamp_sample <= _local_position_last.timestamp_sample)
+		    || (local_position.timestamp_sample < _instance[_selected_instance].timestamp_sample_last)) {
+			return;
+		}
+
 		bool instance_change = false;
 
 		if (_instance[_selected_instance].estimator_local_position_sub.get_instance() != _local_position_instance_prev) {
@@ -489,36 +491,24 @@ void EKF2Selector::PublishVehicleLocalPosition()
 			_delta_heading_reset = local_position.delta_heading;
 		}
 
-		bool publish = true;
-
-		// ensure monotonically increasing timestamp_sample through reset, don't publish
-		//  estimator's local position for system (vehicle_local_position) if it's stale
-		if ((local_position.timestamp_sample <= _local_position_last.timestamp_sample)
-		    || (local_position.timestamp_sample < _instance[_selected_instance].timestamp_sample_last)) {
-
-			publish = false;
-		}
-
 		// save last primary estimator_local_position as published with original resets
 		_local_position_last = local_position;
 
-		if (publish) {
-			// republish with total reset count and current timestamp
-			local_position.xy_reset_counter = _xy_reset_counter;
-			local_position.z_reset_counter = _z_reset_counter;
-			local_position.vxy_reset_counter = _vxy_reset_counter;
-			local_position.vz_reset_counter = _vz_reset_counter;
-			local_position.heading_reset_counter = _heading_reset_counter;
+		// republish with total reset count and current timestamp
+		local_position.xy_reset_counter = _xy_reset_counter;
+		local_position.z_reset_counter = _z_reset_counter;
+		local_position.vxy_reset_counter = _vxy_reset_counter;
+		local_position.vz_reset_counter = _vz_reset_counter;
+		local_position.heading_reset_counter = _heading_reset_counter;
 
-			_delta_xy_reset.copyTo(local_position.delta_xy);
-			local_position.delta_z = _delta_z_reset;
-			_delta_vxy_reset.copyTo(local_position.delta_vxy);
-			local_position.delta_vz = _delta_vz_reset;
-			local_position.delta_heading = _delta_heading_reset;
+		_delta_xy_reset.copyTo(local_position.delta_xy);
+		local_position.delta_z = _delta_z_reset;
+		_delta_vxy_reset.copyTo(local_position.delta_vxy);
+		local_position.delta_vz = _delta_vz_reset;
+		local_position.delta_heading = _delta_heading_reset;
 
-			local_position.timestamp = hrt_absolute_time();
-			_vehicle_local_position_pub.publish(local_position);
-		}
+		local_position.timestamp = hrt_absolute_time();
+		_vehicle_local_position_pub.publish(local_position);
 	}
 }
 
@@ -528,23 +518,18 @@ void EKF2Selector::PublishVehicleOdometry()
 	vehicle_odometry_s odometry;
 
 	if (_instance[_selected_instance].estimator_odometry_sub.update(&odometry)) {
-		bool publish = true;
-
-		// ensure monotonically increasing timestamp_sample through reset, don't publish
-		//  estimator's odometry for system (vehicle_odometry) if it's stale
+		// Rejected input must not change the last-published sample, instance or
+		// reset baseline. Otherwise a later stale sample can pass this guard.
 		if ((odometry.timestamp_sample <= _odometry_last.timestamp_sample)
 		    || (odometry.timestamp_sample < _instance[_selected_instance].timestamp_sample_last)) {
-
-			publish = false;
+			return;
 		}
 
 		// save last primary estimator_odometry
 		_odometry_last = odometry;
 
-		if (publish) {
-			odometry.timestamp = hrt_absolute_time();
-			_vehicle_odometry_pub.publish(odometry);
-		}
+		odometry.timestamp = hrt_absolute_time();
+		_vehicle_odometry_pub.publish(odometry);
 	}
 }
 
@@ -554,6 +539,13 @@ void EKF2Selector::PublishVehicleGlobalPosition()
 	vehicle_global_position_s global_position;
 
 	if (_instance[_selected_instance].estimator_global_position_sub.update(&global_position)) {
+		// Rejected input must not change the last-published sample, instance or
+		// reset baseline. Otherwise a later stale sample can pass this guard.
+		if ((global_position.timestamp_sample <= _global_position_last.timestamp_sample)
+		    || (global_position.timestamp_sample < _instance[_selected_instance].timestamp_sample_last)) {
+			return;
+		}
+
 		bool instance_change = false;
 
 		if (_instance[_selected_instance].estimator_global_position_sub.get_instance() != _global_position_instance_prev) {
@@ -594,28 +586,16 @@ void EKF2Selector::PublishVehicleGlobalPosition()
 			_delta_alt_reset = global_position.delta_alt;
 		}
 
-		bool publish = true;
-
-		// ensure monotonically increasing timestamp_sample through reset, don't publish
-		//  estimator's global position for system (vehicle_global_position) if it's stale
-		if ((global_position.timestamp_sample <= _global_position_last.timestamp_sample)
-		    || (global_position.timestamp_sample < _instance[_selected_instance].timestamp_sample_last)) {
-
-			publish = false;
-		}
-
 		// save last primary estimator_global_position as published with original resets
 		_global_position_last = global_position;
 
-		if (publish) {
-			// republish with total reset count and current timestamp
-			global_position.lat_lon_reset_counter = _lat_lon_reset_counter;
-			global_position.alt_reset_counter = _alt_reset_counter;
-			global_position.delta_alt = _delta_alt_reset;
+		// republish with total reset count and current timestamp
+		global_position.lat_lon_reset_counter = _lat_lon_reset_counter;
+		global_position.alt_reset_counter = _alt_reset_counter;
+		global_position.delta_alt = _delta_alt_reset;
 
-			global_position.timestamp = hrt_absolute_time();
-			_vehicle_global_position_pub.publish(global_position);
-		}
+		global_position.timestamp = hrt_absolute_time();
+		_vehicle_global_position_pub.publish(global_position);
 	}
 }
 
@@ -625,25 +605,20 @@ void EKF2Selector::PublishWindEstimate()
 	wind_s wind;
 
 	if (_instance[_selected_instance].estimator_wind_sub.update(&wind)) {
-		bool publish = true;
-
-		// ensure monotonically increasing timestamp_sample through reset, don't publish
-		//  estimator's wind for system (wind) if it's stale
+		// Rejected input must not change the last-published sample, instance or
+		// reset baseline. Otherwise a later stale sample can pass this guard.
 		if ((wind.timestamp_sample <= _wind_last.timestamp_sample)
 		    || (wind.timestamp_sample < _instance[_selected_instance].timestamp_sample_last)) {
-
-			publish = false;
+			return;
 		}
 
 		// save last primary wind
 		_wind_last = wind;
 
 		// publish estimator's wind for system unless it's stale
-		if (publish) {
-			// republish with current timestamp
-			wind.timestamp = hrt_absolute_time();
-			_wind_pub.publish(wind);
-		}
+		// republish with current timestamp
+		wind.timestamp = hrt_absolute_time();
+		_wind_pub.publish(wind);
 	}
 }
 

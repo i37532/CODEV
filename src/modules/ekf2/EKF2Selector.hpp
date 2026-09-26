@@ -76,6 +76,7 @@ public:
 	void RequestInstance(uint8_t instance) { _request_instance.store(instance); }
 
 private:
+	friend class EKF2SelectorTestAccess;
 	static constexpr uint8_t INVALID_INSTANCE{UINT8_MAX};
 	static constexpr uint64_t FILTER_UPDATE_PERIOD{10_ms};
 

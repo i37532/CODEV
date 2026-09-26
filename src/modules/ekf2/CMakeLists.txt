@@ -51,3 +51,5 @@ px4_add_module(
 		EKF2Utility
 		px4_work_queue
 	)
+
+px4_add_functional_gtest(SRC EKF2SelectorTest.cpp LINKLIBS modules__ekf2)
