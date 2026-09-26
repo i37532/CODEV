@@ -2,6 +2,8 @@
 
 分支：research/sta-velocity-control；规划起点866bba6e0d200d7a5137146c2a67a1a751e01233。
 
+最新诊断：[单次PID触地高频证据](reports/V04_DIAGNOSTIC11_RESULTS.md)。干净源码55073c29b7、种子11001，完成60.480s观察后因降落EKF参考/reset变化停止；已捕捉−186.6m/s²触地加速度、3个IMU削顶和6实例故障。selector修复后本轮无sample倒退，但仍不是飞行验收通过。原9次加诊断1次合计10尝试/0接受，未补飞；下一步离线验证合法公共下降速度上限0.5m/s，不改控制律/门槛。详细状态以下方最新报告为准。
+
 共同试飞前置修复：[selector时间交接与削顶定位](reports/V04_SELECTOR11_REPAIR.md)。原ULog确认6实例短暂bad_acc_clipping；旧selector过期消息污染发布/reset基准已用真实uORB复现并修复，负对照6/6失败、最终10项通过，总132C++/347Python及构建通过。尚未验证新飞行或消除物理削顶；V04仍未通过，Z生产准入保持关闭。
 
 当前优先：[Z速度ESTA离线原型Z01](reports/Z01.md)，用户追加提前开展Z-only测试。新增16项Z测试及106项既有C++/347Python、构建通过；生产仍拒绝Z/XYZ，尚未模块接线或飞行。后续按[Z路线](z_velocity/PLAN_CN.md)推进，V04仍未通过；普通相关修复/新批次授权沿用用户最新指令，但须新冻协议预算，不恢复旧余量。以下均为历史时点记录。
