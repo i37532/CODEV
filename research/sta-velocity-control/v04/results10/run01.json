@@ -1,0 +1,71 @@
+{
+  "source_head": "d7090c4bc17eae80b88181c8e32dd0ac59d1b868",
+  "branch": "research/sta-velocity-control",
+  "binary_sha256": "29f0c6121f7d82b30693ce14bead61c15257c0fde5581521dbb22f72d4bc96ca",
+  "runner_sha256": "fe06c93e50fba38194fed2d1bf8546f62766541348795742c0c8fde219b39822",
+  "command": [
+    "./sitl/run.sh",
+    "--headless",
+    "--backend",
+    "gazebo",
+    "--model",
+    "iris"
+  ],
+  "pid_parameters_modified": false,
+  "success": false,
+  "events": [
+    {
+      "name": "ready",
+      "timestamp_us": 30944000
+    },
+    {
+      "name": "takeoff_command",
+      "timestamp_us": 30964000
+    },
+    {
+      "name": "reposition_command",
+      "timestamp_us": 39684000
+    },
+    {
+      "name": "handoff_ready",
+      "timestamp_us": 40004000
+    },
+    {
+      "name": "hover_start",
+      "timestamp_us": 48676000
+    },
+    {
+      "name": "hover_end",
+      "timestamp_us": 108796000
+    },
+    {
+      "name": "land_command",
+      "timestamp_us": 108796000
+    }
+  ],
+  "scenario_sha256": "ca1c30db058dcc346130fa5062f6397591967b95df812ba5839e356900f28986",
+  "scenario_path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/protocol10/execution.json",
+  "simulation_speed_requested": 1,
+  "explicit_environment": {
+    "PX4_SITL_WORLD": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world",
+    "GAZEBO_MASTER_URI": "http://127.0.0.1:11345"
+  },
+  "launcher_pid": 127324,
+  "error": "ValueError('CLI reference representation changed: xy_reset_counter')",
+  "launcher_returncode": 0,
+  "logs": [
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-26/07_40_28.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/07_40_28.ulg",
+      "sha256": "5c9a44d3da6f4517e2c53fce67bd7561d2a1584f4b812884101825a63798abbd",
+      "bytes": 163556
+    },
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-26/07_40_29.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/07_40_29.ulg",
+      "sha256": "96db142fdfc5449c74ab0c86e46cae39d380caee51df31690280207b285a3403",
+      "bytes": 35391199
+    }
+  ],
+  "finished_utc": "2026-09-26T07:42:22Z"
+}

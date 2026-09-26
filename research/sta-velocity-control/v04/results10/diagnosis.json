@@ -1,0 +1,444 @@
+{
+  "accepted": false,
+  "historical_acceptance_changed": false,
+  "new_flights": 0,
+  "source_head": "d7090c4bc17eae80b88181c8e32dd0ac59d1b868",
+  "original_error": "ValueError('CLI reference representation changed: xy_reset_counter')",
+  "events": [
+    {
+      "name": "ready",
+      "timestamp_us": 30944000
+    },
+    {
+      "name": "takeoff_command",
+      "timestamp_us": 30964000
+    },
+    {
+      "name": "reposition_command",
+      "timestamp_us": 39684000
+    },
+    {
+      "name": "handoff_ready",
+      "timestamp_us": 40004000
+    },
+    {
+      "name": "hover_start",
+      "timestamp_us": 48676000
+    },
+    {
+      "name": "hover_end",
+      "timestamp_us": 108796000
+    },
+    {
+      "name": "land_command",
+      "timestamp_us": 108796000
+    }
+  ],
+  "logs": [
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-26/07_40_28.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/07_40_28.ulg",
+      "sha256": "5c9a44d3da6f4517e2c53fce67bd7561d2a1584f4b812884101825a63798abbd",
+      "bytes": 163556,
+      "dropouts": 0,
+      "corruption": false
+    },
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-26/07_40_29.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/07_40_29.ulg",
+      "sha256": "96db142fdfc5449c74ab0c86e46cae39d380caee51df31690280207b285a3403",
+      "bytes": 35391199,
+      "dropouts": 0,
+      "corruption": false
+    }
+  ],
+  "checks": [
+    {
+      "name": "failed_without_complete_landing",
+      "passed": true
+    },
+    {
+      "name": "no_recorded_dropouts_or_corruption",
+      "passed": true
+    },
+    {
+      "name": "complete_observation_window",
+      "passed": true
+    },
+    {
+      "name": "uncropped_heading_replay_recorded",
+      "passed": true
+    },
+    {
+      "name": "full_raw_history_rejects",
+      "passed": true
+    },
+    {
+      "name": "cli_rejection_reproduced",
+      "passed": true
+    },
+    {
+      "name": "actual_raw_resets",
+      "passed": true
+    },
+    {
+      "name": "actual_raw_primary_changes",
+      "passed": true
+    },
+    {
+      "name": "full_landing_component_rejects_late_timing",
+      "passed": true
+    },
+    {
+      "name": "live_new_landing_component_really_used",
+      "passed": true
+    },
+    {
+      "name": "landing_prefix_matches_online_evidence",
+      "passed": true
+    },
+    {
+      "name": "actual_outer_and_inner_PID",
+      "passed": true
+    },
+    {
+      "name": "no_first_retry_or_fault_flags",
+      "passed": true
+    },
+    {
+      "name": "late_negative_raw_dt_preserved",
+      "passed": true
+    },
+    {
+      "name": "no_disarm_after_land",
+      "passed": true
+    },
+    {
+      "name": "original_files_unchanged",
+      "passed": true
+    }
+  ],
+  "observation_seconds": 60.12,
+  "heading_through_hover_only": {
+    "passed": false,
+    "error": "Empty/nonmonotonic estimator_selector_status"
+  },
+  "full_raw_heading": {
+    "passed": false,
+    "error": "Coordinate/reset changed: ref_alt"
+  },
+  "last_host_sample_timestamp_us": 113624000,
+  "cli_rejection": {
+    "passed": false,
+    "error": "CLI reference representation changed: xy_reset_counter"
+  },
+  "local_position_changes_after_land": {
+    "ref_timestamp": [],
+    "ref_alt": [
+      {
+        "timestamp_us": 113448000,
+        "before": 488.4864807128906,
+        "after": 488.4265441894531
+      },
+      {
+        "timestamp_us": 113456000,
+        "before": 488.4265441894531,
+        "after": 488.4864807128906
+      }
+    ],
+    "xy_reset_counter": [
+      {
+        "timestamp_us": 113448000,
+        "before": 2,
+        "after": 4
+      },
+      {
+        "timestamp_us": 113456000,
+        "before": 4,
+        "after": 5
+      }
+    ],
+    "z_reset_counter": [
+      {
+        "timestamp_us": 113448000,
+        "before": 0,
+        "after": 2
+      },
+      {
+        "timestamp_us": 113456000,
+        "before": 2,
+        "after": 3
+      }
+    ],
+    "vxy_reset_counter": [
+      {
+        "timestamp_us": 113448000,
+        "before": 2,
+        "after": 4
+      },
+      {
+        "timestamp_us": 113456000,
+        "before": 4,
+        "after": 5
+      }
+    ],
+    "vz_reset_counter": [
+      {
+        "timestamp_us": 113448000,
+        "before": 1,
+        "after": 3
+      },
+      {
+        "timestamp_us": 113456000,
+        "before": 3,
+        "after": 4
+      }
+    ],
+    "heading_reset_counter": [
+      {
+        "timestamp_us": 113448000,
+        "before": 3,
+        "after": 5
+      },
+      {
+        "timestamp_us": 113456000,
+        "before": 5,
+        "after": 6
+      }
+    ]
+  },
+  "primary_changes_after_land": [
+    {
+      "timestamp_us": 113444000,
+      "before": 0,
+      "after": 1
+    },
+    {
+      "timestamp_us": 113448000,
+      "before": 1,
+      "after": 3
+    },
+    {
+      "timestamp_us": 113460000,
+      "before": 3,
+      "after": 0
+    }
+  ],
+  "landing_component_only": {
+    "passed": false,
+    "error": "Landing diagnostic failure: timing"
+  },
+  "landing_polls": {
+    "count": 19,
+    "pending": 0,
+    "last": {
+      "category": "raw_landing_verified",
+      "pending": false,
+      "evidence": {
+        "command_us": 108948000,
+        "through_us": 113376000,
+        "diagnostic_rows": 6471,
+        "classification": {
+          "clear": 6028,
+          "expected_planned_landing_gate": 443
+        },
+        "raw_values_preserved": true,
+        "consumed_status_proven": false
+      }
+    }
+  },
+  "landing_before_reset_component_only": {
+    "passed": true,
+    "value": {
+      "command_us": 108948000,
+      "through_us": 113376000,
+      "diagnostic_rows": 6471,
+      "classification": {
+        "clear": 6028,
+        "expected_planned_landing_gate": 443
+      },
+      "raw_values_preserved": true,
+      "consumed_status_proven": false
+    }
+  },
+  "recorded_flight_values": {
+    "effective_mode": [
+      0
+    ],
+    "effective_axes": [
+      0
+    ],
+    "inner_mode": [
+      0
+    ],
+    "inner_axes": [
+      0
+    ],
+    "inner_divisor": [
+      1
+    ],
+    "inner_valid": [
+      1
+    ],
+    "first_fail": [
+      0
+    ],
+    "retry_result": [
+      0
+    ],
+    "fault": [
+      0
+    ],
+    "sta_fault": [
+      0
+    ],
+    "failsafe": [
+      0
+    ],
+    "timing": [
+      0,
+      2
+    ],
+    "excitation_fault": [
+      0,
+      2,
+      3
+    ]
+  },
+  "timing_anomalies": [
+    {
+      "timestamp": 113448000,
+      "timestamp_sample": 113440000,
+      "input_timestamp": 113448000,
+      "raw_dt": -0.004000000189989805,
+      "timing": 2,
+      "excitation_fault": 3
+    }
+  ],
+  "selector_nonincreasing_publications": [
+    {
+      "timestamp_us": 113448000,
+      "before": 1,
+      "after": 3
+    }
+  ],
+  "first_invocation": {
+    "samples": 8269,
+    "first_failures": 0,
+    "retries": 0,
+    "first_input_masks": [
+      32511,
+      32704,
+      32763,
+      32767
+    ]
+  },
+  "hover_diagnostic_descriptive_only": {
+    "n": 6012,
+    "inner": {
+      "max_age_us": 4000,
+      "median_age_us": 0,
+      "maximum_reads": 4
+    },
+    "maximum_gap_s": 0.012,
+    "hz": 100.00332734411393,
+    "error": {
+      "rmse": [
+        0.042777190159676425,
+        0.00952213931505483,
+        0.002549107852728234
+      ],
+      "mean": [
+        0.001478334309416821,
+        -0.00008599270839477392,
+        0.00009521543973096395
+      ],
+      "std": [
+        0.042751637695259304,
+        0.009521751014882495,
+        0.0025473289667566654
+      ],
+      "max_abs": [
+        0.09595411270856857,
+        0.024216221645474434,
+        0.007772811688482761
+      ]
+    },
+    "iae_m": [
+      1.054992788616568,
+      0.2453733279500158,
+      0.06546988595859146
+    ],
+    "acceleration_tv": [
+      3.187717914581299,
+      3.3509769439697266,
+      2.6482226848602295
+    ],
+    "samples": 3200,
+    "seconds": 32,
+    "constraint_fraction": 0,
+    "maximum_continuous_constraint_s": 0,
+    "nu_peak": null
+  },
+  "last_raw_status": {
+    "timestamp": 113488000,
+    "nav_state": 18,
+    "arming_state": 2,
+    "failsafe": 0
+  },
+  "last_raw_land": {
+    "timestamp": 113464000,
+    "landed": 0,
+    "ground_contact": 0
+  },
+  "not_evaluated": "No complete landing acceptance or paired ESTA performance. Primary/reset observations do not identify their physical or numerical root cause. No production fix or reset exemption authorized.",
+  "original_artifacts": {
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/original_parameters.bson": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/ledger.json": "54a2f4884a7c83e36b0b681df4b731ea47379a3dd5096d65c27c4f660b6ec051",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/authorization.json": "6b8fe6b0536a263a17819fedef9c771e9bab46f2c97c156d6ee81b1cdb4e633f",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/seed_audit_before_launch.json": "31b37f06b0cf195cce4f01b97f353b2e2972d63cf0deb24eccf5693ca26ba96f",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/heading_live.jsonl": "eee5355f2ac137c2ad0a639586b4992986000d18fbf5923e0b84b9764e5f2327",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/mavlink_events.jsonl": "859488638fcae5a6a027791e45d2344a2e836adda4db58859131e499d522e3d4",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/landing10_monitor.jsonl": "ee5a17abc8a39129a5bcc227b51b0b145b8091f3fd278a43ff864a0347edec66",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/protocol09_monitor.jsonl": "bd05d186ac884546b0508eb476891529a0c99763454fcc02acecfd4a6291f81f",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/mavlink_status.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/triplet_before.txt": "f823e75ef5f096aa9879ea31dcb32fd91a4715bee9d2c412879d1ba8b80aa008",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/ground.json": "1402e75feaaa8e5c012a3c65b85cdb54a73c53bcc49829f3580b2bb305855869",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/live_log.json": "4484bbe634b9e4480b87a78177a9c29373783da07ea40081bc7571a0e2d01b6f",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/console.log": "9caa8b062b0b18e9cbbc5a066280dc005a3c097a4f89aceb9b9aad7c18c622d2",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/entry_candidates.json": "d35959e7666fc4594b120edaf80ad4f8194a945e2204abf89ac343faa2d9fa85",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/model_manifest.json": "209983d027e9e4c9f102eab0b714eb8f6c7223e8349ccfbf3953a39289e7b39c",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/task_yaw.json": "7201a702ca3b039032ed6be8946e637a5ae506f4c574df1ae6958d7890e1e74b",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/authorization.json": "6b8fe6b0536a263a17819fedef9c771e9bab46f2c97c156d6ee81b1cdb4e633f",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/worktree_status.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/reposition_command.json": "d35df77a3af8ad49db6565415c6c9e1ad8de05ca1315b60d590961bafc7399d0",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/samples.jsonl": "bf5851bbf7a853d4c50125fb476fa337eb8ce99c3abb18b5c3c0eebeb01d2bf1",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/v00_monitor.jsonl": "a41195632c94083517083e0b95a20c596fc5b0225d6a57b4e371a8fe0530c3bd",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/imu_innovations.csv": "c2a452ccf5efa50d1a44019c0f658a14bee348c574f2d8de4c35fc6cb1ba7696",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/handoff_target.json": "75fb4bf8133a78c8db724e023e1e8a492fc9f5371b73464402dd79e8e84bfbb3",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/uorb_hover.txt": "0740b18417c46f87074775d2c8ac0bbc6804a939ff0f301c7849e46b37a20b2e",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/height_reference.json": "16555075583311de5f5a1ca62409ac4e8ffd1f889d00468b345bfc75c26b64a4",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/handoff_pending.jsonl": "ee41e0bfeee068bd36c4df27747cf87dd77bbfce6d61580d0b3c6a4647e1af80",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/triplet_after.txt": "b357a09a66071b99ec93acf5f8ae947a0c78b7dd1cb1e65568630b0b8bf2d1ba",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/07_40_29.ulg": "96db142fdfc5449c74ab0c86e46cae39d380caee51df31690280207b285a3403",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/07_40_28.ulg": "5c9a44d3da6f4517e2c53fce67bd7561d2a1584f4b812884101825a63798abbd",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/perf_hover_start.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/world_process.json": "4ac63263761236fe9366a78893fb55f61a24d6e351ded732cc753e40981085a8",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/perf_hover_end.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/startup_parameters.bson": "6fa41e2e4434de22b6df3d0eb2a6e45d9b29c74eac53485403f8116e6de6b589",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/commands.jsonl": "7327ebc6a8d7f796ef9277e4fd121f8cb6890d0d12b5fb87b29a01ec0de7dae5",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/version.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/result.json": "27857aab7184751b5abb51ac6e4c172025b44a895b597c7f695f43c9068dcecd",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/runtime_parameters_start.json": "ec0119169d0f992782dab0737811bf670478968a7dfd50ea67f63ed7efbf3888",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/job.json": "236a3fd1f220b1b9e8d1288adfc8acbf99b2328b017ce8e4f63da1fb0d370114",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/uorb_start.txt": "028f6bbcc274781d5bf2c98b4a269ccec9562824a982d766620fbb44dd64bfa1",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/params_all.txt": "caa514334434bc49604840ca1574e4558a8c46f3aca9f576a8ba2363d80c543f",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/reposition_ack.json": "10e2f46c5020f9b553dd5899ebbebd9c5f09e2b956b7c9ff6e0fd35948589ede",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/landing_context.json": "b0763a222bde7d8460456143149d6d616faf281e0524a0d011a2e4ae92e67323",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/tracked_diff.patch": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/models/iris/iris.sdf": "dd1f1751ff99ce724cc1cee95239263cac3c94cfcd6d4ae607946cbd4b030537",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/models/iris/model.config": "fc6a6787ae91b01968720225df947649019023c1f1f1f0a9462f2c3de20c7ebc",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series09/run01/models/iris/iris-gen.sdf": "dd1f1751ff99ce724cc1cee95239263cac3c94cfcd6d4ae607946cbd4b030537"
+  },
+  "diagnostic_checks_passed": true
+}
