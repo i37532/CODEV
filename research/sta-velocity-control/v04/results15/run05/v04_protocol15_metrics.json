@@ -1,0 +1,135 @@
+{
+  "accepted": false,
+  "job": {
+    "id": "run05",
+    "seed": 15003,
+    "mode": 0,
+    "axes": 0,
+    "parameters": {
+      "MPC_VC_L1_X": 1,
+      "MPC_VC_L2_X": 0.2,
+      "MPC_VC_NU_X": 0.4,
+      "MPC_VC_A_X": 0.8,
+      "MPC_VC_MODE": 0,
+      "MPC_VC_AXES": 0
+    }
+  },
+  "baseline_accepted": true,
+  "flight": {
+    "n": 8613,
+    "inner": {
+      "max_age_us": 4000,
+      "median_age_us": 0.0,
+      "maximum_reads": 4
+    },
+    "maximum_gap_s": 0.012,
+    "hz": 99.99999999999999
+  },
+  "diagnostic": {
+    "n": 6067,
+    "inner": {
+      "max_age_us": 4000,
+      "median_age_us": 0.0,
+      "maximum_reads": 4
+    },
+    "maximum_gap_s": 0.012,
+    "hz": 100.0,
+    "error": {
+      "rmse": [
+        0.04408013755370592,
+        0.008100620641927875,
+        0.002796729635628892
+      ],
+      "mean": [
+        -0.002047089176194284,
+        0.004366935170670339,
+        -4.7972132451833454e-06
+      ],
+      "std": [
+        0.044032578310364084,
+        0.006822751058011026,
+        0.002796725521310592
+      ],
+      "max_abs": [
+        0.0878104567527771,
+        0.02067042887210846,
+        0.008106514811515808
+      ]
+    },
+    "iae_m": [
+      1.1039920303653912,
+      0.20254882680089203,
+      0.07160990013927235
+    ],
+    "acceleration_tv": [
+      3.305872917175293,
+      2.7993924617767334,
+      3.6328024864196777
+    ],
+    "samples": 3200,
+    "seconds": 32.0,
+    "constraint_fraction": 0.0,
+    "maximum_continuous_constraint_s": 0.0,
+    "nu_peak": null
+  },
+  "local_output": {
+    "matched": 6067,
+    "denominator": 6067,
+    "coverage": 1.0,
+    "max_gap_s": 0.012,
+    "max_abs_error": 0.0
+  },
+  "attitude_output": {
+    "matched": 6067,
+    "denominator": 6067,
+    "coverage": 1.0,
+    "max_gap_s": 0.012,
+    "max_abs_error": 0.0
+  },
+  "mixer": {
+    "count": 15167,
+    "bit_histogram": {
+      "1": 15167
+    },
+    "feedback_valid_fraction": 1.0,
+    "raw_nonzero_fraction": 1.0,
+    "saturation_fraction_among_valid": 0.0,
+    "rate_direction_saturation_fraction_among_valid": 0.0
+  },
+  "position_rmse": [
+    0.07469637940054455,
+    0.021010689289109274,
+    0.05519424041227845
+  ],
+  "yaw_rmse": 0.00014883027661008954,
+  "height": {
+    "rmse": 0.0548420005373945,
+    "mean": 0.025174099471200844,
+    "std": 0.048722784595686484,
+    "max_abs": 0.10502219200134277
+  },
+  "first_invocation": {
+    "samples": 8613,
+    "first_failures": 0,
+    "retries": 0,
+    "first_input_masks": [
+      32511,
+      32704,
+      32760,
+      32763,
+      32767
+    ]
+  },
+  "exit": {
+    "raw_fault_counts": {
+      "0": 7792,
+      "2": 822
+    },
+    "classification": {
+      "clear": 7792,
+      "expected_planned_landing_gate": 822
+    },
+    "raw_values_preserved": true
+  },
+  "error": "Ambiguous equal-time triplet field previous.timestamp"
+}
