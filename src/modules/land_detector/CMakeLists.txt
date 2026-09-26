@@ -46,3 +46,4 @@ px4_add_module(
 		hysteresis
 	)
 
+px4_add_functional_gtest(SRC LandingDescentContractTest.cpp LINKLIBS modules__land_detector)

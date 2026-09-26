@@ -143,6 +143,26 @@ TEST_F(VelocityModule, LegalDescentCapLimitsLandingWithoutChangingStoredLandPara
 	}
 }
 
+TEST_F(VelocityModule, CommonLandingParametersKeepTargetAboveDetectorIntentBoundary)
+{
+	delete m; m = nullptr;
+	float cap = .55f, land_speed = .6f;
+	ASSERT_EQ(param_set(param_find("MPC_Z_VEL_MAX_DN"), &cap), 0);
+	ASSERT_EQ(param_set(param_find("MPC_LAND_SPEED"), &land_speed), 0);
+	m = new MulticopterPositionControl(); VelocityModuleTestAccess::fastSpool(*m);
+	step(8000, true); VelocityModuleTestAccess::airborne(*m, lp.timestamp);
+	land.landed = land.ground_contact = false; ASSERT_TRUE(land_pub.publish(land));
+	target.z = NAN; target.vz = .6f; target.acceleration[2] = 0.f;
+	lp.z_deriv = .2f; lp.vz = .1f;
+	const auto d = step(12000, true);
+	ASSERT_TRUE(d.valid); EXPECT_EQ(d.first_fail, 0); EXPECT_EQ(d.retry_result, 0);
+	EXPECT_EQ(d.effective_mode, 0); EXPECT_EQ(d.pid_axes, 7);
+	EXPECT_FLOAT_EQ(d.v_sp[2], cap); EXPECT_GE(d.v_sp[2], .9f * land_speed);
+	EXPECT_FLOAT_EQ(d.v[2], .2f); EXPECT_FLOAT_EQ(VelocityModuleTestAccess::internalLandSpeed(*m), cap);
+	float stored_land = 0.f; ASSERT_EQ(param_get(param_find("MPC_LAND_SPEED"), &stored_land), 0);
+	EXPECT_FLOAT_EQ(stored_land, land_speed);
+}
+
 TEST_F(VelocityModule, EstimatorResetsAdjustCacheOnceNotSuppressedCopy)
 {
 	step(); lp.xy_reset_counter=lp.z_reset_counter=lp.vxy_reset_counter=lp.vz_reset_counter=lp.heading_reset_counter=1;
