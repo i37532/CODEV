@@ -1,0 +1,68 @@
+{
+  "kind": "offline_protocol10_wiring_not_flight",
+  "new_flights": 0,
+  "commands": [
+    {
+      "name": "full_regression",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/scripts/verify_v04_protocol04.py",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/protocol10_verify01/full"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0
+    },
+    {
+      "name": "imu_conversion",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/scripts/verify_v04_imu0_repair.py",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/protocol10_verify01/imu"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0
+    },
+    {
+      "name": "seven_clock_replays",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/scripts/replay_v04_clock09.py",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/protocol10_verify01/seven"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0
+    },
+    {
+      "name": "eight_landing_replays",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/scripts/replay_v04_landing10.py",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/protocol10_verify01/eight"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0
+    }
+  ],
+  "passed": true,
+  "source_head": "ead33cba094f40dc943736e6ca5c29de81279cfd",
+  "eeprom_before": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+  "active_simulators_before": [],
+  "eight_historical_inputs_unchanged": 284,
+  "eight_historical_verdicts_unchanged": true,
+  "cpp_control_tests": 109,
+  "cpp_imu_unique_tests": 11,
+  "cpp_imu_sanitizer_tests": 11,
+  "python_tests": 347,
+  "historical_inputs_unchanged": 243,
+  "firmware_sha256": "b676ed9e11c530ac3dbff98ce7f0c2c10342b2a1c9e50de1e0b93240fca769b3",
+  "eeprom_after": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+  "active_simulators_after": [],
+  "seven_historical_verdicts_unchanged": true,
+  "evidence_path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/protocol10_verify01/evidence.json",
+  "evidence_sha256": "c2d5b18c88ffdc11811decef25fda68e2554dba60a60a865dcc0d627f571c24e",
+  "artifacts_index_sha256": "084aaf599e5e60bdfedce329f7a92b60502f792b4e1b01a5cde7ea64fbcb69e8"
+}

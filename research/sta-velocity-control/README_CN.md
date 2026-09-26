@@ -2,6 +2,8 @@
 
 分支：research/sta-velocity-control；规划起点866bba6e0d200d7a5137146c2a67a1a751e01233。
 
+2026-09-26 新批次接线：[protocol10 / series09](reports/V04_PROTOCOL10_IMPLEMENTATION.md)。用户条件确认9901–9903各PID→ESTA X最多6次；新降落匹配已接入独立运行/完整分析链。提交前120个不同C++、347 Python及八批回放通过；必须再于干净提交复核才能飞行，首必需失败停批，不push、不V05。下方状态保留历史时点含义。
+
 最新离线修复：[降落时间匹配 landing10](reports/V04_LANDING10_REPAIR.md)。原始命令/状态/诊断匹配、有界 pending、故障锁存与上锁竞态保护已实现；120 个不同 C++ / 最终 334 Python 及只构建通过，八批回放不改判。无新飞行，V04 仍未通过；拟申请 9901–9903 各 PID→ESTA X 最多 6 次，须授权后另冻可执行协议并干净提交复核，入口当前禁用。不 push，不续旧五轮、不 V05。
 
 最新飞行结果：[protocol09 / series08](reports/V04_PROTOCOL09_RESULTS.md)。用户确认后按冻结源码 a361ebda9783dc4bf65cbf6e57cce35520b0fa44 执行，首轮 PID 完成 60.172 秒观察/32 秒激励，但降落监视器将旧 Hold 与新 Gate=2 混合判断而中止；未完成降落上锁。1 尝试/0 接受、ESTA 0、余 5 停止；累计 8/0，V04 仍 failed/needs_revision。302 Python 与 18 项只读诊断通过，不等于飞行验收；失败/导入错误均保留、参数恢复，未修运行器或续飞、不 push、不 V05。以下“最新/待授权”等保留历史时点含义。
