@@ -1,0 +1,322 @@
+{
+  "kind": "read_only_diagnosis_not_flight_acceptance",
+  "accepted": false,
+  "acceptance_changed": false,
+  "new_flights": 0,
+  "source_head": "a361ebda9783dc4bf65cbf6e57cce35520b0fa44",
+  "original_error": "ValueError('Unexpected excitation fault 2')",
+  "events": {
+    "ready": 30936000,
+    "takeoff_command": 30944000,
+    "reposition_command": 39376000,
+    "handoff_ready": 39696000,
+    "hover_start": 47944000,
+    "hover_end": 108116000,
+    "land_command": 108116000
+  },
+  "checks": [
+    {
+      "name": "no_reported_ulog_dropout_corruption",
+      "passed": true
+    },
+    {
+      "name": "one_failed_attempt_remaining_five_not_run",
+      "passed": true
+    },
+    {
+      "name": "parameters_restored_and_owned_processes_stopped",
+      "passed": true
+    },
+    {
+      "name": "no_completed_landing_or_acceptance",
+      "passed": true
+    },
+    {
+      "name": "recorded_complete_observation",
+      "passed": true
+    },
+    {
+      "name": "one_successful_planned_land_command",
+      "passed": true
+    },
+    {
+      "name": "archived_cli_reproduces_exact_online_error",
+      "passed": true
+    },
+    {
+      "name": "fault_first_occurs_after_plan_land_with_same_timestamp_status",
+      "passed": true
+    },
+    {
+      "name": "raw_transition_has_existing_expected_landing_class",
+      "passed": true
+    },
+    {
+      "name": "only_gate_bit_after_land",
+      "passed": true
+    },
+    {
+      "name": "archived_host_used_old_loiter_snapshot",
+      "passed": true
+    },
+    {
+      "name": "actual_PID_and_no_recorded_controller_failure",
+      "passed": true
+    },
+    {
+      "name": "velocity_publication_continuous",
+      "passed": true
+    },
+    {
+      "name": "rate_publication_continuous",
+      "passed": true
+    },
+    {
+      "name": "complete_32s_excitation_component",
+      "passed": true
+    },
+    {
+      "name": "independent_binary_attitude_clocks_match",
+      "passed": true
+    },
+    {
+      "name": "live_parser_no_row_loss",
+      "passed": true
+    },
+    {
+      "name": "no_recorded_reference_or_primary_switch",
+      "passed": true
+    }
+  ],
+  "logs": [
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-26/04_29_52.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series08/run01/04_29_52.ulg",
+      "sha256": "401ac8edf859562328a088659f27c65415cf1ca8261abfc48318f4ff81c2cf5e",
+      "bytes": 168897,
+      "dropouts": 0,
+      "corruption": false
+    },
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-26/04_29_53.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series08/run01/04_29_53.ulg",
+      "sha256": "d94fd81e9826147b0a84d59042e62e85c8d699692d749626ae0e279215cc00e0",
+      "bytes": 33839787,
+      "dropouts": 0,
+      "corruption": false
+    }
+  ],
+  "observation_seconds": 60.172,
+  "mixed_host_snapshot": {
+    "status": {
+      "timestamp": 107932000.0,
+      "nav_state": 4.0,
+      "arming_state": 2.0,
+      "failsafe": false
+    },
+    "diagnostic": {
+      "timestamp": 108244000.0,
+      "excitation_fault": 2.0,
+      "excitation": 0.0,
+      "armed": true,
+      "fault": false,
+      "failsafe": false
+    },
+    "age_difference_us": 312000.0
+  },
+  "mixed_snapshot_rejection": "Unexpected excitation fault 2",
+  "raw_transition": {
+    "diagnostic_timestamp_us": 108244000,
+    "status_timestamp_us": 108244000,
+    "nav_state": 18,
+    "nav_state_timestamp_us": 108244000,
+    "fault": 2,
+    "excitation": 0.0,
+    "excitation_time_s": 56.839996337890625,
+    "classification": "expected_planned_landing_gate"
+  },
+  "active_controller_fields": {
+    "effective_mode": [
+      0
+    ],
+    "effective_axes": [
+      0
+    ],
+    "inner_mode": [
+      0
+    ],
+    "inner_axes": [
+      0
+    ],
+    "inner_divisor": [
+      1
+    ],
+    "inner_valid": [
+      1
+    ],
+    "first_fail": [
+      0
+    ],
+    "retry_result": [
+      0
+    ],
+    "fault": [
+      0
+    ],
+    "sta_fault": [
+      0
+    ],
+    "failsafe": [
+      0
+    ],
+    "timing": [
+      0
+    ],
+    "pid_calls": [
+      1
+    ],
+    "valid": [
+      1
+    ]
+  },
+  "first_invocation": {
+    "samples": 7742,
+    "first_failures": 0,
+    "retries": 0,
+    "first_input_masks": [
+      32511,
+      32704,
+      32763,
+      32767
+    ]
+  },
+  "hover_diagnostic_component_only": {
+    "n": 6017,
+    "inner": {
+      "max_age_us": 4000,
+      "median_age_us": 0.0,
+      "maximum_reads": 4
+    },
+    "maximum_gap_s": 0.012,
+    "hz": 100.0,
+    "error": {
+      "rmse": [
+        0.04513299885889657,
+        0.00877517760723735,
+        0.002025037008080923
+      ],
+      "mean": [
+        0.0025357991919154324,
+        -0.003596099464688448,
+        -7.544505933219628e-05
+      ],
+      "std": [
+        0.045061705565318265,
+        0.008004486909142097,
+        0.0020236311242713425
+      ],
+      "max_abs": [
+        0.10352790355682373,
+        0.02084934338927269,
+        0.0069279600866138935
+      ]
+    },
+    "iae_m": [
+      1.128041528742762,
+      0.22074826274998544,
+      0.04945804633054661
+    ],
+    "acceleration_tv": [
+      3.5313642024993896,
+      2.8264880180358887,
+      1.9982855319976807
+    ],
+    "samples": 3200,
+    "seconds": 32.0,
+    "constraint_fraction": 0.0,
+    "maximum_continuous_constraint_s": 0.0,
+    "nu_peak": null
+  },
+  "attitude_clock": {
+    "records": 23377,
+    "equal_publications": 0,
+    "sample_periods_us": [
+      4000,
+      8000
+    ]
+  },
+  "hover_attitude_safety_component_only": {
+    "records": 13518,
+    "max_tilt_deg": 1.413469910621643,
+    "max_yaw_error_rad": 0.00042724612285383046,
+    "yaw_bound_checked": true,
+    "reset_indices": []
+  },
+  "hover_yaw_descriptive_component_only": {
+    "stats": {
+      "rmse": 0.00014885413815990062,
+      "mean": 1.3501272461294122e-06,
+      "std": 0.00014884801511523774,
+      "max_abs": 0.00042724612285383046
+    },
+    "records": 13516,
+    "max_target_age_us": 8000,
+    "pairing": "unique preceding target at publication; not proven consumed",
+    "weighting": "one per recorded attitude row; historical yaw convention"
+  },
+  "live_independent_field_arrays_equal": 1049,
+  "reference_and_counters": {
+    "ref_timestamp": [
+      1196000
+    ],
+    "ref_lat": [
+      47.3977508
+    ],
+    "ref_lon": [
+      8.5456073
+    ],
+    "ref_alt": [
+      488.4783020019531
+    ],
+    "xy_reset_counter": [
+      2
+    ],
+    "z_reset_counter": [
+      0
+    ],
+    "vxy_reset_counter": [
+      2
+    ],
+    "vz_reset_counter": [
+      1
+    ]
+  },
+  "primary_instances": [
+    0
+  ],
+  "live_transport": {
+    "polls": 157,
+    "min_age_us": 40000.0,
+    "max_age_us": 128000.0
+  },
+  "runtime_parameters": {
+    "MC_RTC_MODE": 0.0,
+    "MC_STA_AXES": 0.0,
+    "MC_RTC_DIV": 1.0,
+    "MC_RATT_TEST": 0.0,
+    "MC_STA_TKO_MGT": 0.0,
+    "MPC_VC_MODE": 0.0,
+    "MPC_VC_AXES": 0.0,
+    "MPC_VCT_TEST": 1.0,
+    "SDLOG_PROFILE": 147.0
+  },
+  "limitations": [
+    "No completed landing, no accepted attempt, no ESTA flight or paired comparison.",
+    "Raw timestamps do not prove cross-topic consumer causality; CLI command order proves this host mixed old status with newer diagnostic.",
+    "Hover component metrics are exploratory failed-attempt evidence, not complete-flight acceptance.",
+    "No production, runner, checker, parameter, threshold or frozen protocol repair performed."
+  ],
+  "original_artifact_count": 44,
+  "original_index_sha256": "6e3b3744a67b92868b183995cfc066bb49bc1b6e362544c4dc21a07dcf5ef00b",
+  "diagnostic_checks_passed": true
+}
