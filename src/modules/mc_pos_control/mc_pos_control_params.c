@@ -56,12 +56,14 @@ PARAM_DEFINE_FLOAT(MPC_THR_MIN, 0.12f);
  * Default-off velocity diagnostic excitation (SITL only)
  *
  * One X/North 32 second smooth sine after 12 seconds airborne settling.
- * PID-only V03 protocol; never use on hardware. Not a controller mode.
+ * Value 2 uses half amplitude in Down/Z for the Z03 protocol.
+ * Never use on hardware. Not a controller mode.
  *
  * @value 0 Disabled
  * @value 1 Single shot PID X excitation
+ * @value 2 Single shot Z excitation (0.1 m/s)
  * @min 0
- * @max 1
+ * @max 2
  * @group Multicopter Position Control
  */
 PARAM_DEFINE_INT32(MPC_VCT_TEST, 0);
@@ -235,13 +237,13 @@ PARAM_DEFINE_FLOAT(MPC_XY_P, 0.95f);
 /**
  * Velocity controller request
  *
- * V04 accepts PID/AXES=0 or SITL ESTA/AXES=1 with valid gains.
+ * Accepts PID/AXES=0 or SITL ESTA/AXES=1 or 4 with valid independent gains.
  * MODE2 and AXES3/7 remain rejected. Differing armed requests are pending until
  * disarm; requesting the effective configuration cancels pending changes.
  * Original PID gain updates are unaffected.
  *
  * @value 0 PID
- * @value 1 ESTA X (SITL only)
+ * @value 1 ESTA X or Z (SITL only)
  * @value 2 Reserved (unavailable)
  * @min 0
  * @max 2
@@ -253,7 +255,8 @@ PARAM_DEFINE_INT32(MPC_VC_MODE, 0);
  * Experimental velocity axes request
  *
  * Local NED axes, not body rates. MODE0 requires 0; MODE1 permits
- * only 1 (North/X) with valid gains in SITL. Y/Z remain PID.
+ * 1 (North/X) or 4 (Down/Z) with valid gains in SITL. Other axes remain PID.
+ * Z retains PID during ground/takeoff ramp and one handover sample.
  * XY/XYZ masks 3/7 remain rejected.
  *
  * @min 0
@@ -297,6 +300,42 @@ PARAM_DEFINE_FLOAT(MPC_VC_NU_X, 0.f);
  * @group Multicopter Position Control
  */
 PARAM_DEFINE_FLOAT(MPC_VC_A_X, 0.f);
+
+/**
+ * ESTA Down velocity square-root gain
+ *
+ * Units (m/s^2)/sqrt(m/s). Zero disables admission. Disarmed changes only.
+ * @min 0
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_FLOAT(MPC_VC_L1_Z, 0.f);
+
+/**
+ * ESTA Down velocity integral gain
+ *
+ * Units m/s^3. Zero disables admission. Disarmed changes only.
+ * @min 0
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_FLOAT(MPC_VC_L2_Z, 0.f);
+
+/**
+ * ESTA Down nu absolute limit
+ *
+ * Units m/s^2. Zero disables admission. Disarmed changes only.
+ * @min 0
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_FLOAT(MPC_VC_NU_Z, 0.f);
+
+/**
+ * ESTA Down acceleration correction absolute limit
+ *
+ * Units m/s^2 before FF. Zero disables admission. Disarmed changes only.
+ * @min 0
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_FLOAT(MPC_VC_A_Z, 0.f);
 
 /**
  * Proportional gain for horizontal velocity error

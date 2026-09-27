@@ -283,10 +283,13 @@ void MulticopterPositionControl::Run()
 		_control_mode_sub.update(&_control_mode);
 		_vehicle_land_detected_sub.update(&_vehicle_land_detected);
 		StaVelocityProtection::Config esta_config{};
-		esta_config.axes = 1;
+		esta_config.axes = _param_mpc_vc_axes.get() == 4 ? 4 : 1;
 		esta_config.gains[0] = {_param_mpc_vc_l1_x.get(), _param_mpc_vc_l2_x.get()};
 		esta_config.nu_limit[0] = _param_mpc_vc_nu_x.get();
 		esta_config.acceleration_limit[0] = _param_mpc_vc_a_x.get();
+		esta_config.gains[2] = {_param_mpc_vc_l1_z.get(), _param_mpc_vc_l2_z.get()};
+		esta_config.nu_limit[2] = _param_mpc_vc_nu_z.get();
+		esta_config.acceleration_limit[2] = _param_mpc_vc_a_z.get();
 		_control.configureVelocityEsta(esta_config, _control_mode.flag_armed);
 		_control.configureVelocityControl(_param_mpc_vc_mode.get(), _param_mpc_vc_axes.get(), _control_mode.flag_armed);
 		uint8_t pid_calls = 0;
@@ -463,10 +466,13 @@ void MulticopterPositionControl::Run()
 				&& !_rate_diagnostic.fault && !_rate_diagnostic.termination;
 			// A reset with a freshly replaced target has no evidence of a matching delta.
 			velocity_frame.unmatched_reset_axes = (reset_bits & 1) && _setpoint.timestamp >= local_pos.timestamp ? 3 : 0;
+			// Z blends vz/z_deriv during descent. There is no evidence that both
+			// estimates and the active target share a reset delta: fail closed.
+			if (reset_bits & (2 | 8)) { velocity_frame.unmatched_reset_axes |= 4; }
 			_control.setVelocityFrame(velocity_frame);
 
 #if defined(CONFIG_ARCH_BOARD_PX4_SITL)
-			const bool excitation_gate = _param_mpc_vct_test.get() == 1 && flying
+			const bool excitation_gate = (_param_mpc_vct_test.get() == 1 || _param_mpc_vct_test.get() == 2) && flying
 				&& _velocity_vehicle_status.nav_state == vehicle_status_s::NAVIGATION_STATE_AUTO_LOITER
 				&& !_vehicle_land_detected.landed && !_vehicle_land_detected.ground_contact
 				&& _control_mode.flag_control_auto_enabled && !_control.velocitySelection().pending()
@@ -474,8 +480,9 @@ void MulticopterPositionControl::Run()
 				&& inner_valid && _rate_diagnostic.effective_mode == 0 && _rate_diagnostic.effective_axes == 0
 				&& _rate_diagnostic.div_eff == 1 && !_rate_diagnostic.fault;
 			excitation = _velocity_excitation.update(local_pos.timestamp_sample, _control_mode.flag_armed, excitation_gate);
+			if (_param_mpc_vct_test.get() == 2) { excitation *= .5f; }
 #endif
-			_control.setDiagnosticExcitation(excitation);
+			_control.setDiagnosticExcitation(excitation, _param_mpc_vct_test.get() == 2);
 
 			// Run position control
 			const hrt_abstime controller_started = hrt_absolute_time();

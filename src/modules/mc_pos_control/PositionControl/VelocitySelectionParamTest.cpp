@@ -55,3 +55,24 @@ TEST(VelocitySelectionParam, EstaGainsSavedReloadedAndDisarmedAdmission)
 	EXPECT_EQ(restarted.velocitySelection().effectiveMode(),1); EXPECT_EQ(restarted.velocitySelection().effectiveAxes(),1);
 	for (auto key:keys) { param_reset(key); } param_reset(mode); param_reset(axes);
 }
+
+TEST(VelocitySelectionParam, ZGainsBsonReloadDoNotDependOnXGains)
+{
+	param_control_autosave(false);
+	const char *names[]={"MPC_VC_L1_Z","MPC_VC_L2_Z","MPC_VC_NU_Z","MPC_VC_A_Z"};
+	float values[]={1.f,.2f,2.f,3.f}; param_t keys[4];
+	for(int i=0;i<4;++i) {
+		keys[i]=param_find(names[i]); ASSERT_NE(keys[i],PARAM_INVALID); param_reset(keys[i]);
+		float value=-1.f; ASSERT_EQ(param_get(keys[i],&value),0); EXPECT_FLOAT_EQ(value,0.f);
+		ASSERT_EQ(param_set(keys[i],&values[i]),0);
+	}
+	FILE *f=tmpfile(); ASSERT_NE(f,nullptr); ASSERT_EQ(param_export(fileno(f),false,nullptr),0);
+	for(auto key:keys) { param_reset(key); }
+	ASSERT_EQ(lseek(fileno(f),0,SEEK_SET),0); ASSERT_EQ(param_import(fileno(f),true),0); fclose(f);
+	for(int i=0;i<4;++i) { float value=0.f; ASSERT_EQ(param_get(keys[i],&value),0); EXPECT_FLOAT_EQ(value,values[i]); }
+	StaVelocityProtection::Config c{}; c.axes=4; c.gains[2]={values[0],values[1]}; c.nu_limit[2]=values[2]; c.acceleration_limit[2]=values[3];
+	PositionControl restarted; restarted.configureVelocityEsta(c,false); restarted.configureVelocityControl(1,4,false);
+	EXPECT_EQ(restarted.velocitySelection().effectiveAxes(),4);
+	restarted.configureVelocityControl(1,1,false); EXPECT_NE(restarted.velocitySelection().reject(),0);
+	for(auto key:keys) { param_reset(key); }
+}

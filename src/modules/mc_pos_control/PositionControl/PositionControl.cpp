@@ -47,10 +47,12 @@ using namespace matrix;
 void PositionControl::configureVelocityEsta(const StaVelocityProtection::Config &c, bool armed)
 {
 	_esta_requested = c;
-	_esta_config_valid = c.axes == 1 && StaVelocityProtection::validConfig(c);
-	const bool different = memcmp(&c.gains[0], &_esta_effective.gains[0], sizeof(c.gains[0]))
-			       || memcmp(&c.nu_limit[0], &_esta_effective.nu_limit[0], sizeof(float))
-			       || memcmp(&c.acceleration_limit[0], &_esta_effective.acceleration_limit[0], sizeof(float));
+	_esta_config_valid = (c.axes == 1 || c.axes == 4) && StaVelocityProtection::validConfig(c);
+	const unsigned axis = c.axes == 4 ? 2 : 0;
+	const bool different = c.axes != _esta_effective.axes
+		|| memcmp(&c.gains[axis], &_esta_effective.gains[axis], sizeof(c.gains[axis]))
+		|| memcmp(&c.nu_limit[axis], &_esta_effective.nu_limit[axis], sizeof(float))
+		|| memcmp(&c.acceleration_limit[axis], &_esta_effective.acceleration_limit[axis], sizeof(float));
 	_esta_pending = armed && different;
 	if (!armed && _esta_config_valid && different) {
 		_esta_effective = c;
@@ -61,18 +63,21 @@ void PositionControl::configureVelocityEsta(const StaVelocityProtection::Config 
 void PositionControl::configureVelocityControl(int32_t mode, int32_t axes, bool armed)
 {
 	const int32_t previous = _velocity_selector.effectiveMode();
+	const int32_t previous_axes = _velocity_selector.effectiveAxes();
 	bool ready = false;
 #if defined(CONFIG_ARCH_BOARD_PX4_SITL)
 	ready = _esta_config_valid;
 #endif
-	_velocity_selector.configure(mode, axes, armed, ready);
-	if (previous != _velocity_selector.effectiveMode()) {
+	_velocity_selector.configure(mode, axes, armed, ready, _esta_requested.axes);
+	if (previous != _velocity_selector.effectiveMode() || previous_axes != _velocity_selector.effectiveAxes()) {
 		++_esta_config_generation;
 		// Only experimental-axis PID state is reset on disarmed algorithm change.
-		_vel_int(0) = 0.f;
+		if ((previous_axes | _velocity_selector.effectiveAxes()) & 1) { _vel_int(0) = 0.f; }
+		if ((previous_axes | _velocity_selector.effectiveAxes()) & 4) { _vel_int(2) = 0.f; }
+		_z_engaged = false;
 	}
 	StaVelocityProtection::Config c = _esta_effective;
-	c.axes = _velocity_selector.effectiveMode() == 1 ? 1 : 0;
+	c.axes = _velocity_selector.effectiveMode() == 1 ? _velocity_selector.effectiveAxes() : 0;
 	_velocity_protection.configure(c, armed);
 }
 
@@ -83,6 +88,7 @@ void PositionControl::setVelocityFrame(const StaVelocityProtection::Frame &frame
 		auto inactive = frame;
 		inactive.enabled = false;
 		_velocity_protection.begin(inactive);
+		_z_engaged = false;
 		if (!frame.armed) { _esta_failed = false; }
 	}
 }
@@ -110,6 +116,22 @@ void PositionControl::setThrustLimits(const float min, const float max)
 
 void PositionControl::updateHoverThrust(const float hover_thrust_new)
 {
+	if (_velocity_selector.effectiveMode() == 1 && _velocity_selector.effectiveAxes() == 4 && _z_engaged) {
+		// Fixed error/FF and XY demand: body_z is independent of Z acceleration.
+		// Preserve pre-limit collective thrust, including at nonzero tilt. Refuse
+		// saturated/invalid states rather than silently clipping a continuity seed.
+		const float s = _diagnostic.s[2];
+		const float correction = -_esta_effective.gains[2].lambda1 * sqrtf(fabsf(s)) * sign(s)
+			+ _velocity_protection.state()[2];
+		const float ff = PX4_ISFINITE(_diagnostic.a_ff[2]) ? _diagnostic.a_ff[2] : 0.f;
+		const float shift = (_hover_thrust / hover_thrust_new - 1.f) * (correction + ff - CONSTANTS_ONE_G);
+		if (!PX4_ISFINITE(hover_thrust_new) || hover_thrust_new < .1f || hover_thrust_new > .9f
+		    || (_diagnostic.constraint_bits & 6) || !_velocity_protection.shiftZ(shift, correction)) {
+			_esta_failed = true;
+		} else { _z_hte_shift += shift; }
+		setHoverThrust(hover_thrust_new);
+		return;
+	}
 	_vel_int(2) += (hover_thrust_new - _hover_thrust) * (CONSTANTS_ONE_G / hover_thrust_new);
 	setHoverThrust(hover_thrust_new);
 }
@@ -146,7 +168,11 @@ bool PositionControl::update(const float dt)
 	// Explicit, default-off SITL test input. Original position P is unchanged.
 #if defined(CONFIG_ARCH_BOARD_PX4_SITL)
 	if (fabsf(_diagnostic_excitation) > 0.f) {
-		_vel_sp.xy() = ControlMath::constrainXY(_vel_sp.xy(), Vector2f(_diagnostic_excitation, 0.f), _lim_vel_horizontal);
+		if (_diagnostic_vertical) {
+			_vel_sp(2) = math::constrain(_vel_sp(2) + _diagnostic_excitation, -_lim_vel_up, _lim_vel_down);
+		} else {
+			_vel_sp.xy() = ControlMath::constrainXY(_vel_sp.xy(), Vector2f(_diagnostic_excitation, 0.f), _lim_vel_horizontal);
+		}
 	}
 #endif
 	_velocityControl(dt);
@@ -159,24 +185,30 @@ bool PositionControl::update(const float dt)
 	if (_velocity_selector.effectiveMode() == 1) {
 		StaVelocityProtection::Vec proxy{};
 		for (int i = 0; i < 3; ++i) { proxy[i] = _diagnostic.a_proxy[i]; }
-		const uint8_t constrained_axes = _diagnostic.constraint_bits ? 3 : 0;
+		const uint8_t constrained_axes = (_diagnostic.constraint_bits ? 3 : 0)
+			| ((_diagnostic.constraint_bits & 6) ? 4 : 0);
 		const auto &r = _velocity_protection.finish(proxy, constrained_axes, success && !_esta_failed);
 		_esta_failed = _esta_failed || !success || r.fault;
 		success = success && !_esta_failed;
 		_diagnostic.valid = success;
 		_diagnostic.fault = _esta_failed;
-		_diagnostic.active_axes = r.active_axes;
-		_diagnostic.pid_axes &= ~1u;
+		_diagnostic.active_axes = _z_phase ? (_z_phase == 3 ? r.active_axes : 0) : r.active_axes;
+		if (!_z_phase) { _diagnostic.pid_axes &= ~1u; }
+		if (_z_phase == 3) { _diagnostic.pid_axes &= ~4u; }
 		_diagnostic.sta_flags = r.flags;
 		_diagnostic.sta_fault = r.fault;
 		_diagnostic.committed_axes = r.committed_axes;
 		_diagnostic.config_pending = _esta_pending;
 		_diagnostic.config_generation = _esta_config_generation;
-		_diagnostic.nu_before[0] = r.nu_before[0];
-		_diagnostic.nu_ideal[0] = r.nu_ideal[0];
-		_diagnostic.nu_applied[0] = r.nu_applied[0];
-		_diagnostic.a_sta[0] = r.a_sta[0];
+		const unsigned axis = _velocity_selector.effectiveAxes() == 4 ? 2 : 0;
+		_diagnostic.nu_before[axis] = r.nu_before[axis];
+		_diagnostic.nu_ideal[axis] = r.nu_ideal[axis];
+		_diagnostic.nu_applied[axis] = r.nu_applied[axis];
+		_diagnostic.a_sta[axis] = (_z_phase && _z_phase != 3) ? NAN : r.a_sta[axis];
 	}
+	_diagnostic.z_phase = _z_phase;
+	_diagnostic.z_hte_shift = _z_hte_shift;
+	_z_hte_shift = 0.f;
 	return success;
 }
 
@@ -263,13 +295,15 @@ void PositionControl::_positionControl()
 
 void PositionControl::_velocityControl(const float dt)
 {
+	_z_phase = 0;
 	// Only accepted configurations reach dispatch. V01 has exactly one backend.
 	switch (_velocity_selector.effectiveMode()) {
 	case 0:
 		_velocityControlPid(dt);
 		break;
 	case 1:
-		_velocityControlEstaX(dt);
+		if (_velocity_selector.effectiveAxes() == 4) { _velocityControlEstaZ(dt); }
+		else { _velocityControlEstaX(dt); }
 		break;
 	}
 }
@@ -394,6 +428,59 @@ void PositionControl::_velocityControlEstaX(const float dt)
 
 	// limit thrust integral
 	_vel_int(2) = math::min(fabsf(_vel_int(2)), CONSTANTS_ONE_G) * sign(_vel_int(2));
+}
+
+void PositionControl::_velocityControlEstaZ(const float dt)
+{
+	auto frame = _velocity_frame;
+	for (int i = 0; i < 3; ++i) {
+		frame.velocity[i] = _vel(i); frame.target[i] = _vel_sp(i); frame.ff[i] = _acc_sp(i);
+	}
+	const auto &candidate = _velocity_protection.begin(frame);
+	_esta_failed = _esta_failed || candidate.fault || (candidate.flags & StaVelocityProtection::Duplicate);
+	const bool ground = !frame.armed || !frame.enabled || !frame.flying || frame.landed || frame.contact;
+	_z_phase = ground ? 1 : (!PX4_ISFINITE(_vel_sp(2)) ? 4 : 3);
+	_z_engaged = false;
+	if (ground || (_z_phase == 4 && !_esta_failed)) {
+		// Preserve original takeoff ramp/contact suppression and acceleration-only
+		// semantics. These phases are explicitly NOT claimed as Z ESTA.
+		_velocityControlPid(dt);
+		return;
+	}
+	if ((candidate.flags & StaVelocityProtection::Priming) && !_esta_failed) {
+		const float ff = PX4_ISFINITE(_acc_sp(2)) ? _acc_sp(2) : 0.f;
+		_velocityControlPid(dt); // one boundary sample, same-frame PID output
+		const float s = _vel(2) - _vel_sp(2);
+		const float correction = _acc_sp(2) - ff;
+		const float nu = correction + _esta_effective.gains[2].lambda1 * sqrtf(fabsf(s)) * sign(s);
+		const float ideal_z = (_acc_sp(2) / CONSTANTS_ONE_G - 1.f) * _hover_thrust;
+		if (!PX4_ISFINITE(correction) || fabsf(correction) > _esta_effective.acceleration_limit[2]
+		    || !PX4_ISFINITE(ideal_z) || fabsf(ideal_z - _thr_sp(2)) > 1e-6f
+		    || !_velocity_protection.seedZ(nu)) { _esta_failed = true; }
+		_z_phase = 2;
+		_z_engaged = !_esta_failed;
+		return;
+	}
+	// Normal flight: calculate only XY PID. Never run idle Z PID or add its
+	// integral/derivative to ESTA. The common position P and FF remain upstream.
+	Vector3f vel_error = _vel_sp - _vel;
+	Vector3f correction(NAN, NAN, NAN);
+	for (int i = 0; i < 2; ++i) {
+		correction(i) = vel_error(i) * _gain_vel_p(i) + _vel_int(i) - _vel_dot(i) * _gain_vel_d(i);
+	}
+	_acc_sp(2) = !_esta_failed && candidate.active_axes == 4 ? candidate.a_req[2] : NAN;
+	ControlMath::addIfNotNanVector3f(_acc_sp, correction);
+	_accelerationControl();
+	_thr_sp(2) = math::max(_thr_sp(2), -_lim_thr_max);
+	const float remaining = _lim_thr_max * _lim_thr_max - _thr_sp(2) * _thr_sp(2);
+	const float xy_max = remaining > 0.f ? sqrtf(remaining) : 0.f;
+	const Vector2f xy(_thr_sp);
+	if (xy.norm() > xy_max) { _thr_sp.xy() = xy / xy.norm() * xy_max; }
+	const Vector2f limited = Vector2f(_thr_sp) * (CONSTANTS_ONE_G / _hover_thrust);
+	vel_error.xy() = Vector2f(vel_error) - (2.f / _gain_vel_p(0)) * (Vector2f(_acc_sp) - limited);
+	ControlMath::setZeroIfNanVector3f(vel_error);
+	for (int i = 0; i < 2; ++i) { _vel_int(i) += vel_error(i) * _gain_vel_i(i) * dt; }
+	_z_engaged = !_esta_failed;
 }
 
 void PositionControl::_accelerationControl()

@@ -6,7 +6,7 @@
 
 bool StaVelocityProtection::validConfig(const Config &c)
 {
-	if (c.axes != 0 && c.axes != 1 && c.axes != 3) { return false; } // No Z research authorization.
+	if (c.axes != 0 && c.axes != 1 && c.axes != 3 && c.axes != 4) { return false; }
 
 	for (size_t i = 0; i < 3; ++i) {
 		if ((c.axes & (1 << i)) && (!StaVelocityControl::validParameters(c.gains[i])
@@ -14,6 +14,28 @@ bool StaVelocityProtection::validConfig(const Config &c)
 		    || !std::isnormal(c.acceleration_limit[i]) || c.acceleration_limit[i] <= 0.f)) { return false; }
 	}
 
+	return true;
+}
+
+bool StaVelocityProtection::seedZ(float nu)
+{
+	if (_config.axes != 4 || !_active || _open || _fault || !(_result.flags & Priming)
+	    || !std::isfinite(nu) || fabsf(nu) > _config.nu_limit[2]) { latch(Numerical); return false; }
+	_kernel.reset(2, nu);
+	_result.nu_before[2] = _result.nu_ideal[2] = _result.nu_applied[2] = nu;
+	return true;
+}
+
+bool StaVelocityProtection::shiftZ(float shift, float correction)
+{
+	const float nu = _kernel.state()[2] + shift;
+	if (_config.axes != 4 || !_active || _open || _fault || !std::isfinite(shift)
+	    || !std::isfinite(nu) || fabsf(nu) > _config.nu_limit[2]
+	    || !std::isfinite(correction) || fabsf(correction) > _config.acceleration_limit[2]
+	    || !std::isfinite(correction + shift) || fabsf(correction + shift) > _config.acceleration_limit[2]) {
+		latch(Numerical); return false;
+	}
+	_kernel.reset(2, nu);
 	return true;
 }
 

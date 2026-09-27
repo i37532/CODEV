@@ -34,6 +34,12 @@ public:
 		m._param_mpc_vc_l1_x.set(1.f); m._param_mpc_vc_l2_x.set(.2f);
 		m._param_mpc_vc_nu_x.set(.4f); m._param_mpc_vc_a_x.set(.8f);
 	}
+	static void selectZ(MulticopterPositionControl &m)
+	{
+		m._param_mpc_vc_mode.set(1); m._param_mpc_vc_axes.set(4);
+		m._param_mpc_vc_l1_z.set(1.f); m._param_mpc_vc_l2_z.set(.2f);
+		m._param_mpc_vc_nu_z.set(2.f); m._param_mpc_vc_a_z.set(3.f);
+	}
 };
 
 class VelocityTestQueueAnchor : public px4::WorkItem
@@ -102,6 +108,64 @@ protected:
 		EXPECT_GT(reads,0u); EXPECT_EQ(d.timestamp_sample,lp.timestamp_sample); return d;
 	}
 };
+
+TEST_F(VelocityModule, ZSelectionRealModuleRampHandoverMixedVelocityAndContact)
+{
+	VelocityModuleTestAccess::selectZ(*m);
+	mode.flag_armed=false; ASSERT_TRUE(mode_pub.publish(mode));
+	auto d=step(); EXPECT_EQ(d.effective_axes,4); EXPECT_EQ(d.z_phase,1);
+	mode.flag_armed=true; ASSERT_TRUE(mode_pub.publish(mode)); target.z=lp.z; target.vz=0.f;
+	d=step(8000,true); EXPECT_EQ(d.committed_axes,0);
+	VelocityModuleTestAccess::airborne(*m,lp.timestamp);
+	land.landed=land.ground_contact=false; ASSERT_TRUE(land_pub.publish(land));
+	d=step(12000,true); ASSERT_TRUE(d.valid); EXPECT_EQ(d.z_phase,2); EXPECT_EQ(d.pid_axes,7);
+	d=step(8000,true); ASSERT_TRUE(d.valid); EXPECT_EQ(d.z_phase,3); EXPECT_EQ(d.pid_axes,3); EXPECT_EQ(d.committed_axes,4);
+	target.z=NAN; target.vz=.3f; target.acceleration[2]=.02f; lp.vz=.1f; lp.z_deriv=.2f;
+	d=step(12000,true); ASSERT_TRUE(d.valid); EXPECT_EQ(d.z_phase,3);
+	const float w=.3f/VelocityModuleTestAccess::internalLandSpeed(*m);
+	EXPECT_NEAR(d.v[2],.2f*w+.1f*(1.f-w),1e-6f);
+	EXPECT_NEAR(d.a_req[2],d.a_sta[2]+.02f,1e-6f);
+	land.ground_contact=true; ASSERT_TRUE(land_pub.publish(land)); d=step(8000,true);
+	ASSERT_TRUE(d.valid); EXPECT_EQ(d.z_phase,1); EXPECT_EQ(d.committed_axes,0); EXPECT_FLOAT_EQ(d.a_ff[2],100.f);
+}
+
+TEST_F(VelocityModule, ZHoverEstimatorUpdateKeepsMappingContinuous)
+{
+	VelocityModuleTestAccess::selectZ(*m); mode.flag_armed=false; ASSERT_TRUE(mode_pub.publish(mode)); step();
+	mode.flag_armed=true; ASSERT_TRUE(mode_pub.publish(mode));
+	VelocityModuleTestAccess::airborne(*m,lp.timestamp); land.landed=land.ground_contact=false; ASSERT_TRUE(land_pub.publish(land));
+	target.z=lp.z; target.vz=0.f; target.acceleration[2]=0.f;
+	ASSERT_TRUE(step(12000,true).valid); auto before=step(8000,true); ASSERT_TRUE(before.valid);
+	uORB::Publication<hover_thrust_estimate_s> publisher{ORB_ID(hover_thrust_estimate)};
+	hover_thrust_estimate_s h{}; h.timestamp=hrt_absolute_time(); h.valid=true; h.hover_thrust=before.hover_thrust+.01f;
+	ASSERT_TRUE(publisher.publish(h)); auto after=step(12000,true); ASSERT_TRUE(after.valid);
+	EXPECT_FLOAT_EQ(after.hover_thrust,h.hover_thrust); EXPECT_NE(after.z_hte_shift,0.f);
+	EXPECT_NEAR(after.thrust[2],before.thrust[2],1e-6f); EXPECT_EQ(after.pid_axes,3);
+}
+
+TEST_F(VelocityModule, ZResetFailsClosedAndSameSampleFailsafeCannotCommit)
+{
+	VelocityModuleTestAccess::selectZ(*m); mode.flag_armed=false; ASSERT_TRUE(mode_pub.publish(mode)); step();
+	mode.flag_armed=true; ASSERT_TRUE(mode_pub.publish(mode));
+	VelocityModuleTestAccess::airborne(*m,lp.timestamp); land.landed=land.ground_contact=false; ASSERT_TRUE(land_pub.publish(land));
+	target.z=lp.z; target.vz=0.f; target.acceleration[2]=0.f;
+	ASSERT_TRUE(step(12000,true).valid); ASSERT_TRUE(step(8000,true).valid);
+	lp.vz_reset_counter++; lp.delta_vz=.01f;
+	const auto d=step(12000,true);
+	EXPECT_EQ(d.pid_calls,2); EXPECT_NE(d.first_fail,0); EXPECT_EQ(d.retry_result,2); EXPECT_FALSE(d.valid);
+	EXPECT_EQ(d.committed_axes,0); EXPECT_EQ(d.output_timestamp,0u); EXPECT_TRUE(d.fault);
+}
+
+TEST_F(VelocityModule, ZMissingMeasurementNeverPublishesAutomaticPidTakeover)
+{
+	VelocityModuleTestAccess::selectZ(*m); mode.flag_armed=false; ASSERT_TRUE(mode_pub.publish(mode)); step();
+	mode.flag_armed=true; ASSERT_TRUE(mode_pub.publish(mode));
+	VelocityModuleTestAccess::airborne(*m,lp.timestamp); land.landed=land.ground_contact=false; ASSERT_TRUE(land_pub.publish(land));
+	target.z=lp.z; target.vz=0.f; target.acceleration[2]=0.f;
+	ASSERT_TRUE(step(12000,true).valid); lp.v_z_valid=false;
+	const auto d=step(8000,true); EXPECT_FALSE(d.valid); EXPECT_EQ(d.output_timestamp,0u); EXPECT_EQ(d.committed_axes,0);
+	lp.v_z_valid=true; EXPECT_FALSE(step(12000,true).valid);
+}
 
 TEST_F(VelocityModule, FiftyHzTargetHundredHzCallbacksRampWithoutNewTarget)
 {

@@ -161,7 +161,7 @@ public:
 	uint16_t inputValidity() const;
 	uint16_t failureReason() const;
 	bool velocityOutputPublishable() const { return _velocity_selector.effectiveMode() == 0 || _diagnostic.valid; }
-	void setDiagnosticExcitation(float velocity) { _diagnostic_excitation = velocity; }
+	void setDiagnosticExcitation(float velocity, bool vertical = false) { _diagnostic_excitation = velocity; _diagnostic_vertical = vertical; }
 
 	/**
 	 * Set the integral term in xy to 0.
@@ -190,10 +190,14 @@ private:
 	VelocityControlSelector _velocity_selector;
 	sta_velocity_ctrl_status_s _diagnostic{};
 	float _diagnostic_excitation{0.f};
+	bool _diagnostic_vertical{false};
 	StaVelocityProtection _velocity_protection;
 	StaVelocityProtection::Frame _velocity_frame{};
 	StaVelocityProtection::Config _esta_requested{}, _esta_effective{};
 	bool _esta_config_valid{false}, _esta_pending{false}, _esta_failed{false};
+	bool _z_engaged{false};
+	uint8_t _z_phase{0}; // 0 not Z,1 ground/ramp PID,2 PID handover,3 ESTA,4 acceleration-only
+	float _z_hte_shift{0.f};
 	uint32_t _esta_config_generation{0};
 	void _recordDiagnostic(bool success);
 	bool _updateSuccessful();
@@ -202,6 +206,7 @@ private:
 	void _velocityControl(const float dt); ///< Velocity PID control
 	void _velocityControlPid(const float dt); ///< V00 PID operations, unchanged order
 	void _velocityControlEstaX(const float dt);
+	void _velocityControlEstaZ(const float dt);
 	void _accelerationControl(); ///< Acceleration setpoint processing
 
 	// Gains

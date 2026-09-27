@@ -46,6 +46,9 @@ public:
 	const Result &finish(const Vec &proxy, uint8_t constrained_axes, bool feedback_valid);
 	const Vec &state() const { return _kernel.state(); }
 	static bool validConfig(const Config &config);
+	// Z-only, closed-transaction state changes. No clipping on handover/HTE.
+	bool seedZ(float nu);
+	bool shiftZ(float shift, float correction);
 
 private:
 	static bool same(const Config &a, const Config &b);

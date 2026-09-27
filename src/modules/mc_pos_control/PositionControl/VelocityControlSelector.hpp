@@ -16,7 +16,7 @@ public:
 
 	enum Reject : uint8_t { None = 0, ModeRange = 1, ModeUnimplemented = 2, AxesUnavailable = 4 };
 
-	void configure(int32_t mode, int32_t axes, bool armed, bool esta_ready = false)
+	void configure(int32_t mode, int32_t axes, bool armed, bool esta_ready = false, int32_t admitted_axes = 1)
 	{
 		_requested_mode = mode;
 		_requested_axes = axes;
@@ -25,7 +25,9 @@ public:
 		if (mode < 0 || mode > 2) { _reject |= ModeRange; }
 		else if (mode == 2 || (mode == 1 && !esta_ready)) { _reject |= ModeUnimplemented; }
 
-		if ((mode == 1 && esta_ready) ? axes != 1 : axes != 0) { _reject |= AxesUnavailable; }
+		if ((mode == 1 && esta_ready) ? (axes != admitted_axes || (axes != 1 && axes != 4)) : axes != 0) {
+			_reject |= AxesUnavailable;
+		}
 
 		_pending = armed && (mode != _effective_mode || axes != _effective_axes);
 
