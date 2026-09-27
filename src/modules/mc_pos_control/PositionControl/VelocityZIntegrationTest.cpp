@@ -172,3 +172,35 @@ TEST(VelocityZIntegration, IndependentZohMotorLagConstantAndRampDisturbance) {
 		EXPECT_LT(std::sqrt(sum/3499.),.04); // screening only, not aircraft proof
 	}
 }
+
+TEST(VelocityZIntegration, PidObservedTakeoffSeedWithMotorLagAndFiniteCandidateScreen)
+{
+	// Development screen, BEFORE any ESTA flight. Initial consumed values from
+	// accepted PID Z03/18002 at sample 35.204s; target evolution is synthetic,
+	// not a replay of the nonlinear vehicle/navigation or a stability proof.
+	for(int choice=0;choice<2;++choice) {
+		for(double lag:{.04,.08}) {
+			PositionControl p; setup(p,false); auto c=config(); c.gains[2]=choice==0?
+				StaVelocityControl::Parameters{1.f,.2f}:StaVelocityControl::Parameters{2.f,1.f};
+			c.nu_limit[2]=4.f; c.acceleration_limit[2]=6.f;
+			p.configureVelocityEsta(c,false); p.configureVelocityControl(1,4,false);
+			auto f=frame(); double v=-.0496619493,a=-.00523677608,height=0.,peak_speed=0.,peak_height=0.,square=0.;
+			for(int k=0;k<1500;++k) {
+				const double t=k*.01,h=k%2?.012:.008;
+				const double reference=t<1?-.777807295:(t<3?-.777807295*(3.-t)/2.:0.);
+				auto s=target(static_cast<float>(reference)); s.acceleration[2]=t<.1?-.5f:(t>=1&&t<3?.3889036475f:0.f);
+				ASSERT_TRUE(step(p,f,s,Vector3f(0.f,0.f,static_cast<float>(v))));
+				const double demand=static_cast<double>(p.diagnostic().thrust[2])*9.80665/.5+9.80665;
+				const double decay=std::exp(-h/lag),dv=demand*h+(a-demand)*lag*(1.-decay)+.03*h;
+				height-=(v+.5*dv)*h; v+=dv; a=demand+(a-demand)*decay;
+				peak_speed=std::max(peak_speed,std::abs(v)); peak_height=std::max(peak_height,height);
+				if(t>10) { square+=v*v; }
+				f.sample+=k%2?12000:8000;
+			}
+			const double tail=std::sqrt(square/499.);
+			printf("Z_CANDIDATE choice=%d lambda1=%.1f lambda2=%.1f lag=%.2f peak_v=%.6f peak_h=%.6f tail_rmse=%.6f\n",
+				choice,static_cast<double>(c.gains[2].lambda1),static_cast<double>(c.gains[2].lambda2),lag,peak_speed,peak_height,tail);
+			if(choice==1) { EXPECT_LT(peak_speed,3.5); EXPECT_LT(peak_height,4.); EXPECT_LT(tail,.04); }
+		}
+	}
+}
