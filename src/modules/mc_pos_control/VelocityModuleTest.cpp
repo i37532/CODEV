@@ -41,6 +41,13 @@ public:
 		m._param_mpc_vc_nu_y.set(.4f); m._param_mpc_vc_a_y.set(.8f);
 	}
 	static void changeY(MulticopterPositionControl &m) { m._param_mpc_vc_l1_y.set(2.f); }
+	static void selectXYZ(MulticopterPositionControl &m)
+	{
+		selectXY(m); m._param_mpc_vc_axes.set(7);
+		m._param_mpc_vc_l1_z.set(2.f); m._param_mpc_vc_l2_z.set(1.f);
+		m._param_mpc_vc_nu_z.set(4.f); m._param_mpc_vc_a_z.set(6.f);
+	}
+	static void enableXYZExcitation(MulticopterPositionControl &m) { m._param_mpc_vct_test.set(4); }
 	static void enableXYExcitation(MulticopterPositionControl &m) { m._param_mpc_vct_test.set(3); }
 	static void selectZ(MulticopterPositionControl &m)
 	{
@@ -117,6 +124,64 @@ protected:
 		EXPECT_GT(reads,0u); EXPECT_EQ(d.timestamp_sample,lp.timestamp_sample); return d;
 	}
 };
+
+TEST_F(VelocityModule, XYZRealRunHandoverHteAndContact)
+{
+	VelocityModuleTestAccess::selectXYZ(*m); mode.flag_armed=false; ASSERT_TRUE(mode_pub.publish(mode));
+	EXPECT_EQ(step().effective_axes,7);
+	mode.flag_armed=true; ASSERT_TRUE(mode_pub.publish(mode));
+	VelocityModuleTestAccess::airborne(*m,lp.timestamp); land.landed=land.ground_contact=false; ASSERT_TRUE(land_pub.publish(land));
+	target.z=lp.z; target.vz=0.f; target.acceleration[2]=0.f;
+	auto d=step(12000,true); ASSERT_TRUE(d.valid); EXPECT_EQ(d.z_phase,2); EXPECT_EQ(d.pid_axes,7);
+	for(int k=0;k<100;++k) { ASSERT_TRUE(step(10000,true).valid); }
+	target.vx=.1f; target.vy=-.04f; target.vz=.01f; d=step(8000,true);
+	ASSERT_TRUE(d.valid); EXPECT_EQ(d.pid_axes,0); EXPECT_EQ(d.active_axes,7); EXPECT_EQ(d.committed_axes,7);
+	EXPECT_NEAR(d.nu_applied[0],.0016f,1e-7f); EXPECT_NEAR(d.nu_applied[1],-.0024f,1e-7f); EXPECT_NEAR(d.nu_applied[2],.008f,1e-7f);
+	uORB::Publication<hover_thrust_estimate_s> publisher{ORB_ID(hover_thrust_estimate)};
+	hover_thrust_estimate_s h{}; h.timestamp=hrt_absolute_time(); h.valid=true; h.hover_thrust=d.hover_thrust+.01f;
+	ASSERT_TRUE(publisher.publish(h)); auto after=step(12000,true); ASSERT_TRUE(after.valid);
+	EXPECT_NE(after.z_hte_shift,0.f); EXPECT_FLOAT_EQ(after.nu_before[0],d.nu_applied[0]); EXPECT_FLOAT_EQ(after.nu_before[1],d.nu_applied[1]);
+	VelocityModuleTestAccess::selectPid(*m); after=step(8000,true); EXPECT_TRUE(after.pending); EXPECT_EQ(after.effective_axes,7);
+	VelocityModuleTestAccess::selectXYZ(*m); EXPECT_FALSE(step(12000,true).pending);
+	land.ground_contact=true; ASSERT_TRUE(land_pub.publish(land)); d=step(8000,true);
+	ASSERT_TRUE(d.valid); EXPECT_EQ(d.z_phase,1); EXPECT_EQ(d.committed_axes,0); EXPECT_FLOAT_EQ(d.a_ff[2],100.f);
+}
+
+TEST_F(VelocityModule, XYZResetRetriesCannotPartiallyCommitOrPublish)
+{
+	VelocityModuleTestAccess::selectXYZ(*m); mode.flag_armed=false; ASSERT_TRUE(mode_pub.publish(mode)); step();
+	mode.flag_armed=true; ASSERT_TRUE(mode_pub.publish(mode));
+	VelocityModuleTestAccess::airborne(*m,lp.timestamp); land.landed=land.ground_contact=false; ASSERT_TRUE(land_pub.publish(land));
+	target.z=lp.z; target.vz=0.f; target.acceleration[2]=0.f;
+	ASSERT_TRUE(step(12000,true).valid); ASSERT_TRUE(step(8000,true).valid);
+	lp.vz_reset_counter++; lp.delta_vz=.01f; const auto d=step(12000,true);
+	EXPECT_EQ(d.pid_calls,2); EXPECT_NE(d.first_fail,0); EXPECT_EQ(d.retry_result,2);
+	EXPECT_FALSE(d.valid); EXPECT_EQ(d.committed_axes,0); EXPECT_EQ(d.output_timestamp,0u);
+}
+
+TEST_F(VelocityModule, XYZStimulusCompleteRealRunAndAllOutputsClear)
+{
+	VelocityModuleTestAccess::enableXYZExcitation(*m);
+	mode.flag_armed=false; ASSERT_TRUE(mode_pub.publish(mode)); step();
+	mode.flag_armed=true; ASSERT_TRUE(mode_pub.publish(mode));
+	VelocityModuleTestAccess::airborne(*m,lp.timestamp); land.landed=land.ground_contact=false; ASSERT_TRUE(land_pub.publish(land));
+	uORB::Publication<vehicle_status_s> status_pub{ORB_ID(vehicle_status)};
+	vehicle_status_s status{}; status.nav_state=vehicle_status_s::NAVIGATION_STATE_AUTO_LOITER; ASSERT_TRUE(status_pub.publish(status));
+	target.z=lp.z; target.vz=0.f; target.acceleration[2]=0.f;
+	float peaks[3]{};
+	for(int k=0;k<8000;++k) {
+		const auto d=step(k%2?12000:8000,true); ASSERT_TRUE(d.valid); EXPECT_EQ(d.excitation_fault,0);
+		float x,y,z; VelocityXYZDiagnosticExcitation::waveform(d.excitation_time,x,y,z);
+		EXPECT_FLOAT_EQ(d.excitation,x); EXPECT_FLOAT_EQ(d.excitation_y,y); EXPECT_FLOAT_EQ(d.excitation_z,z);
+		EXPECT_FLOAT_EQ(d.v_sp[0],x); EXPECT_FLOAT_EQ(d.v_sp[1],y); EXPECT_FLOAT_EQ(d.v_sp[2],z);
+		peaks[0]=fmaxf(peaks[0],fabsf(x)); peaks[1]=fmaxf(peaks[1],fabsf(y)); peaks[2]=fmaxf(peaks[2],fabsf(z));
+	}
+	for(float peak:peaks) { EXPECT_GT(peak,.05f); }
+	status.nav_state=vehicle_status_s::NAVIGATION_STATE_AUTO_LAND; ASSERT_TRUE(status_pub.publish(status));
+	auto d=step(10000,true); EXPECT_EQ(d.excitation_fault,VelocityDiagnosticExcitation::Gate);
+	EXPECT_FLOAT_EQ(d.excitation,0.f); EXPECT_FLOAT_EQ(d.excitation_y,0.f); EXPECT_FLOAT_EQ(d.excitation_z,0.f);
+	mode.flag_armed=false; ASSERT_TRUE(mode_pub.publish(mode)); EXPECT_EQ(step(10000,true).excitation_fault,0);
+}
 
 TEST_F(VelocityModule, XYRealRunIndependentStatesAndArmedYChange)
 {

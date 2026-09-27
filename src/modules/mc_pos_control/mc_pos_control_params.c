@@ -63,8 +63,9 @@ PARAM_DEFINE_FLOAT(MPC_THR_MIN, 0.12f);
  * @value 1 Single shot PID X excitation
  * @value 2 Single shot Z excitation (0.1 m/s)
  * @value 3 X then Y then XY excitation (64 s, horizontal norm <= 0.2 m/s)
+ * @value 4 Z then XY then XYZ excitation (64 s, horizontal 0.2, vertical 0.1 m/s)
  * @min 0
- * @max 3
+ * @max 4
  * @group Multicopter Position Control
  */
 PARAM_DEFINE_INT32(MPC_VCT_TEST, 0);
@@ -256,10 +257,11 @@ PARAM_DEFINE_INT32(MPC_VC_MODE, 0);
  * Experimental velocity axes request
  *
  * Local NED axes, not body rates. MODE0 requires 0; MODE1 permits
- * 1 (North/X), 3 (North/East XY) or 4 (Down/Z) with valid gains in SITL.
+ * 1 (North/X), 3 (North/East XY), 4 (Down/Z) or 7 (XYZ) with valid gains in SITL.
  * Other axes remain PID. XY uses independent gains and an atomic transaction.
  * Z retains PID during ground/takeoff ramp and one handover sample.
- * XYZ mask 7 remains rejected.
+ * XYZ retains ground/ramp PID and a bounded atomic handover; normal flight
+ * computes only selected ESTA axes. All rate controllers must remain PID.
  *
  * @min 0
  * @max 7

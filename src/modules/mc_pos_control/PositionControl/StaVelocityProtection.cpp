@@ -6,7 +6,7 @@
 
 bool StaVelocityProtection::validConfig(const Config &c)
 {
-	if (c.axes != 0 && c.axes != 1 && c.axes != 3 && c.axes != 4) { return false; }
+	if (c.axes != 0 && c.axes != 1 && c.axes != 3 && c.axes != 4 && c.axes != 7) { return false; }
 
 	for (size_t i = 0; i < 3; ++i) {
 		if ((c.axes & (1 << i)) && (!StaVelocityControl::validParameters(c.gains[i])
@@ -29,13 +29,31 @@ bool StaVelocityProtection::seedZ(float nu)
 bool StaVelocityProtection::shiftZ(float shift, float correction)
 {
 	const float nu = _kernel.state()[2] + shift;
-	if (_config.axes != 4 || !_active || _open || _fault || !std::isfinite(shift)
+	if ((_config.axes != 4 && _config.axes != 7) || !_active || _open || _fault || !std::isfinite(shift)
 	    || !std::isfinite(nu) || fabsf(nu) > _config.nu_limit[2]
 	    || !std::isfinite(correction) || fabsf(correction) > _config.acceleration_limit[2]
 	    || !std::isfinite(correction + shift) || fabsf(correction + shift) > _config.acceleration_limit[2]) {
 		latch(Numerical); return false;
 	}
 	_kernel.reset(2, nu);
+	return true;
+}
+
+bool StaVelocityProtection::seedXYZ(const Vec &nu)
+{
+	if (_config.axes != 7 || !_active || _open || _fault || !(_result.flags & Priming)) {
+		latch(Numerical); return false;
+	}
+	for (size_t i = 0; i < 3; ++i) {
+		if ((_result.active_axes & (1u << i)) && (!std::isfinite(nu[i]) || fabsf(nu[i]) > _config.nu_limit[i])) {
+			latch(Numerical); return false;
+		}
+	}
+	for (size_t i = 0; i < 3; ++i) {
+		const float value = (_result.active_axes & (1u << i)) ? nu[i] : 0.f;
+		_kernel.reset(i, value);
+		_result.nu_before[i] = _result.nu_ideal[i] = _result.nu_applied[i] = value;
+	}
 	return true;
 }
 
@@ -60,6 +78,7 @@ void StaVelocityProtection::resetState()
 	_kernel.reset();
 	_active = false;
 	_open = false;
+	_xyz_active_axes = 0;
 }
 
 bool StaVelocityProtection::configure(const Config &c, bool armed)
@@ -145,6 +164,14 @@ const StaVelocityProtection::Result &StaVelocityProtection::begin(const Frame &f
 
 	if (!_result.active_axes) {
 		resetState(); _result.nu_applied = _kernel.state(); _result.flags |= Inactive | Reset; return _result;
+	}
+
+	// XYZ mixes velocity and acceleration-only targets. Any active-mask change
+	// requires a fresh, explicit handover; never reuse an inactive axis's nu.
+	if (_config.axes == 7 && _result.active_axes != _xyz_active_axes) {
+		resetState();
+		_xyz_active_axes = _result.active_axes;
+		_result.nu_before = _result.nu_ideal = _result.nu_applied = _kernel.state();
 	}
 
 	if (!_active || !previous) {

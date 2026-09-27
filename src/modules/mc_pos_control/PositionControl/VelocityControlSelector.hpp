@@ -25,7 +25,7 @@ public:
 		if (mode < 0 || mode > 2) { _reject |= ModeRange; }
 		else if (mode == 2 || (mode == 1 && !esta_ready)) { _reject |= ModeUnimplemented; }
 
-		if ((mode == 1 && esta_ready) ? (axes != admitted_axes || (axes != 1 && axes != 3 && axes != 4)) : axes != 0) {
+		if ((mode == 1 && esta_ready) ? (axes != admitted_axes || (axes != 1 && axes != 3 && axes != 4 && axes != 7)) : axes != 0) {
 			_reject |= AxesUnavailable;
 		}
 

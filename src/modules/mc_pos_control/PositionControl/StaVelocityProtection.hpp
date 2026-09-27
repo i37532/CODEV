@@ -48,6 +48,8 @@ public:
 	static bool validConfig(const Config &config);
 	// Z-only, closed-transaction state changes. No clipping on handover/HTE.
 	bool seedZ(float nu);
+	// XYZ handover: validate every active seed before changing any state.
+	bool seedXYZ(const Vec &nu);
 	bool shiftZ(float shift, float correction);
 
 private:
@@ -61,5 +63,6 @@ private:
 	uint64_t _last_sample{0};
 	uint32_t _generation{0};
 	uint16_t _fault{0};
+	uint8_t _xyz_active_axes{0};
 	bool _configured{false}, _pending{false}, _rejected{false}, _active{false}, _open{false};
 };

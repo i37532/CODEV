@@ -70,6 +70,7 @@
 #include <uORB/topics/vehicle_status.h>
 #include "PositionControl/VelocityDiagnosticExcitation.hpp"
 #include "PositionControl/VelocityXYDiagnosticExcitation.hpp"
+#include "PositionControl/VelocityXYZDiagnosticExcitation.hpp"
 #include "PositionControl/VelocityDiagnosticInput.hpp"
 
 using namespace time_literals;

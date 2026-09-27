@@ -283,7 +283,7 @@ void MulticopterPositionControl::Run()
 		_control_mode_sub.update(&_control_mode);
 		_vehicle_land_detected_sub.update(&_vehicle_land_detected);
 		StaVelocityProtection::Config esta_config{};
-		esta_config.axes = _param_mpc_vc_axes.get() == 4 ? 4 : (_param_mpc_vc_axes.get() == 3 ? 3 : 1);
+		esta_config.axes = _param_mpc_vc_axes.get() == 7 ? 7 : (_param_mpc_vc_axes.get() == 4 ? 4 : (_param_mpc_vc_axes.get() == 3 ? 3 : 1));
 		esta_config.gains[0] = {_param_mpc_vc_l1_x.get(), _param_mpc_vc_l2_x.get()};
 		esta_config.nu_limit[0] = _param_mpc_vc_nu_x.get();
 		esta_config.acceleration_limit[0] = _param_mpc_vc_a_x.get();
@@ -303,6 +303,7 @@ void MulticopterPositionControl::Run()
 		float q_sp[4] = {NAN, NAN, NAN, NAN};
 		float excitation = 0.f;
 		float excitation_y = 0.f;
+		float excitation_z = 0.f;
 		uint8_t reset_bits = (local_pos.vxy_reset_counter != _vxy_reset_counter ? 1 : 0)
 				     | (local_pos.vz_reset_counter != _vz_reset_counter ? 2 : 0)
 				     | (local_pos.xy_reset_counter != _xy_reset_counter ? 4 : 0)
@@ -476,7 +477,7 @@ void MulticopterPositionControl::Run()
 			_control.setVelocityFrame(velocity_frame);
 
 #if defined(CONFIG_ARCH_BOARD_PX4_SITL)
-			const bool excitation_gate = (_param_mpc_vct_test.get() >= 1 && _param_mpc_vct_test.get() <= 3) && flying
+			const bool excitation_gate = (_param_mpc_vct_test.get() >= 1 && _param_mpc_vct_test.get() <= 4) && flying
 				&& _velocity_vehicle_status.nav_state == vehicle_status_s::NAVIGATION_STATE_AUTO_LOITER
 				&& !_vehicle_land_detected.landed && !_vehicle_land_detected.ground_contact
 				&& _control_mode.flag_control_auto_enabled && !_control.velocitySelection().pending()
@@ -488,9 +489,13 @@ void MulticopterPositionControl::Run()
 			if (_param_mpc_vct_test.get() == 3 && excitation_gate && !_velocity_excitation.fault()) {
 				VelocityXYDiagnosticExcitation::waveform(_velocity_excitation.time(), excitation, excitation_y);
 			}
+			if (_param_mpc_vct_test.get() == 4 && excitation_gate && !_velocity_excitation.fault()) {
+				VelocityXYZDiagnosticExcitation::waveform(_velocity_excitation.time(), excitation, excitation_y, excitation_z);
+			}
 #endif
 			_control.setDiagnosticExcitation(excitation, _param_mpc_vct_test.get() == 2);
 			if (_param_mpc_vct_test.get() == 3) { _control.setDiagnosticExcitationXY(excitation, excitation_y); }
+			if (_param_mpc_vct_test.get() == 4) { _control.setDiagnosticExcitationXYZ(excitation, excitation_y, excitation_z); }
 
 			// Run position control
 			const hrt_abstime controller_started = hrt_absolute_time();
@@ -512,6 +517,7 @@ void MulticopterPositionControl::Run()
 				_velocity_excitation.abort();
 				excitation = 0.f;
 				excitation_y = 0.f;
+				excitation_z = 0.f;
 				_control.setDiagnosticExcitation(0.f);
 
 				failsafe(time_stamp_now, failsafe_setpoint, states, !was_in_failsafe);
@@ -603,6 +609,7 @@ void MulticopterPositionControl::Run()
 		diagnostic.used_dt = dt;
 		diagnostic.excitation = excitation;
 		diagnostic.excitation_y = excitation_y;
+		diagnostic.excitation_z = excitation_z;
 		diagnostic.excitation_time = _velocity_excitation.time();
 		diagnostic.controller_time_us = controller_time_us;
 		diagnostic.module_time_us = hrt_elapsed_time(&module_started);

@@ -1,5 +1,5 @@
 # V03: exact final controller invocation per local-position input, no interpolation.
-# mode1/axes1 is SITL X ESTA; axes3 XY ESTA; axes4 Z ESTA (see z_phase).
+# mode1/axes1 X ESTA; axes3 XY; axes4 Z; axes7 XYZ (SITL only, see z_phase).
 # mode2 and axes7 unavailable. XY still uses Z velocity PID and all rate PID.
 # nu/a_sta are NaN on PID axes, NOT estimated STA states.
 # a_proxy is thrust * g / hover_thrust + gravity: model proxy, not measured acceleration.
@@ -28,6 +28,7 @@ float32 input_dt
 float32 used_dt
 float32 excitation
 float32 excitation_y
+float32 excitation_z # E01-XYZ TEST4 additional Down velocity; TEST2 uses excitation
 float32 excitation_time
 float32 hover_thrust
 float32 tilt_limit
@@ -84,6 +85,6 @@ uint16 first_fail
 uint16 first_input
 uint8 retry_result # 0 not attempted,1 valid,2 invalid
 uint8 excitation_fault # latched: 1 sensor clock,2 gate lost after start,4 controller failure
-uint8 z_phase # 0 not Z,1 ground/ramp PID,2 PID handover,3 Z ESTA,4 acceleration-only
+uint8 z_phase # 0 not Z,1 ground/ramp PID,2 PID handover,3 Z ESTA,4 Z acceleration-only; XYZ active_axes authoritative
 float32 z_hte_shift # Z nu rebase due to HTE since previous invocation, m/s^2
 uint8 ORB_QUEUE_LENGTH = 8
