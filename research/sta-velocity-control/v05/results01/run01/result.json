@@ -1,0 +1,67 @@
+{
+  "source_head": "fad638b592c21c4af57e7be418a4d51ffa1bc145",
+  "branch": "research/sta-velocity-control",
+  "binary_sha256": "673a15fc94acdcdd5a038d1540dd2240e5402903bfd9bb0da2a687f47454b738",
+  "runner_sha256": "93a064418ac6776d245943007e24bc4ac2db1e7193f1509d14309e5a0fba8d3a",
+  "command": [
+    "./sitl/run.sh",
+    "--headless",
+    "--backend",
+    "gazebo",
+    "--model",
+    "iris"
+  ],
+  "pid_parameters_modified": false,
+  "success": false,
+  "events": [
+    {
+      "name": "ready",
+      "timestamp_us": 30996000.0
+    },
+    {
+      "name": "takeoff_command",
+      "timestamp_us": 31016000
+    },
+    {
+      "name": "reposition_command",
+      "timestamp_us": 39344000.0
+    },
+    {
+      "name": "handoff_ready",
+      "timestamp_us": 39724000.0
+    },
+    {
+      "name": "hover_start",
+      "timestamp_us": 48136000.0
+    },
+    {
+      "name": "hover_end",
+      "timestamp_us": 138296000.0
+    }
+  ],
+  "scenario_sha256": "41ee7703557c3ac80dcabf7088baeb99b249db4d132acf7c58e16633b3d171a5",
+  "scenario_path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v05/protocol01/execution.json",
+  "simulation_speed_requested": 1.0,
+  "explicit_environment": {
+    "PX4_SITL_WORLD": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world",
+    "GAZEBO_MASTER_URI": "http://127.0.0.1:11345"
+  },
+  "launcher_pid": 415105,
+  "error": "ValueError('Incomplete observation/unsuccessful planned land')",
+  "launcher_returncode": 0,
+  "logs": [
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-27/07_38_13.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/V05/paired01/run01/07_38_13.ulg",
+      "sha256": "1eedf7f85c940ad37e94bdc396e02d719eed0e6c3343c29262702b9fca0bf283",
+      "bytes": 225912
+    },
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-27/07_38_14.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/V05/paired01/run01/07_38_14.ulg",
+      "sha256": "438f2d8ac135ffdfd1cde86a5c93d620d63ec9c3dbb589deed718cffb98ef5e3",
+      "bytes": 95606647
+    }
+  ],
+  "finished_utc": "2026-09-27T07:40:32Z"
+}
