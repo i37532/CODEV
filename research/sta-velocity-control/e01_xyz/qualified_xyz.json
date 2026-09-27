@@ -1,0 +1,19 @@
+{
+  "stage": "E01-XYZ",
+  "status": "passed_development_Iris_SITL_only",
+  "source_head": "045f642bf2bad5e532761e59b3d6810be360be58",
+  "execution_sha256": "44a69938f48452cce344634cf70cfbc68637d30fc5d168127df1b55f96d5b686",
+  "evidence": "results01/validation_summary.json",
+  "configuration": "XYZ velocity ESTA; original position P, attitude and all rate PID. Ground/ramp and one handover sample use original velocity PID; normal airborne velocity control uses only ESTA.",
+  "parameters": {
+    "MPC_VC_MODE": 1, "MPC_VC_AXES": 7, "MPC_VCT_TEST": 0,
+    "MPC_VC_L1_X": 1.0, "MPC_VC_L2_X": 0.2, "MPC_VC_NU_X": 0.4, "MPC_VC_A_X": 0.8,
+    "MPC_VC_L1_Y": 1.0, "MPC_VC_L2_Y": 0.2, "MPC_VC_NU_Y": 0.4, "MPC_VC_A_Y": 0.8,
+    "MPC_VC_L1_Z": 2.0, "MPC_VC_L2_Z": 1.0, "MPC_VC_NU_Z": 4.0, "MPC_VC_A_Z": 6.0,
+    "MC_RTC_MODE": 0, "MC_STA_AXES": 0, "MC_RTC_DIV": 1, "MC_RATT_TEST": 0, "MC_STA_TKO_MGT": 0,
+    "MPC_USE_HTE": 1, "MPC_LAND_SPEED": 0.6, "MPC_Z_VEL_MAX_DN": 0.55
+  },
+  "frozen_experiment_only": {"MPC_VCT_TEST": 4, "SDLOG_PROFILE": 1171},
+  "other_parameters": "protocol01/esta/frozen.json control_parameters; exact startup composition is defined by protocol01/common.py load_protocol and run.py. Actual runtime snapshots in results01/run02, run04, run06.",
+  "limitations": "Three paired development IMU seeds, one low-amplitude task, no hardware or general stability proof. Z tracking error and acceleration-request TV are worse than PID. Default firmware and restored EEPROM remain PID. Change parameters only while disarmed. TEST4 requires the owned frozen task; TEST0 convenience configuration has not received a separate task flight. Six-run budget is consumed; this file does not authorize extra flights or reuse of spent seeds."
+}

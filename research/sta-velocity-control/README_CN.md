@@ -1,5 +1,7 @@
 # 速度环 STA 研究
 
+**当前：E01-XYZ 三轴速度 ESTA 已完成开发验收。** [E01-XYZ报告](reports/E01_XYZ.md)：同一干净源码`045f642bf2`，新22001–22003，PID/XYZ ESTA各3轮，6/6轮与3/3配对及6轮独立回放通过；190 C++/424 Python。XYZ组合窗口X/Y误差降低约54.7%/43.7%，但Z误差约2.39倍、全窗请求TV约7.52/7.72/48.04倍PID，不称全面性能改善。位置P、姿态、全部rate PID保持；默认和实验后参数已恢复PID。[合格XYZ配置](e01_xyz/qualified_xyz.json)。当前路线V05→E01-XYZ→V06，本阶段停止，不push、不执行V06/实机。以下“当前/此前”等保留历史时点含义。
+
 **当前：V05 XY ESTA + Z PID 已完成开发验收。** [V05报告](reports/V05.md)：最终新21001–21003、6/6轮与3/3配对通过，174 C++/421 Python及6轮独立回放通过。X/Y受激励轴误差明显降低，但请求TV约为PID的7–8倍，非命令轴/yaw略有退化且在预设门槛内。保留首批1次工具接线失败；全部rate仍PID，默认PID，未push、不自动进入V06。[合格XY配置](v05/qualified_xy.json)、[冻结protocol02](v05/protocol02/execution.json)。
 
 **此前：Z 速度 ESTA 接入及 Z03 开发验收已完成。** [Z03报告](reports/Z03.md)：同一干净源码`d6ea312f73`、新19001–19003，PID/Z ESTA各3轮，6轮及3组配对全部接受；159个不同C++/399Python、独立6轮回放通过。仅Z速度替换，XY速度和全部rate仍PID。Z速度RMSE均值PID .004073、ESTA .009839m/s，ESTA请求TV明显更大，**不代表性能优于PID**。默认仍PID；历史失败保留，未push、不实机、不扩大XYZ。
