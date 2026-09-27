@@ -62,8 +62,9 @@ PARAM_DEFINE_FLOAT(MPC_THR_MIN, 0.12f);
  * @value 0 Disabled
  * @value 1 Single shot PID X excitation
  * @value 2 Single shot Z excitation (0.1 m/s)
+ * @value 3 X then Y then XY excitation (64 s, horizontal norm <= 0.2 m/s)
  * @min 0
- * @max 2
+ * @max 3
  * @group Multicopter Position Control
  */
 PARAM_DEFINE_INT32(MPC_VCT_TEST, 0);
@@ -237,13 +238,13 @@ PARAM_DEFINE_FLOAT(MPC_XY_P, 0.95f);
 /**
  * Velocity controller request
  *
- * Accepts PID/AXES=0 or SITL ESTA/AXES=1 or 4 with valid independent gains.
- * MODE2 and AXES3/7 remain rejected. Differing armed requests are pending until
+ * Accepts PID/AXES=0 or SITL ESTA/AXES=1, 3 or 4 with valid independent gains.
+ * MODE2 and AXES7 remain rejected. Differing armed requests are pending until
  * disarm; requesting the effective configuration cancels pending changes.
  * Original PID gain updates are unaffected.
  *
  * @value 0 PID
- * @value 1 ESTA X or Z (SITL only)
+ * @value 1 ESTA X, XY or Z (SITL only)
  * @value 2 Reserved (unavailable)
  * @min 0
  * @max 2
@@ -255,9 +256,10 @@ PARAM_DEFINE_INT32(MPC_VC_MODE, 0);
  * Experimental velocity axes request
  *
  * Local NED axes, not body rates. MODE0 requires 0; MODE1 permits
- * 1 (North/X) or 4 (Down/Z) with valid gains in SITL. Other axes remain PID.
+ * 1 (North/X), 3 (North/East XY) or 4 (Down/Z) with valid gains in SITL.
+ * Other axes remain PID. XY uses independent gains and an atomic transaction.
  * Z retains PID during ground/takeoff ramp and one handover sample.
- * XY/XYZ masks 3/7 remain rejected.
+ * XYZ mask 7 remains rejected.
  *
  * @min 0
  * @max 7
@@ -300,6 +302,34 @@ PARAM_DEFINE_FLOAT(MPC_VC_NU_X, 0.f);
  * @group Multicopter Position Control
  */
 PARAM_DEFINE_FLOAT(MPC_VC_A_X, 0.f);
+
+/**
+ * ESTA Y gain lambda1 (SITL only, zero is unconfigured)
+ * @min 0
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_FLOAT(MPC_VC_L1_Y, 0.f);
+
+/**
+ * ESTA Y gain lambda2 (m/s^3, SITL only)
+ * @min 0
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_FLOAT(MPC_VC_L2_Y, 0.f);
+
+/**
+ * ESTA Y independent state bound (m/s^2, SITL only)
+ * @min 0
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_FLOAT(MPC_VC_NU_Y, 0.f);
+
+/**
+ * ESTA Y correction bound before feed-forward (m/s^2, SITL only)
+ * @min 0
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_FLOAT(MPC_VC_A_Y, 0.f);
 
 /**
  * ESTA Down velocity square-root gain

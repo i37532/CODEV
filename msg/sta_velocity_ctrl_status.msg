@@ -1,6 +1,6 @@
 # V03: exact final controller invocation per local-position input, no interpolation.
-# mode1/axes1 is SITL X ESTA; mode1/axes4 is SITL Z ESTA (see z_phase).
-# mode2 and axes3/7 unavailable.
+# mode1/axes1 is SITL X ESTA; axes3 XY ESTA; axes4 Z ESTA (see z_phase).
+# mode2 and axes7 unavailable. XY still uses Z velocity PID and all rate PID.
 # nu/a_sta are NaN on PID axes, NOT estimated STA states.
 # a_proxy is thrust * g / hover_thrust + gravity: model proxy, not measured acceleration.
 # constraint_bits: 1 tilt, 2 minimum thrust, 4 maximum Z, 8 XY remainder.
@@ -27,6 +27,7 @@ float32 raw_dt
 float32 input_dt
 float32 used_dt
 float32 excitation
+float32 excitation_y
 float32 excitation_time
 float32 hover_thrust
 float32 tilt_limit

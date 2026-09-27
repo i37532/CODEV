@@ -34,6 +34,14 @@ public:
 		m._param_mpc_vc_l1_x.set(1.f); m._param_mpc_vc_l2_x.set(.2f);
 		m._param_mpc_vc_nu_x.set(.4f); m._param_mpc_vc_a_x.set(.8f);
 	}
+	static void selectXY(MulticopterPositionControl &m)
+	{
+		selectEsta(m); m._param_mpc_vc_axes.set(3);
+		m._param_mpc_vc_l1_y.set(1.5f); m._param_mpc_vc_l2_y.set(.3f);
+		m._param_mpc_vc_nu_y.set(.4f); m._param_mpc_vc_a_y.set(.8f);
+	}
+	static void changeY(MulticopterPositionControl &m) { m._param_mpc_vc_l1_y.set(2.f); }
+	static void enableXYExcitation(MulticopterPositionControl &m) { m._param_mpc_vct_test.set(3); }
 	static void selectZ(MulticopterPositionControl &m)
 	{
 		m._param_mpc_vc_mode.set(1); m._param_mpc_vc_axes.set(4);
@@ -109,6 +117,61 @@ protected:
 		EXPECT_GT(reads,0u); EXPECT_EQ(d.timestamp_sample,lp.timestamp_sample); return d;
 	}
 };
+
+TEST_F(VelocityModule, XYRealRunIndependentStatesAndArmedYChange)
+{
+	VelocityModuleTestAccess::selectXY(*m); mode.flag_armed=false; ASSERT_TRUE(mode_pub.publish(mode));
+	auto d=step(); ASSERT_EQ(d.effective_axes,3);
+	mode.flag_armed=true; ASSERT_TRUE(mode_pub.publish(mode));
+	VelocityModuleTestAccess::airborne(*m,lp.timestamp); land.landed=land.ground_contact=false; ASSERT_TRUE(land_pub.publish(land));
+	target.z=lp.z; target.vz=0.f; target.acceleration[2]=0.f;
+	// Let the original tilt slew limiter leave its zero-angle ground state.
+	for(int k=0;k<100;++k) { ASSERT_TRUE(step(10000,true).valid); }
+	target.vx=.1f; target.vy=-.04f; d=step(8000,true);
+	ASSERT_TRUE(d.valid); EXPECT_EQ(d.committed_axes,3); EXPECT_EQ(d.pid_axes,4); EXPECT_EQ(d.z_phase,0);
+	EXPECT_NEAR(d.nu_applied[0],.0016f,1e-7f); EXPECT_NEAR(d.nu_applied[1],-.0024f,1e-7f);
+	VelocityModuleTestAccess::changeY(*m); d=step(12000,true); EXPECT_TRUE(d.config_pending);
+	EXPECT_NEAR(d.a_sta[1],-.3f-.0024f,1e-6f);
+	VelocityModuleTestAccess::selectXY(*m); EXPECT_FALSE(step(8000,true).config_pending);
+	mode.flag_armed=false; ASSERT_TRUE(mode_pub.publish(mode)); d=step(12000,true);
+	EXPECT_EQ(d.committed_axes,0); EXPECT_FLOAT_EQ(d.nu_applied[0],0.f); EXPECT_FLOAT_EQ(d.nu_applied[1],0.f);
+}
+
+TEST_F(VelocityModule, XYStimulusWiringSampleClockAndExitClear)
+{
+	VelocityModuleTestAccess::enableXYExcitation(*m);
+	mode.flag_armed=false; ASSERT_TRUE(mode_pub.publish(mode)); step();
+	mode.flag_armed=true; ASSERT_TRUE(mode_pub.publish(mode));
+	VelocityModuleTestAccess::airborne(*m,lp.timestamp); land.landed=land.ground_contact=false; ASSERT_TRUE(land_pub.publish(land));
+	uORB::Publication<vehicle_status_s> status_pub{ORB_ID(vehicle_status)};
+	vehicle_status_s status{}; status.nav_state=vehicle_status_s::NAVIGATION_STATE_AUTO_LOITER; ASSERT_TRUE(status_pub.publish(status));
+	target.z=lp.z; target.vz=0.f; target.acceleration[2]=0.f;
+	float peak_x=0.f,peak_y=0.f;
+	for(int k=0;k<8000;++k) {
+		const auto d=step(10000,true); ASSERT_TRUE(d.valid); EXPECT_EQ(d.excitation_fault,0);
+		float x,y; VelocityXYDiagnosticExcitation::waveform(d.excitation_time,x,y);
+		EXPECT_FLOAT_EQ(d.excitation,x); EXPECT_FLOAT_EQ(d.excitation_y,y);
+		EXPECT_FLOAT_EQ(d.v_sp[0],x); EXPECT_FLOAT_EQ(d.v_sp[1],y);
+		peak_x=fmaxf(peak_x,fabsf(x)); peak_y=fmaxf(peak_y,fabsf(y));
+	}
+	EXPECT_GT(peak_x,.1f); EXPECT_GT(peak_y,.1f);
+	status.nav_state=vehicle_status_s::NAVIGATION_STATE_AUTO_LAND; ASSERT_TRUE(status_pub.publish(status));
+	auto d=step(10000,true); EXPECT_EQ(d.excitation_fault,VelocityDiagnosticExcitation::Gate);
+	EXPECT_FLOAT_EQ(d.excitation,0.f); EXPECT_FLOAT_EQ(d.excitation_y,0.f);
+	mode.flag_armed=false; ASSERT_TRUE(mode_pub.publish(mode)); d=step(10000,true); EXPECT_EQ(d.excitation_fault,0);
+}
+
+TEST_F(VelocityModule, XYResetSameFrameRetryCannotPublishOrPartiallyCommit)
+{
+	VelocityModuleTestAccess::selectXY(*m); mode.flag_armed=false; ASSERT_TRUE(mode_pub.publish(mode)); step();
+	mode.flag_armed=true; ASSERT_TRUE(mode_pub.publish(mode));
+	VelocityModuleTestAccess::airborne(*m,lp.timestamp); land.landed=land.ground_contact=false; ASSERT_TRUE(land_pub.publish(land));
+	target.z=lp.z; target.vz=0.f; target.vx=.1f; target.vy=-.04f; target.acceleration[2]=0.f;
+	ASSERT_TRUE(step(12000,true).valid); ASSERT_TRUE(step(8000,true).valid);
+	lp.vxy_reset_counter++; lp.delta_vxy[1]=.01f;
+	const auto d=step(12000,true); EXPECT_EQ(d.pid_calls,2); EXPECT_NE(d.first_fail,0);
+	EXPECT_EQ(d.retry_result,2); EXPECT_FALSE(d.valid); EXPECT_EQ(d.committed_axes,0); EXPECT_EQ(d.output_timestamp,0u);
+}
 
 TEST_F(VelocityModule, PidWithOnlyZCandidateConfiguredHasNoPhantomPending)
 {

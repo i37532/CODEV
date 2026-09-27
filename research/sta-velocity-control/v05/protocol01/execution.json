@@ -1,0 +1,21 @@
+{
+  "stage": "V05-protocol01-paired-XY-ESTA",
+  "seeds": [20001, 20002, 20003],
+  "modes": [0, 1],
+  "maximum_attempts": 6,
+  "new_run_root": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/V05/paired01",
+  "task": "Iris restart/warmup/takeoff/explicit 2.5m handoff/fixed yaw/90s observation/X 32s then Y 16s then XY 16s/land/disarm",
+  "excitation": "MPC_VCT_TEST=3; 12s settle; X unchanged V04 0.2*sin(2*pi*t/8)*sin(pi*t/32)^2; Y same with 16s envelope; XY 16s envelope with X=-Y and amplitude 0.2/sqrt(2); each window zero integral",
+  "authority": "用户：不用要求我授权实验起飞，一直到xy双轴实现为止",
+  "scope": "PID then XY ESTA per seed; Z velocity and all rate PID; original position/attitude/HTE/land detector unchanged; Iris SITL development pairs only",
+  "safety": "V04 protocol17 numeric safety, logging, timing, height, yaw, reset, saturation gates unchanged. Observation duration alone extended 60 to 90 seconds to include all three non-overlapping windows.",
+  "failure_policy": "Stop on first required failure. Preserve all raw data. No automatic retry or replacement flight. An offline repair may create a separate source/seeds/budget batch under standing user authority; no relaxed numerical gates.",
+  "next": "Stop after three accepted pairs and final V05 report; no V06/XYZ/hardware/push",
+  "candidate": {
+    "X": {"lambda1": 1, "lambda2": 0.2, "nu_limit": 0.4, "correction_limit": 0.8},
+    "Y": {"lambda1": 1, "lambda2": 0.2, "nu_limit": 0.4, "correction_limit": 0.8},
+    "selection": "One predeclared candidate, retained X calibration and symmetric Iris XY starting choice; separately stored gains/states, no flight tuning or optimum claim"
+  },
+  "paired_gates": "Each X/Y/XY window and combined 64s: each axis velocity RMSE <= 1.25*paired PID + [0.02,0.02,0.01] m/s; observation position RMSE <= 1.25*PID+0.05m per axis; yaw RMSE <=1.25*PID+0.02rad. No superiority requirement. Each window constraint fraction <=0.05 and continuous <=0.5s.",
+  "statistics": "Exactly three developmental paired IMU seeds; report each window and axis, means and differences, no statistical significance or generalization claim; TV by genuine updates within each window, never compare 64s TV directly against historical 32s TV. Only IMU RNG seeded. Other sensors and scheduling not controlled."
+}

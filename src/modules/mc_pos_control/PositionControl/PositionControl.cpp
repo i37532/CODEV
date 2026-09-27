@@ -47,12 +47,15 @@ using namespace matrix;
 void PositionControl::configureVelocityEsta(const StaVelocityProtection::Config &c, bool armed)
 {
 	_esta_requested = c;
-	_esta_config_valid = (c.axes == 1 || c.axes == 4) && StaVelocityProtection::validConfig(c);
-	const unsigned axis = c.axes == 4 ? 2 : 0;
-	const bool different = c.axes != _esta_effective.axes
-		|| memcmp(&c.gains[axis], &_esta_effective.gains[axis], sizeof(c.gains[axis]))
-		|| memcmp(&c.nu_limit[axis], &_esta_effective.nu_limit[axis], sizeof(float))
-		|| memcmp(&c.acceleration_limit[axis], &_esta_effective.acceleration_limit[axis], sizeof(float));
+	_esta_config_valid = (c.axes == 1 || c.axes == 3 || c.axes == 4) && StaVelocityProtection::validConfig(c);
+	bool different = c.axes != _esta_effective.axes;
+	for (unsigned axis = 0; axis < 3; ++axis) {
+		if (c.axes & (1u << axis)) {
+			different = different || memcmp(&c.gains[axis], &_esta_effective.gains[axis], sizeof(c.gains[axis]))
+				|| memcmp(&c.nu_limit[axis], &_esta_effective.nu_limit[axis], sizeof(float))
+				|| memcmp(&c.acceleration_limit[axis], &_esta_effective.acceleration_limit[axis], sizeof(float));
+		}
+	}
 	// Disabled/unconfigured gains are not a deferred configuration transaction
 	// while running PID. An invalid request while ESTA is effective stays visible.
 	_esta_pending = armed && different && (_esta_config_valid || _velocity_selector.effectiveMode() == 1);
@@ -75,6 +78,7 @@ void PositionControl::configureVelocityControl(int32_t mode, int32_t axes, bool 
 		++_esta_config_generation;
 		// Only experimental-axis PID state is reset on disarmed algorithm change.
 		if ((previous_axes | _velocity_selector.effectiveAxes()) & 1) { _vel_int(0) = 0.f; }
+		if ((previous_axes | _velocity_selector.effectiveAxes()) & 2) { _vel_int(1) = 0.f; }
 		if ((previous_axes | _velocity_selector.effectiveAxes()) & 4) { _vel_int(2) = 0.f; }
 		_z_engaged = false;
 	}
@@ -169,11 +173,11 @@ bool PositionControl::update(const float dt)
 	_positionControl();
 	// Explicit, default-off SITL test input. Original position P is unchanged.
 #if defined(CONFIG_ARCH_BOARD_PX4_SITL)
-	if (fabsf(_diagnostic_excitation) > 0.f) {
+	if (fabsf(_diagnostic_excitation) > 0.f || fabsf(_diagnostic_excitation_y) > 0.f) {
 		if (_diagnostic_vertical) {
 			_vel_sp(2) = math::constrain(_vel_sp(2) + _diagnostic_excitation, -_lim_vel_up, _lim_vel_down);
 		} else {
-			_vel_sp.xy() = ControlMath::constrainXY(_vel_sp.xy(), Vector2f(_diagnostic_excitation, 0.f), _lim_vel_horizontal);
+			_vel_sp.xy() = ControlMath::constrainXY(_vel_sp.xy(), Vector2f(_diagnostic_excitation, _diagnostic_excitation_y), _lim_vel_horizontal);
 		}
 	}
 #endif
@@ -195,18 +199,21 @@ bool PositionControl::update(const float dt)
 		_diagnostic.valid = success;
 		_diagnostic.fault = _esta_failed;
 		_diagnostic.active_axes = _z_phase ? (_z_phase == 3 ? r.active_axes : 0) : r.active_axes;
-		if (!_z_phase) { _diagnostic.pid_axes &= ~1u; }
+		if (!_z_phase) { _diagnostic.pid_axes &= ~_velocity_selector.effectiveAxes(); }
 		if (_z_phase == 3) { _diagnostic.pid_axes &= ~4u; }
 		_diagnostic.sta_flags = r.flags;
 		_diagnostic.sta_fault = r.fault;
 		_diagnostic.committed_axes = r.committed_axes;
 		_diagnostic.config_pending = _esta_pending;
 		_diagnostic.config_generation = _esta_config_generation;
-		const unsigned axis = _velocity_selector.effectiveAxes() == 4 ? 2 : 0;
-		_diagnostic.nu_before[axis] = r.nu_before[axis];
-		_diagnostic.nu_ideal[axis] = r.nu_ideal[axis];
-		_diagnostic.nu_applied[axis] = r.nu_applied[axis];
-		_diagnostic.a_sta[axis] = (_z_phase && _z_phase != 3) ? NAN : r.a_sta[axis];
+		for (unsigned axis = 0; axis < 3; ++axis) {
+			if (_velocity_selector.effectiveAxes() & (1u << axis)) {
+				_diagnostic.nu_before[axis] = r.nu_before[axis];
+				_diagnostic.nu_ideal[axis] = r.nu_ideal[axis];
+				_diagnostic.nu_applied[axis] = r.nu_applied[axis];
+				_diagnostic.a_sta[axis] = (_z_phase && _z_phase != 3) ? NAN : r.a_sta[axis];
+			}
+		}
 	}
 	_diagnostic.z_phase = _z_phase;
 	_diagnostic.z_hte_shift = _z_hte_shift;
@@ -305,6 +312,7 @@ void PositionControl::_velocityControl(const float dt)
 		break;
 	case 1:
 		if (_velocity_selector.effectiveAxes() == 4) { _velocityControlEstaZ(dt); }
+		else if (_velocity_selector.effectiveAxes() == 3) { _velocityControlEstaXY(dt); }
 		else { _velocityControlEstaX(dt); }
 		break;
 	}
@@ -429,6 +437,41 @@ void PositionControl::_velocityControlEstaX(const float dt)
 	_vel_int(0) = 0.f;
 
 	// limit thrust integral
+	_vel_int(2) = math::min(fabsf(_vel_int(2)), CONSTANTS_ONE_G) * sign(_vel_int(2));
+}
+
+void PositionControl::_velocityControlEstaXY(const float dt)
+{
+	// Horizontal ESTA with independent states and one protected transaction.
+	// Z retains PID/HTE and thrust priority; there is no idle horizontal PID.
+	auto frame = _velocity_frame;
+	for (int i = 0; i < 3; ++i) {
+		frame.velocity[i] = _vel(i); frame.target[i] = _vel_sp(i); frame.ff[i] = _acc_sp(i);
+	}
+	const auto &candidate = _velocity_protection.begin(frame);
+	_esta_failed = _esta_failed || candidate.fault || (candidate.flags & StaVelocityProtection::Duplicate);
+	Vector3f vel_error = _vel_sp - _vel;
+	Vector3f correction(NAN, NAN, vel_error(2) * _gain_vel_p(2) + _vel_int(2) - _vel_dot(2) * _gain_vel_d(2));
+	for (int i = 0; i < 2; ++i) {
+		_acc_sp(i) = PX4_ISFINITE(_acc_sp(i)) ? _acc_sp(i) : 0.f;
+		if ((candidate.active_axes & (1u << i)) && !(candidate.flags & (StaVelocityProtection::Priming | StaVelocityProtection::Latched))) {
+			_acc_sp(i) = candidate.a_req[i];
+		}
+	}
+	ControlMath::addIfNotNanVector3f(_acc_sp, correction);
+	_accelerationControl();
+	if ((_thr_sp(2) >= -_lim_thr_min && vel_error(2) >= 0.f)
+	    || (_thr_sp(2) <= -_lim_thr_max && vel_error(2) <= 0.f)) { vel_error(2) = 0.f; }
+	_thr_sp(2) = math::max(_thr_sp(2), -_lim_thr_max);
+	const float remainder = _lim_thr_max * _lim_thr_max - _thr_sp(2) * _thr_sp(2);
+	const float max_xy = remainder > 0.f ? sqrtf(remainder) : 0.f;
+	const Vector2f horizontal(_thr_sp);
+	if (horizontal.norm() > max_xy) { _thr_sp.xy() = horizontal / horizontal.norm() * max_xy; }
+	// No PID tracking-ARW term is applied to either ESTA state. The guard uses
+	// per-axis residuals of the common thrust-mapping proxy after both limits.
+	ControlMath::setZeroIfNanVector3f(vel_error);
+	_vel_int(0) = _vel_int(1) = 0.f;
+	_vel_int(2) += vel_error(2) * _gain_vel_i(2) * dt;
 	_vel_int(2) = math::min(fabsf(_vel_int(2)), CONSTANTS_ONE_G) * sign(_vel_int(2));
 }
 

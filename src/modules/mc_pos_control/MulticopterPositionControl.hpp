@@ -69,6 +69,7 @@
 #include <uORB/topics/sta_rate_ctrl_status.h>
 #include <uORB/topics/vehicle_status.h>
 #include "PositionControl/VelocityDiagnosticExcitation.hpp"
+#include "PositionControl/VelocityXYDiagnosticExcitation.hpp"
 #include "PositionControl/VelocityDiagnosticInput.hpp"
 
 using namespace time_literals;
@@ -154,6 +155,10 @@ private:
 		(ParamFloat<px4::params::MPC_VC_L2_X>) _param_mpc_vc_l2_x,
 		(ParamFloat<px4::params::MPC_VC_NU_X>) _param_mpc_vc_nu_x,
 		(ParamFloat<px4::params::MPC_VC_A_X>) _param_mpc_vc_a_x,
+		(ParamFloat<px4::params::MPC_VC_L1_Y>) _param_mpc_vc_l1_y,
+		(ParamFloat<px4::params::MPC_VC_L2_Y>) _param_mpc_vc_l2_y,
+		(ParamFloat<px4::params::MPC_VC_NU_Y>) _param_mpc_vc_nu_y,
+		(ParamFloat<px4::params::MPC_VC_A_Y>) _param_mpc_vc_a_y,
 		(ParamFloat<px4::params::MPC_VC_L1_Z>) _param_mpc_vc_l1_z,
 		(ParamFloat<px4::params::MPC_VC_L2_Z>) _param_mpc_vc_l2_z,
 		(ParamFloat<px4::params::MPC_VC_NU_Z>) _param_mpc_vc_nu_z,

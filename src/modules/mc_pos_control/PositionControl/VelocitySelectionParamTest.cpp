@@ -56,6 +56,28 @@ TEST(VelocitySelectionParam, EstaGainsSavedReloadedAndDisarmedAdmission)
 	for (auto key:keys) { param_reset(key); } param_reset(mode); param_reset(axes);
 }
 
+TEST(VelocitySelectionParam, XYIndependentGainsAndMaskSurviveBsonReload)
+{
+	param_control_autosave(false);
+	const char *names[]={"MPC_VC_L1_X","MPC_VC_L2_X","MPC_VC_NU_X","MPC_VC_A_X",
+		"MPC_VC_L1_Y","MPC_VC_L2_Y","MPC_VC_NU_Y","MPC_VC_A_Y"};
+	float values[]={1.f,.2f,.4f,.8f,1.5f,.3f,.5f,.9f}; param_t keys[8];
+	for(int i=0;i<8;++i) { keys[i]=param_find(names[i]); ASSERT_NE(keys[i],PARAM_INVALID); ASSERT_EQ(param_set(keys[i],&values[i]),0); }
+	const param_t mode=param_find("MPC_VC_MODE"),axes=param_find("MPC_VC_AXES");
+	int32_t one=1,three=3; ASSERT_EQ(param_set(mode,&one),0); ASSERT_EQ(param_set(axes,&three),0);
+	FILE *f=tmpfile(); ASSERT_NE(f,nullptr); ASSERT_EQ(param_export(fileno(f),false,nullptr),0);
+	for(auto key:keys) { param_reset(key); } param_reset(mode); param_reset(axes);
+	ASSERT_EQ(lseek(fileno(f),0,SEEK_SET),0); ASSERT_EQ(param_import(fileno(f),true),0); fclose(f);
+	float loaded[8]{};
+	for(int i=0;i<8;++i) { ASSERT_EQ(param_get(keys[i],&loaded[i]),0); EXPECT_FLOAT_EQ(loaded[i],values[i]); }
+	int32_t m=0,a=0; ASSERT_EQ(param_get(mode,&m),0); ASSERT_EQ(param_get(axes,&a),0);
+	StaVelocityProtection::Config c{}; c.axes=a;
+	for(int i=0;i<2;++i) { c.gains[i]={loaded[4*i],loaded[4*i+1]}; c.nu_limit[i]=loaded[4*i+2]; c.acceleration_limit[i]=loaded[4*i+3]; }
+	PositionControl restarted; restarted.configureVelocityEsta(c,false); restarted.configureVelocityControl(m,a,false);
+	EXPECT_EQ(restarted.velocitySelection().effectiveMode(),1); EXPECT_EQ(restarted.velocitySelection().effectiveAxes(),3);
+	for(auto key:keys) { param_reset(key); } param_reset(mode); param_reset(axes);
+}
+
 TEST(VelocitySelectionParam, ZGainsBsonReloadDoNotDependOnXGains)
 {
 	param_control_autosave(false);
