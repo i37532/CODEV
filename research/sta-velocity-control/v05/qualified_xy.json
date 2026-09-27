@@ -1,0 +1,18 @@
+{
+  "status": "passed_development_only",
+  "configuration": "XY ESTA + Z velocity PID + all rate PID",
+  "source_head": "969ca4afe7163d27d83282ecff49f080599b41c5",
+  "protocol": "protocol02/execution.json",
+  "complete_parameter_snapshot": "protocol02/esta/frozen.json",
+  "accepted_runs": ["paired02/run02", "paired02/run04", "paired02/run06"],
+  "parameters": {
+    "MPC_VC_MODE": 1, "MPC_VC_AXES": 3,
+    "MPC_VC_L1_X": 1.0, "MPC_VC_L2_X": 0.2, "MPC_VC_NU_X": 0.4, "MPC_VC_A_X": 0.8,
+    "MPC_VC_L1_Y": 1.0, "MPC_VC_L2_Y": 0.2, "MPC_VC_NU_Y": 0.4, "MPC_VC_A_Y": 0.8,
+    "MPC_VC_L1_Z": 0.0, "MPC_VC_L2_Z": 0.0, "MPC_VC_NU_Z": 0.0, "MPC_VC_A_Z": 0.0,
+    "MC_RTC_MODE": 0, "MC_STA_AXES": 0, "MC_RTC_DIV": 1, "MC_RATT_TEST": 0, "MC_STA_TKO_MGT": 0,
+    "MPC_USE_HTE": 1, "MPC_LAND_SPEED": 0.6, "MPC_Z_VEL_MAX_DN": 0.55
+  },
+  "frozen_experiment_only": {"MPC_VCT_TEST": 3, "SDLOG_PROFILE": 1171},
+  "limitations": "Iris Gazebo only; mode/axes/gain changes while disarmed; default firmware still PID. No XYZ or hardware qualification. TEST3 only with the owned frozen task. The six-run budget is consumed; this file does not authorize replaying spent seeds or extra flights."
+}
