@@ -53,7 +53,9 @@ void PositionControl::configureVelocityEsta(const StaVelocityProtection::Config 
 		|| memcmp(&c.gains[axis], &_esta_effective.gains[axis], sizeof(c.gains[axis]))
 		|| memcmp(&c.nu_limit[axis], &_esta_effective.nu_limit[axis], sizeof(float))
 		|| memcmp(&c.acceleration_limit[axis], &_esta_effective.acceleration_limit[axis], sizeof(float));
-	_esta_pending = armed && different;
+	// Disabled/unconfigured gains are not a deferred configuration transaction
+	// while running PID. An invalid request while ESTA is effective stays visible.
+	_esta_pending = armed && different && (_esta_config_valid || _velocity_selector.effectiveMode() == 1);
 	if (!armed && _esta_config_valid && different) {
 		_esta_effective = c;
 		++_esta_config_generation;

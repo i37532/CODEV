@@ -1,0 +1,51 @@
+{
+  "source_head": "b8e864944cf18ce743a7db9899275b90ae1d9207",
+  "branch": "research/sta-velocity-control",
+  "binary_sha256": "761d7e518e05fe307aed948af2bba64be0b9e3be842ae587ac452b3d11d3d931",
+  "runner_sha256": "11f6d843dba7957a8d915919488a12c6d29cf0910958746daf9dc4dda609569f",
+  "command": [
+    "./sitl/run.sh",
+    "--headless",
+    "--backend",
+    "gazebo",
+    "--model",
+    "iris"
+  ],
+  "pid_parameters_modified": false,
+  "success": false,
+  "events": [
+    {
+      "name": "ready",
+      "timestamp_us": 30956000.0
+    },
+    {
+      "name": "takeoff_command",
+      "timestamp_us": 30956000
+    }
+  ],
+  "scenario_sha256": "c0ff1a5e3394d05973dd6765ffa48e61efcc04fef44f8c1dee1b4a50f8e72254",
+  "scenario_path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/z_velocity/protocol01/execution.json",
+  "simulation_speed_requested": 1.0,
+  "explicit_environment": {
+    "PX4_SITL_WORLD": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world",
+    "GAZEBO_MASTER_URI": "http://127.0.0.1:11345"
+  },
+  "launcher_pid": 356170,
+  "error": "RuntimeError('V04 monitor config_pending=True')",
+  "launcher_returncode": 0,
+  "logs": [
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-27/05_32_20.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/pid01/run01/05_32_20.ulg",
+      "sha256": "b8c560f184aedcbfb3cfa89fd1064755120442260be7276e910eebd9481722c2",
+      "bytes": 217585
+    },
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-27/05_32_21.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/pid01/run01/05_32_21.ulg",
+      "sha256": "33c258bd6a30802c1e5d2827e52666d04a568e0ebe89836cd0663f0865df4b7f",
+      "bytes": 20877271
+    }
+  ],
+  "finished_utc": "2026-09-27T05:32:52Z"
+}

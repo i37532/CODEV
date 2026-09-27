@@ -39,6 +39,19 @@ TEST(VelocityZIntegration, IndependentAdmissionAndArmedStaging) {
 	p.configureVelocityControl(0,0,false); EXPECT_EQ(p.velocitySelection().effectiveMode(),0);
 }
 
+TEST(VelocityZIntegration, UnconfiguredInactiveEstaIsNotPendingDuringPid)
+{
+	PositionControl p; setup(p,false); G::Config unused{}; unused.axes=1;
+	p.configureVelocityEsta(unused,false); p.configureVelocityControl(0,0,false);
+	auto f=frame(); p.configureVelocityEsta(unused,true); p.configureVelocityControl(0,0,true);
+	ASSERT_TRUE(step(p,f,target())); EXPECT_FALSE(p.diagnostic().config_pending); EXPECT_EQ(p.diagnostic().pid_axes,7);
+	// Invalid active ESTA changes remain pending/rejected, never silently applied.
+	PositionControl z; setup(z); ASSERT_TRUE(step(z,f,target()));
+	auto bad=config(); bad.gains[2].lambda1=0.f; z.configureVelocityEsta(bad,true); z.configureVelocityControl(1,4,true);
+	f.sample+=10000; ASSERT_TRUE(step(z,f,target())); EXPECT_TRUE(z.diagnostic().config_pending);
+	EXPECT_NE(z.velocitySelection().reject(),0); EXPECT_EQ(z.velocitySelection().effectiveAxes(),4);
+}
+
 TEST(VelocityZIntegration, VerticalDiagnosticDoesNotChangeXYOrBypassLimits) {
 	PositionControl p; setup(p,false); auto f=frame(); auto s=target(.5f);
 	p.setDiagnosticExcitation(.1f,true); ASSERT_TRUE(step(p,f,s));

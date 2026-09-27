@@ -40,6 +40,7 @@ public:
 		m._param_mpc_vc_l1_z.set(1.f); m._param_mpc_vc_l2_z.set(.2f);
 		m._param_mpc_vc_nu_z.set(2.f); m._param_mpc_vc_a_z.set(3.f);
 	}
+	static void selectPid(MulticopterPositionControl &m) { m._param_mpc_vc_mode.set(0); m._param_mpc_vc_axes.set(0); }
 };
 
 class VelocityTestQueueAnchor : public px4::WorkItem
@@ -108,6 +109,18 @@ protected:
 		EXPECT_GT(reads,0u); EXPECT_EQ(d.timestamp_sample,lp.timestamp_sample); return d;
 	}
 };
+
+TEST_F(VelocityModule, PidWithOnlyZCandidateConfiguredHasNoPhantomPending)
+{
+	VelocityModuleTestAccess::selectZ(*m); VelocityModuleTestAccess::selectPid(*m);
+	mode.flag_armed=false; ASSERT_TRUE(mode_pub.publish(mode)); EXPECT_FALSE(step().config_pending);
+	mode.flag_armed=true; ASSERT_TRUE(mode_pub.publish(mode));
+	for(int k=0;k<20;++k) {
+		const auto d=step(k%2?8000:12000,true); ASSERT_TRUE(d.valid);
+		EXPECT_EQ(d.effective_mode,0); EXPECT_EQ(d.effective_axes,0); EXPECT_FALSE(d.config_pending);
+		EXPECT_EQ(d.first_fail,0); EXPECT_EQ(d.retry_result,0);
+	}
+}
 
 TEST_F(VelocityModule, ZSelectionRealModuleRampHandoverMixedVelocityAndContact)
 {
