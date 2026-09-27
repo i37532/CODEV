@@ -1,0 +1,124 @@
+{
+  "accepted": true,
+  "job": {
+    "id": "run04",
+    "seed": 19002,
+    "mode": 1,
+    "axes": 4,
+    "parameters": {
+      "MPC_VC_L1_X": 0,
+      "MPC_VC_L2_X": 0,
+      "MPC_VC_NU_X": 0,
+      "MPC_VC_A_X": 0,
+      "MPC_VC_L1_Z": 2.0,
+      "MPC_VC_L2_Z": 1.0,
+      "MPC_VC_NU_Z": 4.0,
+      "MPC_VC_A_Z": 6.0,
+      "MPC_VC_MODE": 1,
+      "MPC_VC_AXES": 4
+    }
+  },
+  "baseline_accepted": true,
+  "flight": {
+    "n": 8712,
+    "inner": {
+      "max_age_us": 4000,
+      "median_age_us": 0.0,
+      "maximum_reads": 4
+    },
+    "maximum_gap_s": 0.012,
+    "hz": 99.99770410506012
+  },
+  "z_lifecycle": {
+    "phase_counts": {
+      "1": 732,
+      "2": 1,
+      "3": 7979
+    },
+    "handovers": 1,
+    "hte_updates": 7585
+  },
+  "diagnostic": {
+    "n": 6007,
+    "inner": {
+      "max_age_us": 4000,
+      "median_age_us": 0.0,
+      "maximum_reads": 4
+    },
+    "maximum_gap_s": 0.012,
+    "hz": 100.0,
+    "error": {
+      "rmse": [
+        0.01059248000364579,
+        0.009209173637090604,
+        0.00981904181595564
+      ],
+      "mean": [
+        -0.004662512350652831,
+        -0.005537373518396615,
+        0.0002906593044463088
+      ],
+      "std": [
+        0.009511130911077081,
+        0.0073584219501088765,
+        0.00981473888354776
+      ],
+      "max_abs": [
+        0.026050422340631485,
+        0.026383617892861366,
+        0.019058702513575554
+      ]
+    },
+    "iae_m": [
+      0.2631027082190852,
+      0.22369518313556913,
+      0.27955911662895144
+    ],
+    "acceleration_tv": [
+      3.104458808898926,
+      3.1289660930633545,
+      135.33897399902344
+    ],
+    "samples": 3200,
+    "seconds": 32.0,
+    "constraint_fraction": 0.0,
+    "maximum_continuous_constraint_s": 0.0,
+    "nu_peak": 0.10915181785821915
+  },
+  "local_output": {
+    "matched": 6007,
+    "denominator": 6007,
+    "coverage": 1.0,
+    "max_gap_s": 0.012,
+    "max_abs_error": 0.0
+  },
+  "attitude_output": {
+    "matched": 6007,
+    "denominator": 6007,
+    "coverage": 1.0,
+    "max_gap_s": 0.012,
+    "max_abs_error": 0.0
+  },
+  "mixer": {
+    "count": 15018,
+    "bit_histogram": {
+      "1": 15018
+    },
+    "feedback_valid_fraction": 1.0,
+    "raw_nonzero_fraction": 1.0,
+    "saturation_fraction_among_valid": 0.0,
+    "rate_direction_saturation_fraction_among_valid": 0.0
+  },
+  "position_rmse": [
+    0.025385074933513472,
+    0.024544727106427723,
+    0.03704337685491958
+  ],
+  "yaw_rmse": 0.00013946312964895237,
+  "height": {
+    "rmse": 0.036971038465285586,
+    "mean": -0.01305056344615415,
+    "std": 0.03459104622499198,
+    "max_abs": 0.09071826934814453
+  }
+}

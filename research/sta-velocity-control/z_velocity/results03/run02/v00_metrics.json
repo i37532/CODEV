@@ -1,0 +1,333 @@
+{
+  "accepted": true,
+  "checks": {
+    "runner_success": true,
+    "hover_60s": true,
+    "no_ulog_dropout": true,
+    "critical_parameters_unchanged": true,
+    "hover_loiter": true,
+    "hover_armed": true,
+    "hover_airborne": true,
+    "no_failsafe": true,
+    "no_failure_detector": true,
+    "landed_disarmed": true,
+    "vehicle_local_position_coverage": true,
+    "vehicle_local_position_setpoint_coverage": true,
+    "trajectory_setpoint_coverage": true,
+    "vehicle_attitude_coverage": true,
+    "vehicle_attitude_setpoint_coverage": true,
+    "actuator_controls_0_coverage": true,
+    "sta_rate_ctrl_status_coverage": true,
+    "multirotor_motor_limits_coverage": true,
+    "rate_effective_mode": true,
+    "rate_effective_axes": true,
+    "rate_requested_mode": true,
+    "rate_requested_axes": true,
+    "rate_div_eff": true,
+    "rate_div_req": true,
+    "rate_fault": true,
+    "rate_abort_requested": true,
+    "rate_termination": true,
+    "rate_experiment_updated": true,
+    "rate_sequence_complete": true,
+    "rate_active_valid": true,
+    "hover_pid_updates": true,
+    "research_roll_addition_zero": true,
+    "research_pitch_addition_zero": true,
+    "research_yaw_addition_zero": true,
+    "xy_valid": true,
+    "z_valid": true,
+    "v_xy_valid": true,
+    "v_z_valid": true,
+    "height_whole_flight": true,
+    "hover_height": true,
+    "xy_position": true,
+    "xy_speed": true,
+    "z_speed_flight": true,
+    "z_speed_hover": true,
+    "tilt_15deg": true,
+    "yaw_error": true,
+    "finite_bounded_commands": true,
+    "matched_actuator_equal": true,
+    "matched_actuator_coverage": true
+  },
+  "ulog": {
+    "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-27/05_49_21.ulg",
+    "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01/run02/05_49_21.ulg",
+    "sha256": "c02d923e98c634ce6ebb5af6f5f2d84be5a5845e32ffe37675f3b5dc7d5250c1",
+    "bytes": 80614073
+  },
+  "hover_seconds": 60.012,
+  "topic_rates": {
+    "vehicle_local_position": {
+      "n": 6001,
+      "hz": 100.0,
+      "dt_min_s": 0.008,
+      "dt_median_s": 0.01,
+      "dt_max_s": 0.012,
+      "dt_p95_s": 0.012
+    },
+    "vehicle_local_position_setpoint": {
+      "n": 6001,
+      "hz": 100.0,
+      "dt_min_s": 0.008,
+      "dt_median_s": 0.01,
+      "dt_max_s": 0.012,
+      "dt_p95_s": 0.012
+    },
+    "trajectory_setpoint": {
+      "n": 3000,
+      "hz": 50.0,
+      "dt_min_s": 0.02,
+      "dt_median_s": 0.02,
+      "dt_max_s": 0.02,
+      "dt_p95_s": 0.02
+    },
+    "vehicle_attitude": {
+      "publication": {
+        "n": 13436,
+        "hz": 223.88681509132115,
+        "dt_min_s": 0.004,
+        "dt_median_s": 0.004,
+        "dt_max_s": 0.008,
+        "dt_p95_s": 0.008
+      },
+      "sample": {
+        "n": 13436,
+        "hz": 223.88681509132115,
+        "dt_min_s": 0.004,
+        "dt_median_s": 0.004,
+        "dt_max_s": 0.008,
+        "dt_p95_s": 0.008
+      },
+      "equal_publish": 0,
+      "max_publish_age_us": 0
+    },
+    "vehicle_attitude_setpoint": {
+      "n": 6001,
+      "hz": 100.0,
+      "dt_min_s": 0.008,
+      "dt_median_s": 0.01,
+      "dt_max_s": 0.012,
+      "dt_p95_s": 0.012
+    },
+    "actuator_controls_0": {
+      "n": 13861,
+      "hz": 230.9692041061192,
+      "dt_min_s": 0.004,
+      "dt_median_s": 0.004,
+      "dt_max_s": 0.008,
+      "dt_p95_s": 0.008
+    },
+    "sta_rate_ctrl_status": {
+      "n": 15003,
+      "hz": 250.00000000000003,
+      "dt_min_s": 0.004,
+      "dt_median_s": 0.004,
+      "dt_max_s": 0.004,
+      "dt_p95_s": 0.004
+    },
+    "multirotor_motor_limits": {
+      "n": 13554,
+      "hz": 225.85321957072392,
+      "dt_min_s": 0.004,
+      "dt_median_s": 0.004,
+      "dt_max_s": 0.008,
+      "dt_p95_s": 0.008
+    }
+  },
+  "metrics": {
+    "rate_error_rad_s": {
+      "rmse": [
+        0.0035879885062028963,
+        0.004170138502965008,
+        0.001548950036191248
+      ],
+      "mean": [
+        -2.227678761840266e-06,
+        -6.680020803854685e-06,
+        2.959994979592335e-06
+      ],
+      "std": [
+        0.003587987814651998,
+        0.004170133152698237,
+        0.0015489472079598273
+      ],
+      "max_abs": [
+        0.014912562444806099,
+        0.015619756653904915,
+        0.0067583913914859295
+      ]
+    },
+    "velocity_error_m_s": {
+      "rmse": [
+        0.00725791532642378,
+        0.008810486778218133,
+        0.00979823023296522
+      ],
+      "mean": [
+        -7.928559056319242e-05,
+        -0.0005931501202938425,
+        -0.00038865379000466713
+      ],
+      "std": [
+        0.007257482254932923,
+        0.008790497722197095,
+        0.009790519083772266
+      ],
+      "max_abs": [
+        0.022050457075238228,
+        0.032063402235507965,
+        0.018384799361228943
+      ]
+    },
+    "position_error_m": {
+      "rmse": [
+        0.025122702626463444,
+        0.03201435311326502,
+        0.041086113577152625
+      ],
+      "mean": [
+        0.017026722062452863,
+        0.009026257132900666,
+        -0.007475332729754263
+      ],
+      "std": [
+        0.018472707518544546,
+        0.030715557742479232,
+        0.040400348135308815
+      ],
+      "max_abs": [
+        0.06347042322158813,
+        0.06620816141366959,
+        0.10943257808685303
+      ]
+    },
+    "height_error_from_2p5_m": {
+      "rmse": 0.041235097192348594,
+      "mean": -0.007813024155359788,
+      "std": 0.04048814510458832,
+      "max_abs": 0.10945367813110352
+    },
+    "acceleration_request_m_s2": {
+      "rmse": [
+        0.024140979364134875,
+        0.01967566105723891,
+        0.18435697342632076
+      ],
+      "mean": [
+        0.01844610347310302,
+        0.01105650788485006,
+        0.0026186905004216957
+      ],
+      "std": [
+        0.015573315360550594,
+        0.016275296354647282,
+        0.18433837395120883
+      ],
+      "max_abs": [
+        0.05757293105125427,
+        0.05622868984937668,
+        0.2853173613548279
+      ]
+    },
+    "thrust_ned_normalized": {
+      "rmse": [
+        0.0017372267405891383,
+        0.0014160978282683956,
+        0.7057591258448153
+      ],
+      "mean": [
+        0.0013267684061582562,
+        0.0007949153057592543,
+        -0.7056339555651997
+      ],
+      "std": [
+        0.0011214465411415002,
+        0.0011719397236616405,
+        0.013291518598044252
+      ],
+      "max_abs": [
+        0.004185336176306009,
+        0.0041040885262191296,
+        0.7258774638175964
+      ]
+    },
+    "position_timestamp_delta_s": {
+      "rmse": 0.010198039027185569,
+      "mean": 0.01,
+      "std": 0.002,
+      "max_abs": 0.012
+    },
+    "position_timestamp_sample_delta_s": {
+      "rmse": 0.010198039027185569,
+      "mean": 0.01,
+      "std": 0.002,
+      "max_abs": 0.012
+    },
+    "position_publish_minus_sample_s": {
+      "rmse": 0.0,
+      "mean": 0.0,
+      "std": 0.0,
+      "max_abs": 0.0
+    },
+    "tilt_deg": {
+      "rmse": 0.17750157370743103,
+      "mean": 0.16110547432586125,
+      "std": 0.07451063555529393,
+      "max_abs": 0.43700724840164185
+    },
+    "yaw_error_rad": {
+      "rmse": 0.0001486893774360129,
+      "mean": 6.151389454509597e-06,
+      "std": 0.00014856207917933852,
+      "max_abs": 0.00043427947093732655
+    }
+  },
+  "limitations": [
+    "No new velocity controller diagnostic exists in V00; paired measured state is a proxy, not proven consumed state.",
+    "Publication timestamp distributions and perf counts do not prove full callback/update sequence coverage.",
+    "RMSE uses recorded samples; no full-bandwidth TV/PSD or motor energy claim.",
+    "Default random engines; three restarts are not three independent seeded draws."
+  ],
+  "parameters_not_in_used_only_ulog": [],
+  "pairing_age_us": {
+    "max": 0,
+    "median": 0.0,
+    "matched": 6001
+  },
+  "attitude_clock_safety": {
+    "flight": {
+      "records": 19484,
+      "max_tilt_deg": 1.110474705696106,
+      "max_yaw_error_rad": 0.007155060768127441,
+      "yaw_bound_checked": false,
+      "reset_indices": [
+        7343
+      ]
+    },
+    "hover": {
+      "records": 13438,
+      "max_tilt_deg": 0.43700724840164185,
+      "max_yaw_error_rad": 0.00043427947093732655,
+      "yaw_bound_checked": true,
+      "reset_indices": []
+    }
+  },
+  "attitude_yaw_semantics": {
+    "records": 13436,
+    "max_target_age_us": 8000,
+    "pairing": "unique preceding target at publication; not proven consumed",
+    "weighting": "one per recorded attitude row; historical yaw convention"
+  },
+  "actuator_matches": {
+    "matched": 13861,
+    "diagnostic_count": 15003,
+    "coverage": 0.9238818902886089,
+    "max_gap_s": 0.008,
+    "max_abs_error": 0.0
+  },
+  "consumed_mixer_saturation_fraction": 1.0,
+  "consumed_mixer_valid_fraction": 1.0,
+  "position_module_perf_counts": []
+}

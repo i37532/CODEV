@@ -1,0 +1,690 @@
+{
+  "ledger": {
+    "source_head": "d6ea312f7383b7492f554e00ee873a06270d7fe3",
+    "planned": 6,
+    "attempts": [
+      {
+        "attempt": 1,
+        "job": {
+          "id": "run01",
+          "seed": 19001,
+          "mode": 0,
+          "axes": 0,
+          "parameters": {
+            "MPC_VC_L1_X": 0,
+            "MPC_VC_L2_X": 0,
+            "MPC_VC_NU_X": 0,
+            "MPC_VC_A_X": 0,
+            "MPC_VC_L1_Z": 2.0,
+            "MPC_VC_L2_Z": 1.0,
+            "MPC_VC_NU_Z": 4.0,
+            "MPC_VC_A_Z": 6.0,
+            "MPC_VC_MODE": 0,
+            "MPC_VC_AXES": 0
+          }
+        },
+        "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01/run01",
+        "status": "accepted"
+      },
+      {
+        "attempt": 2,
+        "job": {
+          "id": "run02",
+          "seed": 19001,
+          "mode": 1,
+          "axes": 4,
+          "parameters": {
+            "MPC_VC_L1_X": 0,
+            "MPC_VC_L2_X": 0,
+            "MPC_VC_NU_X": 0,
+            "MPC_VC_A_X": 0,
+            "MPC_VC_L1_Z": 2.0,
+            "MPC_VC_L2_Z": 1.0,
+            "MPC_VC_NU_Z": 4.0,
+            "MPC_VC_A_Z": 6.0,
+            "MPC_VC_MODE": 1,
+            "MPC_VC_AXES": 4
+          }
+        },
+        "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01/run02",
+        "status": "accepted"
+      },
+      {
+        "attempt": 3,
+        "job": {
+          "id": "run03",
+          "seed": 19002,
+          "mode": 0,
+          "axes": 0,
+          "parameters": {
+            "MPC_VC_L1_X": 0,
+            "MPC_VC_L2_X": 0,
+            "MPC_VC_NU_X": 0,
+            "MPC_VC_A_X": 0,
+            "MPC_VC_L1_Z": 2.0,
+            "MPC_VC_L2_Z": 1.0,
+            "MPC_VC_NU_Z": 4.0,
+            "MPC_VC_A_Z": 6.0,
+            "MPC_VC_MODE": 0,
+            "MPC_VC_AXES": 0
+          }
+        },
+        "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01/run03",
+        "status": "accepted"
+      },
+      {
+        "attempt": 4,
+        "job": {
+          "id": "run04",
+          "seed": 19002,
+          "mode": 1,
+          "axes": 4,
+          "parameters": {
+            "MPC_VC_L1_X": 0,
+            "MPC_VC_L2_X": 0,
+            "MPC_VC_NU_X": 0,
+            "MPC_VC_A_X": 0,
+            "MPC_VC_L1_Z": 2.0,
+            "MPC_VC_L2_Z": 1.0,
+            "MPC_VC_NU_Z": 4.0,
+            "MPC_VC_A_Z": 6.0,
+            "MPC_VC_MODE": 1,
+            "MPC_VC_AXES": 4
+          }
+        },
+        "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01/run04",
+        "status": "accepted"
+      },
+      {
+        "attempt": 5,
+        "job": {
+          "id": "run05",
+          "seed": 19003,
+          "mode": 0,
+          "axes": 0,
+          "parameters": {
+            "MPC_VC_L1_X": 0,
+            "MPC_VC_L2_X": 0,
+            "MPC_VC_NU_X": 0,
+            "MPC_VC_A_X": 0,
+            "MPC_VC_L1_Z": 2.0,
+            "MPC_VC_L2_Z": 1.0,
+            "MPC_VC_NU_Z": 4.0,
+            "MPC_VC_A_Z": 6.0,
+            "MPC_VC_MODE": 0,
+            "MPC_VC_AXES": 0
+          }
+        },
+        "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01/run05",
+        "status": "accepted"
+      },
+      {
+        "attempt": 6,
+        "job": {
+          "id": "run06",
+          "seed": 19003,
+          "mode": 1,
+          "axes": 4,
+          "parameters": {
+            "MPC_VC_L1_X": 0,
+            "MPC_VC_L2_X": 0,
+            "MPC_VC_NU_X": 0,
+            "MPC_VC_A_X": 0,
+            "MPC_VC_L1_Z": 2.0,
+            "MPC_VC_L2_Z": 1.0,
+            "MPC_VC_NU_Z": 4.0,
+            "MPC_VC_A_Z": 6.0,
+            "MPC_VC_MODE": 1,
+            "MPC_VC_AXES": 4
+          }
+        },
+        "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01/run06",
+        "status": "accepted"
+      }
+    ],
+    "pairs": [
+      {
+        "accepted": true,
+        "checks": {
+          "velocity_0": true,
+          "position_0": true,
+          "velocity_1": true,
+          "position_1": true,
+          "velocity_2": true,
+          "position_2": true,
+          "yaw": true
+        },
+        "seed": 19001,
+        "imu_prefix_max_difference": 0.0,
+        "paired_noise": true
+      },
+      {
+        "accepted": true,
+        "checks": {
+          "velocity_0": true,
+          "position_0": true,
+          "velocity_1": true,
+          "position_1": true,
+          "velocity_2": true,
+          "position_2": true,
+          "yaw": true
+        },
+        "seed": 19002,
+        "imu_prefix_max_difference": 0.0,
+        "paired_noise": true
+      },
+      {
+        "accepted": true,
+        "checks": {
+          "velocity_0": true,
+          "position_0": true,
+          "velocity_1": true,
+          "position_1": true,
+          "velocity_2": true,
+          "position_2": true,
+          "yaw": true
+        },
+        "seed": 19003,
+        "imu_prefix_max_difference": 0.0,
+        "paired_noise": true
+      }
+    ],
+    "success": true,
+    "firmware_sha256": "c96694037c4a1e977469437ee4ce95964fe67e34e9c798433502b828b95922a3",
+    "original_parameter_sha256": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+    "applied_profile": 1171,
+    "parameter_restore_exact": true,
+    "remaining_simulators": []
+  },
+  "diagnostics": [
+    {
+      "run": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01/run01",
+      "accepted": true,
+      "logs": [
+        {
+          "ulog": {
+            "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-27/05_47_13.ulg",
+            "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01/run01/05_47_13.ulg",
+            "sha256": "692b5bc1acf07c36d005a92f240167a58d583e2bcf3e6bcae2b3f2022750ad58",
+            "bytes": 227976
+          },
+          "dropouts": 0,
+          "corruption": false
+        },
+        {
+          "ulog": {
+            "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-27/05_47_14.ulg",
+            "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01/run01/05_47_14.ulg",
+            "sha256": "603bd50ee4c6d60fa33c26e06e334de4ae1577c36acf775c47051e20dcc0f6aa",
+            "bytes": 81775736
+          },
+          "dropouts": 0,
+          "corruption": false,
+          "samples": 11718,
+          "armed_enabled": 8718,
+          "requested_mode": {
+            "0": 8718
+          },
+          "effective_mode": {
+            "0": 8718
+          },
+          "requested_axes": {
+            "0": 8718
+          },
+          "effective_axes": {
+            "0": 8718
+          },
+          "pid_axes": {
+            "0": 371,
+            "7": 8347
+          },
+          "active_axes": {
+            "0": 8718
+          },
+          "committed_axes": {
+            "0": 8718
+          },
+          "config_pending": {
+            "0": 8718
+          },
+          "sta_fault": {
+            "0": 8718
+          },
+          "fault": {
+            "0": 8718
+          },
+          "first_fail": {
+            "0": 8718
+          },
+          "retry_result": {
+            "0": 8718
+          },
+          "timing": {
+            "0": 8718
+          },
+          "z_phase": {
+            "0": 8718
+          },
+          "first_eligible": {
+            "sample": 35284000,
+            "s": 0.8263826370239258,
+            "correction": -3.7745327949523926,
+            "nu_seed_lambda1_1": -2.8654768907177157,
+            "hover": 0.5,
+            "constraint": 0
+          }
+        }
+      ]
+    },
+    {
+      "run": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01/run02",
+      "accepted": true,
+      "logs": [
+        {
+          "ulog": {
+            "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-27/05_49_20.ulg",
+            "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01/run02/05_49_20.ulg",
+            "sha256": "b21ee3c8dd28a0b0095652c5cbef8ab3cf4dafe8be92cfe38b632001f5cd582b",
+            "bytes": 261041
+          },
+          "dropouts": 0,
+          "corruption": false
+        },
+        {
+          "ulog": {
+            "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-27/05_49_21.ulg",
+            "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01/run02/05_49_21.ulg",
+            "sha256": "c02d923e98c634ce6ebb5af6f5f2d84be5a5845e32ffe37675f3b5dc7d5250c1",
+            "bytes": 80614073
+          },
+          "dropouts": 0,
+          "corruption": false,
+          "samples": 11557,
+          "armed_enabled": 8644,
+          "requested_mode": {
+            "1": 8644
+          },
+          "effective_mode": {
+            "1": 8644
+          },
+          "requested_axes": {
+            "4": 8644
+          },
+          "effective_axes": {
+            "4": 8644
+          },
+          "pid_axes": {
+            "0": 371,
+            "3": 7971,
+            "7": 302
+          },
+          "active_axes": {
+            "0": 673,
+            "4": 7971
+          },
+          "committed_axes": {
+            "0": 673,
+            "4": 7971
+          },
+          "config_pending": {
+            "0": 8644
+          },
+          "sta_fault": {
+            "0": 8644
+          },
+          "fault": {
+            "0": 8644
+          },
+          "first_fail": {
+            "0": 8644
+          },
+          "retry_result": {
+            "0": 8644
+          },
+          "timing": {
+            "0": 8644
+          },
+          "z_phase": {
+            "1": 672,
+            "2": 1,
+            "3": 7971
+          },
+          "first_eligible": {
+            "sample": 34324000,
+            "s": 0.8364709615707397,
+            "correction": -3.7970638275146484,
+            "nu_seed_lambda1_1": -2.8824759631895525,
+            "hover": 0.5,
+            "constraint": 0
+          }
+        }
+      ]
+    },
+    {
+      "run": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01/run03",
+      "accepted": true,
+      "logs": [
+        {
+          "ulog": {
+            "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-27/05_51_24.ulg",
+            "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01/run03/05_51_24.ulg",
+            "sha256": "a883c5d421ebe1a31c9083005a83af3496f4f51edf6c7bd502b8bba8c4812d88",
+            "bytes": 270941
+          },
+          "dropouts": 0,
+          "corruption": false
+        },
+        {
+          "ulog": {
+            "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-27/05_51_25.ulg",
+            "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01/run03/05_51_25.ulg",
+            "sha256": "9b6731c0c865e648be4c4fb1362becd7652a389be418f748b3964cd249a0a4d6",
+            "bytes": 80552304
+          },
+          "dropouts": 0,
+          "corruption": false,
+          "samples": 11536,
+          "armed_enabled": 8610,
+          "requested_mode": {
+            "0": 8610
+          },
+          "effective_mode": {
+            "0": 8610
+          },
+          "requested_axes": {
+            "0": 8610
+          },
+          "effective_axes": {
+            "0": 8610
+          },
+          "pid_axes": {
+            "0": 371,
+            "7": 8239
+          },
+          "active_axes": {
+            "0": 8610
+          },
+          "committed_axes": {
+            "0": 8610
+          },
+          "config_pending": {
+            "0": 8610
+          },
+          "sta_fault": {
+            "0": 8610
+          },
+          "fault": {
+            "0": 8610
+          },
+          "first_fail": {
+            "0": 8610
+          },
+          "retry_result": {
+            "0": 8610
+          },
+          "timing": {
+            "0": 8610
+          },
+          "z_phase": {
+            "0": 8610
+          },
+          "first_eligible": {
+            "sample": 34404000,
+            "s": 0.8416083455085754,
+            "correction": -3.854778289794922,
+            "nu_seed_lambda1_1": -2.9373861459934965,
+            "hover": 0.5,
+            "constraint": 0
+          }
+        }
+      ]
+    },
+    {
+      "run": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01/run04",
+      "accepted": true,
+      "logs": [
+        {
+          "ulog": {
+            "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-27/05_53_29.ulg",
+            "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01/run04/05_53_29.ulg",
+            "sha256": "990a04b638585459ecd01ec0efb0ae645c0a47c3182ce2469ec7849e3db43be9",
+            "bytes": 240072
+          },
+          "dropouts": 0,
+          "corruption": false
+        },
+        {
+          "ulog": {
+            "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-27/05_53_30.ulg",
+            "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01/run04/05_53_30.ulg",
+            "sha256": "5825164417355b7aa42b8ab486a29215beffed3fdc7f23c1148110e6b9ef4b19",
+            "bytes": 81392962
+          },
+          "dropouts": 0,
+          "corruption": false,
+          "samples": 11671,
+          "armed_enabled": 8652,
+          "requested_mode": {
+            "1": 8652
+          },
+          "effective_mode": {
+            "1": 8652
+          },
+          "requested_axes": {
+            "4": 8652
+          },
+          "effective_axes": {
+            "4": 8652
+          },
+          "pid_axes": {
+            "0": 371,
+            "3": 7979,
+            "7": 302
+          },
+          "active_axes": {
+            "0": 673,
+            "4": 7979
+          },
+          "committed_axes": {
+            "0": 673,
+            "4": 7979
+          },
+          "config_pending": {
+            "0": 8652
+          },
+          "sta_fault": {
+            "0": 8652
+          },
+          "fault": {
+            "0": 8652
+          },
+          "first_fail": {
+            "0": 8652
+          },
+          "retry_result": {
+            "0": 8652
+          },
+          "timing": {
+            "0": 8652
+          },
+          "z_phase": {
+            "1": 672,
+            "2": 1,
+            "3": 7979
+          },
+          "first_eligible": {
+            "sample": 35284000,
+            "s": 0.8260266184806824,
+            "correction": -3.7792911529541016,
+            "nu_seed_lambda1_1": -2.8704310875531167,
+            "hover": 0.5,
+            "constraint": 0
+          }
+        }
+      ]
+    },
+    {
+      "run": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01/run05",
+      "accepted": true,
+      "logs": [
+        {
+          "ulog": {
+            "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-27/05_55_36.ulg",
+            "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01/run05/05_55_36.ulg",
+            "sha256": "55e5d9eb88948b7fa2b33cf8635e76fcd2d3c34120d4c95380b9c2157d307db7",
+            "bytes": 211541
+          },
+          "dropouts": 0,
+          "corruption": false
+        },
+        {
+          "ulog": {
+            "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-27/05_55_37.ulg",
+            "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01/run05/05_55_37.ulg",
+            "sha256": "53d61438dbf703f7164644250c1d6619619563f92e824dd48830e8f50b96d995",
+            "bytes": 82317882
+          },
+          "dropouts": 0,
+          "corruption": false,
+          "samples": 11797,
+          "armed_enabled": 8792,
+          "requested_mode": {
+            "0": 8792
+          },
+          "effective_mode": {
+            "0": 8792
+          },
+          "requested_axes": {
+            "0": 8792
+          },
+          "effective_axes": {
+            "0": 8792
+          },
+          "pid_axes": {
+            "0": 371,
+            "7": 8421
+          },
+          "active_axes": {
+            "0": 8792
+          },
+          "committed_axes": {
+            "0": 8792
+          },
+          "config_pending": {
+            "0": 8792
+          },
+          "sta_fault": {
+            "0": 8792
+          },
+          "fault": {
+            "0": 8792
+          },
+          "first_fail": {
+            "0": 8792
+          },
+          "retry_result": {
+            "0": 8792
+          },
+          "timing": {
+            "0": 8792
+          },
+          "z_phase": {
+            "0": 8792
+          },
+          "first_eligible": {
+            "sample": 35228000,
+            "s": 0.7526784539222717,
+            "correction": -3.0595688819885254,
+            "nu_seed_lambda1_1": -2.191998450310341,
+            "hover": 0.5,
+            "constraint": 0
+          }
+        }
+      ]
+    },
+    {
+      "run": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01/run06",
+      "accepted": true,
+      "logs": [
+        {
+          "ulog": {
+            "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-27/05_57_43.ulg",
+            "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01/run06/05_57_43.ulg",
+            "sha256": "58c9a18d9ef44e340c32ae3daee258d7431980e0822366953405591452e41d37",
+            "bytes": 279913
+          },
+          "dropouts": 0,
+          "corruption": false
+        },
+        {
+          "ulog": {
+            "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-27/05_57_44.ulg",
+            "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01/run06/05_57_44.ulg",
+            "sha256": "97e40df0f67fe44c97eeb88004edfbf0b2b85b00e3ada8fa49f421ce12aec10b",
+            "bytes": 81269078
+          },
+          "dropouts": 0,
+          "corruption": false,
+          "samples": 11661,
+          "armed_enabled": 8744,
+          "requested_mode": {
+            "1": 8744
+          },
+          "effective_mode": {
+            "1": 8744
+          },
+          "requested_axes": {
+            "4": 8744
+          },
+          "effective_axes": {
+            "4": 8744
+          },
+          "pid_axes": {
+            "0": 370,
+            "3": 8072,
+            "7": 302
+          },
+          "active_axes": {
+            "0": 672,
+            "4": 8072
+          },
+          "committed_axes": {
+            "0": 672,
+            "4": 8072
+          },
+          "config_pending": {
+            "0": 8744
+          },
+          "sta_fault": {
+            "0": 8744
+          },
+          "fault": {
+            "0": 8744
+          },
+          "first_fail": {
+            "0": 8744
+          },
+          "retry_result": {
+            "0": 8744
+          },
+          "timing": {
+            "0": 8744
+          },
+          "z_phase": {
+            "1": 671,
+            "2": 1,
+            "3": 8072
+          },
+          "first_eligible": {
+            "sample": 34356000,
+            "s": 0.74582839012146,
+            "correction": -2.975029468536377,
+            "nu_seed_lambda1_1": -2.1114159032645823,
+            "hover": 0.5,
+            "constraint": 0
+          }
+        }
+      ]
+    }
+  ]
+}

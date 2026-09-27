@@ -1,6 +1,8 @@
 # 速度环 STA 研究
 
-**当前：V04已通过。** [最终报告](reports/V04_PROTOCOL17_RESULTS.md)：同一干净源码`85771e4cf0`、新17001–17003，PID/ESTA X各3轮，6轮及3组配对全部接受；140个不同C++/395Python及独立6轮回放通过。X误差较低但请求TV较高；仅Iris开发验收，Y/Z与rate仍PID。历史失败保留、未push、未进入V05。用户追加Z研究仍处于[Z01离线原型](reports/Z01.md)，未接执行器/飞行。
+**当前：Z 速度 ESTA 接入及 Z03 开发验收已完成。** [Z03报告](reports/Z03.md)：同一干净源码`d6ea312f73`、新19001–19003，PID/Z ESTA各3轮，6轮及3组配对全部接受；159个不同C++/399Python、独立6轮回放通过。仅Z速度替换，XY速度和全部rate仍PID。Z速度RMSE均值PID .004073、ESTA .009839m/s，ESTA请求TV明显更大，**不代表性能优于PID**。默认仍PID；历史失败保留，未push、不实机、不扩大XYZ。
+
+此前 [V04 X单轴报告](reports/V04_PROTOCOL17_RESULTS.md)：新17001–17003的6轮及3组配对已通过；不是本次Z配对样本。[Z接线设计](z_velocity/Z02_DESIGN_CN.md)、[当前Z路线](z_velocity/PLAN_CN.md)、[Z使用说明](z_velocity/QUICKSTART_CN.md)。
 
 ## 历史进展（下列“最新”等保留当时含义）
 
@@ -87,4 +89,4 @@ V00–V03已通过，历史失败保留。V04 **failed / needs_revision**：SITL
 
 V00核对后将计划和基线工具纳入明确范围提交。后续reports/、scripts/、configs/、evidence/按阶段创建，不预填成功报告。plan/v1为初始快照，修订另存版本，已执行依据以对应提交协议/阶段报告为准。大型日志放仓库外VELOCITY-STA实验目录。
 
-当前默认速度配置为MPC_VC_MODE=0/MPC_VC_AXES=0。实验MODE1/AXES1仅在SITL且配置有效时准入，已完成上述三组开发验收；MODE2及其他实验掩码仍拒绝。X是本地NED北向，不是roll。V03及以前已按用户要求push；本次V04不push。
+当前默认速度配置为MPC_VC_MODE=0/MPC_VC_AXES=0。实验MODE1/AXES1（X）或AXES4（Z）仅在SITL且各自配置有效时准入；3/7和MODE2仍拒绝。X为本地NED北向、Z为向下，均不是机体角速度轴。本次Z研究不push。

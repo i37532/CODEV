@@ -1,0 +1,119 @@
+{
+  "accepted": true,
+  "job": {
+    "id": "run05",
+    "seed": 19003,
+    "mode": 0,
+    "axes": 0,
+    "parameters": {
+      "MPC_VC_L1_X": 0,
+      "MPC_VC_L2_X": 0,
+      "MPC_VC_NU_X": 0,
+      "MPC_VC_A_X": 0,
+      "MPC_VC_L1_Z": 2.0,
+      "MPC_VC_L2_Z": 1.0,
+      "MPC_VC_NU_Z": 4.0,
+      "MPC_VC_A_Z": 6.0,
+      "MPC_VC_MODE": 0,
+      "MPC_VC_AXES": 0
+    }
+  },
+  "baseline_accepted": true,
+  "flight": {
+    "n": 8837,
+    "inner": {
+      "max_age_us": 4000,
+      "median_age_us": 0.0,
+      "maximum_reads": 4
+    },
+    "maximum_gap_s": 0.012,
+    "hz": 99.99999999999999
+  },
+  "z_lifecycle": {
+    "pid_only": true,
+    "samples": 8837
+  },
+  "diagnostic": {
+    "n": 6068,
+    "inner": {
+      "max_age_us": 4000,
+      "median_age_us": 0.0,
+      "maximum_reads": 4
+    },
+    "maximum_gap_s": 0.012,
+    "hz": 99.99670358649789,
+    "error": {
+      "rmse": [
+        0.00757410924269257,
+        0.008527969013135862,
+        0.003975954831404022
+      ],
+      "mean": [
+        -0.0014980643918825077,
+        0.0038234888307633777,
+        -4.4136267330031286e-05
+      ],
+      "std": [
+        0.0074244820626098015,
+        0.007622807137140027,
+        0.003975709849985435
+      ],
+      "max_abs": [
+        0.018800975754857063,
+        0.018132725730538368,
+        0.012102635577321053
+      ]
+    },
+    "iae_m": [
+      0.1914127489249222,
+      0.23788982779346407,
+      0.09741662186011697
+    ],
+    "acceleration_tv": [
+      2.6804027557373047,
+      3.053396701812744,
+      2.1465179920196533
+    ],
+    "samples": 3200,
+    "seconds": 32.0,
+    "constraint_fraction": 0.0,
+    "maximum_continuous_constraint_s": 0.0,
+    "nu_peak": null
+  },
+  "local_output": {
+    "matched": 6068,
+    "denominator": 6068,
+    "coverage": 1.0,
+    "max_gap_s": 0.012,
+    "max_abs_error": 0.0
+  },
+  "attitude_output": {
+    "matched": 6068,
+    "denominator": 6068,
+    "coverage": 1.0,
+    "max_gap_s": 0.012,
+    "max_abs_error": 0.0
+  },
+  "mixer": {
+    "count": 15170,
+    "bit_histogram": {
+      "1": 15170
+    },
+    "feedback_valid_fraction": 1.0,
+    "raw_nonzero_fraction": 1.0,
+    "saturation_fraction_among_valid": 0.0,
+    "rate_direction_saturation_fraction_among_valid": 0.0
+  },
+  "position_rmse": [
+    0.015390904852965102,
+    0.032634491454885096,
+    0.04419979014195725
+  ],
+  "yaw_rmse": 0.00021838378415454932,
+  "height": {
+    "rmse": 0.04409973037294538,
+    "mean": -0.022397156522395035,
+    "std": 0.03798886150805021,
+    "max_abs": 0.09614968299865723
+  }
+}
