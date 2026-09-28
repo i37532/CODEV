@@ -48,6 +48,7 @@ public:
 		m._param_mpc_vc_nu_z.set(4.f); m._param_mpc_vc_a_z.set(6.f);
 	}
 	static void enableXYZExcitation(MulticopterPositionControl &m) { m._param_mpc_vct_test.set(4); }
+	static void researchTask(MulticopterPositionControl &m,int task) { m._param_mpc_vct_test.set(task); }
 	static void enableXYExcitation(MulticopterPositionControl &m) { m._param_mpc_vct_test.set(3); }
 	static void selectZ(MulticopterPositionControl &m)
 	{
@@ -124,6 +125,31 @@ protected:
 		EXPECT_GT(reads,0u); EXPECT_EQ(d.timestamp_sample,lp.timestamp_sample); return d;
 	}
 };
+
+TEST_F(VelocityModule, V06TrajectoryBeforePositionPAndSingleFeedforward)
+{
+	VelocityModuleTestAccess::researchTask(*m,7);
+	mode.flag_armed=false; ASSERT_TRUE(mode_pub.publish(mode)); step();
+	mode.flag_armed=true; ASSERT_TRUE(mode_pub.publish(mode));
+	VelocityModuleTestAccess::airborne(*m,lp.timestamp); land.landed=land.ground_contact=false; ASSERT_TRUE(land_pub.publish(land));
+	uORB::Publication<vehicle_status_s> status_pub{ORB_ID(vehicle_status)};
+	vehicle_status_s status{}; status.nav_state=vehicle_status_s::NAVIGATION_STATE_AUTO_LOITER; ASSERT_TRUE(status_pub.publish(status));
+	target.z=lp.z; target.vz=0.f; target.acceleration[0]=.01f; target.acceleration[1]=-.02f; target.acceleration[2]=0.f;
+	float peak=0.f;
+	for(int k=0;k<8000;++k) {
+		const auto d=step(k%2?12000:8000,true); ASSERT_TRUE(d.valid); EXPECT_EQ(d.excitation_fault,0);
+		const auto o=VelocityResearchTask::evaluate(7,d.excitation_time);
+		EXPECT_FLOAT_EQ(d.p_sp[0],target.x+o.p[0]); EXPECT_FLOAT_EQ(d.p_sp[1],target.y+o.p[1]);
+		EXPECT_FLOAT_EQ(d.v_ff[0],target.vx+o.v[0]); EXPECT_FLOAT_EQ(d.a_ff[0],target.acceleration[0]+o.a[0]);
+		EXPECT_FLOAT_EQ(d.a_ff[1],target.acceleration[1]+o.a[1]); EXPECT_FLOAT_EQ(d.p_sp[2],target.z);
+		EXPECT_NEAR(d.v_sp[0],.95f*o.p[0]+o.v[0],2e-6f);
+		EXPECT_FLOAT_EQ(d.excitation+d.excitation_y+d.excitation_z,0.f);
+		EXPECT_FLOAT_EQ(VelocityModuleTestAccess::cache(*m).x,target.x); peak=fmaxf(peak,fabsf(o.p[0]));
+	}
+	EXPECT_GT(peak,.2f);
+	status.nav_state=vehicle_status_s::NAVIGATION_STATE_AUTO_LAND; ASSERT_TRUE(status_pub.publish(status));
+	const auto d=step(8000,true); EXPECT_EQ(d.excitation_fault,2); EXPECT_FLOAT_EQ(d.p_sp[0],target.x); EXPECT_FLOAT_EQ(d.a_ff[0],target.acceleration[0]);
+}
 
 TEST_F(VelocityModule, XYZRealRunHandoverHteAndContact)
 {

@@ -64,8 +64,11 @@ PARAM_DEFINE_FLOAT(MPC_THR_MIN, 0.12f);
  * @value 2 Single shot Z excitation (0.1 m/s)
  * @value 3 X then Y then XY excitation (64 s, horizontal norm <= 0.2 m/s)
  * @value 4 Z then XY then XYZ excitation (64 s, horizontal 0.2, vertical 0.1 m/s)
+ * @value 5 V06 hover trajectory (64 s, no velocity excitation)
+ * @value 6 V06 low-speed NED figure8 (64 s, position/velocity/acceleration FF)
+ * @value 7 V06 same figure8 with smooth heading variation (up to 30 degrees)
  * @min 0
- * @max 4
+ * @max 7
  * @group Multicopter Position Control
  */
 PARAM_DEFINE_INT32(MPC_VCT_TEST, 0);

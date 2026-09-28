@@ -71,6 +71,7 @@
 #include "PositionControl/VelocityDiagnosticExcitation.hpp"
 #include "PositionControl/VelocityXYDiagnosticExcitation.hpp"
 #include "PositionControl/VelocityXYZDiagnosticExcitation.hpp"
+#include "PositionControl/VelocityResearchTask.hpp"
 #include "PositionControl/VelocityDiagnosticInput.hpp"
 
 using namespace time_literals;
