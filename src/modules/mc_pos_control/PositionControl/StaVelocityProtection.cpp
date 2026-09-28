@@ -178,11 +178,21 @@ const StaVelocityProtection::Result &StaVelocityProtection::begin(const Frame &f
 		_kernel.reset(); _active = true; _result.nu_applied = _kernel.state();
 		_result.flags |= Priming | Reset; return _result;
 	}
+	if (!f.evaluate) {
+		_result.flags |= Held;
+		for (size_t i = 0; i < 3; ++i) {
+			_result.a_sta[i] = _result.nu_ideal[i] = NAN; // no ideal candidate was evaluated
+		}
+		return _result;
+	}
+	const float h = f.integration_dt > 0.f ? f.integration_dt : _result.raw_dt;
+	if ((f.divisor != 1 && f.divisor != 2 && f.divisor != 4) || !std::isfinite(h)
+	    || h < .002f || h > .04f * f.divisor) { latch(Time); return _result; }
 
 	for (size_t i = 0; i < 3; ++i) {
 		if (_result.active_axes & (1 << i)) {
 			auto &c = _candidates[i];
-			c = _kernel.evaluate(i, f.velocity[i], f.target[i], _result.raw_dt);
+			c = _kernel.evaluate(i, f.velocity[i], f.target[i], h);
 			if (!c.valid()) { latch(Numerical); return _result; }
 			_result.s[i] = c.s;
 			_result.a_sta[i] = c.a_sta;
@@ -200,7 +210,7 @@ const StaVelocityProtection::Result &StaVelocityProtection::begin(const Frame &f
 }
 
 const StaVelocityProtection::Result &StaVelocityProtection::finish(const Vec &proxy, uint8_t constrained_axes,
-		bool feedback_valid)
+		bool feedback_valid, uint8_t interval_positive, uint8_t interval_negative)
 {
 	if (!_open) { _result.committed_axes = 0; return _result; }
 	_open = false;
@@ -219,7 +229,9 @@ const StaVelocityProtection::Result &StaVelocityProtection::finish(const Vec &pr
 					std::min(c.a_sta, _config.acceleration_limit[i]));
 			// Freeze only increments deepening a real constraint; unconstrained
 			// thrust-map mismatch (including Z scaling) alone must not freeze nu.
-			if (increment * correction_residual > 0.f || ((constrained_axes & (1 << i))
+			if ((increment > 0.f && (interval_positive & (1 << i)))
+			    || (increment < 0.f && (interval_negative & (1 << i)))
+			    || increment * correction_residual > 0.f || ((constrained_axes & (1 << i))
 			    && increment * (_result.a_req[i] - proxy[i]) > 0.f)) {
 				next = c.nu_before; _result.flags |= OutwardFreeze;
 			}

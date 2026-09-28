@@ -152,6 +152,7 @@ private:
 	DEFINE_PARAMETERS(
 		// Position Control
 		(ParamInt<px4::params::MPC_VC_MODE>) _param_mpc_vc_mode,
+		(ParamInt<px4::params::MPC_VC_DIV>) _param_mpc_vc_div,
 		(ParamInt<px4::params::MPC_VC_AXES>) _param_mpc_vc_axes,
 		(ParamFloat<px4::params::MPC_VC_L1_X>) _param_mpc_vc_l1_x,
 		(ParamFloat<px4::params::MPC_VC_L2_X>) _param_mpc_vc_l2_x,

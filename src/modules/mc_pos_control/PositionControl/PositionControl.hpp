@@ -45,6 +45,7 @@
 #include <uORB/topics/vehicle_local_position_setpoint.h>
 #include "VelocityControlSelector.hpp"
 #include "StaVelocityProtection.hpp"
+#include "VelocityDecimation.hpp"
 #include <uORB/topics/sta_velocity_ctrl_status.h>
 
 struct PositionControlStates {
@@ -154,13 +155,20 @@ public:
 	bool update(const float dt);
 
 	void configureVelocityControl(int32_t mode, int32_t axes, bool armed);
+	void configureVelocityDivisor(int32_t divisor, bool armed);
+	const VelocityDecimation &velocityDecimation() const { return _decimation; }
+	const matrix::Vector3f &velocityCorrection() const { return _correction; }
+	const matrix::Vector3f &velocityIntegral() const { return _vel_int; }
+	uint8_t intervalPositive() const { return _interval_positive; }
+	uint8_t intervalNegative() const { return _interval_negative; }
+	uint64_t velocityPathTimeNs() const { return _velocity_path_ns; }
 	void configureVelocityEsta(const StaVelocityProtection::Config &config, bool armed);
 	void setVelocityFrame(const StaVelocityProtection::Frame &frame);
 	const VelocityControlSelector &velocitySelection() const { return _velocity_selector; }
 	const sta_velocity_ctrl_status_s &diagnostic() const { return _diagnostic; }
 	uint16_t inputValidity() const;
 	uint16_t failureReason() const;
-	bool velocityOutputPublishable() const { return _velocity_selector.effectiveMode() == 0 || _diagnostic.valid; }
+	bool velocityOutputPublishable() const { return !_decimation.fault && (_velocity_selector.effectiveMode() == 0 || _diagnostic.valid); }
 	void setDiagnosticExcitation(float velocity, bool vertical = false) { _diagnostic_excitation = velocity; _diagnostic_excitation_y = _diagnostic_excitation_z = 0.f; _diagnostic_vertical = vertical; }
 	void setDiagnosticExcitationXY(float x, float y) { setDiagnosticExcitation(x); _diagnostic_excitation_y = y; }
 	void setDiagnosticExcitationXYZ(float x, float y, float z) { setDiagnosticExcitationXY(x, y); _diagnostic_excitation_z = z; }
@@ -169,7 +177,7 @@ public:
 	 * Set the integral term in xy to 0.
 	 * @see _vel_int
 	 */
-	void resetIntegral() { _vel_int.setZero(); }
+	void resetIntegral() { _vel_int.setZero(); _decimation.invalidate(); }
 
 	/**
 	 * Get the controllers output local position setpoint
@@ -190,6 +198,14 @@ public:
 private:
 	friend class VelocityControlTestAccess;
 	VelocityControlSelector _velocity_selector;
+	VelocityDecimation _decimation;
+	matrix::Vector3f _correction{NAN, NAN, NAN}; // never includes acceleration FF
+	uint32_t _velocity_frame_serial{0}, _consumed_frame_serial{0};
+	uint8_t _interval_positive{0}, _interval_negative{0};
+	bool _decimated_retry{false};
+	uint64_t _velocity_path_ns{0};
+	void _velocityControlDecimated(float dt);
+	void _mapHeldCorrection();
 	sta_velocity_ctrl_status_s _diagnostic{};
 	float _diagnostic_excitation{0.f};
 	float _diagnostic_excitation_y{0.f};

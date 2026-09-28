@@ -32,6 +32,19 @@ TEST(VelocitySelectionParam, BsonSaveReloadAndFreshSelector)
 	param_reset(mode); param_reset(axes);
 }
 
+TEST(VelocitySelectionParam, VelocityDivisorDefaultAndBsonRestart)
+{
+	param_control_autosave(false);
+	const param_t key=param_find("MPC_VC_DIV"); ASSERT_NE(key,PARAM_INVALID); param_reset(key);
+	int32_t value=0; ASSERT_EQ(param_get(key,&value),0); EXPECT_EQ(value,1);
+	value=4; ASSERT_EQ(param_set(key,&value),0);
+	FILE *file=tmpfile(); ASSERT_NE(file,nullptr); ASSERT_EQ(param_export(fileno(file),false,nullptr),0);
+	param_reset(key); ASSERT_EQ(lseek(fileno(file),0,SEEK_SET),0); ASSERT_EQ(param_import(fileno(file),true),0); fclose(file);
+	ASSERT_EQ(param_get(key,&value),0); EXPECT_EQ(value,4);
+	PositionControl restarted; restarted.configureVelocityDivisor(value,false); EXPECT_EQ(restarted.velocityDecimation().divisor,4);
+	param_reset(key);
+}
+
 TEST(VelocitySelectionParam, EstaGainsSavedReloadedAndDisarmedAdmission)
 {
 	param_control_autosave(false);

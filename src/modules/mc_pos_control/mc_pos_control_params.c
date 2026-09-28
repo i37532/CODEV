@@ -937,3 +937,17 @@ PARAM_DEFINE_FLOAT(MPC_XY_VEL_ALL, -10.0f);
  * @group Multicopter Position Control
  */
 PARAM_DEFINE_FLOAT(MPC_Z_VEL_ALL, -3.0f);
+
+/**
+ * Velocity feedback update divisor (SITL research)
+ *
+ * Only feedback correction and integral/nu are decimated. Position P,
+ * acceleration feedforward, mapping and lifecycle run every callback.
+ * DIV>1 currently supports PID and X/XY ESTA, not Z/XYZ ESTA.
+ * Armed changes are deferred until disarm. Invalid values are rejected.
+ * @value 1 Every callback (legacy PID)
+ * @value 2 Every second callback
+ * @value 4 Every fourth callback
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_INT32(MPC_VC_DIV, 1);

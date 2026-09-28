@@ -25,10 +25,15 @@ public:
 		Vec velocity{}, target{}, ff{};
 		// Non-covariant EKF reset: target and estimate not translated together.
 		uint8_t unmatched_reset_axes{0};
+		// V07 only: validation/lifecycle still runs at every callback. The caller
+		// supplies real update h independently of the unchanged raw clock gate.
+		bool evaluate{true};
+		float integration_dt{0.f};
+		uint8_t divisor{1};
 	};
 	enum Fault : uint16_t { Time = 1, Measurement = 2, ResetMismatch = 4, Numerical = 8, Feedback = 16 };
 	enum Flag : uint16_t { Priming = 1, Inactive = 2, Duplicate = 4, StateLimit = 8,
-		CorrectionLimit = 16, OutwardFreeze = 32, Latched = 64, Reset = 128 };
+		CorrectionLimit = 16, OutwardFreeze = 32, Latched = 64, Reset = 128, Held = 256 };
 	struct Result {
 		Vec s{}, nu_before{}, nu_ideal{}, nu_applied{}, a_sta{}, a_req{}, a_proxy{};
 		float raw_dt{0.f};
@@ -43,7 +48,8 @@ public:
 	const Result &begin(const Frame &frame);
 	// constrained_axes is NED, derived from the common mapping. No motor bits.
 	// Validate ALL selected axes and feedback before any axis state is committed.
-	const Result &finish(const Vec &proxy, uint8_t constrained_axes, bool feedback_valid);
+	const Result &finish(const Vec &proxy, uint8_t constrained_axes, bool feedback_valid,
+		uint8_t interval_positive = 0, uint8_t interval_negative = 0);
 	const Vec &state() const { return _kernel.state(); }
 	static bool validConfig(const Config &config);
 	// Z-only, closed-transaction state changes. No clipping on handover/HTE.

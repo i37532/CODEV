@@ -37,6 +37,7 @@
 #include <lib/mathlib/mathlib.h>
 #include <lib/matrix/matrix/math.hpp>
 #include "PositionControl/ControlMath.hpp"
+#include "PositionControl/VelocityHostClock.hpp"
 
 using namespace matrix;
 
@@ -248,6 +249,7 @@ PositionControlStates MulticopterPositionControl::set_vehicle_states(const vehic
 
 void MulticopterPositionControl::Run()
 {
+	const uint64_t host_started = velocityHostClock();
 	if (should_exit()) {
 		_local_pos_sub.unregisterCallback();
 		exit_and_cleanup();
@@ -294,6 +296,7 @@ void MulticopterPositionControl::Run()
 		esta_config.nu_limit[2] = _param_mpc_vc_nu_z.get();
 		esta_config.acceleration_limit[2] = _param_mpc_vc_a_z.get();
 		_control.configureVelocityEsta(esta_config, _control_mode.flag_armed);
+		_control.configureVelocityDivisor(_param_mpc_vc_div.get(), _control_mode.flag_armed);
 		_control.configureVelocityControl(_param_mpc_vc_mode.get(), _param_mpc_vc_axes.get(), _control_mode.flag_armed);
 		uint8_t pid_calls = 0;
 		uint16_t first_fail = 0, first_input = 0;
@@ -591,6 +594,23 @@ void MulticopterPositionControl::Run()
 		selection_status.armed = _control_mode.flag_armed;
 		selection_status.enabled = _control_mode.flag_multicopter_position_control_enabled;
 		selection_status.pid_calls = pid_calls;
+		const auto &cadence = _control.velocityDecimation();
+		selection_status.div_req = cadence.requested;
+		selection_status.div_eff = cadence.divisor;
+		selection_status.div_pending = cadence.pending;
+		selection_status.div_reject = cadence.rejected;
+		selection_status.control_seq = cadence.sequence;
+		selection_status.h = cadence.h;
+		selection_status.control_updated = pid_calls && cadence.updated;
+		selection_status.control_held = pid_calls && cadence.held;
+		selection_status.control_fault = cadence.fault;
+		selection_status.interval_pos = _control.intervalPositive();
+		selection_status.interval_neg = _control.intervalNegative();
+		_control.velocityCorrection().copyTo(selection_status.correction);
+		_control.velocityIntegral().copyTo(selection_status.integral);
+		selection_status.path_ns = pid_calls ? _control.velocityPathTimeNs() : 0;
+		selection_status.module_ns = host_started ? velocityHostClock() - host_started : 0;
+		selection_status.clock = host_started ? 1 : 0;
 		_velocity_selection_pub.publish(selection_status);
 
 		// Final invocation only: failed-first-call output is never labelled as final.
