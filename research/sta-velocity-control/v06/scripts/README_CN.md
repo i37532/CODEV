@@ -1,6 +1,6 @@
 # V06 速度研究脚本
 
-当前V06未验收：protocol02在第9轮降落发生真实IMU截幅/EKF切换，8轮接受、1轮失败、9轮取消。该批已停止，fly不能续跑/重试；先解决共同起降边界、再冻结新批。start/switch已做不解锁的真实地面冒烟，不等同完整任务飞行通过。详见 ../../reports/V06.md。
+软着陆专项已独立通过：合格派生接触模型下PID/XYZ ESTA共6轮、3对起降通过，全部IMU无截幅、EKF无故障/切换。V06完整任务尚未验收：新protocol03固定同一合格模型，另做18轮；不拼接旧批数据。原protocol02第9轮真实IMU截幅/EKF切换失败仍保留，不能续跑旧批。详见 ../../reports/V06_SOFT_LANDING.md 和 ../../reports/V06.md。
 仅 Gazebo Classic Iris SITL。这里 ESTA 是 **XYZ速度环**，角速度仍是 PID；不是旧 sim_scripts 的角速度 ESTA。
 
 ## 打开 Gazebo，落地切换
@@ -14,6 +14,8 @@
 start 默认 PID，不起飞；使用项目 sitl/run.sh 原启动器。switch 加载已验收 E01-XYZ 参数并检查实际速度模式和角速度 PID，不连接实机/其他仓库，不修改旧 sim_scripts。手动会话 TEST=0，不自动施加任务。退出时在 PX4 控制台执行 shutdown，启动脚本恢复原始完整 EEPROM；恢复前不强制关闭终端。备份在外部 V06/manual。
 
 ## 自动起飞、任务、降落及对比
+本目录 start 和 protocol03 fly 使用合格弹性接触派生 Iris：kp=2500、kd=50、max_vel=.2、max_contacts=4。只改变机体与地面的接触参数，不改变控制律、增益、惯量、传感器信号或默认仓库模型。手动 start 保留原IMU插件，正式 fly 使用冻结的配对噪声插件；二者不能当成同一重复实验。旧 sim_scripts 默认行为不变。该接触模型没有实机起落架标定，不代表实机软着陆通过。
+
 先退出手动 PX4/Gazebo/QGC。fly 自行重启后端、预热、起飞至约2.5m、进入任务、降落上锁并完整恢复参数；不需要先 start。
 ```bash
 ./research/sta-velocity-control/v06/scripts/fly.sh all
@@ -42,5 +44,7 @@ PlotJuggler 使用其 ULog 插件打开 result.json 指向的 .ulg；不要把 C
 - timestamp_sample/input_timestamp/raw_dt/used_dt/publish_seq/update_seq：采样与发布时序。
 vehicle_attitude_setpoint 的 yaw_body/yaw_sp_move_rate 对实际姿态yaw；sta_rate_ctrl_status 必须 MODE0/AXES0/DIV1。
 raw trajectory_setpoint 是未加研究轨迹的基础目标，不能把它单独当成已消费的移动目标。
+
+降落专项另外看所有实例的 sensor_accel.clip_counter、vehicle_imu.delta_velocity_clipping、estimator_status.filter_fault_flags 和 estimator_selector_status.primary_instance；必须有覆盖 landed_disarmed 的实际日志边界，不能靠外推补齐。并检查落地后 postland_tail.json 与最终日志检查一致。
 
 这是三种名义任务的开发回归，不是正式留出实验，也不承诺ESTA每轴胜出。E01显示Z误差和输出变化负担可能比PID大，V06如实报告。

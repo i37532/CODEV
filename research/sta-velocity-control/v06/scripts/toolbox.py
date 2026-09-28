@@ -12,7 +12,7 @@ HERE=Path(__file__).resolve().parent
 REPO=HERE.parents[3]
 spec=importlib.util.spec_from_file_location('v06_local_io',REPO/'sim_scripts/_internal/toolbox.py')
 rate_io=importlib.util.module_from_spec(spec); spec.loader.exec_module(rate_io)
-sys.path.insert(0,str(HERE.parent/'protocol02'))
+sys.path.insert(0,str(HERE.parent/'protocol03'))
 from common import load_protocol, CONFIG, fingerprint
 STATE=Path('/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/manual')
 RATE=dict(MC_RTC_MODE=0,MC_STA_AXES=0,MC_RTC_DIV=1,MC_RATT_TEST=0,MC_STA_TKO_MGT=0)
@@ -57,12 +57,15 @@ def start():
     if (STATE/'session.json').exists(): raise RuntimeError('已有会话/未确认恢复记录，拒绝覆盖')
     path=ROOTFS/'eeprom/parameters_10016'; original=path.read_bytes()
     stamp=str(time.time_ns()); backup=STATE/(stamp+'.bson'); backup.write_bytes(original)
+    from manual_contact import prepare
+    env=rate_io.environment()
+    model=prepare(STATE/stamp,env)
     defaults=json.loads((REPO/'build/px4_sitl_default/parameters.json').read_text())['parameters']
-    (STATE/'session.json').write_text(json.dumps(dict(owner=os.getpid(),backup=str(backup),sha256=hashlib.sha256(original).hexdigest())))
+    (STATE/'session.json').write_text(json.dumps(dict(owner=os.getpid(),backup=str(backup),sha256=hashlib.sha256(original).hexdigest(),model=model)))
     try:
         path.write_bytes(encode_bson({**persisted_bson(original),**config(0)},{p['name']:p['type'] for p in defaults}))
         print('仅打开仿真，不自动解锁。退出请在 PX4 控制台 shutdown；退出后自动恢复全部 EEPROM。',flush=True)
-        subprocess.run(['./sitl/run.sh','--backend','gazebo','--model','iris'],cwd=REPO,env=rate_io.environment(),check=True)
+        subprocess.run(['./sitl/run.sh','--backend','gazebo','--model','iris'],cwd=REPO,env=env,check=True)
     finally:
         if not rate_io.processes({'px4','gzserver','gazebo'}):
             path.write_bytes(original)
