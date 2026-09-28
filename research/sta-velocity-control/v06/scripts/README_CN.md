@@ -1,4 +1,6 @@
 # V06 速度研究脚本
+
+当前V06未验收：protocol02在第9轮降落发生真实IMU截幅/EKF切换，8轮接受、1轮失败、9轮取消。该批已停止，fly不能续跑/重试；先解决共同起降边界、再冻结新批。start/switch已做不解锁的真实地面冒烟，不等同完整任务飞行通过。详见 ../../reports/V06.md。
 仅 Gazebo Classic Iris SITL。这里 ESTA 是 **XYZ速度环**，角速度仍是 PID；不是旧 sim_scripts 的角速度 ESTA。
 
 ## 打开 Gazebo，落地切换
@@ -35,7 +37,7 @@ PlotJuggler 使用其 ULog 插件打开 result.json 指向的 .ulg；不要把 C
 - p_sp 与 vehicle_local_position.x/y/z：移动位置目标与实际位置，NED的Z向下，高度=-z。
 - v_ff、a_ff：目标前馈；a_req 为加速度请求，a_proxy仅推力映射代理，均不是加速度真值。
 - nu_before/nu_ideal/nu_applied、a_sta、constraint_bits：积分状态与保护；thrust/q_sp 为输出。
-- requested/effective_mode/axes、active_axes/pid_axes、z_phase、fault、timing、reset：真实配置与生命周期。
+- requested/effective_mode/axes、active_axes/pid_axes、z_phase、fault、timing、reset_bits：真实配置与生命周期。
 - excitation_time：任务时钟；老excitation/excitation_y/excitation_z应全0。MPC_VCT_TEST=5/6/7区分三任务。
 - timestamp_sample/input_timestamp/raw_dt/used_dt/publish_seq/update_seq：采样与发布时序。
 vehicle_attitude_setpoint 的 yaw_body/yaw_sp_move_rate 对实际姿态yaw；sta_rate_ctrl_status 必须 MODE0/AXES0/DIV1。

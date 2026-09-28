@@ -1,5 +1,7 @@
 # V06：可重复任务与开发回归
 
+当前状态：needs_revision，未通过。protocol02实际9轮：8接受、1失败、9取消；hover3对通过，figure8仅1对通过，heading未飞。降落冲击造成真实IMU截幅→EKF切换→参考变化，不能放宽日志检查或继续抽种子。见 [V06报告](../reports/V06.md)。新批未启动，等待明确共同起降专项范围。
+
 比较原速度PID与已验收XYZ速度ESTA（不是XY+Z PID），原位置P/姿态/全部角速度PID不变，固件默认PID。
 
 - [三个便捷脚本和PlotJuggler说明](scripts/README_CN.md)

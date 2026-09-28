@@ -1,0 +1,349 @@
+{
+  "status": "failed_retained_requires_separate_landing_scope",
+  "source_head": "9b852c355dfc394c8f8bdcd61c038f9d7af265d4",
+  "original_error": "ValueError('CLI reference representation changed: ref_alt')",
+  "ulog": {
+    "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-28/06_05_49.ulg",
+    "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/series02/run09/06_05_49.ulg",
+    "sha256": "238c37c81c2c2a254142a6ecc63369fb5ce5755a87b32846b7f9110d2507a2e9",
+    "bytes": 99825549
+  },
+  "events": {
+    "ready": 30936000,
+    "takeoff_command": 30944000,
+    "reposition_command": 39984000,
+    "handoff_ready": 40364000,
+    "hover_start": 48436000,
+    "hover_end": 138964000,
+    "land_command": 138964000
+  },
+  "dropouts": 0,
+  "file_corruption": false,
+  "tables": {
+    "estimator_selector_status:0": {
+      "samples": 12,
+      "primary": [
+        {
+          "timestamp": 144384000,
+          "value": 2.0
+        },
+        {
+          "timestamp": 144392000,
+          "value": 4.0
+        }
+      ]
+    },
+    "estimator_status:0": {
+      "samples": 569,
+      "fault_flags": [
+        {
+          "timestamp": 144384000,
+          "value": 131072.0
+        },
+        {
+          "timestamp": 144396000,
+          "value": 0.0
+        }
+      ]
+    },
+    "estimator_status:1": {
+      "samples": 569,
+      "fault_flags": [
+        {
+          "timestamp": 144388000,
+          "value": 131072.0
+        },
+        {
+          "timestamp": 144396000,
+          "value": 0.0
+        }
+      ]
+    },
+    "estimator_status:2": {
+      "samples": 569,
+      "fault_flags": [
+        {
+          "timestamp": 144388000,
+          "value": 131072.0
+        },
+        {
+          "timestamp": 144400000,
+          "value": 0.0
+        }
+      ]
+    },
+    "estimator_status:3": {
+      "samples": 569,
+      "fault_flags": [
+        {
+          "timestamp": 144380000,
+          "value": 131072.0
+        },
+        {
+          "timestamp": 144392000,
+          "value": 0.0
+        }
+      ]
+    },
+    "estimator_status:4": {
+      "samples": 570,
+      "fault_flags": [
+        {
+          "timestamp": 144384000,
+          "value": 131072.0
+        },
+        {
+          "timestamp": 144392000,
+          "value": 0.0
+        }
+      ]
+    },
+    "estimator_status:5": {
+      "samples": 569,
+      "fault_flags": [
+        {
+          "timestamp": 144384000,
+          "value": 131072.0
+        },
+        {
+          "timestamp": 144396000,
+          "value": 0.0
+        }
+      ]
+    },
+    "estimator_status_flags:0": {
+      "samples": 8,
+      "bad_acc_clipping": [
+        {
+          "timestamp": 144384000,
+          "value": 1.0
+        },
+        {
+          "timestamp": 144396000,
+          "value": 0.0
+        }
+      ]
+    },
+    "estimator_status_flags:1": {
+      "samples": 8,
+      "bad_acc_clipping": [
+        {
+          "timestamp": 144388000,
+          "value": 1.0
+        },
+        {
+          "timestamp": 144396000,
+          "value": 0.0
+        }
+      ]
+    },
+    "estimator_status_flags:2": {
+      "samples": 8,
+      "bad_acc_clipping": [
+        {
+          "timestamp": 144388000,
+          "value": 1.0
+        },
+        {
+          "timestamp": 144400000,
+          "value": 0.0
+        }
+      ]
+    },
+    "estimator_status_flags:3": {
+      "samples": 8,
+      "bad_acc_clipping": [
+        {
+          "timestamp": 144380000,
+          "value": 1.0
+        },
+        {
+          "timestamp": 144392000,
+          "value": 0.0
+        }
+      ]
+    },
+    "estimator_status_flags:4": {
+      "samples": 8,
+      "bad_acc_clipping": [
+        {
+          "timestamp": 144384000,
+          "value": 1.0
+        },
+        {
+          "timestamp": 144392000,
+          "value": 0.0
+        }
+      ]
+    },
+    "estimator_status_flags:5": {
+      "samples": 8,
+      "bad_acc_clipping": [
+        {
+          "timestamp": 144384000,
+          "value": 1.0
+        },
+        {
+          "timestamp": 144396000,
+          "value": 0.0
+        }
+      ]
+    },
+    "sensor_accel:0": {
+      "samples": 1424,
+      "z_min_m_s2": -83.3780746459961,
+      "peak_publish_us": 144276000,
+      "peak_sample_us": 144276000,
+      "z_clipping": [
+        {
+          "timestamp": 144272000,
+          "value": 1.0
+        },
+        {
+          "timestamp": 144276000,
+          "value": 0.0
+        }
+      ]
+    },
+    "sensor_accel:1": {
+      "samples": 1424,
+      "z_min_m_s2": -160.64288330078125,
+      "peak_publish_us": 144272000,
+      "peak_sample_us": 144272000,
+      "z_clipping": [
+        {
+          "timestamp": 144272000,
+          "value": 1.0
+        },
+        {
+          "timestamp": 144276000,
+          "value": 0.0
+        }
+      ]
+    },
+    "sensor_accel:2": {
+      "samples": 1424,
+      "z_min_m_s2": -160.64288330078125,
+      "peak_publish_us": 144272000,
+      "peak_sample_us": 144272000,
+      "z_clipping": [
+        {
+          "timestamp": 144272000,
+          "value": 1.0
+        },
+        {
+          "timestamp": 144276000,
+          "value": 0.0
+        }
+      ]
+    },
+    "vehicle_imu:0": {
+      "samples": 1254,
+      "clipping": [
+        {
+          "timestamp": 144272000,
+          "value": 4.0
+        },
+        {
+          "timestamp": 144276000,
+          "value": 0.0
+        }
+      ],
+      "delta_velocity_dt_range": [
+        4000,
+        4000
+      ]
+    },
+    "vehicle_imu:1": {
+      "samples": 1254,
+      "clipping": [
+        {
+          "timestamp": 144272000,
+          "value": 4.0
+        },
+        {
+          "timestamp": 144276000,
+          "value": 0.0
+        }
+      ],
+      "delta_velocity_dt_range": [
+        4000,
+        4000
+      ]
+    },
+    "vehicle_imu:2": {
+      "samples": 1262,
+      "clipping": [
+        {
+          "timestamp": 144272000,
+          "value": 4.0
+        },
+        {
+          "timestamp": 144276000,
+          "value": 0.0
+        }
+      ],
+      "delta_velocity_dt_range": [
+        4000,
+        4000
+      ]
+    },
+    "vehicle_imu_status:0": {
+      "samples": 57,
+      "clipping_total": [
+        {
+          "timestamp": 144272000,
+          "value": 2.0
+        }
+      ]
+    },
+    "vehicle_imu_status:1": {
+      "samples": 57,
+      "clipping_total": [
+        {
+          "timestamp": 144272000,
+          "value": 2.0
+        }
+      ]
+    },
+    "vehicle_imu_status:2": {
+      "samples": 57,
+      "clipping_total": [
+        {
+          "timestamp": 144272000,
+          "value": 2.0
+        }
+      ]
+    },
+    "vehicle_local_position:0": {
+      "samples": 571,
+      "reference_altitude": [
+        {
+          "timestamp": 144384000,
+          "value": 488.4044189453125
+        }
+      ],
+      "reference_before_m": 488.4737854003906,
+      "reference_after_m": 488.4044189453125
+    }
+  },
+  "parameter_metadata": {
+    "MPC_LAND_SPEED": {
+      "default": 0.7,
+      "min": 0.6,
+      "max": null
+    },
+    "MPC_Z_VEL_MAX_DN": {
+      "default": 1.0,
+      "min": 0.5,
+      "max": 4.0
+    },
+    "LNDMC_Z_VEL_MAX": {
+      "default": 0.5,
+      "min": null,
+      "max": null
+    }
+  },
+  "conclusion": "Observed landing acceleration clipping (fault bit17), followed by selector changes and real reference/reset changes; not listener rounding. No estimator/land-detector change, new flight or historical reacceptance.",
+  "limitations": "Not a complete contact-physics causal proof. Existing FIFO clipping repair preserves direction but cannot reconstruct out-of-range impulse. No evidence justifying selective waiver, disabling estimator instances, lower-than-metadata parameters, or seed retries."
+}
