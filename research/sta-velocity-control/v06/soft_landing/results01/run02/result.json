@@ -1,0 +1,74 @@
+{
+  "source_head": "5bee3023d0dab41489ec896b6307688e954c062c",
+  "branch": "research/sta-velocity-control",
+  "binary_sha256": "f83a96377f360a32a0070f9e149c1c3eae19fffe0d978d01270da90be3b99181",
+  "runner_sha256": "e59447b1e9eed2cad64cf3a76adca5429f6c4da64180b648d554055e10acb511",
+  "command": [
+    "./sitl/run.sh",
+    "--headless",
+    "--backend",
+    "gazebo",
+    "--model",
+    "iris"
+  ],
+  "pid_parameters_modified": false,
+  "success": true,
+  "events": [
+    {
+      "name": "ready",
+      "timestamp_us": 30960000.0
+    },
+    {
+      "name": "takeoff_command",
+      "timestamp_us": 30968000
+    },
+    {
+      "name": "reposition_command",
+      "timestamp_us": 40248000.0
+    },
+    {
+      "name": "handoff_ready",
+      "timestamp_us": 40608000.0
+    },
+    {
+      "name": "hover_start",
+      "timestamp_us": 48900000.0
+    },
+    {
+      "name": "hover_end",
+      "timestamp_us": 139628000.0
+    },
+    {
+      "name": "land_command",
+      "timestamp_us": 139628000.0
+    },
+    {
+      "name": "landed_disarmed",
+      "timestamp_us": 149600000.0
+    }
+  ],
+  "scenario_sha256": "4303c051844ce0222258ee1a357cd0701176a9d3d4caee1ebdfc8317afdd09e7",
+  "scenario_path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v06/sl_protocol01/execution.json",
+  "simulation_speed_requested": 1.0,
+  "explicit_environment": {
+    "PX4_SITL_WORLD": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world",
+    "GAZEBO_MASTER_URI": "http://127.0.0.1:11345"
+  },
+  "launcher_pid": 605584,
+  "launcher_returncode": 0,
+  "logs": [
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-28/06_54_05.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/series01/run02/06_54_05.ulg",
+      "sha256": "9886decb8f205d2a12bd5762bdeec0295a7de7272c71cd420a5c5fb0ef346bd9",
+      "bytes": 237097
+    },
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-28/06_54_06.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/series01/run02/06_54_06.ulg",
+      "sha256": "34b667d8cf80a6b4831f8c3bbd77ffa3b467b372d9e0e8f9c5062d03ce1561e4",
+      "bytes": 104027277
+    }
+  ],
+  "finished_utc": "2026-09-28T06:56:36Z"
+}
