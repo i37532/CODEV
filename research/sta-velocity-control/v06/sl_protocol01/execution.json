@@ -1,0 +1,15 @@
+{
+  "stage": "V06-SL-protocol01-compliant-contact",
+  "tasks": ["hover"],
+  "seeds": [25001,25002,25003],
+  "modes": [0,1],
+  "maximum_attempts": 6,
+  "new_run_root": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/series01",
+  "selection": "Original velocity PID vs qualified XYZ velocity ESTA; all rate PID. Same inherited E01 gains, original .6/.55 landing parameters, fixed yaw and 2.5m. No tuning.",
+  "task": "Each fresh process: warmup30s, takeoff, exact height handoff, hover observation90..92s including64s evaluation, AUTO_LAND and automatic disarm. PID then ESTA for each seed; at first mandatory failure stop the batch. No additional smoke/retry/replacement.",
+  "change": "Only derived Iris base collision kp2500,kd50,max_vel.2,max_contacts4; original mass,inertia,geometry,world,physics4ms,controllers and parameters unchanged. Original seeded IMU library replacement retained. Contact variant is not calibrated hardware and is distinct from old rigid-contact results.",
+  "gates": "All V06 protocol02 timing/reset/reference/selection/full data/output/safety and per-axis additive performance gates retained. Additional complete landing health evidence: all3 IMUs no clipping, all6 EKFs no faults, selector no change, finite acceleration and regular evidence coverage. No suppression or historical reacceptance.",
+  "authority": "User explicitly added SITL soft-landing specialty and previously requested continuous V06 completion without repeated takeoff approvals. This freezes one finite qualification batch, not endless reruns.",
+  "seed_scope": "3 fresh IMU seeds, first5000 innovations paired; other sensors and host scheduling not independently randomized. Development qualification only.",
+  "next": "Six accepted and three passing pairs plus independent replay required. Then freeze a separate18-run V06 task batch with9 fresh seeds. Do not combine prior runs. No push, hardware, ISTA or V07."
+}
