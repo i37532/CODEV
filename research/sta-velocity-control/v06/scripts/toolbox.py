@@ -12,7 +12,7 @@ HERE=Path(__file__).resolve().parent
 REPO=HERE.parents[3]
 spec=importlib.util.spec_from_file_location('v06_local_io',REPO/'sim_scripts/_internal/toolbox.py')
 rate_io=importlib.util.module_from_spec(spec); spec.loader.exec_module(rate_io)
-sys.path.insert(0,str(HERE.parent/'protocol01'))
+sys.path.insert(0,str(HERE.parent/'protocol02'))
 from common import load_protocol, CONFIG, fingerprint
 STATE=Path('/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/manual')
 RATE=dict(MC_RTC_MODE=0,MC_STA_AXES=0,MC_RTC_DIV=1,MC_RATT_TEST=0,MC_STA_TKO_MGT=0)
