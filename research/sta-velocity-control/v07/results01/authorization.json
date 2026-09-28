@@ -1,0 +1,10 @@
+{
+  "approved": true,
+  "source_head": "c8319664a09bea74fec5d352f478bad4bcf6dc0a",
+  "stage": "V07-protocol01-xy-velocity-decimation",
+  "execution_sha256": "f011d5ae370db18997a5385d33ca830bb79a9d677c3df071abda6e3065ec0f9e",
+  "maximum_attempts": 18,
+  "basis": "V07 user standing authorization; no per-flight request; fixed eighteen-attempt budget",
+  "user_request": "V07 — 速度分频与耗时，依旧不用我授权。仅V07，冻结N1→2→4三门，每档PID/ESTA各3轮共18次，先提交再飞，前门失败不得降频。失败停止，不自动重试、补飞、扩预算或改阈值。",
+  "conditions": "Only after nonzero offline regression and clean committed build pass. Qualified Iris Gazebo SITL only, XY ESTA plus Z velocity PID, all rate PID. Preserve all failures and restore complete parameters. No hardware, ISTA, push or V08."
+}
