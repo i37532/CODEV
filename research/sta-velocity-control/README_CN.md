@@ -1,5 +1,11 @@
 # 速度环 STA 研究
 
+**最新：V06与SITL软着陆专项已完成开发验收。** [V06报告](reports/V06.md)：新合格接触条件下悬停、固定yaw8字、平滑转向8字共18/18轮、9/9配对及独立回放通过；196 C++/467 Python。ESTA三任务速度RMSE和请求TV均高于PID，不能称性能全面胜出。全部rate PID、默认PID保持，参数完整恢复；旧失败保留，不push、不自动V07/实机。
+
+[软着陆专项报告](reports/V06_SOFT_LANDING.md)：独立6轮/3对通过，只改 opt-in 派生模型接触，不改原控制律/模型默认或健康门槛。[打开Gazebo、切算法、任务及PlotJuggler指南](v06/scripts/README_CN.md)。protocol03本批18轮预算已耗尽，重复实验需另冻新清单，不覆盖旧结果。
+
+## 此前阶段（以下状态保留当时含义）
+
 **当前：E01-XYZ 三轴速度 ESTA 已完成开发验收。** [E01-XYZ报告](reports/E01_XYZ.md)：同一干净源码`045f642bf2`，新22001–22003，PID/XYZ ESTA各3轮，6/6轮与3/3配对及6轮独立回放通过；190 C++/424 Python。XYZ组合窗口X/Y误差降低约54.7%/43.7%，但Z误差约2.39倍、全窗请求TV约7.52/7.72/48.04倍PID，不称全面性能改善。位置P、姿态、全部rate PID保持；默认和实验后参数已恢复PID。[合格XYZ配置](e01_xyz/qualified_xyz.json)。当前路线V05→E01-XYZ→V06，本阶段停止，不push、不执行V06/实机。以下“当前/此前”等保留历史时点含义。
 
 **当前：V05 XY ESTA + Z PID 已完成开发验收。** [V05报告](reports/V05.md)：最终新21001–21003、6/6轮与3/3配对通过，174 C++/421 Python及6轮独立回放通过。X/Y受激励轴误差明显降低，但请求TV约为PID的7–8倍，非命令轴/yaw略有退化且在预设门槛内。保留首批1次工具接线失败；全部rate仍PID，默认PID，未push、不自动进入V06。[合格XY配置](v05/qualified_xy.json)、[冻结protocol02](v05/protocol02/execution.json)。

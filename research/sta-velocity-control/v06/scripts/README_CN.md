@@ -1,6 +1,6 @@
 # V06 速度研究脚本
 
-软着陆专项已独立通过：合格派生接触模型下PID/XYZ ESTA共6轮、3对起降通过，全部IMU无截幅、EKF无故障/切换。V06完整任务尚未验收：新protocol03固定同一合格模型，另做18轮；不拼接旧批数据。原protocol02第9轮真实IMU截幅/EKF切换失败仍保留，不能续跑旧批。详见 ../../reports/V06_SOFT_LANDING.md 和 ../../reports/V06.md。
+软着陆专项与V06完整任务均已通过：专项6轮/3对；独立protocol03三任务18轮/9对及完整回放通过，无IMU截幅或降落EKF切换，参数完整恢复。ESTA三任务平均速度误差和请求TV高于PID，不能称性能全面胜出。旧失败不改判、不拼接数据。详见 ../../reports/V06_SOFT_LANDING.md 和 ../../reports/V06.md。当前18轮预算已耗尽，fly默认仍可查看清单，但拒绝再次执行；新实验需另冻源码/新种子/有限预算。
 仅 Gazebo Classic Iris SITL。这里 ESTA 是 **XYZ速度环**，角速度仍是 PID；不是旧 sim_scripts 的角速度 ESTA。
 
 ## 打开 Gazebo，落地切换

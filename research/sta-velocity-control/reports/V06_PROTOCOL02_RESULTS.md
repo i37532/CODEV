@@ -1,0 +1,108 @@
+# V06 protocol01/02：历史结果（当时未验收，原失败保留）
+
+2026-09-28补充：用户授权的SITL软着陆专项已通过，见[V06-SL报告](V06_SOFT_LANDING.md)。独立弹性接触候选、最终6轮/3对及独立回放通过；原模型/生产控制/参数默认不改，历史失败不追认。接下来另冻新18轮V06，不能把专项或原8个接受轮次拼作本阶段完成。以下为此前protocol01/02的历史结果。
+日期：2026-09-28。状态：**needs_revision；已停止新飞行**。不是18轮通过，不准入V07。仅Gazebo Classic Iris SITL，无实机、ISTA、自动push。
+
+## 1. 已交付与范围
+- 独立 [start/switch/fly与中文说明](../v06/scripts/README_CN.md)。默认清单/预检，显式执行才启动；地面切换先核对本仓库实例、Iris、落地上锁及真实速度/角速度模式。手动会话与正式批次均完整备份、恢复EEPROM。
+- 本阶段明确比较原速度PID与合格**XYZ速度ESTA**；原位置P、姿态和全部rate PID保持。增益沿用E01：XY λ1/λ2/ν限幅/a限幅=1/.2/.4/.8；Z=2/1/4/6。HTE策略不变，默认固件PID。不是XY ESTA+Z PID，也不是角速度ESTA。
+- 新增默认关闭的SITL任务适配器 VelocityResearchTask，TEST5悬停/6固定yaw8字/7相同平移加平滑heading。在原位置P之前只修改每帧目标副本；缓存基础目标不变，速度/加速度FF各一次，原PID/ESTA律、dt、滤波、模型惯量、估计器和land detector均未修改。
+- Navigator→FlightTask为唯一基础目标源，宿主仅发起降/一次目标交接、GCS心跳和中立RC，不额外发Offboard目标。raw trajectory_setpoint是基础目标，实际移动目标看sta_velocity_ctrl_status.p_sp/v_ff/a_ff；最终v_sp含位置P反馈，因此不同算法不保证逐样本相同。
+
+## 2. 版本、协议和实际执行
+起点/分支：2b6cb940e7355197dc420328d6da44dda716cd56 / research/sta-velocity-control，开始时干净；递归33个子模块匹配，Gazebo子模块822050a7ab6fd87972e59f16312f451bce217a56。
+外部三文档快照在v06/plan01，历史计划/协议不覆盖；每次先提交协议、干净源码构建验证后飞行。
+
+| 批次 | 源码 | 计划/实际 | 接受/失败/取消 | 完整配对 |
+|---|---|---|---|---|
+| protocol01，23001–23009 | 4cb91c0d9372039f5c5ccd2a6ea8a7dd9cab2c95 | 18 / 2 | 1 / 1 / 16 | 0 |
+| protocol02，24001–24009 | 9b852c355dfc394c8f8bdcd61c038f9d7af265d4 | 18 / 9 | 8 / 1 / 9 | 4 |
+
+总计11次飞行尝试、9次接受、2次失败；两个协议不能合并成同一18轮组。protocol01失败留档提交718546936e2bf1fcae50083aa334ee2bbf682c5d。本结果提交SHA由提交后外部进度表记录，本文件不预填自身SHA。
+
+protocol02按任务门推进的实际完成：
+- hover：PID3/3、XYZ ESTA3/3，3对通过。
+- 固定yaw figure8：PID第1轮与ESTA第1轮接受、1对通过；第二轮PID在降落阶段失败，其余不执行。
+- heading：0轮，未执行。不能以已实现波形或C++测试替代飞行验证。
+
+每轮重启、预热约30s、起飞、显式约2.5m交接、90–92s观察、降落上锁；任务时钟先12ssettle，主指标64s且分前/后32s。8字为sin⁴平滑包络两圈，参考速度峰值0.138840m/s、水平偏移峰值0.421632m；heading在同轨迹加不超过30°的平滑航向变化，不宣称沿切线对齐。
+
+各批固定18次，9个新IMU种子，PID→ESTA成对；只保证IMU引擎及前5000行创新前缀配对，其他传感器/主机时序不是独立受控随机源。各任务n=3是开发回归，不是论文正式留出或显著性实验。
+
+## 3. 保留的门槛与运行条件
+沿用E01：倾角15°、全程高度[-.5,4]m、观察2.5±1m、水平偏移≤2m、水平速度≤1m/s、观察垂速≤.6m/s、起降≤3.5m/s、yaw跟踪误差≤20°。原公共降落配置MPC_LAND_SPEED=.6、MPC_Z_VEL_MAX_DN=.55。
+每轴完整64s及每32s窗口：ESTA速度RMSE≤1.25×配对PID+[.02,.02,.01]m/s；位置RMSE≤1.25×PID+.05m；yaw≤1.25×PID+.02rad；受约束比例≤5%、连续≤.5s。是预定开发界限，不是“每轴必须胜出”。
+
+实际启动均沿用 ./sitl/run.sh --headless --backend gazebo --model iris，world=sitl/worlds/empty_grey.world。仅派生Iris的IMU插件文件名用于确定性种子，原模型/惯量不改。
+Gazebo11.10.2/GCC11.4/CMake3.22.1/Ninja1.10.1/Python3.10.12；484个资产指纹、参数、模型/插件版本见protocol02/frozen.json及逐轮world/model/runtime记录。
+protocol02固件SHA-256：d5487bee9c63df8eea24e22ab85198cb2cb898ff910b17f96b3857759e5be54d。Iris不是CODEV DP1000，不构成实机验收。
+
+## 4. 两次失败及处理边界
+### 4.1 protocol01/run02：运行器比较错对象，已修复
+冻结的新实测yaw=1.563394784927rad，原hold目标=1.561700582504rad，差约0.09707°。原代码把“原目标是否漂移”错误地与“新航向指令”比较。protocol02仅将右操作数改成冻结的existing_target_yaw；新指令仍受原准入检查，0.001rad完整性阈值、reset/时钟/跳变/唯一编码与ACK规则全部保持。
+真实ULog复现、边界/NaN/伪造负例、逐文本一处操作数差异测试通过。旧失败不改判。详见 [首批失败报告](V06_PROTOCOL01_FAILURE.md)。
+
+### 4.2 protocol02/run09：真实接触冲击、IMU截幅与EKF切换，尚未修复
+这是PID轮，90.528s观察已完成，但没有完成landed_disarmed，不能接受。
+- 144272000us：sensor_accel实例1/2的Z样本达到−160.642883m/s²，三个IMU均出现Z clipping；vehicle_imu的截幅位=4，积分周期仍4000us。
+- 144380000us起：多个estimator_status出现131072（bit17，bad_acc_clipping），高频estimator_status_flags确认，不是缺样猜测。
+- 144384000us：主EKF0→2；144392000us：2→4。
+- ref_alt从488.473785400391变到488.404418945313m，差约−0.069366m，同时reset计数变化。因此CLI检查正确失败，不能作为打印舍入放行。
+- 主ULog指纹238c37c81c2c2a254142a6ecc63369fb5ce5755a87b32846b7f9110d2507a2e9，dropout=0、未发现文件损坏。完整可运行审计见v06/audit_landing.py与results02/landing_audit.json。
+
+旧IMU0转换链修复保留了超量程方向和clipping提示，但从未承诺重建超量程冲击或保证EKF永不切换；这次不能通过关掉clipping、禁止selector或忽略参考变化“修好”。
+也不能直接将降落速度写成.3：本版MPC_LAND_SPEED元数据下限.6、MPC_Z_VEL_MAX_DN下限.5；原落地检测还要求目标下降速度≥.9×MPC_LAND_SPEED。原5个LandingDescentContract用例已覆盖.6/.55合法与.7/.5不合法等情形。没有证据支持仅换种子、放宽门槛或越过参数范围。
+
+当前需要单独明确SITL软着陆/接触模型研究范围，先离线验证后另冻协议；这将改变已冻结起降条件，不能假称普通日志修正。尚未改估计器、全局land detector、模型或安全阈值，也未启动第三批。
+
+## 5. 当前可报告结果（仅protocol02接受样本）
+速度RMSE单位m/s，按真实sample时间加权，64秒窗口。失败轮即使任务窗口完整也不混入接受组。
+
+| 任务/算法 | n | X | Y | Z |
+|---|---:|---:|---:|---:|
+| hover PID | 3 | .009118 | .009178 | .002903 |
+| hover XYZ ESTA | 3 | .014490 | .017283 | .009783 |
+| figure8 PID | 1 | .011156 | .010431 | .002477 |
+| figure8 XYZ ESTA | 1 | .014415 | .016654 | .009817 |
+
+本批已接受样本中，ESTA的速度误差并未优于PID。悬停位置RMSE(m)分别PID[.029635,.030093,.054118]、ESTA[.028868,.027594,.053835]；位置略小不代表速度误差也小。
+64s加速度请求TV：hover PID[6.018,5.872,6.878]、ESTA[46.910,51.295,270.587]；归一化推力TV分别[.435,.424,.499]和[3.397,3.716,19.541]。如实披露ESTA输出变化负担明显更大；TV是请求序列变化量，不是电机能耗或全带宽抖振证明。
+figure8只有1对、heading未飞，不能完成三任务总体比较，不能推论所有任务/频率优劣。
+
+接受8轮实际速度更新频率99.9978–100.0000Hz，不是假定250Hz；消费状态/更新序列检查通过，local/attitude精确输出匹配覆盖均100%，最大匹配间隔12ms，主窗口受约束比例为0。正常XYZ只计算所选速度控制律；地面/ramp及一次交接样本仍为原速度PID，rate真实MODE0/AXES0/DIV1。退出任务的计划landing Gate2单独分类，不把所有原始fault字段说成0。
+
+## 6. 测试、命令、退出码和未执行项
+外部根：/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06。
+
+- verification_dev01：协议测试通过，landing入口因缺少历史scripts的PYTHONPATH退出1，未飞行；修复后dev02与committed01均196不同C++/432 Python通过。
+- protocol02 verification_dev03与verification_committed02：**196不同C++/437 Python实际通过**（437=386历史工具+29本地协议+22落地），SITL/Gazebo构建、484资产和EEPROM检查全部退出0。含5个新任务纯核测试、1个真实Run轨迹接线测试、原位置/速度/角速度/保护/lifecycle/reset/HTE回归；绝不以CTest零匹配计通过。
+- 开发中一个负例fixture共享timestamp数组、一个fixture属性run覆盖unittest方法曾失败，均在离线修正；不改变验收阈值。初次无frozen文件的fly预检也曾拒绝，已将dry-run置于资产读取之前。
+- 两个正式batch命令退出均1，分别在第2/9轮中止；没有自动补飞/恢复失败账本。
+- 独立replay02：接受8轮分析命令退出0且metrics逐项与原记录完全相同；失败第9轮退出1、保持失败；回放总校验退出0。非新增飞行。
+- audit_landing.py实际解析主ULog并检查bit17/primary/ref变化，退出0；不是新C++测试或物理接触因果证明。
+- 额外地面脚本冒烟：start.sh --execute实际启动本项目Gazebo/PX4；switch.sh esta、pid两次退出0并读回实际模式。vehicle_status显示armed_time=0/takeoff_time=0、arming_state=1；未解锁、新增飞行0。shutdown客户端因服务退出返回255，启动器实际退出0，所有仿真进程退出、完整EEPROM复原，不能把255隐瞒成客户端0。
+- 未执行：完整18轮、heading飞行、额外飞行调参、MATLAB、软着陆专项、V07、实机、push。
+
+复现离线命令：
+```bash
+cd /home/yr/Desktop/Codev-autopilot
+export PYTHONPATH="$PWD/.px4-python:/home/yr/Desktop/codev doc/experiments/M00-20260912/python${PYTHONPATH:+:$PYTHONPATH}"
+python3 research/sta-velocity-control/v06/protocol02/verify.py --output <新的外部验证目录>
+python3 research/sta-velocity-control/v06/replay_results.py --batch "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/series02" --output <新的外部回放目录>
+python3 research/sta-velocity-control/v06/audit_landing.py --run "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/series02/run09" --output <新的外部审计JSON>
+```
+完整历史verify还校验当时源码资产；在后续结果提交上新增文档/入口注释可能使旧快照校验拒绝，这不等于旧测试失败。正式再飞需要新协议/新源码/新种子/有限预算，失败的series02不允许续跑。
+
+实际批次命令为：
+```bash
+./research/sta-velocity-control/v06/scripts/fly.sh all --execute --source-head 9b852c355dfc394c8f8bdcd61c038f9d7af265d4 --authorization "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/authorization02.json"
+```
+此命令仅记录历史，不授权重复执行。
+
+## 7. 证据、恢复及审查
+v06/results01与results02保存原始结果、完整运行参数、模型/世界/授权信息、指标和原始指纹；大型ULog仍在外部。results02含455个原始文件的SHA-256、提交后测试清单、独立回放记录和降落审计。不删除失败或旧数据。
+两批及地面冒烟之后EEPROM均恢复到06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc，无残留PX4/Gazebo进程。
+
+代码审查范围：SITL-only目标适配、参数TEST枚举（默认0）、纯核/真实模块测试；v06独立运行器、显式任务日志检查、脚本与新版本快照；protocol02只修handoff比较对象，不修改历史脚本。结果提交仅审计/回放工具、证据和报告，不修改生产控制律/默认值。明确路径提交，不push。
+
+下一步：先解决共同起降/接触边界，再冻结新任务矩阵；已有脚本实现和部分飞行证据保留。**V06未通过，不能进入下一阶段，也不能靠继续抽种子把失败隐藏掉。**

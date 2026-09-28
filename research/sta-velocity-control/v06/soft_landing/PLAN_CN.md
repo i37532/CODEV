@@ -1,6 +1,6 @@
 # V06-SL：SITL 软着陆专项
 
-最新：A/B已通过，专项最终源码94da9279307147154c1bc89de161f3b46b1c6ac9；protocol02新26001–26003完成6/6、3/3配对及独立回放。196 C++/461 Python；旧protocol01一接受一失败保留。详见reports/V06_SOFT_LANDING.md及qualified_contact.json。C仍待另冻18轮；下文保留飞前计划时点。
+最新：A/B/C均已通过。专项最终源码94da9279307147154c1bc89de161f3b46b1c6ac9，独立6/6、3/3配对及回放通过（196 C++/461 Python）。C在64cd58b6c8fe112ffb2086b7ddff483489acd624完成新27001–27009三任务18/18、9/9配对及独立回放（196 C++/467 Python）。各批独立、旧失败保留，不push/V07。详见reports/V06_SOFT_LANDING.md与reports/V06.md。下文保留飞前计划时点。
 
 日期：2026-09-28。起点：research/sta-velocity-control / 9178972fd6f6e0cda87b24ed34374c71f8a7190b。
 用户已明确加入本专项；沿用“不用我授权，跑完为止”的阶段内持续授权。当前为离线开发，尚未验收。
