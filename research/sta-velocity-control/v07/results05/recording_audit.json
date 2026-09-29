@@ -1,0 +1,140 @@
+{
+  "complete": false,
+  "new_flights": 0,
+  "runs": [
+    {
+      "run": "run01",
+      "accepted": true,
+      "job": {
+        "id": "run01",
+        "task": "figure8",
+        "gate": "n1",
+        "divisor": 1,
+        "seed": 33001,
+        "mode": 0,
+        "axes": 0,
+        "parameters": {
+          "MPC_VC_L1_X": 1.0,
+          "MPC_VC_L2_X": 0.2,
+          "MPC_VC_NU_X": 0.4,
+          "MPC_VC_A_X": 0.8,
+          "MPC_VC_L1_Y": 1.0,
+          "MPC_VC_L2_Y": 0.2,
+          "MPC_VC_NU_Y": 0.4,
+          "MPC_VC_A_Y": 0.8,
+          "MPC_VC_L1_Z": 0.0,
+          "MPC_VC_L2_Z": 0.0,
+          "MPC_VC_NU_Z": 0.0,
+          "MPC_VC_A_Z": 0.0,
+          "MPC_VC_MODE": 0,
+          "MPC_VC_AXES": 0,
+          "MPC_VC_DIV": 1,
+          "MPC_VCT_TEST": 6
+        }
+      },
+      "file": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LIVEPOLL/series05/run01/log001.ulg",
+      "sha256": "c61bc1fbc9d6565bcd3f748ac076ed28b34bc4c9fd5e68ad4172cc7636d285b3",
+      "bytes": 109648564,
+      "position_evidence": {
+        "source_topic": "vehicle_local_position_log",
+        "control_topic_unchanged": true,
+        "queue_length": 32,
+        "records": 15179,
+        "sequence_first": 83,
+        "sequence_last": 15261,
+        "sequence_gaps": 0,
+        "raw_overlap_records": 15179,
+        "raw_missing_records": 0,
+        "consumed_records": 15179,
+        "publication_end_us": 153396000,
+        "no_interpolation": true,
+        "no_deduplication": true,
+        "raw_records_preserved": true
+      },
+      "logger_start_argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/bin/px4-logger",
+        "start",
+        "-b",
+        "256",
+        "-r",
+        "1000",
+        "-f"
+      ],
+      "session_path": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/sess006/log001.ulg",
+      "startup_and_session_logs_preserved": true,
+      "pending_poll": {
+        "polls": 19,
+        "extra_polls": 0,
+        "pending_events": 0,
+        "max_poll_index": 1,
+        "max_poll_seconds": 0.45084208401385695,
+        "maximum_resolution_to_record_s": 0,
+        "note": "Original validator enforces both500ms deadlines; host_end includes subsequent record preparation and is not its exact internal check instant."
+      },
+      "raw_missing_timestamps": [],
+      "raw_missing_consumed": [],
+      "registered_topic_counts": [
+        256
+      ],
+      "active_topic_ids": 154,
+      "maximum_message_id": 168,
+      "logger_aggregate_message_gaps_max": 78831,
+      "note": "Aggregate gaps include unrelated unqueued topics; mandatory position/diagnostic sequence and health coverage checked separately.",
+      "file_unchanged": true
+    },
+    {
+      "run": "run02",
+      "accepted": false,
+      "job": {
+        "id": "run02",
+        "task": "figure8",
+        "gate": "n1",
+        "divisor": 1,
+        "seed": 33001,
+        "mode": 1,
+        "axes": 3,
+        "parameters": {
+          "MPC_VC_L1_X": 1.0,
+          "MPC_VC_L2_X": 0.2,
+          "MPC_VC_NU_X": 0.4,
+          "MPC_VC_A_X": 0.8,
+          "MPC_VC_L1_Y": 1.0,
+          "MPC_VC_L2_Y": 0.2,
+          "MPC_VC_NU_Y": 0.4,
+          "MPC_VC_A_Y": 0.8,
+          "MPC_VC_L1_Z": 0.0,
+          "MPC_VC_L2_Z": 0.0,
+          "MPC_VC_NU_Z": 0.0,
+          "MPC_VC_A_Z": 0.0,
+          "MPC_VC_MODE": 1,
+          "MPC_VC_AXES": 3,
+          "MPC_VC_DIV": 1,
+          "MPC_VCT_TEST": 6
+        }
+      },
+      "file": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LIVEPOLL/series05/run02/log001.ulg",
+      "sha256": "4f489f4c957d1cee95501f6e8bdd1c94898c93e8251a19f4e76075deae279dfb",
+      "error": "RuntimeError('Live ULog transport stale/future')",
+      "dropouts": [
+        {
+          "duration": 0,
+          "timestamp": 36204000
+        },
+        {
+          "duration": 912,
+          "timestamp": 36204000
+        }
+      ],
+      "file_corruption": false,
+      "raw_missing_timestamps": [],
+      "raw_missing_consumed": [],
+      "position_evidence": {
+        "records": 0
+      },
+      "note": "Failed run: do not apply successful-run completeness assertions or regrade."
+    }
+  ],
+  "raw_missing_total": 0,
+  "raw_missing_consumed_total": 0,
+  "queued_records_total": 15179
+}
