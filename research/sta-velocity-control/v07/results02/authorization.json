@@ -1,0 +1,10 @@
+{
+  "approved": true,
+  "source_head": "9f10dd0cca69c8c3da11fdafd1a966138cb5f307",
+  "stage": "V07-protocol02-imu-clock-xy-velocity-decimation",
+  "execution_sha256": "5629e9e0d187be21ec48dffc6703e0c2d344ec56be1211a11b52a8b5cd026687",
+  "maximum_attempts": 18,
+  "basis": "V07 remediation standing authorization 2026-09-29; audited IMU clock policy; new eighteen-attempt budget",
+  "user_request": "先离线审计 IMU 日志的发布时间与采样时间规则，然后继续完成实验，一直到通过为止，除非是因为系统原因",
+  "constraints": "Only V07 Iris SITL; new batch first failure stops; no automatic replacements or relaxed thresholds, upstream changes, push, hardware or V08. Historical results preserved."
+}
