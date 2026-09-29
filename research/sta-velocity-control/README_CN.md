@@ -1,5 +1,7 @@
 # 速度环 STA 研究
 
+**最新：V07速度分频与耗时已通过开发验收。** [最终报告](reports/V07.md)：第七批18/18轮、9/9配对及独立回放通过，231 C++/503 Python。实际100/50/25Hz；原速度PID对XY ESTA+Z PID，rate全部PID。日志记录链修复完成，前六批失败保留。ESTA的XY误差/TV仍高于PID，不称性能优胜或板级CPU收益。参数已恢复、默认PID，未push，不自动V08/ISTA/实机。[结果与指纹](v07/RESULTS_CN.md)。以下“最新/当前”等保留历史时点。
+
 **最新：V06与SITL软着陆专项已完成开发验收。** [V06报告](reports/V06.md)：新合格接触条件下悬停、固定yaw8字、平滑转向8字共18/18轮、9/9配对及独立回放通过；196 C++/467 Python。ESTA三任务速度RMSE和请求TV均高于PID，不能称性能全面胜出。全部rate PID、默认PID保持，参数完整恢复；旧失败保留，不push、不自动V07/实机。
 
 [软着陆专项报告](reports/V06_SOFT_LANDING.md)：独立6轮/3对通过，只改 opt-in 派生模型接触，不改原控制律/模型默认或健康门槛。[打开Gazebo、切算法、任务及PlotJuggler指南](v06/scripts/README_CN.md)。protocol03本批18轮预算已耗尽，重复实验需另冻新清单，不覆盖旧结果。
