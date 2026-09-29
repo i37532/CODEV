@@ -202,6 +202,9 @@ void LoggedTopics::add_high_rate_topics()
 	// Velocity baseline: request full publication rate without changing control
 	// timing. Actual topic coverage must still be measured from each ULog.
 	add_topic("vehicle_local_position");
+#if defined(CONFIG_ARCH_BOARD_PX4_SITL)
+	add_topic("vehicle_local_position_log"); // Independent queued evidence, not control input.
+#endif
 	add_topic("vehicle_local_position_setpoint");
 	add_topic("trajectory_setpoint");
 	// V04 explicit height command: retain command acknowledgement and navigator evidence.

@@ -1,0 +1,39 @@
+{
+  "stage": "V07-protocol03-queued-position-log-xy-velocity-decimation",
+  "divisors": [
+    1,
+    2,
+    4
+  ],
+  "modes": [
+    0,
+    1
+  ],
+  "seeds": [
+    31001,
+    31002,
+    31003,
+    31004,
+    31005,
+    31006,
+    31007,
+    31008,
+    31009
+  ],
+  "maximum_attempts": 18,
+  "new_run_root": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGCHAIN/series03",
+  "scope": "Original velocity PID versus qualified XY ESTA + Z velocity PID; original position P, attitude and all rate PID. Default DIV1/PID unchanged. DIV>1 rejects Z/XYZ ESTA; no new Z authority inferred from V06.",
+  "task": "Identical low-amplitude fixed-yaw figure8 TEST6 at all divisors, using unchanged V06 task adapter. Restart/warmup30s/takeoff and audited 2.5m handoff/90..92s observation/land/disarm with qualified compliant Iris contact.12s settle then64s two32s loops. Navigator/FlightTask sole target source. No Gazebo truth control or additional publishers.",
+  "gates": "N1 six flights before N2; N2 six before N4. Each three new paired IMU seeds, PID then ESTA. Any mandatory flight/log/pair failure stops entire batch. No retry, replacement, added tuning or budget expansion.",
+  "parameters": "V05 qualified XY gains1/.2/.4/.8 on both axes, Z gains0 unused; Z velocity PID/HTE unchanged. MC_RTC_MODE0 MC_STA_AXES0 MC_RTC_DIV1 MC_RATT_TEST0 MC_STA_TKO_MGT0; same sensor/filter and .6/.55 landing parameters.Only MPC_VC_DIV changes between gates; original project Gazebo launcher.",
+  "time": "Actual local_position sample timestamps; raw callbacks2..40ms, accumulated updateh2..N*40ms with every raw callback checked. No h clamp. N1 legacy publication-time clamped PID dt preserved. N2/4 only correction/integral/nu cadence, pre-FF correction cached; positionP/currentFF/mapping/limits/HTE/lifecycle/safety eachcallback. Cache invalidation retains elapsed h unless control leaves/reenters.",
+  "constraints": "Observed NED acceleration mapping residual direction OR per interval, not mixer bits. PID conservatively freezes affected interval integral; STA freezes outward state increments. New current limits always apply. No proof of actual physical acceleration or unseen feedback completeness.",
+  "safety": "Inherited V06 numeric gates unchanged: tilt15deg, whole height[-.5,4]m, observation2.5+/-1m, horizontal displacement2m/speed1m/s, observation Zspeed.6/whole3.5m/s, yawerror20deg. Constraints fraction<=.05 and contiguous<=.5s. No failed first call/retry/fault/fallback, inner actualPID required. Preserve timestamps/reset/attitude whitelist/log completeness and partial downstream coverage semantics.",
+  "pairs": "Every64s and each32s velocity axis ESTA RMSE<=1.25pairedPID+[.02,.02,.01]m/s; position axisRMSE<=1.25PID+.05m; yawRMSE<=1.25PID+.02rad. Development thresholds, not superiority. No a posteriori N2/N4 thresholds based on ESTA.",
+  "metrics": "Actual update count/frequency/h/hold state and exactly paired diagnostic/selection publish_seq. Velocity/position error at callbacks. Correction/acceleration/thrust TV using true update sequence, held-output TV separately if reported. Native spectra on actual update grid after time-grid evidence; common comparison uses100Hz callback ZOH,513tap Blackman FIR8Hz cutoff then4x decimation,0..7Hz band,trim2.56s eachside. Timing path/module hostCLOCK_MONOTONIC median/p95/p99/max and sum per simulator second; update vs hold separated; not boardCPU or WCET.",
+  "randomness": "Nine fresh IMU seeds only, other sensors and host scheduler not independently seeded. Pair first5000 innovations identical, other seed prefixes distinct. n3/divisor developmental, not significance or formal power claim.",
+  "contact": "Reuse qualified opt-in Iris base collision kp2500,kd50,max_vel.2,max_contacts4 with original mass/inertia/geometry/friction/world and unchanged seeded IMU library. Require V06 contact qualification and raw fingerprints before flight, health tail after disarm.",
+  "authority": "User 2026-09-29 explicitly authorizes logging-chain repair and continued V07 completion without per-flight requests. Includes independent SITL queued publication copy and logger transport capacity/ID changes; does not include estimator/control mathematics. First failure stops each batch; diagnose and version a justified correction before a new batch. No blind retries, relaxed thresholds, push, hardware or V08.",
+  "imu_clock": "vehicle_imu0/1/2 only: nondecreasing publication, strictly increasing sample; retain complete same-publication boundary groups, actual successor closure, dual-clock boundaries/gaps,12ms age bound. No dedup/reordering/interpolation. Other topic policies and clipping/EKF/reset checks unchanged. Historical rejection retained.",
+  "log_chain_policy": "Dedicated queued raw publisher snapshot; original control topic/consumption unchanged; sequence gaps and consumed missing samples reject."
+}

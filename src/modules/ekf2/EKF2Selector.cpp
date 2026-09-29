@@ -509,6 +509,9 @@ void EKF2Selector::PublishVehicleLocalPosition()
 
 		local_position.timestamp = hrt_absolute_time();
 		_vehicle_local_position_pub.publish(local_position);
+#if defined(CONFIG_ARCH_BOARD_PX4_SITL)
+		_local_position_log.publish(local_position);
+#endif
 	}
 }
 

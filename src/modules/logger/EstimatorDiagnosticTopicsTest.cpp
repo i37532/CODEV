@@ -1,7 +1,31 @@
 // SPDX-License-Identifier: BSD-3-Clause
+#define MODULE_NAME "logger_functional_test"
 #include <gtest/gtest.h>
 #include "logged_topics.h"
+#ifndef PX4_BOARD_NAME
+#define PX4_BOARD_NAME "logger_functional_test"
+#endif
+#include "logger.h"
 using namespace px4::logger;
+
+TEST(EstimatorDiagnosticTopics, PositionEvidenceHasIndependentSlotAndWideMessageId)
+{
+	static_assert(sizeof(LoggerSubscription{}.msg_id)==2,"ULog IDs must represent 255 distinctly from invalid");
+	static_assert(sizeof(logger_status_s{}.num_messages)==2,"Status must represent all 256 subscriptions");
+	EXPECT_EQ(MSG_ID_INVALID,UINT16_MAX);
+	LoggerSubscription sub; sub.msg_id=255; EXPECT_NE(sub.msg_id,MSG_ID_INVALID);
+	LoggedTopics topics;
+	ASSERT_TRUE(topics.initialize_logged_topics(static_cast<SDLogProfileMask>(1171)));
+	const auto &all=topics.subscriptions();
+	EXPECT_EQ(all.count,256);
+	for(ORB_ID id : {ORB_ID::vehicle_local_position,ORB_ID::vehicle_local_position_log}) {
+		int found=0;
+		for(int i=0;i<all.count;++i) if(all.sub[i].id==id && all.sub[i].instance==0) {
+			++found; EXPECT_EQ(all.sub[i].interval_ms,0);
+		}
+		EXPECT_EQ(found,1);
+	}
+}
 
 TEST(EstimatorDiagnosticTopics, OptInRetainsAllBaselineTopicsWithinCapacity)
 {

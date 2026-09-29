@@ -50,6 +50,9 @@
 #include <uORB/topics/sensors_status_imu.h>
 #include <uORB/topics/vehicle_attitude.h>
 #include <uORB/topics/vehicle_local_position.h>
+#if defined(CONFIG_ARCH_BOARD_PX4_SITL)
+#include "LocalPositionLog.hpp"
+#endif
 #include <uORB/topics/vehicle_global_position.h>
 #include <uORB/topics/vehicle_odometry.h>
 #include <uORB/topics/wind.h>
@@ -230,6 +233,9 @@ private:
 	uORB::Publication<vehicle_attitude_s>          _vehicle_attitude_pub{ORB_ID(vehicle_attitude)};
 	uORB::Publication<vehicle_global_position_s>   _vehicle_global_position_pub{ORB_ID(vehicle_global_position)};
 	uORB::Publication<vehicle_local_position_s>    _vehicle_local_position_pub{ORB_ID(vehicle_local_position)};
+#if defined(CONFIG_ARCH_BOARD_PX4_SITL)
+	LocalPositionLog _local_position_log;
+#endif
 	uORB::Publication<vehicle_odometry_s>          _vehicle_odometry_pub{ORB_ID(vehicle_odometry)};
 	uORB::Publication<wind_s>             _wind_pub{ORB_ID(wind)};
 

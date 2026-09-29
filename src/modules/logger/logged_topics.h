@@ -75,7 +75,11 @@ inline bool operator&(SDLogProfileMask a, SDLogProfileMask b)
 class LoggedTopics
 {
 public:
-	static constexpr int MAX_TOPICS_NUM = 255; /**< Maximum number of logged topics */
+#if defined(CONFIG_ARCH_BOARD_PX4_SITL)
+	static constexpr int MAX_TOPICS_NUM = 256; /**< Retain 255 old slots plus queued position evidence. */
+#else
+	static constexpr int MAX_TOPICS_NUM = 255;
+#endif
 
 	struct RequestedSubscription {
 		uint16_t interval_ms;

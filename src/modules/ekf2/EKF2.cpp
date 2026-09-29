@@ -860,6 +860,10 @@ void EKF2::PublishLocalPosition(const hrt_abstime &timestamp)
 	// publish vehicle local position data
 	lpos.timestamp = _replay_mode ? timestamp : hrt_absolute_time();
 	_local_position_pub.publish(lpos);
+#if defined(CONFIG_ARCH_BOARD_PX4_SITL)
+	// Multi-EKF has one authoritative copy at the selector publication edge.
+	if (!_multi_mode) { _local_position_log.publish(lpos); }
+#endif
 }
 
 void EKF2::PublishOdometry(const hrt_abstime &timestamp, const imuSample &imu)

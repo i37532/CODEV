@@ -31,6 +31,7 @@ private:
 };
 SelectorQueueAnchor *EKF2SelectorPublication::_anchor = nullptr;
 
+
 // Invoke the real production publication functions synchronously. No filter,
 // simulator, armed vehicle or ScheduledWorkItem::Run() is started by this test.
 class EKF2SelectorTestAccess
@@ -195,3 +196,181 @@ TEST_F(EKF2SelectorPublication, NominalSamplesAndCounterWrapPreservePayload)
 		EXPECT_FLOAT_EQ(got.delta_xy[0], m.delta_xy[0]);
 	}
 }
+
+#if defined(CONFIG_ARCH_BOARD_PX4_SITL)
+#include <cstring>
+namespace {
+void logEqual(const vehicle_local_position_s &a, const vehicle_local_position_log_s &b)
+{
+	EXPECT_EQ(std::memcmp(&a.timestamp, &b.timestamp, sizeof(a.timestamp)), 0) << "timestamp";
+	EXPECT_EQ(std::memcmp(&a.timestamp_sample, &b.timestamp_sample, sizeof(a.timestamp_sample)), 0) << "timestamp_sample";
+	EXPECT_EQ(std::memcmp(&a.xy_valid, &b.xy_valid, sizeof(a.xy_valid)), 0) << "xy_valid";
+	EXPECT_EQ(std::memcmp(&a.z_valid, &b.z_valid, sizeof(a.z_valid)), 0) << "z_valid";
+	EXPECT_EQ(std::memcmp(&a.v_xy_valid, &b.v_xy_valid, sizeof(a.v_xy_valid)), 0) << "v_xy_valid";
+	EXPECT_EQ(std::memcmp(&a.v_z_valid, &b.v_z_valid, sizeof(a.v_z_valid)), 0) << "v_z_valid";
+	EXPECT_EQ(std::memcmp(&a.x, &b.x, sizeof(a.x)), 0) << "x";
+	EXPECT_EQ(std::memcmp(&a.y, &b.y, sizeof(a.y)), 0) << "y";
+	EXPECT_EQ(std::memcmp(&a.z, &b.z, sizeof(a.z)), 0) << "z";
+	EXPECT_EQ(std::memcmp(&a.delta_xy, &b.delta_xy, sizeof(a.delta_xy)), 0) << "delta_xy";
+	EXPECT_EQ(std::memcmp(&a.xy_reset_counter, &b.xy_reset_counter, sizeof(a.xy_reset_counter)), 0) << "xy_reset_counter";
+	EXPECT_EQ(std::memcmp(&a.delta_z, &b.delta_z, sizeof(a.delta_z)), 0) << "delta_z";
+	EXPECT_EQ(std::memcmp(&a.z_reset_counter, &b.z_reset_counter, sizeof(a.z_reset_counter)), 0) << "z_reset_counter";
+	EXPECT_EQ(std::memcmp(&a.vx, &b.vx, sizeof(a.vx)), 0) << "vx";
+	EXPECT_EQ(std::memcmp(&a.vy, &b.vy, sizeof(a.vy)), 0) << "vy";
+	EXPECT_EQ(std::memcmp(&a.vz, &b.vz, sizeof(a.vz)), 0) << "vz";
+	EXPECT_EQ(std::memcmp(&a.z_deriv, &b.z_deriv, sizeof(a.z_deriv)), 0) << "z_deriv";
+	EXPECT_EQ(std::memcmp(&a.delta_vxy, &b.delta_vxy, sizeof(a.delta_vxy)), 0) << "delta_vxy";
+	EXPECT_EQ(std::memcmp(&a.vxy_reset_counter, &b.vxy_reset_counter, sizeof(a.vxy_reset_counter)), 0) << "vxy_reset_counter";
+	EXPECT_EQ(std::memcmp(&a.delta_vz, &b.delta_vz, sizeof(a.delta_vz)), 0) << "delta_vz";
+	EXPECT_EQ(std::memcmp(&a.vz_reset_counter, &b.vz_reset_counter, sizeof(a.vz_reset_counter)), 0) << "vz_reset_counter";
+	EXPECT_EQ(std::memcmp(&a.ax, &b.ax, sizeof(a.ax)), 0) << "ax";
+	EXPECT_EQ(std::memcmp(&a.ay, &b.ay, sizeof(a.ay)), 0) << "ay";
+	EXPECT_EQ(std::memcmp(&a.az, &b.az, sizeof(a.az)), 0) << "az";
+	EXPECT_EQ(std::memcmp(&a.heading, &b.heading, sizeof(a.heading)), 0) << "heading";
+	EXPECT_EQ(std::memcmp(&a.delta_heading, &b.delta_heading, sizeof(a.delta_heading)), 0) << "delta_heading";
+	EXPECT_EQ(std::memcmp(&a.heading_reset_counter, &b.heading_reset_counter, sizeof(a.heading_reset_counter)), 0) << "heading_reset_counter";
+	EXPECT_EQ(std::memcmp(&a.xy_global, &b.xy_global, sizeof(a.xy_global)), 0) << "xy_global";
+	EXPECT_EQ(std::memcmp(&a.z_global, &b.z_global, sizeof(a.z_global)), 0) << "z_global";
+	EXPECT_EQ(std::memcmp(&a.ref_timestamp, &b.ref_timestamp, sizeof(a.ref_timestamp)), 0) << "ref_timestamp";
+	EXPECT_EQ(std::memcmp(&a.ref_lat, &b.ref_lat, sizeof(a.ref_lat)), 0) << "ref_lat";
+	EXPECT_EQ(std::memcmp(&a.ref_lon, &b.ref_lon, sizeof(a.ref_lon)), 0) << "ref_lon";
+	EXPECT_EQ(std::memcmp(&a.ref_alt, &b.ref_alt, sizeof(a.ref_alt)), 0) << "ref_alt";
+	EXPECT_EQ(std::memcmp(&a.dist_bottom, &b.dist_bottom, sizeof(a.dist_bottom)), 0) << "dist_bottom";
+	EXPECT_EQ(std::memcmp(&a.dist_bottom_valid, &b.dist_bottom_valid, sizeof(a.dist_bottom_valid)), 0) << "dist_bottom_valid";
+	EXPECT_EQ(std::memcmp(&a.dist_bottom_sensor_bitfield, &b.dist_bottom_sensor_bitfield, sizeof(a.dist_bottom_sensor_bitfield)), 0) << "dist_bottom_sensor_bitfield";
+	EXPECT_EQ(std::memcmp(&a.eph, &b.eph, sizeof(a.eph)), 0) << "eph";
+	EXPECT_EQ(std::memcmp(&a.epv, &b.epv, sizeof(a.epv)), 0) << "epv";
+	EXPECT_EQ(std::memcmp(&a.evh, &b.evh, sizeof(a.evh)), 0) << "evh";
+	EXPECT_EQ(std::memcmp(&a.evv, &b.evv, sizeof(a.evv)), 0) << "evv";
+	EXPECT_EQ(std::memcmp(&a.vxy_max, &b.vxy_max, sizeof(a.vxy_max)), 0) << "vxy_max";
+	EXPECT_EQ(std::memcmp(&a.vz_max, &b.vz_max, sizeof(a.vz_max)), 0) << "vz_max";
+	EXPECT_EQ(std::memcmp(&a.hagl_min, &b.hagl_min, sizeof(a.hagl_min)), 0) << "hagl_min";
+	EXPECT_EQ(std::memcmp(&a.hagl_max, &b.hagl_max, sizeof(a.hagl_max)), 0) << "hagl_max";
+}
+void drainLog(uORB::Subscription &sub)
+{
+	vehicle_local_position_log_s ignored{};
+	while (sub.update(&ignored)) {}
+}
+}
+
+TEST_F(EKF2SelectorPublication, QueuedPositionLogPreservesPayloadAndRejectedSampleSemantics)
+{
+	apps_map_type apps; init_app_map(apps);
+	EKF2Selector selector;
+	uORB::PublicationMulti<vehicle_local_position_s> input{ORB_ID(estimator_local_position)};
+	uORB::Subscription output{ORB_ID(vehicle_local_position)}, log{ORB_ID(vehicle_local_position_log)};
+	drainLog(log);
+	ASSERT_TRUE(input.advertise()); Access::select(selector,input.get_instance());
+	vehicle_local_position_s in{}, original{}; vehicle_local_position_log_s recorded{};
+	in.timestamp=1; in.timestamp_sample=10000; in.x=-0.f; in.y=2.5f; in.z=-2.5f;
+	in.vx=.2f; in.vz=-.3f; in.heading=.1f; in.ref_lat=47.3977508; in.ref_lon=8.5456073;
+	in.xy_reset_counter=255; in.delta_xy[0]=.125f; in.vxy_max=NAN; in.hagl_max=INFINITY;
+	ASSERT_TRUE(input.publish(in)); Access::local(selector);
+	ASSERT_TRUE(output.update(&original)); ASSERT_TRUE(log.update(&recorded));
+	logEqual(original,recorded); EXPECT_EQ(recorded.log_seq,1u);
+	in.timestamp_sample=8000; ASSERT_TRUE(input.publish(in)); Access::local(selector);
+	EXPECT_FALSE(log.update(&recorded)); EXPECT_FALSE(output.update(&original));
+	in.timestamp_sample=12000; in.xy_reset_counter=0; in.x=3.f;
+	ASSERT_TRUE(input.publish(in)); Access::local(selector);
+	ASSERT_TRUE(output.update(&original)); ASSERT_TRUE(log.update(&recorded));
+	logEqual(original,recorded); EXPECT_EQ(recorded.log_seq,2u); EXPECT_EQ(original.xy_reset_counter,0);
+}
+
+TEST_F(EKF2SelectorPublication, PositionLogBurstDoesNotChangeLatestValueControlQueue)
+{
+	static_assert(uORB::DefaultQueueSize<vehicle_local_position_s>::value==1,"Control queue must remain latest value");
+	static_assert(vehicle_local_position_log_s::ORB_QUEUE_LENGTH==32,"Bounded evidence queue");
+	LocalPositionLog recording;
+	uORB::Publication<vehicle_local_position_s> control_pub{ORB_ID(vehicle_local_position)};
+	uORB::Subscription control{ORB_ID(vehicle_local_position)}, log{ORB_ID(vehicle_local_position_log)};
+	drainLog(log); vehicle_local_position_s in{}, current{}; vehicle_local_position_log_s saved{};
+	for(unsigned i=1;i<=32;++i) {
+		in.timestamp=in.timestamp_sample=i*10000; in.x=float(i);
+		ASSERT_TRUE(control_pub.publish(in)); recording.publish(in);
+	}
+	ASSERT_TRUE(control.update(&current)); EXPECT_EQ(current.timestamp,320000u);
+	EXPECT_FALSE(control.update(&current));
+	for(unsigned i=1;i<=32;++i) {
+		ASSERT_TRUE(log.update(&saved)); EXPECT_EQ(saved.log_seq,i);
+		EXPECT_EQ(saved.timestamp,i*10000u); EXPECT_FLOAT_EQ(saved.x,float(i));
+	}
+	EXPECT_FALSE(log.update(&saved));
+}
+
+TEST_F(EKF2SelectorPublication, PositionLogOverflowRemainsDetectable)
+{
+	LocalPositionLog recording; uORB::Subscription log{ORB_ID(vehicle_local_position_log)};
+	drainLog(log); vehicle_local_position_s in{}; vehicle_local_position_log_s saved{};
+	in.timestamp=in.timestamp_sample=10000; recording.publish(in);
+	ASSERT_TRUE(log.update(&saved)); EXPECT_EQ(saved.log_seq,1u);
+	for(unsigned i=2;i<=34;++i) { in.timestamp=in.timestamp_sample=i*10000; recording.publish(in); }
+	ASSERT_TRUE(log.update(&saved)); EXPECT_EQ(saved.log_seq,3u); // Missing seq2 cannot be called lossless.
+	for(unsigned i=4;i<=34;++i) { ASSERT_TRUE(log.update(&saved)); EXPECT_EQ(saved.log_seq,i); }
+	EXPECT_FALSE(log.update(&saved));
+}
+
+TEST_F(EKF2SelectorPublication, PositionLogKeepsPublicationAndSampleClocksUnmodified)
+{
+	LocalPositionLog recording; uORB::Subscription log{ORB_ID(vehicle_local_position_log)};
+	drainLog(log); vehicle_local_position_s in{}; vehicle_local_position_log_s saved{};
+	in.timestamp=20000;
+	for(uint64_t t : {10000u, 12000u}) {
+		in.timestamp_sample=t; recording.publish(in);
+		ASSERT_TRUE(log.update(&saved)); EXPECT_EQ(saved.timestamp,20000u); EXPECT_EQ(saved.timestamp_sample,t);
+	}
+}
+
+TEST_F(EKF2SelectorPublication, PositionLogCopiesEveryFieldWithoutConversion)
+{
+	LocalPositionLog recording; uORB::Subscription log{ORB_ID(vehicle_local_position_log)};
+	drainLog(log); vehicle_local_position_s in{}; vehicle_local_position_log_s saved{};
+	in.timestamp = 1;
+	in.timestamp_sample = 2;
+	in.xy_valid = true;
+	in.z_valid = true;
+	in.v_xy_valid = true;
+	in.v_z_valid = true;
+	in.x = 7.25f;
+	in.y = 8.25f;
+	in.z = 9.25f;
+	in.delta_xy[0] = 10.25f;
+	in.delta_xy[1] = 11.25f;
+	in.xy_reset_counter = 11;
+	in.delta_z = 12.25f;
+	in.z_reset_counter = 13;
+	in.vx = 14.25f;
+	in.vy = 15.25f;
+	in.vz = 16.25f;
+	in.z_deriv = 17.25f;
+	in.delta_vxy[0] = 18.25f;
+	in.delta_vxy[1] = 19.25f;
+	in.vxy_reset_counter = 19;
+	in.delta_vz = 20.25f;
+	in.vz_reset_counter = 21;
+	in.ax = 22.25f;
+	in.ay = 23.25f;
+	in.az = 24.25f;
+	in.heading = 25.25f;
+	in.delta_heading = 26.25f;
+	in.heading_reset_counter = 27;
+	in.xy_global = true;
+	in.z_global = true;
+	in.ref_timestamp = 30;
+	in.ref_lat = 31.123456789;
+	in.ref_lon = 32.123456789;
+	in.ref_alt = 33.25f;
+	in.dist_bottom = 34.25f;
+	in.dist_bottom_valid = true;
+	in.dist_bottom_sensor_bitfield = 36;
+	in.eph = 37.25f;
+	in.epv = 38.25f;
+	in.evh = 39.25f;
+	in.evv = 40.25f;
+	in.vxy_max = 41.25f;
+	in.vz_max = 42.25f;
+	in.hagl_min = 43.25f;
+	in.hagl_max = 44.25f;
+	recording.publish(in); ASSERT_TRUE(log.update(&saved)); logEqual(in,saved);
+}
+#endif
