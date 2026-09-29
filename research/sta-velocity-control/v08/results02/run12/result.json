@@ -1,0 +1,79 @@
+{
+  "source_head": "0b575f0a6b258eb8e018b57326ca1af0f56d144c",
+  "branch": "research/sta-velocity-control",
+  "binary_sha256": "4287ea20cf90e4e70841b0551d26a44bb9621bcf2bbf26269ba2bdd8dde1064b",
+  "runner_sha256": "ed6901ce8203821943241bf4108f6b6a6d1768b80b2c6a4e65f687a6d1ed9cfb",
+  "command": [
+    "./sitl/run.sh",
+    "--headless",
+    "--backend",
+    "gazebo",
+    "--model",
+    "iris"
+  ],
+  "pid_parameters_modified": true,
+  "success": true,
+  "events": [
+    {
+      "name": "ready",
+      "timestamp_us": 30904000.0
+    },
+    {
+      "name": "takeoff_command",
+      "timestamp_us": 30924000
+    },
+    {
+      "name": "reposition_command",
+      "timestamp_us": 39616000.0
+    },
+    {
+      "name": "handoff_ready",
+      "timestamp_us": 40016000.0
+    },
+    {
+      "name": "hover_start",
+      "timestamp_us": 48476000.0
+    },
+    {
+      "name": "hover_end",
+      "timestamp_us": 139236000.0
+    },
+    {
+      "name": "land_command",
+      "timestamp_us": 139236000.0
+    },
+    {
+      "name": "landed_disarmed",
+      "timestamp_us": 148496000.0
+    }
+  ],
+  "scenario_sha256": "971da8bd482804f75bc05abb82c25d123f5819d970a7f8aae7826ec664f0f2c9",
+  "scenario_path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/protocol02/execution.json",
+  "simulation_speed_requested": 1.0,
+  "explicit_environment": {
+    "PX4_SITL_WORLD": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world",
+    "GAZEBO_MASTER_URI": "http://127.0.0.1:11345",
+    "PX4_SITL_LOG_DIR": "/dev/shm/px4-v07-of2xwq9z"
+  },
+  "launcher_pid": 1236476,
+  "launcher_returncode": 0,
+  "logs": [
+    {
+      "source": "/dev/shm/px4-v07-of2xwq9z/2026-09-29/08_14_14.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training02/run12/08_14_14.ulg",
+      "sha256": "471f41fc2dde5b832f5bbcd60dac162b9c320aa448c07c8c83161ee26cd921a0",
+      "bytes": 211186,
+      "durable_copy_verified": true,
+      "volatile_source_retained": true
+    },
+    {
+      "source": "/dev/shm/px4-v07-of2xwq9z/sess001/log001.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training02/run12/log001.ulg",
+      "sha256": "c713d11fc86e443be3ce5bb029190766b18d3c1ddd4f7d86da2fbb7d4ae42190",
+      "bytes": 109788259,
+      "durable_copy_verified": true,
+      "volatile_source_retained": true
+    }
+  ],
+  "finished_utc": "2026-09-29T08:16:48Z"
+}
