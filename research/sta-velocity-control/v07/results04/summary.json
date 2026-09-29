@@ -1,0 +1,1684 @@
+{
+  "success": false,
+  "source_head": "d37a4cb3ed4e8351acc0ab027dd4149dd1bc1eb2",
+  "firmware_sha256": "0e46f38f2e681b419544c6aa32955345fd0543d73fa4d8783e28817455d4b76e",
+  "attempts": 5,
+  "accepted": 4,
+  "pairs": [
+    {
+      "accepted": true,
+      "checks": {
+        "velocity_0": true,
+        "position_0": true,
+        "velocity_1": true,
+        "position_1": true,
+        "velocity_2": true,
+        "position_2": true,
+        "first_loop_velocity_0": true,
+        "first_loop_velocity_1": true,
+        "first_loop_velocity_2": true,
+        "second_loop_velocity_0": true,
+        "second_loop_velocity_1": true,
+        "second_loop_velocity_2": true,
+        "yaw": true
+      },
+      "seed": 32001,
+      "task": "figure8",
+      "divisor": 1,
+      "imu_prefix_max_difference": 0.0,
+      "paired_noise": true
+    },
+    {
+      "accepted": true,
+      "checks": {
+        "velocity_0": true,
+        "position_0": true,
+        "velocity_1": true,
+        "position_1": true,
+        "velocity_2": true,
+        "position_2": true,
+        "first_loop_velocity_0": true,
+        "first_loop_velocity_1": true,
+        "first_loop_velocity_2": true,
+        "second_loop_velocity_0": true,
+        "second_loop_velocity_1": true,
+        "second_loop_velocity_2": true,
+        "yaw": true
+      },
+      "seed": 32002,
+      "task": "figure8",
+      "divisor": 1,
+      "imu_prefix_max_difference": 0.0,
+      "paired_noise": true
+    }
+  ],
+  "replays": [
+    {
+      "run": "run01",
+      "command": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v07/protocol04/analyze.py",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/series04/run01",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/assessment04/replay/run01"
+      ],
+      "exit_code": 0,
+      "metrics_byte_identical": true
+    },
+    {
+      "run": "run02",
+      "command": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v07/protocol04/analyze.py",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/series04/run02",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/assessment04/replay/run02"
+      ],
+      "exit_code": 0,
+      "metrics_byte_identical": true
+    },
+    {
+      "run": "run03",
+      "command": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v07/protocol04/analyze.py",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/series04/run03",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/assessment04/replay/run03"
+      ],
+      "exit_code": 0,
+      "metrics_byte_identical": true
+    },
+    {
+      "run": "run04",
+      "command": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v07/protocol04/analyze.py",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/series04/run04",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/assessment04/replay/run04"
+      ],
+      "exit_code": 0,
+      "metrics_byte_identical": true
+    }
+  ],
+  "rows": [
+    {
+      "job": {
+        "id": "run01",
+        "task": "figure8",
+        "gate": "n1",
+        "divisor": 1,
+        "seed": 32001,
+        "mode": 0,
+        "axes": 0,
+        "parameters": {
+          "MPC_VC_L1_X": 1.0,
+          "MPC_VC_L2_X": 0.2,
+          "MPC_VC_NU_X": 0.4,
+          "MPC_VC_A_X": 0.8,
+          "MPC_VC_L1_Y": 1.0,
+          "MPC_VC_L2_Y": 0.2,
+          "MPC_VC_NU_Y": 0.4,
+          "MPC_VC_A_Y": 0.8,
+          "MPC_VC_L1_Z": 0.0,
+          "MPC_VC_L2_Z": 0.0,
+          "MPC_VC_NU_Z": 0.0,
+          "MPC_VC_A_Z": 0.0,
+          "MPC_VC_MODE": 0,
+          "MPC_VC_AXES": 0,
+          "MPC_VC_DIV": 1,
+          "MPC_VCT_TEST": 6
+        }
+      },
+      "accepted": true,
+      "rmse": [
+        0.010174069926485669,
+        0.011073340415235684,
+        0.0028419855023190167
+      ],
+      "windows": {
+        "first_loop": {
+          "error": {
+            "rmse": [
+              0.010390332696546512,
+              0.011063362972586472,
+              0.0027760218079703343
+            ],
+            "mean": [
+              0.002291462963323281,
+              0.004772137618201687,
+              -3.487860871245942e-06
+            ],
+            "std": [
+              0.010134505958981976,
+              0.009981217501694976,
+              0.0027760196168531343
+            ],
+            "max_abs": [
+              0.03355008736252785,
+              0.028058061376214027,
+              0.01152036339044571
+            ]
+          },
+          "iae_m": [
+            0.2687388987068547,
+            0.2899575825347566,
+            0.06845026983972635
+          ],
+          "acceleration_tv": [
+            2.8592886924743652,
+            2.9873030185699463,
+            3.4964780807495117
+          ],
+          "normalized_thrust_tv": [
+            0.20652543008327484,
+            0.21610645949840546,
+            0.254009485244751
+          ],
+          "samples": 3200,
+          "seconds": 32.0,
+          "constraint_fraction": 0.0,
+          "maximum_continuous_constraint_s": 0.0,
+          "nu_peak": null
+        },
+        "second_loop": {
+          "error": {
+            "rmse": [
+              0.009953109272640228,
+              0.01108330887597138,
+              0.002906452496163677
+            ],
+            "mean": [
+              0.003009306173451479,
+              0.00011748068619635867,
+              4.394760973809746e-05
+            ],
+            "std": [
+              0.009487278880034245,
+              0.011082686223500022,
+              0.002906120217756721
+            ],
+            "max_abs": [
+              0.025211043655872345,
+              0.02640761435031891,
+              0.009744912385940552
+            ]
+          },
+          "iae_m": [
+            0.2525011922670527,
+            0.2889256849740636,
+            0.06919325951719668
+          ],
+          "acceleration_tv": [
+            2.8820276260375977,
+            3.0060691833496094,
+            2.5116443634033203
+          ],
+          "normalized_thrust_tv": [
+            0.2078828513622284,
+            0.21667025983333588,
+            0.18252766132354736
+          ],
+          "samples": 3200,
+          "seconds": 32.0,
+          "constraint_fraction": 0.0,
+          "maximum_continuous_constraint_s": 0.0,
+          "nu_peak": null
+        }
+      },
+      "position_rmse": [
+        0.025346283131502025,
+        0.02900277145059423,
+        0.04261870985028346
+      ],
+      "yaw_rmse": 0.00016869265078915625,
+      "hz": 100.00000000000001,
+      "callback_hz": 99.99999999999999,
+      "cadence": {
+        "updates": 9063,
+        "holds": 0,
+        "update_hz": 100.00000000000001,
+        "h_min": 0.00800000037997961,
+        "h_max": 0.012000000104308128,
+        "host_cost": {
+          "path_ns": {
+            "update": {
+              "median": 0.973,
+              "p95": 2.225,
+              "p99": 3.9695599999999507,
+              "max": 21.048000000000002
+            }
+          },
+          "module_ns": {
+            "update": {
+              "median": 8.177,
+              "p95": 20.252899999999993,
+              "p99": 28.06031999999995,
+              "max": 159.292
+            }
+          }
+        },
+        "host_us_per_sim_second": {
+          "path_ns": 120.9904215404988,
+          "module_ns": 967.165096005297
+        }
+      },
+      "acceleration_tv": [
+        5.741888999938965,
+        5.995090484619141,
+        6.01039457321167
+      ],
+      "thrust_tv": [
+        0.41446131467819214,
+        0.43289342522621155,
+        0.4367009997367859
+      ],
+      "spectrum": {
+        "update_hz": 99.99687460932617,
+        "correction_tv": [
+          5.741369724273682,
+          5.981481075286865,
+          6.01039457321167
+        ],
+        "correction_tv_per_second": [
+          0.08970890194177628,
+          0.09346064180135727,
+          0.09391241520643234
+        ],
+        "common_0_7hz_rms": [
+          0.024380871661965106,
+          0.024601835840588154,
+          0.013904162466548242
+        ],
+        "notes": "Analysis-only ZOH at measured update Hz and100Hz callbacks; common513tap8Hz BlackmanFIR then25Hz,2.56s boundary crop. TV only actual updates; not physical motor energy. HTE-only cache shifts between updates are not extra algorithm updates."
+      },
+      "constraint_fraction": 0.0,
+      "landing_health": {
+        "accel": {
+          "0": {
+            "samples": 2414,
+            "peak_abs": [
+              0.5315127968788147,
+              3.88818359375,
+              53.2278938293457
+            ]
+          },
+          "1": {
+            "samples": 2414,
+            "peak_abs": [
+              1.1637840270996094,
+              6.6611857414245605,
+              61.610931396484375
+            ]
+          },
+          "2": {
+            "samples": 2414,
+            "peak_abs": [
+              1.1637840270996094,
+              6.6611857414245605,
+              61.610931396484375
+            ]
+          }
+        },
+        "imu": {
+          "0": {
+            "samples": 2170,
+            "clipping": 0,
+            "publication_ties": 0,
+            "max_publication_gap_us": 8000,
+            "max_sample_gap_us": 8000,
+            "max_age_us": 0,
+            "boundary_groups_complete": true,
+            "recorded_gap_not_equal_integration": 245,
+            "coverage": "bounded recorded evidence; not lossless IMU consumption proof"
+          },
+          "1": {
+            "samples": 2158,
+            "clipping": 0,
+            "publication_ties": 0,
+            "max_publication_gap_us": 8000,
+            "max_sample_gap_us": 8000,
+            "max_age_us": 0,
+            "boundary_groups_complete": true,
+            "recorded_gap_not_equal_integration": 257,
+            "coverage": "bounded recorded evidence; not lossless IMU consumption proof"
+          },
+          "2": {
+            "samples": 2138,
+            "clipping": 0,
+            "publication_ties": 0,
+            "max_publication_gap_us": 8000,
+            "max_sample_gap_us": 8000,
+            "max_age_us": 0,
+            "boundary_groups_complete": true,
+            "recorded_gap_not_equal_integration": 278,
+            "coverage": "bounded recorded evidence; not lossless IMU consumption proof"
+          }
+        },
+        "estimator": {
+          "0": {
+            "samples": 966,
+            "faults": 0
+          },
+          "1": {
+            "samples": 967,
+            "faults": 0
+          },
+          "2": {
+            "samples": 967,
+            "faults": 0
+          },
+          "3": {
+            "samples": 967,
+            "faults": 0
+          },
+          "4": {
+            "samples": 967,
+            "faults": 0
+          },
+          "5": {
+            "samples": 966,
+            "faults": 0
+          }
+        },
+        "selector": {
+          "samples": 12,
+          "primary": 0
+        }
+      },
+      "position_log": {
+        "source_topic": "vehicle_local_position_log",
+        "control_topic_unchanged": true,
+        "queue_length": 32,
+        "records": 15212,
+        "sequence_first": 88,
+        "sequence_last": 15299,
+        "sequence_gaps": 0,
+        "raw_overlap_records": 15212,
+        "raw_missing_records": 0,
+        "consumed_records": 15212,
+        "publication_end_us": 153776000,
+        "no_interpolation": true,
+        "no_deduplication": true,
+        "raw_records_preserved": true
+      },
+      "coverage": {
+        "local": {
+          "matched": 9063,
+          "denominator": 9063,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0
+        },
+        "attitude": {
+          "matched": 9063,
+          "denominator": 9063,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0
+        }
+      },
+      "pid_reconstruction": {
+        "samples": 9062,
+        "updates": 9062,
+        "axes": [
+          0,
+          1,
+          2
+        ],
+        "reference": "independent binary64, actual consumed error/derivative/HTE and interval constraints"
+      },
+      "metrics_sha256": "148695740475bc9e6a212ff2b911f02108e1a74b006f9a856b38340950a21ba2"
+    },
+    {
+      "job": {
+        "id": "run02",
+        "task": "figure8",
+        "gate": "n1",
+        "divisor": 1,
+        "seed": 32001,
+        "mode": 1,
+        "axes": 3,
+        "parameters": {
+          "MPC_VC_L1_X": 1.0,
+          "MPC_VC_L2_X": 0.2,
+          "MPC_VC_NU_X": 0.4,
+          "MPC_VC_A_X": 0.8,
+          "MPC_VC_L1_Y": 1.0,
+          "MPC_VC_L2_Y": 0.2,
+          "MPC_VC_NU_Y": 0.4,
+          "MPC_VC_A_Y": 0.8,
+          "MPC_VC_L1_Z": 0.0,
+          "MPC_VC_L2_Z": 0.0,
+          "MPC_VC_NU_Z": 0.0,
+          "MPC_VC_A_Z": 0.0,
+          "MPC_VC_MODE": 1,
+          "MPC_VC_AXES": 3,
+          "MPC_VC_DIV": 1,
+          "MPC_VCT_TEST": 6
+        }
+      },
+      "accepted": true,
+      "rmse": [
+        0.014455603533643776,
+        0.016788241643044505,
+        0.002604548999607616
+      ],
+      "windows": {
+        "first_loop": {
+          "error": {
+            "rmse": [
+              0.014326584881356862,
+              0.017125894470101207,
+              0.0026123400948372013
+            ],
+            "mean": [
+              0.00035728402304812355,
+              -0.00015436904426314847,
+              -1.5032079914817207e-05
+            ],
+            "std": [
+              0.01432212911859119,
+              0.017125198731670697,
+              0.0026122968452431832
+            ],
+            "max_abs": [
+              0.02666776068508625,
+              0.0327877439558506,
+              0.010537371039390564
+            ]
+          },
+          "iae_m": [
+            0.4062177719995383,
+            0.48534650326613277,
+            0.06563948272261766
+          ],
+          "acceleration_tv": [
+            23.49830436706543,
+            25.445409774780273,
+            3.471625328063965
+          ],
+          "normalized_thrust_tv": [
+            1.694252848625183,
+            1.834202527999878,
+            0.2521693706512451
+          ],
+          "samples": 3200,
+          "seconds": 32.0,
+          "constraint_fraction": 0.0,
+          "maximum_continuous_constraint_s": 0.0,
+          "nu_peak": [
+            0.12400000542402267,
+            0.13040004670619965
+          ]
+        },
+        "second_loop": {
+          "error": {
+            "rmse": [
+              0.014583480814986059,
+              0.01644365693905902,
+              0.002596734528522318
+            ],
+            "mean": [
+              0.0001361085778917183,
+              -7.515424490702483e-05,
+              7.385651840013462e-05
+            ],
+            "std": [
+              0.014582845646035288,
+              0.016443485195326974,
+              0.002595683999702173
+            ],
+            "max_abs": [
+              0.02698989026248455,
+              0.0310988649725914,
+              0.008304078131914139
+            ]
+          },
+          "iae_m": [
+            0.4150766933872363,
+            0.46726116009498975,
+            0.06443996899854387
+          ],
+          "acceleration_tv": [
+            23.67247772216797,
+            25.326128005981445,
+            2.543386936187744
+          ],
+          "normalized_thrust_tv": [
+            1.707014560699463,
+            1.8254226446151733,
+            0.18488216400146484
+          ],
+          "samples": 3200,
+          "seconds": 32.0,
+          "constraint_fraction": 0.0,
+          "maximum_continuous_constraint_s": 0.0,
+          "nu_peak": [
+            0.15439987182617188,
+            0.12400005012750626
+          ]
+        }
+      },
+      "position_rmse": [
+        0.023513487284804815,
+        0.02980418888513031,
+        0.04205498350729624
+      ],
+      "yaw_rmse": 0.0002505447110032994,
+      "hz": 100.00222054447751,
+      "callback_hz": 100.0022205444775,
+      "cadence": {
+        "updates": 9008,
+        "holds": 0,
+        "update_hz": 100.00222054447751,
+        "h_min": 0.00800000037997961,
+        "h_max": 0.012000000104308128,
+        "host_cost": {
+          "path_ns": {
+            "update": {
+              "median": 1.82,
+              "p95": 4.254949999999999,
+              "p99": 11.293230000000149,
+              "max": 27.452
+            }
+          },
+          "module_ns": {
+            "update": {
+              "median": 8.916500000000001,
+              "p95": 21.8516,
+              "p99": 30.446040000000007,
+              "max": 215.09
+            }
+          }
+        },
+        "host_us_per_sim_second": {
+          "path_ns": 227.6597459697118,
+          "module_ns": 1056.292145934183
+        }
+      },
+      "acceleration_tv": [
+        47.17448806762695,
+        50.77627182006836,
+        6.0161662101745605
+      ],
+      "thrust_tv": [
+        3.401535749435425,
+        3.659958839416504,
+        0.4371348023414612
+      ],
+      "spectrum": {
+        "update_hz": 100.00312558604739,
+        "correction_tv": [
+          47.173492431640625,
+          50.76864242553711,
+          6.0161662101745605
+        ],
+        "correction_tv_per_second": [
+          0.7370858192443848,
+          0.7932600378990173,
+          0.09400259703397751
+        ],
+        "common_0_7hz_rms": [
+          0.11476656260403889,
+          0.12312248142976533,
+          0.012520221727318174
+        ],
+        "notes": "Analysis-only ZOH at measured update Hz and100Hz callbacks; common513tap8Hz BlackmanFIR then25Hz,2.56s boundary crop. TV only actual updates; not physical motor energy. HTE-only cache shifts between updates are not extra algorithm updates."
+      },
+      "constraint_fraction": 0.0,
+      "landing_health": {
+        "accel": {
+          "0": {
+            "samples": 2321,
+            "peak_abs": [
+              9.009381294250488,
+              8.688557624816895,
+              45.0923957824707
+            ]
+          },
+          "1": {
+            "samples": 2321,
+            "peak_abs": [
+              11.743258476257324,
+              10.602167129516602,
+              51.491851806640625
+            ]
+          },
+          "2": {
+            "samples": 2321,
+            "peak_abs": [
+              11.743258476257324,
+              10.602167129516602,
+              51.491851806640625
+            ]
+          }
+        },
+        "imu": {
+          "0": {
+            "samples": 2065,
+            "clipping": 0,
+            "publication_ties": 0,
+            "max_publication_gap_us": 8000,
+            "max_sample_gap_us": 8000,
+            "max_age_us": 0,
+            "boundary_groups_complete": true,
+            "recorded_gap_not_equal_integration": 258,
+            "coverage": "bounded recorded evidence; not lossless IMU consumption proof"
+          },
+          "1": {
+            "samples": 2066,
+            "clipping": 0,
+            "publication_ties": 0,
+            "max_publication_gap_us": 8000,
+            "max_sample_gap_us": 8000,
+            "max_age_us": 0,
+            "boundary_groups_complete": true,
+            "recorded_gap_not_equal_integration": 257,
+            "coverage": "bounded recorded evidence; not lossless IMU consumption proof"
+          },
+          "2": {
+            "samples": 2060,
+            "clipping": 0,
+            "publication_ties": 0,
+            "max_publication_gap_us": 8000,
+            "max_sample_gap_us": 8000,
+            "max_age_us": 0,
+            "boundary_groups_complete": true,
+            "recorded_gap_not_equal_integration": 263,
+            "coverage": "bounded recorded evidence; not lossless IMU consumption proof"
+          }
+        },
+        "estimator": {
+          "0": {
+            "samples": 929,
+            "faults": 0
+          },
+          "1": {
+            "samples": 929,
+            "faults": 0
+          },
+          "2": {
+            "samples": 930,
+            "faults": 0
+          },
+          "3": {
+            "samples": 930,
+            "faults": 0
+          },
+          "4": {
+            "samples": 930,
+            "faults": 0
+          },
+          "5": {
+            "samples": 929,
+            "faults": 0
+          }
+        },
+        "selector": {
+          "samples": 11,
+          "primary": 0
+        }
+      },
+      "position_log": {
+        "source_topic": "vehicle_local_position_log",
+        "control_topic_unchanged": true,
+        "queue_length": 32,
+        "records": 15126,
+        "sequence_first": 88,
+        "sequence_last": 15213,
+        "sequence_gaps": 0,
+        "raw_overlap_records": 15126,
+        "raw_missing_records": 0,
+        "consumed_records": 15126,
+        "publication_end_us": 152916000,
+        "no_interpolation": true,
+        "no_deduplication": true,
+        "raw_records_preserved": true
+      },
+      "coverage": {
+        "local": {
+          "matched": 9008,
+          "denominator": 9008,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0
+        },
+        "attitude": {
+          "matched": 9008,
+          "denominator": 9008,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0
+        }
+      },
+      "pid_reconstruction": {
+        "samples": 9007,
+        "updates": 9007,
+        "axes": [
+          2
+        ],
+        "reference": "independent binary64, actual consumed error/derivative/HTE and interval constraints"
+      },
+      "metrics_sha256": "5814bdd716f1fe5c1b87a2049db46cb85012f38d24dd8fa79d2f0a815554bb25"
+    },
+    {
+      "job": {
+        "id": "run03",
+        "task": "figure8",
+        "gate": "n1",
+        "divisor": 1,
+        "seed": 32002,
+        "mode": 0,
+        "axes": 0,
+        "parameters": {
+          "MPC_VC_L1_X": 1.0,
+          "MPC_VC_L2_X": 0.2,
+          "MPC_VC_NU_X": 0.4,
+          "MPC_VC_A_X": 0.8,
+          "MPC_VC_L1_Y": 1.0,
+          "MPC_VC_L2_Y": 0.2,
+          "MPC_VC_NU_Y": 0.4,
+          "MPC_VC_A_Y": 0.8,
+          "MPC_VC_L1_Z": 0.0,
+          "MPC_VC_L2_Z": 0.0,
+          "MPC_VC_NU_Z": 0.0,
+          "MPC_VC_A_Z": 0.0,
+          "MPC_VC_MODE": 0,
+          "MPC_VC_AXES": 0,
+          "MPC_VC_DIV": 1,
+          "MPC_VCT_TEST": 6
+        }
+      },
+      "accepted": true,
+      "rmse": [
+        0.011340306122941561,
+        0.011097310350934197,
+        0.0027841139594358823
+      ],
+      "windows": {
+        "first_loop": {
+          "error": {
+            "rmse": [
+              0.010059207354019129,
+              0.011081609591031327,
+              0.0026552284306877887
+            ],
+            "mean": [
+              -0.0007963304937584352,
+              -0.005103719008693578,
+              -0.00018048595880100097
+            ],
+            "std": [
+              0.010027637325704535,
+              0.009836367388845187,
+              0.0026490871706700086
+            ],
+            "max_abs": [
+              0.02641485072672367,
+              0.030084572732448578,
+              0.007878139615058899
+            ]
+          },
+          "iae_m": [
+            0.2667771711479873,
+            0.2849484382630332,
+            0.06636381189012913
+          ],
+          "acceleration_tv": [
+            2.698417901992798,
+            2.8611016273498535,
+            2.925541639328003
+          ],
+          "normalized_thrust_tv": [
+            0.19470886886119843,
+            0.20790711045265198,
+            0.21260809898376465
+          ],
+          "samples": 3200,
+          "seconds": 32.0,
+          "constraint_fraction": 0.0,
+          "maximum_continuous_constraint_s": 0.0,
+          "nu_peak": null
+        },
+        "second_loop": {
+          "error": {
+            "rmse": [
+              0.012490693869153106,
+              0.011112988928360603,
+              0.0029072913612362256
+            ],
+            "mean": [
+              0.0016753823146718827,
+              -0.00016855184007726726,
+              0.0001283096552506329
+            ],
+            "std": [
+              0.01237782401848498,
+              0.011111710633339579,
+              0.0029044585883583
+            ],
+            "max_abs": [
+              0.03155539929866791,
+              0.03192221745848656,
+              0.010955828242003918
+            ]
+          },
+          "iae_m": [
+            0.32649104112805793,
+            0.2716312529980211,
+            0.0716369434124789
+          ],
+          "acceleration_tv": [
+            2.9410605430603027,
+            2.948640823364258,
+            3.0413715839385986
+          ],
+          "normalized_thrust_tv": [
+            0.21320997178554535,
+            0.21449708938598633,
+            0.22052299976348877
+          ],
+          "samples": 3200,
+          "seconds": 32.0,
+          "constraint_fraction": 0.0,
+          "maximum_continuous_constraint_s": 0.0,
+          "nu_peak": null
+        }
+      },
+      "position_rmse": [
+        0.02665060084418423,
+        0.023968402265562568,
+        0.04520695525939495
+      ],
+      "yaw_rmse": 0.00011977991715715924,
+      "hz": 100.00000000000001,
+      "callback_hz": 99.99999999999999,
+      "cadence": {
+        "updates": 9005,
+        "holds": 0,
+        "update_hz": 100.00000000000001,
+        "h_min": 0.00800000037997961,
+        "h_max": 0.012000000104308128,
+        "host_cost": {
+          "path_ns": {
+            "update": {
+              "median": 1.0050000000000001,
+              "p95": 2.364,
+              "p99": 4.426239999999984,
+              "max": 20.452
+            }
+          },
+          "module_ns": {
+            "update": {
+              "median": 8.575000000000001,
+              "p95": 20.48559999999999,
+              "p99": 29.647479999999966,
+              "max": 753.815
+            }
+          }
+        },
+        "host_us_per_sim_second": {
+          "path_ns": 125.01346068414038,
+          "module_ns": 1013.4845624167039
+        }
+      },
+      "acceleration_tv": [
+        5.640047550201416,
+        5.810795783996582,
+        5.966970920562744
+      ],
+      "thrust_tv": [
+        0.4079608619213104,
+        0.4224828779697418,
+        0.4331369996070862
+      ],
+      "spectrum": {
+        "update_hz": 99.99687460932616,
+        "correction_tv": [
+          5.632820129394531,
+          5.8035054206848145,
+          5.966970920562744
+        ],
+        "correction_tv_per_second": [
+          0.08801281452178955,
+          0.09067977219820023,
+          0.09323392063379288
+        ],
+        "common_0_7hz_rms": [
+          0.025257033316821186,
+          0.02718394853597773,
+          0.013804765983365242
+        ],
+        "notes": "Analysis-only ZOH at measured update Hz and100Hz callbacks; common513tap8Hz BlackmanFIR then25Hz,2.56s boundary crop. TV only actual updates; not physical motor energy. HTE-only cache shifts between updates are not extra algorithm updates."
+      },
+      "constraint_fraction": 0.0,
+      "landing_health": {
+        "accel": {
+          "0": {
+            "samples": 2391,
+            "peak_abs": [
+              2.2912509441375732,
+              3.751713991165161,
+              50.14655303955078
+            ]
+          },
+          "1": {
+            "samples": 2391,
+            "peak_abs": [
+              3.7547154426574707,
+              7.479182243347168,
+              50.72220993041992
+            ]
+          },
+          "2": {
+            "samples": 2391,
+            "peak_abs": [
+              3.7547154426574707,
+              7.479182243347168,
+              50.72220993041992
+            ]
+          }
+        },
+        "imu": {
+          "0": {
+            "samples": 2118,
+            "clipping": 0,
+            "publication_ties": 0,
+            "max_publication_gap_us": 8000,
+            "max_sample_gap_us": 8000,
+            "max_age_us": 0,
+            "boundary_groups_complete": true,
+            "recorded_gap_not_equal_integration": 275,
+            "coverage": "bounded recorded evidence; not lossless IMU consumption proof"
+          },
+          "1": {
+            "samples": 2120,
+            "clipping": 0,
+            "publication_ties": 0,
+            "max_publication_gap_us": 8000,
+            "max_sample_gap_us": 8000,
+            "max_age_us": 0,
+            "boundary_groups_complete": true,
+            "recorded_gap_not_equal_integration": 273,
+            "coverage": "bounded recorded evidence; not lossless IMU consumption proof"
+          },
+          "2": {
+            "samples": 2104,
+            "clipping": 0,
+            "publication_ties": 0,
+            "max_publication_gap_us": 8000,
+            "max_sample_gap_us": 8000,
+            "max_age_us": 0,
+            "boundary_groups_complete": true,
+            "recorded_gap_not_equal_integration": 288,
+            "coverage": "bounded recorded evidence; not lossless IMU consumption proof"
+          }
+        },
+        "estimator": {
+          "0": {
+            "samples": 957,
+            "faults": 0
+          },
+          "1": {
+            "samples": 957,
+            "faults": 0
+          },
+          "2": {
+            "samples": 958,
+            "faults": 0
+          },
+          "3": {
+            "samples": 958,
+            "faults": 0
+          },
+          "4": {
+            "samples": 958,
+            "faults": 0
+          },
+          "5": {
+            "samples": 957,
+            "faults": 0
+          }
+        },
+        "selector": {
+          "samples": 12,
+          "primary": 0
+        }
+      },
+      "position_log": {
+        "source_topic": "vehicle_local_position_log",
+        "control_topic_unchanged": true,
+        "queue_length": 32,
+        "records": 15093,
+        "sequence_first": 94,
+        "sequence_last": 15186,
+        "sequence_gaps": 0,
+        "raw_overlap_records": 15093,
+        "raw_missing_records": 0,
+        "consumed_records": 15093,
+        "publication_end_us": 152628000,
+        "no_interpolation": true,
+        "no_deduplication": true,
+        "raw_records_preserved": true
+      },
+      "coverage": {
+        "local": {
+          "matched": 9005,
+          "denominator": 9005,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0
+        },
+        "attitude": {
+          "matched": 9005,
+          "denominator": 9005,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0
+        }
+      },
+      "pid_reconstruction": {
+        "samples": 9004,
+        "updates": 9004,
+        "axes": [
+          0,
+          1,
+          2
+        ],
+        "reference": "independent binary64, actual consumed error/derivative/HTE and interval constraints"
+      },
+      "metrics_sha256": "30cc4100c2952fed2276bfa50e46539e3f10dbdf058bf2452e34d8f2eb4af2c5"
+    },
+    {
+      "job": {
+        "id": "run04",
+        "task": "figure8",
+        "gate": "n1",
+        "divisor": 1,
+        "seed": 32002,
+        "mode": 1,
+        "axes": 3,
+        "parameters": {
+          "MPC_VC_L1_X": 1.0,
+          "MPC_VC_L2_X": 0.2,
+          "MPC_VC_NU_X": 0.4,
+          "MPC_VC_A_X": 0.8,
+          "MPC_VC_L1_Y": 1.0,
+          "MPC_VC_L2_Y": 0.2,
+          "MPC_VC_NU_Y": 0.4,
+          "MPC_VC_A_Y": 0.8,
+          "MPC_VC_L1_Z": 0.0,
+          "MPC_VC_L2_Z": 0.0,
+          "MPC_VC_NU_Z": 0.0,
+          "MPC_VC_A_Z": 0.0,
+          "MPC_VC_MODE": 1,
+          "MPC_VC_AXES": 3,
+          "MPC_VC_DIV": 1,
+          "MPC_VCT_TEST": 6
+        }
+      },
+      "accepted": true,
+      "rmse": [
+        0.014401961926880187,
+        0.017163851929855246,
+        0.002496285126238906
+      ],
+      "windows": {
+        "first_loop": {
+          "error": {
+            "rmse": [
+              0.01440783554926701,
+              0.01759344931219453,
+              0.002432159429256459
+            ],
+            "mean": [
+              0.00021674431936116829,
+              -0.0004987769069048231,
+              -0.00012938735051284324
+            ],
+            "std": [
+              0.014406205160094977,
+              0.017586377691210228,
+              0.002428715381194005
+            ],
+            "max_abs": [
+              0.028349310159683228,
+              0.03476295247673988,
+              0.008920244872570038
+            ]
+          },
+          "iae_m": [
+            0.40706835000775765,
+            0.498546558996429,
+            0.0608845575076994
+          ],
+          "acceleration_tv": [
+            23.09813117980957,
+            25.501333236694336,
+            2.8893065452575684
+          ],
+          "normalized_thrust_tv": [
+            1.6659057140350342,
+            1.838569164276123,
+            0.21002179384231567
+          ],
+          "samples": 3200,
+          "seconds": 32.0,
+          "constraint_fraction": 0.0,
+          "maximum_continuous_constraint_s": 0.0,
+          "nu_peak": [
+            0.09120000153779984,
+            0.13920000195503235
+          ]
+        },
+        "second_loop": {
+          "error": {
+            "rmse": [
+              0.0143960859080478,
+              0.016723222399981218,
+              0.0025588042859199084
+            ],
+            "mean": [
+              -0.00036582014374653306,
+              -0.0002759603049162254,
+              0.00017216991715395119
+            ],
+            "std": [
+              0.014391437214341092,
+              0.016720945348554447,
+              0.0025530054628357733
+            ],
+            "max_abs": [
+              0.02725198119878769,
+              0.03403669223189354,
+              0.0078914575278759
+            ]
+          },
+          "iae_m": [
+            0.4081578522039349,
+            0.47554293458687596,
+            0.06476926237507746
+          ],
+          "acceleration_tv": [
+            23.430227279663086,
+            25.235567092895508,
+            2.8744585514068604
+          ],
+          "normalized_thrust_tv": [
+            1.6893600225448608,
+            1.8196139335632324,
+            0.2084304690361023
+          ],
+          "samples": 3200,
+          "seconds": 32.0,
+          "constraint_fraction": 0.0,
+          "maximum_continuous_constraint_s": 0.0,
+          "nu_peak": [
+            0.12480000406503677,
+            0.13520000874996185
+          ]
+        }
+      },
+      "position_rmse": [
+        0.0249705097180337,
+        0.022853359740448217,
+        0.04553745728250732
+      ],
+      "yaw_rmse": 0.00022078693030564,
+      "hz": 100.0,
+      "callback_hz": 99.99999999999999,
+      "cadence": {
+        "updates": 9017,
+        "holds": 0,
+        "update_hz": 100.0,
+        "h_min": 0.004000000189989805,
+        "h_max": 0.01600000075995922,
+        "host_cost": {
+          "path_ns": {
+            "update": {
+              "median": 1.87,
+              "p95": 4.219599999999997,
+              "p99": 11.601640000000003,
+              "max": 23.701
+            }
+          },
+          "module_ns": {
+            "update": {
+              "median": 9.488,
+              "p95": 22.624799999999993,
+              "p99": 30.770160000000022,
+              "max": 1822.117
+            }
+          }
+        },
+        "host_us_per_sim_second": {
+          "path_ns": 228.86944321206744,
+          "module_ns": 1121.2370674356698
+        }
+      },
+      "acceleration_tv": [
+        46.529239654541016,
+        50.741416931152344,
+        5.764770030975342
+      ],
+      "thrust_tv": [
+        3.3553266525268555,
+        3.658508777618408,
+        0.4185258150100708
+      ],
+      "spectrum": {
+        "update_hz": 100.00312558604739,
+        "correction_tv": [
+          46.52915954589844,
+          50.731788635253906,
+          5.764770030975342
+        ],
+        "correction_tv_per_second": [
+          0.7270181179046631,
+          0.7926841974258423,
+          0.09007453173398972
+        ],
+        "common_0_7hz_rms": [
+          0.11545743498503555,
+          0.12559078635496262,
+          0.012383252562861007
+        ],
+        "notes": "Analysis-only ZOH at measured update Hz and100Hz callbacks; common513tap8Hz BlackmanFIR then25Hz,2.56s boundary crop. TV only actual updates; not physical motor energy. HTE-only cache shifts between updates are not extra algorithm updates."
+      },
+      "constraint_fraction": 0.0,
+      "landing_health": {
+        "accel": {
+          "0": {
+            "samples": 2261,
+            "peak_abs": [
+              7.053318023681641,
+              7.261613845825195,
+              48.257530212402344
+            ]
+          },
+          "1": {
+            "samples": 2261,
+            "peak_abs": [
+              8.07583999633789,
+              10.023061752319336,
+              55.660499572753906
+            ]
+          },
+          "2": {
+            "samples": 2261,
+            "peak_abs": [
+              8.07583999633789,
+              10.023061752319336,
+              55.660499572753906
+            ]
+          }
+        },
+        "imu": {
+          "0": {
+            "samples": 1991,
+            "clipping": 0,
+            "publication_ties": 0,
+            "max_publication_gap_us": 8000,
+            "max_sample_gap_us": 8000,
+            "max_age_us": 0,
+            "boundary_groups_complete": true,
+            "recorded_gap_not_equal_integration": 272,
+            "coverage": "bounded recorded evidence; not lossless IMU consumption proof"
+          },
+          "1": {
+            "samples": 1986,
+            "clipping": 0,
+            "publication_ties": 0,
+            "max_publication_gap_us": 8000,
+            "max_sample_gap_us": 8000,
+            "max_age_us": 0,
+            "boundary_groups_complete": true,
+            "recorded_gap_not_equal_integration": 277,
+            "coverage": "bounded recorded evidence; not lossless IMU consumption proof"
+          },
+          "2": {
+            "samples": 1997,
+            "clipping": 0,
+            "publication_ties": 0,
+            "max_publication_gap_us": 8000,
+            "max_sample_gap_us": 8000,
+            "max_age_us": 0,
+            "boundary_groups_complete": true,
+            "recorded_gap_not_equal_integration": 265,
+            "coverage": "bounded recorded evidence; not lossless IMU consumption proof"
+          }
+        },
+        "estimator": {
+          "0": {
+            "samples": 905,
+            "faults": 0
+          },
+          "1": {
+            "samples": 906,
+            "faults": 0
+          },
+          "2": {
+            "samples": 906,
+            "faults": 0
+          },
+          "3": {
+            "samples": 906,
+            "faults": 0
+          },
+          "4": {
+            "samples": 905,
+            "faults": 0
+          },
+          "5": {
+            "samples": 905,
+            "faults": 0
+          }
+        },
+        "selector": {
+          "samples": 11,
+          "primary": 0
+        }
+      },
+      "position_log": {
+        "source_topic": "vehicle_local_position_log",
+        "control_topic_unchanged": true,
+        "queue_length": 32,
+        "records": 15090,
+        "sequence_first": 85,
+        "sequence_last": 15174,
+        "sequence_gaps": 0,
+        "raw_overlap_records": 15090,
+        "raw_missing_records": 0,
+        "consumed_records": 15090,
+        "publication_end_us": 152504000,
+        "no_interpolation": true,
+        "no_deduplication": true,
+        "raw_records_preserved": true
+      },
+      "coverage": {
+        "local": {
+          "matched": 9017,
+          "denominator": 9017,
+          "coverage": 1.0,
+          "max_gap_s": 0.016,
+          "max_abs_error": 0.0
+        },
+        "attitude": {
+          "matched": 9017,
+          "denominator": 9017,
+          "coverage": 1.0,
+          "max_gap_s": 0.016,
+          "max_abs_error": 0.0
+        }
+      },
+      "pid_reconstruction": {
+        "samples": 9016,
+        "updates": 9016,
+        "axes": [
+          2
+        ],
+        "reference": "independent binary64, actual consumed error/derivative/HTE and interval constraints"
+      },
+      "metrics_sha256": "fa4ec9169d516b7562ddeaf5782c94aee89d9de2dc749df6dab5aa632964c3f8"
+    },
+    {
+      "job": {
+        "id": "run05",
+        "task": "figure8",
+        "gate": "n1",
+        "divisor": 1,
+        "seed": 32003,
+        "mode": 0,
+        "axes": 0,
+        "parameters": {
+          "MPC_VC_L1_X": 1.0,
+          "MPC_VC_L2_X": 0.2,
+          "MPC_VC_NU_X": 0.4,
+          "MPC_VC_A_X": 0.8,
+          "MPC_VC_L1_Y": 1.0,
+          "MPC_VC_L2_Y": 0.2,
+          "MPC_VC_NU_Y": 0.4,
+          "MPC_VC_A_Y": 0.8,
+          "MPC_VC_L1_Z": 0.0,
+          "MPC_VC_L2_Z": 0.0,
+          "MPC_VC_NU_Z": 0.0,
+          "MPC_VC_A_Z": 0.0,
+          "MPC_VC_MODE": 0,
+          "MPC_VC_AXES": 0,
+          "MPC_VC_DIV": 1,
+          "MPC_VCT_TEST": 6
+        }
+      },
+      "accepted": false,
+      "error": "SystemExit(1)"
+    }
+  ],
+  "groups": [
+    {
+      "divisor": 1,
+      "mode": 0,
+      "accepted": 2,
+      "mean_rmse": [
+        0.010757188024713614,
+        0.01108532538308494,
+        0.0028130497308774495
+      ],
+      "mean_correction_tv_per_s": [
+        0.08886085823178291,
+        0.09207020699977875,
+        0.09357316792011261
+      ],
+      "mean_common_0_7hz_rms": [
+        0.024818952489393146,
+        0.025892892188282942,
+        0.013854464224956741
+      ],
+      "mean_update_hz": 100.00000000000001,
+      "host_mean_of_run_medians_us": {
+        "path_ns": {
+          "update": 0.9890000000000001
+        },
+        "module_ns": {
+          "update": 8.376000000000001
+        }
+      },
+      "mean_host_us_per_sim_second": {
+        "path_ns": 123.0019411123196,
+        "module_ns": 990.3248292110004
+      }
+    },
+    {
+      "divisor": 1,
+      "mode": 1,
+      "accepted": 2,
+      "mean_rmse": [
+        0.01442878273026198,
+        0.016976046786449876,
+        0.002550417062923261
+      ],
+      "mean_correction_tv_per_s": [
+        0.7320519685745239,
+        0.7929721176624298,
+        0.09203856438398361
+      ],
+      "mean_common_0_7hz_rms": [
+        0.11511199879453722,
+        0.12435663389236398,
+        0.01245173714508959
+      ],
+      "mean_update_hz": 100.00111027223875,
+      "host_mean_of_run_medians_us": {
+        "path_ns": {
+          "update": 1.8450000000000002
+        },
+        "module_ns": {
+          "update": 9.20225
+        }
+      },
+      "mean_host_us_per_sim_second": {
+        "path_ns": 228.2645945908896,
+        "module_ns": 1088.7646066849265
+      }
+    }
+  ],
+  "new_flights": 0,
+  "sensor_filter_estimator": {
+    "parameters": 149,
+    "runs": 4,
+    "changed": [],
+    "values": {
+      "EKF2_ABIAS_INIT": 0.20000000298023224,
+      "EKF2_ABL_ACCLIM": 25.0,
+      "EKF2_ABL_GYRLIM": 3.0,
+      "EKF2_ABL_LIM": 0.4000000059604645,
+      "EKF2_ABL_TAU": 0.5,
+      "EKF2_ACC_B_NOISE": 0.003000000026077032,
+      "EKF2_ACC_NOISE": 0.3499999940395355,
+      "EKF2_AID_MASK": 1,
+      "EKF2_ANGERR_INIT": 0.10000000149011612,
+      "EKF2_ARSP_THR": 0.0,
+      "EKF2_ASPD_MAX": 20.0,
+      "EKF2_ASP_DELAY": 100.0,
+      "EKF2_AVEL_DELAY": 5.0,
+      "EKF2_BARO_DELAY": 0.0,
+      "EKF2_BARO_GATE": 5.0,
+      "EKF2_BARO_NOISE": 3.5,
+      "EKF2_BCOEF_X": 25.0,
+      "EKF2_BCOEF_Y": 25.0,
+      "EKF2_BETA_GATE": 5.0,
+      "EKF2_BETA_NOISE": 0.30000001192092896,
+      "EKF2_DECL_TYPE": 7,
+      "EKF2_DRAG_NOISE": 2.5,
+      "EKF2_EAS_NOISE": 1.399999976158142,
+      "EKF2_EVA_NOISE": 0.05000000074505806,
+      "EKF2_EVP_GATE": 5.0,
+      "EKF2_EVP_NOISE": 0.10000000149011612,
+      "EKF2_EVV_GATE": 3.0,
+      "EKF2_EVV_NOISE": 0.10000000149011612,
+      "EKF2_EV_DELAY": 175.0,
+      "EKF2_EV_NOISE_MD": 0,
+      "EKF2_EV_POS_X": 0.0,
+      "EKF2_EV_POS_Y": 0.0,
+      "EKF2_EV_POS_Z": 0.0,
+      "EKF2_FUSE_BETA": 0,
+      "EKF2_GBIAS_INIT": 0.10000000149011612,
+      "EKF2_GND_EFF_DZ": 4.0,
+      "EKF2_GND_MAX_HGT": 0.5,
+      "EKF2_GPS_CHECK": 245,
+      "EKF2_GPS_DELAY": 110.0,
+      "EKF2_GPS_POS_X": 0.0,
+      "EKF2_GPS_POS_Y": 0.0,
+      "EKF2_GPS_POS_Z": 0.0,
+      "EKF2_GPS_P_GATE": 5.0,
+      "EKF2_GPS_P_NOISE": 0.5,
+      "EKF2_GPS_V_GATE": 5.0,
+      "EKF2_GPS_V_NOISE": 0.30000001192092896,
+      "EKF2_GSF_TAS": 15.0,
+      "EKF2_GYR_B_NOISE": 0.0010000000474974513,
+      "EKF2_GYR_NOISE": 0.014999999664723873,
+      "EKF2_HDG_GATE": 2.5999999046325684,
+      "EKF2_HEAD_NOISE": 0.30000001192092896,
+      "EKF2_HGT_MODE": 0,
+      "EKF2_IMU_POS_X": 0.0,
+      "EKF2_IMU_POS_Y": 0.0,
+      "EKF2_IMU_POS_Z": 0.0,
+      "EKF2_MAG_ACCLIM": 0.5,
+      "EKF2_MAG_B_NOISE": 9.999999747378752e-05,
+      "EKF2_MAG_CHECK": 0,
+      "EKF2_MAG_DECL": 0.0,
+      "EKF2_MAG_DELAY": 0.0,
+      "EKF2_MAG_E_NOISE": 0.0010000000474974513,
+      "EKF2_MAG_GATE": 3.0,
+      "EKF2_MAG_NOISE": 0.05000000074505806,
+      "EKF2_MAG_TYPE": 0,
+      "EKF2_MAG_YAWLIM": 0.25,
+      "EKF2_MIN_OBS_DT": 20,
+      "EKF2_MIN_RNG": 0.10000000149011612,
+      "EKF2_MOVE_TEST": 1.0,
+      "EKF2_MULTI_IMU": 3,
+      "EKF2_MULTI_MAG": 2,
+      "EKF2_NOAID_NOISE": 10.0,
+      "EKF2_NOAID_TOUT": 5000000,
+      "EKF2_OF_DELAY": 20.0,
+      "EKF2_OF_GATE": 3.0,
+      "EKF2_OF_N_MAX": 0.5,
+      "EKF2_OF_N_MIN": 0.15000000596046448,
+      "EKF2_OF_POS_X": 0.0,
+      "EKF2_OF_POS_Y": 0.0,
+      "EKF2_OF_POS_Z": 0.0,
+      "EKF2_OF_QMIN": 1,
+      "EKF2_PCOEF_XN": 0.0,
+      "EKF2_PCOEF_XP": 0.0,
+      "EKF2_PCOEF_YN": 0.0,
+      "EKF2_PCOEF_YP": 0.0,
+      "EKF2_PCOEF_Z": 0.0,
+      "EKF2_REQ_EPH": 3.0,
+      "EKF2_REQ_EPV": 5.0,
+      "EKF2_REQ_GPS_H": 0.5,
+      "EKF2_REQ_HDRIFT": 0.10000000149011612,
+      "EKF2_REQ_NSATS": 6,
+      "EKF2_REQ_PDOP": 2.5,
+      "EKF2_REQ_SACC": 0.5,
+      "EKF2_REQ_VDRIFT": 0.20000000298023224,
+      "EKF2_RNG_AID": 1,
+      "EKF2_RNG_A_HMAX": 5.0,
+      "EKF2_RNG_A_IGATE": 1.0,
+      "EKF2_RNG_A_VMAX": 1.0,
+      "EKF2_RNG_DELAY": 5.0,
+      "EKF2_RNG_GATE": 5.0,
+      "EKF2_RNG_NOISE": 0.10000000149011612,
+      "EKF2_RNG_PITCH": 0.0,
+      "EKF2_RNG_POS_X": 0.0,
+      "EKF2_RNG_POS_Y": 0.0,
+      "EKF2_RNG_POS_Z": 0.0,
+      "EKF2_RNG_QLTY_T": 1.0,
+      "EKF2_RNG_SFE": 0.05000000074505806,
+      "EKF2_SEL_ERR_RED": 0.20000000298023224,
+      "EKF2_SEL_IMU_ACC": 1.0,
+      "EKF2_SEL_IMU_ANG": 15.0,
+      "EKF2_SEL_IMU_RAT": 7.0,
+      "EKF2_SEL_IMU_VEL": 2.0,
+      "EKF2_SYNT_MAG_Z": 0,
+      "EKF2_TAS_GATE": 3.0,
+      "EKF2_TAU_POS": 0.25,
+      "EKF2_TAU_VEL": 0.25,
+      "EKF2_TERR_GRAD": 0.5,
+      "EKF2_TERR_MASK": 3,
+      "EKF2_TERR_NOISE": 5.0,
+      "EKF2_WIND_NOISE": 0.10000000149011612,
+      "IMU_ACCEL_CUTOFF": 30.0,
+      "IMU_DGYRO_CUTOFF": 30.0,
+      "IMU_GYRO_CAL_EN": 1,
+      "IMU_GYRO_CUTOFF": 40.0,
+      "IMU_GYRO_DYN_NF": 0,
+      "IMU_GYRO_FFT_EN": 1,
+      "IMU_GYRO_FFT_LEN": 1024,
+      "IMU_GYRO_FFT_MAX": 192.0,
+      "IMU_GYRO_FFT_MIN": 32.0,
+      "IMU_GYRO_NF_BW": 20.0,
+      "IMU_GYRO_NF_FREQ": 0.0,
+      "IMU_GYRO_RATEMAX": 800,
+      "IMU_INTEG_RATE": 250,
+      "SENS_BARO_QNH": 1013.25,
+      "SENS_BARO_RATE": 20.0,
+      "SENS_BOARD_ROT": 0,
+      "SENS_BOARD_X_OFF": 9.999999974752427e-07,
+      "SENS_BOARD_Y_OFF": 0.0,
+      "SENS_BOARD_Z_OFF": 0.0,
+      "SENS_DPRES_OFF": 0.0010000000474974513,
+      "SENS_FLOW_MAXHGT": 3.0,
+      "SENS_FLOW_MAXR": 2.5,
+      "SENS_FLOW_MINHGT": 0.699999988079071,
+      "SENS_FLOW_ROT": 6,
+      "SENS_GPS_MASK": 0,
+      "SENS_GPS_PRIME": 0,
+      "SENS_GPS_TAU": 10.0,
+      "SENS_IMU_MODE": 0,
+      "SENS_MAG_MODE": 0,
+      "SENS_MAG_RATE": 50.0
+    }
+  },
+  "parameter_restore_exact": true
+}
