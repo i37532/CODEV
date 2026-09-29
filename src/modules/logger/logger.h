@@ -62,6 +62,10 @@ using namespace time_literals;
 static constexpr hrt_abstime TRY_SUBSCRIBE_INTERVAL{20_ms};	// interval in microseconds at which we try to subscribe to a topic
 // if we haven't succeeded before
 
+#if defined(CONFIG_ARCH_BOARD_PX4_SITL)
+#include "SitlResearchLogRoot.hpp"
+#endif
+
 namespace px4
 {
 namespace logger
@@ -130,6 +134,16 @@ public:
 	void set_arm_override(bool override) { _manually_logging_override = override; }
 
 private:
+	const char *log_root(LogType type) const
+	{
+#if defined(CONFIG_ARCH_BOARD_PX4_SITL)
+		if (type == LogType::Full && _research_log_root.get()) { return _research_log_root.get(); }
+#endif
+		return LOG_ROOT[(int)type];
+	}
+#if defined(CONFIG_ARCH_BOARD_PX4_SITL)
+	SitlResearchLogRoot _research_log_root;
+#endif
 
 	enum class PrintLoadReason {
 		Preflight,
