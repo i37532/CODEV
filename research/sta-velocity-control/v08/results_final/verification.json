@@ -1,0 +1,75 @@
+{
+  "success": true,
+  "new_flights": 0,
+  "commands": [
+    {
+      "name": "formal_runtime_tests",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/formal/test_runtime.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "formal_package_tests",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/formal/test_formal_package.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "qualified_gate_tests",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/evidence_tools/test_qualified_gate_summary.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "previous_regression",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/protocol05/verify.py",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/verification_formal_committed01/regression"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "dry_run",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/formal/run.py",
+        "--source-head",
+        "392d61ca9876dd5e3bf27ad4b746e4f0f6c8c62b",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/verification_formal_committed01/NOT_CREATED"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "zero_holdout_statistics",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/formal/formal_package.py",
+        "analyze",
+        "--manifest",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/formal/manifest.json",
+        "--outcomes",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/formal/outcomes_unattempted.json",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/verification_formal_committed01/zero_holdout_statistics.json"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "head": "392d61ca9876dd5e3bf27ad4b746e4f0f6c8c62b",
+  "new_python_tests": 23,
+  "cpp_tests": 231,
+  "python_tests": 621,
+  "waveform_probe_cases": 13,
+  "invalid_probe_cases": 3,
+  "assets_checked": 2495,
+  "firmware_sha256": "1befc9fd6a4b8ab5ec61ca7b4dbd0e9f649c47a353b39673ba62186df56662e6"
+}
