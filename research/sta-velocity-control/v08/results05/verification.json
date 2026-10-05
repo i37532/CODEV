@@ -1,0 +1,44 @@
+{
+  "success": true,
+  "new_flights": 0,
+  "commands": [
+    {
+      "name": "mass_tests",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/protocol05/test_mass.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "previous_regression",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/protocol04/verify.py",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/verification_mass_committed01/regression"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "dry_run",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/protocol05/run.py",
+        "--source-head",
+        "80a2dd0098dd72214f2b8876b0333082c9bb00d8",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/verification_mass_committed01/NOT_CREATED"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "head": "80a2dd0098dd72214f2b8876b0333082c9bb00d8",
+  "new_python_tests": 15,
+  "cpp_tests": 231,
+  "python_tests": 598,
+  "waveform_probe_cases": 13,
+  "invalid_probe_cases": 3,
+  "assets_checked": 2407,
+  "firmware_sha256": "01360b247490ced6d2eaea77de02d5c74862719500e740da83d6199d89e68f9f"
+}
