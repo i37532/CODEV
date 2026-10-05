@@ -1,0 +1,78 @@
+{
+  "success": true,
+  "new_flights": 0,
+  "commands": [
+    {
+      "name": "pilot_tests",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/protocol04/test_pilot.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "design_tests",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/protocol04/test_design.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "formal_design_tests",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/protocol04/test_formal_design.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "evidence_tests",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/evidence_tools/test_replay_batch.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "previous_regression",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/protocol03b/verify.py",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/verification_pilot_committed01/regression"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "plugin_and_probe_build",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/protocol04/build_offline.py",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/verification_pilot_committed01/plugin_build"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "dry_run",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/protocol04/run.py",
+        "--source-head",
+        "ce0704bcdfefd8b4501c2c06ed9556fe5b542469",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/verification_pilot_committed01/NOT_CREATED"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "head": "ce0704bcdfefd8b4501c2c06ed9556fe5b542469",
+  "new_python_tests": 29,
+  "cpp_tests": 231,
+  "python_tests": 583,
+  "waveform_probe_cases": 13,
+  "invalid_probe_cases": 3,
+  "assets_checked": 2262,
+  "firmware_sha256": "7007742c27cd7a242ae922731ba3afaeb830cf465b372721983378a58e6aea70"
+}
