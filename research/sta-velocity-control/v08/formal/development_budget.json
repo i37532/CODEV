@@ -1,0 +1,121 @@
+{
+  "batches": [
+    {
+      "batch": "training01",
+      "source_head": "c2e6c0be8490c1ebe2250859f5cdc10252941f63",
+      "planned": 24,
+      "attempts": 13,
+      "accepted": 12,
+      "by_algorithm": {
+        "0": {
+          "attempts": 6,
+          "accepted": 6,
+          "takeoff_events": 6
+        },
+        "1": {
+          "attempts": 7,
+          "accepted": 6,
+          "takeoff_events": 7
+        }
+      }
+    },
+    {
+      "batch": "training02",
+      "source_head": "0b575f0a6b258eb8e018b57326ca1af0f56d144c",
+      "planned": 24,
+      "attempts": 24,
+      "accepted": 24,
+      "by_algorithm": {
+        "0": {
+          "attempts": 12,
+          "accepted": 12,
+          "takeoff_events": 12
+        },
+        "1": {
+          "attempts": 12,
+          "accepted": 12,
+          "takeoff_events": 12
+        }
+      }
+    },
+    {
+      "batch": "validation01",
+      "source_head": "1321ff43a8e77052f10d98f9c6f8eba194910401",
+      "planned": 12,
+      "attempts": 6,
+      "accepted": 5,
+      "by_algorithm": {
+        "0": {
+          "attempts": 3,
+          "accepted": 3,
+          "takeoff_events": 3
+        },
+        "1": {
+          "attempts": 3,
+          "accepted": 2,
+          "takeoff_events": 3
+        }
+      }
+    },
+    {
+      "batch": "validation02",
+      "source_head": "ffe57be3542a8fb4c5e5148df9c6163b79c8d55a",
+      "planned": 12,
+      "attempts": 12,
+      "accepted": 12,
+      "by_algorithm": {
+        "0": {
+          "attempts": 6,
+          "accepted": 6,
+          "takeoff_events": 6
+        },
+        "1": {
+          "attempts": 6,
+          "accepted": 6,
+          "takeoff_events": 6
+        }
+      }
+    },
+    {
+      "batch": "pilots01",
+      "source_head": "ce0704bcdfefd8b4501c2c06ed9556fe5b542469",
+      "planned": 18,
+      "attempts": 13,
+      "accepted": 12,
+      "by_algorithm": {
+        "0": {
+          "attempts": 7,
+          "accepted": 6,
+          "takeoff_events": 6
+        },
+        "1": {
+          "attempts": 6,
+          "accepted": 6,
+          "takeoff_events": 6
+        }
+      }
+    },
+    {
+      "batch": "pilots02_mass",
+      "source_head": "80a2dd0098dd72214f2b8876b0333082c9bb00d8",
+      "planned": 6,
+      "attempts": 6,
+      "accepted": 6,
+      "by_algorithm": {
+        "0": {
+          "attempts": 3,
+          "accepted": 3,
+          "takeoff_events": 3
+        },
+        "1": {
+          "attempts": 3,
+          "accepted": 3,
+          "takeoff_events": 3
+        }
+      }
+    }
+  ],
+  "formal_actual": 0,
+  "formal_next_budget": 200,
+  "note": "Historical M10/optimization/V00-V07 are additional seen development, not part of the new equal candidate budget or unseen holdout. Different prior exposures are not erased."
+}
