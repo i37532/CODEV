@@ -2,12 +2,12 @@
 #pragma once
 #include "StaVelocityControl.hpp"
 
-/** Acceleration-domain adapter; PositionControl admission is SITL only. Local NED.
+/** V03-tested adapter; V04 AX00PositionControl connects only SITL X. Local NED.
  * Caller supplies the complete constrained thrust-map proxy, NOT measured
  * acceleration or body-frame mixer signs. Existing PID ARW is unrelated.
  * begin/evaluate/finish is one transaction per sensor sample, including retries.
  */
-class StaVelocityProtection
+class AX00StaVelocityProtection
 {
 public:
 
@@ -56,7 +56,6 @@ public:
 	bool seedZ(float nu);
 	// XYZ handover: validate every active seed before changing any state.
 	bool seedXYZ(const Vec &nu);
-	bool seedCoupled(const Vec &nu); // atomic active subset of XZ/YZ/XYZ
 	bool shiftZ(float shift, float correction);
 
 private:

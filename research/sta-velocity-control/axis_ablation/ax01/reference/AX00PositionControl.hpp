@@ -32,7 +32,7 @@
  ****************************************************************************/
 
 /**
- * @file PositionControl.hpp
+ * @file AX00PositionControl.hpp
  *
  * A cascaded position controller for position/velocity control only.
  */
@@ -43,12 +43,12 @@
 #include <matrix/matrix/math.hpp>
 #include <uORB/topics/vehicle_attitude_setpoint.h>
 #include <uORB/topics/vehicle_local_position_setpoint.h>
-#include "VelocityControlSelector.hpp"
-#include "StaVelocityProtection.hpp"
+#include "AX00VelocityControlSelector.hpp"
+#include "AX00StaVelocityProtection.hpp"
 #include "VelocityDecimation.hpp"
 #include <uORB/topics/sta_velocity_ctrl_status.h>
 
-struct PositionControlStates {
+struct AX00PositionControlStates {
 	matrix::Vector3f position;
 	matrix::Vector3f velocity;
 	matrix::Vector3f acceleration;
@@ -75,12 +75,12 @@ struct PositionControlStates {
  * 	If there is a position/velocity- and thrust-setpoint present, then
  *  the thrust-setpoint is ommitted and recomputed from position-velocity-PID-loop.
  */
-class PositionControl
+class AX00PositionControl
 {
 public:
 
-	PositionControl() = default;
-	~PositionControl() = default;
+	AX00PositionControl() = default;
+	~AX00PositionControl() = default;
 
 	/**
 	 * Set the position control gains
@@ -132,9 +132,9 @@ public:
 
 	/**
 	 * Pass the current vehicle state to the controller
-	 * @param PositionControlStates structure
+	 * @param AX00PositionControlStates structure
 	 */
-	void setState(const PositionControlStates &states);
+	void setState(const AX00PositionControlStates &states);
 
 	/**
 	 * Pass the desired setpoints
@@ -162,9 +162,9 @@ public:
 	uint8_t intervalPositive() const { return _interval_positive; }
 	uint8_t intervalNegative() const { return _interval_negative; }
 	uint64_t velocityPathTimeNs() const { return _velocity_path_ns; }
-	void configureVelocityEsta(const StaVelocityProtection::Config &config, bool armed);
-	void setVelocityFrame(const StaVelocityProtection::Frame &frame);
-	const VelocityControlSelector &velocitySelection() const { return _velocity_selector; }
+	void configureVelocityEsta(const AX00StaVelocityProtection::Config &config, bool armed);
+	void setVelocityFrame(const AX00StaVelocityProtection::Frame &frame);
+	const AX00VelocityControlSelector &velocitySelection() const { return _velocity_selector; }
 	const sta_velocity_ctrl_status_s &diagnostic() const { return _diagnostic; }
 	uint16_t inputValidity() const;
 	uint16_t failureReason() const;
@@ -197,7 +197,7 @@ public:
 
 private:
 	friend class VelocityControlTestAccess;
-	VelocityControlSelector _velocity_selector;
+	AX00VelocityControlSelector _velocity_selector;
 	VelocityDecimation _decimation;
 	matrix::Vector3f _correction{NAN, NAN, NAN}; // never includes acceleration FF
 	uint32_t _velocity_frame_serial{0}, _consumed_frame_serial{0};
@@ -211,10 +211,10 @@ private:
 	float _diagnostic_excitation_y{0.f};
 	float _diagnostic_excitation_z{0.f};
 	bool _diagnostic_vertical{false};
-	StaVelocityProtection _velocity_protection;
-	StaVelocityProtection::Frame _velocity_frame{};
-	StaVelocityProtection::Config _esta_requested{}, _esta_effective{};
-	bool _esta_config_valid{false}, _esta_pending{false}, _esta_failed{false}, _esta_config_changed{false};
+	AX00StaVelocityProtection _velocity_protection;
+	AX00StaVelocityProtection::Frame _velocity_frame{};
+	AX00StaVelocityProtection::Config _esta_requested{}, _esta_effective{};
+	bool _esta_config_valid{false}, _esta_pending{false}, _esta_failed{false};
 	bool _z_engaged{false};
 	uint8_t _z_phase{0}; // 0 not Z,1 ground/ramp PID,2 PID handover,3 ESTA,4 acceleration-only
 	float _z_hte_shift{0.f};
@@ -229,7 +229,6 @@ private:
 	void _velocityControlEstaXY(const float dt);
 	void _velocityControlEstaZ(const float dt);
 	void _velocityControlEstaXYZ(const float dt);
-	void _velocityControlEstaMixed(const float dt); // AX01 Y/XZ/YZ, DIV1 only
 	void _accelerationControl(); ///< Acceleration setpoint processing
 
 	// Gains

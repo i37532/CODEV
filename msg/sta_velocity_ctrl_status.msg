@@ -1,6 +1,6 @@
 # V03: exact final controller invocation per local-position input, no interpolation.
-# mode1/axes1 X ESTA; axes3 XY; axes4 Z; axes7 XYZ (SITL only, see z_phase).
-# mode2 and axes7 unavailable. XY still uses Z velocity PID and all rate PID.
+# mode1/axes1..7 selects local NED ESTA axes (SITL only, see z_phase).
+# mode2 unavailable. Unselected velocity axes and all rate axes remain PID.
 # nu/a_sta are NaN on PID axes, NOT estimated STA states.
 # a_proxy is thrust * g / hover_thrust + gravity: model proxy, not measured acceleration.
 # constraint_bits: 1 tilt, 2 minimum thrust, 4 maximum Z, 8 XY remainder.
@@ -85,6 +85,6 @@ uint16 first_fail
 uint16 first_input
 uint8 retry_result # 0 not attempted,1 valid,2 invalid
 uint8 excitation_fault # latched: 1 sensor clock,2 gate lost after start,4 controller failure
-uint8 z_phase # 0 not Z,1 ground/ramp PID,2 PID handover,3 Z ESTA,4 Z acceleration-only; XYZ active_axes authoritative
+uint8 z_phase # 0 not Z,1 ground/ramp PID,2 PID handover,3 Z ESTA,4 Z acceleration-only; active_axes authoritative
 float32 z_hte_shift # Z nu rebase due to HTE since previous invocation, m/s^2
 uint8 ORB_QUEUE_LENGTH = 8

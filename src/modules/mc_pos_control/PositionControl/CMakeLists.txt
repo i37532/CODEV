@@ -48,6 +48,14 @@ px4_add_unit_gtest(SRC ControlMathTest.cpp LINKLIBS PositionControl)
 px4_add_unit_gtest(SRC PositionControlTest.cpp LINKLIBS PositionControl)
 
 if(BUILD_TESTING)
+	px4_add_library(AX00PositionReference
+		${PX4_SOURCE_DIR}/research/sta-velocity-control/axis_ablation/ax01/reference/AX00PositionControl.cpp
+		${PX4_SOURCE_DIR}/research/sta-velocity-control/axis_ablation/ax01/reference/AX00StaVelocityProtection.cpp
+	)
+	target_include_directories(AX00PositionReference PUBLIC
+		${PX4_SOURCE_DIR}/research/sta-velocity-control/axis_ablation/ax01/reference
+		${CMAKE_CURRENT_SOURCE_DIR})
+	target_link_libraries(AX00PositionReference PUBLIC PositionControl)
 	px4_add_library(V00PositionReference
 		test/v00/V00PositionControl.cpp
 		test/v00/V00ControlMath.cpp
@@ -67,3 +75,4 @@ px4_add_unit_gtest(SRC VelocityXYIntegrationTest.cpp LINKLIBS PositionControl)
 px4_add_unit_gtest(SRC VelocityXYZIntegrationTest.cpp LINKLIBS PositionControl)
 px4_add_unit_gtest(SRC VelocityResearchTaskTest.cpp LINKLIBS PositionControl)
 px4_add_unit_gtest(SRC VelocityDecimationTest.cpp LINKLIBS PositionControl)
+px4_add_unit_gtest(SRC VelocityAxesTest.cpp LINKLIBS PositionControl AX00PositionReference)

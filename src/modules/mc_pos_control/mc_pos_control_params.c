@@ -242,13 +242,13 @@ PARAM_DEFINE_FLOAT(MPC_XY_P, 0.95f);
 /**
  * Velocity controller request
  *
- * Accepts PID/AXES=0 or SITL ESTA/AXES=1, 3 or 4 with valid independent gains.
- * MODE2 and AXES7 remain rejected. Differing armed requests are pending until
+ * Accepts PID/AXES=0 or SITL ESTA/AXES=1..7 with valid independent gains.
+ * AX01 Y/XZ/YZ require DIV1. MODE2 remains rejected. Armed requests are pending until
  * disarm; requesting the effective configuration cancels pending changes.
  * Original PID gain updates are unaffected.
  *
  * @value 0 PID
- * @value 1 ESTA X, XY or Z (SITL only)
+ * @value 1 ESTA selected NED axes (SITL only)
  * @value 2 Reserved (unavailable)
  * @min 0
  * @max 2
@@ -260,10 +260,10 @@ PARAM_DEFINE_INT32(MPC_VC_MODE, 0);
  * Experimental velocity axes request
  *
  * Local NED axes, not body rates. MODE0 requires 0; MODE1 permits
- * 1 (North/X), 3 (North/East XY), 4 (Down/Z) or 7 (XYZ) with valid gains in SITL.
+ * 1 X, 2 Y, 3 XY, 4 Z, 5 XZ, 6 YZ or 7 XYZ with valid gains in SITL.
  * Other axes remain PID. XY uses independent gains and an atomic transaction.
  * Z retains PID during ground/takeoff ramp and one handover sample.
- * XYZ retains ground/ramp PID and a bounded atomic handover; normal flight
+ * XZ/YZ/XYZ retain ground/ramp PID and a bounded atomic handover; normal flight
  * computes only selected ESTA axes. All rate controllers must remain PID.
  *
  * @min 0
@@ -943,7 +943,7 @@ PARAM_DEFINE_FLOAT(MPC_Z_VEL_ALL, -3.0f);
  *
  * Only feedback correction and integral/nu are decimated. Position P,
  * acceleration feedforward, mapping and lifecycle run every callback.
- * DIV>1 currently supports PID and X/XY ESTA, not Z/XYZ ESTA.
+ * DIV>1 only supports PID and X/XY ESTA; Y/Z/XZ/YZ/XYZ require DIV1.
  * Armed changes are deferred until disarm. Invalid values are rejected.
  * @value 1 Every callback (legacy PID)
  * @value 2 Every second callback

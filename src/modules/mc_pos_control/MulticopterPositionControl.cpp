@@ -285,7 +285,9 @@ void MulticopterPositionControl::Run()
 		_control_mode_sub.update(&_control_mode);
 		_vehicle_land_detected_sub.update(&_vehicle_land_detected);
 		StaVelocityProtection::Config esta_config{};
-		esta_config.axes = _param_mpc_vc_axes.get() == 7 ? 7 : (_param_mpc_vc_axes.get() == 4 ? 4 : (_param_mpc_vc_axes.get() == 3 ? 3 : 1));
+		// Validate the signed request before narrowing. Invalid/disabled is not X.
+		const int32_t requested_axes = _param_mpc_vc_axes.get();
+		esta_config.axes = requested_axes >= 1 && requested_axes <= 7 ? static_cast<uint8_t>(requested_axes) : 0;
 		esta_config.gains[0] = {_param_mpc_vc_l1_x.get(), _param_mpc_vc_l2_x.get()};
 		esta_config.nu_limit[0] = _param_mpc_vc_nu_x.get();
 		esta_config.acceleration_limit[0] = _param_mpc_vc_a_x.get();

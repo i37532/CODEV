@@ -57,6 +57,9 @@ public:
 		m._param_mpc_vc_nu_z.set(2.f); m._param_mpc_vc_a_z.set(3.f);
 	}
 	static void selectPid(MulticopterPositionControl &m) { m._param_mpc_vc_mode.set(0); m._param_mpc_vc_axes.set(0); }
+	static void selectMask(MulticopterPositionControl &m, int32_t axes) {
+		selectXYZ(m); m._param_mpc_vc_axes.set(axes); m._param_mpc_vc_mode.set(axes?1:0);
+	}
 };
 
 class VelocityTestQueueAnchor : public px4::WorkItem
@@ -95,6 +98,7 @@ protected:
 	vehicle_land_detected_s land{};
 	vehicle_constraints_s limits{};
 	MulticopterPositionControl *m{nullptr};
+	bool rate_fault{false}, rate_termination{false};
 	void SetUp() override
 	{
 		apps_map_type apps; init_app_map(apps); ASSERT_TRUE(apps.empty());
@@ -118,6 +122,7 @@ protected:
 		lp.timestamp+=dt; lp.timestamp_sample=lp.timestamp;
 		if (new_target) { target.timestamp=lp.timestamp; EXPECT_TRUE(target_pub.publish(target)); }
 		sta_rate_ctrl_status_s rate{}; rate.timestamp=hrt_absolute_time(); rate.div_eff=1;
+		rate.fault=rate_fault; rate.termination=rate_termination;
 		rate.measurement_valid=rate.output_valid=true; EXPECT_TRUE(rate_pub.publish(rate));
 		EXPECT_TRUE(lp_pub.publish(lp)); VelocityModuleTestAccess::step(*m);
 		sta_velocity_ctrl_status_s d{}; unsigned reads=0;
@@ -125,6 +130,64 @@ protected:
 		EXPECT_GT(reads,0u); EXPECT_EQ(d.timestamp_sample,lp.timestamp_sample); return d;
 	}
 };
+
+TEST_F(VelocityModule, AX01AllMasksActualRunAndTrace)
+{
+	for(int axes=0;axes<=7;++axes) {
+		SCOPED_TRACE(axes); mode.flag_armed=false; ASSERT_TRUE(mode_pub.publish(mode));
+		VelocityModuleTestAccess::selectMask(*m,axes); auto d=step(10000,true);
+		ASSERT_EQ(d.effective_axes,axes); EXPECT_EQ(d.reject,0);
+		mode.flag_armed=true; ASSERT_TRUE(mode_pub.publish(mode));
+		VelocityModuleTestAccess::airborne(*m,lp.timestamp); land.landed=land.ground_contact=false; ASSERT_TRUE(land_pub.publish(land));
+		target.z=lp.z; target.vx=target.vy=target.vz=0.f;
+		target.acceleration[0]=target.acceleration[1]=target.acceleration[2]=0.f;
+		for(int k=0;k<110;++k) {
+			d=step(k%2?8000:12000,true); ASSERT_TRUE(d.valid);
+			// Machine-readable observations from real Run()/uORB, not synthetic
+			// fixtures. AX01 analyzer consumes these offline, never calls a runner.
+			char nu[3][32];
+			for(int i=0;i<3;++i) {
+				if(std::isfinite(d.nu_applied[i])) { snprintf(nu[i],sizeof(nu[i]),"%.9g",double(d.nu_applied[i])); }
+				else { snprintf(nu[i],sizeof(nu[i]),"null"); }
+			}
+			printf("AX01_SAMPLE {\"mask\":%d,\"timestamp\":%llu,\"sample\":%llu,\"seq\":%u,\"mode\":%d,\"axes\":%d,\"requested\":%d,\"reject\":%u,\"pending\":%u,\"active\":%u,\"committed\":%u,\"pid\":%u,\"phase\":%u,\"valid\":%u,\"fault\":%u,\"inner\":%d,\"inner_axes\":%u,\"inner_div\":%u,\"inner_valid\":%u,\"nu\":[%s,%s,%s]}\n",
+			       axes,(unsigned long long)d.timestamp,(unsigned long long)d.timestamp_sample,d.publish_seq,
+			       d.effective_mode,d.effective_axes,d.requested_axes,d.reject,d.pending,d.active_axes,d.committed_axes,
+			       d.pid_axes,d.z_phase,d.valid,d.fault,d.inner_mode,d.inner_axes,d.inner_divisor,d.inner_valid,
+			       nu[0],nu[1],nu[2]);
+		}
+		EXPECT_EQ(d.committed_axes,axes); EXPECT_EQ(d.pid_axes,7^axes);
+		target.vx=.01f; target.vy=-.01f; target.vz=.01f; d=step(10000,true); ASSERT_TRUE(d.valid);
+		EXPECT_EQ(d.committed_axes,axes); EXPECT_EQ(d.pid_axes,7^axes);
+	}
+}
+
+TEST_F(VelocityModule, AX01UnknownSignedRequestNeverBecomesX)
+{
+	mode.flag_armed=false; ASSERT_TRUE(mode_pub.publish(mode));
+	for(int32_t axes:{-1,8,256,INT32_MAX}) {
+		VelocityModuleTestAccess::selectMask(*m,axes); auto d=step(10000,true);
+		EXPECT_EQ(d.requested_axes,axes); EXPECT_NE(d.reject,0); EXPECT_EQ(d.effective_axes,0);
+	}
+}
+
+TEST_F(VelocityModule, AX01MixedFaultTerminationResetRetryAndContact)
+{
+	for(int axes:{2,5,6}) { for(int cause=0;cause<3;++cause) {
+		mode.flag_armed=false; ASSERT_TRUE(mode_pub.publish(mode)); VelocityModuleTestAccess::selectMask(*m,axes);
+		rate_fault=rate_termination=false; step(10000,true);
+		mode.flag_armed=true; ASSERT_TRUE(mode_pub.publish(mode)); VelocityModuleTestAccess::airborne(*m,lp.timestamp);
+		land.landed=land.ground_contact=false; ASSERT_TRUE(land_pub.publish(land));
+		target.z=lp.z; target.vx=target.vy=target.vz=0.f; target.acceleration[2]=0.f;
+		ASSERT_TRUE(step(10000,true).valid); ASSERT_TRUE(step(10000,true).valid);
+		if(cause==0) { rate_termination=true; }
+		if(cause==1) { rate_fault=true; }
+		if(cause==2) { ++lp.vxy_reset_counter; lp.delta_vxy[0]=.01f; }
+		auto d=step(10000,true); EXPECT_FALSE(d.valid); EXPECT_EQ(d.output_timestamp,0u);
+		EXPECT_EQ(d.pid_calls,2); EXPECT_NE(d.first_fail,0); EXPECT_EQ(d.committed_axes,0); EXPECT_EQ(d.retry_result,2);
+		rate_fault=rate_termination=false; EXPECT_FALSE(step(10000,true).valid);
+	} }
+}
 
 TEST_F(VelocityModule, V06TrajectoryBeforePositionPAndSingleFeedforward)
 {

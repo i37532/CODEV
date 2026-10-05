@@ -156,7 +156,8 @@ TEST(StaVelocityProtection, ArmedConfigurationPendingCancelAndDisarmReset)
 	EXPECT_TRUE(g.configure(c, false)); EXPECT_EQ(g.generation(), generation + 1);
 	EXPECT_TRUE(g.begin(f).flags & Guard::Priming);
 	c.axes = 7; EXPECT_TRUE(g.configure(c, false)); EXPECT_FALSE(g.rejected()); // E01-XYZ admission
-	c.axes = 5; EXPECT_FALSE(g.configure(c, false)); EXPECT_TRUE(g.rejected());
+	c.axes = 5; EXPECT_TRUE(g.configure(c, false)); EXPECT_FALSE(g.rejected()); // AX01 XZ
+	c.axes = 8; EXPECT_FALSE(g.configure(c, false)); EXPECT_TRUE(g.rejected());
 	c = config(); c.gains[0].lambda1 = NAN; EXPECT_FALSE(g.configure(c, false));
 }
 

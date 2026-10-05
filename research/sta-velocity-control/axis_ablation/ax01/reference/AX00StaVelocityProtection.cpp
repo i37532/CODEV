@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: BSD-3-Clause
-#include "StaVelocityProtection.hpp"
+#include "AX00StaVelocityProtection.hpp"
 #include <cmath>
 #include <algorithm>
 #include <cstring>
 
-bool StaVelocityProtection::validConfig(const Config &c)
+bool AX00StaVelocityProtection::validConfig(const Config &c)
 {
-	if (c.axes > 7) { return false; }
+	if (c.axes != 0 && c.axes != 1 && c.axes != 3 && c.axes != 4 && c.axes != 7) { return false; }
 
 	for (size_t i = 0; i < 3; ++i) {
 		if ((c.axes & (1 << i)) && (!StaVelocityControl::validParameters(c.gains[i])
@@ -17,7 +17,7 @@ bool StaVelocityProtection::validConfig(const Config &c)
 	return true;
 }
 
-bool StaVelocityProtection::seedZ(float nu)
+bool AX00StaVelocityProtection::seedZ(float nu)
 {
 	if (_config.axes != 4 || !_active || _open || _fault || !(_result.flags & Priming)
 	    || !std::isfinite(nu) || fabsf(nu) > _config.nu_limit[2]) { latch(Numerical); return false; }
@@ -26,10 +26,10 @@ bool StaVelocityProtection::seedZ(float nu)
 	return true;
 }
 
-bool StaVelocityProtection::shiftZ(float shift, float correction)
+bool AX00StaVelocityProtection::shiftZ(float shift, float correction)
 {
 	const float nu = _kernel.state()[2] + shift;
-	if (!(_config.axes & 4) || !_active || _open || _fault || !std::isfinite(shift)
+	if ((_config.axes != 4 && _config.axes != 7) || !_active || _open || _fault || !std::isfinite(shift)
 	    || !std::isfinite(nu) || fabsf(nu) > _config.nu_limit[2]
 	    || !std::isfinite(correction) || fabsf(correction) > _config.acceleration_limit[2]
 	    || !std::isfinite(correction + shift) || fabsf(correction + shift) > _config.acceleration_limit[2]) {
@@ -39,16 +39,9 @@ bool StaVelocityProtection::shiftZ(float shift, float correction)
 	return true;
 }
 
-bool StaVelocityProtection::seedXYZ(const Vec &nu)
+bool AX00StaVelocityProtection::seedXYZ(const Vec &nu)
 {
-	if (_config.axes != 7) { latch(Numerical); return false; }
-	return seedCoupled(nu);
-}
-
-bool StaVelocityProtection::seedCoupled(const Vec &nu)
-{
-	if ((_config.axes != 5 && _config.axes != 6 && _config.axes != 7)
-	    || !_active || _open || _fault || !(_result.flags & Priming)) {
+	if (_config.axes != 7 || !_active || _open || _fault || !(_result.flags & Priming)) {
 		latch(Numerical); return false;
 	}
 	for (size_t i = 0; i < 3; ++i) {
@@ -64,7 +57,7 @@ bool StaVelocityProtection::seedCoupled(const Vec &nu)
 	return true;
 }
 
-bool StaVelocityProtection::same(const Config &a, const Config &b)
+bool AX00StaVelocityProtection::same(const Config &a, const Config &b)
 {
 	if (a.axes != b.axes) { return false; }
 
@@ -80,7 +73,7 @@ bool StaVelocityProtection::same(const Config &a, const Config &b)
 	return true;
 }
 
-void StaVelocityProtection::resetState()
+void AX00StaVelocityProtection::resetState()
 {
 	_kernel.reset();
 	_active = false;
@@ -88,7 +81,7 @@ void StaVelocityProtection::resetState()
 	_xyz_active_axes = 0;
 }
 
-bool StaVelocityProtection::configure(const Config &c, bool armed)
+bool AX00StaVelocityProtection::configure(const Config &c, bool armed)
 {
 	_rejected = !validConfig(c);
 	_pending = armed && (!_configured || !same(c, _config));
@@ -109,7 +102,7 @@ bool StaVelocityProtection::configure(const Config &c, bool armed)
 	return true;
 }
 
-void StaVelocityProtection::latch(uint16_t reason)
+void AX00StaVelocityProtection::latch(uint16_t reason)
 {
 	_fault |= reason;
 	_result.fault = _fault;
@@ -117,7 +110,7 @@ void StaVelocityProtection::latch(uint16_t reason)
 	_open = false;
 }
 
-const StaVelocityProtection::Result &StaVelocityProtection::begin(const Frame &f)
+const AX00StaVelocityProtection::Result &AX00StaVelocityProtection::begin(const Frame &f)
 {
 	_open = false;
 	_result = {};
@@ -173,9 +166,9 @@ const StaVelocityProtection::Result &StaVelocityProtection::begin(const Frame &f
 		resetState(); _result.nu_applied = _kernel.state(); _result.flags |= Inactive | Reset; return _result;
 	}
 
-	// XZ/YZ/XYZ mix velocity and acceleration-only targets. Any active-mask change
+	// XYZ mixes velocity and acceleration-only targets. Any active-mask change
 	// requires a fresh, explicit handover; never reuse an inactive axis's nu.
-	if ((_config.axes == 5 || _config.axes == 6 || _config.axes == 7) && _result.active_axes != _xyz_active_axes) {
+	if (_config.axes == 7 && _result.active_axes != _xyz_active_axes) {
 		resetState();
 		_xyz_active_axes = _result.active_axes;
 		_result.nu_before = _result.nu_ideal = _result.nu_applied = _kernel.state();
@@ -216,7 +209,7 @@ const StaVelocityProtection::Result &StaVelocityProtection::begin(const Frame &f
 	return _result;
 }
 
-const StaVelocityProtection::Result &StaVelocityProtection::finish(const Vec &proxy, uint8_t constrained_axes,
+const AX00StaVelocityProtection::Result &AX00StaVelocityProtection::finish(const Vec &proxy, uint8_t constrained_axes,
 		bool feedback_valid, uint8_t interval_positive, uint8_t interval_negative)
 {
 	if (!_open) { _result.committed_axes = 0; return _result; }

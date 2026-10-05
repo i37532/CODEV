@@ -5,12 +5,12 @@
 
 /** Configuration gate only. PID gains and integrator lifecycle are independent.
  * Requests use signed parameter-width values: validate before any narrowing.
- * Default admission is PID only; callers may admit configured SITL NED ESTA.
+ * Default admission is PID only; V04 callers may admit configured SITL X ESTA.
  * Rejected requests never become
  * effective; while armed a differing request remains pending until cancelled
  * or considered on disarm. Rejection describes the current request immediately.
  */
-class VelocityControlSelector
+class AX00VelocityControlSelector
 {
 public:
 
@@ -25,7 +25,7 @@ public:
 		if (mode < 0 || mode > 2) { _reject |= ModeRange; }
 		else if (mode == 2 || (mode == 1 && !esta_ready)) { _reject |= ModeUnimplemented; }
 
-		if ((mode == 1 && esta_ready) ? (axes != admitted_axes || axes < 1 || axes > 7) : axes != 0) {
+		if ((mode == 1 && esta_ready) ? (axes != admitted_axes || (axes != 1 && axes != 3 && axes != 4 && axes != 7)) : axes != 0) {
 			_reject |= AxesUnavailable;
 		}
 
