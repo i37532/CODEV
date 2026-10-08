@@ -1,0 +1,275 @@
+{
+  "stage": "AX05",
+  "observed_at": "2026-10-08T07:11:36.796449+00:00",
+  "planned": 320,
+  "attempted": 0,
+  "takeoffs": 0,
+  "accepted": 0,
+  "unattempted": 320,
+  "commands": [
+    {
+      "name": "branch",
+      "argv": [
+        "git",
+        "branch",
+        "--show-current"
+      ],
+      "exit_code": 0,
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/preflight01/branch.log",
+      "sha256": "80fc6b37e41fd81d40bf798473574747010a93cf6cf1edd139c6f314e1c5184e"
+    },
+    {
+      "name": "head",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/preflight01/head.log",
+      "sha256": "b7eba09c771d68683e66a65552655605456b7c9462f2e7f65c760f06bb2508cc"
+    },
+    {
+      "name": "workspace",
+      "argv": [
+        "git",
+        "status",
+        "--porcelain"
+      ],
+      "exit_code": 0,
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/preflight01/workspace.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "submodules",
+      "argv": [
+        "git",
+        "submodule",
+        "status",
+        "--recursive"
+      ],
+      "exit_code": 0,
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/preflight01/submodules.log",
+      "sha256": "20028a594d20cfd6abf4713c4767d687b7d2e82c2d0ab6f2f3530b1ee3396b55"
+    },
+    {
+      "name": "submodules_clean",
+      "argv": [
+        "git",
+        "submodule",
+        "foreach",
+        "--recursive",
+        "--quiet",
+        "git status --porcelain"
+      ],
+      "exit_code": 0,
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/preflight01/submodules_clean.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "frozen",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax04/freeze.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/preflight01/frozen.log",
+      "sha256": "177a63d38c946db7ea9f3bcccf04c80f461a4b86463fff62a5d40bd92d28b88d"
+    },
+    {
+      "name": "dry_run",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax04/run.py"
+      ],
+      "exit_code": 0,
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/preflight01/dry_run.log",
+      "sha256": "38c18278696136d0588c41880d7845aa0fab3f9b974f4b6827deb6034e1fd486"
+    },
+    {
+      "name": "ax02_test_protocol",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax02/test_protocol.py"
+      ],
+      "exit_code": 0,
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/preflight01/ax02_test_protocol.log",
+      "sha256": "cb8a593b2ebb2394aeae3859a2f28bc655a283a66a07ac37f5ac8f484633a468"
+    },
+    {
+      "name": "ax02_test_targets",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax02/test_targets.py"
+      ],
+      "exit_code": 0,
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/preflight01/ax02_test_targets.log",
+      "sha256": "c8ee1a95039546216f165ddd0404541ea120a0a43cab8fefacc8da49713e8bb7"
+    },
+    {
+      "name": "ax03_test_collect",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax03/test_collect.py"
+      ],
+      "exit_code": 0,
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/preflight01/ax03_test_collect.log",
+      "sha256": "f4d3ac6800b863502d43d93d11c3082f5da393146c12a3280bf5f03bb5f1b956"
+    },
+    {
+      "name": "ax04_test_formal",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax04/test_formal.py"
+      ],
+      "exit_code": 0,
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/preflight01/ax04_test_formal.log",
+      "sha256": "60f757874bc8c6666469a9d5cba3c1f7543ee72fa1d3371c7ad1c06710ad36ca"
+    },
+    {
+      "name": "VelocityAblationTask",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-VelocityAblationTask",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/preflight01/VelocityAblationTask.xml"
+      ],
+      "exit_code": 0,
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/preflight01/VelocityAblationTask.log",
+      "sha256": "45149c0f49ae8796e20dc1ba7f347c5b198488479f3b4d6923aa53a54177d7eb"
+    },
+    {
+      "name": "raw_storage",
+      "argv": [
+        "du",
+        "-s",
+        "--block-size=1",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX03/batch01"
+      ],
+      "exit_code": 0,
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/preflight01/raw_storage.log",
+      "sha256": "a925bdc8bb959733bea8e9859d06cf21518956043107e80b5d74b9a49f36c250"
+    },
+    {
+      "name": "replay_storage",
+      "argv": [
+        "du",
+        "-s",
+        "--block-size=1",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX03/replay01"
+      ],
+      "exit_code": 0,
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/preflight01/replay_storage.log",
+      "sha256": "3aec50503194f3062067d4ae28aea6cabad01199953f9ca94725efdcc7ff2612"
+    },
+    {
+      "name": "filesystems",
+      "argv": [
+        "df",
+        "-B1"
+      ],
+      "exit_code": 0,
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/preflight01/filesystems.log",
+      "sha256": "76a07abd8c40013a10e289daf78d8b0587c719a6b89bcb49a6e54400c223fd4e"
+    },
+    {
+      "name": "block_devices",
+      "argv": [
+        "lsblk",
+        "-o",
+        "NAME,SIZE,FSTYPE,MOUNTPOINTS"
+      ],
+      "exit_code": 0,
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/preflight01/block_devices.log",
+      "sha256": "0b39a546c206c68cfbaedd4a2b0b3bc588643a9a2f8697c0fb6b2b50854fdaa1"
+    },
+    {
+      "name": "workspace_after",
+      "argv": [
+        "git",
+        "status",
+        "--porcelain"
+      ],
+      "exit_code": 0,
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/preflight01/workspace_after.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "status": "blocked_storage",
+  "flight_authorization": "User granted exact AX04 batch; not permission to delete data or change storage protocol",
+  "branch": "research/sta-velocity-control",
+  "source_head": "794301664cc0aacee6b5c62987531ab6f0b33fdf",
+  "submodule_count": 33,
+  "eeprom_before": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+  "qualification": {
+    "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX04/qualified_source.json",
+    "sha256": "7f8cc14635d33f635e87cb6fc2023c494793fd39a576d3437244842d0d3b3e59",
+    "firmware_sha256": "3c31069dc295edfa535b87909e39544d09a42acb2c54182421324e435386fa09",
+    "execution_sha256": "308aa5a4e52828585bbf6ee3ec0be339a8081475663ceb759de0aee40167d2d3",
+    "frozen_sha256": "0cf4d1a6626ed0cb19ce7cf0af822fe16f9a9fb70f3d3209dfe8d51cd7695f3a"
+  },
+  "asset_count": 500,
+  "external_asset_count": 7,
+  "seed_audit": {
+    "accepted": true,
+    "files_parsed": 38969,
+    "scan_manifest_sha256": "5d97c0eb1d7c87c769d9362589a64d55ac5a39c1714be0f94b63e5a77175328a",
+    "roots": [
+      "/home/yr/Desktop/Codev-autopilot/research",
+      "/home/yr/Desktop/codev doc/experiments",
+      "/home/yr/Desktop/codev doc/plan"
+    ],
+    "excluded": "none; exact fingerprinted unattempted/design registrations only",
+    "registered_matches": 962
+  },
+  "active_simulators": [],
+  "fresh_python_tests": 81,
+  "fresh_cpp_tests": 10,
+  "storage": {
+    "free_bytes": 40905502720,
+    "historical_attempts": 48,
+    "historical_raw_bytes": 5863370752,
+    "historical_replay_bytes": 291987456,
+    "projected_320_bytes": 41035721387,
+    "projection_is_estimate_not_bound": true,
+    "remaining_after_projection_bytes": -130218667,
+    "planning_reserve_bytes": 10737418240,
+    "recommended_free_bytes": 51773139627,
+    "reserve_basis": "Existing runner initial free-space check is 10 GiB; retain comparable host reserve as capacity planning, not a changed flight threshold",
+    "minimum_additional_bytes": 10867636907,
+    "mounted_usb_free_bytes": 24072519680,
+    "alternate_storage": "Mounted USB insufficient for full batch; NTFS partitions unmounted, not inspected/mounted/modified"
+  },
+  "eeprom_after": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+  "offline_checks_passed": true,
+  "formal_data_created": false,
+  "not_run": [
+    "Gazebo",
+    "formal flights",
+    "formal ULog decoding/replay/statistics",
+    "full historical C++/Python suite",
+    "rebuild",
+    "MATLAB",
+    "V09",
+    "hardware"
+  ],
+  "external_evidence": {
+    "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/preflight01/evidence.json",
+    "sha256": "cd21f0c5bc1703914a89d381bfd45c159e6eccc68f2c18e80f1619275a947879",
+    "index_sha256": "da8c31c2b859de09e961fb396e4a2c476f38be4ae365cce4188005530deec55b",
+    "audit_script_sha256": "7ba34838a181ace0c0143e543e257f410b6df152fb7d7e0c8099dc3e36331690"
+  },
+  "supplementary_offline_parameter_check": {
+    "exit_code": 0,
+    "source": "generated parameters.json defaults overlaid with unchanged EEPROM, check_parameters against AX04 frozen.control_parameters",
+    "actual": {
+      "MC_RTC_MODE": 0,
+      "MC_STA_AXES": 0,
+      "MC_RTC_DIV": 1,
+      "MC_RATT_TEST": 0,
+      "MC_STA_TKO_MGT": 0,
+      "MPC_VC_DIV": 1
+    },
+    "live_effective_modes_verified": false
+  },
+  "audit_exit_code": 2
+}
