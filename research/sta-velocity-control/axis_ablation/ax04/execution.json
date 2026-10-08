@@ -1,0 +1,6183 @@
+{
+  "stage": "AX05-axis-ablation-formal01",
+  "maximum_attempts": 320,
+  "task_seeds": {
+    "H": [
+      52001,
+      52002,
+      52003,
+      52004,
+      52005,
+      52006,
+      52007,
+      52008,
+      52009,
+      52010,
+      52011,
+      52012,
+      52013,
+      52014,
+      52015,
+      52016,
+      52017,
+      52018,
+      52019,
+      52020
+    ],
+    "V": [
+      52001,
+      52002,
+      52003,
+      52004,
+      52005,
+      52006,
+      52007,
+      52008,
+      52009,
+      52010,
+      52011,
+      52012,
+      52013,
+      52014,
+      52015,
+      52016,
+      52017,
+      52018,
+      52019,
+      52020
+    ]
+  },
+  "seeds": [
+    52001,
+    52002,
+    52003,
+    52004,
+    52005,
+    52006,
+    52007,
+    52008,
+    52009,
+    52010,
+    52011,
+    52012,
+    52013,
+    52014,
+    52015,
+    52016,
+    52017,
+    52018,
+    52019,
+    52020
+  ],
+  "fixed_parameters": {
+    "MPC_YAW_MODE": 0,
+    "MC_AIRMODE": 0,
+    "MC_PITCHRATE_MAX": 220,
+    "MC_PITCH_P": 6.5,
+    "MC_RATT_TEST": 0,
+    "MC_ROLLRATE_MAX": 220,
+    "MC_ROLL_P": 6.5,
+    "MC_YAWRATE_MAX": 200,
+    "MC_YAW_P": 2.8,
+    "MC_YAW_WEIGHT": 0.4,
+    "MPC_YAWRAUTO_MAX": 45,
+    "MC_MAN_TILT_TAU": 0,
+    "MPC_ACC_DOWN_MAX": 3,
+    "MPC_ACC_HOR": 3,
+    "MPC_ACC_HOR_MAX": 5,
+    "MPC_ACC_UP_MAX": 4,
+    "MPC_ALT_MODE": 0,
+    "MPC_HOLD_DZ": 0.1,
+    "MPC_HOLD_MAX_XY": 0.8,
+    "MPC_HOLD_MAX_Z": 0.6,
+    "MPC_JERK_AUTO": 4,
+    "MPC_JERK_MAX": 8,
+    "MPC_LAND_ALT1": 10,
+    "MPC_LAND_ALT2": 5,
+    "MPC_LAND_SPEED": 0.6,
+    "MPC_MANTHR_MIN": 0.08,
+    "MPC_MAN_TILT_MAX": 35,
+    "MPC_MAN_Y_MAX": 150,
+    "MPC_MAN_Y_TAU": 0.08,
+    "MPC_POS_MODE": 4,
+    "MPC_SPOOLUP_TIME": 1,
+    "MPC_THR_CURVE": 0,
+    "MPC_THR_HOVER": 0.5,
+    "MPC_THR_MAX": 1,
+    "MPC_THR_MIN": 0.12,
+    "MPC_TILTMAX_AIR": 45,
+    "MPC_TILTMAX_LND": 12,
+    "MPC_TKO_RAMP_T": 3,
+    "MPC_TKO_SPEED": 1.5,
+    "MPC_USE_HTE": 1,
+    "MPC_VELD_LP": 5,
+    "MPC_VEL_MANUAL": 10,
+    "MPC_XY_CRUISE": 5,
+    "MPC_XY_ERR_MAX": 2,
+    "MPC_XY_MAN_EXPO": 0.6,
+    "MPC_XY_P": 0.95,
+    "MPC_XY_TRAJ_P": 0.5,
+    "MPC_XY_VEL_ALL": -10,
+    "MPC_XY_VEL_D_ACC": 0.24,
+    "MPC_XY_VEL_I_ACC": 0.48,
+    "MPC_XY_VEL_MAX": 12,
+    "MPC_XY_VEL_P_ACC": 2.16,
+    "MPC_YAW_EXPO": 0.6,
+    "MPC_Z_MAN_EXPO": 0.6,
+    "MPC_Z_P": 1,
+    "MPC_Z_VEL_ALL": -3,
+    "MPC_Z_VEL_D_ACC": 0,
+    "MPC_Z_VEL_I_ACC": 2,
+    "MPC_Z_VEL_MAX_DN": 0.55,
+    "MPC_Z_VEL_MAX_UP": 3,
+    "MPC_Z_VEL_P_ACC": 4,
+    "SYS_VEHICLE_RESP": -0.4,
+    "MC_ACRO_EXPO": 0.69,
+    "MC_ACRO_EXPO_Y": 0.69,
+    "MC_ACRO_P_MAX": 720,
+    "MC_ACRO_R_MAX": 720,
+    "MC_ACRO_SUPEXPO": 0.7,
+    "MC_ACRO_SUPEXPOY": 0.7,
+    "MC_ACRO_Y_MAX": 540,
+    "MC_BAT_SCALE_EN": 0,
+    "MC_PITCHRATE_D": 0.003,
+    "MC_PITCHRATE_FF": 0,
+    "MC_PITCHRATE_I": 0.2,
+    "MC_PITCHRATE_K": 1,
+    "MC_PITCHRATE_P": 0.15,
+    "MC_PR_INT_LIM": 0.3,
+    "MC_ROLLRATE_D": 0.003,
+    "MC_ROLLRATE_FF": 0,
+    "MC_ROLLRATE_I": 0.2,
+    "MC_ROLLRATE_K": 1,
+    "MC_ROLLRATE_P": 0.15,
+    "MC_RR_INT_LIM": 0.3,
+    "MC_RTC_DIV": 1,
+    "MC_RTC_MODE": 0,
+    "MC_STA_AXES": 0,
+    "MC_STA_G_P": 0,
+    "MC_STA_G_R": 0,
+    "MC_STA_G_Y": 0,
+    "MC_STA_L1_P": 0,
+    "MC_STA_L1_R": 0,
+    "MC_STA_L1_Y": 0,
+    "MC_STA_L2_P": 0,
+    "MC_STA_L2_R": 0,
+    "MC_STA_L2_Y": 0,
+    "MC_STA_NU_P": 0,
+    "MC_STA_NU_R": 0,
+    "MC_STA_NU_Y": 0,
+    "MC_STA_TKO_MGT": 0,
+    "MC_YAWRATE_D": 0,
+    "MC_YAWRATE_FF": 0,
+    "MC_YAWRATE_I": 0.1,
+    "MC_YAWRATE_K": 1,
+    "MC_YAWRATE_P": 0.2,
+    "MC_YR_INT_LIM": 0.3,
+    "MPC_LAND_RC_HELP": 0,
+    "MPC_VC_MODE": 0,
+    "MPC_VC_AXES": 0,
+    "MPC_VC_L1_X": 0.5,
+    "MPC_VC_L2_X": 0.1,
+    "MPC_VC_NU_X": 0.4,
+    "MPC_VC_A_X": 0.8,
+    "MIS_TAKEOFF_ALT": 2.5,
+    "SDLOG_DIRS_MAX": 1000,
+    "SDLOG_MODE": 1,
+    "MPC_VC_L1_Y": 0.5,
+    "MPC_VC_L2_Y": 0.1,
+    "MPC_VC_NU_Y": 0.4,
+    "MPC_VC_A_Y": 0.8,
+    "MPC_VC_L1_Z": 2.0,
+    "MPC_VC_L2_Z": 1.0,
+    "MPC_VC_NU_Z": 4.0,
+    "MPC_VC_A_Z": 6.0,
+    "MPC_VC_DIV": 1,
+    "MPC_VCT_TEST": 0
+  },
+  "jobs": [
+    {
+      "id": "run001",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52020,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 1,
+      "position": 1
+    },
+    {
+      "id": "run002",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52020,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 1,
+      "position": 2
+    },
+    {
+      "id": "run003",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52020,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 1,
+      "position": 3
+    },
+    {
+      "id": "run004",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52020,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 1,
+      "position": 4
+    },
+    {
+      "id": "run005",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52020,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 1,
+      "position": 5
+    },
+    {
+      "id": "run006",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52020,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 1,
+      "position": 6
+    },
+    {
+      "id": "run007",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52020,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 1,
+      "position": 7
+    },
+    {
+      "id": "run008",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52020,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 1,
+      "position": 8
+    },
+    {
+      "id": "run009",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52008,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 2,
+      "position": 1
+    },
+    {
+      "id": "run010",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52008,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 2,
+      "position": 2
+    },
+    {
+      "id": "run011",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52008,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 2,
+      "position": 3
+    },
+    {
+      "id": "run012",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52008,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 2,
+      "position": 4
+    },
+    {
+      "id": "run013",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52008,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 2,
+      "position": 5
+    },
+    {
+      "id": "run014",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52008,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 2,
+      "position": 6
+    },
+    {
+      "id": "run015",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52008,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 2,
+      "position": 7
+    },
+    {
+      "id": "run016",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52008,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 2,
+      "position": 8
+    },
+    {
+      "id": "run017",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52019,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 3,
+      "position": 1
+    },
+    {
+      "id": "run018",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52019,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 3,
+      "position": 2
+    },
+    {
+      "id": "run019",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52019,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 3,
+      "position": 3
+    },
+    {
+      "id": "run020",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52019,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 3,
+      "position": 4
+    },
+    {
+      "id": "run021",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52019,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 3,
+      "position": 5
+    },
+    {
+      "id": "run022",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52019,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 3,
+      "position": 6
+    },
+    {
+      "id": "run023",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52019,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 3,
+      "position": 7
+    },
+    {
+      "id": "run024",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52019,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 3,
+      "position": 8
+    },
+    {
+      "id": "run025",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52006,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 4,
+      "position": 1
+    },
+    {
+      "id": "run026",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52006,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 4,
+      "position": 2
+    },
+    {
+      "id": "run027",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52006,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 4,
+      "position": 3
+    },
+    {
+      "id": "run028",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52006,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 4,
+      "position": 4
+    },
+    {
+      "id": "run029",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52006,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 4,
+      "position": 5
+    },
+    {
+      "id": "run030",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52006,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 4,
+      "position": 6
+    },
+    {
+      "id": "run031",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52006,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 4,
+      "position": 7
+    },
+    {
+      "id": "run032",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52006,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 4,
+      "position": 8
+    },
+    {
+      "id": "run033",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52011,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 5,
+      "position": 1
+    },
+    {
+      "id": "run034",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52011,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 5,
+      "position": 2
+    },
+    {
+      "id": "run035",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52011,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 5,
+      "position": 3
+    },
+    {
+      "id": "run036",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52011,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 5,
+      "position": 4
+    },
+    {
+      "id": "run037",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52011,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 5,
+      "position": 5
+    },
+    {
+      "id": "run038",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52011,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 5,
+      "position": 6
+    },
+    {
+      "id": "run039",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52011,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 5,
+      "position": 7
+    },
+    {
+      "id": "run040",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52011,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 5,
+      "position": 8
+    },
+    {
+      "id": "run041",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52012,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 6,
+      "position": 1
+    },
+    {
+      "id": "run042",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52012,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 6,
+      "position": 2
+    },
+    {
+      "id": "run043",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52012,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 6,
+      "position": 3
+    },
+    {
+      "id": "run044",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52012,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 6,
+      "position": 4
+    },
+    {
+      "id": "run045",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52012,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 6,
+      "position": 5
+    },
+    {
+      "id": "run046",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52012,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 6,
+      "position": 6
+    },
+    {
+      "id": "run047",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52012,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 6,
+      "position": 7
+    },
+    {
+      "id": "run048",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52012,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 6,
+      "position": 8
+    },
+    {
+      "id": "run049",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52016,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 7,
+      "position": 1
+    },
+    {
+      "id": "run050",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52016,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 7,
+      "position": 2
+    },
+    {
+      "id": "run051",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52016,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 7,
+      "position": 3
+    },
+    {
+      "id": "run052",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52016,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 7,
+      "position": 4
+    },
+    {
+      "id": "run053",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52016,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 7,
+      "position": 5
+    },
+    {
+      "id": "run054",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52016,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 7,
+      "position": 6
+    },
+    {
+      "id": "run055",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52016,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 7,
+      "position": 7
+    },
+    {
+      "id": "run056",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52016,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 7,
+      "position": 8
+    },
+    {
+      "id": "run057",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52018,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 8,
+      "position": 1
+    },
+    {
+      "id": "run058",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52018,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 8,
+      "position": 2
+    },
+    {
+      "id": "run059",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52018,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 8,
+      "position": 3
+    },
+    {
+      "id": "run060",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52018,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 8,
+      "position": 4
+    },
+    {
+      "id": "run061",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52018,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 8,
+      "position": 5
+    },
+    {
+      "id": "run062",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52018,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 8,
+      "position": 6
+    },
+    {
+      "id": "run063",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52018,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 8,
+      "position": 7
+    },
+    {
+      "id": "run064",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52018,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 8,
+      "position": 8
+    },
+    {
+      "id": "run065",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52010,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 9,
+      "position": 1
+    },
+    {
+      "id": "run066",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52010,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 9,
+      "position": 2
+    },
+    {
+      "id": "run067",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52010,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 9,
+      "position": 3
+    },
+    {
+      "id": "run068",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52010,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 9,
+      "position": 4
+    },
+    {
+      "id": "run069",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52010,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 9,
+      "position": 5
+    },
+    {
+      "id": "run070",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52010,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 9,
+      "position": 6
+    },
+    {
+      "id": "run071",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52010,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 9,
+      "position": 7
+    },
+    {
+      "id": "run072",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52010,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 9,
+      "position": 8
+    },
+    {
+      "id": "run073",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52007,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 10,
+      "position": 1
+    },
+    {
+      "id": "run074",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52007,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 10,
+      "position": 2
+    },
+    {
+      "id": "run075",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52007,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 10,
+      "position": 3
+    },
+    {
+      "id": "run076",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52007,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 10,
+      "position": 4
+    },
+    {
+      "id": "run077",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52007,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 10,
+      "position": 5
+    },
+    {
+      "id": "run078",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52007,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 10,
+      "position": 6
+    },
+    {
+      "id": "run079",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52007,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 10,
+      "position": 7
+    },
+    {
+      "id": "run080",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52007,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 10,
+      "position": 8
+    },
+    {
+      "id": "run081",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52001,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 11,
+      "position": 1
+    },
+    {
+      "id": "run082",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52001,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 11,
+      "position": 2
+    },
+    {
+      "id": "run083",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52001,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 11,
+      "position": 3
+    },
+    {
+      "id": "run084",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52001,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 11,
+      "position": 4
+    },
+    {
+      "id": "run085",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52001,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 11,
+      "position": 5
+    },
+    {
+      "id": "run086",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52001,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 11,
+      "position": 6
+    },
+    {
+      "id": "run087",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52001,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 11,
+      "position": 7
+    },
+    {
+      "id": "run088",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52001,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 11,
+      "position": 8
+    },
+    {
+      "id": "run089",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52004,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 12,
+      "position": 1
+    },
+    {
+      "id": "run090",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52004,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 12,
+      "position": 2
+    },
+    {
+      "id": "run091",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52004,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 12,
+      "position": 3
+    },
+    {
+      "id": "run092",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52004,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 12,
+      "position": 4
+    },
+    {
+      "id": "run093",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52004,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 12,
+      "position": 5
+    },
+    {
+      "id": "run094",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52004,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 12,
+      "position": 6
+    },
+    {
+      "id": "run095",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52004,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 12,
+      "position": 7
+    },
+    {
+      "id": "run096",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52004,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 12,
+      "position": 8
+    },
+    {
+      "id": "run097",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52003,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 13,
+      "position": 1
+    },
+    {
+      "id": "run098",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52003,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 13,
+      "position": 2
+    },
+    {
+      "id": "run099",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52003,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 13,
+      "position": 3
+    },
+    {
+      "id": "run100",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52003,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 13,
+      "position": 4
+    },
+    {
+      "id": "run101",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52003,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 13,
+      "position": 5
+    },
+    {
+      "id": "run102",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52003,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 13,
+      "position": 6
+    },
+    {
+      "id": "run103",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52003,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 13,
+      "position": 7
+    },
+    {
+      "id": "run104",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52003,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 13,
+      "position": 8
+    },
+    {
+      "id": "run105",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52017,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 14,
+      "position": 1
+    },
+    {
+      "id": "run106",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52017,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 14,
+      "position": 2
+    },
+    {
+      "id": "run107",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52017,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 14,
+      "position": 3
+    },
+    {
+      "id": "run108",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52017,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 14,
+      "position": 4
+    },
+    {
+      "id": "run109",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52017,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 14,
+      "position": 5
+    },
+    {
+      "id": "run110",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52017,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 14,
+      "position": 6
+    },
+    {
+      "id": "run111",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52017,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 14,
+      "position": 7
+    },
+    {
+      "id": "run112",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52017,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 14,
+      "position": 8
+    },
+    {
+      "id": "run113",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52009,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 15,
+      "position": 1
+    },
+    {
+      "id": "run114",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52009,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 15,
+      "position": 2
+    },
+    {
+      "id": "run115",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52009,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 15,
+      "position": 3
+    },
+    {
+      "id": "run116",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52009,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 15,
+      "position": 4
+    },
+    {
+      "id": "run117",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52009,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 15,
+      "position": 5
+    },
+    {
+      "id": "run118",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52009,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 15,
+      "position": 6
+    },
+    {
+      "id": "run119",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52009,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 15,
+      "position": 7
+    },
+    {
+      "id": "run120",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52009,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 15,
+      "position": 8
+    },
+    {
+      "id": "run121",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52015,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 16,
+      "position": 1
+    },
+    {
+      "id": "run122",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52015,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 16,
+      "position": 2
+    },
+    {
+      "id": "run123",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52015,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 16,
+      "position": 3
+    },
+    {
+      "id": "run124",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52015,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 16,
+      "position": 4
+    },
+    {
+      "id": "run125",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52015,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 16,
+      "position": 5
+    },
+    {
+      "id": "run126",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52015,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 16,
+      "position": 6
+    },
+    {
+      "id": "run127",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52015,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 16,
+      "position": 7
+    },
+    {
+      "id": "run128",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52015,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 16,
+      "position": 8
+    },
+    {
+      "id": "run129",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52013,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 17,
+      "position": 1
+    },
+    {
+      "id": "run130",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52013,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 17,
+      "position": 2
+    },
+    {
+      "id": "run131",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52013,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 17,
+      "position": 3
+    },
+    {
+      "id": "run132",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52013,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 17,
+      "position": 4
+    },
+    {
+      "id": "run133",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52013,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 17,
+      "position": 5
+    },
+    {
+      "id": "run134",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52013,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 17,
+      "position": 6
+    },
+    {
+      "id": "run135",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52013,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 17,
+      "position": 7
+    },
+    {
+      "id": "run136",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52013,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 17,
+      "position": 8
+    },
+    {
+      "id": "run137",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52005,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 18,
+      "position": 1
+    },
+    {
+      "id": "run138",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52005,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 18,
+      "position": 2
+    },
+    {
+      "id": "run139",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52005,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 18,
+      "position": 3
+    },
+    {
+      "id": "run140",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52005,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 18,
+      "position": 4
+    },
+    {
+      "id": "run141",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52005,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 18,
+      "position": 5
+    },
+    {
+      "id": "run142",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52005,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 18,
+      "position": 6
+    },
+    {
+      "id": "run143",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52005,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 18,
+      "position": 7
+    },
+    {
+      "id": "run144",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52005,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 18,
+      "position": 8
+    },
+    {
+      "id": "run145",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52002,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 19,
+      "position": 1
+    },
+    {
+      "id": "run146",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52002,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 19,
+      "position": 2
+    },
+    {
+      "id": "run147",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52002,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 19,
+      "position": 3
+    },
+    {
+      "id": "run148",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52002,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 19,
+      "position": 4
+    },
+    {
+      "id": "run149",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52002,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 19,
+      "position": 5
+    },
+    {
+      "id": "run150",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52002,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 19,
+      "position": 6
+    },
+    {
+      "id": "run151",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52002,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 19,
+      "position": 7
+    },
+    {
+      "id": "run152",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52002,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 19,
+      "position": 8
+    },
+    {
+      "id": "run153",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52014,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 20,
+      "position": 1
+    },
+    {
+      "id": "run154",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52014,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 20,
+      "position": 2
+    },
+    {
+      "id": "run155",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52014,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 20,
+      "position": 3
+    },
+    {
+      "id": "run156",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52014,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 20,
+      "position": 4
+    },
+    {
+      "id": "run157",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52014,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 20,
+      "position": 5
+    },
+    {
+      "id": "run158",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52014,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 20,
+      "position": 6
+    },
+    {
+      "id": "run159",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52014,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 20,
+      "position": 7
+    },
+    {
+      "id": "run160",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 52014,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 6
+      },
+      "block": 20,
+      "position": 8
+    },
+    {
+      "id": "run161",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52016,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 1,
+      "position": 1
+    },
+    {
+      "id": "run162",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52016,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 1,
+      "position": 2
+    },
+    {
+      "id": "run163",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52016,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 1,
+      "position": 3
+    },
+    {
+      "id": "run164",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52016,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 1,
+      "position": 4
+    },
+    {
+      "id": "run165",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52016,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 1,
+      "position": 5
+    },
+    {
+      "id": "run166",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52016,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 1,
+      "position": 6
+    },
+    {
+      "id": "run167",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52016,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 1,
+      "position": 7
+    },
+    {
+      "id": "run168",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52016,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 1,
+      "position": 8
+    },
+    {
+      "id": "run169",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52001,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 2,
+      "position": 1
+    },
+    {
+      "id": "run170",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52001,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 2,
+      "position": 2
+    },
+    {
+      "id": "run171",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52001,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 2,
+      "position": 3
+    },
+    {
+      "id": "run172",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52001,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 2,
+      "position": 4
+    },
+    {
+      "id": "run173",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52001,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 2,
+      "position": 5
+    },
+    {
+      "id": "run174",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52001,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 2,
+      "position": 6
+    },
+    {
+      "id": "run175",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52001,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 2,
+      "position": 7
+    },
+    {
+      "id": "run176",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52001,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 2,
+      "position": 8
+    },
+    {
+      "id": "run177",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52019,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 3,
+      "position": 1
+    },
+    {
+      "id": "run178",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52019,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 3,
+      "position": 2
+    },
+    {
+      "id": "run179",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52019,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 3,
+      "position": 3
+    },
+    {
+      "id": "run180",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52019,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 3,
+      "position": 4
+    },
+    {
+      "id": "run181",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52019,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 3,
+      "position": 5
+    },
+    {
+      "id": "run182",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52019,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 3,
+      "position": 6
+    },
+    {
+      "id": "run183",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52019,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 3,
+      "position": 7
+    },
+    {
+      "id": "run184",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52019,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 3,
+      "position": 8
+    },
+    {
+      "id": "run185",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52007,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 4,
+      "position": 1
+    },
+    {
+      "id": "run186",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52007,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 4,
+      "position": 2
+    },
+    {
+      "id": "run187",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52007,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 4,
+      "position": 3
+    },
+    {
+      "id": "run188",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52007,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 4,
+      "position": 4
+    },
+    {
+      "id": "run189",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52007,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 4,
+      "position": 5
+    },
+    {
+      "id": "run190",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52007,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 4,
+      "position": 6
+    },
+    {
+      "id": "run191",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52007,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 4,
+      "position": 7
+    },
+    {
+      "id": "run192",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52007,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 4,
+      "position": 8
+    },
+    {
+      "id": "run193",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52002,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 5,
+      "position": 1
+    },
+    {
+      "id": "run194",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52002,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 5,
+      "position": 2
+    },
+    {
+      "id": "run195",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52002,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 5,
+      "position": 3
+    },
+    {
+      "id": "run196",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52002,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 5,
+      "position": 4
+    },
+    {
+      "id": "run197",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52002,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 5,
+      "position": 5
+    },
+    {
+      "id": "run198",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52002,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 5,
+      "position": 6
+    },
+    {
+      "id": "run199",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52002,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 5,
+      "position": 7
+    },
+    {
+      "id": "run200",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52002,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 5,
+      "position": 8
+    },
+    {
+      "id": "run201",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52013,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 6,
+      "position": 1
+    },
+    {
+      "id": "run202",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52013,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 6,
+      "position": 2
+    },
+    {
+      "id": "run203",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52013,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 6,
+      "position": 3
+    },
+    {
+      "id": "run204",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52013,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 6,
+      "position": 4
+    },
+    {
+      "id": "run205",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52013,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 6,
+      "position": 5
+    },
+    {
+      "id": "run206",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52013,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 6,
+      "position": 6
+    },
+    {
+      "id": "run207",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52013,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 6,
+      "position": 7
+    },
+    {
+      "id": "run208",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52013,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 6,
+      "position": 8
+    },
+    {
+      "id": "run209",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52010,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 7,
+      "position": 1
+    },
+    {
+      "id": "run210",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52010,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 7,
+      "position": 2
+    },
+    {
+      "id": "run211",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52010,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 7,
+      "position": 3
+    },
+    {
+      "id": "run212",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52010,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 7,
+      "position": 4
+    },
+    {
+      "id": "run213",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52010,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 7,
+      "position": 5
+    },
+    {
+      "id": "run214",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52010,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 7,
+      "position": 6
+    },
+    {
+      "id": "run215",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52010,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 7,
+      "position": 7
+    },
+    {
+      "id": "run216",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52010,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 7,
+      "position": 8
+    },
+    {
+      "id": "run217",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52004,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 8,
+      "position": 1
+    },
+    {
+      "id": "run218",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52004,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 8,
+      "position": 2
+    },
+    {
+      "id": "run219",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52004,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 8,
+      "position": 3
+    },
+    {
+      "id": "run220",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52004,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 8,
+      "position": 4
+    },
+    {
+      "id": "run221",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52004,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 8,
+      "position": 5
+    },
+    {
+      "id": "run222",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52004,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 8,
+      "position": 6
+    },
+    {
+      "id": "run223",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52004,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 8,
+      "position": 7
+    },
+    {
+      "id": "run224",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52004,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 8,
+      "position": 8
+    },
+    {
+      "id": "run225",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52009,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 9,
+      "position": 1
+    },
+    {
+      "id": "run226",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52009,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 9,
+      "position": 2
+    },
+    {
+      "id": "run227",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52009,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 9,
+      "position": 3
+    },
+    {
+      "id": "run228",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52009,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 9,
+      "position": 4
+    },
+    {
+      "id": "run229",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52009,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 9,
+      "position": 5
+    },
+    {
+      "id": "run230",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52009,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 9,
+      "position": 6
+    },
+    {
+      "id": "run231",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52009,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 9,
+      "position": 7
+    },
+    {
+      "id": "run232",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52009,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 9,
+      "position": 8
+    },
+    {
+      "id": "run233",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52008,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 10,
+      "position": 1
+    },
+    {
+      "id": "run234",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52008,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 10,
+      "position": 2
+    },
+    {
+      "id": "run235",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52008,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 10,
+      "position": 3
+    },
+    {
+      "id": "run236",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52008,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 10,
+      "position": 4
+    },
+    {
+      "id": "run237",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52008,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 10,
+      "position": 5
+    },
+    {
+      "id": "run238",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52008,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 10,
+      "position": 6
+    },
+    {
+      "id": "run239",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52008,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 10,
+      "position": 7
+    },
+    {
+      "id": "run240",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52008,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 10,
+      "position": 8
+    },
+    {
+      "id": "run241",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52011,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 11,
+      "position": 1
+    },
+    {
+      "id": "run242",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52011,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 11,
+      "position": 2
+    },
+    {
+      "id": "run243",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52011,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 11,
+      "position": 3
+    },
+    {
+      "id": "run244",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52011,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 11,
+      "position": 4
+    },
+    {
+      "id": "run245",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52011,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 11,
+      "position": 5
+    },
+    {
+      "id": "run246",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52011,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 11,
+      "position": 6
+    },
+    {
+      "id": "run247",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52011,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 11,
+      "position": 7
+    },
+    {
+      "id": "run248",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52011,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 11,
+      "position": 8
+    },
+    {
+      "id": "run249",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52005,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 12,
+      "position": 1
+    },
+    {
+      "id": "run250",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52005,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 12,
+      "position": 2
+    },
+    {
+      "id": "run251",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52005,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 12,
+      "position": 3
+    },
+    {
+      "id": "run252",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52005,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 12,
+      "position": 4
+    },
+    {
+      "id": "run253",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52005,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 12,
+      "position": 5
+    },
+    {
+      "id": "run254",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52005,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 12,
+      "position": 6
+    },
+    {
+      "id": "run255",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52005,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 12,
+      "position": 7
+    },
+    {
+      "id": "run256",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52005,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 12,
+      "position": 8
+    },
+    {
+      "id": "run257",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52014,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 13,
+      "position": 1
+    },
+    {
+      "id": "run258",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52014,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 13,
+      "position": 2
+    },
+    {
+      "id": "run259",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52014,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 13,
+      "position": 3
+    },
+    {
+      "id": "run260",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52014,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 13,
+      "position": 4
+    },
+    {
+      "id": "run261",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52014,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 13,
+      "position": 5
+    },
+    {
+      "id": "run262",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52014,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 13,
+      "position": 6
+    },
+    {
+      "id": "run263",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52014,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 13,
+      "position": 7
+    },
+    {
+      "id": "run264",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52014,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 13,
+      "position": 8
+    },
+    {
+      "id": "run265",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52015,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 14,
+      "position": 1
+    },
+    {
+      "id": "run266",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52015,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 14,
+      "position": 2
+    },
+    {
+      "id": "run267",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52015,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 14,
+      "position": 3
+    },
+    {
+      "id": "run268",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52015,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 14,
+      "position": 4
+    },
+    {
+      "id": "run269",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52015,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 14,
+      "position": 5
+    },
+    {
+      "id": "run270",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52015,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 14,
+      "position": 6
+    },
+    {
+      "id": "run271",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52015,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 14,
+      "position": 7
+    },
+    {
+      "id": "run272",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52015,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 14,
+      "position": 8
+    },
+    {
+      "id": "run273",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52017,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 15,
+      "position": 1
+    },
+    {
+      "id": "run274",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52017,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 15,
+      "position": 2
+    },
+    {
+      "id": "run275",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52017,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 15,
+      "position": 3
+    },
+    {
+      "id": "run276",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52017,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 15,
+      "position": 4
+    },
+    {
+      "id": "run277",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52017,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 15,
+      "position": 5
+    },
+    {
+      "id": "run278",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52017,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 15,
+      "position": 6
+    },
+    {
+      "id": "run279",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52017,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 15,
+      "position": 7
+    },
+    {
+      "id": "run280",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52017,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 15,
+      "position": 8
+    },
+    {
+      "id": "run281",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52018,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 16,
+      "position": 1
+    },
+    {
+      "id": "run282",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52018,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 16,
+      "position": 2
+    },
+    {
+      "id": "run283",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52018,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 16,
+      "position": 3
+    },
+    {
+      "id": "run284",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52018,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 16,
+      "position": 4
+    },
+    {
+      "id": "run285",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52018,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 16,
+      "position": 5
+    },
+    {
+      "id": "run286",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52018,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 16,
+      "position": 6
+    },
+    {
+      "id": "run287",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52018,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 16,
+      "position": 7
+    },
+    {
+      "id": "run288",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52018,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 16,
+      "position": 8
+    },
+    {
+      "id": "run289",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52012,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 17,
+      "position": 1
+    },
+    {
+      "id": "run290",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52012,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 17,
+      "position": 2
+    },
+    {
+      "id": "run291",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52012,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 17,
+      "position": 3
+    },
+    {
+      "id": "run292",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52012,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 17,
+      "position": 4
+    },
+    {
+      "id": "run293",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52012,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 17,
+      "position": 5
+    },
+    {
+      "id": "run294",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52012,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 17,
+      "position": 6
+    },
+    {
+      "id": "run295",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52012,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 17,
+      "position": 7
+    },
+    {
+      "id": "run296",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52012,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 17,
+      "position": 8
+    },
+    {
+      "id": "run297",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52020,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 18,
+      "position": 1
+    },
+    {
+      "id": "run298",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52020,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 18,
+      "position": 2
+    },
+    {
+      "id": "run299",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52020,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 18,
+      "position": 3
+    },
+    {
+      "id": "run300",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52020,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 18,
+      "position": 4
+    },
+    {
+      "id": "run301",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52020,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 18,
+      "position": 5
+    },
+    {
+      "id": "run302",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52020,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 18,
+      "position": 6
+    },
+    {
+      "id": "run303",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52020,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 18,
+      "position": 7
+    },
+    {
+      "id": "run304",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52020,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 18,
+      "position": 8
+    },
+    {
+      "id": "run305",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52003,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 19,
+      "position": 1
+    },
+    {
+      "id": "run306",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52003,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 19,
+      "position": 2
+    },
+    {
+      "id": "run307",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52003,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 19,
+      "position": 3
+    },
+    {
+      "id": "run308",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52003,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 19,
+      "position": 4
+    },
+    {
+      "id": "run309",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52003,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 19,
+      "position": 5
+    },
+    {
+      "id": "run310",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52003,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 19,
+      "position": 6
+    },
+    {
+      "id": "run311",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52003,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 19,
+      "position": 7
+    },
+    {
+      "id": "run312",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52003,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 19,
+      "position": 8
+    },
+    {
+      "id": "run313",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52006,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 20,
+      "position": 1
+    },
+    {
+      "id": "run314",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52006,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 20,
+      "position": 2
+    },
+    {
+      "id": "run315",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52006,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 20,
+      "position": 3
+    },
+    {
+      "id": "run316",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52006,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 20,
+      "position": 4
+    },
+    {
+      "id": "run317",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52006,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 20,
+      "position": 5
+    },
+    {
+      "id": "run318",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52006,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 20,
+      "position": 6
+    },
+    {
+      "id": "run319",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52006,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 20,
+      "position": 7
+    },
+    {
+      "id": "run320",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 52006,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 8
+      },
+      "block": 20,
+      "position": 8
+    }
+  ],
+  "protocol_overrides": {
+    "scope": "Iris SITL eight velocity configurations; original position P/attitude/rate PID; DIV1 only",
+    "not_authorized": [
+      "AX02 flight",
+      "hardware",
+      "ISTA",
+      "DIV2/4",
+      "tuning",
+      "V08/formal changes",
+      "push",
+      "automatic AX03"
+    ],
+    "data_gate": {
+      "hover_duration_s": [
+        90,
+        92
+      ],
+      "maximum_topic_gap_s": 0.25,
+      "minimum_hover_samples": 600,
+      "maximum_pairing_age_us": 20000,
+      "minimum_metric_window_s": 89.75,
+      "required_rate_sequence_missing": 0,
+      "maximum_ulog_dropouts": 0,
+      "minimum_actuator_match_fraction": 0.8,
+      "maximum_actuator_match_gap_s": 0.25
+    },
+    "height_task": {
+      "coordinate": "local NED, estimated height = frozen_ground_z - local_position.z; not Gazebo truth or terrain clearance",
+      "target_height_m": 2.5,
+      "ground_freeze": "Preserve immutable original xyz, heading, heading counter, ref_timestamp/ref_lat/ref_lon/ref_alt and all p/v reset counters. Height remains ground_z minus local z; global altitude target uses the same pre-arm ref_alt.",
+      "local_target_z": "frozen_ground_z - 2.5",
+      "global_target_alt_m": "frozen_ref_alt - local_target_z",
+      "target_source": "original navigator -> flight_mode_manager -> trajectory_setpoint; no external trajectory/attitude/rate publisher",
+      "takeoff": "unchanged commander takeoff; wait for armed airborne POSCTL after original navigation completion; do not issue current-position Hold",
+      "reposition": {
+        "command": "MAV_CMD_DO_REPOSITION in one COMMAND_INT, frame5, target1/1",
+        "param1": -1,
+        "param2": 1,
+        "param3": 0,
+        "param4": "One original navigator DO_REPOSITION with param4=task_yaw radians for this pinned receiver; no external attitude/rate/trajectory publisher. Do not add delta_heading again to this fresh post-alignment value.",
+        "param5": "COMMAND_INT.x = nearest integer latitude degrees * 1e7",
+        "param6": "COMMAND_INT.y = nearest integer longitude degrees * 1e7",
+        "param7": "float32(frozen_ref_alt - local_target_z)",
+        "xy": "Once-captured fresh onboard trajectory XY, projected with immutable original NED reference; never measured-position or truth substitution",
+        "confirmation": 0,
+        "maximum_sends": 1,
+        "ack_wall_timeout_s": 5,
+        "require": "Fresh accepted addressed ACK, AUTO_LOITER and exact encoded target within 5s; pending only before qualification; no resend; raw/CLI representations checked separately",
+        "altitude_readback_tolerance_m": 0.02,
+        "yaw_readback_tolerance_rad": 0.001,
+        "coordinate_reference_change": {
+          "before_arm": "Preserve immutable original xyz, heading, heading counter, ref_timestamp/ref_lat/ref_lon/ref_alt and all p/v reset counters. Height remains ground_z minus local z; global altitude target uses the same pre-arm ref_alt.",
+          "always_reject_after_arm": [
+            "ref_timestamp/ref_lat/ref_lon/ref_alt change",
+            "xy/z/vxy/vz reset",
+            "primary estimator switch",
+            "invalid measurements",
+            "controller/first update/retry/failsafe/time fault"
+          ],
+          "heading_exception_phase": "TAKEOFF_PREPARATION only: armed, airborne, no ground contact, actual AUTO_TAKEOFF or POSCTL, before any DO_REPOSITION/AUTO_LOITER/excitation/observation",
+          "heading_count_increment": 1,
+          "heading_max_events": 1,
+          "heading_delta_abs_max_deg": 5.0,
+          "heading_delta_limit_basis": "New conservative engineering admission cap, one quarter of unchanged 20deg yaw envelope; not a theoretical bound or held-out estimate. Chosen after historical PID diagnostic knowledge; disclose this development use.",
+          "event_height_m": [
+            1.0,
+            3.0
+          ],
+          "height_limit_basis": "Broad preparation envelope, not an exact reproduction of private delayed terrain>1.5m test. dist_bottom_valid=false is not proof of a valid range observation.",
+          "evidence": {
+            "primary_instance_constant": true,
+            "primary_healthy": true,
+            "mag_aligned_in_flight": "same primary 0->1; yaw_align true; not mag_fault, mag_field_disturbed, emergency reset, EV/GPS yaw takeover or filter fault",
+            "alignment_confirmation_max_lag_s": 0.5,
+            "quat_heading_pair_max_offset_s": 0.04,
+            "quat_heading_delta_tolerance_rad": 0.0001,
+            "require_quat_single_increment": true,
+            "sample_max_gap_s": 0.04,
+            "sequence_missing": 0,
+            "metadata_max_age_s": 0.5,
+            "metadata_max_age_scope": "Periodic estimator_status only; do not apply 0.5s to all metadata topics.",
+            "selector_max_age_s": 1.2,
+            "status_flags_max_age_s": 1.2,
+            "events_freshness": "estimator_event_flags is event-only, no periodic heartbeat. Require pre-arm last event/counter snapshot and uninterrupted subscription/decoded history, contiguous information/warning change counters for new messages, no forbidden events. An old last event is not a new reset nor automatically stale failure; a missing topic or unobservable event interval is not zero. Do not force extra EKF publications.",
+            "metadata_age_basis": "Pinned sources: estimator_status requested at 200ms logger interval; selector/status_flags publish about 1Hz or on change; events publish only on events. Separate 0.5/1.2s engineering guards, not claimed common sample rates.",
+            "pending": "On first candidate, inhibit height command/admission while awaiting asynchronous alignment evidence for <=0.5s. Missing/late/contradictory evidence fails; do not silently accept immediately.",
+            "record": "Original counters/delta/time/primary/alignment flags, pending and confirmation timestamps, actual status/land and controller diagnostics; no zero replacement for missing fields. No Gazebo truth."
+          },
+          "after_exception": "Any second heading event, including counter jump or estimator switch, fails. No heading changes after task_yaw_freeze through landing/disarm. Do not exempt landing resets."
+        }
+      },
+      "entry": {
+        "height_m": [
+          2,
+          3
+        ],
+        "abs_vz_strictly_below_m_s": 0.2,
+        "continuous_sim_seconds": 3,
+        "local_target_z_tolerance_m": 0.05,
+        "local_target_vz_abs_max_m_s": 0.05,
+        "require": "Original entry plus verified protocol04 alignment and once-only task yaw",
+        "host_max_sample_gap_s": 1,
+        "ulog_max_sample_gap_s": 0.04,
+        "height_ready_deadline_after_excitation_gate_s": 10,
+        "hover_start_event": "only after entry passes; preserve candidate entry samples; verify the final 3 seconds independently in actual ULog"
+      },
+      "excitation_clock": "unchanged first valid airborne AUTO_LOITER gate starts existing 12s settle; ready by gate+10s, else abort before gate+12s. Derive gate from diagnostic timestamp_sample and excitation_time, not host receipt time. Never reset/restart excitation while armed.",
+      "observation_sim_s": 90,
+      "observation_accepted_duration_s": [
+        90,
+        92
+      ],
+      "require_excitation_inside_observation": true,
+      "landing": "unchanged commander mode auto:land; require landed and automatic disarm",
+      "wall_timeouts_s": {
+        "startup": 180,
+        "warmup": 180,
+        "takeoff_including_height_entry": 150,
+        "hover": 240,
+        "landing": 150
+      }
+    },
+    "excitation": {
+      "parameter": "H=6,V=8; default0",
+      "duration_s": 64,
+      "settle_after_auto_loiter_s": 12,
+      "H": "p=(.5*E*sin(wt),.25*E*sin(2wt),0)",
+      "V": "same XY; pz=.1*E*sin(wt); positive Z is Down",
+      "envelope": "E=sin(pi*t/64)^4 for0<t<64; otherwise p,v,a=0",
+      "w_rad_s": "2*pi/32",
+      "derivatives": "v=dp/dt,a=d2p/dt2, analytic product rule; once-only additive FF",
+      "source": "single Navigator/FlightTask target plus guarded per-frame adapter; original position P retained; fixed yaw",
+      "conservative_bounds": {
+        "horizontal_p_m": 0.56,
+        "horizontal_v_m_s": 0.18,
+        "horizontal_a_m_s2": 0.08,
+        "z_p_m": 0.1,
+        "z_v_m_s": 0.04,
+        "z_a_m_s2": 0.02
+      }
+    },
+    "diagnostic_gate": {
+      "minimum_samples": 600,
+      "sequence_missing": 0,
+      "maximum_gap_s": 0.04,
+      "raw_dt_domain_s": [
+        0.002,
+        0.04
+      ],
+      "mode": "exact job mode",
+      "axes": "exact job axes",
+      "minimum_excitation_samples": 6390,
+      "minimum_excitation_span_s": 63.96,
+      "full_window_inside_hover": true,
+      "output_exact_minimum_coverage": 0.8,
+      "output_exact_maximum_gap_s": 0.25,
+      "accepted_output_difference": 0,
+      "nu_in_pid": "NaN on unselected axes; selected independent; Z groups phase1/2 PID handover, phase3 steady",
+      "pid_calls": 1,
+      "strict_failures": "Any required check fails: stop and preserve, no additional flight."
+    },
+    "pair_gate": {
+      "relative_rmse_limit": 1.25,
+      "absolute_velocity_rmse_allowance_m_s": [
+        0.02,
+        0.02,
+        0.01
+      ],
+      "absolute_yaw_rmse_allowance_rad": 0.02,
+      "absolute_position_rmse_allowance_m": 0.05,
+      "source": "V00/V01 PID noise scale (X .010751,Y .008080,Z .005138m/s); V03 provides consumed-state baseline. Fixed before any ESTA data.",
+      "per_pair_rule": "candidate_rmse <= 1.25*paired_PID_rmse + frozen absolute allowance; each commanded/noncommanded axis separately",
+      "maximum_constraint_fraction": 0.05,
+      "maximum_continuous_constraint_s": 0.5,
+      "maximum_faults": 0,
+      "maximum_failsafe": 0,
+      "maximum_hover_yaw_error_deg": 20,
+      "maximum_hover_height_error_m": 1,
+      "maximum_position_deviation_m": 2,
+      "maximum_tilt_deg": 15,
+      "maximum_xy_speed_m_s": 1,
+      "maximum_hover_vz_m_s": 0.6,
+      "maximum_candidate_flights_before_reauthorization": 48,
+      "candidates": 1,
+      "order": "H24 then V24; PID first per seed, run25 V PID budgeted safety gate",
+      "parameter_search_flights": 0,
+      "window": "64s and32s halves consumed velocity;90s position/yaw; componentwise",
+      "calculation": "ESTA <= 1.25 * same-seed PID + fixed allowance; acceptance is development noninferiority, not scientific superiority.",
+      "noise_pair_max_difference": 1e-10,
+      "noise_distinct_min_difference": 1e-06
+    },
+    "metrics": {
+      "primary": "time-weighted consumed per-axis velocity RMSE [0,64), each32s half; XY=sqrt((RMSE_X^2+RMSE_Y^2)/2), does not replace componentwise gates",
+      "secondary": "velocity mean/std/IAE,90s position/yaw, nu, constraints, true-update acceleration/thrust TV, common-band spectrum and host wall-time",
+      "missing": "stop first failure; retain attempts and unexecuted missing, no imputation/retry; all48+42pairs required",
+      "interpretation": "fixed-gain axis configuration development ablation; n3/task; not general superiority, not fully independent random sources"
+    },
+    "logging": "Preserve original SDLOG_PROFILE bits OR16 OR1024; audited RAM logging and durable archive; no required dropout/gap",
+    "current_turn_not_run": [
+      "flight",
+      "tuning",
+      "formal holdout",
+      "push"
+    ]
+  },
+  "output_root": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/formal01",
+  "authority": "AX04 offline only; separate explicit AX05 authorization and exact receipt required",
+  "order_rationale": "All eight qualified in AX03. Balance PID too; same seed blocks across H/V, order frozen below.",
+  "stop_rule": "First mandatory safety/log or newly available paired risk failure stops batch; no retry or replacement",
+  "V_safety_gate": "Prior AX03 V24 qualification plus formal H160/140paired gate; no additional pilot",
+  "parameter_sources": {
+    "audit": "research/sta-velocity-control/axis_ablation/ax00/evidence.json",
+    "sha256": "dc2c5a12ab76591e00fa7a28c151957accfe010bfc176b87df83983c2fdbdb99",
+    "status": "V08 XY plus historical Z; unified matrix not flight-qualified"
+  },
+  "formal_order": {
+    "engine": "numpy.PCG64",
+    "randomization_seed": 62001,
+    "method": "Williams eight rows, two complete sets plus complementary four rows; task gates H then V",
+    "individual_failure": "stop immediately",
+    "paired_risk": "check all newly available pairs immediately; unresolved pairs must finish within current block",
+    "qualified_pilot": "AX03 all48 accepted; no new formal pilot, all320 count toward budget"
+  }
+}
