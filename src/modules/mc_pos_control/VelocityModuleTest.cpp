@@ -60,6 +60,19 @@ public:
 	static void selectMask(MulticopterPositionControl &m, int32_t axes) {
 		selectXYZ(m); m._param_mpc_vc_axes.set(axes); m._param_mpc_vc_mode.set(axes?1:0);
 	}
+	static void ablationParameters(MulticopterPositionControl &m, int32_t axes) {
+		m._param_mpc_vc_mode.commit_no_notification(axes?1:0); m._param_mpc_vc_axes.commit_no_notification(axes);
+		m._param_mpc_xy_vel_p_acc.commit_no_notification(2.16f);
+		m._param_mpc_xy_vel_i_acc.commit_no_notification(.48f);
+		m._param_mpc_xy_vel_d_acc.commit_no_notification(.24f);
+		m._param_mpc_vc_l1_x.commit_no_notification(.5f); m._param_mpc_vc_l2_x.commit_no_notification(.1f);
+		m._param_mpc_vc_l1_y.commit_no_notification(.5f); m._param_mpc_vc_l2_y.commit_no_notification(.1f);
+		m._param_mpc_vc_nu_x.commit_no_notification(.4f); m._param_mpc_vc_a_x.commit_no_notification(.8f);
+		m._param_mpc_vc_nu_y.commit_no_notification(.4f); m._param_mpc_vc_a_y.commit_no_notification(.8f);
+		m._param_mpc_vc_l1_z.commit_no_notification(2.f); m._param_mpc_vc_l2_z.commit_no_notification(1.f);
+		m._param_mpc_vc_nu_z.commit_no_notification(4.f); m._param_mpc_vc_a_z.commit_no_notification(6.f);
+		m.parameters_update(true);
+	}
 };
 
 class VelocityTestQueueAnchor : public px4::WorkItem
@@ -187,6 +200,68 @@ TEST_F(VelocityModule, AX01MixedFaultTerminationResetRetryAndContact)
 		EXPECT_EQ(d.pid_calls,2); EXPECT_NE(d.first_fail,0); EXPECT_EQ(d.committed_axes,0); EXPECT_EQ(d.retry_result,2);
 		rate_fault=rate_termination=false; EXPECT_FALSE(step(10000,true).valid);
 	} }
+}
+
+TEST_F(VelocityModule, AX02VerticalTaskAllEightActualMasks)
+{
+	for(int axes=0;axes<8;++axes) {
+	VelocityModuleTestAccess::ablationParameters(*m,axes);
+	VelocityModuleTestAccess::researchTask(*m,8);
+	mode.flag_armed=false; ASSERT_TRUE(mode_pub.publish(mode)); step();
+	mode.flag_armed=true; ASSERT_TRUE(mode_pub.publish(mode));
+	VelocityModuleTestAccess::airborne(*m,lp.timestamp); land.landed=land.ground_contact=false; ASSERT_TRUE(land_pub.publish(land));
+	uORB::Publication<vehicle_status_s> status_pub{ORB_ID(vehicle_status)};
+	vehicle_status_s status{}; status.nav_state=vehicle_status_s::NAVIGATION_STATE_AUTO_LOITER; ASSERT_TRUE(status_pub.publish(status));
+	target.z=lp.z; target.vz=0.f; target.acceleration[0]=.01f; target.acceleration[1]=-.02f; target.acceleration[2]=0.f;
+	float peak=0.f;
+	for(int k=0;k<8000;++k) {
+		const auto d=step(k%2?12000:8000,true); ASSERT_TRUE(d.valid); EXPECT_EQ(d.excitation_fault,0);
+		const auto o=VelocityResearchTask::evaluate(6,d.excitation_time);
+		EXPECT_FLOAT_EQ(d.p_sp[0],target.x+o.p[0]); EXPECT_FLOAT_EQ(d.p_sp[1],target.y+o.p[1]);
+		EXPECT_FLOAT_EQ(d.v_ff[0],target.vx+o.v[0]); EXPECT_FLOAT_EQ(d.a_ff[0],target.acceleration[0]+o.a[0]);
+		EXPECT_FLOAT_EQ(d.a_ff[1],target.acceleration[1]+o.a[1]); const auto z=VelocityAxisAblationTask::vertical(d.excitation_time);
+		EXPECT_FLOAT_EQ(d.p_sp[2],target.z+z.p); EXPECT_FLOAT_EQ(d.v_ff[2],target.vz+z.v);
+		EXPECT_FLOAT_EQ(d.a_ff[2],target.acceleration[2]+z.a); EXPECT_NEAR(d.v_sp[2],z.p+z.v,2e-6f);
+		EXPECT_EQ(d.effective_mode,axes?1:0);
+		if(k>1) { EXPECT_EQ(d.committed_axes,axes); EXPECT_EQ(d.pid_axes,7^axes); } EXPECT_EQ(d.inner_mode,0); EXPECT_EQ(d.inner_axes,0); EXPECT_EQ(d.inner_divisor,1);
+		EXPECT_FLOAT_EQ(VelocityModuleTestAccess::cache(*m).z,target.z);
+		EXPECT_NEAR(d.v_sp[0],.95f*o.p[0]+o.v[0],2e-6f);
+		EXPECT_FLOAT_EQ(d.excitation+d.excitation_y+d.excitation_z,0.f);
+		EXPECT_FLOAT_EQ(VelocityModuleTestAccess::cache(*m).x,target.x); peak=fmaxf(peak,fabsf(o.p[0]));
+	}
+	EXPECT_GT(peak,.2f);
+	status.nav_state=vehicle_status_s::NAVIGATION_STATE_AUTO_LAND; ASSERT_TRUE(status_pub.publish(status));
+	const auto d=step(8000,true); EXPECT_EQ(d.excitation_fault,2); EXPECT_FLOAT_EQ(d.p_sp[0],target.x); EXPECT_FLOAT_EQ(d.a_ff[0],target.acceleration[0]); EXPECT_FLOAT_EQ(d.p_sp[2],target.z); EXPECT_FLOAT_EQ(d.a_ff[2],target.acceleration[2]);
+	}
+}
+
+TEST_F(VelocityModule, AX02VerticalTaskRealRunSingleFFAndGateClear)
+{
+	VelocityModuleTestAccess::researchTask(*m,8);
+	mode.flag_armed=false; ASSERT_TRUE(mode_pub.publish(mode)); step();
+	mode.flag_armed=true; ASSERT_TRUE(mode_pub.publish(mode));
+	VelocityModuleTestAccess::airborne(*m,lp.timestamp); land.landed=land.ground_contact=false; ASSERT_TRUE(land_pub.publish(land));
+	uORB::Publication<vehicle_status_s> status_pub{ORB_ID(vehicle_status)};
+	vehicle_status_s status{}; status.nav_state=vehicle_status_s::NAVIGATION_STATE_AUTO_LOITER; ASSERT_TRUE(status_pub.publish(status));
+	target.z=lp.z; target.vz=0.f; target.acceleration[0]=.01f; target.acceleration[1]=-.02f; target.acceleration[2]=0.f;
+	float peak=0.f;
+	for(int k=0;k<8000;++k) {
+		const auto d=step(k%2?12000:8000,true); ASSERT_TRUE(d.valid); EXPECT_EQ(d.excitation_fault,0);
+		const auto o=VelocityResearchTask::evaluate(6,d.excitation_time);
+		EXPECT_FLOAT_EQ(d.p_sp[0],target.x+o.p[0]); EXPECT_FLOAT_EQ(d.p_sp[1],target.y+o.p[1]);
+		EXPECT_FLOAT_EQ(d.v_ff[0],target.vx+o.v[0]); EXPECT_FLOAT_EQ(d.a_ff[0],target.acceleration[0]+o.a[0]);
+		EXPECT_FLOAT_EQ(d.a_ff[1],target.acceleration[1]+o.a[1]); const auto z=VelocityAxisAblationTask::vertical(d.excitation_time);
+		EXPECT_FLOAT_EQ(d.p_sp[2],target.z+z.p); EXPECT_FLOAT_EQ(d.v_ff[2],target.vz+z.v);
+		EXPECT_FLOAT_EQ(d.a_ff[2],target.acceleration[2]+z.a); EXPECT_NEAR(d.v_sp[2],z.p+z.v,2e-6f);
+		EXPECT_EQ(d.effective_mode,0); EXPECT_EQ(d.inner_mode,0); EXPECT_EQ(d.inner_axes,0); EXPECT_EQ(d.inner_divisor,1);
+		EXPECT_FLOAT_EQ(VelocityModuleTestAccess::cache(*m).z,target.z);
+		EXPECT_NEAR(d.v_sp[0],.95f*o.p[0]+o.v[0],2e-6f);
+		EXPECT_FLOAT_EQ(d.excitation+d.excitation_y+d.excitation_z,0.f);
+		EXPECT_FLOAT_EQ(VelocityModuleTestAccess::cache(*m).x,target.x); peak=fmaxf(peak,fabsf(o.p[0]));
+	}
+	EXPECT_GT(peak,.2f);
+	status.nav_state=vehicle_status_s::NAVIGATION_STATE_AUTO_LAND; ASSERT_TRUE(status_pub.publish(status));
+	const auto d=step(8000,true); EXPECT_EQ(d.excitation_fault,2); EXPECT_FLOAT_EQ(d.p_sp[0],target.x); EXPECT_FLOAT_EQ(d.a_ff[0],target.acceleration[0]); EXPECT_FLOAT_EQ(d.p_sp[2],target.z); EXPECT_FLOAT_EQ(d.a_ff[2],target.acceleration[2]);
 }
 
 TEST_F(VelocityModule, V06TrajectoryBeforePositionPAndSingleFeedforward)

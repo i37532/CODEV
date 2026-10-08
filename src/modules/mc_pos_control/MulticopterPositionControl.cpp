@@ -482,7 +482,7 @@ void MulticopterPositionControl::Run()
 			_control.setVelocityFrame(velocity_frame);
 
 #if defined(CONFIG_ARCH_BOARD_PX4_SITL)
-			const bool excitation_gate = (_param_mpc_vct_test.get() >= 1 && _param_mpc_vct_test.get() <= 7) && flying
+			const bool excitation_gate = (_param_mpc_vct_test.get() >= 1 && _param_mpc_vct_test.get() <= 8) && flying
 				&& _velocity_vehicle_status.nav_state == vehicle_status_s::NAVIGATION_STATE_AUTO_LOITER
 				&& !_vehicle_land_detected.landed && !_vehicle_land_detected.ground_contact
 				&& _control_mode.flag_control_auto_enabled && !_control.velocitySelection().pending()
@@ -497,13 +497,17 @@ void MulticopterPositionControl::Run()
 			if (_param_mpc_vct_test.get() == 4 && excitation_gate && !_velocity_excitation.fault()) {
 				VelocityXYZDiagnosticExcitation::waveform(_velocity_excitation.time(), excitation, excitation_y, excitation_z);
 			}
-			if (VelocityResearchTask::valid(_param_mpc_vct_test.get())) {
+			if (VelocityResearchTask::valid(_param_mpc_vct_test.get()) || _param_mpc_vct_test.get() == 8) {
 				// Task inputs precede original position P; never also add velocity
 				// excitation. Keep the cached upstream target unchanged each frame.
 				excitation = 0.f;
 				if (excitation_gate && !_velocity_excitation.fault()) {
-					const auto task = VelocityResearchTask::evaluate(_param_mpc_vct_test.get(), _velocity_excitation.time());
-					VelocityResearchTask::apply(frame_setpoint, task);
+					if (_param_mpc_vct_test.get() == 8) {
+						VelocityAxisAblationTask::apply(frame_setpoint, _velocity_excitation.time());
+					} else {
+						const auto task = VelocityResearchTask::evaluate(_param_mpc_vct_test.get(), _velocity_excitation.time());
+						VelocityResearchTask::apply(frame_setpoint, task);
+					}
 					_control.setInputSetpoint(frame_setpoint);
 				}
 			}

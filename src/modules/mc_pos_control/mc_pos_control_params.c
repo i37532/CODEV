@@ -67,8 +67,9 @@ PARAM_DEFINE_FLOAT(MPC_THR_MIN, 0.12f);
  * @value 5 V06 hover trajectory (64 s, no velocity excitation)
  * @value 6 V06 low-speed NED figure8 (64 s, position/velocity/acceleration FF)
  * @value 7 V06 same figure8 with smooth heading variation (up to 30 degrees)
+ * @value 8 AX02 fixed-yaw figure8 with smooth NED Z addition (<=0.1 m)
  * @min 0
- * @max 7
+ * @max 8
  * @group Multicopter Position Control
  */
 PARAM_DEFINE_INT32(MPC_VCT_TEST, 0);

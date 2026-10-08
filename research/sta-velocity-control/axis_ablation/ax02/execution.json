@@ -1,0 +1,1135 @@
+{
+  "stage": "AX03-axis-ablation-protocol01",
+  "maximum_attempts": 48,
+  "task_seeds": {
+    "H": [
+      51001,
+      51002,
+      51003
+    ],
+    "V": [
+      51011,
+      51012,
+      51013
+    ]
+  },
+  "seeds": [
+    51001,
+    51002,
+    51003,
+    51011,
+    51012,
+    51013
+  ],
+  "fixed_parameters": {
+    "MPC_YAW_MODE": 0,
+    "MC_AIRMODE": 0,
+    "MC_PITCHRATE_MAX": 220,
+    "MC_PITCH_P": 6.5,
+    "MC_RATT_TEST": 0,
+    "MC_ROLLRATE_MAX": 220,
+    "MC_ROLL_P": 6.5,
+    "MC_YAWRATE_MAX": 200,
+    "MC_YAW_P": 2.8,
+    "MC_YAW_WEIGHT": 0.4,
+    "MPC_YAWRAUTO_MAX": 45,
+    "MC_MAN_TILT_TAU": 0,
+    "MPC_ACC_DOWN_MAX": 3,
+    "MPC_ACC_HOR": 3,
+    "MPC_ACC_HOR_MAX": 5,
+    "MPC_ACC_UP_MAX": 4,
+    "MPC_ALT_MODE": 0,
+    "MPC_HOLD_DZ": 0.1,
+    "MPC_HOLD_MAX_XY": 0.8,
+    "MPC_HOLD_MAX_Z": 0.6,
+    "MPC_JERK_AUTO": 4,
+    "MPC_JERK_MAX": 8,
+    "MPC_LAND_ALT1": 10,
+    "MPC_LAND_ALT2": 5,
+    "MPC_LAND_SPEED": 0.6,
+    "MPC_MANTHR_MIN": 0.08,
+    "MPC_MAN_TILT_MAX": 35,
+    "MPC_MAN_Y_MAX": 150,
+    "MPC_MAN_Y_TAU": 0.08,
+    "MPC_POS_MODE": 4,
+    "MPC_SPOOLUP_TIME": 1,
+    "MPC_THR_CURVE": 0,
+    "MPC_THR_HOVER": 0.5,
+    "MPC_THR_MAX": 1,
+    "MPC_THR_MIN": 0.12,
+    "MPC_TILTMAX_AIR": 45,
+    "MPC_TILTMAX_LND": 12,
+    "MPC_TKO_RAMP_T": 3,
+    "MPC_TKO_SPEED": 1.5,
+    "MPC_USE_HTE": 1,
+    "MPC_VELD_LP": 5,
+    "MPC_VEL_MANUAL": 10,
+    "MPC_XY_CRUISE": 5,
+    "MPC_XY_ERR_MAX": 2,
+    "MPC_XY_MAN_EXPO": 0.6,
+    "MPC_XY_P": 0.95,
+    "MPC_XY_TRAJ_P": 0.5,
+    "MPC_XY_VEL_ALL": -10,
+    "MPC_XY_VEL_D_ACC": 0.24,
+    "MPC_XY_VEL_I_ACC": 0.48,
+    "MPC_XY_VEL_MAX": 12,
+    "MPC_XY_VEL_P_ACC": 2.16,
+    "MPC_YAW_EXPO": 0.6,
+    "MPC_Z_MAN_EXPO": 0.6,
+    "MPC_Z_P": 1,
+    "MPC_Z_VEL_ALL": -3,
+    "MPC_Z_VEL_D_ACC": 0,
+    "MPC_Z_VEL_I_ACC": 2,
+    "MPC_Z_VEL_MAX_DN": 0.55,
+    "MPC_Z_VEL_MAX_UP": 3,
+    "MPC_Z_VEL_P_ACC": 4,
+    "SYS_VEHICLE_RESP": -0.4,
+    "MC_ACRO_EXPO": 0.69,
+    "MC_ACRO_EXPO_Y": 0.69,
+    "MC_ACRO_P_MAX": 720,
+    "MC_ACRO_R_MAX": 720,
+    "MC_ACRO_SUPEXPO": 0.7,
+    "MC_ACRO_SUPEXPOY": 0.7,
+    "MC_ACRO_Y_MAX": 540,
+    "MC_BAT_SCALE_EN": 0,
+    "MC_PITCHRATE_D": 0.003,
+    "MC_PITCHRATE_FF": 0,
+    "MC_PITCHRATE_I": 0.2,
+    "MC_PITCHRATE_K": 1,
+    "MC_PITCHRATE_P": 0.15,
+    "MC_PR_INT_LIM": 0.3,
+    "MC_ROLLRATE_D": 0.003,
+    "MC_ROLLRATE_FF": 0,
+    "MC_ROLLRATE_I": 0.2,
+    "MC_ROLLRATE_K": 1,
+    "MC_ROLLRATE_P": 0.15,
+    "MC_RR_INT_LIM": 0.3,
+    "MC_RTC_DIV": 1,
+    "MC_RTC_MODE": 0,
+    "MC_STA_AXES": 0,
+    "MC_STA_G_P": 0,
+    "MC_STA_G_R": 0,
+    "MC_STA_G_Y": 0,
+    "MC_STA_L1_P": 0,
+    "MC_STA_L1_R": 0,
+    "MC_STA_L1_Y": 0,
+    "MC_STA_L2_P": 0,
+    "MC_STA_L2_R": 0,
+    "MC_STA_L2_Y": 0,
+    "MC_STA_NU_P": 0,
+    "MC_STA_NU_R": 0,
+    "MC_STA_NU_Y": 0,
+    "MC_STA_TKO_MGT": 0,
+    "MC_YAWRATE_D": 0,
+    "MC_YAWRATE_FF": 0,
+    "MC_YAWRATE_I": 0.1,
+    "MC_YAWRATE_K": 1,
+    "MC_YAWRATE_P": 0.2,
+    "MC_YR_INT_LIM": 0.3,
+    "MPC_LAND_RC_HELP": 0,
+    "MPC_VC_MODE": 0,
+    "MPC_VC_AXES": 0,
+    "MPC_VC_L1_X": 0.5,
+    "MPC_VC_L2_X": 0.1,
+    "MPC_VC_NU_X": 0.4,
+    "MPC_VC_A_X": 0.8,
+    "MIS_TAKEOFF_ALT": 2.5,
+    "SDLOG_DIRS_MAX": 1000,
+    "SDLOG_MODE": 1,
+    "MPC_VC_L1_Y": 0.5,
+    "MPC_VC_L2_Y": 0.1,
+    "MPC_VC_NU_Y": 0.4,
+    "MPC_VC_A_Y": 0.8,
+    "MPC_VC_L1_Z": 2.0,
+    "MPC_VC_L2_Z": 1.0,
+    "MPC_VC_NU_Z": 4.0,
+    "MPC_VC_A_Z": 6.0,
+    "MPC_VC_DIV": 1,
+    "MPC_VCT_TEST": 0
+  },
+  "jobs": [
+    {
+      "id": "run01",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 51001,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 6
+      }
+    },
+    {
+      "id": "run02",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 51001,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 6
+      }
+    },
+    {
+      "id": "run03",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 51001,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 6
+      }
+    },
+    {
+      "id": "run04",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 51001,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 6
+      }
+    },
+    {
+      "id": "run05",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 51001,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 6
+      }
+    },
+    {
+      "id": "run06",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 51001,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 6
+      }
+    },
+    {
+      "id": "run07",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 51001,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 6
+      }
+    },
+    {
+      "id": "run08",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 51001,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 6
+      }
+    },
+    {
+      "id": "run09",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 51002,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 6
+      }
+    },
+    {
+      "id": "run10",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 51002,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 6
+      }
+    },
+    {
+      "id": "run11",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 51002,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 6
+      }
+    },
+    {
+      "id": "run12",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 51002,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 6
+      }
+    },
+    {
+      "id": "run13",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 51002,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 6
+      }
+    },
+    {
+      "id": "run14",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 51002,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 6
+      }
+    },
+    {
+      "id": "run15",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 51002,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 6
+      }
+    },
+    {
+      "id": "run16",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 51002,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 6
+      }
+    },
+    {
+      "id": "run17",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 51003,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 6
+      }
+    },
+    {
+      "id": "run18",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 51003,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 6
+      }
+    },
+    {
+      "id": "run19",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 51003,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 6
+      }
+    },
+    {
+      "id": "run20",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 51003,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 6
+      }
+    },
+    {
+      "id": "run21",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 51003,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 6
+      }
+    },
+    {
+      "id": "run22",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 51003,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 6
+      }
+    },
+    {
+      "id": "run23",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 51003,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 6
+      }
+    },
+    {
+      "id": "run24",
+      "phase": "development",
+      "task": "H",
+      "gate": "H",
+      "seed": 51003,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 6
+      }
+    },
+    {
+      "id": "run25",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 51011,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 8
+      }
+    },
+    {
+      "id": "run26",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 51011,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 8
+      }
+    },
+    {
+      "id": "run27",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 51011,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 8
+      }
+    },
+    {
+      "id": "run28",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 51011,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 8
+      }
+    },
+    {
+      "id": "run29",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 51011,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 8
+      }
+    },
+    {
+      "id": "run30",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 51011,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 8
+      }
+    },
+    {
+      "id": "run31",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 51011,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 8
+      }
+    },
+    {
+      "id": "run32",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 51011,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 8
+      }
+    },
+    {
+      "id": "run33",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 51012,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 8
+      }
+    },
+    {
+      "id": "run34",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 51012,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 8
+      }
+    },
+    {
+      "id": "run35",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 51012,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 8
+      }
+    },
+    {
+      "id": "run36",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 51012,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 8
+      }
+    },
+    {
+      "id": "run37",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 51012,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 8
+      }
+    },
+    {
+      "id": "run38",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 51012,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 8
+      }
+    },
+    {
+      "id": "run39",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 51012,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 8
+      }
+    },
+    {
+      "id": "run40",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 51012,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 8
+      }
+    },
+    {
+      "id": "run41",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 51013,
+      "candidate": "PID",
+      "mode": 0,
+      "axes": 0,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0,
+        "MPC_VCT_TEST": 8
+      }
+    },
+    {
+      "id": "run42",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 51013,
+      "candidate": "XY",
+      "mode": 1,
+      "axes": 3,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 3,
+        "MPC_VCT_TEST": 8
+      }
+    },
+    {
+      "id": "run43",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 51013,
+      "candidate": "XZ",
+      "mode": 1,
+      "axes": 5,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 5,
+        "MPC_VCT_TEST": 8
+      }
+    },
+    {
+      "id": "run44",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 51013,
+      "candidate": "YZ",
+      "mode": 1,
+      "axes": 6,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 6,
+        "MPC_VCT_TEST": 8
+      }
+    },
+    {
+      "id": "run45",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 51013,
+      "candidate": "XYZ",
+      "mode": 1,
+      "axes": 7,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 7,
+        "MPC_VCT_TEST": 8
+      }
+    },
+    {
+      "id": "run46",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 51013,
+      "candidate": "X",
+      "mode": 1,
+      "axes": 1,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1,
+        "MPC_VCT_TEST": 8
+      }
+    },
+    {
+      "id": "run47",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 51013,
+      "candidate": "Y",
+      "mode": 1,
+      "axes": 2,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 2,
+        "MPC_VCT_TEST": 8
+      }
+    },
+    {
+      "id": "run48",
+      "phase": "development",
+      "task": "V",
+      "gate": "V",
+      "seed": 51013,
+      "candidate": "Z",
+      "mode": 1,
+      "axes": 4,
+      "divisor": 1,
+      "parameters": {
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 4,
+        "MPC_VCT_TEST": 8
+      }
+    }
+  ],
+  "protocol_overrides": {
+    "scope": "Iris SITL eight velocity configurations; original position P/attitude/rate PID; DIV1 only",
+    "not_authorized": [
+      "AX02 flight",
+      "hardware",
+      "ISTA",
+      "DIV2/4",
+      "tuning",
+      "V08/formal changes",
+      "push",
+      "automatic AX03"
+    ],
+    "data_gate": {
+      "hover_duration_s": [
+        90,
+        92
+      ],
+      "maximum_topic_gap_s": 0.25,
+      "minimum_hover_samples": 600,
+      "maximum_pairing_age_us": 20000,
+      "minimum_metric_window_s": 89.75,
+      "required_rate_sequence_missing": 0,
+      "maximum_ulog_dropouts": 0,
+      "minimum_actuator_match_fraction": 0.8,
+      "maximum_actuator_match_gap_s": 0.25
+    },
+    "height_task": {
+      "coordinate": "local NED, estimated height = frozen_ground_z - local_position.z; not Gazebo truth or terrain clearance",
+      "target_height_m": 2.5,
+      "ground_freeze": "Preserve immutable original xyz, heading, heading counter, ref_timestamp/ref_lat/ref_lon/ref_alt and all p/v reset counters. Height remains ground_z minus local z; global altitude target uses the same pre-arm ref_alt.",
+      "local_target_z": "frozen_ground_z - 2.5",
+      "global_target_alt_m": "frozen_ref_alt - local_target_z",
+      "target_source": "original navigator -> flight_mode_manager -> trajectory_setpoint; no external trajectory/attitude/rate publisher",
+      "takeoff": "unchanged commander takeoff; wait for armed airborne POSCTL after original navigation completion; do not issue current-position Hold",
+      "reposition": {
+        "command": "MAV_CMD_DO_REPOSITION in one COMMAND_INT, frame5, target1/1",
+        "param1": -1,
+        "param2": 1,
+        "param3": 0,
+        "param4": "One original navigator DO_REPOSITION with param4=task_yaw radians for this pinned receiver; no external attitude/rate/trajectory publisher. Do not add delta_heading again to this fresh post-alignment value.",
+        "param5": "COMMAND_INT.x = nearest integer latitude degrees * 1e7",
+        "param6": "COMMAND_INT.y = nearest integer longitude degrees * 1e7",
+        "param7": "float32(frozen_ref_alt - local_target_z)",
+        "xy": "Once-captured fresh onboard trajectory XY, projected with immutable original NED reference; never measured-position or truth substitution",
+        "confirmation": 0,
+        "maximum_sends": 1,
+        "ack_wall_timeout_s": 5,
+        "require": "Fresh accepted addressed ACK, AUTO_LOITER and exact encoded target within 5s; pending only before qualification; no resend; raw/CLI representations checked separately",
+        "altitude_readback_tolerance_m": 0.02,
+        "yaw_readback_tolerance_rad": 0.001,
+        "coordinate_reference_change": {
+          "before_arm": "Preserve immutable original xyz, heading, heading counter, ref_timestamp/ref_lat/ref_lon/ref_alt and all p/v reset counters. Height remains ground_z minus local z; global altitude target uses the same pre-arm ref_alt.",
+          "always_reject_after_arm": [
+            "ref_timestamp/ref_lat/ref_lon/ref_alt change",
+            "xy/z/vxy/vz reset",
+            "primary estimator switch",
+            "invalid measurements",
+            "controller/first update/retry/failsafe/time fault"
+          ],
+          "heading_exception_phase": "TAKEOFF_PREPARATION only: armed, airborne, no ground contact, actual AUTO_TAKEOFF or POSCTL, before any DO_REPOSITION/AUTO_LOITER/excitation/observation",
+          "heading_count_increment": 1,
+          "heading_max_events": 1,
+          "heading_delta_abs_max_deg": 5.0,
+          "heading_delta_limit_basis": "New conservative engineering admission cap, one quarter of unchanged 20deg yaw envelope; not a theoretical bound or held-out estimate. Chosen after historical PID diagnostic knowledge; disclose this development use.",
+          "event_height_m": [
+            1.0,
+            3.0
+          ],
+          "height_limit_basis": "Broad preparation envelope, not an exact reproduction of private delayed terrain>1.5m test. dist_bottom_valid=false is not proof of a valid range observation.",
+          "evidence": {
+            "primary_instance_constant": true,
+            "primary_healthy": true,
+            "mag_aligned_in_flight": "same primary 0->1; yaw_align true; not mag_fault, mag_field_disturbed, emergency reset, EV/GPS yaw takeover or filter fault",
+            "alignment_confirmation_max_lag_s": 0.5,
+            "quat_heading_pair_max_offset_s": 0.04,
+            "quat_heading_delta_tolerance_rad": 0.0001,
+            "require_quat_single_increment": true,
+            "sample_max_gap_s": 0.04,
+            "sequence_missing": 0,
+            "metadata_max_age_s": 0.5,
+            "metadata_max_age_scope": "Periodic estimator_status only; do not apply 0.5s to all metadata topics.",
+            "selector_max_age_s": 1.2,
+            "status_flags_max_age_s": 1.2,
+            "events_freshness": "estimator_event_flags is event-only, no periodic heartbeat. Require pre-arm last event/counter snapshot and uninterrupted subscription/decoded history, contiguous information/warning change counters for new messages, no forbidden events. An old last event is not a new reset nor automatically stale failure; a missing topic or unobservable event interval is not zero. Do not force extra EKF publications.",
+            "metadata_age_basis": "Pinned sources: estimator_status requested at 200ms logger interval; selector/status_flags publish about 1Hz or on change; events publish only on events. Separate 0.5/1.2s engineering guards, not claimed common sample rates.",
+            "pending": "On first candidate, inhibit height command/admission while awaiting asynchronous alignment evidence for <=0.5s. Missing/late/contradictory evidence fails; do not silently accept immediately.",
+            "record": "Original counters/delta/time/primary/alignment flags, pending and confirmation timestamps, actual status/land and controller diagnostics; no zero replacement for missing fields. No Gazebo truth."
+          },
+          "after_exception": "Any second heading event, including counter jump or estimator switch, fails. No heading changes after task_yaw_freeze through landing/disarm. Do not exempt landing resets."
+        }
+      },
+      "entry": {
+        "height_m": [
+          2,
+          3
+        ],
+        "abs_vz_strictly_below_m_s": 0.2,
+        "continuous_sim_seconds": 3,
+        "local_target_z_tolerance_m": 0.05,
+        "local_target_vz_abs_max_m_s": 0.05,
+        "require": "Original entry plus verified protocol04 alignment and once-only task yaw",
+        "host_max_sample_gap_s": 1,
+        "ulog_max_sample_gap_s": 0.04,
+        "height_ready_deadline_after_excitation_gate_s": 10,
+        "hover_start_event": "only after entry passes; preserve candidate entry samples; verify the final 3 seconds independently in actual ULog"
+      },
+      "excitation_clock": "unchanged first valid airborne AUTO_LOITER gate starts existing 12s settle; ready by gate+10s, else abort before gate+12s. Derive gate from diagnostic timestamp_sample and excitation_time, not host receipt time. Never reset/restart excitation while armed.",
+      "observation_sim_s": 90,
+      "observation_accepted_duration_s": [
+        90,
+        92
+      ],
+      "require_excitation_inside_observation": true,
+      "landing": "unchanged commander mode auto:land; require landed and automatic disarm",
+      "wall_timeouts_s": {
+        "startup": 180,
+        "warmup": 180,
+        "takeoff_including_height_entry": 150,
+        "hover": 240,
+        "landing": 150
+      }
+    },
+    "excitation": {
+      "parameter": "H=6,V=8; default0",
+      "duration_s": 64,
+      "settle_after_auto_loiter_s": 12,
+      "H": "p=(.5*E*sin(wt),.25*E*sin(2wt),0)",
+      "V": "same XY; pz=.1*E*sin(wt); positive Z is Down",
+      "envelope": "E=sin(pi*t/64)^4 for0<t<64; otherwise p,v,a=0",
+      "w_rad_s": "2*pi/32",
+      "derivatives": "v=dp/dt,a=d2p/dt2, analytic product rule; once-only additive FF",
+      "source": "single Navigator/FlightTask target plus guarded per-frame adapter; original position P retained; fixed yaw",
+      "conservative_bounds": {
+        "horizontal_p_m": 0.56,
+        "horizontal_v_m_s": 0.18,
+        "horizontal_a_m_s2": 0.08,
+        "z_p_m": 0.1,
+        "z_v_m_s": 0.04,
+        "z_a_m_s2": 0.02
+      }
+    },
+    "diagnostic_gate": {
+      "minimum_samples": 600,
+      "sequence_missing": 0,
+      "maximum_gap_s": 0.04,
+      "raw_dt_domain_s": [
+        0.002,
+        0.04
+      ],
+      "mode": "exact job mode",
+      "axes": "exact job axes",
+      "minimum_excitation_samples": 6390,
+      "minimum_excitation_span_s": 63.96,
+      "full_window_inside_hover": true,
+      "output_exact_minimum_coverage": 0.8,
+      "output_exact_maximum_gap_s": 0.25,
+      "accepted_output_difference": 0,
+      "nu_in_pid": "NaN on unselected axes; selected independent; Z groups phase1/2 PID handover, phase3 steady",
+      "pid_calls": 1,
+      "strict_failures": "Any required check fails: stop and preserve, no additional flight."
+    },
+    "pair_gate": {
+      "relative_rmse_limit": 1.25,
+      "absolute_velocity_rmse_allowance_m_s": [
+        0.02,
+        0.02,
+        0.01
+      ],
+      "absolute_yaw_rmse_allowance_rad": 0.02,
+      "absolute_position_rmse_allowance_m": 0.05,
+      "source": "V00/V01 PID noise scale (X .010751,Y .008080,Z .005138m/s); V03 provides consumed-state baseline. Fixed before any ESTA data.",
+      "per_pair_rule": "candidate_rmse <= 1.25*paired_PID_rmse + frozen absolute allowance; each commanded/noncommanded axis separately",
+      "maximum_constraint_fraction": 0.05,
+      "maximum_continuous_constraint_s": 0.5,
+      "maximum_faults": 0,
+      "maximum_failsafe": 0,
+      "maximum_hover_yaw_error_deg": 20,
+      "maximum_hover_height_error_m": 1,
+      "maximum_position_deviation_m": 2,
+      "maximum_tilt_deg": 15,
+      "maximum_xy_speed_m_s": 1,
+      "maximum_hover_vz_m_s": 0.6,
+      "maximum_candidate_flights_before_reauthorization": 48,
+      "candidates": 1,
+      "order": "H24 then V24; PID first per seed, run25 V PID budgeted safety gate",
+      "parameter_search_flights": 0,
+      "window": "64s and32s halves consumed velocity;90s position/yaw; componentwise",
+      "calculation": "ESTA <= 1.25 * same-seed PID + fixed allowance; acceptance is development noninferiority, not scientific superiority.",
+      "noise_pair_max_difference": 1e-10,
+      "noise_distinct_min_difference": 1e-06
+    },
+    "metrics": {
+      "primary": "time-weighted consumed per-axis velocity RMSE [0,64), each32s half; XY=sqrt((RMSE_X^2+RMSE_Y^2)/2), does not replace componentwise gates",
+      "secondary": "velocity mean/std/IAE,90s position/yaw, nu, constraints, true-update acceleration/thrust TV, common-band spectrum and host wall-time",
+      "missing": "stop first failure; retain attempts and unexecuted missing, no imputation/retry; all48+42pairs required",
+      "interpretation": "fixed-gain axis configuration development ablation; n3/task; not general superiority, not fully independent random sources"
+    },
+    "logging": "Preserve original SDLOG_PROFILE bits OR16 OR1024; audited RAM logging and durable archive; no required dropout/gap",
+    "current_turn_not_run": [
+      "flight",
+      "tuning",
+      "formal holdout",
+      "push"
+    ]
+  },
+  "output_root": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX03/batch01",
+  "authority": "AX02 freezes only; separate AX03 receipt required",
+  "order_rationale": "PID first for immediate paired gate; reverse/rotate candidates across blocks; not fully randomized, disclose order confounding",
+  "stop_rule": "Any safety/log/source/parameter/pair/noise/cleanup failure stops; no retry/resume; no extra pilot",
+  "V_safety_gate": "run25 PID within48; no V ESTA until accepted",
+  "parameter_sources": {
+    "audit": "research/sta-velocity-control/axis_ablation/ax00/evidence.json",
+    "sha256": "dc2c5a12ab76591e00fa7a28c151957accfe010bfc176b87df83983c2fdbdb99",
+    "status": "V08 XY plus historical Z; unified matrix not flight-qualified"
+  }
+}
