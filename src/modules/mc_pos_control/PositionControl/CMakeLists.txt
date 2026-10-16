@@ -35,6 +35,15 @@ px4_add_library(StaVelocityControl StaVelocityControl.cpp StaVelocityControl.hpp
 target_compile_features(StaVelocityControl PUBLIC cxx_std_14)
 target_include_directories(StaVelocityControl PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
+# R01: compile the independent regularized kernel, but do not link it into
+# PositionControl or the flight module. Only the unit-test target consumes it.
+px4_add_library(RegularizedStaVelocityControl
+	RegularizedStaVelocityControl.cpp
+	RegularizedStaVelocityControl.hpp
+)
+target_compile_features(RegularizedStaVelocityControl PUBLIC cxx_std_14)
+target_include_directories(RegularizedStaVelocityControl PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
 px4_add_library(PositionControl
 	ControlMath.cpp
 	ControlMath.hpp
@@ -67,6 +76,7 @@ px4_add_unit_gtest(SRC VelocityControlTest.cpp LINKLIBS PositionControl V00Posit
 px4_add_functional_gtest(SRC VelocitySelectionParamTest.cpp LINKLIBS PositionControl parameters)
 px4_add_functional_gtest(SRC VelocityDiagnosticInputTest.cpp LINKLIBS PositionControl parameters)
 px4_add_unit_gtest(SRC StaVelocityControlTest.cpp LINKLIBS StaVelocityControl)
+px4_add_unit_gtest(SRC RegularizedStaVelocityControlTest.cpp LINKLIBS RegularizedStaVelocityControl)
 px4_add_unit_gtest(SRC StaVelocityProtectionTest.cpp LINKLIBS StaVelocityControl PositionControl)
 px4_add_unit_gtest(SRC VelocityEstaTest.cpp LINKLIBS PositionControl)
 px4_add_unit_gtest(SRC VelocityEstaZTest.cpp LINKLIBS PositionControl)

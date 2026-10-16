@@ -10,6 +10,7 @@
 - [数学与来源包审计](r00/math/MATH_AUDIT_CN.md)
 - [PX4接口审计](r00/interface/README_CN.md)
 - [最终基线、参数、资产及旧日志抽样](r00/evidence/baseline_audit02.json)
+- [R01独立内核与离线验证入口](r01/README_CN.md)
 
 实时进度在 /home/yr/Desktop/codev doc/plan/VELOCITY_STA_REGULARIZED_STATUS_CN.md。
 阶段按R00→R01→R02→R03四门→R04→R05；每阶段验收/提交/push后继续，不以性能必须获胜为目标。
