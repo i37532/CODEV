@@ -288,6 +288,10 @@ void MulticopterPositionControl::Run()
 		// Validate the signed request before narrowing. Invalid/disabled is not X.
 		const int32_t requested_axes = _param_mpc_vc_axes.get();
 		esta_config.axes = requested_axes >= 1 && requested_axes <= 7 ? static_cast<uint8_t>(requested_axes) : 0;
+		// MODE3 has independent configuration, but remains unavailable in R02.
+		// Neither these parameters nor metadata enable its production admission.
+		esta_config.variant = _param_mpc_vc_mode.get() == 3 ? 3 : 1;
+		esta_config.epsilon = {{_param_mpc_vc_eps_x.get(), _param_mpc_vc_eps_y.get(), _param_mpc_vc_eps_z.get()}};
 		esta_config.gains[0] = {_param_mpc_vc_l1_x.get(), _param_mpc_vc_l2_x.get()};
 		esta_config.nu_limit[0] = _param_mpc_vc_nu_x.get();
 		esta_config.acceleration_limit[0] = _param_mpc_vc_a_x.get();
@@ -600,6 +604,21 @@ void MulticopterPositionControl::Run()
 		selection_status.armed = _control_mode.flag_armed;
 		selection_status.enabled = _control_mode.flag_multicopter_position_control_enabled;
 		selection_status.pid_calls = pid_calls;
+		const auto &effective_esta = _control.effectiveVelocityEsta();
+		selection_status.variant_req = selection.requestedMode() == 0 ? 0
+				: (selection.requestedMode() == 1 ? 1 : (selection.requestedMode() == 3 ? 3 : 255));
+		selection_status.variant_eff = selection.effectiveMode() == 0 ? 0
+				: (selection.effectiveMode() == 1 ? 1 : (selection.effectiveMode() == 3 ? 3 : 255));
+		selection_status.eps_req[0] = _param_mpc_vc_eps_x.get();
+		selection_status.eps_req[1] = _param_mpc_vc_eps_y.get();
+		selection_status.eps_req[2] = _param_mpc_vc_eps_z.get();
+		for (int axis = 0; axis < 3; ++axis) {
+			selection_status.eps_eff[axis] = selection.effectiveMode() == 3
+				&& (selection.effectiveAxes() & (1 << axis)) ? effective_esta.epsilon[axis] : NAN;
+		}
+		selection_status.sta_gen = _control.velocityEstaGeneration();
+		selection_status.sta_pending = _control.velocityEstaPending();
+		selection_status.sta_reject = _control.velocityEstaRejected();
 		const auto &cadence = _control.velocityDecimation();
 		selection_status.div_req = cadence.requested;
 		selection_status.div_eff = cadence.divisor;

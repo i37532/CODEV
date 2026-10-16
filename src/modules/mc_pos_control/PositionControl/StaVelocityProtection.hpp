@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 #pragma once
 #include "StaVelocityControl.hpp"
+#include "RegularizedStaVelocityControl.hpp"
 
 /** Acceleration-domain adapter; PositionControl admission is SITL only. Local NED.
  * Caller supplies the complete constrained thrust-map proxy, NOT measured
@@ -16,6 +17,8 @@ public:
 		std::array<StaVelocityControl::Parameters, 3> gains{};
 		Vec nu_limit{}, acceleration_limit{};
 		uint8_t axes{0};
+		uint8_t variant{1}; // 1: legacy hard-sign ESTA; 3: regularized explicit STA.
+		Vec epsilon{{.01f, .01f, .02f}}; // m/s, used/validated only by variant 3.
 	};
 	struct Frame {
 		uint64_t sample{0};
@@ -50,7 +53,7 @@ public:
 	// Validate ALL selected axes and feedback before any axis state is committed.
 	const Result &finish(const Vec &proxy, uint8_t constrained_axes, bool feedback_valid,
 		uint8_t interval_positive = 0, uint8_t interval_negative = 0);
-	const Vec &state() const { return _kernel.state(); }
+	const Vec &state() const { return _config.variant == 3 ? _regularized_kernel.state() : _kernel.state(); }
 	static bool validConfig(const Config &config);
 	// Z-only, closed-transaction state changes. No clipping on handover/HTE.
 	bool seedZ(float nu);
@@ -62,10 +65,13 @@ public:
 private:
 	static bool same(const Config &a, const Config &b);
 	void resetState();
+	void resetAxis(size_t axis, float nu);
 	void latch(uint16_t reason);
 	StaVelocityControl _kernel;
+	RegularizedStaVelocityControl _regularized_kernel;
 	Config _config{};
 	std::array<StaVelocityControl::Candidate, 3> _candidates{};
+	std::array<RegularizedStaVelocityControl::Candidate, 3> _regularized_candidates{};
 	Result _result{};
 	uint64_t _last_sample{0};
 	uint32_t _generation{0};

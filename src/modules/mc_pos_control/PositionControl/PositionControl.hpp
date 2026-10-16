@@ -163,6 +163,11 @@ public:
 	uint8_t intervalNegative() const { return _interval_negative; }
 	uint64_t velocityPathTimeNs() const { return _velocity_path_ns; }
 	void configureVelocityEsta(const StaVelocityProtection::Config &config, bool armed);
+	const StaVelocityProtection::Config &requestedVelocityEsta() const { return _esta_requested; }
+	const StaVelocityProtection::Config &effectiveVelocityEsta() const { return _esta_effective; }
+	bool velocityEstaPending() const { return _esta_pending; }
+	bool velocityEstaRejected() const { return !_esta_config_valid; }
+	uint32_t velocityEstaGeneration() const { return _esta_config_generation; }
 	void setVelocityFrame(const StaVelocityProtection::Frame &frame);
 	const VelocityControlSelector &velocitySelection() const { return _velocity_selector; }
 	const sta_velocity_ctrl_status_s &diagnostic() const { return _diagnostic; }
@@ -197,6 +202,12 @@ public:
 
 private:
 	friend class VelocityControlTestAccess;
+	friend class RegularizedVelocityTestAccess;
+	// R02 has no production setter or parameter that can enable this admission.
+	// The only writer is the explicitly named offline test friend.
+	bool _regularized_test_admission{false};
+	bool _staEffective() const { return _velocity_selector.effectiveMode() == 1 || _velocity_selector.effectiveMode() == 3; }
+	float _regularizedPsi(float s, size_t axis) const;
 	VelocityControlSelector _velocity_selector;
 	VelocityDecimation _decimation;
 	matrix::Vector3f _correction{NAN, NAN, NAN}; // never includes acceleration FF

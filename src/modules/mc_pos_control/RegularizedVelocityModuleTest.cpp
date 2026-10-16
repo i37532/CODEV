@@ -1,0 +1,369 @@
+// SPDX-License-Identifier: BSD-3-Clause
+// R02: real synchronous Run/uORB evidence, never a simulator or flight.
+#include <gtest/gtest.h>
+#define MODULE_NAME "mc_pos_control_regularized_test"
+#include "MulticopterPositionControl.hpp"
+#include <platforms/posix/apps.h>
+#include <parameters/param.h>
+#include <px4_platform_common/px4_work_queue/WorkQueueManager.hpp>
+#include <cmath>
+#include <cstdio>
+#include <unistd.h>
+
+extern "C" void __wrap_hrt_call_after(hrt_call *, hrt_abstime, hrt_callout, void *) {}
+extern "C" void __wrap_hrt_cancel(hrt_call *) {}
+
+class RegularizedVelocityTestAccess
+{
+public:
+	static void admit(PositionControl &p) { p._regularized_test_admission = true; }
+};
+
+class RegularizedVelocityModuleTestAccess
+{
+public:
+	static void step(MulticopterPositionControl &m) { m.Run(); m.ScheduleClear(); }
+	static void admit(MulticopterPositionControl &m) { RegularizedVelocityTestAccess::admit(m._control); }
+	static void airborne(MulticopterPositionControl &m, uint64_t t)
+	{
+		m._takeoff.updateTakeoffState(true, false, false, 1.f, true, t);
+	}
+	static void request(MulticopterPositionControl &m, int32_t mode, int32_t axes)
+	{
+		m._param_mpc_vc_mode.set(mode); m._param_mpc_vc_axes.set(axes);
+		m._param_mpc_vc_l1_x.set(.5f); m._param_mpc_vc_l2_x.set(.1f);
+		m._param_mpc_vc_l1_y.set(.5f); m._param_mpc_vc_l2_y.set(.1f);
+		m._param_mpc_vc_l1_z.set(2.f); m._param_mpc_vc_l2_z.set(1.f);
+		m._param_mpc_vc_nu_x.set(.4f); m._param_mpc_vc_a_x.set(.8f);
+		m._param_mpc_vc_nu_y.set(.4f); m._param_mpc_vc_a_y.set(.8f);
+		m._param_mpc_vc_nu_z.set(4.f); m._param_mpc_vc_a_z.set(6.f);
+	}
+	static void widths(MulticopterPositionControl &m, float x, float y, float z)
+	{
+		m._param_mpc_vc_eps_x.set(x); m._param_mpc_vc_eps_y.set(y); m._param_mpc_vc_eps_z.set(z);
+	}
+	static void reload(MulticopterPositionControl &m) { m.parameters_update(true); }
+	static void fastSpool(MulticopterPositionControl &m) { m._takeoff.setSpoolupTime(.008f); }
+	static void pidP(MulticopterPositionControl &m, float value)
+	{
+		m._param_mpc_xy_vel_p_acc.commit_no_notification(value); m.parameters_update(true);
+	}
+};
+
+class RegularizedVelocityQueueAnchor : public px4::WorkItem
+{
+public:
+	RegularizedVelocityQueueAnchor() : WorkItem("regularized_test_anchor", px4::wq_configurations::nav_and_controllers) {}
+	void Run() override {}
+};
+static RegularizedVelocityQueueAnchor *regularized_queue_anchor = nullptr;
+
+class RegularizedVelocityModule : public ::testing::Test
+{
+public:
+	static void SetUpTestSuite()
+	{
+		ASSERT_EQ(px4::WorkQueueManagerStart(), 0); px4_usleep(20000);
+		regularized_queue_anchor = new RegularizedVelocityQueueAnchor();
+	}
+	static void TearDownTestSuite()
+	{
+		delete regularized_queue_anchor; regularized_queue_anchor = nullptr;
+		px4_usleep(20000); EXPECT_EQ(px4::WorkQueueManagerStop(), 0);
+	}
+protected:
+	uORB::Publication<vehicle_local_position_s> lp_pub{ORB_ID(vehicle_local_position)};
+	uORB::Publication<vehicle_local_position_setpoint_s> target_pub{ORB_ID(trajectory_setpoint)};
+	uORB::Publication<vehicle_control_mode_s> mode_pub{ORB_ID(vehicle_control_mode)};
+	uORB::Publication<vehicle_land_detected_s> land_pub{ORB_ID(vehicle_land_detected)};
+	uORB::Publication<vehicle_constraints_s> limits_pub{ORB_ID(vehicle_constraints)};
+	uORB::Publication<sta_rate_ctrl_status_s> rate_pub{ORB_ID(sta_rate_ctrl_status)};
+	uORB::Subscription selection_sub{ORB_ID(velocity_ctrl_selection)};
+	uORB::Subscription diagnostic_sub{ORB_ID(sta_velocity_ctrl_status)};
+	vehicle_local_position_s lp{};
+	vehicle_local_position_setpoint_s target{};
+	vehicle_control_mode_s mode{};
+	vehicle_land_detected_s land{};
+	velocity_ctrl_selection_s selection{};
+	sta_velocity_ctrl_status_s diagnostic{};
+	MulticopterPositionControl *module{nullptr};
+	uint32_t previous_seq{0};
+	bool rate_fault{false};
+	bool rate_termination{false};
+	void SetUp() override
+	{
+		apps_map_type apps; init_app_map(apps); ASSERT_TRUE(apps.empty());
+		param_control_autosave(false); param_reset_all();
+		module = new MulticopterPositionControl();
+		lp.timestamp = lp.timestamp_sample = 1000000;
+		lp.xy_valid = lp.z_valid = lp.v_xy_valid = lp.v_z_valid = true;
+		lp.x = 5.f; lp.y = -2.f; lp.z = -2.5f; lp.heading = .2f;
+		target.x = lp.x; target.y = lp.y; target.z = lp.z;
+		target.vx = .004f; target.vy = -.003f; target.vz = 0.f;
+		target.yaw = lp.heading; target.acceleration[0] = .002f; target.acceleration[1] = -.001f;
+		mode.flag_multicopter_position_control_enabled = mode.flag_control_auto_enabled = true;
+		land.landed = land.ground_contact = true;
+		vehicle_constraints_s limits{}; limits.speed_xy = 5.f; limits.speed_up = 3.f; limits.speed_down = 1.f;
+		limits.want_takeoff = true;
+		ASSERT_TRUE(mode_pub.publish(mode)); ASSERT_TRUE(land_pub.publish(land)); ASSERT_TRUE(limits_pub.publish(limits));
+	}
+	void TearDown() override { delete module; param_reset_all(); }
+	void step(uint64_t dt = 10000, uint64_t publication_delay = 0)
+	{
+		lp.timestamp_sample += dt; lp.timestamp = lp.timestamp_sample + publication_delay;
+		target.timestamp = lp.timestamp; EXPECT_TRUE(target_pub.publish(target));
+		sta_rate_ctrl_status_s rate{}; rate.timestamp = hrt_absolute_time(); rate.div_eff = 1;
+		rate.fault = rate_fault; rate.termination = rate_termination;
+		rate.measurement_valid = rate.output_valid = true; EXPECT_TRUE(rate_pub.publish(rate));
+		EXPECT_TRUE(lp_pub.publish(lp)); RegularizedVelocityModuleTestAccess::step(*module);
+		unsigned sr = 0, dr = 0;
+		while (sr < 8 && selection_sub.update(&selection)) { ++sr; }
+		while (dr < 8 && diagnostic_sub.update(&diagnostic)) { ++dr; }
+		ASSERT_GT(sr, 0u); ASSERT_GT(dr, 0u);
+		EXPECT_EQ(selection.publish_seq, ++previous_seq);
+		EXPECT_EQ(selection.publish_seq, diagnostic.publish_seq);
+		EXPECT_EQ(selection.timestamp_sample, lp.timestamp_sample);
+		EXPECT_EQ(selection.timestamp_sample, diagnostic.timestamp_sample);
+		EXPECT_EQ(selection.input_timestamp, diagnostic.input_timestamp);
+		EXPECT_EQ(selection.effective_mode, diagnostic.effective_mode);
+		EXPECT_EQ(selection.effective_axes, diagnostic.effective_axes);
+		EXPECT_EQ(selection.pid_calls, diagnostic.pid_calls);
+		EXPECT_EQ(selection.armed, diagnostic.armed); EXPECT_EQ(selection.enabled, diagnostic.enabled);
+	}
+	void arm()
+	{
+		mode.flag_armed = true; EXPECT_TRUE(mode_pub.publish(mode));
+		land.landed = land.ground_contact = false; EXPECT_TRUE(land_pub.publish(land));
+		RegularizedVelocityModuleTestAccess::airborne(*module, lp.timestamp);
+	}
+	void disarm()
+	{
+		mode.flag_armed = false; EXPECT_TRUE(mode_pub.publish(mode));
+		land.landed = land.ground_contact = true; EXPECT_TRUE(land_pub.publish(land));
+	}
+	void configureOffline(int32_t axes = 1)
+	{
+		RegularizedVelocityModuleTestAccess::admit(*module);
+		RegularizedVelocityModuleTestAccess::request(*module, 3, axes); step();
+		ASSERT_EQ(selection.effective_mode, 3); ASSERT_EQ(selection.effective_axes, axes);
+		arm(); step(8000); step(12000);
+	}
+};
+
+TEST_F(RegularizedVelocityModule, DefaultPidHasUnusedWidthsAndExactDiagnosticJoin)
+{
+	step(); EXPECT_EQ(selection.effective_mode, 0); EXPECT_EQ(selection.effective_axes, 0);
+	EXPECT_EQ(selection.variant_req, 0); EXPECT_EQ(selection.variant_eff, 0);
+	EXPECT_EQ(selection.div_eff, 1); EXPECT_EQ(selection.sta_gen, 0u);
+	EXPECT_FLOAT_EQ(selection.eps_req[0], .01f); EXPECT_FLOAT_EQ(selection.eps_req[1], .01f);
+	EXPECT_FLOAT_EQ(selection.eps_req[2], .02f);
+	for (int i = 0; i < 3; ++i) { EXPECT_TRUE(std::isnan(selection.eps_eff[i])); }
+	arm(); step(8000); step(12000);
+	EXPECT_EQ(diagnostic.inner_mode, 0); EXPECT_EQ(diagnostic.inner_axes, 0); EXPECT_EQ(diagnostic.inner_divisor, 1);
+	EXPECT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.pid_axes, 7);
+}
+
+TEST_F(RegularizedVelocityModule, ProductionRejectsNewModeAllMasksWithoutEffectiveMutation)
+{
+	for (int32_t axes = 0; axes <= 7; ++axes) {
+		RegularizedVelocityModuleTestAccess::request(*module, 3, axes); step();
+		EXPECT_EQ(selection.requested_mode, 3); EXPECT_EQ(selection.variant_req, 3);
+		EXPECT_EQ(selection.effective_mode, 0); EXPECT_EQ(selection.variant_eff, 0);
+		EXPECT_NE(selection.reject, 0); EXPECT_EQ(selection.sta_gen, 0u);
+		for (int i = 0; i < 3; ++i) { EXPECT_TRUE(std::isnan(selection.eps_eff[i])); }
+	}
+	for (int32_t unavailable : {-1, 2, 4, 256}) {
+		RegularizedVelocityModuleTestAccess::request(*module, unavailable, 0); step();
+		EXPECT_EQ(selection.variant_req, 255); EXPECT_NE(selection.reject, 0); EXPECT_EQ(selection.effective_mode, 0);
+	}
+}
+
+TEST_F(RegularizedVelocityModule, OfflineRegularizedActualOutputUsesEffectiveWidthAndOldNu)
+{
+	configureOffline();
+	for (unsigned k = 0; k < 12; ++k) {
+		step(k % 2 ? 12000 : 8000); ASSERT_TRUE(diagnostic.valid);
+		ASSERT_EQ(selection.variant_eff, 3); ASSERT_EQ(diagnostic.committed_axes, 1);
+		EXPECT_EQ(diagnostic.pid_axes, 6); EXPECT_FLOAT_EQ(selection.eps_eff[0], .01f);
+		EXPECT_TRUE(std::isnan(selection.eps_eff[1])); EXPECT_TRUE(std::isnan(selection.eps_eff[2]));
+		const double s = static_cast<double>(diagnostic.s[0]);
+		const double eps = static_cast<double>(selection.eps_eff[0]);
+		const double psi = std::fabs(s) <= eps ? s / std::sqrt(eps) : std::copysign(std::sqrt(std::fabs(s)), s);
+		const double rho = std::fmax(-1., std::fmin(1., s / eps));
+		EXPECT_NEAR(static_cast<double>(diagnostic.a_sta[0]), -.5 * psi + static_cast<double>(diagnostic.nu_before[0]), 2e-7);
+		EXPECT_NEAR(static_cast<double>(diagnostic.nu_ideal[0]), static_cast<double>(diagnostic.nu_before[0])
+			- static_cast<double>(diagnostic.raw_dt) * .1 * rho, 2e-7);
+		EXPECT_NEAR(diagnostic.a_req[0], diagnostic.a_sta[0] + target.acceleration[0], 2e-7f);
+		EXPECT_EQ(selection.sta_gen, diagnostic.config_generation);
+		printf("R02_SAMPLE {\"mode\":%d,\"axes\":%d,\"seq\":%u,\"sample\":%llu,\"eps\":%.9g,\"s\":%.9g,\"before\":%.9g,\"ideal\":%.9g,\"applied\":%.9g,\"a\":%.9g}\n",
+			selection.effective_mode, selection.effective_axes, selection.publish_seq,
+			static_cast<unsigned long long>(selection.timestamp_sample), static_cast<double>(selection.eps_eff[0]),
+			static_cast<double>(diagnostic.s[0]), static_cast<double>(diagnostic.nu_before[0]),
+			static_cast<double>(diagnostic.nu_ideal[0]), static_cast<double>(diagnostic.nu_applied[0]), static_cast<double>(diagnostic.a_sta[0]));
+	}
+}
+
+TEST_F(RegularizedVelocityModule, EpsilonArmedRequestCancelDisarmAndInvalidRequestRemainDistinct)
+{
+	configureOffline(); const uint32_t generation = selection.sta_gen;
+	RegularizedVelocityModuleTestAccess::widths(*module, .03f, .01f, .02f); step();
+	EXPECT_TRUE(selection.sta_pending); EXPECT_FALSE(selection.pending);
+	EXPECT_EQ(selection.sta_gen, generation); EXPECT_FLOAT_EQ(selection.eps_req[0], .03f);
+	EXPECT_FLOAT_EQ(selection.eps_eff[0], .01f);
+	RegularizedVelocityModuleTestAccess::widths(*module, .01f, .01f, .02f); step();
+	EXPECT_FALSE(selection.sta_pending); EXPECT_EQ(selection.sta_gen, generation);
+	RegularizedVelocityModuleTestAccess::widths(*module, .03f, .01f, .02f); step();
+	disarm(); step(); EXPECT_FALSE(selection.sta_pending); EXPECT_GT(selection.sta_gen, generation);
+	EXPECT_FLOAT_EQ(selection.eps_eff[0], .03f); EXPECT_FLOAT_EQ(diagnostic.nu_applied[0], 0.f);
+	const uint32_t accepted = selection.sta_gen;
+	RegularizedVelocityModuleTestAccess::widths(*module, NAN, .01f, .02f); step();
+	EXPECT_TRUE(selection.sta_reject); EXPECT_NE(selection.reject, 0);
+	EXPECT_TRUE(std::isnan(selection.eps_req[0])); EXPECT_FLOAT_EQ(selection.eps_eff[0], .03f);
+	EXPECT_EQ(selection.sta_gen, accepted); EXPECT_EQ(selection.effective_mode, 3);
+}
+
+TEST_F(RegularizedVelocityModule, OriginalEstaWidthEditsDoNotResetStateOrGeneration)
+{
+	RegularizedVelocityModuleTestAccess::request(*module, 1, 1); step(); arm(); step(8000); step(12000);
+	ASSERT_EQ(selection.effective_mode, 1); ASSERT_TRUE(diagnostic.valid);
+	const uint32_t generation = selection.sta_gen; const float previous = diagnostic.nu_applied[0];
+	RegularizedVelocityModuleTestAccess::widths(*module, NAN, -.2f, INFINITY); step(8000);
+	EXPECT_FALSE(selection.sta_pending); EXPECT_FALSE(selection.sta_reject);
+	EXPECT_EQ(selection.sta_gen, generation); EXPECT_EQ(selection.variant_eff, 1);
+	EXPECT_FLOAT_EQ(diagnostic.nu_before[0], previous); EXPECT_TRUE(diagnostic.valid);
+	for (int i = 0; i < 3; ++i) { EXPECT_TRUE(std::isnan(selection.eps_eff[i])); }
+}
+
+TEST_F(RegularizedVelocityModule, OriginalPidGainUpdatesRemainImmediateWhileArmed)
+{
+	step(); arm(); step(8000); step(12000); ASSERT_TRUE(diagnostic.valid);
+	RegularizedVelocityModuleTestAccess::pidP(*module, 2.7f); step(8000);
+	ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(selection.effective_mode, 0); EXPECT_FALSE(selection.pending);
+	for (int i = 0; i < 2; ++i) {
+		// Constant measured velocity implies zero measured derivative; before-state
+		// integral is reconstructed from its actual post-update diagnostic state.
+		const float error = diagnostic.v_sp[i] - diagnostic.v[i];
+		float gain_i = 0.f; ASSERT_EQ(param_get(param_find("MPC_XY_VEL_I_ACC"), &gain_i), 0);
+		EXPECT_NEAR(selection.correction[i], 2.7f * error + selection.integral[i] - error * gain_i * diagnostic.used_dt, 2e-6f);
+	}
+}
+
+TEST_F(RegularizedVelocityModule, SavedModeAndWidthsReloadStillCannotEnableProduction)
+{
+	const float values[3]{.013f, .024f, .035f};
+	const char *names[3]{"MPC_VC_EPS_X", "MPC_VC_EPS_Y", "MPC_VC_EPS_Z"};
+	for (int i = 0; i < 3; ++i) { ASSERT_EQ(param_set(param_find(names[i]), &values[i]), 0); }
+	int32_t mode_value = 3, axes = 7;
+	ASSERT_EQ(param_set(param_find("MPC_VC_MODE"), &mode_value), 0);
+	ASSERT_EQ(param_set(param_find("MPC_VC_AXES"), &axes), 0);
+	FILE *f = tmpfile(); ASSERT_NE(f, nullptr); ASSERT_EQ(param_export(fileno(f), false, nullptr), 0);
+	param_reset_all(); ASSERT_EQ(lseek(fileno(f), 0, SEEK_SET), 0);
+	ASSERT_EQ(param_import(fileno(f), true), 0); fclose(f);
+	delete module; module = new MulticopterPositionControl(); previous_seq = 0; step();
+	EXPECT_EQ(selection.requested_mode, 3); EXPECT_EQ(selection.requested_axes, 7);
+	EXPECT_EQ(selection.effective_mode, 0); EXPECT_NE(selection.reject, 0);
+	for (int i = 0; i < 3; ++i) { EXPECT_FLOAT_EQ(selection.eps_req[i], values[i]); EXPECT_TRUE(std::isnan(selection.eps_eff[i])); }
+}
+
+TEST_F(RegularizedVelocityModule, FailsafeSameSampleKeepsSingleJoinedPublication)
+{
+	configureOffline(); const uint32_t sequence = selection.publish_seq;
+	rate_fault = true; step(8000);
+	EXPECT_EQ(selection.publish_seq, sequence + 1); EXPECT_EQ(selection.pid_calls, 2);
+	EXPECT_FALSE(diagnostic.valid); EXPECT_NE(diagnostic.first_fail, 0); EXPECT_EQ(diagnostic.committed_axes, 0);
+	EXPECT_EQ(diagnostic.output_timestamp, 0u); EXPECT_EQ(selection.variant_eff, 3);
+	EXPECT_FLOAT_EQ(selection.eps_eff[0], .01f); EXPECT_EQ(selection.sta_gen, diagnostic.config_generation);
+}
+
+TEST_F(RegularizedVelocityModule, DistinctPublicationAndSampleClocksKeepExactJoinAndRawDt)
+{
+	configureOffline(); step(12000, 4000);
+	ASSERT_TRUE(diagnostic.valid);
+	EXPECT_EQ(selection.input_timestamp - selection.timestamp_sample, 4000u);
+	EXPECT_NEAR(diagnostic.raw_dt, .012f, 1e-7f);
+	EXPECT_NEAR(diagnostic.input_dt, .016f, 1e-7f);
+	const float rho = math::constrain(diagnostic.s[0] / selection.eps_eff[0], -1.f, 1.f);
+	EXPECT_NEAR(diagnostic.nu_ideal[0], diagnostic.nu_before[0] - .012f * .1f * rho, 2e-7f);
+	step(8000, 0); ASSERT_TRUE(diagnostic.valid);
+	EXPECT_NEAR(diagnostic.raw_dt, .008f, 1e-7f); EXPECT_NEAR(diagnostic.input_dt, .004f, 1e-7f);
+}
+
+TEST_F(RegularizedVelocityModule, TerminationRemainsLatchedUntilDisarmAndFreshHandover)
+{
+	configureOffline(7); ASSERT_TRUE(diagnostic.valid);
+	rate_termination = true; step(8000);
+	EXPECT_FALSE(diagnostic.valid); EXPECT_TRUE(diagnostic.fault); EXPECT_EQ(diagnostic.pid_calls, 2);
+	EXPECT_EQ(diagnostic.committed_axes, 0); EXPECT_EQ(diagnostic.output_timestamp, 0u);
+	rate_termination = false; step(12000);
+	EXPECT_FALSE(diagnostic.valid); EXPECT_EQ(diagnostic.output_timestamp, 0u);
+	disarm(); step(8000); EXPECT_FALSE(diagnostic.fault);
+	for (int i = 0; i < 3; ++i) { EXPECT_FLOAT_EQ(diagnostic.nu_applied[i], 0.f); }
+	arm(); step(12000); EXPECT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.z_phase, 2);
+	EXPECT_EQ(diagnostic.committed_axes, 0);
+	step(8000); EXPECT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.committed_axes, 7);
+}
+
+TEST_F(RegularizedVelocityModule, LongGroundWaitAndExternalTimeoutCancelNeverIntegrateNu)
+{
+	// Takeoff has no independent timeout detector. The experiment runner owns
+	// its deadline/cancel command; model that command by disarming after 60 s.
+	RegularizedVelocityModuleTestAccess::admit(*module);
+	RegularizedVelocityModuleTestAccess::request(*module, 3, 7);
+	RegularizedVelocityModuleTestAccess::fastSpool(*module); step();
+	mode.flag_armed = true; ASSERT_TRUE(mode_pub.publish(mode));
+	const uint64_t started = lp.timestamp_sample;
+	unsigned suppressed = 0, ramp_pid = 0;
+	for (unsigned k = 0; k < 6002; ++k) {
+		step(k % 2 ? 12000 : 8000);
+		ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.committed_axes, 0);
+		EXPECT_EQ(diagnostic.z_phase, 1); EXPECT_EQ(diagnostic.pid_calls, 1);
+		// z_phase=1 dispatches the unchanged PID function. pid_axes, however,
+		// describes enabled finite velocity targets, not that function call.
+		// Ground suppression makes all velocity targets NaN: no axis is active.
+		if (diagnostic.reset_bits & 32) {
+			++suppressed; EXPECT_EQ(diagnostic.pid_axes, 0); EXPECT_FLOAT_EQ(diagnostic.a_ff[2], 100.f);
+			for (float value : diagnostic.v_sp) { EXPECT_TRUE(std::isnan(value)); }
+		} else {
+			++ramp_pid; EXPECT_EQ(diagnostic.pid_axes, 7);
+			EXPECT_EQ(diagnostic.takeoff_state, static_cast<uint8_t>(TakeoffState::rampup));
+			for (float value : diagnostic.v_sp) { EXPECT_TRUE(std::isfinite(value)); }
+		}
+		for (int i = 0; i < 3; ++i) { EXPECT_FLOAT_EQ(diagnostic.nu_applied[i], 0.f); }
+	}
+	EXPECT_GT(suppressed, 0u); EXPECT_GT(ramp_pid, 0u); EXPECT_EQ(suppressed + ramp_pid, 6002u);
+	printf("R02_GROUND_WAIT suppressed=%u ramp_pid=%u duration_us=%llu\n", suppressed, ramp_pid,
+		static_cast<unsigned long long>(lp.timestamp_sample - started));
+	EXPECT_GT(lp.timestamp_sample - started, 60000000u);
+	disarm(); step(8000); EXPECT_EQ(diagnostic.takeoff_state, static_cast<uint8_t>(TakeoffState::disarmed));
+	EXPECT_EQ(diagnostic.committed_axes, 0); EXPECT_FALSE(diagnostic.fault);
+	arm(); step(12000); EXPECT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.z_phase, 2);
+	step(8000); EXPECT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.committed_axes, 7);
+}
+
+TEST_F(RegularizedVelocityModule, RepeatedContactBounceClearsNuAndUsesOneFreshHandover)
+{
+	configureOffline(7);
+	for (unsigned bounce = 0; bounce < 3; ++bounce) {
+		step(8000); ASSERT_TRUE(diagnostic.valid); ASSERT_EQ(diagnostic.committed_axes, 7);
+		land.ground_contact = true; ASSERT_TRUE(land_pub.publish(land)); step(12000);
+		ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.z_phase, 1); EXPECT_EQ(diagnostic.committed_axes, 0);
+		for (int i = 0; i < 3; ++i) { EXPECT_FLOAT_EQ(diagnostic.nu_applied[i], 0.f); }
+		land.ground_contact = false; ASSERT_TRUE(land_pub.publish(land)); step(8000);
+		ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.z_phase, 2); EXPECT_EQ(diagnostic.committed_axes, 0);
+		step(12000); ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.z_phase, 3); EXPECT_EQ(diagnostic.committed_axes, 7);
+	}
+}
+
+TEST_F(RegularizedVelocityModule, InvalidMeasurementRecoveryOrModeReentryCannotClearFault)
+{
+	configureOffline(7); lp.v_z_valid = false; step(8000);
+	EXPECT_FALSE(diagnostic.valid); EXPECT_EQ(diagnostic.pid_calls, 2); EXPECT_EQ(diagnostic.committed_axes, 0);
+	EXPECT_EQ(diagnostic.output_timestamp, 0u);
+	lp.v_z_valid = true; step(12000); EXPECT_FALSE(diagnostic.valid); EXPECT_EQ(diagnostic.output_timestamp, 0u);
+	mode.flag_multicopter_position_control_enabled = false; ASSERT_TRUE(mode_pub.publish(mode)); step(8000);
+	EXPECT_EQ(diagnostic.pid_calls, 0); EXPECT_EQ(diagnostic.output_timestamp, 0u);
+	mode.flag_multicopter_position_control_enabled = true; ASSERT_TRUE(mode_pub.publish(mode)); step(12000);
+	EXPECT_FALSE(diagnostic.valid); EXPECT_EQ(diagnostic.committed_axes, 0); EXPECT_EQ(diagnostic.output_timestamp, 0u);
+	disarm(); step(8000); EXPECT_FALSE(diagnostic.fault); arm(); step(12000);
+	EXPECT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.z_phase, 2); EXPECT_EQ(diagnostic.committed_axes, 0);
+}

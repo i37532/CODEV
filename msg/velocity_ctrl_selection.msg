@@ -36,4 +36,20 @@ float32[3] integral # actual PID state after invocation; HTE shifts can occur on
 uint64 path_ns # velocity dispatch, mapping, protection and diagnostic path, incl held work
 uint64 module_ns # Run entry to selection publication, excludes later diagnostics/scheduling
 uint8 clock # 1 Linux host CLOCK_MONOTONIC; 0 unavailable, NOT lockstep HRT or board CPU
+# R02 configuration evidence. Join sta_velocity_ctrl_status by exact
+# (publish_seq, timestamp_sample), never by approximate publication time.
+# variant: 0 PID, 1 original ESTA, 3 regularized explicit STA, 255 unknown.
+# MODE3 is not available in production in R02; metadata is not admission.
+uint8 variant_req
+uint8 variant_eff
+# Requested raw parameter values (m/s), including rejected invalid values.
+float32[3] eps_req
+# Actual effective regularized width on selected axes; otherwise NaN (unused).
+float32[3] eps_eff
+# Last accepted STA configuration generation, not a control-update counter.
+uint32 sta_gen
+bool sta_pending
+# Invalid requested STA configuration, independent of mode rejection/fault.
+# May be true for unused/unconfigured STA gains while effective mode is PID.
+bool sta_reject
 uint8 ORB_QUEUE_LENGTH = 8

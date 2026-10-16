@@ -6,10 +6,12 @@
 
 bool StaVelocityProtection::validConfig(const Config &c)
 {
-	if (c.axes > 7) { return false; }
+	if (c.axes > 7 || (c.variant != 1 && c.variant != 3)) { return false; }
+	if (c.variant == 3 && c.axes != 0 && c.axes != 1 && c.axes != 3 && c.axes != 4 && c.axes != 7) { return false; }
 
 	for (size_t i = 0; i < 3; ++i) {
 		if ((c.axes & (1 << i)) && (!StaVelocityControl::validParameters(c.gains[i])
+		    || (c.variant == 3 && !RegularizedStaVelocityControl::validEpsilon(c.epsilon[i]))
 		    || !std::isnormal(c.nu_limit[i]) || c.nu_limit[i] <= 0.f
 		    || !std::isnormal(c.acceleration_limit[i]) || c.acceleration_limit[i] <= 0.f)) { return false; }
 	}
@@ -21,21 +23,21 @@ bool StaVelocityProtection::seedZ(float nu)
 {
 	if (_config.axes != 4 || !_active || _open || _fault || !(_result.flags & Priming)
 	    || !std::isfinite(nu) || fabsf(nu) > _config.nu_limit[2]) { latch(Numerical); return false; }
-	_kernel.reset(2, nu);
+	resetAxis(2, nu);
 	_result.nu_before[2] = _result.nu_ideal[2] = _result.nu_applied[2] = nu;
 	return true;
 }
 
 bool StaVelocityProtection::shiftZ(float shift, float correction)
 {
-	const float nu = _kernel.state()[2] + shift;
+	const float nu = state()[2] + shift;
 	if (!(_config.axes & 4) || !_active || _open || _fault || !std::isfinite(shift)
 	    || !std::isfinite(nu) || fabsf(nu) > _config.nu_limit[2]
 	    || !std::isfinite(correction) || fabsf(correction) > _config.acceleration_limit[2]
 	    || !std::isfinite(correction + shift) || fabsf(correction + shift) > _config.acceleration_limit[2]) {
 		latch(Numerical); return false;
 	}
-	_kernel.reset(2, nu);
+	resetAxis(2, nu);
 	return true;
 }
 
@@ -58,7 +60,7 @@ bool StaVelocityProtection::seedCoupled(const Vec &nu)
 	}
 	for (size_t i = 0; i < 3; ++i) {
 		const float value = (_result.active_axes & (1u << i)) ? nu[i] : 0.f;
-		_kernel.reset(i, value);
+		resetAxis(i, value);
 		_result.nu_before[i] = _result.nu_ideal[i] = _result.nu_applied[i] = value;
 	}
 	return true;
@@ -66,12 +68,13 @@ bool StaVelocityProtection::seedCoupled(const Vec &nu)
 
 bool StaVelocityProtection::same(const Config &a, const Config &b)
 {
-	if (a.axes != b.axes) { return false; }
+	if (a.axes != b.axes || a.variant != b.variant) { return false; }
 
 	for (size_t i = 0; i < 3; ++i) {
 		if (a.axes & (1 << i)) {
 			if (memcmp(&a.gains[i].lambda1, &b.gains[i].lambda1, sizeof(float))
 			    || memcmp(&a.gains[i].lambda2, &b.gains[i].lambda2, sizeof(float))
+			    || (a.variant == 3 && memcmp(&a.epsilon[i], &b.epsilon[i], sizeof(float)))
 			    || memcmp(&a.nu_limit[i], &b.nu_limit[i], sizeof(float))
 			    || memcmp(&a.acceleration_limit[i], &b.acceleration_limit[i], sizeof(float))) { return false; }
 		}
@@ -83,9 +86,16 @@ bool StaVelocityProtection::same(const Config &a, const Config &b)
 void StaVelocityProtection::resetState()
 {
 	_kernel.reset();
+	_regularized_kernel.reset();
 	_active = false;
 	_open = false;
 	_xyz_active_axes = 0;
+}
+
+void StaVelocityProtection::resetAxis(size_t axis, float nu)
+{
+	if (_config.variant == 3) { _regularized_kernel.reset(axis, nu); }
+	else { _kernel.reset(axis, nu); }
 }
 
 bool StaVelocityProtection::configure(const Config &c, bool armed)
@@ -98,7 +108,11 @@ bool StaVelocityProtection::configure(const Config &c, bool armed)
 	if (!_configured || !same(c, _config)) {
 		_config = c;
 		for (size_t i = 0; i < 3; ++i) {
-			if (c.axes & (1 << i)) { _kernel.setParameters(i, c.gains[i]); }
+			if (c.axes & (1 << i)) {
+				if (c.variant == 3) {
+					_regularized_kernel.setParameters(i, {c.gains[i].lambda1, c.gains[i].lambda2, c.epsilon[i]});
+				} else { _kernel.setParameters(i, c.gains[i]); }
+			}
 		}
 		resetState();
 		++_generation;
@@ -121,12 +135,12 @@ const StaVelocityProtection::Result &StaVelocityProtection::begin(const Frame &f
 {
 	_open = false;
 	_result = {};
-	_result.nu_before = _result.nu_ideal = _result.nu_applied = _kernel.state();
+	_result.nu_before = _result.nu_ideal = _result.nu_applied = state();
 	const uint64_t previous = _last_sample;
 
 	// Disarm clears a latch; no automatic PID takeover is claimed.
 	if (!f.armed) {
-		_fault = 0; resetState(); _result.flags |= Reset; _result.nu_applied = _kernel.state();
+		_fault = 0; resetState(); _result.flags |= Reset; _result.nu_applied = state();
 	}
 	_result.fault = _fault;
 
@@ -139,7 +153,7 @@ const StaVelocityProtection::Result &StaVelocityProtection::begin(const Frame &f
 	if (!run) {
 		if (_active) { _result.flags |= Reset; }
 		resetState();
-		_result.nu_applied = _kernel.state();
+		_result.nu_applied = state();
 		_result.flags |= Inactive;
 		return _result;
 	}
@@ -151,6 +165,7 @@ const StaVelocityProtection::Result &StaVelocityProtection::begin(const Frame &f
 
 	if (_fault) { _result.flags |= Latched; return _result; }
 	if (!f.inner_valid) { latch(Feedback); return _result; }
+	if (_config.variant == 3 && f.divisor != 1) { latch(Time); return _result; }
 
 	if (!f.sample || (previous && (_result.raw_dt < .002f || _result.raw_dt > .04f))) {
 		latch(Time); return _result;
@@ -170,7 +185,7 @@ const StaVelocityProtection::Result &StaVelocityProtection::begin(const Frame &f
 	}
 
 	if (!_result.active_axes) {
-		resetState(); _result.nu_applied = _kernel.state(); _result.flags |= Inactive | Reset; return _result;
+		resetState(); _result.nu_applied = state(); _result.flags |= Inactive | Reset; return _result;
 	}
 
 	// XZ/YZ/XYZ mix velocity and acceleration-only targets. Any active-mask change
@@ -178,11 +193,11 @@ const StaVelocityProtection::Result &StaVelocityProtection::begin(const Frame &f
 	if ((_config.axes == 5 || _config.axes == 6 || _config.axes == 7) && _result.active_axes != _xyz_active_axes) {
 		resetState();
 		_xyz_active_axes = _result.active_axes;
-		_result.nu_before = _result.nu_ideal = _result.nu_applied = _kernel.state();
+		_result.nu_before = _result.nu_ideal = _result.nu_applied = state();
 	}
 
 	if (!_active || !previous) {
-		_kernel.reset(); _active = true; _result.nu_applied = _kernel.state();
+		_kernel.reset(); _regularized_kernel.reset(); _active = true; _result.nu_applied = state();
 		_result.flags |= Priming | Reset; return _result;
 	}
 	if (!f.evaluate) {
@@ -198,15 +213,25 @@ const StaVelocityProtection::Result &StaVelocityProtection::begin(const Frame &f
 
 	for (size_t i = 0; i < 3; ++i) {
 		if (_result.active_axes & (1 << i)) {
-			auto &c = _candidates[i];
-			c = _kernel.evaluate(i, f.velocity[i], f.target[i], h);
-			if (!c.valid()) { latch(Numerical); return _result; }
-			_result.s[i] = c.s;
-			_result.a_sta[i] = c.a_sta;
-			_result.nu_before[i] = c.nu_before;
-			_result.nu_ideal[i] = c.nu_next;
-			const float limited = std::max(-_config.acceleration_limit[i], std::min(c.a_sta, _config.acceleration_limit[i]));
-			if (fabsf(limited - c.a_sta) > 0.f) { _result.flags |= CorrectionLimit; }
+			const auto store = [&](const auto &c) {
+				if (!c.valid()) { return false; }
+				_result.s[i] = c.s;
+				_result.a_sta[i] = c.a_sta;
+				_result.nu_before[i] = c.nu_before;
+				_result.nu_ideal[i] = c.nu_next;
+				return true;
+			};
+			bool valid = false;
+			if (_config.variant == 3) {
+				_regularized_candidates[i] = _regularized_kernel.evaluate(i, f.velocity[i], f.target[i], h);
+				valid = store(_regularized_candidates[i]);
+			} else {
+				_candidates[i] = _kernel.evaluate(i, f.velocity[i], f.target[i], h);
+				valid = store(_candidates[i]);
+			}
+			if (!valid) { latch(Numerical); return _result; }
+			const float limited = std::max(-_config.acceleration_limit[i], std::min(_result.a_sta[i], _config.acceleration_limit[i]));
+			if (fabsf(limited - _result.a_sta[i]) > 0.f) { _result.flags |= CorrectionLimit; }
 			_result.a_req[i] = limited + (std::isfinite(f.ff[i]) ? f.ff[i] : 0.f);
 			if (!std::isfinite(_result.a_req[i])) { latch(Numerical); return _result; }
 		}
@@ -223,24 +248,30 @@ const StaVelocityProtection::Result &StaVelocityProtection::finish(const Vec &pr
 	_open = false;
 	_result.a_proxy = proxy;
 	if (!feedback_valid) { latch(Feedback); return _result; }
-	Vec applied = _kernel.state();
+	Vec applied = state();
 
 	for (size_t i = 0; i < 3; ++i) {
 		if (_result.active_axes & (1 << i)) {
-			const auto &c = _candidates[i];
-			if (!std::isfinite(proxy[i]) || !_kernel.current(c)) { latch(Feedback); return _result; }
-			float next = std::max(-_config.nu_limit[i], std::min(c.nu_next, _config.nu_limit[i]));
-			if (fabsf(next - c.nu_next) > 0.f) { _result.flags |= StateLimit; }
-			const float increment = next - c.nu_before;
-			const float correction_residual = c.a_sta - std::max(-_config.acceleration_limit[i],
-					std::min(c.a_sta, _config.acceleration_limit[i]));
+			const bool current = _config.variant == 3 ? _regularized_kernel.current(_regularized_candidates[i])
+				: _kernel.current(_candidates[i]);
+			if (!std::isfinite(proxy[i]) || !current) { latch(Feedback); return _result; }
+			// Derive the applied state from the immutable, sealed kernel proposal,
+			// not from the separate diagnostic Result that copies those values.
+			const float ideal = _config.variant == 3 ? _regularized_candidates[i].nu_next : _candidates[i].nu_next;
+			const float before = _config.variant == 3 ? _regularized_candidates[i].nu_before : _candidates[i].nu_before;
+			const float raw = _config.variant == 3 ? _regularized_candidates[i].a_sta : _candidates[i].a_sta;
+			float next = std::max(-_config.nu_limit[i], std::min(ideal, _config.nu_limit[i]));
+			if (fabsf(next - ideal) > 0.f) { _result.flags |= StateLimit; }
+			const float increment = next - before;
+			const float correction_residual = raw - std::max(-_config.acceleration_limit[i],
+					std::min(raw, _config.acceleration_limit[i]));
 			// Freeze only increments deepening a real constraint; unconstrained
 			// thrust-map mismatch (including Z scaling) alone must not freeze nu.
 			if ((increment > 0.f && (interval_positive & (1 << i)))
 			    || (increment < 0.f && (interval_negative & (1 << i)))
 			    || increment * correction_residual > 0.f || ((constrained_axes & (1 << i))
 			    && increment * (_result.a_req[i] - proxy[i]) > 0.f)) {
-				next = c.nu_before; _result.flags |= OutwardFreeze;
+				next = before; _result.flags |= OutwardFreeze;
 			}
 			applied[i] = next;
 		}
@@ -248,10 +279,12 @@ const StaVelocityProtection::Result &StaVelocityProtection::finish(const Vec &pr
 
 	for (size_t i = 0; i < 3; ++i) {
 		if (_result.active_axes & (1 << i)) {
-			_kernel.commitProtected(_candidates[i], applied[i]); // All axes prevalidated; no intervening mutation.
+			// All selected candidates prevalidated; no intervening state mutation.
+			if (_config.variant == 3) { _regularized_kernel.commitProtected(_regularized_candidates[i], applied[i]); }
+			else { _kernel.commitProtected(_candidates[i], applied[i]); }
 			_result.committed_axes |= 1 << i;
 		}
 	}
-	_result.nu_applied = _kernel.state();
+	_result.nu_applied = state();
 	return _result;
 }

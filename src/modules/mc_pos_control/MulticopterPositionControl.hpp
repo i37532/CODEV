@@ -97,6 +97,7 @@ public:
 
 private:
 	friend class VelocityModuleTestAccess;
+	friend class RegularizedVelocityModuleTestAccess;
 	void Run() override;
 
 	Takeoff _takeoff; /**< state machine and ramp to bring the vehicle off the ground without jumps */
@@ -155,6 +156,9 @@ private:
 		(ParamInt<px4::params::MPC_VC_MODE>) _param_mpc_vc_mode,
 		(ParamInt<px4::params::MPC_VC_DIV>) _param_mpc_vc_div,
 		(ParamInt<px4::params::MPC_VC_AXES>) _param_mpc_vc_axes,
+		(ParamFloat<px4::params::MPC_VC_EPS_X>) _param_mpc_vc_eps_x,
+		(ParamFloat<px4::params::MPC_VC_EPS_Y>) _param_mpc_vc_eps_y,
+		(ParamFloat<px4::params::MPC_VC_EPS_Z>) _param_mpc_vc_eps_z,
 		(ParamFloat<px4::params::MPC_VC_L1_X>) _param_mpc_vc_l1_x,
 		(ParamFloat<px4::params::MPC_VC_L2_X>) _param_mpc_vc_l2_x,
 		(ParamFloat<px4::params::MPC_VC_NU_X>) _param_mpc_vc_nu_x,

@@ -244,15 +244,18 @@ PARAM_DEFINE_FLOAT(MPC_XY_P, 0.95f);
  * Velocity controller request
  *
  * Accepts PID/AXES=0 or SITL ESTA/AXES=1..7 with valid independent gains.
- * AX01 Y/XZ/YZ require DIV1. MODE2 remains rejected. Armed requests are pending until
+ * AX01 Y/XZ/YZ require DIV1. MODE2 and MODE3 remain rejected in production.
+ * MODE3 identifies the regularized explicit STA for R02 offline tests only;
+ * setting its parameters cannot enable it. Armed requests are pending until
  * disarm; requesting the effective configuration cancels pending changes.
  * Original PID gain updates are unaffected.
  *
  * @value 0 PID
  * @value 1 ESTA selected NED axes (SITL only)
  * @value 2 Reserved (unavailable)
+ * @value 3 Regularized explicit STA (unavailable in R02)
  * @min 0
- * @max 2
+ * @max 3
  * @group Multicopter Position Control
  */
 PARAM_DEFINE_INT32(MPC_VC_MODE, 0);
@@ -272,6 +275,46 @@ PARAM_DEFINE_INT32(MPC_VC_MODE, 0);
  * @group Multicopter Position Control
  */
 PARAM_DEFINE_INT32(MPC_VC_AXES, 0);
+
+/**
+ * Regularized STA North velocity boundary width
+ *
+ * Width in velocity-error units, not an acceleration gain. Used only by MODE3,
+ * which is unavailable in R02 production. Does not change PID or MODE1 ESTA.
+ * Valid domain is checked without clamping; disarmed changes only.
+ * @unit m/s
+ * @min 0.001
+ * @max 1.0
+ * @decimal 3
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_FLOAT(MPC_VC_EPS_X, 0.01f);
+
+/**
+ * Regularized STA East velocity boundary width
+ *
+ * MODE3 only (unavailable in R02 production), ignored by PID and MODE1 ESTA.
+ * Invalid values are rejected without clamping; disarmed changes only.
+ * @unit m/s
+ * @min 0.001
+ * @max 1.0
+ * @decimal 3
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_FLOAT(MPC_VC_EPS_Y, 0.01f);
+
+/**
+ * Regularized STA Down velocity boundary width
+ *
+ * MODE3 only (unavailable in R02 production), ignored by PID and MODE1 ESTA.
+ * Invalid values are rejected without clamping; disarmed changes only.
+ * @unit m/s
+ * @min 0.001
+ * @max 1.0
+ * @decimal 3
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_FLOAT(MPC_VC_EPS_Z, 0.02f);
 
 /**
  * ESTA North velocity square-root gain
