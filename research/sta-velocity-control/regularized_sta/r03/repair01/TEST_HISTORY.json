@@ -1,0 +1,22 @@
+{
+  "scope": "Offline repair-only tests; no flight, no historical acceptance changes",
+  "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH='/home/yr/Desktop/Codev-autopilot/.px4-python:/home/yr/Desktop/codev doc/experiments/M00-20260912/python' python3 test_adapter.py",
+  "attempts": [
+    {
+      "attempt": 1,
+      "exit_code": 1,
+      "tests_run": 18,
+      "reported_error_instances_including_subtests": 10,
+      "cause": "Test fixture stored reference function as class attribute; Python bound self and supplied 3 arguments to a 2-argument offsets function.",
+      "correction": "Mark the test-only reference staticmethod; production adapter math and checks unchanged."
+    },
+    {
+      "attempt": 2,
+      "exit_code": 0,
+      "tests_run": 25,
+      "reported_errors": 0,
+      "notes": "Includes 7 added full-height synthetic positive/negative tests, exact AST import-only equivalence, separate-process runner/analyzer import orders, poisoned generic task modules, and non-authorizing diagnostic output."
+    }
+  ],
+  "actual_run001_replay_executed_at_this_checkpoint": false
+}
