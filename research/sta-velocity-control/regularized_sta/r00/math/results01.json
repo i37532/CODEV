@@ -1,0 +1,545 @@
+{
+  "schema": 1,
+  "purpose": "R00 audit, no production changes or flight",
+  "success": true,
+  "build_directory": "/tmp/r00-source-audit-7z0djan1",
+  "package": "/home/yr/Desktop/STA-ISTA-MATLAB-PX4",
+  "package_sha256_manifest": "0f74af545a3c68ab5d26da19f527d089ff1a3fdbaa5d0d4dd060ac0077bd874f",
+  "package_sha256_count": 29,
+  "commands": [
+    {
+      "argv": [
+        "sha256sum",
+        "-c",
+        "SHA256SUMS.txt"
+      ],
+      "cwd": "/home/yr/Desktop/STA-ISTA-MATLAB-PX4",
+      "exit_code": 0,
+      "stdout": ".gitattributes: OK\n.gitignore: OK\nCMakeLists.txt: OK\ncpp/README.md: OK\ncpp/velocity_sta_ista.hpp: OK\ndocs/CODEV源码接口核对.md: OK\ndocs/PX4速度环接入说明.md: OK\ndocs/算法与参数.md: OK\nmatlab/common/height_acceleration_to_throttle.m: OK\nmatlab/ista/height_ista_tuned_acceleration.m: OK\nmatlab/ista/ISTA_author_step.m: OK\nmatlab/ista/ista_compensated_step.m: OK\nmatlab/ista/ista_regularized_step.m: OK\nmatlab/ista/ista_velocity_tuned.m: OK\nmatlab/load_controller_parameters.m: OK\nmatlab/sta/height_sta_acceleration.m: OK\nmatlab/sta/sta_velocity_ff_conditional.m: OK\nmodels/ista/drone_position_control_ista_tuned.slx: OK\nmodels/README.md: OK\nmodels/sta/drone_position_control_sta_z_tuned.slx: OK\nparameters/controller_parameters.json: OK\nparameters/source_manifest.json: OK\nREADME.md: OK\ntests/cpp/test_velocity_core.cpp: OK\ntests/matlab/controller_reference.csv: OK\ntests/matlab/export_controller_reference.m: OK\ntests/matlab/README.md: OK\ntests/matlab/verify_model_parameters.m: OK\nVALIDATION.md: OK\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "cmake",
+        "--version"
+      ],
+      "cwd": "/home/yr/Desktop/STA-ISTA-MATLAB-PX4",
+      "exit_code": 0,
+      "stdout": "cmake version 3.22.1\n\nCMake suite maintained and supported by Kitware (kitware.com/cmake).\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "g++",
+        "--version"
+      ],
+      "cwd": "/home/yr/Desktop/STA-ISTA-MATLAB-PX4",
+      "exit_code": 0,
+      "stdout": "g++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0\nCopyright (C) 2021 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "cmake",
+        "-S",
+        "/home/yr/Desktop/STA-ISTA-MATLAB-PX4",
+        "-B",
+        "/tmp/r00-source-audit-7z0djan1/build",
+        "-DCMAKE_BUILD_TYPE=Release"
+      ],
+      "cwd": "/home/yr/Desktop/STA-ISTA-MATLAB-PX4",
+      "exit_code": 0,
+      "stdout": "-- The CXX compiler identification is GNU 11.4.0\n-- Detecting CXX compiler ABI info\n-- Detecting CXX compiler ABI info - done\n-- Check for working CXX compiler: /usr/bin/c++ - skipped\n-- Detecting CXX compile features\n-- Detecting CXX compile features - done\n-- Configuring done\n-- Generating done\n-- Build files have been written to: /tmp/r00-source-audit-7z0djan1/build\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "cmake",
+        "--build",
+        "/tmp/r00-source-audit-7z0djan1/build",
+        "--parallel",
+        "2"
+      ],
+      "cwd": "/home/yr/Desktop/STA-ISTA-MATLAB-PX4",
+      "exit_code": 0,
+      "stdout": "[ 50%] Building CXX object CMakeFiles/test_velocity_core.dir/tests/cpp/test_velocity_core.cpp.o\n[100%] Linking CXX executable test_velocity_core\n[100%] Built target test_velocity_core\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "ctest",
+        "--test-dir",
+        "/tmp/r00-source-audit-7z0djan1/build",
+        "--output-on-failure",
+        "-V"
+      ],
+      "cwd": "/home/yr/Desktop/STA-ISTA-MATLAB-PX4",
+      "exit_code": 0,
+      "stdout": "Internal ctest changing into directory: /tmp/r00-source-audit-7z0djan1/build\nUpdateCTestConfiguration  from :/tmp/r00-source-audit-7z0djan1/build/DartConfiguration.tcl\nParse Config file:/tmp/r00-source-audit-7z0djan1/build/DartConfiguration.tcl\nUpdateCTestConfiguration  from :/tmp/r00-source-audit-7z0djan1/build/DartConfiguration.tcl\nParse Config file:/tmp/r00-source-audit-7z0djan1/build/DartConfiguration.tcl\nTest project /tmp/r00-source-audit-7z0djan1/build\nConstructing a list of tests\nDone constructing a list of tests\nUpdating test list for fixtures\nAdded 0 tests to meet fixture requirements\nChecking test dependency graph...\nChecking test dependency graph end\ntest 1\n    Start 1: velocity_core_unit\n\n1: Test command: /tmp/r00-source-audit-7z0djan1/build/test_velocity_core\n1: Test timeout computed to be: 1500\n1: PASS: 0 failed checks\n1/2 Test #1: velocity_core_unit ...............   Passed    0.00 sec\ntest 2\n    Start 2: velocity_core_matlab_oracle\n\n2: Test command: /tmp/r00-source-audit-7z0djan1/build/test_velocity_core \"--oracle\" \"/home/yr/Desktop/STA-ISTA-MATLAB-PX4/tests/matlab/controller_reference.csv\"\n2: Test timeout computed to be: 1500\n2: MATLAB oracle cases checked (double and float): 7980\n2: PASS: 0 failed checks\n2/2 Test #2: velocity_core_matlab_oracle ......   Passed    0.03 sec\n\n100% tests passed, 0 tests failed out of 2\n\nTotal Test time (real) =   0.03 sec\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "g++",
+        "-std=c++14",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-I",
+        "/home/yr/Desktop/STA-ISTA-MATLAB-PX4/cpp",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r00/math/source_probe.cpp",
+        "-o",
+        "/tmp/r00-source-audit-7z0djan1/source_probe"
+      ],
+      "cwd": "/home/yr/Desktop/STA-ISTA-MATLAB-PX4",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/r00-source-audit-7z0djan1/source_probe"
+      ],
+      "cwd": "/home/yr/Desktop/STA-ISTA-MATLAB-PX4",
+      "exit_code": 0,
+      "stdout": "{\"input_cases_float_and_double\":4320,\"assertions\":17284,\"failures\":0,\"source_reset_same_value_stale_accepted\":true,\"source_cross_axis_candidate_accepted\":true,\"package_total_clamp\":1,\"px4_order_counterexample\":4}\n",
+      "stderr": ""
+    }
+  ],
+  "source_probe": {
+    "input_cases_float_and_double": 4320,
+    "assertions": 17284,
+    "failures": 0,
+    "source_reset_same_value_stale_accepted": true,
+    "source_cross_axis_candidate_accepted": true,
+    "package_total_clamp": 1,
+    "px4_order_counterexample": 4
+  },
+  "unittest": {
+    "tests_run": 14,
+    "failures": 0,
+    "errors": 0,
+    "output": "test_01_piecewise_product_equivalence (math_probe.MathProbe) ... ok\ntest_02_sign_mapping_nonzero_nu (math_probe.MathProbe) ... ok\ntest_03_exact_boundary_and_neighbors (math_probe.MathProbe) ... ok\ntest_04_explicit_old_nu (math_probe.MathProbe) ... ok\ntest_05_jury_vs_direct_eigenvalues (math_probe.MathProbe) ... ok\ntest_06_high_z_stability_boundary (math_probe.MathProbe) ... ok\ntest_07_ax05_epsilon_domain (math_probe.MathProbe) ... ok\ntest_08_independent_zoh_matches_local_matrix (math_probe.MathProbe) ... ok\ntest_09_constant_disturbance_exact_equilibrium (math_probe.MathProbe) ... ok\ntest_10_ramp_disturbance_particular_solution (math_probe.MathProbe) ... ok\ntest_11_convergence_ideal_fixed_period (math_probe.MathProbe) ... ok\ntest_12_invalid_epsilon_rejected (math_probe.MathProbe) ... ok\ntest_13_tiny_error_piecewise_no_ratio_overflow (math_probe.MathProbe) ... ok\ntest_14_zero_gain_not_asymptotically_stable (math_probe.MathProbe) ... ok\n\n----------------------------------------------------------------------\nRan 14 tests in 0.003s\n\nOK\n"
+  },
+  "ctest": {
+    "registered_and_executed": 2,
+    "exit_code": 0
+  },
+  "historical_matlab_fixture": {
+    "rows": 7980,
+    "sta_rows": 3990,
+    "ista_rows": 3990,
+    "sha256": "ebf558d8bc2f28c61f3502b73ceba3b267c0c66b209b77f048fab881fc3e81d0"
+  },
+  "matlab": {
+    "path": null,
+    "octave_path": null,
+    "executed": false,
+    "reason": "R00 reruns package C++ against historical fixture; no MATLAB available on PATH"
+  },
+  "math": {
+    "local_models": [
+      {
+        "name": "source_high_z",
+        "lambda1": 20.0,
+        "lambda2": 12.0,
+        "epsilon": 0.01,
+        "first_boundary_s": 0.01031947467255235,
+        "periods": [
+          {
+            "h_s": 0.002,
+            "schur": true,
+            "spectral_radius": 0.9876166303929376,
+            "eigenvalues": [
+              [
+                0.9876166303929376,
+                0.0
+              ],
+              [
+                0.6123833696070625,
+                0.0
+              ]
+            ]
+          },
+          {
+            "h_s": 0.005,
+            "schur": true,
+            "spectral_radius": 0.969041575982343,
+            "eigenvalues": [
+              [
+                0.969041575982343,
+                0.0
+              ],
+              [
+                0.030958424017657027,
+                0.0
+              ]
+            ]
+          },
+          {
+            "h_s": 0.01,
+            "schur": true,
+            "spectral_radius": 0.938083151964686,
+            "eigenvalues": [
+              [
+                0.938083151964686,
+                0.0
+              ],
+              [
+                -0.938083151964686,
+                0.0
+              ]
+            ]
+          },
+          {
+            "h_s": 0.012,
+            "schur": false,
+            "spectral_radius": 1.325699782357623,
+            "eigenvalues": [
+              [
+                0.9256997823576232,
+                0.0
+              ],
+              [
+                -1.325699782357623,
+                0.0
+              ]
+            ]
+          },
+          {
+            "h_s": 0.016,
+            "schur": false,
+            "spectral_radius": 2.100933043143498,
+            "eigenvalues": [
+              [
+                0.9009330431434976,
+                0.0
+              ],
+              [
+                -2.100933043143498,
+                0.0
+              ]
+            ]
+          },
+          {
+            "h_s": 0.04,
+            "schur": false,
+            "spectral_radius": 6.752332607858744,
+            "eigenvalues": [
+              [
+                0.7523326078587438,
+                0.0
+              ],
+              [
+                -6.752332607858744,
+                0.0
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "name": "ax05_xy_candidate",
+        "lambda1": 0.5,
+        "lambda2": 0.1,
+        "epsilon": 0.01,
+        "first_boundary_s": 0.5,
+        "periods": [
+          {
+            "h_s": 0.002,
+            "schur": true,
+            "spectral_radius": 0.9950075376598913,
+            "eigenvalues": [
+              [
+                0.995,
+                0.00387298334620577
+              ],
+              [
+                0.995,
+                -0.00387298334620577
+              ]
+            ]
+          },
+          {
+            "h_s": 0.005,
+            "schur": true,
+            "spectral_radius": 0.9875474672136019,
+            "eigenvalues": [
+              [
+                0.9875,
+                0.009682458365512993
+              ],
+              [
+                0.9875,
+                -0.009682458365512993
+              ]
+            ]
+          },
+          {
+            "h_s": 0.01,
+            "schur": true,
+            "spectral_radius": 0.9751922887307918,
+            "eigenvalues": [
+              [
+                0.975,
+                0.019364916731037452
+              ],
+              [
+                0.975,
+                -0.019364916731037452
+              ]
+            ]
+          },
+          {
+            "h_s": 0.012,
+            "schur": true,
+            "spectral_radius": 0.9702783105892865,
+            "eigenvalues": [
+              [
+                0.97,
+                0.02323790007724418
+              ],
+              [
+                0.97,
+                -0.02323790007724418
+              ]
+            ]
+          },
+          {
+            "h_s": 0.016,
+            "schur": true,
+            "spectral_radius": 0.9604998698594394,
+            "eigenvalues": [
+              [
+                0.96,
+                0.030983866769660494
+              ],
+              [
+                0.96,
+                -0.030983866769660494
+              ]
+            ]
+          },
+          {
+            "h_s": 0.04,
+            "schur": true,
+            "spectral_radius": 0.9033271832508972,
+            "eigenvalues": [
+              [
+                0.9,
+                0.07745966692414837
+              ],
+              [
+                0.9,
+                -0.07745966692414837
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "name": "ax05_z_candidate",
+        "lambda1": 2.0,
+        "lambda2": 1.0,
+        "epsilon": 0.02,
+        "first_boundary_s": 0.2828427091028711,
+        "periods": [
+          {
+            "h_s": 0.002,
+            "schur": true,
+            "spectral_radius": 0.9858578643762691,
+            "eigenvalues": [
+              [
+                0.985857864376269,
+                1.0536712127723509e-08
+              ],
+              [
+                0.985857864376269,
+                -1.0536712127723509e-08
+              ]
+            ]
+          },
+          {
+            "h_s": 0.005,
+            "schur": true,
+            "spectral_radius": 0.9646446714773849,
+            "eigenvalues": [
+              [
+                0.9646446714773849,
+                0.0
+              ],
+              [
+                0.9646446504039605,
+                0.0
+              ]
+            ]
+          },
+          {
+            "h_s": 0.01,
+            "schur": true,
+            "spectral_radius": 0.9292893218813453,
+            "eigenvalues": [
+              [
+                0.9292893218813453,
+                0.0
+              ],
+              [
+                0.9292893218813453,
+                0.0
+              ]
+            ]
+          },
+          {
+            "h_s": 0.012,
+            "schur": true,
+            "spectral_radius": 0.9151471862576143,
+            "eigenvalues": [
+              [
+                0.9151471862576143,
+                0.0
+              ],
+              [
+                0.9151471862576143,
+                0.0
+              ]
+            ]
+          },
+          {
+            "h_s": 0.016,
+            "schur": true,
+            "spectral_radius": 0.8868629150101525,
+            "eigenvalues": [
+              [
+                0.8868629150101524,
+                1.0536712127723509e-08
+              ],
+              [
+                0.8868629150101524,
+                -1.0536712127723509e-08
+              ]
+            ]
+          },
+          {
+            "h_s": 0.04,
+            "schur": true,
+            "spectral_radius": 0.717157287525381,
+            "eigenvalues": [
+              [
+                0.717157287525381,
+                0.0
+              ],
+              [
+                0.717157287525381,
+                0.0
+              ]
+            ]
+          }
+        ]
+      }
+    ],
+    "epsilon_grid": [
+      {
+        "name": "ax05_xy",
+        "epsilon": 0.0025,
+        "first_boundary_s": 0.25,
+        "maximum_h_s": 0.04,
+        "schur_at_max_h": true
+      },
+      {
+        "name": "ax05_xy",
+        "epsilon": 0.005,
+        "first_boundary_s": 0.3535533905932738,
+        "maximum_h_s": 0.04,
+        "schur_at_max_h": true
+      },
+      {
+        "name": "ax05_xy",
+        "epsilon": 0.01,
+        "first_boundary_s": 0.5,
+        "maximum_h_s": 0.04,
+        "schur_at_max_h": true
+      },
+      {
+        "name": "ax05_xy",
+        "epsilon": 0.02,
+        "first_boundary_s": 0.7071067811865476,
+        "maximum_h_s": 0.04,
+        "schur_at_max_h": true
+      },
+      {
+        "name": "ax05_xy",
+        "epsilon": 0.04,
+        "first_boundary_s": 1.0,
+        "maximum_h_s": 0.04,
+        "schur_at_max_h": true
+      },
+      {
+        "name": "ax05_xy",
+        "epsilon": 0.08,
+        "first_boundary_s": 1.4142135623730951,
+        "maximum_h_s": 0.04,
+        "schur_at_max_h": true
+      },
+      {
+        "name": "ax05_z",
+        "epsilon": 0.0025,
+        "first_boundary_s": 0.1,
+        "maximum_h_s": 0.04,
+        "schur_at_max_h": true
+      },
+      {
+        "name": "ax05_z",
+        "epsilon": 0.005,
+        "first_boundary_s": 0.14142135455143556,
+        "maximum_h_s": 0.04,
+        "schur_at_max_h": true
+      },
+      {
+        "name": "ax05_z",
+        "epsilon": 0.01,
+        "first_boundary_s": 0.2,
+        "maximum_h_s": 0.04,
+        "schur_at_max_h": true
+      },
+      {
+        "name": "ax05_z",
+        "epsilon": 0.02,
+        "first_boundary_s": 0.2828427091028711,
+        "maximum_h_s": 0.04,
+        "schur_at_max_h": true
+      },
+      {
+        "name": "ax05_z",
+        "epsilon": 0.04,
+        "first_boundary_s": 0.4,
+        "maximum_h_s": 0.04,
+        "schur_at_max_h": true
+      },
+      {
+        "name": "ax05_z",
+        "epsilon": 0.08,
+        "first_boundary_s": 0.5656854182057423,
+        "maximum_h_s": 0.04,
+        "schur_at_max_h": true
+      }
+    ],
+    "epsilon_grid_size": 12,
+    "proposed_numeric_domain_m_s": [
+      0.001,
+      1.0
+    ],
+    "proposed_first_candidate_m_s": [
+      0.01,
+      0.01,
+      0.02
+    ],
+    "status": "offline screening only; R01 must validate lag/noise/constraints/variable time"
+  },
+  "source_files": {
+    "cpp/velocity_sta_ista.hpp": "de3366ecacaf54ea5058f2bde6e6f2c9122b9375e8128ecb6c353fada40dbcb8",
+    "matlab/sta/sta_velocity_ff_conditional.m": "688e48a1e2587f85764e49c4324d6f3aacf3d112640aa22e36f9b96473b81967",
+    "matlab/sta/height_sta_acceleration.m": "2f7f185f01df1e24d98175aae6cfa00876b3cdc0a894b85a4e6239cbda7deb42",
+    "parameters/controller_parameters.json": "82738d6d6204db974a2e3ba040e7fe8c5e9d5d414c4fb3e73de1a72120d438d4"
+  }
+}
