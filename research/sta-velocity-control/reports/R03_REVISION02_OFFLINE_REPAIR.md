@@ -104,3 +104,21 @@ python3 research/sta-velocity-control/regularized_sta/r03_revision02/runner.py -
 下一批仍缺：明确启动新36次清单的执行意图、对应可执行版本及干净源码/固件资格、飞前进程/容量/参数/模型/插件/种子现场核验。当前只有 A 的既有生产准入，B/C/D 还要按各门前置逐步开放与资格验证。新监视链的完整在线有效性仍需下一批实际飞行证实。
 
 未执行 MATLAB、新飞行、参数写入、Z/XY/XYZ 扩展、R04/R05、ISTA 或实机。本阶段未通过，因此不 push，也不恢复自动研究飞行。
+
+## 7. 干净提交后的最终核验
+
+修复/协议提交 **`3675c87abbd6d51b92d95c5df0d087efcb8ce99a`**，29 个明确新增文件，提交后工作区干净。随后 `verify.py --gate A --qualify --output .../R03_revision02/A/qualification01` 真实退出0：43条顶层命令全0，再次执行475不同C++、1125 Python，32768主样本对/256同sample重算，SITL与Gazebo仅构建通过。660输入指纹、33子模块和EEPROM首尾保持；`clean=true`、新飞行0。
+
+| 最终绑定 | 值 |
+|---|---|
+| 固件 SHA-256 | `56dfe915e933981ffbe81c3eb10b3b1795c4a730fa4afc39bcf90f528e5b1864` |
+| parameters.json | `5782d0dff49ec11e6adbf70c6d1761eb65fbc063edfc9610a8e01590b36e2fa8` |
+| A/frozen.json | `28c9a3808abad8a6046c2c641a954de78badd077c447b716086b7920d445ce13` |
+| qualification01/evidence.json | `b01c9e4e7f9446438c9d2e743fae18ed22c4a480b5322c7aaf8e808722587dd4` |
+| qualification01/authorization.json | `596ef3e98b26259e656527816404b19bbfe9b8b123b95155f9a1228ad9395405` |
+
+该收据 **approved=false、execution_authorized=false、flight_authorized=false、execution_ready=false**。真实只读调用 `require_qualification` 完整接受上述离线证据，`require_execution_authority('A')` 仍明确拒绝；外部新目录无 batch，36项outcomes全unattempted。这不是R03飞行门通过收据。
+
+格式整理后另做实际种子复查：56,997份JSON，无新冲突/非法JSON，只有4份准确指纹设计文件登记；一个已知空M06诊断文件按原已审计例外保持。扫描清单SHA `e4adf0f95f62d86d7fe0994bec7a256eb68e3190b0a6a98fb6ba09b9a17b7728`，命令退出0。这是当前离线复查，未来起飞仍需当时现场复查。
+
+本节作为单独报告结果提交，不改变冻结代码或资格绑定的源码HEAD；完整结果SHA写外部进度。工作区核对后停止，不push、不飞行。
