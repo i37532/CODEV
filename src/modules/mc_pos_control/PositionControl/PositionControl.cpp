@@ -95,7 +95,11 @@ void PositionControl::configureVelocityControl(int32_t mode, int32_t axes, bool 
 	bool regularized_ready = false;
 #if defined(CONFIG_ARCH_BOARD_PX4_SITL)
 	ready = _esta_config_valid && _esta_requested.variant == 1 && (_decimation.divisor == 1 || axes == 1 || axes == 3);
-	regularized_ready = _regularized_test_admission && _esta_config_valid
+	// R03 gate A: only NED X is admitted to the actual SITL output path.
+	// The private friend override is defined only in offline test translation
+	// units; it is not a parameter or a production setter for later gates.
+	const bool regularized_gate_admitted = axes == 1;
+	regularized_ready = (regularized_gate_admitted || _regularized_test_admission) && _esta_config_valid
 		&& _esta_requested.variant == 3 && _decimation.divisor == 1;
 #endif
 	_velocity_selector.configure(mode, axes, armed, ready, _esta_requested.axes, regularized_ready);

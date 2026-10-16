@@ -60,17 +60,68 @@ void equalState(const Guard::Vec &a, const Guard::Vec &b)
 }
 }
 
-TEST(RegularizedVelocityIntegration, ProductionAdmissionRemainsClosedForAllNewMasks)
+TEST(RegularizedVelocityIntegration, ProductionGateAAdmitsOnlyXAndPreservesAllLegacyMasks)
 {
-	for (const uint8_t axes : {1, 3, 4, 7}) {
+	for (const uint8_t axes : {1, 2, 3, 4, 5, 6, 7}) {
 		PositionControl p; setup(p, 0, 3, false);
 		p.configureVelocityEsta(config(axes), false); p.configureVelocityControl(3, axes, false);
-		EXPECT_NE(p.velocitySelection().reject(), 0); EXPECT_EQ(p.velocitySelection().effectiveMode(), 0);
+		if (axes == 1) {
+			EXPECT_EQ(p.velocitySelection().reject(), 0); EXPECT_EQ(p.velocitySelection().effectiveMode(), 3);
+		} else {
+			EXPECT_NE(p.velocitySelection().reject(), 0); EXPECT_EQ(p.velocitySelection().effectiveMode(), 0);
+		}
 		p.configureVelocityEsta(config(axes, 1), false); p.configureVelocityControl(1, axes, false);
-		ASSERT_EQ(p.velocitySelection().effectiveMode(), 1);
+		ASSERT_EQ(p.velocitySelection().effectiveMode(), 1); ASSERT_EQ(p.velocitySelection().effectiveAxes(), axes);
+		const auto generation = p.velocityEstaGeneration();
 		p.configureVelocityEsta(config(axes), false); p.configureVelocityControl(3, axes, false);
-		EXPECT_NE(p.velocitySelection().reject(), 0); EXPECT_EQ(p.velocitySelection().effectiveMode(), 1);
-		EXPECT_EQ(p.effectiveVelocityEsta().variant, 1);
+		if (axes == 1) {
+			EXPECT_EQ(p.velocitySelection().reject(), 0); EXPECT_EQ(p.velocitySelection().effectiveMode(), 3);
+			EXPECT_EQ(p.effectiveVelocityEsta().variant, 3);
+		} else {
+			EXPECT_NE(p.velocitySelection().reject(), 0); EXPECT_EQ(p.velocitySelection().effectiveMode(), 1);
+			EXPECT_EQ(p.effectiveVelocityEsta().variant, 1); EXPECT_EQ(p.velocityEstaGeneration(), generation);
+		}
+	}
+	for (const int axes : {-1, 0, 8, 257}) {
+		PositionControl p; setup(p, 1, 3, false); const auto generation = p.velocityEstaGeneration();
+		p.configureVelocityControl(3, axes, false);
+		EXPECT_NE(p.velocitySelection().reject(), 0); EXPECT_EQ(p.velocitySelection().effectiveMode(), 3);
+		EXPECT_EQ(p.velocitySelection().effectiveAxes(), 1); EXPECT_EQ(p.velocityEstaGeneration(), generation);
+	}
+}
+
+TEST(RegularizedVelocityIntegration, ProductionXPendingCancelDisarmAndAlgorithmChangesResetState)
+{
+	PositionControl p; setup(p, 0, 3, false); const auto original = config(1);
+	p.configureVelocityEsta(original, true); p.configureVelocityControl(3, 1, true);
+	EXPECT_TRUE(p.velocitySelection().pending()); EXPECT_EQ(p.velocitySelection().effectiveMode(), 0);
+	p.configureVelocityControl(0, 0, true); EXPECT_FALSE(p.velocitySelection().pending());
+	p.configureVelocityEsta(original, false); p.configureVelocityControl(3, 1, false);
+	ASSERT_EQ(p.velocitySelection().effectiveMode(), 3); EXPECT_EQ(p.velocitySelection().reject(), 0);
+	auto f = frame(); ASSERT_TRUE(step(p, f, target())); f.sample += 8000;
+	ASSERT_TRUE(step(p, f, target(.005f))); EXPECT_EQ(p.diagnostic().pid_axes, 6);
+	EXPECT_EQ(p.diagnostic().committed_axes, 1); EXPECT_GT(fabsf(p.diagnostic().nu_applied[0]), 0.f);
+	const auto generation = p.velocityEstaGeneration(); auto changed = original; changed.epsilon[0] = .02f;
+	p.configureVelocityEsta(changed, true); p.configureVelocityControl(3, 1, true);
+	EXPECT_TRUE(p.velocityEstaPending()); EXPECT_EQ(p.velocityEstaGeneration(), generation);
+	EXPECT_FLOAT_EQ(p.effectiveVelocityEsta().epsilon[0], .01f);
+	p.configureVelocityEsta(original, true); p.configureVelocityControl(3, 1, true); EXPECT_FALSE(p.velocityEstaPending());
+	p.configureVelocityControl(0, 0, true); EXPECT_TRUE(p.velocitySelection().pending());
+	p.configureVelocityControl(3, 1, true); EXPECT_FALSE(p.velocitySelection().pending());
+	f.armed = false; f.sample += 12000; ASSERT_TRUE(step(p, f, target()));
+	EXPECT_FLOAT_EQ(p.diagnostic().nu_applied[0], 0.f);
+	p.configureVelocityEsta(changed, false); p.configureVelocityControl(3, 1, false);
+	EXPECT_GT(p.velocityEstaGeneration(), generation); EXPECT_FLOAT_EQ(p.effectiveVelocityEsta().epsilon[0], .02f);
+	for (const int mode : {0, 1, 3}) {
+		f.armed = false; f.sample += 10000; ASSERT_TRUE(step(p, f, target()));
+		p.configureVelocityEsta(mode == 1 ? config(1, 1) : changed, false);
+		p.configureVelocityControl(mode, mode ? 1 : 0, false);
+		EXPECT_EQ(p.velocitySelection().effectiveMode(), mode); EXPECT_EQ(p.velocitySelection().reject(), 0);
+		f.armed = true; f.sample += 10000; ASSERT_TRUE(step(p, f, target()));
+		if (mode) { EXPECT_FLOAT_EQ(p.diagnostic().nu_applied[0], 0.f); }
+		else { EXPECT_TRUE(std::isnan(p.diagnostic().nu_applied[0])); }
+		f.sample += 10000; ASSERT_TRUE(step(p, f, target(.005f)));
+		EXPECT_EQ(p.diagnostic().pid_axes, mode ? 6 : 7);
 	}
 }
 
@@ -96,7 +147,7 @@ TEST(RegularizedVelocityIntegration, FixtureAdmissionRequiresConsistentVariantAn
 TEST(RegularizedVelocityIntegration, RegularizedDivisorIsOneIncludingReconfigurationOrder)
 {
 	for (const int divisor : {2, 4}) {
-		PositionControl p; setup(p, 0); p.configureVelocityDivisor(divisor, false);
+		PositionControl p; setup(p, 0, 3, false); p.configureVelocityDivisor(divisor, false);
 		ASSERT_EQ(p.velocityDecimation().divisor, divisor);
 		p.configureVelocityEsta(config(1), false); p.configureVelocityControl(3, 1, false);
 		EXPECT_NE(p.velocitySelection().reject(), 0); EXPECT_EQ(p.velocitySelection().effectiveMode(), 0);

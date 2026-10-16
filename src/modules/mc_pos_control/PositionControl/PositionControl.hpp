@@ -203,7 +203,8 @@ public:
 private:
 	friend class VelocityControlTestAccess;
 	friend class RegularizedVelocityTestAccess;
-	// R02 has no production setter or parameter that can enable this admission.
+	// Offline-only override for later masks; production admission is explicitly
+	// gated in configureVelocityControl, with no setter/parameter for this flag.
 	// The only writer is the explicitly named offline test friend.
 	bool _regularized_test_admission{false};
 	bool _staEffective() const { return _velocity_selector.effectiveMode() == 1 || _velocity_selector.effectiveMode() == 3; }

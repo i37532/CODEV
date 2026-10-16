@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: BSD-3-Clause
-// R02: parameter-server/BSON transactions only; no simulator or actuator use.
+// R02/R03: parameter-server/BSON transactions only; no simulator or flight.
 #include <gtest/gtest.h>
 #include <parameters/param.h>
 #include "PositionControl.hpp"
@@ -54,38 +54,47 @@ TEST_F(RegularizedVelocityParam, IndependentDefaultsKeepPidDefault)
 	int32_t div = -1; ASSERT_EQ(param_get(param_find("MPC_VC_DIV"), &div), 0); EXPECT_EQ(div, 1);
 }
 
-TEST_F(RegularizedVelocityParam, BsonIndependentWidthsAndModeSurviveButProductionRejects)
+TEST_F(RegularizedVelocityParam, BsonReloadAdmitsOnlyGateAXAndKeepsUnadmittedRequests)
 {
 	const float values[3]{.001f, .031f, 1.f};
-	for (int i = 0; i < 3; ++i) { ASSERT_EQ(param_set(keys[i], &values[i]), 0); }
-	int32_t mode = 3, axes = 7;
-	ASSERT_EQ(param_set(param_find("MPC_VC_MODE"), &mode), 0);
-	ASSERT_EQ(param_set(param_find("MPC_VC_AXES"), &axes), 0);
-	FILE *f = tmpfile(); ASSERT_NE(f, nullptr);
-	ASSERT_EQ(param_export(fileno(f), false, nullptr), 0);
-	param_reset_all(); ASSERT_EQ(lseek(fileno(f), 0, SEEK_SET), 0);
-	ASSERT_EQ(param_import(fileno(f), true), 0); fclose(f);
-	auto c = config();
-	for (int i = 0; i < 3; ++i) {
-		ASSERT_EQ(param_get(keys[i], &c.epsilon[i]), 0); EXPECT_FLOAT_EQ(c.epsilon[i], values[i]);
+	for (const int32_t requested_axes : {1, 3, 4, 7}) {
+		for (int i = 0; i < 3; ++i) { ASSERT_EQ(param_set(keys[i], &values[i]), 0); }
+		int32_t mode = 3, axes = requested_axes;
+		ASSERT_EQ(param_set(param_find("MPC_VC_MODE"), &mode), 0);
+		ASSERT_EQ(param_set(param_find("MPC_VC_AXES"), &axes), 0);
+		FILE *f = tmpfile(); ASSERT_NE(f, nullptr);
+		ASSERT_EQ(param_export(fileno(f), false, nullptr), 0);
+		param_reset_all(); ASSERT_EQ(lseek(fileno(f), 0, SEEK_SET), 0);
+		ASSERT_EQ(param_import(fileno(f), true), 0); fclose(f);
+		auto c = config();
+		for (int i = 0; i < 3; ++i) {
+			ASSERT_EQ(param_get(keys[i], &c.epsilon[i]), 0); EXPECT_FLOAT_EQ(c.epsilon[i], values[i]);
+		}
+		ASSERT_EQ(param_get(param_find("MPC_VC_MODE"), &mode), 0); EXPECT_EQ(mode, 3);
+		ASSERT_EQ(param_get(param_find("MPC_VC_AXES"), &axes), 0); EXPECT_EQ(axes, requested_axes);
+		c.axes = static_cast<uint8_t>(axes);
+		PositionControl restarted; configure(restarted, c, false);
+		if (requested_axes == 1) {
+			EXPECT_EQ(restarted.velocitySelection().effectiveMode(), 3);
+			EXPECT_EQ(restarted.velocitySelection().effectiveAxes(), 1);
+			EXPECT_EQ(restarted.velocitySelection().reject(), 0); EXPECT_GT(restarted.velocityEstaGeneration(), 0u);
+			EXPECT_FLOAT_EQ(restarted.effectiveVelocityEsta().epsilon[0], values[0]);
+		} else {
+			EXPECT_EQ(restarted.velocitySelection().effectiveMode(), 0);
+			EXPECT_NE(restarted.velocitySelection().reject(), 0); EXPECT_EQ(restarted.velocityEstaGeneration(), 0u);
+		}
 	}
-	ASSERT_EQ(param_get(param_find("MPC_VC_MODE"), &mode), 0); EXPECT_EQ(mode, 3);
-	ASSERT_EQ(param_get(param_find("MPC_VC_AXES"), &axes), 0); EXPECT_EQ(axes, 7);
-	PositionControl restarted; configure(restarted, c, false);
-	EXPECT_EQ(restarted.velocitySelection().effectiveMode(), 0);
-	EXPECT_NE(restarted.velocitySelection().reject(), 0);
-	EXPECT_EQ(restarted.velocityEstaGeneration(), 0u);
 }
 
 TEST_F(RegularizedVelocityParam, InvalidRawParameterIsNotClampedIntoAdmission)
 {
 	for (float value : {-.01f, 0.f, .000999f, 1.001f, INFINITY, NAN}) {
 		ASSERT_EQ(param_set(keys[0], &value), 0);
-		auto c = config(); ASSERT_EQ(param_get(keys[0], &c.epsilon[0]), 0);
+		auto c = config(); c.axes = 1; ASSERT_EQ(param_get(keys[0], &c.epsilon[0]), 0);
 		if (std::isnan(value)) { EXPECT_TRUE(std::isnan(c.epsilon[0])); }
 		else { EXPECT_FLOAT_EQ(c.epsilon[0], value); }
 		EXPECT_FALSE(StaVelocityProtection::validConfig(c));
-		PositionControl p; RegularizedVelocityTestAccess::admit(p); configure(p, c, false);
+		PositionControl p; configure(p, c, false);
 		EXPECT_EQ(p.velocitySelection().effectiveMode(), 0);
 		EXPECT_TRUE(p.velocityEstaRejected()); EXPECT_NE(p.velocitySelection().reject(), 0);
 	}
@@ -95,7 +104,7 @@ TEST_F(RegularizedVelocityParam, ValidInclusiveBoundariesAndSelectedAxisOnly)
 {
 	for (float value : {.001f, 1.f}) {
 		auto c = config(); c.axes = 1; c.epsilon = {{value, NAN, INFINITY}};
-		PositionControl p; RegularizedVelocityTestAccess::admit(p); configure(p, c, false);
+		PositionControl p; configure(p, c, false);
 		EXPECT_EQ(p.velocitySelection().effectiveMode(), 3);
 		EXPECT_FLOAT_EQ(p.effectiveVelocityEsta().epsilon[0], value);
 		EXPECT_FALSE(p.velocityEstaRejected());

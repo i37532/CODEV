@@ -288,8 +288,8 @@ void MulticopterPositionControl::Run()
 		// Validate the signed request before narrowing. Invalid/disabled is not X.
 		const int32_t requested_axes = _param_mpc_vc_axes.get();
 		esta_config.axes = requested_axes >= 1 && requested_axes <= 7 ? static_cast<uint8_t>(requested_axes) : 0;
-		// MODE3 has independent configuration, but remains unavailable in R02.
-		// Neither these parameters nor metadata enable its production admission.
+		// MODE3 has independent configuration. PositionControl enforces the
+		// current SITL development gate; parameters cannot admit later masks.
 		esta_config.variant = _param_mpc_vc_mode.get() == 3 ? 3 : 1;
 		esta_config.epsilon = {{_param_mpc_vc_eps_x.get(), _param_mpc_vc_eps_y.get(), _param_mpc_vc_eps_z.get()}};
 		esta_config.gains[0] = {_param_mpc_vc_l1_x.get(), _param_mpc_vc_l2_x.get()};
