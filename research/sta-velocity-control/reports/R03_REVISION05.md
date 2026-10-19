@@ -1,6 +1,6 @@
 # R03 revision05：保留完整X门，重新验证Z/XY/XYZ
 
-2026-10-19。最新状态：**B/Z完整通过**，C/XY与D/XYZ尚未执行，R03整体尚未验收。下文准备阶段记录保留为历史。
+2026-10-19。最新状态：**B/Z与C/XY完整通过**，D/XYZ尚未执行，R03整体尚未验收。下文准备阶段记录保留为历史。
 
 ## 范围、历史与授权
 
@@ -112,3 +112,28 @@ B结果明确提交为 `947412cd340e0368dc7c9d8a873a069bbc157eda`。在B完整�
 `verify.py --gate C --output .../R03_revision05/C/verification01` 实际exit0，54命令全部0，501不同C++/1430 Python、32768主样本对/256同sample重算、SITL/Gazebo构建及两顺序完整日志链通过。证据SHA `747b32fa2fc73a2bd7cffd2646713233f284d5bb06ece97559d9614c2370960b`。未新增飞行；尚不能代替干净源码资格。
 
 `freeze.py --gate C` 实际exit0，724仓库资产；绑定已通过B与保留A、原任务/参数/插件、准确9项顺序与预算。独立只读审查五文件无阻断，diff检查通过。本次仅五个准入/测试/说明文件、C冻结和报告；旧版本、B冻结、参数/模型/任务/阈值保持。提交之后再干净资格并执行C9。
+
+## C/XY门：9/9接受，6配对与9独立回放通过
+
+源码提交 `a3bd03e6009a52a2430b6c3f918872d73f71b495`。在此干净提交运行 `verify.py --gate C --qualify --output .../C/qualification01` 退出0：54命令全0、501不同C++/1430 Python、32768+256回归及构建通过。实际固件 `0d0663fcd4f65ec601a010a15c7ff9cc54e48817526345ba47ca5e91791ded99`。
+
+`runner.py --gate C --execute --source-head a3bd03e6009a52a2430b6c3f918872d73f71b495 --qualification .../C/qualification01/evidence.json` 退出0，run019–027共9尝试/9起降/9接受、6配对通过。`replay.py --gate C --output .../C/replay01 --finalize` 退出0，9独立解码全部指标精确一致、频谱SHA相同、输入保持。共18份ULog，逐轮完整参数恢复，末尾无残留模拟器；EEPROM原SHA保持。没有补飞/失败/参数调整。
+
+| C证据 | SHA-256 |
+|---|---|
+| qualification01/evidence.json | cd3454e90d5d2187da6c0ac762cfda6812129e862c95de0ead4c323cbbfbe87a |
+| batch01/ledger.json | 5d4cde3a10adf70eb200aee867da7bc173f685d055a7cf701023166961db8b7e |
+| replay01/summary.json | 7c5a4f63ba2a72da31b241a4226fb809038a5f41c45c46fdb3d0fdcc90aa6a14 |
+| gate_pass.json | b31d060ad6569f222335b1bb7618e93664f9ecb881d77758296e638fd0bdcef8 |
+
+主窗64s，各算法n=3描述性均值；速度RMSE单位m/s，纠偏TV/T单位m/s³：
+
+| 算法 | X RMSE | Y RMSE | Z RMSE | 三轴均值J | X/Y纠偏TV/T |
+|---|---:|---:|---:|---:|---:|
+| PID | 0.00973792 | 0.00991328 | 0.00279201 | 0.00748107 | 0.112536 / 0.110225 |
+| ESTA | 0.00667264 | 0.00694693 | 0.00278800 | 0.00546919 | 0.217283 / 0.223693 |
+| RSTA | 0.00520436 | 0.00500684 | 0.00278057 | 0.00433059 | 0.144019 / 0.145477 |
+
+此开发工况RSTA水平速度误差低于另两者，水平纠偏变化量低于ESTA但高于PID；Z仍为PID，不能把这门称为三轴RSTA。位置/高度/yaw及限制按冻结门槛通过，全部逐轴指标在 `regularized_sta/results/R03_revision05_C.json`。外部只读汇总C_result01退出0，完整摘要SHA `b740e7cc644d4274f15eb8a107561ce0a5d995f061b3593e5a30540a9da5e08d`。n=3不作显著性/普适性结论，TV不是能耗。
+
+累计48尝试/47起飞/44接受/4历史失败。本版18/27接受，D9未执行；先完成D三轴离线测试、冻结与干净资格，再按清单进行最后9次。保留旧A原证据，不混旧B接受。
