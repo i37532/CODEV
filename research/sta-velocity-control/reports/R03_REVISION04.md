@@ -1,6 +1,6 @@
 # R03 revision04：新36轮逐门验证
 
-2026-10-19。当前 **A/X门通过**，B/Z、C/XY、D/XYZ尚未开始；**不代表完整R03通过**。下方飞前记录保留，实际执行结果在末节。
+2026-10-19。当前 **A/X门通过**，B/Z正在离线准备，B/C/D均未飞行；**不代表完整R03通过**。下方飞前记录保留，实际执行结果在后续各节。
 
 ## 范围与预算
 
@@ -93,3 +93,20 @@ R03当前累计24尝试、23实际起飞、21接受、3历史失败/无效；新
 
 完整逐轮结果、18份归档ULog指纹与指标入口见 `regularized_sta/results/r03_revision04_A.json`；大型日志仍外置。
 本结果提交只记录A，不开放B；后续须另行应用Z生产准入和测试、冻结B并在干净提交重新资格，无需用户重复授权。
+
+## B门飞前准备（尚未飞行）
+
+A结果提交为 `155807308d313494187ce36ca1edd5bf87ebd7fd`。只有A九轮及独立回放已通过后，才应用此前外部草稿：
+唯一生产逻辑改动为SITL的MODE3准入从AXES1累计为1/4；MODE2及2/3/5/6/7仍拒绝。
+参数文件只改说明文字，不改变数值/default；XY继续速度PID，全部rate继续PID。
+
+新增Z真实生产准入测试不调用测试专用admit：覆盖正负目标、FF一次、8/12ms非均匀sample、仅XY PID、
+地面/ramp/单帧有界交接/空中/接触/重入、状态与参数暂存取消/disarm/BSON重载、原子故障与同sample、真实HTE消息。
+现有X测试和离线全轴测试保留。旧全轴friend测试不冒称当前XYZ生产开放。
+
+开发失败与修订完整保留：
+
+- `B/verification01` 在historical_ax01的构建命令退出1：新增模块测试中float/double混用触发`-Werror=double-promotion`；仅补明确类型转换。
+- 随后定向构建退出0；`development_checks/integration01.xml`实际32项中31通过、1失败；param01的9项和module01的20项通过。
+- 失败断言误在PositionControl层读取仅由MulticopterPositionControl发布时填写的diagnostic.raw_dt，值为0。源码审计确认真实guard按sample差积分；改为底层从真实nu候选增量验证8/12ms、模块测试额外检查发布raw_dt。未改任何生产时间语义或宽限阈值。
+- 完整 `B/verification02` 已退出0：46命令全部成功，488个不同C++、1245个Python测试、32768对旧路径主样本及256对同sample重算通过，SITL与DONT_RUN Gazebo构建通过。没有B飞行；下一步冻结、提交后重新干净资格，不能使用A的固件资格启动Z飞行。

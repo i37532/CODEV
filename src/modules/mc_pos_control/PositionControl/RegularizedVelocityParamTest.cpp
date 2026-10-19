@@ -54,10 +54,10 @@ TEST_F(RegularizedVelocityParam, IndependentDefaultsKeepPidDefault)
 	int32_t div = -1; ASSERT_EQ(param_get(param_find("MPC_VC_DIV"), &div), 0); EXPECT_EQ(div, 1);
 }
 
-TEST_F(RegularizedVelocityParam, BsonReloadAdmitsOnlyGateAXAndKeepsUnadmittedRequests)
+TEST_F(RegularizedVelocityParam, BsonReloadAdmitsOnlyGateBXAndZAndKeepsUnadmittedRequests)
 {
 	const float values[3]{.001f, .031f, 1.f};
-	for (const int32_t requested_axes : {1, 3, 4, 7}) {
+	for (const int32_t requested_axes : {1, 2, 3, 4, 5, 6, 7}) {
 		for (int i = 0; i < 3; ++i) { ASSERT_EQ(param_set(keys[i], &values[i]), 0); }
 		int32_t mode = 3, axes = requested_axes;
 		ASSERT_EQ(param_set(param_find("MPC_VC_MODE"), &mode), 0);
@@ -74,11 +74,12 @@ TEST_F(RegularizedVelocityParam, BsonReloadAdmitsOnlyGateAXAndKeepsUnadmittedReq
 		ASSERT_EQ(param_get(param_find("MPC_VC_AXES"), &axes), 0); EXPECT_EQ(axes, requested_axes);
 		c.axes = static_cast<uint8_t>(axes);
 		PositionControl restarted; configure(restarted, c, false);
-		if (requested_axes == 1) {
+		if (requested_axes == 1 || requested_axes == 4) {
 			EXPECT_EQ(restarted.velocitySelection().effectiveMode(), 3);
-			EXPECT_EQ(restarted.velocitySelection().effectiveAxes(), 1);
+			EXPECT_EQ(restarted.velocitySelection().effectiveAxes(), requested_axes);
 			EXPECT_EQ(restarted.velocitySelection().reject(), 0); EXPECT_GT(restarted.velocityEstaGeneration(), 0u);
-			EXPECT_FLOAT_EQ(restarted.effectiveVelocityEsta().epsilon[0], values[0]);
+			const int selected = requested_axes == 1 ? 0 : 2;
+			EXPECT_FLOAT_EQ(restarted.effectiveVelocityEsta().epsilon[selected], values[selected]);
 		} else {
 			EXPECT_EQ(restarted.velocitySelection().effectiveMode(), 0);
 			EXPECT_NE(restarted.velocitySelection().reject(), 0); EXPECT_EQ(restarted.velocityEstaGeneration(), 0u);
@@ -152,4 +153,45 @@ TEST_F(RegularizedVelocityParam, OriginalEstaIgnoresEpsilonWithoutResetOrPending
 	configure(p, c, true); EXPECT_FALSE(p.velocityEstaPending()); EXPECT_FALSE(p.velocityEstaRejected());
 	configure(p, c, false); EXPECT_EQ(p.velocityEstaGeneration(), generation);
 	EXPECT_EQ(p.velocitySelection().effectiveMode(), 1);
+}
+
+TEST_F(RegularizedVelocityParam, ProductionZSelectedEpsilonDomainAndUnselectedWidths)
+{
+	for (const float width : {.001f, 1.f}) {
+		PositionControl p; auto c = config(); c.axes = 4; c.epsilon = {{NAN, INFINITY, width}};
+		configure(p, c, false); ASSERT_EQ(p.velocitySelection().effectiveMode(), 3);
+		EXPECT_EQ(p.velocitySelection().effectiveAxes(), 4); EXPECT_FALSE(p.velocityEstaRejected());
+		EXPECT_FLOAT_EQ(p.effectiveVelocityEsta().epsilon[2], width);
+	}
+	for (const float width : {-.01f, 0.f, .000999f, 1.001f, INFINITY, NAN}) {
+		ASSERT_EQ(param_set(keys[2], &width), 0);
+		PositionControl p; auto c = config(); c.axes = 4; ASSERT_EQ(param_get(keys[2], &c.epsilon[2]), 0);
+		EXPECT_FALSE(StaVelocityProtection::validConfig(c)); configure(p, c, false);
+		EXPECT_EQ(p.velocitySelection().effectiveMode(), 0); EXPECT_TRUE(p.velocityEstaRejected());
+		EXPECT_NE(p.velocitySelection().reject(), 0);
+	}
+}
+
+TEST_F(RegularizedVelocityParam, ProductionZArmedEpsilonCancelDisarmAndCumulativeXSwitch)
+{
+	PositionControl p; auto initial = config(); initial.axes = 4;
+	configure(p, initial, false); ASSERT_EQ(p.velocitySelection().effectiveMode(), 3);
+	ASSERT_EQ(p.velocitySelection().effectiveAxes(), 4); const auto generation = p.velocityEstaGeneration();
+	auto changed = initial; changed.epsilon[2] = .031f;
+	configure(p, changed, true); EXPECT_TRUE(p.velocityEstaPending()); EXPECT_FALSE(p.velocitySelection().pending());
+	EXPECT_EQ(p.velocityEstaGeneration(), generation); EXPECT_FLOAT_EQ(p.effectiveVelocityEsta().epsilon[2], .02f);
+	configure(p, initial, true); EXPECT_FALSE(p.velocityEstaPending());
+	configure(p, changed, true); configure(p, changed, false);
+	EXPECT_FALSE(p.velocityEstaPending()); EXPECT_GT(p.velocityEstaGeneration(), generation);
+	EXPECT_FLOAT_EQ(p.effectiveVelocityEsta().epsilon[2], .031f);
+	const auto accepted = p.velocityEstaGeneration();
+	auto unused = changed; unused.epsilon[0] = NAN; unused.epsilon[1] = INFINITY;
+	configure(p, unused, true); EXPECT_FALSE(p.velocityEstaPending()); EXPECT_FALSE(p.velocityEstaRejected());
+	configure(p, unused, false); EXPECT_EQ(p.velocityEstaGeneration(), accepted);
+	auto x = initial; x.axes = 1;
+	configure(p, x, true); EXPECT_TRUE(p.velocitySelection().pending()); EXPECT_EQ(p.velocitySelection().effectiveAxes(), 4);
+	configure(p, changed, true); EXPECT_FALSE(p.velocitySelection().pending()); EXPECT_FALSE(p.velocityEstaPending());
+	configure(p, x, false); EXPECT_EQ(p.velocitySelection().effectiveAxes(), 1); EXPECT_GT(p.velocityEstaGeneration(), accepted);
+	configure(p, changed, false); EXPECT_EQ(p.velocitySelection().effectiveAxes(), 4);
+	p.configureVelocityControl(0, 0, false); EXPECT_EQ(p.velocitySelection().effectiveMode(), 0);
 }

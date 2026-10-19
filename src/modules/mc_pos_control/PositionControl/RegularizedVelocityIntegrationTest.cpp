@@ -60,12 +60,12 @@ void equalState(const Guard::Vec &a, const Guard::Vec &b)
 }
 }
 
-TEST(RegularizedVelocityIntegration, ProductionGateAAdmitsOnlyXAndPreservesAllLegacyMasks)
+TEST(RegularizedVelocityIntegration, ProductionGateBAdmitsOnlyXAndZAndPreservesAllLegacyMasks)
 {
 	for (const uint8_t axes : {1, 2, 3, 4, 5, 6, 7}) {
 		PositionControl p; setup(p, 0, 3, false);
 		p.configureVelocityEsta(config(axes), false); p.configureVelocityControl(3, axes, false);
-		if (axes == 1) {
+		if (axes == 1 || axes == 4) {
 			EXPECT_EQ(p.velocitySelection().reject(), 0); EXPECT_EQ(p.velocitySelection().effectiveMode(), 3);
 		} else {
 			EXPECT_NE(p.velocitySelection().reject(), 0); EXPECT_EQ(p.velocitySelection().effectiveMode(), 0);
@@ -74,7 +74,7 @@ TEST(RegularizedVelocityIntegration, ProductionGateAAdmitsOnlyXAndPreservesAllLe
 		ASSERT_EQ(p.velocitySelection().effectiveMode(), 1); ASSERT_EQ(p.velocitySelection().effectiveAxes(), axes);
 		const auto generation = p.velocityEstaGeneration();
 		p.configureVelocityEsta(config(axes), false); p.configureVelocityControl(3, axes, false);
-		if (axes == 1) {
+		if (axes == 1 || axes == 4) {
 			EXPECT_EQ(p.velocitySelection().reject(), 0); EXPECT_EQ(p.velocitySelection().effectiveMode(), 3);
 			EXPECT_EQ(p.effectiveVelocityEsta().variant, 3);
 		} else {
@@ -528,4 +528,141 @@ TEST(RegularizedVelocityIntegration, RepeatedContactBounceAndLongRampRequireFres
 		EXPECT_EQ(p.diagnostic().z_phase, 2); EXPECT_EQ(p.diagnostic().committed_axes, 0);
 		for (int i = 0; i < 3; ++i) { EXPECT_FLOAT_EQ(p.diagnostic().nu_applied[i], 0.f); }
 	}
+}
+
+// Gate B production cases deliberately never call the test-admission friend.
+TEST(RegularizedVelocityIntegration, ProductionZSignedTargetsFeedForwardAndActualSampleDtUseOnlyXyPid)
+{
+	for (const float direction : {-1.f, 1.f}) {
+		PositionControl p; setup(p, 4, 3, false);
+		ASSERT_EQ(p.velocitySelection().effectiveMode(), 3); ASSERT_EQ(p.velocitySelection().effectiveAxes(), 4);
+		auto f = frame(); ASSERT_TRUE(step(p, f, target())); EXPECT_EQ(p.diagnostic().z_phase, 2);
+		// A dormant Z PID calculation must not be necessary for a normal Z STA output.
+		p.setVelocityGains(Vector3f(2.16f, 2.16f, NAN), Vector3f(.48f, .48f, NAN), Vector3f(.24f, .24f, NAN));
+		auto s = target(.004f, -.003f, direction * .004f);
+		s.acceleration[0] = .02f; s.acceleration[1] = -.03f; s.acceleration[2] = direction * .04f;
+		const Vector3f velocity(.001f, -.001f, direction * .001f);
+		for (const uint64_t interval : {8000, 12000, 8000, 12000}) {
+			const float nu_before = p.diagnostic().nu_applied[2];
+			const Vector3f integral_before = p.velocityIntegral();
+			const float error = s.vz - velocity(2);
+			const float correction = 2.f * error / sqrtf(.02f) + nu_before;
+			const float h = static_cast<float>(interval) * 1.e-6f;
+			f.sample += interval; ASSERT_TRUE(step(p, f, s, velocity, .03f));
+			const auto d = p.diagnostic();
+			EXPECT_EQ(d.z_phase, 3); EXPECT_EQ(d.active_axes, 4); EXPECT_EQ(d.committed_axes, 4); EXPECT_EQ(d.pid_axes, 3);
+			// raw_dt is filled by the module's publication, not PositionControl.
+			// Here infer the applied integration step from the real nu proposal.
+			EXPECT_NEAR((d.nu_ideal[2] - d.nu_before[2]) * .02f / error, h, 2.e-7f);
+			EXPECT_FLOAT_EQ(d.nu_before[2], nu_before);
+			EXPECT_NEAR(d.a_sta[2], correction, 2.e-6f); EXPECT_NEAR(d.a_req[2], correction + s.acceleration[2], 2.e-6f);
+			EXPECT_NEAR(d.nu_ideal[2], nu_before + h * error / .02f, 2.e-7f);
+			EXPECT_FLOAT_EQ(d.nu_applied[2], d.nu_ideal[2]); EXPECT_FLOAT_EQ(p.velocityIntegral()(2), 0.f);
+			EXPECT_NEAR(d.a_req[0], (s.vx - velocity(0)) * 2.16f + integral_before(0) + s.acceleration[0], 2.e-6f);
+			EXPECT_NEAR(d.a_req[1], (s.vy - velocity(1)) * 2.16f + integral_before(1) + s.acceleration[1], 2.e-6f);
+			EXPECT_TRUE(std::isnan(d.a_sta[0])); EXPECT_TRUE(std::isnan(d.a_sta[1]));
+			for (int i = 0; i < 3; ++i) { EXPECT_TRUE(std::isfinite(d.thrust[i])); }
+		}
+	}
+}
+
+TEST(RegularizedVelocityIntegration, ProductionZGroundRampBoundaryAirContactAndDisarmReprime)
+{
+	PositionControl p, pid; setup(p, 4, 3, false); setup(pid, 0, 3, false);
+	ASSERT_EQ(p.velocitySelection().effectiveAxes(), 4);
+	auto f = frame(); f.armed = false; f.flying = false; f.landed = true; f.contact = true;
+	auto s = target(.003f, -.002f, -.004f);
+	s.acceleration[0] = .02f; s.acceleration[1] = -.01f; s.acceleration[2] = -.03f;
+	for (int phase = 0; phase < 2; ++phase) {
+		if (phase == 1) { f.armed = true; f.landed = false; f.contact = false; }
+		for (int k = 0; k < 15; ++k) {
+			ASSERT_TRUE(step(p, f, s)); ASSERT_TRUE(step(pid, f, s));
+			EXPECT_EQ(p.diagnostic().z_phase, 1); EXPECT_EQ(p.diagnostic().pid_axes, 7);
+			EXPECT_EQ(p.diagnostic().committed_axes, 0); EXPECT_FLOAT_EQ(p.diagnostic().nu_applied[2], 0.f);
+			for (int i = 0; i < 3; ++i) { EXPECT_FLOAT_EQ(p.diagnostic().thrust[i], pid.diagnostic().thrust[i]); }
+			f.sample += 10000;
+		}
+	}
+	f.flying = true; ASSERT_TRUE(step(p, f, s)); ASSERT_TRUE(step(pid, f, s));
+	const auto boundary = p.diagnostic();
+	EXPECT_EQ(boundary.z_phase, 2); EXPECT_EQ(boundary.pid_axes, 7); EXPECT_EQ(boundary.committed_axes, 0);
+	for (int i = 0; i < 3; ++i) { EXPECT_FLOAT_EQ(boundary.a_req[i], pid.diagnostic().a_req[i]); }
+	f.sample += 8000; ASSERT_TRUE(step(p, f, s));
+	EXPECT_EQ(p.diagnostic().z_phase, 3); EXPECT_EQ(p.diagnostic().pid_axes, 3); EXPECT_EQ(p.diagnostic().committed_axes, 4);
+	EXPECT_NEAR(p.diagnostic().a_req[2], boundary.a_req[2], 2.e-6f);
+	for (int bounce = 0; bounce < 2; ++bounce) {
+		f.contact = true; f.sample += 12000; ASSERT_TRUE(step(p, f, target()));
+		EXPECT_EQ(p.diagnostic().z_phase, 1); EXPECT_EQ(p.diagnostic().committed_axes, 0);
+		EXPECT_FLOAT_EQ(p.diagnostic().nu_applied[2], 0.f);
+		f.contact = false; f.sample += 8000; ASSERT_TRUE(step(p, f, target()));
+		EXPECT_EQ(p.diagnostic().z_phase, 2); EXPECT_EQ(p.diagnostic().committed_axes, 0);
+		f.sample += 12000; ASSERT_TRUE(step(p, f, s)); EXPECT_EQ(p.diagnostic().committed_axes, 4);
+	}
+	f.armed = false; f.sample += 10000; ASSERT_TRUE(step(p, f, target()));
+	EXPECT_EQ(p.diagnostic().committed_axes, 0); EXPECT_FLOAT_EQ(p.diagnostic().nu_applied[2], 0.f);
+	p.resetIntegral(); f.armed = true; f.sample += 10000; ASSERT_TRUE(step(p, f, target()));
+	EXPECT_EQ(p.diagnostic().z_phase, 2); EXPECT_EQ(p.diagnostic().committed_axes, 0);
+	EXPECT_FLOAT_EQ(p.diagnostic().nu_applied[2], 0.f);
+}
+
+TEST(RegularizedVelocityIntegration, ProductionZNonzeroStateHtePreservesThrustAndSingleFeedForward)
+{
+	PositionControl p, unchanged; setup(p, 4, 3, false); setup(unchanged, 4, 3, false);
+	ASSERT_EQ(p.velocitySelection().effectiveAxes(), 4);
+	auto f = frame(); auto s = target(.003f, -.002f, .004f);
+	s.acceleration[0] = .2f; s.acceleration[1] = -.1f; s.acceleration[2] = .03f;
+	for (const uint64_t interval : {8000, 12000, 8000}) {
+		ASSERT_TRUE(step(p, f, s)); ASSERT_TRUE(step(unchanged, f, s)); f.sample += interval;
+	}
+	const auto old = p.diagnostic(); const Vector3f integral_before = p.velocityIntegral();
+	ASSERT_GT(fabsf(old.nu_applied[2]), 0.f);
+	const float correction = 2.f * s.vz / sqrtf(.02f) + old.nu_applied[2];
+	const float expected_shift = (.5f / .55f - 1.f) * (correction + s.acceleration[2] - 9.80665f);
+	p.updateHoverThrust(.55f); ASSERT_TRUE(step(p, f, s)); ASSERT_TRUE(step(unchanged, f, s));
+	EXPECT_EQ(p.diagnostic().pid_axes, 3); EXPECT_EQ(p.diagnostic().committed_axes, 4);
+	EXPECT_NEAR(p.diagnostic().z_hte_shift, expected_shift, 2.e-6f);
+	EXPECT_NEAR(p.diagnostic().nu_before[2], old.nu_applied[2] + expected_shift, 2.e-6f);
+	EXPECT_FLOAT_EQ(p.velocityIntegral()(2), integral_before(2));
+	for (int i = 0; i < 3; ++i) { EXPECT_NEAR(p.diagnostic().thrust[i], unchanged.diagnostic().thrust[i], 3.e-6f); }
+}
+
+TEST(RegularizedVelocityIntegration, ProductionZSameSampleAndInvalidFrameNeverPartiallyCommit)
+{
+	for (const int reason : {0, 1, 2, 3, 4, 5}) {
+		PositionControl p; setup(p, 4, 3, false); auto f = frame();
+		ASSERT_EQ(p.velocitySelection().effectiveAxes(), 4); ASSERT_TRUE(step(p, f, target()));
+		f.sample += 8000; ASSERT_TRUE(step(p, f, target(.003f, -.002f, .004f)));
+		const auto old = p.diagnostic(); Vector3f velocity; auto s = target();
+		if (reason != 0) { f.sample += 12000; }
+		if (reason == 1) { velocity(2) = NAN; }
+		if (reason == 2) { f.inner_valid = false; }
+		if (reason == 3) { f.unmatched_reset_axes = 4; }
+		if (reason == 4) { f.sample += 100000; }
+		if (reason == 5) { s.vx = NAN; }
+		EXPECT_FALSE(step(p, f, s, velocity)); EXPECT_FALSE(p.velocityOutputPublishable());
+		EXPECT_EQ(p.diagnostic().committed_axes, 0); EXPECT_FLOAT_EQ(p.diagnostic().nu_applied[2], old.nu_applied[2]);
+		f.inner_valid = true; f.unmatched_reset_axes = 0; f.sample += 10000;
+		EXPECT_FALSE(step(p, f, target())); EXPECT_EQ(p.diagnostic().committed_axes, 0);
+		f.armed = false; f.sample += 10000; ASSERT_TRUE(step(p, f, target()));
+		EXPECT_FLOAT_EQ(p.diagnostic().nu_applied[2], 0.f);
+		p.resetIntegral(); f.armed = true; f.sample += 10000; ASSERT_TRUE(step(p, f, target()));
+		EXPECT_EQ(p.diagnostic().z_phase, 2); EXPECT_EQ(p.diagnostic().committed_axes, 0);
+	}
+}
+
+TEST(RegularizedVelocityIntegration, ProductionZRejectsFutureMasksAndModeTwoWithoutLosingEffectiveState)
+{
+	PositionControl p; setup(p, 4, 3, false); auto f = frame(); ASSERT_TRUE(step(p, f, target()));
+	f.sample += 10000; ASSERT_TRUE(step(p, f, target(0.f, 0.f, .004f)));
+	const auto generation = p.velocityEstaGeneration(); const auto old = p.diagnostic();
+	for (const int axes : {2, 3, 5, 6, 7}) {
+		p.configureVelocityEsta(config(static_cast<uint8_t>(axes)), false); p.configureVelocityControl(3, axes, false);
+		EXPECT_NE(p.velocitySelection().reject(), 0); EXPECT_EQ(p.velocitySelection().effectiveMode(), 3);
+		EXPECT_EQ(p.velocitySelection().effectiveAxes(), 4); EXPECT_EQ(p.velocityEstaGeneration(), generation);
+	}
+	p.configureVelocityControl(2, 4, false);
+	EXPECT_NE(p.velocitySelection().reject(), 0); EXPECT_EQ(p.velocitySelection().effectiveMode(), 3);
+	EXPECT_EQ(p.velocitySelection().effectiveAxes(), 4); EXPECT_EQ(p.velocityEstaGeneration(), generation);
+	f.sample += 10000; ASSERT_TRUE(step(p, f, target(0.f, 0.f, .004f)));
+	EXPECT_FLOAT_EQ(p.diagnostic().nu_before[2], old.nu_applied[2]); EXPECT_EQ(p.diagnostic().committed_axes, 4);
 }
