@@ -1,6 +1,6 @@
 # R03 revision04：新36轮逐门验证
 
-2026-10-19。当前为飞前准备，**尚未起飞，不代表R03通过**。
+2026-10-19。当前 **A/X门通过**，B/Z、C/XY、D/XYZ尚未开始；**不代表完整R03通过**。下方飞前记录保留，实际执行结果在末节。
 
 ## 范围与预算
 
@@ -53,4 +53,43 @@ A门生产控制路径与入口逐字一致，新算法仍仅开放X；后门只
 `aa6691744b6650f0f6e5e662090a8dbbb3fff0168331c0394c08f968bcaf1d6f`。
 运行器分项日志为 `A/development_checks/runner01.log`、`runner_dryrun01.log`。
 
-未执行MATLAB、新ISTA实验、实机、R04或R05。本版目前新尝试/起飞/接受均为0，36项仍未执行。
+飞前记录当时新尝试/起飞/接受为0、36项未执行；实际计数以下方新结果为准。未执行MATLAB、新ISTA实验、实机、R04或R05。
+
+## A门：真实九轮与独立回放通过
+
+协议/飞行源码：`d6a80776b478adbbbe03a1967140d55c62bd618b`；固件SHA-256：
+`50b747719dff4905ea1ed80f23897880e8f12176fb4db6b747701fe4214f71f1`。
+干净 `qualification01` 再次实际完成46命令、475不同C++/1245 Python及32768+256逐样本回归，全部退出0。
+资格approved=true、clean=true；资格中的new_flights=0只描述飞前，不能代替之后飞行计数。
+
+`runner.py --gate A --execute --source-head d6a80776b478adbbbe03a1967140d55c62bd618b --qualification .../A/qualification01/evidence.json`
+退出0：**9计划、9尝试、9起飞、9完整降落上锁、9接受、0失败、0缺失**。
+三种算法各3轮，六项同种子STA对PID风险检查全部通过。每轮参数精确恢复、无残留模拟器，现场EEPROM仍为原指纹。
+前三算法首个配对块以及其余两块没有补飞、改参数或改阈值。
+
+`replay.py --gate A --output .../A/replay01 --finalize` 退出0：九个独立分析进程均退出0，
+全部metrics值/类型/列表顺序一致、频谱SHA一致；原始整批文件指纹保持，独立重算六项配对决定一致。
+`gate_pass.json` 已生成并由只读摘要再次完整核验。原15次历史仍单独保留。
+R03当前累计24尝试、23实际起飞、21接受、3历史失败/无效；新矩阵9接受、剩27项，预算不变51。
+
+以下为本门32秒主窗、每算法n=3的描述性均值。速度RMSE单位m/s，J是每轮三轴RMSE算术平均；X纠偏TV/T为m/s³，不是能耗。
+
+| 算法 | X RMSE | Y RMSE | Z RMSE | J | X纠偏TV/T |
+|---|---:|---:|---:|---:|---:|
+| PID | .036241 | .008024 | .002592 | .015619 | .119338 |
+| ESTA | .009987 | .007802 | .002632 | .006807 | .197844 |
+| R-STA | .009439 | .007896 | .002563 | .006633 | .140294 |
+
+本次X任务中R-STA的X误差与X输出变化量均小于硬sign ESTA，但Y误差不是更低，X输出变化量仍高于PID。
+这是3个开发配对块的结果，不作统计显著、全轴优势或实机结论。预解锁每轮具体时序见各metrics的prearm_preparation；不拿单轮20ms推断所有运行时延。
+
+| 证据（相对本版外部根） | SHA-256 |
+|---|---|
+| A/qualification01/evidence.json | 125a08ea3ce3848e665fa542876a82f52b50984781056ec1bdc35865fb8c68f4 |
+| A/batch01/ledger.json | 9cd60d44d94c7ca8334647dbb7a5963709e75de861c45ef3546c6ef2afcb7a10 |
+| A/batch01/journal.jsonl | 23c41181632b59a3a5d1f3ab35f58f7ec36be34530f8136e1c8bd3a498050a6b |
+| A/replay01/summary.json | b1ec614842f397d5e50f872378222442f8c5d5596a536f9379ea5d4385027d44 |
+| A/gate_pass.json | 6e0498bf52c69239f13b294ce9059473827af8ec4e1b0595ef8dc2ccf659e8d2 |
+
+完整逐轮结果、18份归档ULog指纹与指标入口见 `regularized_sta/results/r03_revision04_A.json`；大型日志仍外置。
+本结果提交只记录A，不开放B；后续须另行应用Z生产准入和测试、冻结B并在干净提交重新资格，无需用户重复授权。
