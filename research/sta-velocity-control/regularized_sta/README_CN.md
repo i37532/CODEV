@@ -15,8 +15,10 @@
 - [R03 revision03：首败停批与部分结果](../reports/R03_REVISION03.md)
 - [R03 prearm04：日志预热离线修复](../reports/R03_PREARM04_OFFLINE_REPAIR.md)
 - [prearm04离线范围及下一批预算提案](r03_prearm04/OFFLINE_PROTOCOL_CN.md)
+- [R03 revision04：X通过、Z数值验收首败与诊断](../reports/R03_REVISION04.md)
 
 实时进度在 /home/yr/Desktop/codev doc/plan/VELOCITY_STA_REGULARIZED_STATUS_CN.md。
 阶段按R00→R01→R02→R03四门→R04→R05；每阶段验收/提交/push后继续，不以性能必须获胜为目标。
-当前R03仍needs_revision；prearm04仅离线修复，不授权继续旧run008或启动新批次。
+当前R03仍needs_revision；revision04 A/X九轮通过，B/Z六轮起降中五接受、一轮数值验收拒绝，C/D未执行。
+停止记录与离线诊断见revision04报告；不把物理PASS或单帧复算当完整验收，不续旧run008/run016或自动扩预算。
 旧AX05/V08/V09协议、日志和失败保留；新测试及统计只能用新冻结清单，不能把旧成功拼作新重复。
