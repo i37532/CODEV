@@ -1,6 +1,6 @@
 # R03 revision05：保留完整X门，重新验证Z/XY/XYZ
 
-2026-10-19。最新状态：**B/Z与C/XY完整通过**，D/XYZ尚未执行，R03整体尚未验收。下文准备阶段记录保留为历史。
+2026-10-19。最新状态：**保留A/X，B/Z与C/XY完整通过；D/XYZ首轮因分析依赖冲突停批**。R03整体尚未验收。下文准备/运行中记录保留为历史，以末尾停点为准。
 
 ## 范围、历史与授权
 
@@ -147,3 +147,51 @@ C结果提交 `4763af0c2babbdd661fac7fb862b023fd2d7db49` 后才应用D。生产�
 `verify.py --gate D --output .../D/verification01` 实际exit0：54命令全0，513不同C++/1430 Python、32768+256逐样本回归，SITL/Gazebo及完整日志两导入顺序通过；证据SHA `21938778adca2bf7ab999b8c50bb9d66fa5fea3508121cabff322c78071a62ca`。生产/参数/旧算法回归均非零实际执行。独立审查实际五文件与已审补丁逐字一致，无阻断；这是离线证据，不是D飞行通过。
 
 本次范围仍为五个准入/说明/测试文件、D冻结及报告；之后必须在明确干净提交上重新资格，再启动已登记D9，不改变任务、增益、epsilon、阈值或预算。
+
+## D/XYZ首轮：物理起降完成，完整验收失败，已停止
+
+源码提交 `d0401534528b906d18836f28daabb769532da84a`。在干净提交执行 `verify.py --gate D --qualify --output .../D/qualification01`，实际exit0：54命令全0、513不同C++/1430 Python、32768主样本对+256同sample重算，SITL/Gazebo构建通过。资格不是飞行验收。
+
+`runner.py --gate D --execute --source-head d0401534528b906d18836f28daabb769532da84a --qualification .../D/qualification01/evidence.json` 的会话72478实际exit1。首轮run028为PID、种子71331、TEST8；物理完成起飞、90.2s观察、降落并上锁，但完整分析报 `Downstream XY target differs`，运行器随后报 `Full ULog acceptance failed`。原 `r03_metrics.json.accepted=false` 不改判；run029–036八项均未执行，无D门收据或完整九轮回放，不拼旧成功补齐。
+
+| 范围 | 尝试 | 起飞 | 接受 | 失败/无效 | 尚未执行 |
+|---|---:|---:|---:|---:|---:|
+| 本版B/Z | 9 | 9 | 9 | 0 | 0 |
+| 本版C/XY | 9 | 9 | 9 | 0 | 0 |
+| 本版D/XYZ | 1 | 1 | 0 | 1 | 8 |
+| 本版合计 | 19 | 19 | 18 | 1 | 8 |
+| 全R03历史累计 | 49 | 48 | 44 | 5 | 不能当作完整矩阵样本 |
+
+保留的完整门为旧A/X9、新B/Z9、新C/XY9，共27个完整门接受样本；累计44接受另含历史不完整批次，不能全部合并统计。当前生产虽然已经允许MODE3/AXES7，但它仍是**未经D飞行验收的实验路径**，不得称完整三轴合格配置。
+
+| D证据 | SHA-256 |
+|---|---|
+| qualification01/evidence.json | 9bcb28d35041f73c1c81503f89d1149ec70ac1e475e135c1b9242b640bd26009 |
+| 实际固件 | 3393a14baf2ab033764a598580d85a09d8e7cdb2539ffc417b1a834d668236d3 |
+| gates/D/frozen.json | eedea5653be43cfe579476b56932b6d855c14cd1eed92e20d0d8bb270e309f92 |
+| batch01/ledger.json | 28fc7da4a1ce7a6bc09366b417a626cdb28c6759fcc55c1cb6605f84ec0cb667 |
+| batch01/journal.jsonl | b306cf68c310886b8588f900d9b60c3e9cc34eeb982fe1450d2a1646b7c03819 |
+| run028/result.json | bb1d2afe1864c0055e2f5051855a5abfaadb3b26dbbc83c2b1b3f9f092717dd1 |
+| run028/r03_metrics.json（原失败） | 7f70514fcb543299ee64750f08c0024bb1c84203fb75699dbe9a89e36962c519 |
+| run028/log001.ulg，102428592字节 | 0b991d7e45d740f2e5a553dabdd0554dc2021aa97d82e74b1ea5fdd2a5f9670f |
+| run028/15_31_25.ulg，6561108字节 | 6e052415b3d9cdb091e5e06864bbd15c38f2e337dc92ccf4388050540589b4df |
+
+127项参数前后精确一致，原EEPROM SHA仍为 `06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc`；每轮归档指纹保持，无残留仿真进程。全部原始数据留在外部，不删除失败。
+
+### 原因：完整分析链内仍有泛名task导入，而非本轮PID失稳
+
+在线runner-first导入顺序下，AX02 `height_evidence` 的内嵌 `check_handoff` 来自V08；后者内部 `from task import offsets` 实际解析到V07二维波形。V07不认识TEST8，返回零XY偏移；正确AX02任务8包含真实水平8字及Z波形。旧repair01只隔离height自己的局部offsets，没有隔离内嵌handoff，之前任务6的XY公式相同，未暴露这个遗漏。
+
+独立实际日志诊断复现原谓词失败：9320观察/进入窗口样本中，共2787个时刻、5274个轴样本被错误零参考判超限。用正确AX02参考重建，原0.05m阈值下超限数为0，最大残差X=0.000306741m、Y=0.000188746m。首坏帧68496000µs：实际X=-0.050070133m，正确参考约-0.050069685m。相关帧reset/constraint/fault均0、实际速度PID和rate PID；原独立任务检查6400主窗更新、一次FF与位置P重建已通过。这支持“本报错来自参考解析冲突”，不是所有飞行安全由局部样本自动证明。
+
+同一冻结分析器独立CLI以analyzer-first顺序读取该原日志，`original_replay01/run028` 实际exit0且输出accepted=true，频谱SHA与原输出相同。该结果仅为**导入顺序不确定性证据**，不覆盖原在线失败、不给D门授权、不作为新接受样本。其metrics SHA为 `4bb03ae1a2bc3b1ade71b445aad3162689d206e592a3cd71823f8cc3fa3ef97c`。不是“两次完整回放都保持失败”。
+
+详细样本诊断在 `D/offline_development/failure_xy_target01/`，evidence SHA `7768383777eacef388cca96da1d83b3c86183268eb18fa41a6fd9ac4c5c0d93c`，原文件/源码指纹保持。后续修复只能另建隔离完整依赖组件，保留全部原handoff/高度/时钟/reset/落地谓词，不能放宽5cm、跳过失败或简单把任务8偏移置零。
+
+### 当前预算边界
+
+总上限57已用49，余8；按同门同源码、三算法各3轮要求，重新验证D必须完整新9轮。因此最低准确提案为 **58=已用49+新D9**，相对当前上限增加1。此处仅记录提案，未激活、未登记新种子，旧run029–036不续跑。离线修复/负例/原日志回放可继续，不能把“直到验收”为无限重试，也不能将诊断通过当补飞或历史改判。R03未通过，未push，不执行R04/R05。
+
+### handoff06离线修复完成情况
+
+新增完整height→handoff→AX02依赖隔离组件，没有修改旧冻结源或任何控制/数值门槛。46项新测试和291项原定向回归实际exit0，共337不同Python用例；未冒称重新运行全资格。D失败日志两种加载顺序、A/B/C各三算法代表日志共10个原运行/11次完整CLI均检查结束，原文件/源码/判定保持，全部新输出accepted=false/new_flights=0。详见[离线修复报告](R03_HANDOFF06_OFFLINE_REPAIR.md)。这些诊断不使D门或R03通过。
