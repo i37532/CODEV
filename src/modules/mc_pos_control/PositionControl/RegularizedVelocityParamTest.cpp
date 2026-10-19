@@ -54,7 +54,7 @@ TEST_F(RegularizedVelocityParam, IndependentDefaultsKeepPidDefault)
 	int32_t div = -1; ASSERT_EQ(param_get(param_find("MPC_VC_DIV"), &div), 0); EXPECT_EQ(div, 1);
 }
 
-TEST_F(RegularizedVelocityParam, BsonReloadAdmitsGateCXOrZOrXyAndChecksEverySelectedWidth)
+TEST_F(RegularizedVelocityParam, BsonReloadAdmitsGateDXOrZOrXyOrXyzAndChecksEverySelectedWidth)
 {
 	const float values[3]{.001f, .031f, 1.f};
 	for (const int32_t requested_axes : {1, 2, 3, 4, 5, 6, 7}) {
@@ -74,7 +74,7 @@ TEST_F(RegularizedVelocityParam, BsonReloadAdmitsGateCXOrZOrXyAndChecksEverySele
 		ASSERT_EQ(param_get(param_find("MPC_VC_AXES"), &axes), 0); EXPECT_EQ(axes, requested_axes);
 		c.axes = static_cast<uint8_t>(axes);
 		PositionControl restarted; configure(restarted, c, false);
-		if (requested_axes == 1 || requested_axes == 4 || requested_axes == 3) {
+		if (requested_axes == 1 || requested_axes == 4 || requested_axes == 3 || requested_axes == 7) {
 			EXPECT_EQ(restarted.velocitySelection().effectiveMode(), 3);
 			EXPECT_EQ(restarted.velocitySelection().effectiveAxes(), requested_axes);
 			EXPECT_EQ(restarted.velocitySelection().reject(), 0); EXPECT_GT(restarted.velocityEstaGeneration(), 0u);
@@ -218,6 +218,71 @@ TEST_F(RegularizedVelocityParam, ProductionXyRequiresBothWidthsAndIgnoresOnlyUns
 	}
 }
 
+TEST_F(RegularizedVelocityParam, ProductionXyzAllWidthsRequiredAndSelectedChangesAreAtomic)
+{
+	for (const float width : {.001f, 1.f}) {
+		PositionControl p; auto c = config(); c.epsilon = {{width, width, width}};
+		configure(p, c, false); ASSERT_EQ(p.velocitySelection().effectiveMode(), 3);
+		ASSERT_EQ(p.velocitySelection().effectiveAxes(), 7); EXPECT_EQ(p.velocitySelection().reject(), 0);
+		for (int i = 0; i < 3; ++i) { EXPECT_FLOAT_EQ(p.effectiveVelocityEsta().epsilon[i], width); }
+	}
+	for (int axis = 0; axis < 3; ++axis) {
+		PositionControl p; const auto initial = config(); configure(p, initial, false);
+		ASSERT_EQ(p.velocitySelection().effectiveAxes(), 7); const auto generation = p.velocityEstaGeneration();
+		auto changed = initial; changed.epsilon[axis] = .031f;
+		configure(p, changed, true); EXPECT_TRUE(p.velocityEstaPending()); EXPECT_FALSE(p.velocitySelection().pending());
+		EXPECT_EQ(p.velocityEstaGeneration(), generation);
+		for (int i = 0; i < 3; ++i) { EXPECT_FLOAT_EQ(p.effectiveVelocityEsta().epsilon[i], initial.epsilon[i]); }
+		configure(p, initial, true); EXPECT_FALSE(p.velocityEstaPending());
+		for (const float invalid_width : {-.01f, 0.f, .000999f, 1.001f, INFINITY, NAN}) {
+			auto invalid = changed; invalid.epsilon[(axis + 1) % 3] = .04f; invalid.epsilon[axis] = invalid_width;
+			configure(p, invalid, true); EXPECT_TRUE(p.velocityEstaPending()); EXPECT_TRUE(p.velocityEstaRejected());
+			configure(p, invalid, false); EXPECT_NE(p.velocitySelection().reject(), 0);
+			EXPECT_EQ(p.velocitySelection().effectiveAxes(), 7); EXPECT_EQ(p.velocityEstaGeneration(), generation);
+			for (int i = 0; i < 3; ++i) { EXPECT_FLOAT_EQ(p.effectiveVelocityEsta().epsilon[i], initial.epsilon[i]); }
+		}
+		configure(p, changed, false); EXPECT_EQ(p.velocitySelection().reject(), 0);
+		EXPECT_GT(p.velocityEstaGeneration(), generation); EXPECT_FALSE(p.velocityEstaPending());
+		for (int i = 0; i < 3; ++i) { EXPECT_FLOAT_EQ(p.effectiveVelocityEsta().epsilon[i], changed.epsilon[i]); }
+		const auto accepted = p.velocityEstaGeneration(); configure(p, changed, false);
+		EXPECT_EQ(p.velocityEstaGeneration(), accepted);
+	}
+}
+
+TEST_F(RegularizedVelocityParam, ProductionMasksAndModesPersistBsonAndRestartWithoutTestAdmission)
+{
+	const float values[3]{.013f, .024f, .035f};
+	for (const int32_t requested_mode : {0, 1, 3}) {
+		for (const int32_t requested_mask : {1, 4, 3, 7}) {
+			const int32_t requested_axes = requested_mode ? requested_mask : 0;
+			for (int i = 0; i < 3; ++i) { ASSERT_EQ(param_set(keys[i], &values[i]), 0); }
+			ASSERT_EQ(param_set(param_find("MPC_VC_MODE"), &requested_mode), 0);
+			ASSERT_EQ(param_set(param_find("MPC_VC_AXES"), &requested_axes), 0);
+			FILE *f = tmpfile(); ASSERT_NE(f, nullptr); ASSERT_EQ(param_export(fileno(f), false, nullptr), 0);
+			param_reset_all(); ASSERT_EQ(lseek(fileno(f), 0, SEEK_SET), 0);
+			ASSERT_EQ(param_import(fileno(f), true), 0); fclose(f);
+			int32_t mode = -1, axes = -1; ASSERT_EQ(param_get(param_find("MPC_VC_MODE"), &mode), 0);
+			ASSERT_EQ(param_get(param_find("MPC_VC_AXES"), &axes), 0);
+			EXPECT_EQ(mode, requested_mode); EXPECT_EQ(axes, requested_axes);
+			PositionControl restarted; auto c = config(); c.variant = mode == 3 ? 3 : 1; c.axes = static_cast<uint8_t>(axes);
+			for (int i = 0; i < 3; ++i) {
+				ASSERT_EQ(param_get(keys[i], &c.epsilon[i]), 0); EXPECT_FLOAT_EQ(c.epsilon[i], values[i]);
+			}
+			if (mode) { restarted.configureVelocityEsta(c, false); }
+			restarted.configureVelocityControl(mode, axes, false);
+			EXPECT_EQ(restarted.velocitySelection().effectiveMode(), mode);
+			EXPECT_EQ(restarted.velocitySelection().effectiveAxes(), axes); EXPECT_EQ(restarted.velocitySelection().reject(), 0);
+			if (mode == 3) {
+				for (int i = 0; i < 3; ++i) {
+					if (axes & (1 << i)) { EXPECT_FLOAT_EQ(restarted.effectiveVelocityEsta().epsilon[i], values[i]); }
+				}
+			}
+		}
+	}
+	// The production gate's existing rejection tests separately retain MODE=2
+	// and AXES=2/5/6 rejection. Persistence does not broaden their valid domain.
+}
+
 TEST_F(RegularizedVelocityParam, ProductionXyWidthTransactionCannotPartiallyAcceptOneAxis)
 {
 	PositionControl p; auto initial = config(); initial.axes = 3; initial.epsilon = {{.01f, .02f, .03f}};
@@ -242,7 +307,7 @@ TEST_F(RegularizedVelocityParam, ProductionXyWidthTransactionCannotPartiallyAcce
 		EXPECT_EQ(p.velocitySelection().effectiveMode(), 3); EXPECT_EQ(p.velocitySelection().effectiveAxes(), axes);
 		EXPECT_EQ(p.velocitySelection().reject(), 0);
 	}
-	auto xyz = initial; xyz.axes = 7; const auto before_xyz = p.velocityEstaGeneration();
-	configure(p, xyz, false); EXPECT_NE(p.velocitySelection().reject(), 0);
-	EXPECT_EQ(p.velocitySelection().effectiveAxes(), 3); EXPECT_EQ(p.velocityEstaGeneration(), before_xyz);
+	auto xz = initial; xz.axes = 5; const auto before_xz = p.velocityEstaGeneration();
+	configure(p, xz, false); EXPECT_NE(p.velocitySelection().reject(), 0);
+	EXPECT_EQ(p.velocitySelection().effectiveAxes(), 3); EXPECT_EQ(p.velocityEstaGeneration(), before_xz);
 }

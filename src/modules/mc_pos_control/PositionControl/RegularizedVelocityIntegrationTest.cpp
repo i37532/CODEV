@@ -60,12 +60,12 @@ void equalState(const Guard::Vec &a, const Guard::Vec &b)
 }
 }
 
-TEST(RegularizedVelocityIntegration, ProductionGateCAdmitsXOrZOrXyAndPreservesAllLegacyMasks)
+TEST(RegularizedVelocityIntegration, ProductionGateDAdmitsXOrZOrXyOrXyzAndPreservesAllLegacyMasks)
 {
 	for (const uint8_t axes : {1, 2, 3, 4, 5, 6, 7}) {
 		PositionControl p; setup(p, 0, 3, false);
 		p.configureVelocityEsta(config(axes), false); p.configureVelocityControl(3, axes, false);
-		if (axes == 1 || axes == 4 || axes == 3) {
+		if (axes == 1 || axes == 4 || axes == 3 || axes == 7) {
 			EXPECT_EQ(p.velocitySelection().reject(), 0); EXPECT_EQ(p.velocitySelection().effectiveMode(), 3);
 		} else {
 			EXPECT_NE(p.velocitySelection().reject(), 0); EXPECT_EQ(p.velocitySelection().effectiveMode(), 0);
@@ -74,7 +74,7 @@ TEST(RegularizedVelocityIntegration, ProductionGateCAdmitsXOrZOrXyAndPreservesAl
 		ASSERT_EQ(p.velocitySelection().effectiveMode(), 1); ASSERT_EQ(p.velocitySelection().effectiveAxes(), axes);
 		const auto generation = p.velocityEstaGeneration();
 		p.configureVelocityEsta(config(axes), false); p.configureVelocityControl(3, axes, false);
-		if (axes == 1 || axes == 4 || axes == 3) {
+		if (axes == 1 || axes == 4 || axes == 3 || axes == 7) {
 			EXPECT_EQ(p.velocitySelection().reject(), 0); EXPECT_EQ(p.velocitySelection().effectiveMode(), 3);
 			EXPECT_EQ(p.effectiveVelocityEsta().variant, 3);
 		} else {
@@ -650,12 +650,12 @@ TEST(RegularizedVelocityIntegration, ProductionZSameSampleAndInvalidFrameNeverPa
 	}
 }
 
-TEST(RegularizedVelocityIntegration, ProductionZRejectsFutureMasksAndModeTwoWithoutLosingEffectiveState)
+TEST(RegularizedVelocityIntegration, ProductionZRejectsUnavailableMasksAndModeTwoWithoutLosingEffectiveState)
 {
 	PositionControl p; setup(p, 4, 3, false); auto f = frame(); ASSERT_TRUE(step(p, f, target()));
 	f.sample += 10000; ASSERT_TRUE(step(p, f, target(0.f, 0.f, .004f)));
 	const auto generation = p.velocityEstaGeneration(); const auto old = p.diagnostic();
-	for (const int axes : {2, 5, 6, 7}) {
+	for (const int axes : {2, 5, 6}) {
 		p.configureVelocityEsta(config(static_cast<uint8_t>(axes)), false); p.configureVelocityControl(3, axes, false);
 		EXPECT_NE(p.velocitySelection().reject(), 0); EXPECT_EQ(p.velocitySelection().effectiveMode(), 3);
 		EXPECT_EQ(p.velocitySelection().effectiveAxes(), 4); EXPECT_EQ(p.velocityEstaGeneration(), generation);
@@ -773,4 +773,186 @@ TEST(RegularizedVelocityIntegration, ProductionXyHoverEstimateUsesOriginalZPidWi
 	// invariant. Check its original integral formula above, not a stronger claim.
 	const float expected_a_z = 4.f * s.vz + integral + (.55f - .5f) * (9.80665f / .55f) + s.acceleration[2];
 	EXPECT_NEAR(p.diagnostic().a_req[2], expected_a_z, 2.e-6f);
+}
+
+// Gate D draft: every setup below passes admit=false. These tests exercise
+// production AXES=7 only after the independently verified C gate is complete.
+TEST(RegularizedVelocityIntegration, ProductionXyzIndependentOldNuSingleFfAndNonuniformSampleTime)
+{
+	PositionControl p; setup(p, 7, 3, false);
+	auto c = config(7); c.gains[1] = {.7f, .15f}; c.epsilon[1] = .02f;
+	p.configureVelocityEsta(c, false); p.configureVelocityControl(3, 7, false);
+	ASSERT_EQ(p.velocitySelection().effectiveMode(), 3); ASSERT_EQ(p.velocitySelection().effectiveAxes(), 7);
+	auto f = frame(); ASSERT_TRUE(step(p, f, target())); EXPECT_EQ(p.diagnostic().z_phase, 2);
+	unsigned k = 0;
+	for (const uint64_t interval : {8000, 12000, 8000, 12000}) {
+		const bool alternate = (++k % 2) != 0;
+		auto s = target(.005f, alternate ? .003f : -.003f, alternate ? .004f : -.004f);
+		s.acceleration[0] = .02f; s.acceleration[1] = -.03f; s.acceleration[2] = .04f;
+		const Vector3f velocity(.001f, -.001f, .001f);
+		const auto previous = p.diagnostic(); const float h = static_cast<float>(interval) * 1.e-6f;
+		f.sample += interval; ASSERT_TRUE(step(p, f, s, velocity, .03f));
+		const auto d = p.diagnostic(); const float demand[3]{s.vx, s.vy, s.vz};
+		EXPECT_EQ(d.z_phase, 3); EXPECT_EQ(d.active_axes, 7); EXPECT_EQ(d.committed_axes, 7); EXPECT_EQ(d.pid_axes, 0);
+		EXPECT_EQ(d.constraint_bits, 0);
+		for (int i = 0; i < 3; ++i) {
+			const float error = demand[i] - velocity(i);
+			const float correction = c.gains[i].lambda1 * error / sqrtf(c.epsilon[i]) + previous.nu_applied[i];
+			EXPECT_FLOAT_EQ(d.nu_before[i], previous.nu_applied[i]);
+			EXPECT_NEAR(d.a_sta[i], correction, 2.e-6f);
+			EXPECT_NEAR(d.a_req[i], correction + s.acceleration[i], 2.e-6f);
+			EXPECT_NEAR(d.nu_ideal[i], previous.nu_applied[i] + h * c.gains[i].lambda2 * error / c.epsilon[i], 2.e-7f);
+			EXPECT_FLOAT_EQ(d.nu_applied[i], d.nu_ideal[i]); EXPECT_FLOAT_EQ(p.velocityIntegral()(i), 0.f);
+			EXPECT_TRUE(std::isfinite(d.thrust[i]));
+		}
+	}
+	// Two exact-zero errors retain their own nonzero states while X changes.
+	const auto old = p.diagnostic();
+	auto isolated = target(-.004f, 0.f, 0.f);
+	isolated.acceleration[0] = .02f; isolated.acceleration[1] = -.03f; isolated.acceleration[2] = .04f;
+	f.sample += 8000; ASSERT_TRUE(step(p, f, isolated));
+	for (int i = 1; i < 3; ++i) {
+		EXPECT_FLOAT_EQ(p.diagnostic().s[i], 0.f);
+		EXPECT_FLOAT_EQ(p.diagnostic().nu_applied[i], old.nu_applied[i]);
+		EXPECT_NEAR(p.diagnostic().a_req[i], old.nu_applied[i] + isolated.acceleration[i], 2.e-6f);
+	}
+	// PositionControl raw_dt is populated only by the publishing module.
+	// The nu increments above test sample h, not the deliberately different .03 legacy dt.
+}
+
+TEST(RegularizedVelocityIntegration, ProductionXyzGroundRampKeepsPidThenSeedsAllAxesAtOneBoundary)
+{
+	PositionControl p, pid; setup(p, 7, 3, false); setup(pid, 0, 3, false);
+	ASSERT_EQ(p.velocitySelection().effectiveAxes(), 7);
+	auto f = frame(); f.armed = false; f.flying = false; f.landed = true; f.contact = true;
+	auto s = target(.003f, -.002f, -.004f);
+	s.acceleration[0] = .02f; s.acceleration[1] = -.01f; s.acceleration[2] = -.03f;
+	for (int phase = 0; phase < 2; ++phase) {
+		if (phase == 1) { f.armed = true; f.landed = false; f.contact = false; }
+		for (int k = 0; k < 15; ++k) {
+			ASSERT_TRUE(step(p, f, s)); ASSERT_TRUE(step(pid, f, s));
+			EXPECT_EQ(p.diagnostic().z_phase, 1); EXPECT_EQ(p.diagnostic().pid_axes, 7);
+			EXPECT_EQ(p.diagnostic().committed_axes, 0);
+			for (int i = 0; i < 3; ++i) {
+				EXPECT_FLOAT_EQ(p.diagnostic().nu_applied[i], 0.f);
+				EXPECT_FLOAT_EQ(p.diagnostic().a_req[i], pid.diagnostic().a_req[i]);
+				EXPECT_FLOAT_EQ(p.diagnostic().thrust[i], pid.diagnostic().thrust[i]);
+			}
+			f.sample += 10000;
+		}
+	}
+	f.flying = true; ASSERT_TRUE(step(p, f, s)); ASSERT_TRUE(step(pid, f, s));
+	const auto boundary = p.diagnostic(); const auto c = config(7);
+	EXPECT_EQ(boundary.z_phase, 2); EXPECT_EQ(boundary.pid_axes, 7); EXPECT_EQ(boundary.committed_axes, 0);
+	for (int i = 0; i < 3; ++i) {
+		EXPECT_FLOAT_EQ(boundary.a_req[i], pid.diagnostic().a_req[i]);
+		EXPECT_FLOAT_EQ(boundary.thrust[i], pid.diagnostic().thrust[i]);
+	}
+	f.sample += 8000; ASSERT_TRUE(step(p, f, s)); const auto airborne = p.diagnostic();
+	EXPECT_EQ(airborne.z_phase, 3); EXPECT_EQ(airborne.pid_axes, 0); EXPECT_EQ(airborne.committed_axes, 7);
+	for (int i = 0; i < 3; ++i) {
+		const float seed = boundary.a_req[i] - s.acceleration[i]
+			+ c.gains[i].lambda1 * boundary.s[i] / sqrtf(c.epsilon[i]);
+		EXPECT_NEAR(airborne.nu_before[i], seed, 2.e-6f);
+		EXPECT_NEAR(airborne.a_req[i], boundary.a_req[i], 2.e-6f);
+	}
+	for (const int lifecycle : {0, 1, 2}) {
+		if (lifecycle == 0) { f.contact = true; }
+		if (lifecycle == 1) { f.flying = false; }
+		if (lifecycle == 2) { f.armed = false; }
+		f.sample += 12000; ASSERT_TRUE(step(p, f, target()));
+		EXPECT_EQ(p.diagnostic().z_phase, 1); EXPECT_EQ(p.diagnostic().committed_axes, 0);
+		for (int i = 0; i < 3; ++i) { EXPECT_FLOAT_EQ(p.diagnostic().nu_applied[i], 0.f); }
+		f.contact = false; f.flying = true; f.armed = true; f.sample += 8000;
+		ASSERT_TRUE(step(p, f, target())); EXPECT_EQ(p.diagnostic().z_phase, 2); EXPECT_EQ(p.diagnostic().committed_axes, 0);
+		f.sample += 12000; ASSERT_TRUE(step(p, f, s)); EXPECT_EQ(p.diagnostic().committed_axes, 7);
+	}
+}
+
+TEST(RegularizedVelocityIntegration, ProductionXyzHteRebasesOnlyZNuAndPreservesCurrentCandidateThrust)
+{
+	PositionControl p, unchanged; setup(p, 7, 3, false); setup(unchanged, 7, 3, false);
+	ASSERT_EQ(p.velocitySelection().effectiveAxes(), 7);
+	auto f = frame(); auto s = target(.003f, -.002f, .004f);
+	s.acceleration[0] = .2f; s.acceleration[1] = -.1f; s.acceleration[2] = .03f;
+	for (int k = 0; k < 3; ++k) { ASSERT_TRUE(step(p, f, s)); ASSERT_TRUE(step(unchanged, f, s)); f.sample += 10000; }
+	const auto old = p.diagnostic();
+	const float correction = 2.f * s.vz / sqrtf(.02f) + old.nu_applied[2];
+	const float expected_shift = (.5f / .55f - 1.f) * (correction + s.acceleration[2] - 9.80665f);
+	p.updateHoverThrust(.55f); ASSERT_TRUE(step(p, f, s)); ASSERT_TRUE(step(unchanged, f, s));
+	EXPECT_EQ(p.diagnostic().pid_axes, 0); EXPECT_EQ(p.diagnostic().committed_axes, 7);
+	EXPECT_NEAR(p.diagnostic().z_hte_shift, expected_shift, 2.e-6f);
+	EXPECT_NEAR(p.diagnostic().nu_before[2], old.nu_applied[2] + expected_shift, 2.e-6f);
+	for (int i = 0; i < 3; ++i) {
+		EXPECT_NEAR(p.diagnostic().thrust[i], unchanged.diagnostic().thrust[i], 3.e-6f);
+		EXPECT_FLOAT_EQ(p.velocityIntegral()(i), 0.f);
+	}
+	for (int i = 0; i < 2; ++i) {
+		EXPECT_FLOAT_EQ(p.diagnostic().nu_before[i], old.nu_applied[i]);
+		EXPECT_FLOAT_EQ(p.diagnostic().nu_applied[i], unchanged.diagnostic().nu_applied[i]);
+	}
+}
+
+TEST(RegularizedVelocityIntegration, ProductionXyzVerticalPriorityAndTiltConstraintKeepIdealAndAppliedDistinct)
+{
+	for (const int constraint : {0, 1}) {
+		PositionControl p; setup(p, 7, 3, false); ASSERT_EQ(p.velocitySelection().effectiveAxes(), 7);
+		auto f = frame(); ASSERT_TRUE(step(p, f, target()));
+		if (constraint == 1) { p.setTiltLimit(.005f); }
+		auto s = target(.2f, -.1f, -.1f);
+		if (constraint == 0) { s.acceleration[2] = -30.f; }
+		f.sample += 10000; ASSERT_TRUE(step(p, f, s)); const auto d = p.diagnostic();
+		EXPECT_EQ(d.pid_axes, 0); EXPECT_EQ(d.committed_axes, 7); EXPECT_NE(d.constraint_bits, 0);
+		EXPECT_TRUE(d.sta_flags & Guard::OutwardFreeze);
+		EXPECT_GT(d.nu_ideal[0], 0.f); EXPECT_LT(d.nu_ideal[1], 0.f); EXPECT_LT(d.nu_ideal[2], 0.f);
+		EXPECT_FLOAT_EQ(d.nu_applied[0], 0.f); EXPECT_FLOAT_EQ(d.nu_applied[1], 0.f);
+		if (constraint == 0) {
+			EXPECT_FLOAT_EQ(d.nu_applied[2], 0.f); EXPECT_FLOAT_EQ(d.thrust[2], -1.f);
+			EXPECT_NEAR(d.thrust[0], 0.f, 1.e-7f); EXPECT_NEAR(d.thrust[1], 0.f, 1.e-7f);
+		} else { EXPECT_LT(d.nu_applied[2], 0.f); }
+	}
+	// This case covers outward freezing, not all possible inward recovery directions.
+}
+
+TEST(RegularizedVelocityIntegration, ProductionXyzFaultOrSameSampleCannotCommitSubsetAndNeedsDisarm)
+{
+	for (const int reason : {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}) {
+		PositionControl p; setup(p, 7, 3, false); auto f = frame();
+		ASSERT_EQ(p.velocitySelection().effectiveAxes(), 7); ASSERT_TRUE(step(p, f, target()));
+		f.sample += 8000; ASSERT_TRUE(step(p, f, target(.005f, -.003f, .004f)));
+		const auto old = p.diagnostic(); auto s = target(); Vector3f velocity;
+		if (reason != 0) { f.sample += 12000; }
+		if (reason == 1) { velocity(2) = NAN; }
+		if (reason == 2) { s.acceleration[2] = INFINITY; }
+		if (reason == 3) { f.inner_valid = false; }
+		if (reason == 4) { f.unmatched_reset_axes = 1; }
+		if (reason == 5) { f.unmatched_reset_axes = 2; }
+		if (reason == 6) { f.unmatched_reset_axes = 4; }
+		if (reason == 7) { f.unmatched_reset_axes = 7; }
+		if (reason == 8) { f.sample += 100000; }
+		if (reason == 9) { f.sample -= 20000; }
+		if (reason == 10) { s.vx = NAN; }
+		if (reason == 11) { p.updateHoverThrust(.9f); } // Finite hover, out-of-range continuity seed.
+		EXPECT_FALSE(step(p, f, s, velocity)); EXPECT_FALSE(p.velocityOutputPublishable());
+		EXPECT_EQ(p.diagnostic().committed_axes, 0);
+		for (int i = 0; i < 3; ++i) { EXPECT_FLOAT_EQ(p.diagnostic().nu_applied[i], old.nu_applied[i]); }
+		p.updateHoverThrust(.55f); // Fault latch must not permit a hidden Z rebase.
+		f.inner_valid = true; f.unmatched_reset_axes = 0; f.sample += 10000;
+		EXPECT_FALSE(step(p, f, target())); EXPECT_EQ(p.diagnostic().committed_axes, 0);
+		for (int i = 0; i < 3; ++i) { EXPECT_FLOAT_EQ(p.diagnostic().nu_applied[i], old.nu_applied[i]); }
+		f.armed = false; f.sample += 10000; ASSERT_TRUE(step(p, f, target()));
+		for (int i = 0; i < 3; ++i) { EXPECT_FLOAT_EQ(p.diagnostic().nu_applied[i], 0.f); }
+		p.resetIntegral(); f.armed = true; f.sample += 10000; ASSERT_TRUE(step(p, f, target()));
+		EXPECT_EQ(p.diagnostic().z_phase, 2); EXPECT_EQ(p.diagnostic().committed_axes, 0);
+		f.sample += 8000; ASSERT_TRUE(step(p, f, target())); EXPECT_EQ(p.diagnostic().committed_axes, 7);
+	}
+	// A nonfinite HTE is only a fail-closed case here: do not claim that a
+	// disarm alone repairs a deliberately nonfinite hover mapping.
+	PositionControl invalid_hte; setup(invalid_hte, 7, 3, false); auto f = frame();
+	ASSERT_TRUE(step(invalid_hte, f, target())); f.sample += 8000;
+	ASSERT_TRUE(step(invalid_hte, f, target(.005f, -.003f, .004f))); const auto before = invalid_hte.diagnostic();
+	invalid_hte.updateHoverThrust(NAN); f.sample += 12000;
+	EXPECT_FALSE(step(invalid_hte, f, target())); EXPECT_FALSE(invalid_hte.velocityOutputPublishable());
+	EXPECT_EQ(invalid_hte.diagnostic().committed_axes, 0);
+	for (int i = 0; i < 3; ++i) { EXPECT_FLOAT_EQ(invalid_hte.diagnostic().nu_applied[i], before.nu_applied[i]); }
 }
