@@ -1,6 +1,6 @@
 # R03 revision05：保留完整X门，重新验证Z/XY/XYZ
 
-2026-10-19。当前为**离线接线与飞前准备**，尚无revision05飞行，不代表R03验收。
+2026-10-19。最新状态：**B/Z完整通过**，C/XY与D/XYZ尚未执行，R03整体尚未验收。下文准备阶段记录保留为历史。
 
 ## 范围、历史与授权
 
@@ -67,3 +67,38 @@ B/verification01在两个numeric_full_chain命令均退出0后，最后比较历
 verification02/evidence.json SHA-256为ee71ea04ef3b8f56df457183eaafe9e10d4e26395833d98bd2884f01f72109c0。本次不是干净提交资格；之后必须在明确源码提交上重新构建/测试并绑定实际固件，不能用本次预提交固件启动飞行。
 
 明确范围审查：仅新增revision05协议/工具/测试、授权、三份入口计划快照和本报告；B生产控制、参数默认、模型、旧算法和旧冻结目录未改。两个独立审查分别覆盖候选/完整分析链及预算/运行器/冻结/回放，未见阻断；cached diff空白检查通过。尚未push，R03尚未验收。
+
+## B/Z门：9/9接受，6配对与9独立回放通过
+
+源码提交 `e4987db64083482b3227ba01a7fdf3f027e006c6`，生产源码保持原B入口。干净qualification01真实54命令全0、488不同C++/1430 Python、32768+256逐样本回归；SITL/Gazebo构建通过。固件 `47aa3245b9933f51942fdf6ce36612e167af033a6ac82d05961d4df196e221ed`。独立审查核对799输入、418资格证据指纹和33子模块一致。
+
+实际命令（在仓库根，沿README设置Python依赖）：
+
+```bash
+python3 research/sta-velocity-control/regularized_sta/r03_revision05/verify.py --gate B --qualify --output '/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/qualification01'
+python3 research/sta-velocity-control/regularized_sta/r03_revision05/runner.py --gate B --execute --source-head e4987db64083482b3227ba01a7fdf3f027e006c6 --qualification '/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/qualification01/evidence.json'
+python3 research/sta-velocity-control/regularized_sta/r03_revision05/replay.py --gate B --output '/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/replay01' --finalize
+```
+
+三命令实际exit0。准确run010–018九轮，PID/ESTA/RSTA各3，全部起飞、观察、降落上锁、完整日志接受；6项配对风险检查通过。独立9子进程重解码全部exit0，metrics逐值精确一致、频谱SHA一致，输入保持。共18份ULog（每轮启动与主日志），不是只有9份。参数每轮精确恢复，末尾无残留进程，EEPROM SHA仍为06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc。
+
+| B证据 | SHA-256 |
+|---|---|
+| qualification01/evidence.json | 220680bb2a2f851a6de8d752d601dd86393804b1be63f7a563fbd28fb215c23f |
+| batch01/ledger.json | 275d512c8b157e2070eb456b65c45afce4ddca4b7e89d942134ad7da4c5cb611 |
+| replay01/summary.json | 08933485a9e18e129f266fccae4404ef664b87f967d27be67acaa01aac5559ef |
+| gate_pass.json | 198c15655a94abdd8a6b96e78c70e2c91556fa27842e3e425fe494d6c1d73886 |
+
+主窗32s，各算法n=3的描述性均值；速度RMSE单位m/s，Z纠偏TV/T单位m/s³：
+
+| 算法 | X RMSE | Y RMSE | Z RMSE | 三轴均值J | Z纠偏TV/T |
+|---|---:|---:|---:|---:|---:|
+| PID | 0.00726350 | 0.00791830 | 0.00414773 | 0.00644317 | 0.0913940 |
+| ESTA | 0.00724080 | 0.00776818 | 0.01047500 | 0.00849466 | 4.2720442 |
+| RSTA | 0.00739399 | 0.00756599 | 0.00156083 | 0.00550694 | 0.4171647 |
+
+此工况RSTA的Z误差低于另两者，控制变化量低于硬sign ESTA、仍高于PID；不是全面最优、显著性或实机结论，TV不是能耗。旧B五个接受未拼入，新B没有失败或补飞。
+
+可追溯索引：`regularized_sta/results/R03_revision05_B.json`；包含全部18日志/参数恢复/逐轮指标及资格、回放与门收据。外部完整只读汇总B_result01退出0，SHA `7e51ffc63455dde8d7a767adc88369dee53a6890a096e3554166901a3c302b2b`，只确认保留A与新B，不宣称全R03通过。该后处理工具41个临时夹具测试exit0；曾发现并修复输出目录符号链接边界问题，仅影响汇总输出保护，不改冻结实验/原始数据。
+
+累计39尝试/38起飞/35接受/4历史失败；本版9/27接受，C/D18未执行。下一步只开放C/AXES3，先离线验证/冻结/提交/干净资格，不自动开放7或进入R04/R05。
