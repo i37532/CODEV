@@ -102,3 +102,13 @@ python3 research/sta-velocity-control/regularized_sta/r03_revision05/replay.py -
 可追溯索引：`regularized_sta/results/R03_revision05_B.json`；包含全部18日志/参数恢复/逐轮指标及资格、回放与门收据。外部完整只读汇总B_result01退出0，SHA `7e51ffc63455dde8d7a767adc88369dee53a6890a096e3554166901a3c302b2b`，只确认保留A与新B，不宣称全R03通过。该后处理工具41个临时夹具测试exit0；曾发现并修复输出目录符号链接边界问题，仅影响汇总输出保护，不改冻结实验/原始数据。
 
 累计39尝试/38起飞/35接受/4历史失败；本版9/27接受，C/D18未执行。下一步只开放C/AXES3，先离线验证/冻结/提交/干净资格，不自动开放7或进入R04/R05。
+
+## C/XY准备：只增加双轴准入，离线验证通过
+
+B结果明确提交为 `947412cd340e0368dc7c9d8a873a069bbc157eda`。在B完整门证据通过后，生产仅将MODE3准入从1/4增至1/4/3；参数文件只改说明文字，所有默认值和数学控制/保护/dt不变。MODE2及MODE3的2/5/6/7仍拒绝，XY运行时Z速度及角速度仍PID。
+
+新增13项真实生产路径测试（Integration4、Param2、Module7），不用测试friend放行：X/Y独立增益/epsilon/旧nu、一次FF、非均匀sensor时间、未选Z的PID/HTE、水平向量/垂直优先约束、同sample和末轴故障原子拒绝、落地取消/接触重入、armed暂存/取消/disarm、生效与BSON重启。闲置XY PID的NaN探针仅直接作用测试对象，不误用参数重载重置被测配置。`pid_calls`为模块update次数，不是PID核次数。
+
+`verify.py --gate C --output .../R03_revision05/C/verification01` 实际exit0，54命令全部0，501不同C++/1430 Python、32768主样本对/256同sample重算、SITL/Gazebo构建及两顺序完整日志链通过。证据SHA `747b32fa2fc73a2bd7cffd2646713233f284d5bb06ece97559d9614c2370960b`。未新增飞行；尚不能代替干净源码资格。
+
+`freeze.py --gate C` 实际exit0，724仓库资产；绑定已通过B与保留A、原任务/参数/插件、准确9项顺序与预算。独立只读审查五文件无阻断，diff检查通过。本次仅五个准入/测试/说明文件、C冻结和报告；旧版本、B冻结、参数/模型/任务/阈值保持。提交之后再干净资格并执行C9。

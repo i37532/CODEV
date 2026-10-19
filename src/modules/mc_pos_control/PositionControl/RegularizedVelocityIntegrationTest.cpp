@@ -60,12 +60,12 @@ void equalState(const Guard::Vec &a, const Guard::Vec &b)
 }
 }
 
-TEST(RegularizedVelocityIntegration, ProductionGateBAdmitsOnlyXAndZAndPreservesAllLegacyMasks)
+TEST(RegularizedVelocityIntegration, ProductionGateCAdmitsXOrZOrXyAndPreservesAllLegacyMasks)
 {
 	for (const uint8_t axes : {1, 2, 3, 4, 5, 6, 7}) {
 		PositionControl p; setup(p, 0, 3, false);
 		p.configureVelocityEsta(config(axes), false); p.configureVelocityControl(3, axes, false);
-		if (axes == 1 || axes == 4) {
+		if (axes == 1 || axes == 4 || axes == 3) {
 			EXPECT_EQ(p.velocitySelection().reject(), 0); EXPECT_EQ(p.velocitySelection().effectiveMode(), 3);
 		} else {
 			EXPECT_NE(p.velocitySelection().reject(), 0); EXPECT_EQ(p.velocitySelection().effectiveMode(), 0);
@@ -74,7 +74,7 @@ TEST(RegularizedVelocityIntegration, ProductionGateBAdmitsOnlyXAndZAndPreservesA
 		ASSERT_EQ(p.velocitySelection().effectiveMode(), 1); ASSERT_EQ(p.velocitySelection().effectiveAxes(), axes);
 		const auto generation = p.velocityEstaGeneration();
 		p.configureVelocityEsta(config(axes), false); p.configureVelocityControl(3, axes, false);
-		if (axes == 1 || axes == 4) {
+		if (axes == 1 || axes == 4 || axes == 3) {
 			EXPECT_EQ(p.velocitySelection().reject(), 0); EXPECT_EQ(p.velocitySelection().effectiveMode(), 3);
 			EXPECT_EQ(p.effectiveVelocityEsta().variant, 3);
 		} else {
@@ -655,7 +655,7 @@ TEST(RegularizedVelocityIntegration, ProductionZRejectsFutureMasksAndModeTwoWith
 	PositionControl p; setup(p, 4, 3, false); auto f = frame(); ASSERT_TRUE(step(p, f, target()));
 	f.sample += 10000; ASSERT_TRUE(step(p, f, target(0.f, 0.f, .004f)));
 	const auto generation = p.velocityEstaGeneration(); const auto old = p.diagnostic();
-	for (const int axes : {2, 3, 5, 6, 7}) {
+	for (const int axes : {2, 5, 6, 7}) {
 		p.configureVelocityEsta(config(static_cast<uint8_t>(axes)), false); p.configureVelocityControl(3, axes, false);
 		EXPECT_NE(p.velocitySelection().reject(), 0); EXPECT_EQ(p.velocitySelection().effectiveMode(), 3);
 		EXPECT_EQ(p.velocitySelection().effectiveAxes(), 4); EXPECT_EQ(p.velocityEstaGeneration(), generation);
@@ -665,4 +665,112 @@ TEST(RegularizedVelocityIntegration, ProductionZRejectsFutureMasksAndModeTwoWith
 	EXPECT_EQ(p.velocitySelection().effectiveAxes(), 4); EXPECT_EQ(p.velocityEstaGeneration(), generation);
 	f.sample += 10000; ASSERT_TRUE(step(p, f, target(0.f, 0.f, .004f)));
 	EXPECT_FLOAT_EQ(p.diagnostic().nu_before[2], old.nu_applied[2]); EXPECT_EQ(p.diagnostic().committed_axes, 4);
+}
+
+// Gate C cases use the actual production admission, never the offline friend.
+TEST(RegularizedVelocityIntegration, ProductionXyIndependentOldNuOneFeedForwardAndOnlyZPid)
+{
+	PositionControl p; setup(p, 3, 3, false);
+	auto c = config(3); c.gains[1] = {.7f, .15f}; c.epsilon[1] = .02f;
+	p.configureVelocityEsta(c, false); p.configureVelocityControl(3, 3, false);
+	ASSERT_EQ(p.velocitySelection().effectiveMode(), 3); ASSERT_EQ(p.velocitySelection().effectiveAxes(), 3);
+	auto f = frame(); ASSERT_TRUE(step(p, f, target()));
+	// Normal XY STA must not need either unused horizontal PID calculation.
+	p.setVelocityGains(Vector3f(NAN, NAN, 4.f), Vector3f(NAN, NAN, 2.f), Vector3f(NAN, NAN, 0.f));
+	unsigned k = 0;
+	for (const uint64_t interval : {8000, 12000, 8000, 12000}) {
+		auto s = target(.005f, k++ % 2 ? .003f : -.003f, .004f);
+		s.acceleration[0] = .02f; s.acceleration[1] = -.03f; s.acceleration[2] = .04f;
+		const Vector3f velocity(.001f, -.001f, .001f);
+		const auto previous = p.diagnostic(); const float z_integral = p.velocityIntegral()(2);
+		const float h = static_cast<float>(interval) * 1.e-6f;
+		f.sample += interval; ASSERT_TRUE(step(p, f, s, velocity, .03f)); const auto d = p.diagnostic();
+		EXPECT_EQ(d.active_axes, 3); EXPECT_EQ(d.committed_axes, 3); EXPECT_EQ(d.pid_axes, 4);
+		const float demand[2]{s.vx, s.vy};
+		for (unsigned i = 0; i < 2; ++i) {
+			const float error = demand[i] - velocity(i);
+			const float expected = c.gains[i].lambda1 * error / sqrtf(c.epsilon[i]) + previous.nu_applied[i];
+			EXPECT_FLOAT_EQ(d.nu_before[i], previous.nu_applied[i]);
+			EXPECT_NEAR(d.a_sta[i], expected, 2.e-6f); EXPECT_NEAR(d.a_req[i], expected + s.acceleration[i], 2.e-6f);
+			EXPECT_NEAR(d.nu_ideal[i], previous.nu_applied[i] + h * c.gains[i].lambda2 * error / c.epsilon[i], 2.e-7f);
+			EXPECT_FLOAT_EQ(d.nu_applied[i], d.nu_ideal[i]); EXPECT_FLOAT_EQ(p.velocityIntegral()(i), 0.f);
+		}
+		EXPECT_NEAR(d.a_req[2], 4.f * (s.vz - velocity(2)) + z_integral + s.acceleration[2], 2.e-6f);
+		EXPECT_NEAR(p.velocityIntegral()(2), z_integral + 2.f * (s.vz - velocity(2)) * .03f, 2.e-7f);
+		EXPECT_TRUE(std::isnan(d.a_sta[2])); EXPECT_TRUE(std::isnan(d.nu_applied[2]));
+		for (int i = 0; i < 3; ++i) { EXPECT_TRUE(std::isfinite(d.thrust[i])); }
+	}
+}
+
+TEST(RegularizedVelocityIntegration, ProductionXyVectorConstraintAndZPriorityFreezeOnlyOutwardNu)
+{
+	for (const int constraint : {0, 1}) {
+		PositionControl p; setup(p, 3, 3, false);
+		ASSERT_EQ(p.velocitySelection().effectiveAxes(), 3);
+		auto f = frame(); ASSERT_TRUE(step(p, f, target()));
+		if (constraint == 1) { p.setTiltLimit(.005f); }
+		auto s = target(.2f, -.1f, 0.f); s.acceleration[0] = s.acceleration[1] = 0.f;
+		s.acceleration[2] = constraint == 0 ? -30.f : 0.f;
+		f.sample += 10000; ASSERT_TRUE(step(p, f, s)); const auto d = p.diagnostic();
+		EXPECT_EQ(d.pid_axes, 4); EXPECT_EQ(d.committed_axes, 3); EXPECT_NE(d.constraint_bits, 0);
+		EXPECT_TRUE(d.sta_flags & Guard::OutwardFreeze);
+		EXPECT_GT(d.nu_ideal[0], 0.f); EXPECT_LT(d.nu_ideal[1], 0.f);
+		EXPECT_FLOAT_EQ(d.nu_applied[0], 0.f); EXPECT_FLOAT_EQ(d.nu_applied[1], 0.f);
+		EXPECT_TRUE(std::isnan(d.nu_applied[2]));
+		if (constraint == 0) {
+			EXPECT_FLOAT_EQ(d.thrust[2], -1.f);
+			EXPECT_NEAR(d.thrust[0], 0.f, 1.e-7f); EXPECT_NEAR(d.thrust[1], 0.f, 1.e-7f);
+		}
+	}
+}
+
+TEST(RegularizedVelocityIntegration, ProductionXySameSampleOrLastAxisFaultCommitsNeitherAxisUntilDisarm)
+{
+	for (const int reason : {0, 1, 2, 3, 4, 5, 6}) {
+		PositionControl p; setup(p, 3, 3, false); auto f = frame();
+		ASSERT_EQ(p.velocitySelection().effectiveAxes(), 3); ASSERT_TRUE(step(p, f, target()));
+		f.sample += 8000; ASSERT_TRUE(step(p, f, target(.005f, -.003f, .004f))); const auto old = p.diagnostic();
+		auto s = target(.005f, -.003f, .004f); Vector3f velocity;
+		if (reason != 0) { f.sample += 12000; }
+		if (reason == 1) { velocity(1) = NAN; } // Last selected axis cannot leave an X-only commit.
+		if (reason == 2) { f.inner_valid = false; }
+		if (reason == 3) { f.unmatched_reset_axes = 1; }
+		if (reason == 4) { f.unmatched_reset_axes = 2; }
+		if (reason == 5) { f.sample += 100000; }
+		if (reason == 6) { s.vy = NAN; }
+		EXPECT_FALSE(step(p, f, s, velocity)); EXPECT_FALSE(p.velocityOutputPublishable());
+		EXPECT_EQ(p.diagnostic().committed_axes, 0);
+		for (int i = 0; i < 2; ++i) { EXPECT_FLOAT_EQ(p.diagnostic().nu_applied[i], old.nu_applied[i]); }
+		f.inner_valid = true; f.unmatched_reset_axes = 0; f.sample += 10000;
+		EXPECT_FALSE(step(p, f, target())); EXPECT_EQ(p.diagnostic().committed_axes, 0);
+		f.armed = false; f.sample += 10000; ASSERT_TRUE(step(p, f, target()));
+		for (int i = 0; i < 2; ++i) { EXPECT_FLOAT_EQ(p.diagnostic().nu_applied[i], 0.f); }
+		f.armed = true; f.sample += 10000; ASSERT_TRUE(step(p, f, target()));
+		EXPECT_EQ(p.diagnostic().committed_axes, 0); EXPECT_EQ(p.diagnostic().pid_axes, 4);
+		f.sample += 8000; ASSERT_TRUE(step(p, f, target(.005f, -.003f, .004f)));
+		EXPECT_EQ(p.diagnostic().committed_axes, 3);
+	}
+}
+
+TEST(RegularizedVelocityIntegration, ProductionXyHoverEstimateUsesOriginalZPidWithoutShiftingHorizontalNu)
+{
+	PositionControl p, unchanged; setup(p, 3, 3, false); setup(unchanged, 3, 3, false);
+	ASSERT_EQ(p.velocitySelection().effectiveAxes(), 3);
+	auto f = frame(); auto s = target(.005f, -.003f, .004f);
+	s.acceleration[0] = .02f; s.acceleration[1] = -.03f; s.acceleration[2] = .04f;
+	for (int k = 0; k < 3; ++k) { ASSERT_TRUE(step(p, f, s)); ASSERT_TRUE(step(unchanged, f, s)); f.sample += 10000; }
+	const auto before = p.diagnostic(); const float integral = p.velocityIntegral()(2);
+	p.updateHoverThrust(.55f);
+	EXPECT_NEAR(p.velocityIntegral()(2), integral + (.55f - .5f) * (9.80665f / .55f), 2.e-6f);
+	ASSERT_TRUE(step(p, f, s)); ASSERT_TRUE(step(unchanged, f, s));
+	EXPECT_EQ(p.diagnostic().pid_axes, 4); EXPECT_EQ(p.diagnostic().committed_axes, 3);
+	EXPECT_FLOAT_EQ(p.diagnostic().z_hte_shift, 0.f); EXPECT_TRUE(std::isnan(p.diagnostic().nu_applied[2]));
+	for (int i = 0; i < 2; ++i) {
+		EXPECT_FLOAT_EQ(p.diagnostic().nu_before[i], before.nu_applied[i]);
+		EXPECT_FLOAT_EQ(p.diagnostic().nu_applied[i], unchanged.diagnostic().nu_applied[i]);
+	}
+	// Original PID HTE compensates gravity, not an exact arbitrary-a_z thrust
+	// invariant. Check its original integral formula above, not a stronger claim.
+	const float expected_a_z = 4.f * s.vz + integral + (.55f - .5f) * (9.80665f / .55f) + s.acceleration[2];
+	EXPECT_NEAR(p.diagnostic().a_req[2], expected_a_z, 2.e-6f);
 }

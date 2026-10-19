@@ -42,6 +42,20 @@ public:
 	{
 		m._param_mpc_vc_eps_x.set(x); m._param_mpc_vc_eps_y.set(y); m._param_mpc_vc_eps_z.set(z);
 	}
+	static void yGains(MulticopterPositionControl &m, float lambda1, float lambda2)
+	{
+		m._param_mpc_vc_l1_y.set(lambda1); m._param_mpc_vc_l2_y.set(lambda2);
+	}
+	static void poisonIdleXyPid(MulticopterPositionControl &m)
+	{
+		// Test-only observation of NORMAL XY dispatch. Never poison the active Z
+		// PID, position P or any parameter store. A full parameter reload would
+		// discard this fixture's uncommitted MODE/AXES/STA requests; do not use it.
+		m._control.setVelocityGains(
+			matrix::Vector3f(NAN, NAN, m._param_mpc_z_vel_p_acc.get()),
+			matrix::Vector3f(NAN, NAN, m._param_mpc_z_vel_i_acc.get()),
+			matrix::Vector3f(NAN, NAN, m._param_mpc_z_vel_d_acc.get()));
+	}
 	static void reload(MulticopterPositionControl &m) { m.parameters_update(true); }
 	static void fastSpool(MulticopterPositionControl &m) { m._takeoff.setSpoolupTime(.008f); }
 	static void pidP(MulticopterPositionControl &m, float value)
@@ -167,6 +181,19 @@ protected:
 		step(12000); ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.z_phase, 3);
 		EXPECT_EQ(diagnostic.committed_axes, 4); EXPECT_EQ(diagnostic.pid_axes, 3);
 	}
+	void configureProductionXY(float lambda1_y = .5f, float lambda2_y = .1f, float epsilon_y = .01f)
+	{
+		// Gate C production route: deliberately never invoke admit().
+		RegularizedVelocityModuleTestAccess::request(*module, 3, 3);
+		RegularizedVelocityModuleTestAccess::yGains(*module, lambda1_y, lambda2_y);
+		RegularizedVelocityModuleTestAccess::widths(*module, .01f, epsilon_y, .02f); step();
+		ASSERT_EQ(selection.effective_mode, 3); ASSERT_EQ(selection.effective_axes, 3);
+		ASSERT_EQ(selection.reject, 0); EXPECT_FLOAT_EQ(selection.eps_eff[0], .01f);
+		EXPECT_FLOAT_EQ(selection.eps_eff[1], epsilon_y); EXPECT_TRUE(std::isnan(selection.eps_eff[2]));
+		arm(); step(8000); ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.committed_axes, 0);
+		step(12000); ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.committed_axes, 3);
+		EXPECT_EQ(diagnostic.pid_axes, 4); EXPECT_EQ(diagnostic.z_phase, 0);
+	}
 };
 
 TEST_F(RegularizedVelocityModule, DefaultPidHasUnusedWidthsAndExactDiagnosticJoin)
@@ -182,9 +209,9 @@ TEST_F(RegularizedVelocityModule, DefaultPidHasUnusedWidthsAndExactDiagnosticJoi
 	EXPECT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.pid_axes, 7);
 }
 
-TEST_F(RegularizedVelocityModule, ProductionGateBRejectsUnadmittedMasksWithoutEffectiveMutation)
+TEST_F(RegularizedVelocityModule, ProductionGateCRejectsUnadmittedMasksWithoutEffectiveMutation)
 {
-	for (const int32_t axes : {-1, 0, 2, 3, 5, 6, 7, 8, 257}) {
+	for (const int32_t axes : {-1, 0, 2, 5, 6, 7, 8, 257}) {
 		RegularizedVelocityModuleTestAccess::request(*module, 3, axes); step();
 		EXPECT_EQ(selection.requested_mode, 3); EXPECT_EQ(selection.variant_req, 3);
 		EXPECT_EQ(selection.effective_mode, 0); EXPECT_EQ(selection.variant_eff, 0);
@@ -194,7 +221,7 @@ TEST_F(RegularizedVelocityModule, ProductionGateBRejectsUnadmittedMasksWithoutEf
 	RegularizedVelocityModuleTestAccess::request(*module, 3, 1); step();
 	ASSERT_EQ(selection.effective_mode, 3); ASSERT_EQ(selection.effective_axes, 1); ASSERT_EQ(selection.reject, 0);
 	const auto generation = selection.sta_gen; ASSERT_GT(generation, 0u);
-	for (const int32_t axes : {-1, 0, 2, 3, 5, 6, 7, 8, 257}) {
+	for (const int32_t axes : {-1, 0, 2, 5, 6, 7, 8, 257}) {
 		RegularizedVelocityModuleTestAccess::request(*module, 3, axes); step();
 		EXPECT_EQ(selection.requested_axes, axes); EXPECT_EQ(selection.effective_mode, 3);
 		EXPECT_EQ(selection.variant_eff, 3); EXPECT_EQ(selection.effective_axes, 1);
@@ -256,7 +283,7 @@ TEST_F(RegularizedVelocityModule, EpsilonArmedRequestCancelDisarmAndInvalidReque
 TEST_F(RegularizedVelocityModule, ProductionXModeRequestsCancelAndDisarmWithoutStaleState)
 {
 	configureProductionX(); ASSERT_TRUE(diagnostic.valid); const auto generation = selection.sta_gen;
-	for (const int32_t unadmitted : {2, 3, 5, 6, 7}) {
+	for (const int32_t unadmitted : {2, 5, 6, 7}) {
 		RegularizedVelocityModuleTestAccess::request(*module, 3, unadmitted); step(8000);
 		EXPECT_TRUE(selection.pending); EXPECT_NE(selection.reject, 0); EXPECT_EQ(selection.effective_mode, 3);
 		EXPECT_EQ(selection.effective_axes, 1); EXPECT_EQ(selection.sta_gen, generation); EXPECT_TRUE(diagnostic.valid);
@@ -307,7 +334,7 @@ TEST_F(RegularizedVelocityModule, OriginalPidGainUpdatesRemainImmediateWhileArme
 	}
 }
 
-TEST_F(RegularizedVelocityModule, SavedModeAndWidthsReloadAdmitOnlyProductionGateBXZ)
+TEST_F(RegularizedVelocityModule, SavedModeAndWidthsReloadAdmitOnlyProductionGateCXZXY)
 {
 	const float values[3]{.013f, .024f, .035f};
 	const char *names[3]{"MPC_VC_EPS_X", "MPC_VC_EPS_Y", "MPC_VC_EPS_Z"};
@@ -327,7 +354,7 @@ TEST_F(RegularizedVelocityModule, SavedModeAndWidthsReloadAdmitOnlyProductionGat
 		delete module; module = new MulticopterPositionControl(); previous_seq = 0; step();
 		EXPECT_EQ(selection.requested_mode, 3); EXPECT_EQ(selection.requested_axes, requested_axes);
 		EXPECT_FALSE(selection.sta_reject); // all gains/widths valid: rejection must be the stage gate
-		const bool admitted = requested_axes == 1 || requested_axes == 4;
+		const bool admitted = requested_axes == 1 || requested_axes == 4 || requested_axes == 3;
 		if (admitted) {
 			EXPECT_EQ(selection.effective_mode, 3); EXPECT_EQ(selection.effective_axes, requested_axes);
 			EXPECT_EQ(selection.reject, 0);
@@ -601,4 +628,207 @@ TEST_F(RegularizedVelocityModule, ProductionZMeasurementFaultAndHteCannotClearLa
 	disarm(); step(8000); EXPECT_FALSE(diagnostic.fault); EXPECT_FLOAT_EQ(diagnostic.nu_applied[2], 0.f);
 	arm(); step(12000); ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.z_phase, 2); EXPECT_EQ(diagnostic.committed_axes, 0);
 	step(8000); ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.committed_axes, 4);
+}
+
+TEST_F(RegularizedVelocityModule, ProductionXYIndependentStateOldNuOneFfAndActualZPid)
+{
+	target.vz = -.004f; target.acceleration[2] = .003f;
+	configureProductionXY(.7f, .2f, .02f);
+	float kp_z = 0.f, ki_z = 0.f, kd_z = 0.f;
+	ASSERT_EQ(param_get(param_find("MPC_Z_VEL_P_ACC"), &kp_z), 0);
+	ASSERT_EQ(param_get(param_find("MPC_Z_VEL_I_ACC"), &ki_z), 0);
+	ASSERT_EQ(param_get(param_find("MPC_Z_VEL_D_ACC"), &kd_z), 0);
+	const double lambda1[2]{.5, .7}, lambda2[2]{.1, .2};
+	for (unsigned k = 0; k < 12; ++k) {
+		const float previous_nu[2]{diagnostic.nu_applied[0], diagnostic.nu_applied[1]};
+		const float old_z_integral = selection.integral[2];
+		step(k % 2 ? 12000 : 8000); ASSERT_TRUE(diagnostic.valid);
+		ASSERT_EQ(selection.effective_mode, 3); ASSERT_EQ(selection.effective_axes, 3);
+		EXPECT_EQ(selection.variant_eff, 3); EXPECT_EQ(selection.sta_gen, diagnostic.config_generation);
+		EXPECT_EQ(diagnostic.active_axes, 3); EXPECT_EQ(diagnostic.committed_axes, 3);
+		EXPECT_EQ(diagnostic.pid_axes, 4); EXPECT_EQ(diagnostic.pid_calls, 1); // One module update, not a kernel-call count.
+		EXPECT_EQ(diagnostic.inner_mode, 0); EXPECT_EQ(diagnostic.inner_axes, 0); EXPECT_EQ(diagnostic.inner_divisor, 1);
+		EXPECT_EQ(diagnostic.constraint_bits, 0); EXPECT_EQ(diagnostic.z_phase, 0);
+		EXPECT_NEAR(diagnostic.raw_dt, k % 2 ? .012f : .008f, 1.e-7f);
+		for (int i = 0; i < 2; ++i) {
+			const double s = static_cast<double>(diagnostic.s[i]);
+			const double eps = static_cast<double>(selection.eps_eff[i]);
+			const double psi = std::fabs(s) <= eps ? s / std::sqrt(eps) : std::copysign(std::sqrt(std::fabs(s)), s);
+			const double rho = std::fmax(-1., std::fmin(1., s / eps));
+			EXPECT_FLOAT_EQ(diagnostic.nu_before[i], previous_nu[i]);
+			EXPECT_NEAR(static_cast<double>(diagnostic.a_sta[i]), -lambda1[i] * psi + static_cast<double>(previous_nu[i]), 3e-7);
+			EXPECT_NEAR(static_cast<double>(diagnostic.nu_ideal[i]), static_cast<double>(previous_nu[i])
+				- static_cast<double>(diagnostic.raw_dt) * lambda2[i] * rho, 3e-7);
+			EXPECT_NEAR(diagnostic.nu_applied[i], diagnostic.nu_ideal[i], 3e-7f);
+			EXPECT_NEAR(diagnostic.a_req[i], diagnostic.a_sta[i] + target.acceleration[i], 3e-7f);
+			EXPECT_FLOAT_EQ(selection.integral[i], 0.f);
+		}
+		EXPECT_TRUE(std::isnan(selection.eps_eff[2])); EXPECT_TRUE(std::isnan(diagnostic.nu_applied[2]));
+		const float z_error = diagnostic.v_sp[2] - diagnostic.v[2];
+		const float expected_z = kp_z * z_error + old_z_integral - kd_z * diagnostic.v_dot[2];
+		EXPECT_NEAR(selection.correction[2], expected_z, 2e-6f);
+		EXPECT_NEAR(diagnostic.a_req[2], expected_z + target.acceleration[2], 2e-6f);
+		EXPECT_NEAR(selection.integral[2], old_z_integral + z_error * ki_z * diagnostic.used_dt, 2e-6f);
+	}
+	EXPECT_LT(diagnostic.nu_applied[0] * diagnostic.nu_applied[1], 0.f);
+	// Hold Y error exactly zero while changing X. Y still has a legal finite
+	// target and nonzero acceleration FF, but its retained nu must not follow X.
+	target.vy = 0.f; const float held_y_nu = diagnostic.nu_applied[1];
+	for (unsigned k = 0; k < 6; ++k) {
+		target.vx = k % 2 ? -.005f : .004f; step(k % 2 ? 12000 : 8000);
+		ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.committed_axes, 3);
+		EXPECT_FLOAT_EQ(diagnostic.s[1], 0.f); EXPECT_FLOAT_EQ(diagnostic.nu_before[1], held_y_nu);
+		EXPECT_FLOAT_EQ(diagnostic.nu_applied[1], held_y_nu);
+		EXPECT_NEAR(diagnostic.a_req[1], held_y_nu + target.acceleration[1], 3e-7f);
+	}
+}
+
+TEST_F(RegularizedVelocityModule, ProductionXYUnusedHorizontalPidCannotContaminateNormalOutput)
+{
+	configureProductionXY(); const uint32_t generation = selection.sta_gen;
+	ASSERT_EQ(selection.effective_mode, 3); ASSERT_EQ(selection.effective_axes, 3);
+	RegularizedVelocityModuleTestAccess::poisonIdleXyPid(*module);
+	for (unsigned k = 0; k < 4; ++k) {
+		step(k % 2 ? 12000 : 8000); ASSERT_TRUE(diagnostic.valid);
+		ASSERT_EQ(selection.effective_mode, 3); ASSERT_EQ(selection.effective_axes, 3);
+		EXPECT_EQ(selection.variant_eff, 3); EXPECT_EQ(selection.sta_gen, generation);
+		EXPECT_EQ(selection.reject, 0); EXPECT_FALSE(selection.pending); EXPECT_FALSE(selection.sta_pending);
+		EXPECT_EQ(diagnostic.pid_axes, 4); EXPECT_EQ(diagnostic.committed_axes, 3);
+		for (int i = 0; i < 3; ++i) { EXPECT_TRUE(std::isfinite(diagnostic.a_req[i])); EXPECT_TRUE(std::isfinite(diagnostic.thrust[i])); }
+		EXPECT_FLOAT_EQ(selection.integral[0], 0.f); EXPECT_FLOAT_EQ(selection.integral[1], 0.f);
+	}
+	// Do not use poisoned gains to draw claims about PID, ground or switching.
+	// Only this test controller object's unused gains were changed; no parameter
+	// storage, production admission or mode/gain reload was involved.
+}
+
+TEST_F(RegularizedVelocityModule, ProductionXYGroundContactAndControlReentryResetBothStates)
+{
+	RegularizedVelocityModuleTestAccess::request(*module, 3, 3); step();
+	ASSERT_EQ(selection.effective_axes, 3); EXPECT_EQ(selection.reject, 0);
+	for (unsigned k = 0; k < 8; ++k) {
+		step(k % 2 ? 12000 : 8000); ASSERT_TRUE(diagnostic.valid);
+		EXPECT_EQ(diagnostic.committed_axes, 0);
+		EXPECT_FLOAT_EQ(diagnostic.nu_applied[0], 0.f); EXPECT_FLOAT_EQ(diagnostic.nu_applied[1], 0.f);
+	}
+	arm(); step(8000); ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.committed_axes, 0);
+	step(12000); ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.committed_axes, 3);
+	for (unsigned bounce = 0; bounce < 3; ++bounce) {
+		land.ground_contact = true; ASSERT_TRUE(land_pub.publish(land)); step(8000);
+		ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.committed_axes, 0);
+		EXPECT_FLOAT_EQ(diagnostic.nu_applied[0], 0.f); EXPECT_FLOAT_EQ(diagnostic.nu_applied[1], 0.f);
+		land.ground_contact = false; ASSERT_TRUE(land_pub.publish(land)); step(12000);
+		ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.committed_axes, 0);
+		EXPECT_FLOAT_EQ(diagnostic.nu_applied[0], 0.f); EXPECT_FLOAT_EQ(diagnostic.nu_applied[1], 0.f);
+		step(8000); ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.committed_axes, 3); EXPECT_EQ(diagnostic.pid_axes, 4);
+	}
+	mode.flag_multicopter_position_control_enabled = false; ASSERT_TRUE(mode_pub.publish(mode)); step(12000);
+	EXPECT_EQ(diagnostic.pid_calls, 0); EXPECT_EQ(diagnostic.output_timestamp, 0u); EXPECT_EQ(diagnostic.committed_axes, 0);
+	mode.flag_multicopter_position_control_enabled = true; ASSERT_TRUE(mode_pub.publish(mode)); step(8000);
+	ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.committed_axes, 0);
+	EXPECT_FLOAT_EQ(diagnostic.nu_applied[0], 0.f); EXPECT_FLOAT_EQ(diagnostic.nu_applied[1], 0.f);
+	step(12000); ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.committed_axes, 3);
+	disarm(); step(8000); EXPECT_FLOAT_EQ(diagnostic.nu_applied[0], 0.f); EXPECT_FLOAT_EQ(diagnostic.nu_applied[1], 0.f);
+}
+
+TEST_F(RegularizedVelocityModule, ProductionXYAndXMaskRequestsCancelAndApplyOnlyDisarmed)
+{
+	configureProductionXY();
+	RegularizedVelocityModuleTestAccess::request(*module, 3, 7); step(8000);
+	EXPECT_TRUE(selection.pending); EXPECT_NE(selection.reject, 0); EXPECT_EQ(selection.effective_axes, 3);
+	RegularizedVelocityModuleTestAccess::request(*module, 3, 3); step(12000);
+	EXPECT_FALSE(selection.pending); EXPECT_EQ(selection.reject, 0);
+	for (const int32_t next_axes : {1, 3}) {
+		const int32_t previous_axes = selection.effective_axes; const uint32_t generation = selection.sta_gen;
+		RegularizedVelocityModuleTestAccess::request(*module, 3, next_axes); step(8000);
+		EXPECT_TRUE(selection.pending); EXPECT_EQ(selection.reject, 0); EXPECT_EQ(selection.effective_axes, previous_axes);
+		EXPECT_EQ(selection.sta_gen, generation); EXPECT_TRUE(diagnostic.valid);
+		RegularizedVelocityModuleTestAccess::request(*module, 3, previous_axes); step(12000);
+		EXPECT_FALSE(selection.pending); EXPECT_FALSE(selection.sta_pending); EXPECT_EQ(selection.sta_gen, generation);
+		RegularizedVelocityModuleTestAccess::request(*module, 3, next_axes); step(8000); disarm(); step(12000);
+		ASSERT_EQ(selection.effective_axes, next_axes); EXPECT_FALSE(selection.pending); EXPECT_GT(selection.sta_gen, generation);
+		for (int i = 0; i < 2; ++i) {
+			if (next_axes & (1 << i)) { EXPECT_FLOAT_EQ(diagnostic.nu_applied[i], 0.f); }
+			else { EXPECT_TRUE(std::isnan(diagnostic.nu_applied[i])); }
+		}
+		arm(); step(8000); ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.committed_axes, 0);
+		step(12000); ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.committed_axes, next_axes);
+		EXPECT_EQ(diagnostic.pid_axes, next_axes == 3 ? 4 : 6);
+	}
+}
+
+TEST_F(RegularizedVelocityModule, ProductionXYAlgorithmRequestsCancelAndResetStateAcrossDisarm)
+{
+	configureProductionXY();
+	for (const int32_t next_mode : {1, 0, 3}) {
+		const int32_t previous_mode = selection.effective_mode;
+		const uint32_t generation = selection.sta_gen;
+		RegularizedVelocityModuleTestAccess::request(*module, next_mode, next_mode ? 3 : 0); step(8000);
+		EXPECT_TRUE(selection.pending); EXPECT_EQ(selection.reject, 0); EXPECT_EQ(selection.effective_mode, previous_mode);
+		EXPECT_EQ(selection.sta_gen, generation);
+		RegularizedVelocityModuleTestAccess::request(*module, previous_mode, previous_mode ? 3 : 0); step(12000);
+		EXPECT_FALSE(selection.pending); EXPECT_FALSE(selection.sta_pending); EXPECT_EQ(selection.sta_gen, generation);
+		RegularizedVelocityModuleTestAccess::request(*module, next_mode, next_mode ? 3 : 0); step(8000);
+		disarm(); step(12000); ASSERT_EQ(selection.effective_mode, next_mode);
+		EXPECT_EQ(selection.effective_axes, next_mode ? 3 : 0); EXPECT_FALSE(selection.pending);
+		for (int i = 0; i < 2; ++i) {
+			if (next_mode) { EXPECT_FLOAT_EQ(diagnostic.nu_applied[i], 0.f); }
+			else { EXPECT_TRUE(std::isnan(diagnostic.nu_applied[i])); }
+			if (next_mode == 3) { EXPECT_FLOAT_EQ(selection.eps_eff[i], .01f); }
+			else { EXPECT_TRUE(std::isnan(selection.eps_eff[i])); }
+		}
+		arm(); step(8000); ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.committed_axes, 0);
+		step(12000); ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.committed_axes, next_mode ? 3 : 0);
+		EXPECT_EQ(diagnostic.pid_axes, next_mode ? 4 : 7);
+	}
+}
+
+TEST_F(RegularizedVelocityModule, ProductionXYRealHoverEstimateKeepsOriginalZPidAndNoHorizontalRebase)
+{
+	int32_t enable_hte = 1; ASSERT_EQ(param_set(param_find("MPC_USE_HTE"), &enable_hte), 0);
+	RegularizedVelocityModuleTestAccess::reload(*module);
+	target.vz = -.004f; target.acceleration[2] = .003f; configureProductionXY(); step(8000);
+	ASSERT_TRUE(diagnostic.valid); const auto before = diagnostic;
+	const float old_z_integral = selection.integral[2];
+	float kp_z = 0.f, ki_z = 0.f, kd_z = 0.f;
+	ASSERT_EQ(param_get(param_find("MPC_Z_VEL_P_ACC"), &kp_z), 0);
+	ASSERT_EQ(param_get(param_find("MPC_Z_VEL_I_ACC"), &ki_z), 0);
+	ASSERT_EQ(param_get(param_find("MPC_Z_VEL_D_ACC"), &kd_z), 0);
+	const float next_hover = before.hover_thrust + .01f;
+	const double hte_integral_shift = (static_cast<double>(next_hover) - static_cast<double>(before.hover_thrust))
+		* (9.80665 / static_cast<double>(next_hover));
+	uORB::Publication<hover_thrust_estimate_s> publisher{ORB_ID(hover_thrust_estimate)};
+	hover_thrust_estimate_s estimate{}; estimate.timestamp = hrt_absolute_time(); estimate.valid = true;
+	estimate.hover_thrust = next_hover; ASSERT_TRUE(publisher.publish(estimate)); step(12000);
+	ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.committed_axes, 3); EXPECT_EQ(diagnostic.pid_axes, 4);
+	EXPECT_EQ(diagnostic.constraint_bits & 6, 0); EXPECT_FLOAT_EQ(diagnostic.hover_thrust, next_hover);
+	EXPECT_FLOAT_EQ(diagnostic.z_hte_shift, 0.f); // Z remains PID; no Z nu exists here.
+	EXPECT_TRUE(std::isnan(diagnostic.nu_applied[2]));
+	for (int i = 0; i < 2; ++i) { EXPECT_FLOAT_EQ(diagnostic.nu_before[i], before.nu_applied[i]); }
+	const float error = diagnostic.v_sp[2] - diagnostic.v[2];
+	const double expected = static_cast<double>(kp_z * error - kd_z * diagnostic.v_dot[2])
+		+ static_cast<double>(old_z_integral) + hte_integral_shift;
+	EXPECT_NEAR(selection.correction[2], expected, 3e-6);
+	EXPECT_NEAR(diagnostic.a_req[2], expected + static_cast<double>(target.acceleration[2]), 3e-6);
+	EXPECT_NEAR(selection.integral[2], static_cast<double>(old_z_integral) + hte_integral_shift
+		+ static_cast<double>(error * ki_z * diagnostic.used_dt), 3e-6);
+}
+
+TEST_F(RegularizedVelocityModule, ProductionXYFaultRetryCannotPartiallyCommitOrClearByControlReentry)
+{
+	configureProductionXY(); const auto before = diagnostic; const uint32_t sequence = selection.publish_seq;
+	rate_fault = true; step(8000);
+	EXPECT_EQ(selection.publish_seq, sequence + 1); EXPECT_EQ(diagnostic.pid_calls, 2);
+	EXPECT_FALSE(diagnostic.valid); EXPECT_TRUE(diagnostic.fault); EXPECT_NE(diagnostic.first_fail, 0);
+	EXPECT_EQ(diagnostic.committed_axes, 0); EXPECT_EQ(diagnostic.output_timestamp, 0u);
+	for (int i = 0; i < 2; ++i) { EXPECT_FLOAT_EQ(diagnostic.nu_applied[i], before.nu_applied[i]); }
+	rate_fault = false; step(12000); EXPECT_FALSE(diagnostic.valid); EXPECT_EQ(diagnostic.committed_axes, 0);
+	mode.flag_multicopter_position_control_enabled = false; ASSERT_TRUE(mode_pub.publish(mode)); step(8000);
+	EXPECT_EQ(diagnostic.pid_calls, 0); EXPECT_EQ(diagnostic.output_timestamp, 0u);
+	mode.flag_multicopter_position_control_enabled = true; ASSERT_TRUE(mode_pub.publish(mode)); step(12000);
+	EXPECT_FALSE(diagnostic.valid); EXPECT_EQ(diagnostic.committed_axes, 0); EXPECT_EQ(diagnostic.output_timestamp, 0u);
+	disarm(); step(8000); EXPECT_FALSE(diagnostic.fault);
+	for (int i = 0; i < 2; ++i) { EXPECT_FLOAT_EQ(diagnostic.nu_applied[i], 0.f); }
+	arm(); step(12000); ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.committed_axes, 0);
+	step(8000); ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.committed_axes, 3);
 }
