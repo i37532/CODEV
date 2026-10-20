@@ -76,3 +76,15 @@ git diff --check
 保留前一次verification01的实际exit1：各测试/构建已运行，但验证过程中协议文档改变，末尾输入指纹检查正确拒绝。其收据SHA `f416209cb0208e4537c98472e0975b68d28ac0f5e97553d8ff7082529f78e9d0`，不计为通过。verification02期间不再修改冻结输入，随后独立freeze检查通过。
 
 只读执行链交叉审查未发现阻断：新资格绑定、两次账本、canonical参数、原BSON恢复、旧科学检查和诊断非接受标签均已检查。仅11个生产/测试路径在上游授权范围内；不修改Selector.cpp、控制律、模型或旧冻结协议。MATLAB、硬件、实际飞行、R03完整验收均未执行；提交后仍须运行`verify.py --qualify`，成功方可启动本两次诊断。
+
+## 两轮诊断与独立回放结果（2026-10-20）
+
+干净提交 `1273eed615cf36845c0ad61f23e44a6edcb15089` 的新资格实际通过：`qualification01/evidence.json` SHA `1d0c7ff6929924c20326156ea9bbfb271c5040352adf5cadf32c7097f406eded`，固件 SHA `92ac4af2cfd48f7e721f48e25e4a6577a9f501dbfa8eb7fb9b332460cfce47c8`，clean/approved 均为 true。新运行器严格执行两次且仅两次：`diag001` PID、`diag002` 旧三轴 ESTA；两次均完成起飞、TEST8 任务、降落并上锁，参数恢复精确、无残留模拟器，账本 success=true，`accepted_for_R03=0`。
+
+两轮均使用 `SDLOG_PROFILE=3089`。原始陀螺三个实例均为约 250 Hz，最大 publication/sample gap 为 4 ms，dropout=0、corruption=false；两轮没有主 EKF 切换、`ref_alt` 变化或原 24 ms age 事件。独立锁步审计分别对两份主 ULog 解码一次，clock/boundary 原谓词均通过，source ULog/result/job 首尾 SHA 不变。实际同刻 publication 组已保留，不做排序、去重或插值。
+
+独立回放 v1 首次按 `allow_nan=false` 比较而拒绝，错误原因是原指标中存在 12 个合法 `+Infinity`（未设置的上限字段），不是飞行或科学检查失败。v2 仅在指标比较器中加入严格的非有限值分类：同路径同类 `+Infinity`/`-Infinity`/`NaN` 可相等，有限值按 `float.hex()`（含符号零）比较，类型、数组顺序、重复键和 ULP 漂移仍拒绝；协议/授权的有限 JSON exact 比较保持不变。v2 四个独立进程均 exit0，两个诊断各两种导入顺序，`numeric_equal=true`、谱 SHA 一致、原始整批和双 ULog 指纹未变。回放 summary SHA `88830fc70aa6bc8874603a032ca82ca53e1163d99d23c615b8dc428a0dfc8992`。诊断和回放仍不产生 R03 接受。
+
+需要特别保留的风险：PID 这轮的非主 EKF1/2/4/5 `time_slip` 分别由 0 增至 4 ms 再至 8 ms；旧 run028/029/030 三份 ULog 的六路 `time_slip` 均为 0。当前数据没有 filter fault、primary 切换或安全门失败，但 publication/sample 日志不能证明 WorkQueue 消费顺序，也不能把该变化唯一归因于 7 行重新调度或日志负载。该信号作为正式四门前的公开限制，不新增事后阈值，不改判两轮诊断。
+
+后续必须使用同一最终源码/固件重新冻结 A/B/C/D 四门各 9 轮（每算法 3 个新配对种子）；旧 ABC 27 轮、两轮诊断和旧 D 失败均不混入新矩阵。若新门前发现必需安全/有效性失败，按首败规则停止并保留全部数据。
