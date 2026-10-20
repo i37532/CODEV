@@ -523,4 +523,19 @@ void LoggedTopics::initialize_configured_topics(SDLogProfileMask profile)
 		add_topic("vehicle_local_position_groundtruth"); // Offline diagnostics only.
 #endif
 	}
+
+#if defined(CONFIG_ARCH_BOARD_PX4_SITL)
+	// Independent opt-in: change only existing raw gyro logging intervals.
+	// Never add/displace subscriptions, change sensor rates or enable the FIFO
+	// profile's logger scheduling/priority policy. Other boards ignore this bit.
+	if (profile & SDLogProfileMask::SITL_IMU_TIMING) {
+		for (int i = 0; i < _subscriptions.count; ++i) {
+			RequestedSubscription &sub = _subscriptions.sub[i];
+
+			if ((sub.id == ORB_ID::sensor_gyro) && (sub.instance < 3)) {
+				sub.interval_ms = 0;
+			}
+		}
+	}
+#endif
 }

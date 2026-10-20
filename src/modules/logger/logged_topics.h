@@ -54,7 +54,8 @@ enum class SDLogProfileMask : int32_t {
 	VISION_AND_AVOIDANCE =  1 << 7,
 	RAW_IMU_GYRO_FIFO =     1 << 8,
 	RAW_IMU_ACCEL_FIFO =    1 << 9,
-	ESTIMATOR_SWITCH_DIAGNOSTICS = 1 << 10
+	ESTIMATOR_SWITCH_DIAGNOSTICS = 1 << 10,
+	SITL_IMU_TIMING =       1 << 11
 };
 
 enum class MissionLogType : int32_t {

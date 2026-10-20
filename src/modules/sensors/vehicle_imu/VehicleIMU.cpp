@@ -209,6 +209,13 @@ void VehicleIMU::Run()
 
 				_gyro_update_latency_mean.update(Vector2f{time_run_s - _gyro_timestamp_sample_last * 1e-6f, time_run_s - _gyro_timestamp_last * 1e-6f});
 
+				// Several sensor callbacks can coalesce into one work item. If a
+				// backlog remains, yield to consumers before processing its next
+				// integral rather than waiting for a new sensor or the backup timer.
+				if (_sensor_gyro_sub.updated()) {
+					ScheduleNow();
+				}
+
 				return;
 			}
 		}

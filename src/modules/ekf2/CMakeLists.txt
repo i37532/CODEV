@@ -53,3 +53,11 @@ px4_add_module(
 	)
 
 px4_add_functional_gtest(SRC EKF2SelectorTest.cpp LINKLIBS modules__ekf2)
+
+# Deterministic time is confined to this Linux test executable. Production and
+# the existing publication test continue to link the real HRT function.
+if(BUILD_TESTING AND CMAKE_SYSTEM_NAME STREQUAL "Linux")
+	px4_add_functional_gtest(SRC EKF2SelectorTimingTest.cpp LINKLIBS modules__ekf2)
+	set_property(TARGET functional-EKF2SelectorTiming APPEND_STRING PROPERTY LINK_FLAGS
+		" -Wl,--wrap=hrt_absolute_time")
+endif()

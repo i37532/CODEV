@@ -6,6 +6,7 @@
 #define PX4_BOARD_NAME "logger_functional_test"
 #endif
 #include "logger.h"
+#include <lib/parameters/param.h>
 using namespace px4::logger;
 
 TEST(EstimatorDiagnosticTopics, PositionEvidenceHasIndependentSlotAndWideMessageId)
@@ -74,4 +75,101 @@ TEST(EstimatorDiagnosticTopics, OptInRetainsAllBaselineTopicsWithinCapacity)
 			EXPECT_TRUE(found);
 		}
 	}
+}
+
+TEST(EstimatorDiagnosticTopics, TimingBitAndDefaultAreExplicit)
+{
+	EXPECT_EQ(static_cast<int32_t>(SDLogProfileMask::SITL_IMU_TIMING), 2048);
+	const param_t handle = param_find("SDLOG_PROFILE");
+	ASSERT_NE(handle, PARAM_INVALID);
+	int32_t value = -1;
+	ASSERT_EQ(param_get_default_value(handle, &value), 0);
+	EXPECT_EQ(value, 1);
+}
+
+TEST(EstimatorDiagnosticTopics, LegacyProfilesKeepAllRawGyroInstancesThrottled)
+{
+	for (int32_t profile : {1, 147, 1041, 1171}) {
+		LoggedTopics topics;
+		ASSERT_TRUE(topics.initialize_logged_topics(static_cast<SDLogProfileMask>(profile)));
+		const auto &all = topics.subscriptions();
+		int found = 0;
+
+		for (int i = 0; i < all.count; ++i) {
+			if (all.sub[i].id == ORB_ID::sensor_gyro) {
+				EXPECT_EQ(all.sub[i].interval_ms, 1000) << "profile " << profile;
+				EXPECT_LT(all.sub[i].instance, 4);
+				++found;
+			}
+		}
+
+		EXPECT_EQ(found, 4);
+	}
+}
+
+namespace
+{
+void checkTimingOnlyChangesExistingGyro(int32_t profile, int expected_count)
+{
+	LoggedTopics baseline, timing;
+	ASSERT_TRUE(baseline.initialize_logged_topics(static_cast<SDLogProfileMask>(profile)));
+	ASSERT_TRUE(timing.initialize_logged_topics(static_cast<SDLogProfileMask>(profile | 2048)));
+	const auto &a = baseline.subscriptions();
+	const auto &b = timing.subscriptions();
+	ASSERT_EQ(a.count, b.count);
+
+	if (expected_count > 0) {
+		EXPECT_EQ(a.count, expected_count);
+	}
+
+	int changed = 0;
+	int fourth_gyro = 0;
+
+	for (int i = 0; i < a.count; ++i) {
+		// Index equality deliberately verifies subscription order, not just set membership.
+		EXPECT_EQ(a.sub[i].id, b.sub[i].id);
+		EXPECT_EQ(a.sub[i].instance, b.sub[i].instance);
+
+		if ((a.sub[i].id == ORB_ID::sensor_gyro) && (a.sub[i].instance < 3)) {
+			EXPECT_EQ(a.sub[i].interval_ms, 1000);
+			EXPECT_EQ(b.sub[i].interval_ms, 0);
+			++changed;
+
+		} else {
+			EXPECT_EQ(a.sub[i].interval_ms, b.sub[i].interval_ms);
+		}
+
+		if ((b.sub[i].id == ORB_ID::sensor_gyro) && (b.sub[i].instance == 3)) {
+			EXPECT_EQ(b.sub[i].interval_ms, 1000);
+			++fourth_gyro;
+		}
+	}
+
+	EXPECT_EQ(changed, 3);
+	EXPECT_EQ(fourth_gyro, 1);
+}
+}
+
+TEST(EstimatorDiagnosticTopics, TimingOptInPreservesAll256ResearchSlotsAndOtherIntervals)
+{
+	checkTimingOnlyChangesExistingGyro(1171, 256);
+}
+
+TEST(EstimatorDiagnosticTopics, ActualRevision06ProfileOnlyChangesThreeGyroIntervals)
+{
+	// The frozen revision06 experiment used 1041, not the larger 1171 fixture.
+	// Do not infer this profile's subscription count from the 256-slot fixture.
+	checkTimingOnlyChangesExistingGyro(1041, 0);
+}
+
+TEST(EstimatorDiagnosticTopics, TimingOptInIsIndependentOfEstimatorDiagnosticBit)
+{
+	checkTimingOnlyChangesExistingGyro(1, 0);
+}
+
+TEST(EstimatorDiagnosticTopics, TimingBitAloneDoesNotCreateSubscriptions)
+{
+	LoggedTopics topics;
+	EXPECT_FALSE(topics.initialize_logged_topics(SDLogProfileMask::SITL_IMU_TIMING));
+	EXPECT_EQ(topics.subscriptions().count, 0);
 }

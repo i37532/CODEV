@@ -38,3 +38,5 @@ px4_add_library(vehicle_imu
 )
 target_compile_options(vehicle_imu PRIVATE ${MAX_CUSTOM_OPT_LEVEL})
 target_link_libraries(vehicle_imu PRIVATE px4_work_queue sensor_calibration)
+
+px4_add_functional_gtest(SRC VehicleIMUTest.cpp LINKLIBS vehicle_imu)
