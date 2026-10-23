@@ -3,6 +3,8 @@
 分支：research/sta-velocity-regularized；从AX05结果0a5796c3ed69d2e415696cf2450fbde74d56e6ea分出。
 比较原PID、旧硬sign ESTA、新边界层R-STA；只做Iris SITL，位置P/姿态/rate PID及DIV1保持，不接ISTA。
 
+当前入口：[revision11有限XYZ九轮](../reports/R03_REVISION11.md)。原revision09 A/X、B/Z、C/XY各9接受/9独立回放/6配对已通过；revision10 D在第6轮停止，5接受/1失败/3未执行，累计88尝试/86起飞指令/78接受/8失败/2诊断。新D9（总上限97）必须在新的干净源码资格后执行，当前尚未飞行、R03未验收。见[停批原始证据](../reports/R03_REVISION10_STOP.md)、[双时钟检查审计与回归](../reports/R03_POSITION11_OFFLINE.md)和[准确协议](r03_revision11/PROTOCOL_CN.md)。下方旧“当前”段落保留为历史，不再是运行入口。
+
 - [连续执行及阶段push边界](AUTHORIZATION_CN.md)
 - [创建时三文档](plan/v1/VELOCITY_STA_REGULARIZED_TODO_CN.md)
 - [R00入口：最新授权与技术计划](plan/r00_entry/VELOCITY_STA_REGULARIZED_TODO_CN.md)
