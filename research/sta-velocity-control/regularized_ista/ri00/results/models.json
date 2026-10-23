@@ -1,0 +1,129 @@
+{
+  "function_files": 8,
+  "embedded_matches": 17,
+  "checks": [
+    "models/sta/drone_position_control_sta_z_tuned.slx:simulink/stateflow/chart_129.xml:matlab/sta/sta_velocity_ff_conditional.m",
+    "models/sta/drone_position_control_sta_z_tuned.slx:simulink/stateflow/chart_140.xml:matlab/sta/sta_velocity_ff_conditional.m",
+    "models/sta/drone_position_control_sta_z_tuned.slx:simulink/stateflow/chart_104.xml:matlab/sta/height_sta_acceleration.m",
+    "models/ista/drone_position_control_ista_tuned.slx:simulink/stateflow/chart_129.xml:matlab/ista/ista_velocity_tuned.m",
+    "models/ista/drone_position_control_ista_tuned.slx:simulink/stateflow/chart_140.xml:matlab/ista/ista_velocity_tuned.m",
+    "models/ista/drone_position_control_ista_tuned.slx:simulink/stateflow/chart_104.xml:matlab/ista/height_ista_tuned_acceleration.m",
+    "models/ista/drone_position_control_ista_tuned.slx:simulink/stateflow/chart_104.xml:matlab/ista/ista_compensated_step.m",
+    "models/ista/drone_position_control_ista_tuned.slx:simulink/stateflow/chart_129.xml:matlab/ista/ista_compensated_step.m",
+    "models/ista/drone_position_control_ista_tuned.slx:simulink/stateflow/chart_140.xml:matlab/ista/ista_compensated_step.m",
+    "models/ista/drone_position_control_ista_tuned.slx:simulink/stateflow/chart_104.xml:matlab/ista/ista_regularized_step.m",
+    "models/ista/drone_position_control_ista_tuned.slx:simulink/stateflow/chart_129.xml:matlab/ista/ista_regularized_step.m",
+    "models/ista/drone_position_control_ista_tuned.slx:simulink/stateflow/chart_140.xml:matlab/ista/ista_regularized_step.m",
+    "models/ista/drone_position_control_ista_tuned.slx:simulink/stateflow/chart_104.xml:matlab/ista/ISTA_author_step.m",
+    "models/ista/drone_position_control_ista_tuned.slx:simulink/stateflow/chart_129.xml:matlab/ista/ISTA_author_step.m",
+    "models/ista/drone_position_control_ista_tuned.slx:simulink/stateflow/chart_140.xml:matlab/ista/ISTA_author_step.m",
+    "models/sta/drone_position_control_sta_z_tuned.slx:simulink/stateflow/chart_119.xml:matlab/common/height_acceleration_to_throttle.m",
+    "models/ista/drone_position_control_ista_tuned.slx:simulink/stateflow/chart_119.xml:matlab/common/height_acceleration_to_throttle.m"
+  ],
+  "models": [
+    {
+      "file": "models/sta/drone_position_control_sta_z_tuned.slx",
+      "sha256": "8cb0411d67ef2912fd6ac3b184cb0c260acf18584f7bbd19aece377d9b192253",
+      "workspace": {
+        "AttDyna_Ixx": 0.0211,
+        "AttDyna_Iyy": 0.0219,
+        "AttDyna_Izz": 0.0366,
+        "AttDyna_JRP": 0.0001287,
+        "ConEfficiency_drone_R": 0.225,
+        "ConEfficiency_drone_cM": 1.779e-07,
+        "ConEfficiency_drone_cT": 1.105e-05,
+        "HeightNominalPlant": [
+          1.4,
+          9.8,
+          1.105e-05,
+          1148.0,
+          -141.4
+        ],
+        "HeightSTAParams": [
+          20.0,
+          12.0,
+          0.01,
+          -22.0,
+          8.0,
+          8.0,
+          0.005,
+          3.0,
+          5.0
+        ],
+        "PosDyna_GravityAcc": 9.8,
+        "PosDyna_Mass": 1.4,
+        "PowerUnit_CR": 1148.0,
+        "PowerUnit_Tm": 0.02,
+        "PowerUnit_wb": -141.4
+      },
+      "settings": {
+        "StartTime": "0.0",
+        "StopTime": "42",
+        "FixedStep": ".001"
+      }
+    },
+    {
+      "file": "models/ista/drone_position_control_ista_tuned.slx",
+      "sha256": "ab2550e576c486e25e14a714580b9e9ed8052063f3c609fb490e5afef590f04f",
+      "workspace": {
+        "AttDyna_Ixx": 0.0211,
+        "AttDyna_Iyy": 0.0219,
+        "AttDyna_Izz": 0.0366,
+        "AttDyna_JRP": 0.0001287,
+        "ConEfficiency_drone_R": 0.225,
+        "ConEfficiency_drone_cM": 1.779e-07,
+        "ConEfficiency_drone_cT": 1.105e-05,
+        "HeightISTAParams": [
+          20.0,
+          40.0,
+          0.01,
+          -22.0,
+          8.0,
+          8.0,
+          0.005,
+          3.0,
+          5.0
+        ],
+        "HeightNominalPlant": [
+          1.4,
+          9.8,
+          1.105e-05,
+          1148.0,
+          -141.4
+        ],
+        "HeightSTAParams": [
+          20.0,
+          12.0,
+          0.01,
+          -22.0,
+          8.0,
+          8.0,
+          0.005,
+          3.0,
+          5.0
+        ],
+        "PosDyna_GravityAcc": 9.8,
+        "PosDyna_Mass": 1.4,
+        "PowerUnit_CR": 1148.0,
+        "PowerUnit_Tm": 0.02,
+        "PowerUnit_wb": -141.4,
+        "XYISTAParams": [
+          3.0,
+          1.0,
+          0.005,
+          -1.7,
+          1.7,
+          1.7,
+          0.005,
+          1.5
+        ]
+      },
+      "settings": {
+        "StartTime": "0.0",
+        "StopTime": "42",
+        "FixedStep": ".0005"
+      }
+    }
+  ],
+  "provenance_limit": "Original Windows source tree/ZIP unavailable; verify packaged contents only; no Simulink run."
+}

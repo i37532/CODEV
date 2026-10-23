@@ -1,5 +1,11 @@
 # 正则化显式 STA 速度环研究
 
+## 2026-10-23 方向调整：原 R04/R05 暂停
+
+用户决定先接入上传的改进 R-ISTA，再统一比较 **PID、R-STA、R-ISTA**；旧 ESTA 不进入新实验矩阵，但代码和历史数据保留。已从 R03 结果 `a286e40ec8bfbb0500b1c24add18c1a98b908778` 新建 `research/ista-velocity-regularized`，新入口为 [R-ISTA 专项](../regularized_ista/README_CN.md)。
+
+原 R03 已验收/push 的结论不变；本目录旧计划和授权只作历史，不启动旧含 ESTA 的 R04/R05。新专项 [RI00 离线审计](../reports/RI00.md) 已通过，后续 RI06/RI07 另冻公平调参/正式协议；当前不改控制、不飞行、不自动执行下一阶段。
+
 分支：research/sta-velocity-regularized；从AX05结果0a5796c3ed69d2e415696cf2450fbde74d56e6ea分出。
 比较原PID、旧硬sign ESTA、新边界层R-STA；只做Iris SITL，位置P/姿态/rate PID及DIV1保持，不接ISTA。
 

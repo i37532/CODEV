@@ -1,0 +1,178 @@
+{
+  "success": true,
+  "source_tests_ctest": 2,
+  "matlab_fixture_rows": 7980,
+  "new_python_tests": 12,
+  "grid": {
+    "cases": 4896,
+    "by_precision": {
+      "float": 2448,
+      "double": 2448
+    },
+    "maximum_scaled_error_or_residual": {
+      "float": 1.8625797833067867e-07,
+      "double": 4.440892098500626e-16
+    }
+  },
+  "closed_loop_cases": 90,
+  "source_calls": 555000,
+  "max_trajectory_difference": 1.5108091825852266e-07,
+  "source_unchanged": true,
+  "production_unchanged": true,
+  "new_flights": 0,
+  "new_seed_registrations": 0,
+  "matlab_run": false,
+  "px4_build": false,
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261023/RI00/audit02/command_01.log",
+      "sha256": "d6d907e27e397f762c1fd90921c551f401da9b69df95725cf9a7554e78289dc1"
+    },
+    {
+      "argv": [
+        "git",
+        "branch",
+        "--show-current"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261023/RI00/audit02/command_02.log",
+      "sha256": "a1313da0370fcdcb70b9cf37453d7c07aab31a68b43947fe7065c21e04b17cd8"
+    },
+    {
+      "argv": [
+        "git",
+        "status",
+        "--porcelain"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261023/RI00/audit02/command_03.log",
+      "sha256": "956bb3e60db6ca09d3e1dbd9b75b4ea17c5130745205e73b8736106353286d12"
+    },
+    {
+      "argv": [
+        "git",
+        "submodule",
+        "status",
+        "--recursive"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261023/RI00/audit02/command_04.log",
+      "sha256": "20028a594d20cfd6abf4713c4767d687b7d2e82c2d0ab6f2f3530b1ee3396b55"
+    },
+    {
+      "argv": [
+        "git",
+        "submodule",
+        "foreach",
+        "--quiet",
+        "--recursive",
+        "git status --porcelain"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261023/RI00/audit02/command_05.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "sha256sum",
+        "--check",
+        "SHA256SUMS.txt"
+      ],
+      "cwd": "/home/yr/Desktop/STA-ISTA-MATLAB-PX4",
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261023/RI00/audit02/command_06.log",
+      "sha256": "3c8645f70ac39ed17189eefa215e985b114a8c32d9aec8c33b7d24d2b74d466f"
+    },
+    {
+      "argv": [
+        "cmake",
+        "-S",
+        "/home/yr/Desktop/STA-ISTA-MATLAB-PX4",
+        "-B",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261023/RI00/audit02/source_build",
+        "-DCMAKE_BUILD_TYPE=Release"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261023/RI00/audit02/command_07.log",
+      "sha256": "aa6592c965e72afd27ea7806d0c60f22ade258a5c6906e7f84570455cb78da4d"
+    },
+    {
+      "argv": [
+        "cmake",
+        "--build",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261023/RI00/audit02/source_build",
+        "-j2"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261023/RI00/audit02/command_08.log",
+      "sha256": "6fc318c0911e8e9cd0cd29c595229e28b384ef2f04e37be357197c4b9168e07d"
+    },
+    {
+      "argv": [
+        "ctest",
+        "--test-dir",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261023/RI00/audit02/source_build",
+        "--output-on-failure",
+        "-V"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261023/RI00/audit02/command_09.log",
+      "sha256": "3e4f7df3cfff7ecfac45da8afded5ee701a593bd3523f8d0b867c46b3182ff70"
+    },
+    {
+      "argv": [
+        "g++",
+        "-std=c++14",
+        "-O2",
+        "-fPIC",
+        "-shared",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic-errors",
+        "-I/home/yr/Desktop/STA-ISTA-MATLAB-PX4/cpp",
+        "-I/home/yr/Desktop/Codev-autopilot/src/modules/mc_pos_control/PositionControl",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri00/source_bridge.cpp",
+        "-o",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261023/RI00/audit02/source_bridge.so"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261023/RI00/audit02/command_10.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "a286e40ec8bfbb0500b1c24add18c1a98b908778",
+        "--",
+        "src",
+        "msg",
+        "Tools",
+        "platforms",
+        "sitl",
+        "ROMFS",
+        "boards"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261023/RI00/audit02/command_11.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

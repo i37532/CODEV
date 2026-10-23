@@ -1,0 +1,31 @@
+Internal ctest changing into directory: /home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261023/RI00/audit02/source_build
+UpdateCTestConfiguration  from :/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261023/RI00/audit02/source_build/DartConfiguration.tcl
+Parse Config file:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261023/RI00/audit02/source_build/DartConfiguration.tcl
+UpdateCTestConfiguration  from :/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261023/RI00/audit02/source_build/DartConfiguration.tcl
+Parse Config file:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261023/RI00/audit02/source_build/DartConfiguration.tcl
+Test project /home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261023/RI00/audit02/source_build
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 1
+    Start 1: velocity_core_unit
+
+1: Test command: /home/yr/Desktop/codev\ doc/experiments/VELOCITY-RISTA-20261023/RI00/audit02/source_build/test_velocity_core
+1: Test timeout computed to be: 1500
+1: PASS: 0 failed checks
+1/2 Test #1: velocity_core_unit ...............   Passed    0.00 sec
+test 2
+    Start 2: velocity_core_matlab_oracle
+
+2: Test command: /home/yr/Desktop/codev\ doc/experiments/VELOCITY-RISTA-20261023/RI00/audit02/source_build/test_velocity_core "--oracle" "/home/yr/Desktop/STA-ISTA-MATLAB-PX4/tests/matlab/controller_reference.csv"
+2: Test timeout computed to be: 1500
+2: MATLAB oracle cases checked (double and float): 7980
+2: PASS: 0 failed checks
+2/2 Test #2: velocity_core_matlab_oracle ......   Passed    0.02 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Total Test time (real) =   0.03 sec
