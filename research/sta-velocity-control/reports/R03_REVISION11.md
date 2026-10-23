@@ -1,5 +1,15 @@
 # R03 revision11：新XYZ门的冻结与资格
 
+## 最终执行结果：D/XYZ 已通过
+
+干净源码 `b2883d7871f659cf810a0a527979c9c1f119fd41` 上 qualification01 实际 exit0，101 命令全0、541 不同 C++/1935 Python，clean/approved=true；固件 SHA-256 `130e032008ec49108fa1662902e79fe4302bc3eac4579d68c273e33e42e241bd`。
+
+batch01 runner exit0：9 尝试/9 起飞指令/9 接受、0 失败、6 配对、0 缺失；每轮完成降落上锁，参数精确恢复、remaining_simulators=[]。replay01 --finalize 实际 exit0：九份独立完整解码数值/类型/列表顺序和频谱一致，原始输入未变；D gate_pass 已真实签发，SHA-256 `285c38536f894b7911346384ce79ca47ca6e36522ed9aa8214523d298bb06bb5`，replay summary SHA-256 `917880875f407490001e509457f4bdb659238c254e087b829c6e004a58b26e1b`。
+
+保留 revision09 ABC 的独立原身份后，R03 四门均通过；历史累计97/95/87/8/2（尝试/起飞指令/接受/失败或无效/诊断），没有超预算或改判。D 的 J 均值 PID/ESTA/R-STA 为 `.00711828/.00786459/.00386996 m/s`，不要求所有指标获胜。完整逐轴、TV/频谱/宿主成本、4ms time_slip、原 raw 部分覆盖及开发限制见 [最终报告](R03_ACCEPTANCE_CN.md)。只做结果提交/push，不进入 R04/R05。
+
+## 以下保留原飞前冻结记录
+
 入口HEAD17b1a4df1e56ec4de872d087983fdd41497b26af，分支research/sta-velocity-regularized，33递归子模块未变。此次只有独立日志工具/检查接线、测试、版本化协议、计划与报告；生产路径无改动。根因、历史停批和修复分别见R03_REVISION10_STOP.md、R03_POSITION11_OFFLINE.md。
 
 持续授权落实为有限总预算97=历史88+新9，不是无限重复。新D九轮：三算法PID/ESTA/RSTA各三轮，IMU种子71831–71833；先PID，后两算法交替顺序，准确清单见`regularized_sta/r03_revision11/manifest.json`。扫描67061份JSON没有种子冲突，仅四份精确登记SHA豁免；execution SHA9aedae9b6b9de9fdaa79605d2cc1bf7dbbbed026ebac4573d20a054554a35333。初始outcomes全部unattempted。
