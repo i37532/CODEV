@@ -1,0 +1,46 @@
+{
+  "stage": "RI04-result-only",
+  "flight_stage_passed": false,
+  "new_flights": 0,
+  "tests_executed": 24,
+  "commands": [
+    {
+      "argv": ["python3", "-B", "research/sta-velocity-control/regularized_ista/ri04/results/test_results_replay.py"],
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI04/result_tests02/test_results_replay.py.log",
+      "sha256": "fc592881fa17c642f657bc3b9f0b83368bb3615383242e5625536d3507bff3dc",
+      "tests_executed": 7,
+      "script_sha256": "1e84721590d6849de26498ec5d3576544e797be9406a981e41418364c25a5fa8"
+    },
+    {
+      "argv": ["python3", "-B", "research/sta-velocity-control/regularized_ista/ri04/results/test_collect.py"],
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI04/result_tests02/test_collect.py.log",
+      "sha256": "154230abe510860c08afaeb2acef5855908fe9797a50fe0663c1fb5dda7f5e4f",
+      "tests_executed": 9,
+      "script_sha256": "cdce6df8defda795b1545c21ec4e562eb9c72a15fad83a3ae0cd9013f8f88c29"
+    },
+    {
+      "argv": ["python3", "-B", "research/sta-velocity-control/regularized_ista/ri04/results/test_failure_audit.py"],
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI04/result_tests02/test_failure_audit.py.log",
+      "sha256": "8b8b21dae2de9724e4e081609269689398e432e23456c683f1f04c24c00f546d",
+      "tests_executed": 8,
+      "script_sha256": "cd8bd190705808dd6aef5c5a2d958b12ec9716c89cf45d3a70c708502bb8e6c0"
+    }
+  ],
+  "collection": {
+    "argv": ["python3", "-B", "research/sta-velocity-control/regularized_ista/ri04/results/collect.py"],
+    "exit_code": 0,
+    "log_sha256": "c4c8f02319be24c7635bc6fed3dafb9d4626ed4b3e8161bf7749989ba6997c7c"
+  },
+  "source_head": "74327418e18eafd421e18b48fe3964fdad63cfb5",
+  "scripts": {
+    "research/sta-velocity-control/regularized_ista/ri04/results/audit_failure.py": "f269e62a70598e3753f907f1b65f11eb3d3a03648fcf7b225f040b8b72e142fc",
+    "research/sta-velocity-control/regularized_ista/ri04/results/collect.py": "de0d88ee534beb1fbdd1be4b7f3639aae8a47d8d2a6422c8492b06889578e2c9",
+    "research/sta-velocity-control/regularized_ista/ri04/results/replay_stopped.py": "146dda79e619d106ddac057691b515e1c3c48f3473029457a8828097617a3b8d",
+    "research/sta-velocity-control/regularized_ista/ri04/results/test_collect.py": "cdce6df8defda795b1545c21ec4e562eb9c72a15fad83a3ae0cd9013f8f88c29",
+    "research/sta-velocity-control/regularized_ista/ri04/results/test_failure_audit.py": "cd8bd190705808dd6aef5c5a2d958b12ec9716c89cf45d3a70c708502bb8e6c0",
+    "research/sta-velocity-control/regularized_ista/ri04/results/test_results_replay.py": "1e84721590d6849de26498ec5d3576544e797be9406a981e41418364c25a5fa8"
+  }
+}
