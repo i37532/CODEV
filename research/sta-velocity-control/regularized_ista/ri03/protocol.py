@@ -139,7 +139,7 @@ def load_protocol(gate='A'):
              jobs=d['jobs'], seeds=cfg['seeds'], **budget(),
              execution_authorized=True, flight_authorized=True, execution_ready=True,
              config_dir=str(HERE/'gates'/gate), execution_path=str(HERE/'execution.json'),
-             qualification_path=str(DATA_ROOT/gate/'qualification01/evidence.json'),
+             qualification_path=str(DATA_ROOT/gate/'qualification02/evidence.json'),
              post_logger_warmup_us=30000000, simulation_speed=1,
              status=d['status'], scope='Iris SITL X only: PID/RSTA/RISTA; Y/Z and rate PID; no tuning')
     p['artifacts'] = {**p['artifacts'], 'new_run_root': str(DATA_ROOT/gate/'batch01')}

@@ -51,9 +51,40 @@ def archive_scope(run, protocol, job):
     return record
 
 
-def provenance(run, protocol, job):
-    run = Path(run)
+def source_context(run, protocol, job, *, original_source=None, authorization_sha256=None):
+    """Bind diagnostics to their canonical archive without copying authority.
+
+    Called before any science output is written. The frozen full engine also
+    invokes provenance as its first try-body statement, before verify_model,
+    baseline decoding, or any save; regression exercises that real ordering.
+    """
+    run = Path(run).resolve()
+    original = (Path(protocol['artifacts']['new_run_root']) / job['id']).resolve()
+    if original_source is None:
+        require(run == original and authorization_sha256 is None, 'Live analysis must use canonical original run')
+    else:
+        require(Path(original_source).resolve() == original and run != original,
+                'Replay original source differs from canonical job archive')
+        require(authorization_sha256 is not None, 'Missing original authorization fingerprint')
+        require(not any((run / name).exists() or (run / name).is_symlink()
+                        for name in ('authorization.json', 'gate_pass.json')),
+                'Replay must not contain reusable authorization/gate authority')
+        require(not any(path.is_symlink() for path in run.iterdir()), 'Replay sidecar must not be a symlink')
+        FINAL._handoff.copied_input_binding(original, run)
+    original_authorization = original / 'authorization.json'
+    require(original_authorization.is_file() and not original_authorization.is_symlink(),
+            'Missing/non-original authorization receipt')
+    actual_sha = digest(original_authorization)
+    if authorization_sha256 is not None:
+        require(actual_sha == authorization_sha256, 'Original authorization changed during replay')
+    return original, actual_sha
+
+
+def provenance(run, protocol, job, *, original_source=None, authorization_sha256=None):
+    run = Path(run).resolve()
     protocol_identity(protocol, job)
+    original, receipt_sha = source_context(run, protocol, job, original_source=original_source,
+                                         authorization_sha256=authorization_sha256)
     api().require_execution_authority('A')
     record = archive_scope(run, protocol, job)
     require(exact(read(run / 'run_protocol.json'), protocol), 'Saved actual protocol differs')
@@ -63,8 +94,8 @@ def provenance(run, protocol, job):
             'Qualification reference changed')
     qualified = api().archive_qualification('A', record['source_head'], qpath)
     require(exact(read(run / 'qualification.json'), qualified), 'Copied qualification changed')
-    approval = read(run / 'authorization.json')
-    require(exact(approval, read(qpath.parent / 'authorization.json')), 'Copied authorization changed')
+    approval = read(original / 'authorization.json')
+    require(exact(approval, read(qpath.parent / 'authorization.json')), 'Original authorization changed')
     expected = dict(revision='ri03', stage=protocol['stage'], gate='A', source_head=qualified['source_head'],
         firmware_sha256=qualified['firmware_sha256'], execution_sha256=digest(Path(protocol['execution_path'])),
         frozen_sha256=digest(Path(protocol['config_dir']) / 'frozen.json'), qualification_sha256=digest(qpath),
@@ -88,7 +119,9 @@ def provenance(run, protocol, job):
             and restored.get('original_parameter_sha256') == digest(run / 'original_parameters.bson')
             and restored.get('restored_parameter_sha256') == restored['original_parameter_sha256'],
             'Incomplete exact parameter restoration/owned shutdown')
-    return expected
+    # Identical qualification receipt across all jobs: no per-run source path
+    # is added to this shared binding, so genuine paired comparisons stay exact.
+    return {**expected, 'authorization_receipt_sha256': receipt_sha}
 
 
 def replay_protocol(run, job):
@@ -109,12 +142,15 @@ def full_analysis(checked_provenance):
     return clone(function, check_components=components, validate_job=validate_job)
 
 
-def analyze(run, protocol, job):
+def analyze(run, protocol, job, *, original_source=None, authorization_sha256=None):
     protocol_identity(protocol, job)
     archive_scope(run, protocol, job)
+    source_context(run, protocol, job, original_source=original_source,
+                   authorization_sha256=authorization_sha256)
     preparation, warmup = {}, {}
     def checked(run, p, j):
-        result = provenance(run, p, j)
+        result = provenance(run, p, j, original_source=original_source,
+                            authorization_sha256=authorization_sha256)
         preparation.update(FINAL.prearm_evidence(run))
         warmup.update(FINAL.warmup_evidence(run))
         return result
@@ -184,8 +220,22 @@ def replay_new(source, destination):
     p = replay_protocol(source, job)
     require(source == (Path(p['artifacts']['new_run_root']) / job['id']).resolve(), 'Not original RI03 run')
     archive_scope(source, p, job)
+    _, original_authorization_sha = source_context(source, p, job)
+    before = local_snapshot(source)
     FINAL._handoff.copy_sidecars(source, destination)
-    return analyze(destination, p, job)
+    FINAL._handoff.copied_input_binding(source, destination)
+    try:
+        return analyze(destination, p, job, original_source=source,
+                       authorization_sha256=original_authorization_sha)
+    finally:
+        require(digest(source / 'authorization.json') == original_authorization_sha
+                and exact(local_snapshot(source), before), 'Original replay inputs changed')
+
+
+def local_snapshot(source):
+    # Reuse the standalone replay snapshot without generic module imports.
+    from bindings import local
+    return local('replay').snapshot(source)
 
 
 if __name__ == '__main__':

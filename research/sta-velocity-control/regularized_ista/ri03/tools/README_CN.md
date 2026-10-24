@@ -20,7 +20,7 @@ python3 -B research/sta-velocity-control/regularized_ista/ri03/tools/runner.py -
 ```bash
 python3 -B research/sta-velocity-control/regularized_ista/ri03/tools/runner.py \
   --gate A --execute --source-head FULL_40_CHARACTER_SHA \
-  --qualification /absolute/RI03/A/qualification01/evidence.json
+  --qualification /absolute/RI03/A/qualification02/evidence.json
 ```
 
 九次全部接受后，独立进程逐轮重解码并检查六个配对结果：
@@ -32,6 +32,8 @@ python3 -B research/sta-velocity-control/regularized_ista/ri03/tools/replay.py \
 
 路径必须属于正式协议规定的新 RI03 gate，不能把历史结果改标签后放入新矩阵。
 回放不启动飞行，逐值/类型检查完整 metrics，一致性包括频谱文件指纹；不能只相信原来的 accepted 标志。
+回放目录不复制授权或 gate 通过凭证；授权只读规范指定的原始轮次目录，并校验原始 SHA、资格绑定以及全部复制 sidecar。
+科学分析写输出之前检查复制完整性，回放结束再次核对原始输入未改变。
 
 ## 执行和日志边界
 
