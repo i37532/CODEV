@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: BSD-3-Clause
-// RI05 A: actual parameter server/BSON and X/Z/XY-only production configuration gate.
+// RI05 B: actual parameter server/BSON and X/Z/XY/XYZ production configuration gate.
 #include <gtest/gtest.h>
 #include <parameters/param.h>
 #include "PositionControl.hpp"
@@ -102,12 +102,12 @@ TEST_F(RegularizedIstaVelocityParam, ExistingPidAndIndependentWidthDefaultsUncha
 	}
 }
 
-TEST_F(RegularizedIstaVelocityParam, RI05AProductionAdmitsOnlyDisarmedXZXyWithValidConfiguration)
+TEST_F(RegularizedIstaVelocityParam, RI05BProductionAdmitsOnlyDisarmedXZXyXyzWithValidConfiguration)
 {
 	for (const bool armed : {false, true}) {
 		for (int axes = 0; axes <= 7; ++axes) {
 			PositionControl p; auto c = config(static_cast<uint8_t>(axes)); configure(p, c, armed);
-			const bool admitted = axes == 1 || axes == 4 || axes == 3;
+			const bool admitted = axes == 1 || axes == 4 || axes == 3 || axes == 7;
 			EXPECT_EQ(p.velocitySelection().requestedMode(), 4);
 			EXPECT_EQ(p.velocitySelection().effectiveMode(), admitted && !armed ? 4 : 0);
 			EXPECT_EQ(p.velocitySelection().effectiveAxes(), admitted && !armed ? axes : 0);
@@ -154,7 +154,7 @@ TEST_F(RegularizedIstaVelocityParam, OfflineMasksOneThreeFourSevenOnlyAndDivisor
 	}
 }
 
-TEST_F(RegularizedIstaVelocityParam, RI05ACompleteBsonConfigurationAdmitsOnlyXZXyAfterReload)
+TEST_F(RegularizedIstaVelocityParam, RI05BCompleteBsonConfigurationAdmitsOnlyXZXyXyzAfterReload)
 {
 	for (const uint8_t axes : {1, 3, 4, 7}) {
 		auto original = config(axes);
@@ -169,7 +169,7 @@ TEST_F(RegularizedIstaVelocityParam, RI05ACompleteBsonConfigurationAdmitsOnlyXZX
 		ASSERT_EQ(lseek(fileno(file), 0, SEEK_SET), 0); ASSERT_EQ(param_import(fileno(file), true), 0); fclose(file);
 		const auto loaded = readConfig(); same(original, loaded);
 		PositionControl production; configure(production, loaded, false);
-		const bool admitted = axes == 1 || axes == 4 || axes == 3;
+		const bool admitted = axes == 1 || axes == 4 || axes == 3 || axes == 7;
 		EXPECT_EQ(production.velocitySelection().effectiveMode(), admitted ? 4 : 0);
 		EXPECT_EQ(production.velocitySelection().reject() == 0, admitted);
 		if (admitted) { same(production.effectiveVelocityEsta(), original); }
@@ -180,7 +180,7 @@ TEST_F(RegularizedIstaVelocityParam, RI05ACompleteBsonConfigurationAdmitsOnlyXZX
 
 TEST_F(RegularizedIstaVelocityParam, AllFifteenValuesStageCancelThenCommitTogetherOnDisarm)
 {
-	PositionControl p; RegularizedIstaVelocityTestAccess::admit(p); const auto initial = config();
+	PositionControl p; const auto initial = config();
 	configure(p, initial, false);
 	ASSERT_EQ(p.velocitySelection().effectiveMode(), 4); const auto generation = p.velocityEstaGeneration();
 	auto changed = initial;
@@ -202,7 +202,7 @@ TEST_F(RegularizedIstaVelocityParam, AllFifteenValuesStageCancelThenCommitTogeth
 
 TEST_F(RegularizedIstaVelocityParam, InvalidLastAxisNeverPartiallyCommitsOtherRequestedValues)
 {
-	PositionControl p; RegularizedIstaVelocityTestAccess::admit(p); const auto initial = config();
+	PositionControl p; const auto initial = config();
 	configure(p, initial, false);
 	const auto generation = p.velocityEstaGeneration();
 
@@ -220,7 +220,7 @@ TEST_F(RegularizedIstaVelocityParam, SelectedGainLimitAndWidthRawNanInfValuesAre
 		for (const float invalid : {NAN, INFINITY, -1.f, 0.f}) {
 			writeConfig(config()); ASSERT_EQ(param_set(param_find(names[2][field]), &invalid), 0);
 			const auto raw = readConfig(); EXPECT_FALSE(StaVelocityProtection::validConfig(raw));
-			PositionControl p; RegularizedIstaVelocityTestAccess::admit(p); configure(p, raw, false);
+			PositionControl p; configure(p, raw, false);
 			EXPECT_TRUE(p.velocityEstaRejected()); EXPECT_EQ(p.velocitySelection().effectiveMode(), 0);
 		}
 	}
@@ -229,7 +229,7 @@ TEST_F(RegularizedIstaVelocityParam, SelectedGainLimitAndWidthRawNanInfValuesAre
 TEST_F(RegularizedIstaVelocityParam, AcceptedEpsilonEndpointsRemainExact)
 {
 	for (float epsilon : {.001f, 1.f}) {
-		PositionControl p; RegularizedIstaVelocityTestAccess::admit(p); auto c = config(); c.epsilon.fill(epsilon);
+		PositionControl p; auto c = config(); c.epsilon.fill(epsilon);
 		configure(p, c, false); ASSERT_EQ(p.velocitySelection().effectiveMode(), 4);
 
 		for (int axis = 0; axis < 3; ++axis) { EXPECT_FLOAT_EQ(p.effectiveVelocityEsta().epsilon[axis], epsilon); }
@@ -238,7 +238,7 @@ TEST_F(RegularizedIstaVelocityParam, AcceptedEpsilonEndpointsRemainExact)
 
 TEST_F(RegularizedIstaVelocityParam, IndependentFullAlgorithmConfigurationsRestoreWithoutInheritance)
 {
-	PositionControl p; RegularizedIstaVelocityTestAccess::admit(p);
+	PositionControl p;
 	const auto explicit_config = config(7, 3); auto implicit_config = config(7, 4);
 
 	for (int i = 0; i < 3; ++i) {
@@ -263,7 +263,7 @@ TEST_F(RegularizedIstaVelocityParam, ProductionRejectedNewRequestCannotMutateExi
 {
 	PositionControl p; const auto original = config(3, 3); configure(p, original, false);
 	ASSERT_EQ(p.velocitySelection().effectiveMode(), 3); const auto generation = p.velocityEstaGeneration();
-	auto request = config(7, 4); request.epsilon[0] = .05f; request.gains[1].lambda1 = .7f;
+	auto request = config(5, 4); request.epsilon[0] = .05f; request.gains[1].lambda1 = .7f;
 
 	for (bool armed : {true, false}) {
 		configure(p, request, armed); EXPECT_EQ(p.velocitySelection().effectiveMode(), 3);
@@ -372,4 +372,23 @@ TEST_F(RegularizedIstaVelocityParam, RI05AXyAllSelectedParametersStageCancelAndC
 	configure(p, original, true); EXPECT_FALSE(p.velocityEstaPending()); same(p.effectiveVelocityEsta(), original);
 	configure(p, changed, true); configure(p, changed, false);
 	EXPECT_FALSE(p.velocityEstaPending()); EXPECT_GT(p.velocityEstaGeneration(), generation); same(p.effectiveVelocityEsta(), changed);
+}
+
+TEST_F(RegularizedIstaVelocityParam, RI05BProductionXyzRejectsOtherDivisorsAndMismatchedAxisConfiguration)
+{
+	for (const int32_t div : {-1, 0, 2, 3, 4, 8, 257}) {
+		PositionControl p; p.configureVelocityDivisor(div, false); configure(p, config(7), false);
+		EXPECT_EQ(p.velocitySelection().effectiveMode(), 0); EXPECT_NE(p.velocitySelection().reject(), 0);
+		EXPECT_EQ(p.velocityEstaGeneration(), 0u);
+	}
+	for (const uint8_t axes : {1, 2, 3, 4, 5, 6}) {
+		PositionControl p; p.configureVelocityEsta(config(axes), false); p.configureVelocityControl(4, 7, false);
+		EXPECT_EQ(p.velocitySelection().effectiveMode(), 0);
+		EXPECT_TRUE(p.velocitySelection().reject() & VelocityControlSelector::AxesUnavailable);
+	}
+	for (const uint8_t variant : {0, 1, 2, 3}) {
+		PositionControl p; p.configureVelocityEsta(config(7, variant), false); p.configureVelocityControl(4, 7, false);
+		EXPECT_EQ(p.velocitySelection().effectiveMode(), 0);
+		EXPECT_TRUE(p.velocitySelection().reject() & VelocityControlSelector::ModeUnimplemented);
+	}
 }

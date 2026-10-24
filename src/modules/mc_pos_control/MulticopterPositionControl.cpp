@@ -289,7 +289,7 @@ void MulticopterPositionControl::Run()
 		const int32_t requested_axes = _param_mpc_vc_axes.get();
 		esta_config.axes = requested_axes >= 1 && requested_axes <= 7 ? static_cast<uint8_t>(requested_axes) : 0;
 		// Each regularized algorithm consumes the whole configuration. MODE4
-		// is recognized here; PositionControl restricts RI05 A admission to SITL X/Z/XY.
+		// is recognized here; PositionControl restricts RI05 B admission to SITL X/Z/XY/XYZ.
 		esta_config.variant = _param_mpc_vc_mode.get() == 4 ? 4 : (_param_mpc_vc_mode.get() == 3 ? 3 : 1);
 		esta_config.epsilon = {{_param_mpc_vc_eps_x.get(), _param_mpc_vc_eps_y.get(), _param_mpc_vc_eps_z.get()}};
 		esta_config.gains[0] = {_param_mpc_vc_l1_x.get(), _param_mpc_vc_l2_x.get()};

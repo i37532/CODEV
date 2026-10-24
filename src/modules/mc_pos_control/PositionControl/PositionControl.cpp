@@ -102,10 +102,10 @@ void PositionControl::configureVelocityControl(int32_t mode, int32_t axes, bool 
 	const bool regularized_gate_admitted = axes == 1 || axes == 4 || axes == 3 || axes == 7;
 	regularized_ready = (regularized_gate_admitted || _regularized_test_admission) && _esta_config_valid
 		&& _esta_requested.variant == 3 && _decimation.divisor == 1;
-	// RI05 gate A admits local NED XY in addition to the accepted X and Z.
-	// XYZ is not admitted before gate A flight acceptance. Later masks retain their
-	// offline test override; neither parameters nor saved state can enable it.
-	const bool implicit_gate_admitted = axes == 1 || axes == 4 || axes == 3;
+	// RI05 gate B admits local NED XYZ after the accepted X, Z and XY gates.
+	// The selector still rejects Y/XZ/YZ; neither parameters nor saved state
+	// can bypass the SITL and DIV1 requirements.
+	const bool implicit_gate_admitted = axes == 1 || axes == 4 || axes == 3 || axes == 7;
 	implicit_ready = (implicit_gate_admitted || _regularized_ista_admission) && _esta_config_valid && _esta_requested.variant == 4
 		&& _decimation.divisor == 1 && _decimation.requested == 1;
 #endif
