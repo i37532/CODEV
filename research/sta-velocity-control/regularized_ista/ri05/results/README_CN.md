@@ -2,7 +2,9 @@
 
 本目录保存结果汇总工具、测试、逐门摘要和指纹；不改变冻结协议、飞行批次、参数或阈值。完整报告见 [RI05.md](../../../reports/RI05.md)。
 
-2026-10-24收尾：A/C通过9接受、9独立回放、6对风险检查；B/D虽取得离线资格，但首次执行在种子历史格式检查中停止，0飞行/9未执行。原因是代理将带说明行的dry-run stdout误存为`.json`，不是种子碰撞。见 [D_PRESTART_CN.md](D_PRESTART_CN.md) 和 [停批收据](D_prestart_failure.json)。不生成D的合格摘要或XYZ配置；不存在D ledger时不能运行下方D结果收集命令冒充验收。
+2026-10-24最终：A/C与B/D均9接受、9独立回放、6对风险通过，合计18/18，无飞行失败或缺失。B首次入口曾因混合dry-run stdout误存`.json`而停止，0飞行；原 [D_PRESTART_CN.md](D_PRESTART_CN.md) 与 [停批收据](D_prestart_failure.json) 保留。用户允许按原字节归档为`.log`、补接线测试后恢复原九项；不增加预算/换种子/改参数/放宽scanner，见 [恢复协议](recovery01/RECOVERY_CN.md) 和 [迁移收据](recovery01/archive_migration.json)。
+
+A飞行源码3e633a0d2aba1326d3f79b0033f59787cc479c44，B实际飞行源码32a266f6162f1e09667ec92eeb0ad25abfee7ea7，B使用新qualification02，不能复用旧6fa资格。最终 [验收收据](final01/final_acceptance.json)、[完整XYZ配置](final01/qualified_xyz.json) 和 [核查记录](final01/FINAL_VERIFICATION_CN.md) 分别披露版本与证据。只属于固定参数Iris开发验收，不要求R-ISTA性能全胜。
 
 ## 单测
 
@@ -31,7 +33,7 @@ python3 -B collect_ri05.py --gate D --output /tmp/RI05-D-results-NEW
 - `evidence_index.json`：batch/replay 全部文件、符号链接信息及外部资格收据/脚本指纹；不跨符号链接目录递归。
 - `SUMMARY_CN.md`：简短表格，指向 JSON 的完整口径与局限。
 
-仓库内 `C/summary.json`、后续合格时的 `D/summary.json` 是明确字段选择的精简收据；完整摘要和档案索引在外部，以绝对路径/字节数/SHA-256引用。导出不重新判定试验：
+仓库内 `C/summary.json`、`D/summary.json` 是明确字段选择的精简收据；完整摘要和档案索引在外部，以绝对路径/字节数/SHA-256引用。导出不重新判定试验：
 
 ```sh
 python3 -B export_compact.py <外部新收集目录> <全新仓库结果目录>
@@ -44,3 +46,15 @@ python3 -B export_compact.py <外部新收集目录> <全新仓库结果目录>
 “已离地”使用已有 `samples.jsonl` 中 `arming_state=2`、`landed=false` 且相对首次有效本地 Z 高度超过 0.5 m 的记录，仅作报告证据分类，不更改飞行安全规则。没有充分记录标 `unknown`；单独的 takeoff_command 不算完成起飞。这不是 Gazebo 真值，也不重新定义冻结验收。
 
 位置误差保留发布目标/前驱测量配对口径；名义 2.5 m 高度误差与 V 任务 Z 速度/位置跟踪分列。各统计先逐轮再均值；缺失/失败不纳入接受组均值。p/理想 nu 峰值未预先聚合时不凭空添加。TV 不是能耗，耗时不是板级 CPU/WCET。
+
+## 最终跨收据核对（不飞行）
+
+在C/D真实回放、收集及导出全部完成后，使用新输出目录：
+
+```sh
+python3 -B recovery01/finalize_ri05.py \
+  --d-source 32a266f6162f1e09667ec92eeb0ad25abfee7ea7 \
+  --output /tmp/RI05-final-NEW
+```
+
+该工具只核对小型收据，不重新解码/哈希ULog；不能替代真实collector/replay。导出PID/RSTA/RISTA各完整127项，包含研究任务参数TEST8，不可盲目导入实机；`new_flight_authorization=false`。原18项预算已全部消费，不得重复运行flight runner。
