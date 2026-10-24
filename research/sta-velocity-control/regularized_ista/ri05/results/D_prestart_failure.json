@@ -1,0 +1,158 @@
+{
+  "schema": 1,
+  "stage": "RI05",
+  "user_gate": "B/XYZ",
+  "internal_gate": "D",
+  "status": "needs_revision",
+  "stop_kind": "stopped_before_batch",
+  "overall_ri05_passed": false,
+  "gate_passed": false,
+  "flight_qualified_xyz_configuration_exported": false,
+  "source_head": "6faad54e1ea1041c144d79c97df9475a19b90290",
+  "predecessor_A_result_commit": "de1823566ec6c89cd416252db079d2044f41f905",
+  "scope": "Only Iris SITL; no new flight after stop, no tuning, no rerun, no budget increase, no push.",
+  "counts": {
+    "planned": 9,
+    "runner_execute_invocations": 1,
+    "startup_precheck_rejections": 1,
+    "attempted": 0,
+    "airborne": 0,
+    "accepted": 0,
+    "flight_failed": 0,
+    "unattempted": 9,
+    "independent_new_flight_replays": 0,
+    "paired_risk_comparisons": 0
+  },
+  "unattempted_job_ids": [
+    "run010",
+    "run011",
+    "run012",
+    "run013",
+    "run014",
+    "run015",
+    "run016",
+    "run017",
+    "run018"
+  ],
+  "qualification": {
+    "success": true,
+    "approved": true,
+    "clean": true,
+    "commands": 118,
+    "all_commands_exit_zero": true,
+    "counts": {
+      "cpp_unique_tests": 751,
+      "cpp_targets": 48,
+      "python_tests": 982,
+      "model_oracle_tests": 6,
+      "historical_accepted_replays": 18,
+      "historical_failure_audits": 2,
+      "new_flights": 0
+    },
+    "evidence": {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI05/D/qualification01/evidence.json",
+      "bytes": 807016,
+      "sha256": "33c3317c41e68a096a3bdfd65efe0fcca433d7f17796d2dce641270b1a3d3f71"
+    },
+    "frozen_configuration": {
+      "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri05/gates/D/frozen.json",
+      "bytes": 175916,
+      "sha256": "9a318cd8a58987ef101cd11eb5be1b77c880df9c8bbf02f40354888f887ce10e"
+    },
+    "firmware": {
+      "path": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/bin/px4",
+      "bytes": 35799160,
+      "sha256": "de8d6c94107c30301a530a8bd25f076591344250d0f5f2a6ff5e4074bb3c3e62"
+    }
+  },
+  "observed_startup": {
+    "record_origin": "Assistant closeout record of actual exec terminal session 40376, not an automatic batch ledger or complete captured traceback.",
+    "exit_code": 1,
+    "exception_type": "RuntimeError",
+    "exception_message": "Seed history scan failed",
+    "where": "tools/runner.py: precheck -> protocol.fresh_seeds; before batch creation / parameter backup / single_flight",
+    "argv": [
+      "python3",
+      "-B",
+      "research/sta-velocity-control/regularized_ista/ri05/tools/runner.py",
+      "--gate",
+      "D",
+      "--execute",
+      "--source-head",
+      "6faad54e1ea1041c144d79c97df9475a19b90290",
+      "--qualification",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI05/D/qualification01/evidence.json"
+    ],
+    "retry_performed": false
+  },
+  "root_cause": {
+    "category": "operator_stdout_archive_extension_error",
+    "owner": "Codex execution agent",
+    "description": "Dry-run prints JSON followed by a human-readable DRY RUN line; agent redirected the whole stdout to .json inside scanned history.",
+    "dry_run_exit_code": 0,
+    "stdout": {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI05/D/dry_run01.json",
+      "bytes": 1805,
+      "sha256": "874270526d0fd015624f187fbb5a2e75af6abd6d0c19e84f55c25aeb53c0a956"
+    },
+    "strict_parse_error": {
+      "message": "Extra data: line 98 column 1 (char 1737)",
+      "line": 98,
+      "column": 1,
+      "position": 1737
+    },
+    "original_unchanged": true,
+    "not_a_flight_or_controller_failure": true
+  },
+  "post_stop_read_only_audit": {
+    "evidence": {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI05_RESULTS/D_PRESTART01/seed_scan.log",
+      "bytes": 6856,
+      "sha256": "ba8c2b0b38310d5dc62d24a78a75b82611e58a851e8bb37ab3ff35c2a793d015"
+    },
+    "origin": "Independent post-stop scan; not the unstored internal result of the original precheck.",
+    "command_exit_code": 0,
+    "files_parsed": 77929,
+    "accepted": false,
+    "actual_collision_count": 0,
+    "invalid_json": [
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI05/D/dry_run01.json"
+    ],
+    "design_registration_rows": 29,
+    "four_frozen_registrations_match": true
+  },
+  "parameter_state": {
+    "eeprom": {
+      "path": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/eeprom/parameters_10016",
+      "bytes": 1129,
+      "sha256": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc"
+    },
+    "qualification_before": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+    "qualification_after": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+    "startup_reached_parameter_backup_or_write": false
+  },
+  "absence_at_closeout": {
+    "batch_directories": [],
+    "batch_ledger": false,
+    "gate_pass_receipt": false,
+    "new_flight_ulog": false,
+    "px4_or_gazebo_processes": []
+  },
+  "closeout_validation": {
+    "controller_tests_added_by_closeout": 0,
+    "collector_unit_tests_executed": 31,
+    "collector_exit_code": 0,
+    "readonly_artifact_assertions": 1350,
+    "readonly_exit_code": 0,
+    "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI05_RESULTS/D_PRESTART01",
+    "script": "verify_closeout.py",
+    "script_sha256": "f6dcc7b4c89d2f5689f72809d91b712863116dd77ec981a90d63d23b9b99e33c",
+    "readonly_log": "verify_closeout.log",
+    "readonly_log_sha256": "315c9a2a5ff87bd6aae91e0d45b2e755a3547d98730d6fe61ea941b68ec5a0dc",
+    "collector_log": "collector_tests.log",
+    "collector_log_sha256": "ebc053383f4b5a9bc2f2de71cf54562a707b76e86f3f9ff9383fa131f5a3b488"
+  },
+  "retained_originals": true,
+  "production_or_threshold_changes_after_stop": false,
+  "next_step_not_executed": "Explicitly authorize documented byte-preserving stdout archive reclassification to .log and its regression checks, preserve this failure, recheck history/source/qualification, then define resumption of the same nine unattempted jobs. Do not ignore malformed JSON globally or merely delete the trailing line."
+}

@@ -1,5 +1,7 @@
 # RI05 B/XYZ 离线准备记录
 
+最终状态：本文件是准备过程的历史记录。其后源码6faad54e1ea1041c144d79c97df9475a19b90290的干净qualification01真实通过，但首次执行入口因dry-run stdout错误归档为JSON而停止；B零飞行、未验收。完整原因与停止边界见 [D_PRESTART_CN.md](D_PRESTART_CN.md)，不能沿用下面历史“下一步”文字自动重试。
+
 A/XY真实9接受、9独立回放、6对78项风险检查通过后，才开始本门。A源码3e633a0d2aba1326d3f79b0033f59787cc479c44，A独立结果de1823566ec6c89cd416252db079d2044f41f905；C/gate_pass及回放摘要e45ce23f6f7996f3306d2202d8c10e9ebea7c13a4cf7f70fa5489c002dec3647作为前门证据。
 
 实际仅七个既定生产/C++测试文件。唯一生产行为：PositionControl中SITL/DIV1 MODE4准入增加AXES7；1/3/4保持，2/5/6拒绝，参数定义/默认值、控制公式、保护、起降、上游、模型及所有RI05 Python/清单/种子/阈值不变。
