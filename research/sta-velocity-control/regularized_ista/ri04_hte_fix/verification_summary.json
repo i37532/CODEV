@@ -1,0 +1,130 @@
+{
+  "stage": "RI04_HTE_FIX",
+  "status": "passed_offline_only",
+  "flight_authorized": false,
+  "new_flights": 0,
+  "new_budget": 0,
+  "historical_ri04_status": "failed/needs_revision unchanged; 3 attempted, 2 accepted, 1 failed, 6 unattempted",
+  "entry_head": "50f354678fafb3fd4d4a09530e340f0eefa60f55",
+  "verification": {
+    "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI04_HTE_FIX/verification02/evidence.json",
+    "sha256": "12dc58701362cb96e9f7eced821d85679efbb8e0060c5570a38c848a63956f1b",
+    "commands": 106,
+    "all_exit_zero": true,
+    "counts": {
+      "cpp_unique_tests": 711,
+      "cpp_targets": 48,
+      "python_tests": 904,
+      "model_oracle_tests": 6,
+      "historical_accepted_replays": 9,
+      "original_failure_audits": 2,
+      "new_flights": 0
+    },
+    "leaf_receipt": {
+      "cpp_unique_tests": 711,
+      "executed_xml_cases": 711,
+      "cpp_targets": 48,
+      "python_tests": 904,
+      "python_suites": 38
+    },
+    "input_count": 1082,
+    "changed_source_hashes": {
+      "src/modules/mc_pos_control/PositionControl/PositionControl.cpp": {
+        "old_sha256": "91b9e0374b7355606fcd901b50e5905aa93f06a73fed68a3ffefe7dcf1946b6f",
+        "new_sha256": "66e8ce2397d6915d05d176313703f156a3ed8bfded64ea22bbec4918d7fd7df6"
+      },
+      "src/modules/mc_pos_control/PositionControl/RegularizedIstaPositionTest.cpp": {
+        "old_sha256": "b9b52670601ab9a9daf0a31a32dd5287c76d0ff0e813020b53cc4288385693d5",
+        "new_sha256": "2f2ff3a37f766c954d46a35ffc79013e0a77f994204f5c99452b29256571173f"
+      },
+      "src/modules/mc_pos_control/RegularizedIstaVelocityModuleTest.cpp": {
+        "old_sha256": "b620137b2f74d881938fa0891330aad8fe63df2a39d207740dec6a916095ae2c",
+        "new_sha256": "693c3c195717e8a7fc9e0857e62b90fef8d877e481e34ce160fc63bf7cd1e541"
+      }
+    }
+  },
+  "firmware_sha256": "061e2a374defd80a32476710b6d6dd78b71950b2532d051ba7e598e944a0c402",
+  "firmware_provenance": "entry HEAD plus tested working-tree patch; not clean flight qualification",
+  "eeprom_sha256": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+  "schema": {
+    "velocity_ctrl_selection": {
+      "bytes_including_nul": 1018,
+      "queue": 8,
+      "generated_sha256": "3e12e3e5184e9b5573a2affed61be1f9f28c1dfb9bea589db39b3d6c6d7be67d",
+      "header_sha256": "65f55776c55514895dad260064cdd9d41c28654356677e7d2f97ba3bdc7aff81"
+    },
+    "sta_velocity_ctrl_status": {
+      "bytes_including_nul": 1475,
+      "queue": 8,
+      "generated_sha256": "2229f14718321b1924021e6cb7c716b89bce0c061fbfdd04a108df28b0bef1a0",
+      "header_sha256": "01fdbb8a5f5cec079209fd28cc5ed39d99a9bbc8119960d948bbe5625b0f1901"
+    }
+  },
+  "historical_archive_audit": {
+    "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI04_HTE_FIX/archive_audit01/summary.json",
+    "sha256": "946e42a9920e0d809441686e9e06a9c1500bf801e5d3125ffd6dc52f405ad9b9",
+    "files_unchanged": 1880,
+    "links_unchanged": 3
+  },
+  "new_evidence_archive": {
+    "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI04_HTE_FIX/archive_index.json",
+    "sha256": "5e7e1dd566235fb679eed0d749572bbce5e340152057fa1c7e2921ef6e52da8c",
+    "files": 1609,
+    "links": 0
+  },
+  "attempt_receipts": {
+    "red01": {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI04_HTE_FIX/red01/commands.json",
+      "sha256": "33b6cc77195516caac985515b4992c6d1723e6289559b79f88bd6b2174171cd4",
+      "exit_codes": [
+        1
+      ]
+    },
+    "red02": {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI04_HTE_FIX/red02/commands.json",
+      "sha256": "fde873c6cf83f1ad4b6af778649995e0fc5b5affca495345bcec18b0a1c23a66",
+      "exit_codes": [
+        0,
+        1,
+        1
+      ]
+    },
+    "red03": {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI04_HTE_FIX/red03/commands.json",
+      "sha256": "ab21e51f20d2ca9064b95f5682436325f64a9edb674a1760239639dbc548f488",
+      "exit_codes": [
+        0,
+        1,
+        1
+      ]
+    },
+    "green01": {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI04_HTE_FIX/green01/commands.json",
+      "sha256": "1f5e7e26b10de856ed4132e79a22ea44438e01f12868df9aa81e44a4ef208464",
+      "exit_codes": [
+        0,
+        1,
+        0
+      ]
+    },
+    "green02": {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI04_HTE_FIX/green02/commands.json",
+      "sha256": "cc9fd2b86c09b58cbaa9f6ff55eaccd7519340cde884595909fe9ddaad96de3e",
+      "exit_codes": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "matlab_executed": false,
+  "not_executed": [
+    "new flight",
+    "new qualification",
+    "MATLAB rerun",
+    "tuning",
+    "RI05",
+    "hardware",
+    "push"
+  ]
+}

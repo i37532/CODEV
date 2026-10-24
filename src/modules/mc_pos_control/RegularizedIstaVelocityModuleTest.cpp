@@ -801,6 +801,194 @@ TEST_F(RegularizedIstaProductionZ, HteShiftsOnlyZFromClosedCacheWithMixedXyPid)
 	for (int i = 0; i < 2; ++i) { EXPECT_TRUE(std::isnan(diagnostic.nu_before[i])); }
 }
 
+// RI04 offline repair: naturally reach the protected state, then reproduce the
+// last valid run003 Z boundary. This is a minimal corresponding state, NOT a
+// claim to replay the full 414-sample flight or to change its failed verdict.
+class RegularizedIstaStateLimitHte : public RegularizedIstaProductionZ
+{
+protected:
+	uORB::Publication<hover_thrust_estimate_s> hte_pub{ORB_ID(hover_thrust_estimate)};
+	void publishHte(float hover, bool valid = true)
+	{
+		hover_thrust_estimate_s estimate{}; estimate.timestamp = hrt_absolute_time();
+		estimate.hover_thrust = hover; estimate.valid = valid;
+		ASSERT_TRUE(hte_pub.publish(estimate));
+	}
+	void SetUp() override
+	{
+		RegularizedIstaProductionZ::SetUp();
+		publishHte(.5f, false); // Do not consume another fixture's retained valid estimate.
+		int32_t enabled = 1; ASSERT_EQ(param_set(param_find("MPC_USE_HTE"), &enabled), 0);
+		RegularizedIstaVelocityModuleTestAccess::reload(*module);
+	}
+	void TearDown() override
+	{
+		publishHte(.5f, false);
+		RegularizedIstaProductionZ::TearDown();
+	}
+	void realLastBoundary()
+	{
+		target.acceleration[2] = 0.f; configure(4, false);
+		ASSERT_TRUE(diagnostic.valid); ASSERT_EQ(selection.effective_axes, 4);
+		target.vz = -.25f;
+		unsigned updates = 0;
+		while (updates < 600 && !(diagnostic.sta_flags & StaVelocityProtection::StateLimit)) {
+			step(updates++ % 2 ? 12000 : 8000);
+			ASSERT_TRUE(diagnostic.valid); ASSERT_EQ(selection.ri_commit_axes, 4);
+			ASSERT_EQ(diagnostic.constraint_bits, 0);
+		}
+		ASSERT_LT(updates, 600u); ASSERT_GT(updates, 300u);
+		ASSERT_FLOAT_EQ(diagnostic.nu_applied[2], -4.f);
+		// Original log001.ulg sample 43,064,000 us: no position error, the same
+		// actually consumed Z v/v_sp, no FF, h=8 ms. No private state writes.
+		lp.vz = -.01793995127081871f; lp.z_deriv = lp.vz;
+		target.vz = -.023422956466674805f; step(8000);
+		ASSERT_TRUE(diagnostic.valid); ASSERT_EQ(diagnostic.sta_flags, StaVelocityProtection::StateLimit);
+		ASSERT_EQ(diagnostic.constraint_bits, 0); ASSERT_EQ(selection.ri_commit_axes, 4);
+		ASSERT_FLOAT_EQ(diagnostic.hover_thrust, .5f); ASSERT_FLOAT_EQ(diagnostic.nu_before[2], -4.f);
+		ASSERT_FLOAT_EQ(diagnostic.nu_applied[2], -4.f);
+		ASSERT_NEAR(diagnostic.s[2], .005483005195856094f, 1e-7f);
+		ASSERT_NEAR(selection.ri_nu_candidate[2], -4.001964569091797f, 1e-6f);
+		ASSERT_NEAR(selection.ri_a_applied[2], -4.071424961090088f, 1e-6f);
+		ASSERT_EQ(selection.ri_strict_axes, 0); // StateLimit is never relabelled as a strict implicit pair.
+	}
+	void expectXyPid(const velocity_ctrl_selection_s &before, float h)
+	{
+		float p = NAN, integral = NAN, derivative = NAN;
+		ASSERT_EQ(param_get(param_find("MPC_XY_VEL_P_ACC"), &p), 0);
+		ASSERT_EQ(param_get(param_find("MPC_XY_VEL_I_ACC"), &integral), 0);
+		ASSERT_EQ(param_get(param_find("MPC_XY_VEL_D_ACC"), &derivative), 0);
+		EXPECT_EQ(diagnostic.pid_axes, 3);
+		for (int i = 0; i < 2; ++i) {
+			const float error = diagnostic.v_sp[i] - diagnostic.v[i];
+			const float correction = error * p + before.integral[i] - diagnostic.v_dot[i] * derivative;
+			EXPECT_NEAR(selection.ri_a_applied[i], correction, 2e-6f);
+			EXPECT_NEAR(output.acceleration[i], correction + diagnostic.a_ff[i], 2e-6f);
+			const float proxy = diagnostic.thrust[i] * (9.80665f / diagnostic.hover_thrust);
+			const float tracked_error = error - (2.f / p) * (diagnostic.a_req[i] - proxy);
+			EXPECT_NEAR(selection.integral[i], before.integral[i] + tracked_error * integral * h, 2e-6f);
+			EXPECT_TRUE(std::isnan(selection.ri_p[i])); EXPECT_TRUE(std::isnan(diagnostic.nu_applied[i]));
+		}
+	}
+	void acceptFirstRealHte()
+	{
+		const auto before = selection; const auto old = diagnostic;
+		EXPECT_TRUE(before.ri_cache_valid); EXPECT_EQ(before.ri_cache_sample, lp.timestamp_sample);
+		EXPECT_EQ(before.ri_strict_axes, 0); EXPECT_LT(before.ri_nu_candidate[2], before.ri_nu_applied[2]);
+		const float next_hover = .7190654277801514f;
+		const double shift = (static_cast<double>(old.hover_thrust) / static_cast<double>(next_hover) - 1.)
+			* (static_cast<double>(before.ri_a_applied[2]) + static_cast<double>(old.a_ff[2]) - 9.80665);
+		// Representative Z target reconstructed from logged trajectory/local Z,
+		// not a directly recorded pre-retry v_sp or a full original-input replay.
+		lp.vz = -.018210813403129578f; lp.z_deriv = lp.vz;
+		target.vz = -1.3284109830856323f - (-1.3049243688583374f);
+		publishHte(next_hover); step(12000);
+		ASSERT_TRUE(diagnostic.valid); ASSERT_TRUE(selection.ri_valid);
+		EXPECT_EQ(diagnostic.first_fail, 0); EXPECT_EQ(diagnostic.retry_result, 0); EXPECT_EQ(diagnostic.pid_calls, 1);
+		EXPECT_EQ(diagnostic.sta_fault, 0); EXPECT_EQ(diagnostic.fault, 0); EXPECT_EQ(selection.ri_commit_axes, 4);
+		EXPECT_EQ(diagnostic.z_phase, 3); EXPECT_FLOAT_EQ(diagnostic.hover_thrust, next_hover);
+		EXPECT_NEAR(static_cast<double>(diagnostic.z_hte_shift), shift, 3e-6);
+		EXPECT_NEAR(static_cast<double>(diagnostic.nu_before[2]), static_cast<double>(old.nu_applied[2]) + shift, 3e-6);
+		EXPECT_EQ(selection.control_seq, before.control_seq + 1); EXPECT_FLOAT_EQ(selection.ri_h, .012f);
+		EXPECT_FLOAT_EQ(selection.ri_seed_h, 0.f); EXPECT_EQ(selection.sta_gen, before.sta_gen);
+		EXPECT_FLOAT_EQ(output.acceleration[2], selection.ri_acc_published[2]);
+		EXPECT_FLOAT_EQ(output.thrust[2], selection.ri_thrust_published[2]);
+		expectXyPid(before, .012f);
+	}
+};
+
+TEST_F(RegularizedIstaStateLimitHte, RealLastBoundaryAcceptsFirstValidHteAndNextNormalUpdateKeepsXyPid)
+{
+	realLastBoundary(); ASSERT_FALSE(::testing::Test::HasFatalFailure());
+	acceptFirstRealHte(); ASSERT_FALSE(::testing::Test::HasFatalFailure());
+	const auto before = selection; const float nu = diagnostic.nu_applied[2]; step(8000);
+	ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(selection.ri_commit_axes, 4); EXPECT_EQ(diagnostic.pid_calls, 1);
+	EXPECT_EQ(diagnostic.first_fail, 0); EXPECT_EQ(diagnostic.retry_result, 0);
+	EXPECT_FLOAT_EQ(diagnostic.z_hte_shift, 0.f); EXPECT_FLOAT_EQ(diagnostic.nu_before[2], nu);
+	EXPECT_FLOAT_EQ(diagnostic.hover_thrust, .7190654277801514f);
+	EXPECT_EQ(selection.control_seq, before.control_seq + 1); EXPECT_FLOAT_EQ(selection.ri_h, .008f);
+	expectXyPid(before, .008f);
+}
+
+TEST_F(RegularizedIstaStateLimitHte, AcceptedHteDoesNotPermitDuplicateSampleOrClearItsLatch)
+{
+	realLastBoundary(); ASSERT_FALSE(::testing::Test::HasFatalFailure());
+	acceptFirstRealHte(); ASSERT_FALSE(::testing::Test::HasFatalFailure());
+	const auto before = selection; const float nu = diagnostic.nu_applied[2]; step(0);
+	EXPECT_FALSE(diagnostic.valid); EXPECT_EQ(diagnostic.pid_calls, 2); EXPECT_EQ(diagnostic.retry_result, 2);
+	EXPECT_TRUE(diagnostic.sta_fault & StaVelocityProtection::Time); EXPECT_EQ(diagnostic.output_timestamp, 0u);
+	EXPECT_EQ(selection.ri_commit_axes, 0); EXPECT_FALSE(selection.ri_cache_valid);
+	EXPECT_FLOAT_EQ(diagnostic.nu_applied[2], nu); EXPECT_EQ(selection.control_seq, before.control_seq);
+	step(12000); EXPECT_FALSE(diagnostic.valid); EXPECT_FLOAT_EQ(diagnostic.nu_applied[2], nu);
+	disarm(); step(8000); EXPECT_EQ(diagnostic.fault, 0); EXPECT_FLOAT_EQ(diagnostic.nu_applied[2], 0.f);
+	arm(); step(12000); EXPECT_EQ(diagnostic.z_phase, 2); EXPECT_EQ(selection.ri_commit_axes, 0);
+	step(8000); EXPECT_TRUE(diagnostic.valid); EXPECT_EQ(selection.ri_commit_axes, 4);
+}
+
+TEST_F(RegularizedIstaStateLimitHte, AcceptedHteContactAndNewFlightRequireFreshSeeds)
+{
+	realLastBoundary(); ASSERT_FALSE(::testing::Test::HasFatalFailure());
+	acceptFirstRealHte(); ASSERT_FALSE(::testing::Test::HasFatalFailure());
+	land.ground_contact = true; ASSERT_TRUE(land_pub.publish(land)); step(8000);
+	ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(selection.ri_commit_axes, 0); EXPECT_FALSE(selection.ri_cache_valid);
+	EXPECT_FLOAT_EQ(diagnostic.nu_applied[2], 0.f);
+	land.ground_contact = false; ASSERT_TRUE(land_pub.publish(land)); step(12000);
+	ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.z_phase, 2); EXPECT_EQ(selection.ri_commit_axes, 0);
+	EXPECT_FLOAT_EQ(selection.ri_seed_h, .012f); step(8000); EXPECT_EQ(selection.ri_commit_axes, 4);
+	disarm(); step(12000); EXPECT_FLOAT_EQ(diagnostic.nu_applied[2], 0.f); EXPECT_FALSE(selection.ri_cache_valid);
+	arm(); step(8000); EXPECT_EQ(diagnostic.z_phase, 2); EXPECT_FLOAT_EQ(selection.ri_seed_h, .008f);
+	EXPECT_EQ(selection.ri_commit_axes, 0); step(12000);
+	EXPECT_TRUE(diagnostic.valid); EXPECT_EQ(selection.ri_commit_axes, 4); EXPECT_EQ(diagnostic.pid_axes, 3);
+}
+
+TEST_F(RegularizedIstaStateLimitHte, InfeasibleHteRetainsOriginalBoundsAndLatchUntilDisarm)
+{
+	realLastBoundary(); ASSERT_FALSE(::testing::Test::HasFatalFailure());
+	EXPECT_TRUE(selection.ri_cache_valid); const auto before = selection; const auto old = diagnostic;
+	// .1 is a legal hover estimate, but its shift would move nu far below -4.
+	publishHte(.1f); step(12000);
+	EXPECT_FALSE(diagnostic.valid); EXPECT_EQ(diagnostic.first_fail, 56); EXPECT_EQ(diagnostic.sta_fault, 10);
+	EXPECT_EQ(diagnostic.pid_calls, 2); EXPECT_EQ(diagnostic.retry_result, 2); EXPECT_EQ(diagnostic.output_timestamp, 0u);
+	EXPECT_EQ(selection.ri_commit_axes, 0); EXPECT_FALSE(selection.ri_cache_valid);
+	EXPECT_FLOAT_EQ(diagnostic.nu_applied[2], old.nu_applied[2]); EXPECT_FLOAT_EQ(diagnostic.hover_thrust, old.hover_thrust);
+	EXPECT_FLOAT_EQ(diagnostic.z_hte_shift, 0.f); EXPECT_EQ(selection.control_seq, before.control_seq);
+	for (int i = 0; i < 3; ++i) { EXPECT_FLOAT_EQ(selection.integral[i], before.integral[i]); }
+	publishHte(.7190654277801514f); step(8000); EXPECT_FALSE(diagnostic.valid);
+	EXPECT_FLOAT_EQ(diagnostic.nu_applied[2], old.nu_applied[2]); EXPECT_FLOAT_EQ(diagnostic.hover_thrust, old.hover_thrust);
+	disarm(); step(12000); EXPECT_EQ(diagnostic.fault, 0); EXPECT_FLOAT_EQ(diagnostic.nu_applied[2], 0.f);
+	arm(); step(8000); EXPECT_EQ(diagnostic.z_phase, 2); step(12000); EXPECT_TRUE(diagnostic.valid);
+}
+
+TEST_F(RegularizedIstaStateLimitHte, StateAndCorrectionLimitStillInvalidateHteCache)
+{
+	realLastBoundary(); ASSERT_FALSE(::testing::Test::HasFatalFailure());
+	target.vz = -2.f; step(12000);
+	ASSERT_TRUE(diagnostic.valid); ASSERT_TRUE(diagnostic.sta_flags & StaVelocityProtection::StateLimit);
+	ASSERT_TRUE(diagnostic.sta_flags & StaVelocityProtection::CorrectionLimit);
+	EXPECT_FALSE(selection.ri_cache_valid); EXPECT_EQ(selection.ri_strict_axes, 0);
+	const auto old = diagnostic; publishHte(.7190654277801514f); step(8000);
+	EXPECT_FALSE(diagnostic.valid); EXPECT_EQ(diagnostic.first_fail, 56); EXPECT_EQ(diagnostic.sta_fault, 10);
+	EXPECT_EQ(diagnostic.pid_calls, 2); EXPECT_EQ(diagnostic.retry_result, 2); EXPECT_EQ(selection.ri_commit_axes, 0);
+	EXPECT_FLOAT_EQ(diagnostic.nu_applied[2], old.nu_applied[2]); EXPECT_FLOAT_EQ(diagnostic.hover_thrust, old.hover_thrust);
+	EXPECT_FLOAT_EQ(diagnostic.z_hte_shift, 0.f);
+}
+
+TEST_F(RegularizedIstaStateLimitHte, AcceptedHteCannotDefeatLaterTerminationOrRebaseALatchedState)
+{
+	realLastBoundary(); ASSERT_FALSE(::testing::Test::HasFatalFailure());
+	acceptFirstRealHte(); ASSERT_FALSE(::testing::Test::HasFatalFailure());
+	const auto old = diagnostic; rate_termination = true; step(8000);
+	EXPECT_FALSE(diagnostic.valid); EXPECT_TRUE(diagnostic.sta_fault & StaVelocityProtection::Feedback);
+	EXPECT_EQ(diagnostic.pid_calls, 2); EXPECT_EQ(diagnostic.retry_result, 2); EXPECT_EQ(selection.ri_commit_axes, 0);
+	EXPECT_FLOAT_EQ(diagnostic.nu_applied[2], old.nu_applied[2]); EXPECT_FALSE(selection.ri_cache_valid);
+	rate_termination = false; publishHte(.7f); step(12000);
+	EXPECT_FALSE(diagnostic.valid); EXPECT_FLOAT_EQ(diagnostic.hover_thrust, old.hover_thrust);
+	EXPECT_FLOAT_EQ(diagnostic.nu_applied[2], old.nu_applied[2]); EXPECT_FLOAT_EQ(diagnostic.z_hte_shift, 0.f);
+	disarm(); step(8000); EXPECT_EQ(diagnostic.fault, 0); EXPECT_FLOAT_EQ(diagnostic.nu_applied[2], 0.f);
+	arm(); step(12000); EXPECT_EQ(diagnostic.z_phase, 2); step(8000);
+	EXPECT_TRUE(diagnostic.valid); EXPECT_EQ(selection.ri_commit_axes, 4);
+}
+
 TEST_F(RegularizedIstaProductionZ, XZSwitchStagesCancelsAndDisarmResetsOnlyTheNewSelectedAlgorithm)
 {
 	configure(1, false); const auto x_generation = selection.sta_gen;

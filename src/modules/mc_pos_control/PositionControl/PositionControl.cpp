@@ -393,10 +393,12 @@ void PositionControl::_recordRistaDiagnostic(bool success)
 		_rista_diagnostic.thrust_published[i] = success ? _thr_sp(i) : NAN;
 	}
 	// Cache precisely the closed transaction's applied correction, not a new
-	// evaluation from the already committed nu. Any protection defeats the
-	// simple HTE continuity relation; refuse rather than infer a missing value.
+	// evaluation from the already committed nu. StateLimit clips only the next
+	// state, not this applied output, so both remain known for a bounded HTE
+	// shift. Output/downstream limits and outward freezing still invalidate
+	// that continuity mapping; shiftZ checks the translated state/output bounds.
 	_rista_cache_valid = success && _z_engaged && !_diagnostic.constraint_bits
-		&& !(r.flags & (StaVelocityProtection::StateLimit | StaVelocityProtection::CorrectionLimit
+		&& !(r.flags & (StaVelocityProtection::CorrectionLimit
 			| StaVelocityProtection::OutwardFreeze | StaVelocityProtection::Latched))
 		&& ((r.committed_axes & 4) || (r.flags & StaVelocityProtection::Priming))
 		&& PX4_ISFINITE(_correction(2));

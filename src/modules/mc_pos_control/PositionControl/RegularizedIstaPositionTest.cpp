@@ -5,12 +5,17 @@
 #include <algorithm>
 #include <cmath>
 #include <cstring>
+#include "../../../../research/sta-velocity-control/regularized_ista/ri04_hte_fix/recorded_hte_fixture.hpp"
 
 // Defined only in an offline test translation unit. No production caller.
 class RegularizedIstaVelocityTestAccess
 {
 public:
 	static void admit(PositionControl &p) { p._regularized_ista_admission = true; }
+	static void staleHteCache(PositionControl &p, bool generation)
+	{
+		if (generation) { ++p._rista_cache_generation; } else { ++p._rista_cache_sample; }
+	}
 };
 
 namespace
@@ -101,6 +106,30 @@ double inverse(double s, double h, double l1, double l2, double eps)
 
 	const double p = lo + (hi - lo) * .5;
 	return l1 * psi(p, eps) + h * l2 * rho(p, eps);
+}
+
+// Reach the real production bound by normal updates, never by editing nu or
+// relaxing gains/limits. Stop on the FIRST clipped commit, not a steady bound.
+void reachStateLimit(PositionControl &p, Guard::Frame &f, vehicle_local_position_setpoint_s &sp, float error_sign)
+{
+	sp.vz = 0.f;
+	const Vector3f velocity(.01f, -.01f, error_sign * .1f);
+	ASSERT_TRUE(step(p, f, sp, .01f, velocity));
+	f.sample += 8000; f.flying = true; f.landed = f.contact = false;
+	ASSERT_TRUE(step(p, f, sp, .008f, velocity));
+	for (unsigned k = 0; k < 800; ++k) {
+		const unsigned us = k % 2 ? 12000 : 8000; f.sample += us;
+		ASSERT_TRUE(step(p, f, sp, static_cast<float>(us) * 1e-6f, velocity));
+		if (p.diagnostic().sta_flags & Guard::StateLimit) {
+			ASSERT_EQ(p.diagnostic().sta_flags, Guard::StateLimit);
+			ASSERT_EQ(p.diagnostic().constraint_bits, 0);
+			ASSERT_EQ(p.regularizedIstaDiagnostic().commit_axes, 4);
+			ASSERT_EQ(p.regularizedIstaDiagnostic().strict_axes, 0);
+			ASSERT_FLOAT_EQ(p.diagnostic().nu_applied[2], -error_sign * 4.f);
+			return;
+		}
+	}
+	FAIL() << "Natural integration did not reach the frozen state limit";
 }
 }
 
@@ -489,4 +518,194 @@ TEST(RegularizedIstaPosition, RI04ProductionZHteRejectsInvalidOrUnclosedCacheWit
 		EXPECT_FLOAT_EQ(p.diagnostic().hover_thrust, hover); EXPECT_FLOAT_EQ(p.diagnostic().nu_applied[2], nu);
 		sameVec(p.velocityIntegral(), integral); EXPECT_EQ(p.regularizedIstaDiagnostic().commit_axes, 0);
 	}
+}
+
+TEST(RegularizedIstaPosition, RI04HteStateLimitUsesAppliedOutputAndBoundedStateWithoutReevaluating)
+{
+	for (const float direction : {1.f, -1.f}) {
+		PositionControl p; setup(p, 4, false); auto f = frame(); auto sp = target();
+		reachStateLimit(p, f, sp, direction);
+		const auto old = p.regularizedIstaDiagnostic();
+		const auto diag = p.diagnostic();
+		const auto correction = p.velocityCorrection(), integral = p.velocityIntegral();
+		const uint32_t sequence = p.velocityDecimation().sequence;
+		EXPECT_TRUE(old.cache_valid); // Old code continues below to reproduce the actual HTE fault.
+		EXPECT_NE(old.nu_candidate[2], old.nu_applied[2]);
+		EXPECT_FLOAT_EQ(old.a_applied[2], old.a_ideal[2]);
+		EXPECT_LT(std::fabs(diag.nu_before[2]), 4.f);
+		// Re-evaluating from clipped nu would lose this first-clipping history.
+		const double wrong_recomputed = static_cast<double>(old.nu_applied[2]) - inverse(diag.s[2], old.h, 2., 1., .02);
+		EXPECT_GT(std::fabs(wrong_recomputed - static_cast<double>(correction(2))), .001);
+		vehicle_local_position_setpoint_s published{}; p.getLocalPositionSetpoint(published);
+		// Freeze the actual post-limitTilt geometry. Reconstructing it from
+		// acceleration omits limitTilt's float acos/sin rounding at small tilt.
+		const Vector3f body = -Vector3f(published.thrust).normalized();
+		ASSERT_LT(body(2), 1.f); // Nonzero XY demand/tilt and FF.
+		const float hover_new = direction > 0.f ? .7190654277801514f : .4f;
+		const float delta = (diag.hover_thrust / hover_new - 1.f)
+			* (correction(2) + sp.acceleration[2] - CONSTANTS_ONE_G);
+		p.updateHoverThrust(hover_new);
+		EXPECT_EQ(p.velocityDecimation().sequence, sequence);
+		sameVec(p.velocityIntegral(), integral);
+		EXPECT_FLOAT_EQ(p.regularizedIstaDiagnostic().p[2], old.p[2]);
+		EXPECT_FLOAT_EQ(p.regularizedIstaDiagnostic().a_ideal[2], old.a_ideal[2]);
+		EXPECT_FLOAT_EQ(p.regularizedIstaDiagnostic().nu_candidate[2], old.nu_candidate[2]);
+		EXPECT_EQ(p.regularizedIstaDiagnostic().strict_axes, 0);
+		EXPECT_FLOAT_EQ(p.velocityCorrection()(2), correction(2) + delta);
+		EXPECT_FLOAT_EQ(p.velocityCorrection()(0), correction(0));
+		EXPECT_FLOAT_EQ(p.velocityCorrection()(1), correction(1));
+		const Vector3f frozen_map = body * ((p.velocityCorrection()(2) + sp.acceleration[2] - CONSTANTS_ONE_G)
+			* hover_new / (CONSTANTS_ONE_G * body(2)));
+		for (int i = 0; i < 3; ++i) { EXPECT_NEAR(frozen_map(i), published.thrust[i], 2e-7f); }
+		vehicle_local_position_setpoint_s unchanged{}; p.getLocalPositionSetpoint(unchanged);
+		for (int i = 0; i < 3; ++i) { EXPECT_FLOAT_EQ(unchanged.thrust[i], published.thrust[i]); }
+		// Different next s/h/FF: verify the new update, not a false unchanged-output guarantee.
+		f.sample += 12000; sp.acceleration[2] = -.04f;
+		ASSERT_TRUE(step(p, f, sp, .012f, Vector3f(.01f, -.01f, direction * .02f)));
+		EXPECT_FLOAT_EQ(p.diagnostic().nu_before[2], old.nu_applied[2] + delta);
+		EXPECT_FLOAT_EQ(p.diagnostic().hover_thrust, hover_new);
+		EXPECT_FLOAT_EQ(p.diagnostic().z_hte_shift, delta);
+		EXPECT_EQ(p.velocityDecimation().sequence, sequence + 1);
+		const double next = static_cast<double>(old.nu_applied[2] + delta)
+			- inverse(p.diagnostic().s[2], p.regularizedIstaDiagnostic().h, 2., 1., .02);
+		EXPECT_NEAR(p.regularizedIstaDiagnostic().a_ideal[2], next, 8e-7);
+		EXPECT_FLOAT_EQ(p.diagnostic().a_req[2], p.velocityCorrection()(2) + sp.acceleration[2]);
+	}
+}
+
+TEST(RegularizedIstaPosition, RI04HteStateLimitRepeatedRebasesComposeWithoutIntegration)
+{
+	PositionControl p; setup(p, 4, false); auto f = frame(); auto sp = target();
+	reachStateLimit(p, f, sp, 1.f);
+	const auto initial = p.velocityCorrection(); const float nu = p.diagnostic().nu_applied[2];
+	const auto old = p.regularizedIstaDiagnostic(); const auto integral = p.velocityIntegral();
+	const uint32_t sequence = p.velocityDecimation().sequence;
+	float hover = .5f, total = 0.f;
+	for (const float next : {.6f, .7f, .65f}) {
+		const float delta = (hover / next - 1.f) * (p.velocityCorrection()(2) + sp.acceleration[2] - CONSTANTS_ONE_G);
+		p.updateHoverThrust(next); total += delta;
+		EXPECT_NEAR((p.velocityCorrection()(2) + sp.acceleration[2] - CONSTANTS_ONE_G) * next,
+			(initial(2) + sp.acceleration[2] - CONSTANTS_ONE_G) * .5f, 2e-6f);
+		EXPECT_EQ(p.velocityDecimation().sequence, sequence);
+		EXPECT_FLOAT_EQ(p.regularizedIstaDiagnostic().nu_candidate[2], old.nu_candidate[2]);
+		sameVec(p.velocityIntegral(), integral); hover = next;
+	}
+	f.sample += 8000; ASSERT_TRUE(step(p, f, sp));
+	EXPECT_NEAR(p.diagnostic().nu_before[2], nu + total, 1e-6f);
+	EXPECT_FLOAT_EQ(p.diagnostic().z_hte_shift, total);
+	EXPECT_FLOAT_EQ(p.diagnostic().hover_thrust, hover);
+}
+
+TEST(RegularizedIstaPosition, RI04HteStateLimitRejectsOutwardStateAndCorrectionOverflowAtomically)
+{
+	for (const int kind : {0, 1, 2, 3, 4}) {
+		PositionControl p; setup(p, 4, false); auto f = frame(); auto sp = target();
+		reachStateLimit(p, f, sp, kind == 1 ? -1.f : 1.f);
+		ASSERT_EQ(p.diagnostic().sta_flags, Guard::StateLimit);
+		const auto old = p.regularizedIstaDiagnostic(); const auto correction = p.velocityCorrection();
+		const auto integral = p.velocityIntegral(); const uint32_t sequence = p.velocityDecimation().sequence;
+		// 0/1: outward nu, 2: both nu/correction overflow, 3/4: invalid hover.
+		const float next = kind == 0 ? .49f : kind == 1 ? .51f : kind == 2 ? .1f : kind == 3 ? NAN : .91f;
+		p.updateHoverThrust(next);
+		sameVec(p.velocityCorrection(), correction); sameVec(p.velocityIntegral(), integral);
+		EXPECT_EQ(p.velocityDecimation().sequence, sequence);
+		f.sample += 8000; EXPECT_FALSE(step(p, f, sp));
+		EXPECT_FALSE(p.velocityOutputPublishable()); // Publication eligibility is refreshed by update().
+		EXPECT_FLOAT_EQ(p.diagnostic().hover_thrust, .5f);
+		EXPECT_FLOAT_EQ(p.diagnostic().nu_applied[2], old.nu_applied[2]);
+		EXPECT_EQ(p.regularizedIstaDiagnostic().commit_axes, 0);
+		EXPECT_NE(p.diagnostic().sta_fault & Guard::Numerical, 0);
+	}
+}
+
+TEST(RegularizedIstaPosition, RI04HteStateLimitCannotReuseStaleOrResetCache)
+{
+	for (const int kind : {0, 1, 2}) {
+		PositionControl p; setup(p, 4, false); auto f = frame(); auto sp = target();
+		reachStateLimit(p, f, sp, 1.f);
+		if (kind < 2) { RegularizedIstaVelocityTestAccess::staleHteCache(p, kind == 1); }
+		else { p.resetIntegral(); }
+		const auto correction = p.velocityCorrection();
+		p.updateHoverThrust(.7190654277801514f);
+		sameVec(p.velocityCorrection(), correction);
+		f.sample += 12000; EXPECT_FALSE(step(p, f, sp));
+		EXPECT_FALSE(p.velocityOutputPublishable());
+		EXPECT_FLOAT_EQ(p.diagnostic().hover_thrust, .5f);
+		EXPECT_FALSE(p.regularizedIstaDiagnostic().cache_valid);
+	}
+}
+
+TEST(RegularizedIstaPosition, RI04HteStateLimitPlusOutputOrDownstreamProtectionStillRefuses)
+{
+	for (const int kind : {0, 1, 2}) {
+		PositionControl p; setup(p, 4, false); auto f = frame(); auto sp = target();
+		reachStateLimit(p, f, sp, 1.f);
+		if (kind == 2) {
+			// Return just inside the bound so the next clipped increment is outward.
+			f.sample += 8000; ASSERT_TRUE(step(p, f, sp, .008f, Vector3f(.01f, -.01f, -.01f)));
+			ASSERT_GT(p.diagnostic().nu_applied[2], -4.f);
+		}
+		if (kind > 0) { sp.acceleration[2] = -20.f; }
+		f.sample += 12000;
+		ASSERT_TRUE(step(p, f, sp, .012f, Vector3f(.01f, -.01f, kind == 0 ? 2.f : .1f)));
+		EXPECT_NE(p.diagnostic().sta_flags & Guard::StateLimit, 0);
+		if (kind == 0) { EXPECT_NE(p.diagnostic().sta_flags & Guard::CorrectionLimit, 0); }
+		if (kind > 0) { EXPECT_NE(p.diagnostic().constraint_bits, 0); }
+		if (kind == 2) { EXPECT_NE(p.diagnostic().sta_flags & Guard::OutwardFreeze, 0); }
+		EXPECT_FALSE(p.regularizedIstaDiagnostic().cache_valid);
+		const auto correction = p.velocityCorrection(); const float nu = p.diagnostic().nu_applied[2];
+		p.updateHoverThrust(.7190654277801514f);
+		sameVec(p.velocityCorrection(), correction);
+		f.sample += 8000; EXPECT_FALSE(step(p, f, target()));
+		EXPECT_FALSE(p.velocityOutputPublishable());
+		EXPECT_FLOAT_EQ(p.diagnostic().hover_thrust, .5f); EXPECT_FLOAT_EQ(p.diagnostic().nu_applied[2], nu);
+	}
+}
+
+TEST(RegularizedIstaPosition, RI04HteRecordedLastBoundaryNoLongerLatchesOnFirstValidEstimate)
+{
+	namespace recorded = ri04_hte_fixture;
+	PositionControl p; setup(p, 4, false); auto f = frame(); auto sp = target();
+	reachStateLimit(p, f, sp, 1.f);
+	sp.acceleration[2] = recorded::LastFf;
+	f.sample += 8000;
+	ASSERT_TRUE(step(p, f, sp, recorded::LastStep, Vector3f(.01f, -.01f, recorded::LastError)));
+	ASSERT_FLOAT_EQ(p.diagnostic().nu_applied[2], recorded::LastNu);
+	ASSERT_FLOAT_EQ(p.regularizedIstaDiagnostic().h, recorded::LastStep);
+	ASSERT_FLOAT_EQ(p.regularizedIstaDiagnostic().nu_candidate[2], recorded::LastNuCandidate);
+	ASSERT_FLOAT_EQ(p.velocityCorrection()(2), recorded::LastCorrection);
+	ASSERT_EQ(p.diagnostic().sta_flags, Guard::StateLimit);
+	const double desired_correction = static_cast<double>(CONSTANTS_ONE_G) - static_cast<double>(recorded::LastFf)
+		+ (static_cast<double>(recorded::LastCorrection) + static_cast<double>(recorded::LastFf) - static_cast<double>(CONSTANTS_ONE_G))
+		* static_cast<double>(recorded::OldHover) / static_cast<double>(recorded::NewHover);
+	const double expected_nu = static_cast<double>(recorded::LastNu) + desired_correction - static_cast<double>(recorded::LastCorrection);
+	p.updateHoverThrust(recorded::NewHover);
+	EXPECT_TRUE(p.velocityOutputPublishable());
+	EXPECT_NEAR(p.velocityCorrection()(2), desired_correction, 8e-7);
+	f.sample += 12000;
+	ASSERT_TRUE(step(p, f, sp, .012f, Vector3f(.01f, -.01f, recorded::LastError)));
+	EXPECT_NEAR(p.diagnostic().nu_before[2], expected_nu, 8e-7);
+	EXPECT_FLOAT_EQ(p.diagnostic().hover_thrust, recorded::NewHover);
+	EXPECT_FALSE(p.diagnostic().fault); EXPECT_EQ(p.regularizedIstaDiagnostic().commit_axes, 4);
+	// This reconstructs the last valid boundary, not a new accepted flight or
+	// the complete recorded plant trajectory after this counterfactual change.
+}
+
+TEST(RegularizedIstaPosition, RI04HteCorrectionOverflowRefusesEvenWhenShiftedNuWouldBeFeasible)
+{
+	PositionControl p; setup(p, 4, false); auto f = frame(); auto sp = target(); engage(p, f, sp);
+	sp.vz = 0.f; f.sample += 8000;
+	ASSERT_TRUE(step(p, f, sp, .008f, Vector3f(.01f, -.01f, 8.f)));
+	ASSERT_TRUE(p.regularizedIstaDiagnostic().cache_valid);
+	ASSERT_EQ(p.diagnostic().constraint_bits, 0);
+	const float correction = p.velocityCorrection()(2), nu = p.diagnostic().nu_applied[2];
+	const float delta = (.5f / .45f - 1.f) * (correction + sp.acceleration[2] - CONSTANTS_ONE_G);
+	ASSERT_LT(std::fabs(nu + delta), 4.f);
+	ASSERT_GT(std::fabs(correction + delta), 6.f);
+	p.updateHoverThrust(.45f);
+	EXPECT_FLOAT_EQ(p.velocityCorrection()(2), correction);
+	f.sample += 12000; EXPECT_FALSE(step(p, f, sp));
+	EXPECT_FALSE(p.velocityOutputPublishable());
+	EXPECT_FLOAT_EQ(p.diagnostic().nu_applied[2], nu);
+	EXPECT_FLOAT_EQ(p.diagnostic().hover_thrust, .5f);
 }
