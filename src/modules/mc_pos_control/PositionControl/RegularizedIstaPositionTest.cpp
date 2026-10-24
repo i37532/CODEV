@@ -133,13 +133,13 @@ void reachStateLimit(PositionControl &p, Guard::Frame &f, vehicle_local_position
 }
 }
 
-TEST(RegularizedIstaPosition, RI04ProductionAdmitsOnlyXOrZAndUnknownMasksNeverAliasThem)
+TEST(RegularizedIstaPosition, RI05AProductionAdmitsOnlyXZXyAndUnknownMasksNeverAliasThem)
 {
 	for (const int axes : {-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 257}) {
 		PositionControl p; setup(p, 0, false);
 		p.configureVelocityEsta(config(axes > 0 && axes < 8 ? static_cast<uint8_t>(axes) : 7), false);
 		p.configureVelocityControl(4, axes, false);
-		const bool admitted = axes == 1 || axes == 4;
+		const bool admitted = axes == 1 || axes == 4 || axes == 3;
 		EXPECT_EQ(p.velocitySelection().reject() == 0, admitted);
 		EXPECT_EQ(p.velocitySelection().requestedMode(), 4);
 		EXPECT_EQ(p.velocitySelection().requestedAxes(), axes);
@@ -311,7 +311,7 @@ TEST(RegularizedIstaPosition, HteWithoutCacheOrWithProtectedOutputFailsWithoutHo
 TEST(RegularizedIstaPosition, RepeatedSampleFailsafeDoesNotIntegrateRemainingPidOrNuTwice)
 {
 	for (const uint8_t axes : {1, 3, 4, 7}) {
-		PositionControl p; setup(p, axes, axes != 1 && axes != 4); auto f = frame(); engage(p, f);
+		PositionControl p; setup(p, axes, axes == 7); auto f = frame(); engage(p, f);
 		const Vector3f integral = p.velocityIntegral();
 		const auto nu = p.regularizedIstaDiagnostic().nu_applied;
 		const uint32_t sequence = p.velocityDecimation().sequence;
@@ -351,7 +351,7 @@ TEST(RegularizedIstaPosition, XyzNormalAlgorithmDoesNotCalculateUnusedPid)
 TEST(RegularizedIstaPosition, HorizontalVectorAndVerticalPriorityLimitsFreezeThenRecover)
 {
 	for (const uint8_t axes : {3, 7}) {
-		PositionControl p; setup(p, axes); auto f = frame(); engage(p, f);
+		PositionControl p; setup(p, axes, axes == 7); auto f = frame(); engage(p, f);
 		p.setTiltLimit(.001f);
 		auto sp = target(); sp.vx = .1f; sp.vy = -.1f;
 		f.sample += 8000; ASSERT_TRUE(step(p, f, sp));
@@ -708,4 +708,73 @@ TEST(RegularizedIstaPosition, RI04HteCorrectionOverflowRefusesEvenWhenShiftedNuW
 	EXPECT_FALSE(p.velocityOutputPublishable());
 	EXPECT_FLOAT_EQ(p.diagnostic().nu_applied[2], nu);
 	EXPECT_FLOAT_EQ(p.diagnostic().hover_thrust, .5f);
+}
+
+TEST(RegularizedIstaPosition, RI05AProductionXyPreservesZPidAndHteWithoutEvaluatingIdleHorizontalPid)
+{
+	PositionControl p; setup(p, 3, false); auto f = frame(); const auto sp = target(); engage(p, f, sp);
+	ASSERT_EQ(p.velocitySelection().effectiveAxes(), 3);
+	p.setVelocityGains(Vector3f(NAN, NAN, 4.f), Vector3f(NAN, NAN, 2.f), Vector3f(NAN, NAN, 0.f));
+	for (unsigned k = 0; k < 256; ++k) {
+		if (k % 32 == 0) {
+			const auto integral = p.velocityIntegral(); const auto nu = p.regularizedIstaDiagnostic().nu_applied;
+			const uint32_t sequence = p.velocityDecimation().sequence;
+			const float old_hover = p.diagnostic().hover_thrust, new_hover = (k / 32) % 2 ? .5f : .505f;
+			EXPECT_FALSE(p.regularizedIstaDiagnostic().cache_valid); // XY has no implicit Z HTE cache.
+			p.updateHoverThrust(new_hover);
+			EXPECT_FLOAT_EQ(p.velocityIntegral()(2), integral(2) + (new_hover - old_hover) * (CONSTANTS_ONE_G / new_hover));
+			EXPECT_EQ(p.velocityDecimation().sequence, sequence);
+			for (int i = 0; i < 2; ++i) { EXPECT_FLOAT_EQ(p.regularizedIstaDiagnostic().nu_applied[i], nu[i]); }
+		}
+		const auto integral = p.velocityIntegral(); const uint32_t us = k % 2 ? 12000 : 8000;
+		f.sample += us; ASSERT_TRUE(step(p, f, sp, static_cast<float>(us) * 1e-6f));
+		EXPECT_EQ(p.diagnostic().pid_axes, 4); EXPECT_EQ(p.regularizedIstaDiagnostic().commit_axes, 3);
+		EXPECT_FLOAT_EQ(p.velocityIntegral()(0), 0.f); EXPECT_FLOAT_EQ(p.velocityIntegral()(1), 0.f);
+		const float expected_z = (sp.vz - .01f) * 4.f + integral(2) - .002f * 0.f;
+		EXPECT_FLOAT_EQ(p.velocityCorrection()(2), expected_z);
+		vehicle_local_position_setpoint_s out{}; p.getLocalPositionSetpoint(out);
+		EXPECT_FLOAT_EQ(out.acceleration[2], expected_z + sp.acceleration[2]);
+		for (int i = 0; i < 2; ++i) {
+			EXPECT_FLOAT_EQ(out.acceleration[i], p.regularizedIstaDiagnostic().a_applied[i] + sp.acceleration[i]);
+		}
+		EXPECT_TRUE(std::isnan(p.regularizedIstaDiagnostic().nu_applied[2]));
+	}
+}
+
+TEST(RegularizedIstaPosition, RI05AProductionXyIndependentStatesAndGainsDoNotCrossCoupleBeforeLimits)
+{
+	PositionControl first, changed; setup(first, 3, false); setup(changed, 3, false);
+	auto c = config(3); c.gains[1] = {.7f, .2f}; c.epsilon[1] = .015f;
+	changed.configureVelocityEsta(c, false); changed.configureVelocityControl(4, 3, false);
+	auto f = frame(); auto other_f = f; engage(first, f); engage(changed, other_f);
+	unsigned differing_y = 0;
+	for (unsigned k = 0; k < 128; ++k) {
+		auto sp = target(), other = sp;
+		other.vy = (k / 16) % 2 ? -.02f : .02f;
+		const uint32_t us = k % 2 ? 12000 : 8000; f.sample += us;
+		ASSERT_TRUE(step(first, f, sp)); ASSERT_TRUE(step(changed, f, other));
+		ASSERT_EQ(first.diagnostic().constraint_bits, 0); ASSERT_EQ(changed.diagnostic().constraint_bits, 0);
+		EXPECT_FLOAT_EQ(first.regularizedIstaDiagnostic().nu_applied[0], changed.regularizedIstaDiagnostic().nu_applied[0]);
+		EXPECT_FLOAT_EQ(first.velocityCorrection()(0), changed.velocityCorrection()(0));
+		EXPECT_FLOAT_EQ(first.velocityCorrection()(2), changed.velocityCorrection()(2));
+		if (std::fabs(first.regularizedIstaDiagnostic().nu_applied[1] - changed.regularizedIstaDiagnostic().nu_applied[1]) > 1e-8f) { ++differing_y; }
+	}
+	EXPECT_GT(differing_y, 100u);
+}
+
+TEST(RegularizedIstaPosition, RI05AProductionXyFinalFeedbackFailureNeverCommitsTheEarlierAxis)
+{
+	for (int axis : {1, 2}) {
+		PositionControl p; setup(p, 3, false); auto f = frame(); engage(p, f);
+		const auto before = p.regularizedIstaDiagnostic().nu_applied;
+		const auto integral = p.velocityIntegral(); const uint32_t sequence = p.velocityDecimation().sequence;
+		f.sample += 8000; p.setVelocityFrame(f);
+		Vector3f derivative(.001f, -.001f, .002f); derivative(axis) = INFINITY;
+		p.setState({Vector3f(), Vector3f(.01f, -.01f, .01f), derivative, .01f}); p.setInputSetpoint(target());
+		EXPECT_FALSE(p.update(.008f)); EXPECT_FALSE(p.velocityOutputPublishable());
+		EXPECT_EQ(p.velocityDecimation().sequence, sequence); EXPECT_EQ(p.regularizedIstaDiagnostic().commit_axes, 0);
+		for (int i = 0; i < 2; ++i) { EXPECT_FLOAT_EQ(p.regularizedIstaDiagnostic().nu_applied[i], before[i]); }
+		sameVec(p.velocityIntegral(), integral);
+		EXPECT_FALSE(step(p, f, target())); EXPECT_EQ(p.regularizedIstaDiagnostic().commit_axes, 0);
+	}
 }
