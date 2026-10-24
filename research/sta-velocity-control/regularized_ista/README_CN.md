@@ -1,5 +1,17 @@
 # R-ISTA 速度环专项
 
+## 当前状态（2026-10-24）
+
+RI03 X 与修复后的 **RI04 Z 开发门已通过，仅 Iris SITL**。RI04 revision01 新9轮全部接受，9独立回放、6对78项风险检查通过；旧3轮（含1失败）原样保留，总历史12次，无补飞或调参。MODE4仍仅允许AXES1/4，默认PID；未push、未执行RI05或旧R04/R05、不实机。
+
+- [RI04 revision01 验收报告](../reports/RI04_REVISION01.md)
+- [新九轮协议与复现入口](ri04_revision01/README_CN.md)
+- [旧失败报告（保留原判）](../reports/RI04.md)
+- [HTE离线修复](../reports/RI04_HTE_FIX.md)
+- [RI03 X 验收](../reports/RI03.md)
+
+以下RI02及创建时“关闭准入/0飞行”等为历史时点说明，不覆盖本条当前结论。
+
 **RI02 保护/模块/日志/工具离线验收通过，MODE4生产准入仍关闭**。609项C++、354项Python（348工具＋6独立参考）、SITL构建和36份历史完整日志回放通过。本轮不飞行、不push、不自动RI03。
 
 - [RI02 报告（保护、交接与日志限制）](../reports/RI02.md)
