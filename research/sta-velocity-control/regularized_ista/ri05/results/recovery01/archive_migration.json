@@ -1,0 +1,103 @@
+{
+  "stage": "RI05-D",
+  "kind": "authorized_stdout_archive_reclassification",
+  "status": "archive_and_history_check_passed_not_flight_qualification",
+  "entry_head": "f4ade4bde0d6c1b409d6ca2044e44db6aeed64a3",
+  "authorization": "User YUNXU: byte-preserving stdout archive repair, wiring regression and original nine unattempted D jobs only; no tuning/new budget/push.",
+  "historical_prestart_failure": {
+    "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri05/results/D_prestart_failure.json",
+    "bytes": 6205,
+    "sha256": "ca28271e8dc2a058d961edc72bea6a5886fdb400afe1f563da3d65edfb4d3eb5"
+  },
+  "migration": {
+    "old_path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI05/D/dry_run01.json",
+    "new_file": {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI05/D/dry_run01.log",
+      "bytes": 1805,
+      "sha256": "874270526d0fd015624f187fbb5a2e75af6abd6d0c19e84f55c25aeb53c0a956"
+    },
+    "old_path_absent": true,
+    "bytes_unchanged": true,
+    "overwrite": false,
+    "operation": "SHA/non-symlink/absent destination checked; mv -nT -- exact source exact destination",
+    "exit_code": 0
+  },
+  "history_scan": {
+    "evidence": {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI05_RESULTS/D_RECOVERY01/history_scan_after_move.log",
+      "bytes": 6761,
+      "sha256": "bf858a7f94af4cf43eb24565285c8733cd9492ca41e945e058a84740522dd312"
+    },
+    "exit_code": 0,
+    "files_parsed": 77930,
+    "accepted": true,
+    "matches": 0,
+    "invalid_json": 0,
+    "original_registration_rows": 29
+  },
+  "preserved_protocol": {
+    "execution.json": {
+      "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri05/execution.json",
+      "bytes": 88536,
+      "sha256": "3cdff9a72d4cdfa01140e1ad6fdb85ad117ba5965a3e9044f95c4ef403f959d8"
+    },
+    "manifest.json": {
+      "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri05/manifest.json",
+      "bytes": 67233,
+      "sha256": "ee3ea31494169b5933bd7502f9abaf0411c1096ecb06638139b78a0a365cfbe1"
+    },
+    "outcomes_unattempted.json": {
+      "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri05/outcomes_unattempted.json",
+      "bytes": 2973,
+      "sha256": "9cfef60a5c51182ea06945e62a59d087b711a9581875717610f9c81c811366b7"
+    },
+    "seed_audit_initial.json": {
+      "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri05/seed_audit_initial.json",
+      "bytes": 932,
+      "sha256": "81dc1e36442772684ec33de1daf847a753eb7d42f31c7cba8dff67548c740b98"
+    },
+    "seed_reservations.json": {
+      "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri05/seed_reservations.json",
+      "bytes": 714,
+      "sha256": "44a3d6fbf61d6f9d9e12abb6cf7c20b709532c7f302c54a9b82a5b1a9074dd40"
+    },
+    "gates/D/frozen.json": {
+      "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri05/gates/D/frozen.json",
+      "bytes": 175916,
+      "sha256": "9a318cd8a58987ef101cd11eb5be1b77c880df9c8bbf02f40354888f887ce10e"
+    },
+    "AUTHORIZATION_CN.md": {
+      "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri05/AUTHORIZATION_CN.md",
+      "bytes": 1354,
+      "sha256": "eeb236e5f89a700515c9f7049aaab1b376b32d894f6eca5da6f241926f167d69"
+    },
+    "PROTOCOL_CN.md": {
+      "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri05/PROTOCOL_CN.md",
+      "bytes": 7238,
+      "sha256": "7addd02c064900cbbf47bfb0b73351b89ab62c78c6715428c54d596eb0424319"
+    }
+  },
+  "budget": {
+    "total_limit": 18,
+    "A_attempted": 9,
+    "A_accepted": 9,
+    "D_attempted": 0,
+    "D_remaining": 9,
+    "new_attempts_added": 0
+  },
+  "unattempted_job_ids": [
+    "run010",
+    "run011",
+    "run012",
+    "run013",
+    "run014",
+    "run015",
+    "run016",
+    "run017",
+    "run018"
+  ],
+  "new_flights": 0,
+  "parameter_write": false,
+  "old_failure_reclassified_as_pass": false,
+  "strict_scanner_changed": false
+}

@@ -1,0 +1,107 @@
+{
+  "stage": "RI05-D-recovery01",
+  "scope": "Offline stdout archive wiring and result-export regression, not controller/flight qualification",
+  "success": true,
+  "new_flights": 0,
+  "entry_head": "f4ade4bde0d6c1b409d6ca2044e44db6aeed64a3",
+  "commands": [
+    {
+      "argv": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "research/sta-velocity-control/regularized_ista/ri05/results/recovery01",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "actual_tests": 56,
+      "groups": {
+        "archive_wiring": 23,
+        "offline_final_export": 33
+      },
+      "log": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI05_RESULTS/D_RECOVERY01/recovery_tests.log",
+        "bytes": 5208,
+        "sha256": "e0ed3482b3ca4ca3c00a5d8e4fca274330d7c51ff4d2c2fc4086ee390ce7c06d"
+      }
+    },
+    {
+      "argv": [
+        "python3",
+        "-B",
+        "research/sta-velocity-control/regularized_ista/ri05/freeze.py",
+        "--gate",
+        "D",
+        "--check"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "repo_assets": 1085,
+      "external_assets": 79,
+      "manifest_written": false
+    }
+  ],
+  "inputs": {
+    "archive_stdout.py": {
+      "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri05/results/recovery01/archive_stdout.py",
+      "bytes": 4580,
+      "sha256": "13a1bfbdc26fa49f83401ba6cb8a6f9d9b26282c86685e4456f151d2b7684c09"
+    },
+    "test_archive_stdout.py": {
+      "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri05/results/recovery01/test_archive_stdout.py",
+      "bytes": 15547,
+      "sha256": "bd19b02c41401df4eb017840a88d9da3f68733bf92c7062418bc31e8042a0312"
+    },
+    "finalize_ri05.py": {
+      "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri05/results/recovery01/finalize_ri05.py",
+      "bytes": 16099,
+      "sha256": "9a55bb72c470ca95e7ba864e879c9f767c66f937988e0971a91762536bf23205"
+    },
+    "test_finalize_ri05.py": {
+      "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri05/results/recovery01/test_finalize_ri05.py",
+      "bytes": 14383,
+      "sha256": "aed9a3789d3913e882db6cd0b880e2e330e8d1f876854b6c48762b310fa75260"
+    },
+    "RECOVERY_CN.md": {
+      "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri05/results/recovery01/RECOVERY_CN.md",
+      "bytes": 4828,
+      "sha256": "716925e4b14910b2cef6ef5403537bccf74ff3172c009564f6197fd0e1856992"
+    },
+    "archive_migration.json": {
+      "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri05/results/recovery01/archive_migration.json",
+      "bytes": 4207,
+      "sha256": "5c80559b73aa9513af53523a68a2529aee903c9fae5103aaa59783b1cc367029"
+    }
+  },
+  "retained_preparation_failure": {
+    "description": "First archive-only invocation omitted the existing M00 pymavlink PYTHONPATH; import failed before tests. No dependency/source/scanner change; corrected the documented environment.",
+    "exit_code": 1,
+    "actual_tests": 0,
+    "log": {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI05/D/recovery01_tests/attempt01/test_archive_stdout.log",
+      "bytes": 1572,
+      "sha256": "5b5e1f416616d2ee2c5fa3f20e2eae9b37d8693319c3048ebba76cb65d23081a"
+    }
+  },
+  "archive_only_repeat": {
+    "actual_tests": 23,
+    "exit_code": 0,
+    "log": {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI05/D/recovery01_tests/attempt02/test_archive_stdout.log",
+      "bytes": 2225,
+      "sha256": "40b6fcb4ef3e347bdb93bcbf4a7ba4018c085f479bbabb3777fd15c596598de5"
+    },
+    "counting": "Subset of the 56, not additional unique tests"
+  },
+  "qualification_not_yet_run": "After explicit commit, run original verify.py D qualification02 at the clean new SHA; preserve original 751 C++/982 Python inventory and separately disclose these 56.",
+  "environment": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "/home/yr/Desktop/Codev-autopilot/.px4-python:/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/scripts:/home/yr/Desktop/codev doc/experiments/M00-20260912/python"
+  }
+}
