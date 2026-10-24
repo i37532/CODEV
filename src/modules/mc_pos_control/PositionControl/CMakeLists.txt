@@ -45,7 +45,7 @@ target_compile_features(RegularizedStaVelocityControl PUBLIC cxx_std_14)
 target_include_directories(RegularizedStaVelocityControl PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(StaVelocityControl PUBLIC RegularizedStaVelocityControl)
 
-# RI03: production MODE4 admission is limited to SITL NED X/DIV1.
+# RI04: production MODE4 admission is limited to SITL NED X or Z/DIV1.
 px4_add_library(RegularizedIstaVelocityControl RegularizedIstaVelocityControl.cpp RegularizedIstaVelocityControl.hpp)
 target_compile_features(RegularizedIstaVelocityControl PUBLIC cxx_std_14)
 target_include_directories(RegularizedIstaVelocityControl PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
