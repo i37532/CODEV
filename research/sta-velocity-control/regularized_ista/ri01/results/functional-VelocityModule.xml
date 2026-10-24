@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="33" failures="0" disabled="0" errors="0" timestamp="2026-10-24T09:31:53" time="0.212" name="AllTests">
+  <testsuite name="VelocityModule" tests="31" failures="0" disabled="0" errors="0" time="0.16">
+    <testcase name="AX01AllMasksActualRunAndTrace" status="run" time="0.002" classname="VelocityModule" />
+    <testcase name="AX01UnknownSignedRequestNeverBecomesX" status="run" time="0" classname="VelocityModule" />
+    <testcase name="AX01MixedFaultTerminationResetRetryAndContact" status="run" time="0.001" classname="VelocityModule" />
+    <testcase name="AX02VerticalTaskAllEightActualMasks" status="run" time="0.106" classname="VelocityModule" />
+    <testcase name="AX02VerticalTaskRealRunSingleFFAndGateClear" status="run" time="0.014" classname="VelocityModule" />
+    <testcase name="V06TrajectoryBeforePositionPAndSingleFeedforward" status="run" time="0.012" classname="VelocityModule" />
+    <testcase name="XYZRealRunHandoverHteAndContact" status="run" time="0.001" classname="VelocityModule" />
+    <testcase name="XYZResetRetriesCannotPartiallyCommitOrPublish" status="run" time="0" classname="VelocityModule" />
+    <testcase name="XYZStimulusCompleteRealRunAndAllOutputsClear" status="run" time="0.011" classname="VelocityModule" />
+    <testcase name="XYRealRunIndependentStatesAndArmedYChange" status="run" time="0" classname="VelocityModule" />
+    <testcase name="XYStimulusWiringSampleClockAndExitClear" status="run" time="0.012" classname="VelocityModule" />
+    <testcase name="XYResetSameFrameRetryCannotPublishOrPartiallyCommit" status="run" time="0" classname="VelocityModule" />
+    <testcase name="PidWithOnlyZCandidateConfiguredHasNoPhantomPending" status="run" time="0" classname="VelocityModule" />
+    <testcase name="ZSelectionRealModuleRampHandoverMixedVelocityAndContact" status="run" time="0" classname="VelocityModule" />
+    <testcase name="ZHoverEstimatorUpdateKeepsMappingContinuous" status="run" time="0" classname="VelocityModule" />
+    <testcase name="ZResetFailsClosedAndSameSampleFailsafeCannotCommit" status="run" time="0" classname="VelocityModule" />
+    <testcase name="ZMissingMeasurementNeverPublishesAutomaticPidTakeover" status="run" time="0" classname="VelocityModule" />
+    <testcase name="FiftyHzTargetHundredHzCallbacksRampWithoutNewTarget" status="run" time="0" classname="VelocityModule" />
+    <testcase name="LegalDescentCapLimitsLandingWithoutChangingStoredLandParameter" status="run" time="0" classname="VelocityModule" />
+    <testcase name="CommonLandingParametersKeepTargetAboveDetectorIntentBoundary" status="run" time="0" classname="VelocityModule" />
+    <testcase name="EstimatorResetsAdjustCacheOnceNotSuppressedCopy" status="run" time="0" classname="VelocityModule" />
+    <testcase name="GroundContactAndExitDoNotPoisonLatestTarget" status="run" time="0" classname="VelocityModule" />
+    <testcase name="FreshTargetAtEstimatorResetIsNotTranslatedAgain" status="run" time="0" classname="VelocityModule" />
+    <testcase name="HeadingOldCachePositiveNegativeWrapAndSingleApplication" status="run" time="0" classname="VelocityModule" />
+    <testcase name="HeadingFreshSameTimestampAndNewerTargetNotDoubleCompensated" status="run" time="0" classname="VelocityModule" />
+    <testcase name="GenuineInvalidTargetLogsFirstFailureAndExplicitAbortNotClock" status="run" time="0" classname="VelocityModule" />
+    <testcase name="FallbackImmediatelyUsesVelocityStopAndPreservesYaw" status="run" time="0" classname="VelocityModule" />
+    <testcase name="MissingMeasurementLoggedBeforeRecoveryWithoutFalseClockFault" status="run" time="0" classname="VelocityModule" />
+    <testcase name="FallbackInvalidVelocityOrDerivativeUsesExplicitAcceleration" status="run" time="0" classname="VelocityModule" />
+    <testcase name="InvalidRetryCannotPublishEvenInPid" status="run" time="0.001" classname="VelocityModule" />
+    <testcase name="EstaFailureNeverDoubleCommitsOrPublishesRetry" status="run" time="0" classname="VelocityModule" />
+  </testsuite>
+  <testsuite name="VelocityExcitationRepair" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="AbortDoesNotAdvanceClockAndStillLatchesRealFailure" status="run" time="0" classname="VelocityExcitationRepair" />
+    <testcase name="BackwardsGapGateAndDisarmRemainDistinct" status="run" time="0" classname="VelocityExcitationRepair" />
+  </testsuite>
+</testsuites>

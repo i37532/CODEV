@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="13" failures="0" disabled="0" errors="0" timestamp="2026-10-24T09:31:53" time="0.013" name="AllTests">
+  <testsuite name="StaAxesApplication" tests="13" failures="0" disabled="0" errors="0" time="0.013">
+    <testcase name="CalibratedGateRejectsPitchAndYawMisconfiguration" status="run" time="0" classname="StaAxesApplication" />
+    <testcase name="ProperIstaGateAllowsRollPitchAndUsesEstablishedLifecycle" status="run" time="0" classname="StaAxesApplication" />
+    <testcase name="ArmedMasksPreserveEffectiveAxesAndDisarmApplies" status="run" time="0" classname="StaAxesApplication" />
+    <testcase name="PitchSignsAtomicApplicationAndYawBitIdentity" status="run" time="0" classname="StaAxesApplication" />
+    <testcase name="IndependentStatesSaturationAndAtomicFailure" status="run" time="0" classname="StaAxesApplication" />
+    <testcase name="PitchGainStagingAndResetBothAxes" status="run" time="0" classname="StaAxesApplication" />
+    <testcase name="CombinedPulsePhasesHaveBothSignsAndZeroIntegral" status="run" time="0" classname="StaAxesApplication" />
+    <testcase name="ThreeAxesCalibratedGateAndNoPidFallbackOnFault" status="run" time="0" classname="StaAxesApplication" />
+    <testcase name="YawSaturationFreezesOnlyWorseningDirection" status="run" time="0" classname="StaAxesApplication" />
+    <testcase name="WorldYawTransformationAndThreeAxisScene" status="run" time="0.001" classname="StaAxesApplication" />
+    <testcase name="YawParameterStagedWhileArmedAndReloadResetsAllStates" status="run" time="0" classname="StaAxesApplication" />
+    <testcase name="ThreeAxisLaggedCoupledObjectWithUncertainGain" status="run" time="0.006" classname="StaAxesApplication" />
+    <testcase name="CombinedIndependentLaggedObjectWithGainUncertainty" status="run" time="0.006" classname="StaAxesApplication" />
+  </testsuite>
+</testsuites>

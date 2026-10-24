@@ -58,6 +58,15 @@ px4_add_unit_gtest(SRC ControlMathTest.cpp LINKLIBS PositionControl)
 px4_add_unit_gtest(SRC PositionControlTest.cpp LINKLIBS PositionControl)
 
 if(BUILD_TESTING)
+	# RI01: isolated implicit kernel. No production module dependency.
+	px4_add_library(RegularizedIstaVelocityControl
+		RegularizedIstaVelocityControl.cpp
+		RegularizedIstaVelocityControl.hpp
+	)
+	target_compile_features(RegularizedIstaVelocityControl PUBLIC cxx_std_14)
+	target_include_directories(RegularizedIstaVelocityControl PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+	px4_add_unit_gtest(SRC RegularizedIstaVelocityControlTest.cpp LINKLIBS RegularizedIstaVelocityControl)
+
 	px4_add_library(R01PositionReference
 		${PX4_SOURCE_DIR}/research/sta-velocity-control/regularized_sta/r02/reference/R01PositionControl.cpp
 		${PX4_SOURCE_DIR}/research/sta-velocity-control/regularized_sta/r02/reference/R01StaVelocityProtection.cpp

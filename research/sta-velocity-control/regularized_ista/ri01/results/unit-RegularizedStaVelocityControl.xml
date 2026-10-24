@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="27" failures="0" disabled="0" errors="0" timestamp="2026-10-24T09:31:52" time="0" name="AllTests">
+  <testsuite name="RegularizedStaVelocityControl" tests="27" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ParameterDomainIncludesBothClosedEpsilonEndpoints" status="run" time="0" classname="RegularizedStaVelocityControl" />
+    <testcase name="InvalidConfigurationPreservesStateAndCurrentCandidate" status="run" time="0" classname="RegularizedStaVelocityControl" />
+    <testcase name="LayerOutputUsesOldNuAndContainsNoFeedForward" status="run" time="0" classname="RegularizedStaVelocityControl" />
+    <testcase name="ZeroErrorRetainsNonzeroNuAndSkipsUnusedHugeStep" status="run" time="0" classname="RegularizedStaVelocityControl" />
+    <testcase name="PositiveNegativeSymmetryIncludesNonzeroState" status="run" time="0" classname="RegularizedStaVelocityControl" />
+    <testcase name="ExactBoundaryAndNextafterNeighborsMatchIndependentProduct" status="run" time="0" classname="RegularizedStaVelocityControl" />
+    <testcase name="ShapeIsContinuousOddAndMonotonic" status="run" time="0" classname="RegularizedStaVelocityControl" />
+    <testcase name="OuterLayerDoesNotEvaluateOverflowingErrorOverEpsilon" status="run" time="0" classname="RegularizedStaVelocityControl" />
+    <testcase name="InvalidInputsAndErrorSubtractionOverflowAreAtomic" status="run" time="0" classname="RegularizedStaVelocityControl" />
+    <testcase name="InvalidDtIsRejectedWithoutClamping" status="run" time="0" classname="RegularizedStaVelocityControl" />
+    <testcase name="CorrectionProductOverflowIsRejected" status="run" time="0" classname="RegularizedStaVelocityControl" />
+    <testcase name="OutputAndNextStateOverflowAreRejected" status="run" time="0" classname="RegularizedStaVelocityControl" />
+    <testcase name="NonzeroIntermediateStepOverflowIsExplicitlyRejected" status="run" time="0" classname="RegularizedStaVelocityControl" />
+    <testcase name="TrueSubnormalProductsRejectWithoutChangingState" status="run" time="0" classname="RegularizedStaVelocityControl" />
+    <testcase name="OrdinaryAdditionRoundingIsNotProductUnderflow" status="run" time="0" classname="RegularizedStaVelocityControl" />
+    <testcase name="AxisStateAndCandidateGenerationsAreIndependent" status="run" time="0" classname="RegularizedStaVelocityControl" />
+    <testcase name="ResetToSameValueAndGlobalResetInvalidateCandidates" status="run" time="0" classname="RegularizedStaVelocityControl" />
+    <testcase name="EpsilonOnlyGainOnlyAndEqualConfigurationInvalidate" status="run" time="0" classname="RegularizedStaVelocityControl" />
+    <testcase name="CandidateCanOnlyCommitOnceIncludingSameNu" status="run" time="0" classname="RegularizedStaVelocityControl" />
+    <testcase name="OwnerAxisRevisionAndAllPublicPayloadFieldsAreSealed" status="run" time="0" classname="RegularizedStaVelocityControl" />
+    <testcase name="ProtectedCommitKeepsIdealOutputAndSealedCandidate" status="run" time="0" classname="RegularizedStaVelocityControl" />
+    <testcase name="InvalidProtectedStateDoesNotConsumeCandidate" status="run" time="0" classname="RegularizedStaVelocityControl" />
+    <testcase name="UnconfiguredInvalidAxisAndResetValidation" status="run" time="0" classname="RegularizedStaVelocityControl" />
+    <testcase name="FloatOneStepGridMatchesOriginalDoubleDefinition" status="run" time="0" classname="RegularizedStaVelocityControl" />
+    <testcase name="EightTwelveMillisecondSequencesTrackIndependentDoubleState" status="run" time="0" classname="RegularizedStaVelocityControl" />
+    <testcase name="InnerLayerMatchesIndependentLinearStateTransition" status="run" time="0" classname="RegularizedStaVelocityControl" />
+    <testcase name="NewModeCannotDisplacePidOrLegacyEsta" status="run" time="0" classname="RegularizedStaVelocityControl" />
+  </testsuite>
+</testsuites>
