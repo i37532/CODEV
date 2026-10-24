@@ -1,0 +1,85 @@
+{
+  "success": true,
+  "commands": [
+    {
+      "name": "analysis_tests",
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/proper_ista_probe/test_analysis.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-PROPER-20261024/PROBE/final_checks02/analysis_tests.log",
+      "sha256": "3c843af74723286e49bee41972429a733daffc42a10a928d2ff8410927c8efcf"
+    },
+    {
+      "name": "production_diff",
+      "argv": [
+        "git",
+        "diff",
+        "8ff776664b63bef1c630db8c625f095a028cfb6b",
+        "--",
+        "src",
+        "msg",
+        "Tools",
+        "sitl",
+        "ROMFS",
+        "boards",
+        "platforms",
+        "CMakeLists.txt",
+        ".gitmodules"
+      ],
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-PROPER-20261024/PROBE/final_checks02/production_diff.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff_check",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-PROPER-20261024/PROBE/final_checks02/diff_check.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "submodules",
+      "argv": [
+        "git",
+        "submodule",
+        "status",
+        "--recursive"
+      ],
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-PROPER-20261024/PROBE/final_checks02/submodules.log",
+      "sha256": "20028a594d20cfd6abf4713c4767d687b7d2e82c2d0ab6f2f3530b1ee3396b55"
+    },
+    {
+      "name": "submodule_worktrees",
+      "argv": [
+        "git",
+        "submodule",
+        "foreach",
+        "--quiet",
+        "--recursive",
+        "git status --porcelain"
+      ],
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-PROPER-20261024/PROBE/final_checks02/submodule_worktrees.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "verified_archive_files": 173,
+  "local_document_links": 11,
+  "cpp_cases": 505,
+  "python_cases": 24,
+  "trajectories_attempted": 144,
+  "trajectories_complete": 132,
+  "numeric_stops": 12,
+  "infeasible_examples": 12,
+  "production_diff_empty": true,
+  "new_flights": 0
+}
