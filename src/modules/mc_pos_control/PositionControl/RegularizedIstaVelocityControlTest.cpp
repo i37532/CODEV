@@ -939,7 +939,7 @@ TEST(RegularizedIstaVelocityControl, FixedPeriodInnerLayerMatchesIndependentStat
 	}
 }
 
-TEST(RegularizedIstaVelocityControl, ModeFourCannotBecomeEffectiveOrDisplaceExistingAlgorithms)
+TEST(RegularizedIstaVelocityControl, SelectorWithoutCallerAdmissionCannotDisplaceExistingAlgorithms)
 {
 	VelocityControlSelector selector;
 
@@ -954,7 +954,7 @@ TEST(RegularizedIstaVelocityControl, ModeFourCannotBecomeEffectiveOrDisplaceExis
 				selector.configure(4, mask, armed, true, mask, true);
 				EXPECT_EQ(selector.requestedMode(), 4);
 				EXPECT_EQ(selector.requestedAxes(), mask);
-				// RI02 recognizes MODE4 but still has no production admission.
+				// The selector requires explicit admission from its caller even in RI03.
 				EXPECT_NE(selector.reject() & VelocityControlSelector::ModeUnimplemented, 0);
 				EXPECT_EQ(selector.effectiveMode(), mode);
 				EXPECT_EQ(selector.effectiveAxes(), previous_axes);

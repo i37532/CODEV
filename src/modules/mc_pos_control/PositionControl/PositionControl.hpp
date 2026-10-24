@@ -217,7 +217,7 @@ private:
 	// gated in configureVelocityControl, with no setter/parameter for this flag.
 	// The only writer is the explicitly named offline test friend.
 	bool _regularized_test_admission{false};
-	bool _regularized_ista_admission{false}; // RI02: no production writer or parameter.
+	bool _regularized_ista_admission{false}; // Offline later-mask override; no production writer or parameter.
 	bool _staEffective() const { return _velocity_selector.effectiveMode() == 1 || _velocity_selector.effectiveMode() == 3 || _velocity_selector.effectiveMode() == 4; }
 	RistaDiagnostic _rista_diagnostic{};
 	uint64_t _rista_processed_sample{0}, _rista_cache_sample{0};

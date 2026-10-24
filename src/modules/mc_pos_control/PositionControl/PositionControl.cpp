@@ -102,8 +102,11 @@ void PositionControl::configureVelocityControl(int32_t mode, int32_t axes, bool 
 	const bool regularized_gate_admitted = axes == 1 || axes == 4 || axes == 3 || axes == 7;
 	regularized_ready = (regularized_gate_admitted || _regularized_test_admission) && _esta_config_valid
 		&& _esta_requested.variant == 3 && _decimation.divisor == 1;
-	implicit_ready = _regularized_ista_admission && _esta_config_valid && _esta_requested.variant == 4
-		&& _decimation.divisor == 1;
+	// RI03 admits only local NED X in production. Later masks retain their
+	// offline test override; neither parameters nor saved state can enable it.
+	const bool implicit_gate_admitted = axes == 1;
+	implicit_ready = (implicit_gate_admitted || _regularized_ista_admission) && _esta_config_valid && _esta_requested.variant == 4
+		&& _decimation.divisor == 1 && _decimation.requested == 1;
 #endif
 	_velocity_selector.configure(mode, axes, armed, ready, _esta_requested.axes, regularized_ready, implicit_ready);
 	if (!armed && !_velocity_selector.reject() && (mode == 1 || mode == 3 || mode == 4) && _esta_config_changed) {

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: BSD-3-Clause
-// RI02: actual parameter server/BSON and configuration gate. Zero flight.
+// RI03: actual parameter server/BSON and X-only production configuration gate.
 #include <gtest/gtest.h>
 #include <parameters/param.h>
 #include "PositionControl.hpp"
@@ -102,16 +102,18 @@ TEST_F(RegularizedIstaVelocityParam, ExistingPidAndIndependentWidthDefaultsUncha
 	}
 }
 
-TEST_F(RegularizedIstaVelocityParam, AllModeFourMasksRejectedInProductionEvenValidConfiguration)
+TEST_F(RegularizedIstaVelocityParam, RI03ProductionAdmitsOnlyDisarmedXWithValidConfiguration)
 {
 	for (const bool armed : {false, true}) {
 		for (int axes = 0; axes <= 7; ++axes) {
 			PositionControl p; auto c = config(static_cast<uint8_t>(axes)); configure(p, c, armed);
-			EXPECT_EQ(p.velocitySelection().requestedMode(), 4); EXPECT_EQ(p.velocitySelection().effectiveMode(), 0);
-			EXPECT_EQ(p.velocitySelection().effectiveAxes(), 0);
-			EXPECT_TRUE(p.velocitySelection().reject() & VelocityControlSelector::ModeUnimplemented);
+			const bool admitted = axes == 1;
+			EXPECT_EQ(p.velocitySelection().requestedMode(), 4);
+			EXPECT_EQ(p.velocitySelection().effectiveMode(), admitted && !armed ? 4 : 0);
+			EXPECT_EQ(p.velocitySelection().effectiveAxes(), admitted && !armed ? 1 : 0);
+			EXPECT_EQ(bool(p.velocitySelection().reject() & VelocityControlSelector::ModeUnimplemented), !admitted);
 			EXPECT_FALSE(p.velocitySelection().reject() & VelocityControlSelector::ModeRange);
-			EXPECT_EQ(p.velocityEstaGeneration(), 0u);
+			EXPECT_EQ(p.velocityEstaGeneration() > 0, admitted && !armed);
 		}
 	}
 }
@@ -152,7 +154,7 @@ TEST_F(RegularizedIstaVelocityParam, OfflineMasksOneThreeFourSevenOnlyAndDivisor
 	}
 }
 
-TEST_F(RegularizedIstaVelocityParam, CompleteFifteenValuesBsonPersistButCannotEnableProduction)
+TEST_F(RegularizedIstaVelocityParam, RI03CompleteBsonConfigurationAdmitsOnlyXAfterReload)
 {
 	for (const uint8_t axes : {1, 3, 4, 7}) {
 		auto original = config(axes);
@@ -167,8 +169,9 @@ TEST_F(RegularizedIstaVelocityParam, CompleteFifteenValuesBsonPersistButCannotEn
 		ASSERT_EQ(lseek(fileno(file), 0, SEEK_SET), 0); ASSERT_EQ(param_import(fileno(file), true), 0); fclose(file);
 		const auto loaded = readConfig(); same(original, loaded);
 		PositionControl production; configure(production, loaded, false);
-		EXPECT_EQ(production.velocitySelection().effectiveMode(), 0);
-		EXPECT_TRUE(production.velocitySelection().reject() & VelocityControlSelector::ModeUnimplemented);
+		EXPECT_EQ(production.velocitySelection().effectiveMode(), axes == 1 ? 4 : 0);
+		EXPECT_EQ(production.velocitySelection().reject() == 0, axes == 1);
+		if (axes == 1) { same(production.effectiveVelocityEsta(), original); }
 		PositionControl offline; RegularizedIstaVelocityTestAccess::admit(offline); configure(offline, loaded, false);
 		ASSERT_EQ(offline.velocitySelection().effectiveMode(), 4); same(offline.effectiveVelocityEsta(), original);
 	}
@@ -267,4 +270,39 @@ TEST_F(RegularizedIstaVelocityParam, ProductionRejectedNewRequestCannotMutateExi
 		EXPECT_NE(p.velocitySelection().reject(), 0); same(p.effectiveVelocityEsta(), original);
 	}
 	configure(p, original, true); EXPECT_FALSE(p.velocitySelection().pending()); EXPECT_FALSE(p.velocityEstaPending());
+}
+
+TEST_F(RegularizedIstaVelocityParam, RI03ProductionXRejectsEveryOtherDivisorAndMismatchedConfiguration)
+{
+	for (int32_t div : {-1, 0, 2, 3, 4, 8, 257}) {
+		PositionControl p; p.configureVelocityDivisor(div, false); configure(p, config(1), false);
+		EXPECT_EQ(p.velocitySelection().effectiveMode(), 0);
+		EXPECT_NE(p.velocitySelection().reject(), 0); EXPECT_EQ(p.velocityEstaGeneration(), 0u);
+	}
+
+	for (const uint8_t axes : {2, 3, 4, 5, 6, 7}) {
+		PositionControl p; p.configureVelocityEsta(config(axes), false);
+		p.configureVelocityControl(4, 1, false);
+		EXPECT_EQ(p.velocitySelection().effectiveMode(), 0);
+		EXPECT_TRUE(p.velocitySelection().reject() & VelocityControlSelector::AxesUnavailable);
+	}
+
+	for (const uint8_t variant : {0, 1, 2, 3}) {
+		PositionControl p; p.configureVelocityEsta(config(1, variant), false);
+		p.configureVelocityControl(4, 1, false);
+		EXPECT_EQ(p.velocitySelection().effectiveMode(), 0);
+		EXPECT_TRUE(p.velocitySelection().reject() & VelocityControlSelector::ModeUnimplemented);
+	}
+}
+
+TEST_F(RegularizedIstaVelocityParam, RI03ProductionXRejectsRawInvalidSelectedParameters)
+{
+	for (int field = 0; field < 5; ++field) {
+		for (const float invalid : {NAN, INFINITY, -1.f, 0.f}) {
+			writeConfig(config(1)); ASSERT_EQ(param_set(param_find(names[0][field]), &invalid), 0);
+			PositionControl p; configure(p, readConfig(), false);
+			EXPECT_TRUE(p.velocityEstaRejected()); EXPECT_EQ(p.velocitySelection().effectiveMode(), 0);
+			EXPECT_EQ(p.velocityEstaGeneration(), 0u);
+		}
+	}
 }

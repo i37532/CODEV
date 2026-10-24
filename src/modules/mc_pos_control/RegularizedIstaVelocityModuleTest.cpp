@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: BSD-3-Clause
-// RI02: synchronous real Run/uORB execution, not Gazebo/flight admission.
+// RI02/RI03: synchronous real Run/uORB execution, not Gazebo flights.
 #include <gtest/gtest.h>
 #define MODULE_NAME "mc_pos_control_rista_test"
 #include "MulticopterPositionControl.hpp"
@@ -52,18 +52,25 @@ public:
 };
 static RistaQueueAnchor *rista_queue_anchor = nullptr;
 
-class RegularizedIstaVelocityModule : public ::testing::Test
+// WorkQueueManager is process-scoped. Keep one lifetime across the offline,
+// production-X and parameterized failure suites, including filtered test runs.
+class RistaQueueEnvironment : public ::testing::Environment
 {
 public:
-	static void SetUpTestSuite()
+	void SetUp() override
 	{
 		ASSERT_EQ(px4::WorkQueueManagerStart(), 0); px4_usleep(20000); rista_queue_anchor = new RistaQueueAnchor();
 	}
-	static void TearDownTestSuite()
+	void TearDown() override
 	{
 		delete rista_queue_anchor; rista_queue_anchor = nullptr; px4_usleep(20000);
 		EXPECT_EQ(px4::WorkQueueManagerStop(), 0);
 	}
+};
+::testing::Environment *const rista_queue_environment = ::testing::AddGlobalTestEnvironment(new RistaQueueEnvironment());
+
+class RegularizedIstaVelocityModule : public ::testing::Test
+{
 protected:
 	uORB::Publication<vehicle_local_position_s> lp_pub{ORB_ID(vehicle_local_position)};
 	uORB::Publication<vehicle_local_position_setpoint_s> target_pub{ORB_ID(trajectory_setpoint)};
@@ -136,9 +143,9 @@ protected:
 		mode.flag_armed = false; EXPECT_TRUE(mode_pub.publish(mode));
 		land.landed = land.ground_contact = true; EXPECT_TRUE(land_pub.publish(land));
 	}
-	void configure(uint8_t axes = 7)
+	void configure(uint8_t axes = 7, bool offline = true)
 	{
-		RegularizedIstaVelocityModuleTestAccess::admit(*module);
+		if (offline) { RegularizedIstaVelocityModuleTestAccess::admit(*module); }
 		RegularizedIstaVelocityModuleTestAccess::request(*module, 4, axes); step();
 		ASSERT_EQ(selection.effective_mode, 4); ASSERT_EQ(selection.effective_axes, axes);
 		arm(); step(8000); step(12000);
@@ -164,9 +171,9 @@ TEST_F(RegularizedIstaVelocityModule, PidDefaultEmitsVersionButNoInventedImplici
 	for (int i = 0; i < 3; ++i) { EXPECT_TRUE(std::isnan(selection.ri_acc_published[i])); }
 }
 
-TEST_F(RegularizedIstaVelocityModule, ProductionModeFourAlwaysRefusedWithoutMutatingPid)
+TEST_F(RegularizedIstaVelocityModule, RI03ProductionOtherMasksRefusedWithoutMutatingPid)
 {
-	for (int32_t axes : {-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 257}) {
+	for (int32_t axes : {-1, 0, 2, 3, 4, 5, 6, 7, 8, 257}) {
 		RegularizedIstaVelocityModuleTestAccess::request(*module, 4, axes); step();
 		EXPECT_EQ(selection.requested_mode, 4); EXPECT_EQ(selection.variant_req, 4);
 		EXPECT_EQ(selection.effective_mode, 0); EXPECT_EQ(selection.variant_eff, 0);
@@ -207,9 +214,9 @@ TEST_F(RegularizedIstaVelocityModule, NewCandidateUsesCandidateNuAndOneFeedForwa
 	}
 }
 
-TEST_F(RegularizedIstaVelocityModule, OfflineXUsesOtherTwoPidAxesAndUnselectedImplicitValuesStayNan)
+TEST_F(RegularizedIstaVelocityModule, RI03ProductionXUsesOtherTwoPidAxesAndUnselectedImplicitValuesStayNan)
 {
-	configure(1); step(8000); ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.pid_axes, 6);
+	configure(1, false); step(8000); ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.pid_axes, 6);
 	EXPECT_EQ(selection.ri_commit_axes, 1); ASSERT_TRUE(selection.ri_valid);
 
 	for (int i = 1; i < 3; ++i) { EXPECT_TRUE(std::isnan(selection.ri_p[i])); EXPECT_TRUE(std::isnan(selection.ri_a_ideal[i])); }
@@ -402,7 +409,7 @@ TEST_F(RegularizedIstaVelocityModule, HteUsesActualAppliedCorrectionCacheNotFres
 	EXPECT_EQ(selection.ri_commit_axes, 7);
 }
 
-TEST_F(RegularizedIstaVelocityModule, BsonSavedWholeConfigurationRestartStillCannotAdmitProduction)
+TEST_F(RegularizedIstaVelocityModule, RI03BsonSavedConfigurationRestartAdmitsOnlyProductionX)
 {
 	const char *names[15] {"MPC_VC_L1_X", "MPC_VC_L2_X", "MPC_VC_NU_X", "MPC_VC_A_X", "MPC_VC_EPS_X",
 			       "MPC_VC_L1_Y", "MPC_VC_L2_Y", "MPC_VC_NU_Y", "MPC_VC_A_Y", "MPC_VC_EPS_Y",
@@ -421,9 +428,14 @@ TEST_F(RegularizedIstaVelocityModule, BsonSavedWholeConfigurationRestartStillCan
 		ASSERT_EQ(param_import(fileno(file), true), 0); fclose(file);
 		delete module; module = new MulticopterPositionControl(); previous_seq = 0; step();
 		EXPECT_EQ(selection.requested_mode, 4); EXPECT_EQ(selection.requested_axes, axes);
-		EXPECT_EQ(selection.variant_req, 4); EXPECT_EQ(selection.effective_mode, 0);
-		EXPECT_TRUE(selection.reject & VelocityControlSelector::ModeUnimplemented); EXPECT_FALSE(selection.sta_reject);
-		EXPECT_EQ(selection.sta_gen, 0u); expectNoRistaCandidate();
+		EXPECT_EQ(selection.variant_req, 4); EXPECT_EQ(selection.effective_mode, axes == 1 ? 4 : 0);
+		EXPECT_EQ(selection.reject == 0, axes == 1); EXPECT_FALSE(selection.sta_reject);
+		EXPECT_EQ(selection.sta_gen > 0, axes == 1); expectNoRistaCandidate();
+		if (axes == 1) {
+			arm(); step(8000); step(12000); ASSERT_TRUE(diagnostic.valid);
+			EXPECT_EQ(selection.ri_commit_axes, 1); EXPECT_EQ(diagnostic.pid_axes, 6);
+			disarm(); step(8000);
+		}
 
 		for (int i = 0; i < 15; ++i) {
 			float actual = NAN; ASSERT_EQ(param_get(param_find(names[i]), &actual), 0); EXPECT_FLOAT_EQ(actual, values[i]);
@@ -513,4 +525,174 @@ TEST_F(RegularizedIstaVelocityModule, FullQueueEightPreservesEveryJoinedPublicat
 
 		EXPECT_FALSE(selection_sub.updated()); EXPECT_FALSE(diagnostic_sub.updated()); previous_seq += 8;
 	}
+}
+
+class RegularizedIstaProductionX : public RegularizedIstaVelocityModule {};
+
+TEST_F(RegularizedIstaProductionX, SignedNorthCommandUsesActualEightTwelveMsAndOneFeedforward)
+{
+	configure(1, false);
+	for (unsigned k = 0; k < 128; ++k) {
+		target.vx = (k / 16) % 2 ? -.03f : .03f;
+		const uint64_t dt = k % 2 ? 12000 : 8000;
+		step(dt, k % 2 ? 3000 : 1000);
+		ASSERT_TRUE(diagnostic.valid); ASSERT_TRUE(selection.ri_valid);
+		EXPECT_EQ(selection.effective_mode, 4); EXPECT_EQ(selection.effective_axes, 1);
+		EXPECT_EQ(selection.reject, 0); EXPECT_EQ(diagnostic.pid_axes, 6);
+		EXPECT_EQ(selection.ri_commit_axes, 1); EXPECT_EQ(selection.ri_strict_axes, 1);
+		EXPECT_GT(selection.ri_a_ideal[0] * target.vx, 0.f);
+		EXPECT_FLOAT_EQ(selection.ri_h, static_cast<float>(dt) * 1e-6f);
+		const double p = static_cast<double>(selection.ri_p[0]), h = static_cast<double>(selection.ri_h);
+		const double rho = std::fmax(-1., std::fmin(1., p / .01));
+		const double psi = std::sqrt(std::fmax(std::fabs(p), .01)) * rho;
+		EXPECT_NEAR(p + h * .5 * psi + h * h * .1 * rho, static_cast<double>(diagnostic.s[0]), 3e-7);
+		EXPECT_NEAR(static_cast<double>(selection.ri_a_ideal[0]),
+			    -.5 * psi + static_cast<double>(selection.ri_nu_candidate[0]), 3e-7);
+		EXPECT_NEAR(selection.ri_acc_published[0], selection.ri_a_applied[0] + target.acceleration[0], 3e-7f);
+		EXPECT_FLOAT_EQ(selection.ri_acc_published[0], output.acceleration[0]);
+		for (int i = 1; i < 3; ++i) {
+			EXPECT_TRUE(std::isnan(selection.ri_p[i])); EXPECT_TRUE(std::isnan(selection.ri_nu_candidate[i]));
+			EXPECT_TRUE(std::isfinite(output.acceleration[i])); EXPECT_TRUE(std::isnan(diagnostic.nu_applied[i]));
+		}
+	}
+}
+
+TEST_F(RegularizedIstaProductionX, ArmedPidRequestStagesCancelsAndAdmitsOnlyAfterDisarm)
+{
+	step(); arm(); step(8000);
+	RegularizedIstaVelocityModuleTestAccess::request(*module, 4, 1); step(12000);
+	EXPECT_TRUE(selection.pending); EXPECT_EQ(selection.reject, 0);
+	EXPECT_EQ(selection.effective_mode, 0); EXPECT_EQ(diagnostic.pid_axes, 7); expectNoRistaCandidate();
+	RegularizedIstaVelocityModuleTestAccess::request(*module, 0, 0); step(8000);
+	EXPECT_FALSE(selection.pending); EXPECT_EQ(selection.effective_mode, 0);
+	RegularizedIstaVelocityModuleTestAccess::request(*module, 4, 1); step(12000);
+	disarm(); step(8000); EXPECT_EQ(selection.effective_mode, 4); EXPECT_FALSE(selection.pending);
+	expectNoRistaCandidate(); arm(); step(12000); step(8000);
+	EXPECT_TRUE(diagnostic.valid); EXPECT_EQ(selection.ri_commit_axes, 1); EXPECT_EQ(diagnostic.pid_axes, 6);
+}
+
+TEST_F(RegularizedIstaProductionX, ArmedConfigCancelAndDisarmApplyKeepXStateAndRejectLaterMasks)
+{
+	configure(1, false); const auto generation = selection.sta_gen;
+	RegularizedIstaVelocityModuleTestAccess::width(*module, .03f); step(8000);
+	EXPECT_TRUE(selection.sta_pending); EXPECT_EQ(selection.sta_gen, generation);
+	EXPECT_FLOAT_EQ(selection.eps_eff[0], .01f); EXPECT_EQ(selection.ri_commit_axes, 1);
+	RegularizedIstaVelocityModuleTestAccess::width(*module, .01f); step(12000);
+	EXPECT_FALSE(selection.sta_pending);
+	for (const int32_t axes : {2, 3, 4, 5, 6, 7}) {
+		RegularizedIstaVelocityModuleTestAccess::request(*module, 4, axes); step(8000);
+		EXPECT_TRUE(selection.pending); EXPECT_NE(selection.reject, 0);
+		EXPECT_EQ(selection.effective_axes, 1); EXPECT_EQ(selection.sta_gen, generation);
+		EXPECT_TRUE(diagnostic.valid); EXPECT_EQ(selection.ri_commit_axes, 1);
+	}
+	RegularizedIstaVelocityModuleTestAccess::request(*module, 4, 1); step(12000);
+	EXPECT_FALSE(selection.pending); EXPECT_FALSE(selection.sta_pending); EXPECT_EQ(selection.reject, 0);
+	RegularizedIstaVelocityModuleTestAccess::width(*module, .03f); step(8000); disarm(); step(12000);
+	EXPECT_GT(selection.sta_gen, generation); EXPECT_FLOAT_EQ(selection.eps_eff[0], .03f);
+	EXPECT_FALSE(selection.sta_pending); expectNoRistaCandidate(); EXPECT_FLOAT_EQ(diagnostic.nu_applied[0], 0.f);
+	arm(); step(8000); step(12000); EXPECT_EQ(selection.ri_commit_axes, 1); EXPECT_TRUE(diagnostic.valid);
+}
+
+TEST_F(RegularizedIstaProductionX, OtherDivisorsCannotBecomeEffectiveOrChangeArmedX)
+{
+	for (const int32_t div : {-1, 0, 2, 3, 4, 8, 257}) {
+		RegularizedIstaVelocityModuleTestAccess::request(*module, 0, 0);
+		RegularizedIstaVelocityModuleTestAccess::divisor(*module, 1); step();
+		RegularizedIstaVelocityModuleTestAccess::divisor(*module, div);
+		RegularizedIstaVelocityModuleTestAccess::request(*module, 4, 1); step();
+		EXPECT_EQ(selection.effective_mode, 0); EXPECT_NE(selection.reject, 0); expectNoRistaCandidate();
+	}
+	RegularizedIstaVelocityModuleTestAccess::divisor(*module, 1); configure(1, false);
+	for (const int32_t div : {2, 4}) {
+		RegularizedIstaVelocityModuleTestAccess::divisor(*module, div); step(8000);
+		EXPECT_EQ(selection.effective_mode, 4); EXPECT_EQ(selection.div_eff, 1);
+		EXPECT_TRUE(selection.div_pending); EXPECT_TRUE(selection.div_reject); EXPECT_NE(selection.reject, 0);
+		EXPECT_TRUE(diagnostic.valid); EXPECT_EQ(selection.ri_commit_axes, 1);
+	}
+	RegularizedIstaVelocityModuleTestAccess::divisor(*module, 1); step(12000);
+	EXPECT_FALSE(selection.div_pending); EXPECT_FALSE(selection.div_reject); EXPECT_EQ(selection.reject, 0);
+}
+
+TEST_F(RegularizedIstaProductionX, ContactExitAndRearmingPrimeWithoutReusingImplicitState)
+{
+	configure(1, false); ASSERT_NE(diagnostic.nu_applied[0], 0.f);
+	land.ground_contact = true; ASSERT_TRUE(land_pub.publish(land)); step(8000);
+	EXPECT_TRUE(diagnostic.valid); EXPECT_EQ(selection.ri_commit_axes, 0); EXPECT_FLOAT_EQ(diagnostic.nu_applied[0], 0.f);
+	land.ground_contact = false; ASSERT_TRUE(land_pub.publish(land)); step(12000);
+	EXPECT_EQ(selection.ri_commit_axes, 0); step(8000); EXPECT_EQ(selection.ri_commit_axes, 1);
+	mode.flag_multicopter_position_control_enabled = false; ASSERT_TRUE(mode_pub.publish(mode)); step(12000);
+	EXPECT_FALSE(selection.enabled); expectNoRistaCandidate();
+	mode.flag_multicopter_position_control_enabled = true; ASSERT_TRUE(mode_pub.publish(mode)); step(8000);
+	EXPECT_EQ(selection.ri_commit_axes, 0); step(12000); EXPECT_EQ(selection.ri_commit_axes, 1);
+	disarm(); step(8000); EXPECT_FLOAT_EQ(diagnostic.nu_applied[0], 0.f); expectNoRistaCandidate();
+	arm(); step(12000); EXPECT_EQ(selection.ri_commit_axes, 0);
+	step(8000); EXPECT_TRUE(diagnostic.valid); EXPECT_EQ(selection.ri_commit_axes, 1);
+}
+
+TEST_F(RegularizedIstaProductionX, CovariantPositionHeadingAndHorizontalVelocityResetsPreserveError)
+{
+	configure(1, false); const auto before = diagnostic; publish_target = false;
+	++lp.xy_reset_counter; lp.delta_xy[0] = .3f; lp.delta_xy[1] = -.2f;
+	lp.x += lp.delta_xy[0]; lp.y += lp.delta_xy[1];
+	++lp.heading_reset_counter; lp.delta_heading = .05f; lp.heading += lp.delta_heading;
+	++lp.vxy_reset_counter; lp.delta_vxy[0] = .03f; lp.delta_vxy[1] = -.02f;
+	lp.vx += lp.delta_vxy[0]; lp.vy += lp.delta_vxy[1]; step(8000);
+	ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.reset_bits & (1 | 4 | 16), 1 | 4 | 16);
+	EXPECT_NEAR(diagnostic.s[0], before.s[0], 1e-6f);
+	EXPECT_FLOAT_EQ(diagnostic.nu_before[0], before.nu_applied[0]); EXPECT_EQ(selection.ri_commit_axes, 1);
+}
+
+TEST_F(RegularizedIstaProductionX, GroundRampAndCancelledTakeoffNeverIntegrateImplicitNu)
+{
+	RegularizedIstaVelocityModuleTestAccess::request(*module, 4, 1); step();
+	ASSERT_EQ(selection.effective_mode, 4); RegularizedIstaVelocityModuleTestAccess::fastSpool(*module);
+	mode.flag_armed = true; ASSERT_TRUE(mode_pub.publish(mode));
+	unsigned ground = 0, ramp = 0;
+	for (unsigned k = 0; k < 6002; ++k) {
+		step(10000); ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.committed_axes, 0);
+		EXPECT_FLOAT_EQ(diagnostic.nu_applied[0], 0.f); expectNoRistaCandidate();
+		if (diagnostic.pid_axes == 0) { ++ground; } else if (diagnostic.pid_axes == 6) { ++ramp; }
+	}
+	EXPECT_GT(ground, 0u); EXPECT_GT(ramp, 0u);
+	disarm(); step(8000); expectNoRistaCandidate();
+	arm(); step(12000); EXPECT_EQ(selection.ri_commit_axes, 0);
+	step(8000); EXPECT_TRUE(diagnostic.valid); EXPECT_EQ(selection.ri_commit_axes, 1);
+}
+
+TEST_F(RegularizedIstaProductionX, LegalPairedNanAccelerationOnlyResetsAndPrimesOnReentry)
+{
+	configure(1, false); const auto original = target;
+	target.x = target.y = target.vx = target.vy = NAN;
+	step(8000); ASSERT_TRUE(diagnostic.valid); EXPECT_EQ(diagnostic.active_axes, 0);
+	EXPECT_EQ(selection.ri_commit_axes, 0); EXPECT_FLOAT_EQ(diagnostic.nu_applied[0], 0.f); expectNoRistaCandidate();
+	EXPECT_FLOAT_EQ(output.acceleration[0], target.acceleration[0]);
+	target = original; step(12000); EXPECT_EQ(selection.ri_commit_axes, 0);
+	step(8000); EXPECT_TRUE(diagnostic.valid); EXPECT_EQ(selection.ri_commit_axes, 1);
+}
+
+class RegularizedIstaProductionXFailure : public RegularizedIstaVelocityModule,
+	public ::testing::WithParamInterface<int> {};
+INSTANTIATE_TEST_SUITE_P(AllFailures, RegularizedIstaProductionXFailure, ::testing::Values(0, 1, 2, 3, 4, 5, 6, 7));
+
+TEST_P(RegularizedIstaProductionXFailure, LatchRejectsRecoveryAndSameSampleRetryUntilDisarm)
+{
+	configure(1, false); const auto before = diagnostic; const auto original_target = target;
+	const int kind = GetParam();
+	if (kind == 0) { rate_termination = true; }
+	if (kind == 1) { rate_fault = true; }
+	if (kind == 2) { lp.v_xy_valid = false; }
+	if (kind == 3) { ++lp.vxy_reset_counter; lp.delta_vxy[0] = .1f; }
+	if (kind == 4) { target.x = NAN; target.vx = NAN; target.acceleration[0] = NAN; }
+	if (kind == 7) { lp.v_z_valid = false; } // Unselected PID Z still needs valid feedback.
+	step(kind == 5 ? 50000 : (kind == 6 ? 0 : 8000));
+	EXPECT_FALSE(diagnostic.valid); EXPECT_NE(diagnostic.first_fail, 0);
+	EXPECT_NE(diagnostic.fault, 0); EXPECT_EQ(diagnostic.committed_axes, 0);
+	EXPECT_EQ(selection.ri_commit_axes, 0); EXPECT_EQ(diagnostic.output_timestamp, 0u);
+	EXPECT_FLOAT_EQ(diagnostic.nu_applied[0], before.nu_applied[0]);
+	rate_termination = rate_fault = false; lp.v_xy_valid = lp.v_z_valid = true; target = original_target;
+	step(12000); EXPECT_FALSE(diagnostic.valid); EXPECT_EQ(selection.ri_commit_axes, 0);
+	EXPECT_FLOAT_EQ(diagnostic.nu_applied[0], before.nu_applied[0]);
+	disarm(); step(8000); EXPECT_EQ(diagnostic.fault, 0); EXPECT_FLOAT_EQ(diagnostic.nu_applied[0], 0.f);
+	arm(); step(12000); EXPECT_EQ(selection.ri_commit_axes, 0);
+	step(8000); EXPECT_TRUE(diagnostic.valid); EXPECT_EQ(selection.ri_commit_axes, 1);
 }

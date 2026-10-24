@@ -13,7 +13,7 @@
  * Only acceleration correction: no FF, mass, rate g, thrust or protection.
  * Evaluation never changes state. Protected commit does NOT rewrite the ideal
  * output or imply that applied values solve the implicit equations.
- * RI01: test-only library, no production selector/actuator path.
+ * RI03: production use is separately gated to SITL NED X/DIV1.
  */
 class RegularizedIstaVelocityControl
 {

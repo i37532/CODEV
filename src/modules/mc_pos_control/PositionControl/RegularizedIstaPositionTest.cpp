@@ -104,17 +104,17 @@ double inverse(double s, double h, double l1, double l2, double eps)
 }
 }
 
-TEST(RegularizedIstaPosition, ProductionModeFourRemainsRejectedAndUnknownMasksNeverAliasX)
+TEST(RegularizedIstaPosition, RI03ProductionAdmitsOnlyXAndUnknownMasksNeverAliasX)
 {
 	for (const int axes : {-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 257}) {
 		PositionControl p; setup(p, 0, false);
 		p.configureVelocityEsta(config(axes > 0 && axes < 8 ? static_cast<uint8_t>(axes) : 7), false);
 		p.configureVelocityControl(4, axes, false);
-		EXPECT_NE(p.velocitySelection().reject(), 0);
+		EXPECT_EQ(p.velocitySelection().reject() == 0, axes == 1);
 		EXPECT_EQ(p.velocitySelection().requestedMode(), 4);
 		EXPECT_EQ(p.velocitySelection().requestedAxes(), axes);
-		EXPECT_EQ(p.velocitySelection().effectiveMode(), 0);
-		EXPECT_EQ(p.velocitySelection().effectiveAxes(), 0);
+		EXPECT_EQ(p.velocitySelection().effectiveMode(), axes == 1 ? 4 : 0);
+		EXPECT_EQ(p.velocitySelection().effectiveAxes(), axes == 1 ? 1 : 0);
 	}
 
 	for (const int axes : {-1, 0, 2, 5, 6, 8, 257}) {
@@ -123,6 +123,34 @@ TEST(RegularizedIstaPosition, ProductionModeFourRemainsRejectedAndUnknownMasksNe
 		p.configureVelocityControl(4, axes, false);
 		EXPECT_NE(p.velocitySelection().reject(), 0);
 		EXPECT_EQ(p.velocitySelection().effectiveMode(), 0);
+	}
+}
+
+TEST(RegularizedIstaPosition, RI03ProductionXPreservesActualYzPidArithmeticAndHoverThrustShift)
+{
+	PositionControl p; setup(p, 1, false); ASSERT_EQ(p.velocitySelection().effectiveMode(), 4);
+	auto f = frame(); const auto sp = target(); engage(p, f, sp);
+	for (unsigned k = 0; k < 256; ++k) {
+		if (k == 128) {
+			const auto before = p.velocityIntegral(); const float hover = p.diagnostic().hover_thrust;
+			const float nu = p.diagnostic().nu_applied[0];
+			p.updateHoverThrust(.505f);
+			EXPECT_FLOAT_EQ(p.velocityIntegral()(0), before(0)); EXPECT_FLOAT_EQ(p.velocityIntegral()(1), before(1));
+			EXPECT_FLOAT_EQ(p.velocityIntegral()(2), before(2) + (.505f - hover) * (CONSTANTS_ONE_G / .505f));
+			EXPECT_FLOAT_EQ(p.diagnostic().nu_applied[0], nu);
+		}
+		const auto integral = p.velocityIntegral();
+		const uint64_t us = k % 2 ? 12000 : 8000; f.sample += us;
+		ASSERT_TRUE(step(p, f, sp, static_cast<float>(us) * 1e-6f));
+		ASSERT_TRUE(p.regularizedIstaDiagnostic().valid); EXPECT_EQ(p.regularizedIstaDiagnostic().commit_axes, 1);
+		EXPECT_EQ(p.diagnostic().pid_axes, 6); EXPECT_FLOAT_EQ(p.velocityIntegral()(0), 0.f);
+		const float expected_y = (sp.vy - -.01f) * 2.16f + integral(1) - -.001f * .24f;
+		const float expected_z = (sp.vz - .01f) * 4.f + integral(2) - .002f * 0.f;
+		EXPECT_FLOAT_EQ(p.velocityCorrection()(1), expected_y); EXPECT_FLOAT_EQ(p.velocityCorrection()(2), expected_z);
+		vehicle_local_position_setpoint_s output{}; p.getLocalPositionSetpoint(output);
+		EXPECT_FLOAT_EQ(output.acceleration[1], expected_y + sp.acceleration[1]);
+		EXPECT_FLOAT_EQ(output.acceleration[2], expected_z + sp.acceleration[2]);
+		EXPECT_TRUE(std::isnan(p.diagnostic().nu_applied[1])); EXPECT_TRUE(std::isnan(p.diagnostic().nu_applied[2]));
 	}
 }
 

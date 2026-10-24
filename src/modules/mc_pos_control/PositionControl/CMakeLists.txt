@@ -45,7 +45,7 @@ target_compile_features(RegularizedStaVelocityControl PUBLIC cxx_std_14)
 target_include_directories(RegularizedStaVelocityControl PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(StaVelocityControl PUBLIC RegularizedStaVelocityControl)
 
-# RI02: protection wiring is built, but MODE4 production admission remains closed.
+# RI03: production MODE4 admission is limited to SITL NED X/DIV1.
 px4_add_library(RegularizedIstaVelocityControl RegularizedIstaVelocityControl.cpp RegularizedIstaVelocityControl.hpp)
 target_compile_features(RegularizedIstaVelocityControl PUBLIC cxx_std_14)
 target_include_directories(RegularizedIstaVelocityControl PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
@@ -80,6 +80,7 @@ if(BUILD_TESTING)
 	px4_add_unit_gtest(SRC RegularizedIstaRegressionTest.cpp LINKLIBS PositionControl RI01PositionReference)
 	px4_add_unit_gtest(SRC RegularizedIstaProtectionTest.cpp LINKLIBS PositionControl)
 	px4_add_unit_gtest(SRC RegularizedIstaPositionTest.cpp LINKLIBS PositionControl)
+	px4_add_unit_gtest(SRC RegularizedIstaNonSitlTest.cpp LINKLIBS PositionControl)
 	px4_add_functional_gtest(SRC RegularizedIstaVelocityParamTest.cpp LINKLIBS PositionControl parameters)
 
 	px4_add_library(R01PositionReference
