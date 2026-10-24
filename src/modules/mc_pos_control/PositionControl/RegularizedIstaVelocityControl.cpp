@@ -291,3 +291,15 @@ void RegularizedIstaVelocityControl::reset()
 		++_reset_generation[axis];
 	}
 }
+
+bool RegularizedIstaVelocityControl::resetBatch(uint8_t mask, const std::array<float, 3> &nu)
+{
+	if (_exhausted || !mask || (mask & ~7u)) { return false; }
+	for (size_t axis = 0; axis < _nu.size(); ++axis) {
+		if ((mask & (1u << axis)) && (!normalOrZero(nu[axis]) || !incrementable(_reset_generation[axis]))) { return false; }
+	}
+	for (size_t axis = 0; axis < _nu.size(); ++axis) {
+		if (mask & (1u << axis)) { _nu[axis] = nu[axis]; ++_reset_generation[axis]; }
+	}
+	return true;
+}

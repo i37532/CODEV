@@ -162,7 +162,9 @@ TEST(RegularizedVelocityIntegration, RegularizedDivisorIsOneIncludingReconfigura
 
 TEST(RegularizedVelocityIntegration, ConfigDomainAndLegacyUnusedEpsilonRemainDistinct)
 {
-	for (const uint8_t variant : {0, 2, 4, 255}) { EXPECT_FALSE(Guard::validConfig(config(1, variant))); }
+	// RI02 recognizes variant4 offline; production admission is tested separately.
+	for (const uint8_t variant : {0, 2, 255}) { EXPECT_FALSE(Guard::validConfig(config(1, variant))); }
+	EXPECT_TRUE(Guard::validConfig(config(1, 4)));
 	for (const uint8_t axes : {2, 5, 6}) { EXPECT_FALSE(Guard::validConfig(config(axes))); EXPECT_TRUE(Guard::validConfig(config(axes, 1))); }
 	for (const float bad : {0.f, .0001f, 1.1f, NAN, INFINITY}) {
 		auto c = config(1); c.epsilon[0] = bad; EXPECT_FALSE(Guard::validConfig(c));

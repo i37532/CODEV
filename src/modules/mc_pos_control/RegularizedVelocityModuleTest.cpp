@@ -253,7 +253,8 @@ TEST_F(RegularizedVelocityModule, ProductionGateDRejectsUnadmittedMasksWithoutEf
 	ASSERT_EQ(selection.effective_mode, 0);
 	for (int32_t unavailable : {-1, 2, 4, 256}) {
 		RegularizedVelocityModuleTestAccess::request(*module, unavailable, 0); step();
-		EXPECT_EQ(selection.variant_req, 255); EXPECT_NE(selection.reject, 0); EXPECT_EQ(selection.effective_mode, 0);
+		EXPECT_EQ(selection.variant_req, unavailable == 4 ? 4 : 255);
+		EXPECT_NE(selection.reject, 0); EXPECT_EQ(selection.effective_mode, 0);
 	}
 }
 

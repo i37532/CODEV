@@ -171,6 +171,14 @@ public:
 	void setVelocityFrame(const StaVelocityProtection::Frame &frame);
 	const VelocityControlSelector &velocitySelection() const { return _velocity_selector; }
 	const sta_velocity_ctrl_status_s &diagnostic() const { return _diagnostic; }
+	struct RistaDiagnostic {
+		StaVelocityProtection::Vec p{}, nu_candidate{}, nu_applied{}, a_ideal{}, a_applied{}, acc_published{}, thrust_published{};
+		float h{0.f}, seed_h{0.f};
+		uint64_t cache_sample{0};
+		uint8_t strict_axes{0}, commit_axes{0};
+		bool valid{false}, cache_valid{false};
+	};
+	const RistaDiagnostic &regularizedIstaDiagnostic() const { return _rista_diagnostic; }
 	uint16_t inputValidity() const;
 	uint16_t failureReason() const;
 	bool velocityOutputPublishable() const { return !_decimation.fault && (_velocity_selector.effectiveMode() == 0 || _diagnostic.valid); }
@@ -182,7 +190,7 @@ public:
 	 * Set the integral term in xy to 0.
 	 * @see _vel_int
 	 */
-	void resetIntegral() { _vel_int.setZero(); _decimation.invalidate(); }
+	void resetIntegral() { _vel_int.setZero(); _decimation.invalidate(); _rista_cache_valid = false; }
 
 	/**
 	 * Get the controllers output local position setpoint
@@ -203,11 +211,20 @@ public:
 private:
 	friend class VelocityControlTestAccess;
 	friend class RegularizedVelocityTestAccess;
+	friend class RegularizedIstaVelocityTestAccess;
+	friend class RegularizedIstaVelocityModuleTestAccess;
 	// Offline-only override for later masks; production admission is explicitly
 	// gated in configureVelocityControl, with no setter/parameter for this flag.
 	// The only writer is the explicitly named offline test friend.
 	bool _regularized_test_admission{false};
-	bool _staEffective() const { return _velocity_selector.effectiveMode() == 1 || _velocity_selector.effectiveMode() == 3; }
+	bool _regularized_ista_admission{false}; // RI02: no production writer or parameter.
+	bool _staEffective() const { return _velocity_selector.effectiveMode() == 1 || _velocity_selector.effectiveMode() == 3 || _velocity_selector.effectiveMode() == 4; }
+	RistaDiagnostic _rista_diagnostic{};
+	uint64_t _rista_processed_sample{0}, _rista_cache_sample{0};
+	uint32_t _rista_cache_generation{0};
+	bool _rista_cache_valid{false};
+	float _rista_cache_correction{0.f}, _rista_cache_ff{0.f};
+	void _recordRistaDiagnostic(bool success);
 	float _regularizedPsi(float s, size_t axis) const;
 	VelocityControlSelector _velocity_selector;
 	VelocityDecimation _decimation;

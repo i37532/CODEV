@@ -69,6 +69,8 @@ public:
 	Status commitBatch(const std::array<Candidate, 3> &candidates, uint8_t mask,
 			   const std::array<float, 3> &applied_nu);
 	bool reset(size_t axis, float nu = 0.f);
+	// RI02 handover: validate every selected seed before changing any axis.
+	bool resetBatch(uint8_t mask, const std::array<float, 3> &nu);
 	void reset();
 	const std::array<float, 3> &state() const { return _nu; }
 private:

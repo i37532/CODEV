@@ -98,6 +98,7 @@ public:
 private:
 	friend class VelocityModuleTestAccess;
 	friend class RegularizedVelocityModuleTestAccess;
+	friend class RegularizedIstaVelocityModuleTestAccess;
 	void Run() override;
 
 	Takeoff _takeoff; /**< state machine and ramp to bring the vehicle off the ground without jumps */

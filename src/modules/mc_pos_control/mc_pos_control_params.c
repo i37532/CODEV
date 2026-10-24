@@ -247,6 +247,9 @@ PARAM_DEFINE_FLOAT(MPC_XY_P, 0.95f);
  * AX01 Y/XZ/YZ require DIV1. MODE2 remains reserved and rejected.
  * R03 gate D admits MODE3 regularized explicit STA on NED X, Z, XY or XYZ (AXES=1/4/3/7),
  * in SITL with DIV1 and valid gains/epsilon. Other MODE3 masks remain rejected.
+ * RI02 defines MODE4 compensated regularized implicit STA metadata only.
+ * Production MODE4 admission remains closed, regardless of parameters. Its
+ * offline contract reuses all 15 gain/limit/width values as one configuration.
  * Armed requests are pending until
  * disarm; requesting the effective configuration cancels pending changes.
  * Original PID gain updates are unaffected.
@@ -255,8 +258,9 @@ PARAM_DEFINE_FLOAT(MPC_XY_P, 0.95f);
  * @value 1 ESTA selected NED axes (SITL only)
  * @value 2 Reserved (unavailable)
  * @value 3 Regularized explicit STA X, Z, XY or XYZ (SITL only, R03 gate D)
+ * @value 4 Regularized implicit STA (unavailable, RI02 offline only)
  * @min 0
- * @max 3
+ * @max 4
  * @group Multicopter Position Control
  */
 PARAM_DEFINE_INT32(MPC_VC_MODE, 0);
@@ -272,6 +276,7 @@ PARAM_DEFINE_INT32(MPC_VC_MODE, 0);
  * computes only selected ESTA axes. All rate controllers must remain PID.
  * MODE3 permits 1 X, 4 Z, 3 XY or 7 XYZ with DIV1 in SITL (R03 gate D).
  * Its 2/5/6 masks remain unavailable; MODE1 masks are unchanged.
+ * MODE4 remains unavailable in production; RI02 tests only 1/3/4/7 with DIV1.
  *
  * @min 0
  * @max 7
@@ -282,8 +287,9 @@ PARAM_DEFINE_INT32(MPC_VC_AXES, 0);
 /**
  * Regularized STA North velocity boundary width
  *
- * Width in velocity-error units, not an acceleration gain. Used only by MODE3
- * on selected X in SITL (R03 gate D). Does not change PID or MODE1 ESTA.
+ * Width in velocity-error units, not an acceleration gain. Used by MODE3
+ * on selected X in SITL (R03 gate D), and MODE4 offline only (RI02).
+ * Does not change PID or MODE1 ESTA.
  * Valid domain is checked without clamping; disarmed changes only.
  * @unit m/s
  * @min 0.001
@@ -296,7 +302,8 @@ PARAM_DEFINE_FLOAT(MPC_VC_EPS_X, 0.01f);
 /**
  * Regularized STA East velocity boundary width
  *
- * MODE3 only; Y is admitted as part of XY/XYZ in R03 gate D. Ignored by PID and MODE1.
+ * MODE3 Y is admitted as part of XY/XYZ in R03 gate D; MODE4 is offline only.
+ * Ignored by PID and MODE1.
  * Invalid values are rejected without clamping; disarmed changes only.
  * @unit m/s
  * @min 0.001
@@ -309,7 +316,8 @@ PARAM_DEFINE_FLOAT(MPC_VC_EPS_Y, 0.01f);
 /**
  * Regularized STA Down velocity boundary width
  *
- * MODE3 only; Z/XYZ are admitted in R03 gate D. Ignored by PID and MODE1.
+ * MODE3 Z/XYZ are admitted in R03 gate D; MODE4 is offline only.
+ * Ignored by PID and MODE1.
  * Invalid values are rejected without clamping; disarmed changes only.
  * @unit m/s
  * @min 0.001

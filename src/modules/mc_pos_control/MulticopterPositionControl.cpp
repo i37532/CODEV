@@ -288,9 +288,9 @@ void MulticopterPositionControl::Run()
 		// Validate the signed request before narrowing. Invalid/disabled is not X.
 		const int32_t requested_axes = _param_mpc_vc_axes.get();
 		esta_config.axes = requested_axes >= 1 && requested_axes <= 7 ? static_cast<uint8_t>(requested_axes) : 0;
-		// MODE3 has independent configuration. PositionControl enforces the
-		// current SITL development gate; parameters cannot admit later masks.
-		esta_config.variant = _param_mpc_vc_mode.get() == 3 ? 3 : 1;
+		// Each regularized algorithm consumes the whole configuration. MODE4
+		// is recognized here, but PositionControl keeps production admission shut.
+		esta_config.variant = _param_mpc_vc_mode.get() == 4 ? 4 : (_param_mpc_vc_mode.get() == 3 ? 3 : 1);
 		esta_config.epsilon = {{_param_mpc_vc_eps_x.get(), _param_mpc_vc_eps_y.get(), _param_mpc_vc_eps_z.get()}};
 		esta_config.gains[0] = {_param_mpc_vc_l1_x.get(), _param_mpc_vc_l2_x.get()};
 		esta_config.nu_limit[0] = _param_mpc_vc_nu_x.get();
@@ -606,14 +606,14 @@ void MulticopterPositionControl::Run()
 		selection_status.pid_calls = pid_calls;
 		const auto &effective_esta = _control.effectiveVelocityEsta();
 		selection_status.variant_req = selection.requestedMode() == 0 ? 0
-				: (selection.requestedMode() == 1 ? 1 : (selection.requestedMode() == 3 ? 3 : 255));
+				: (selection.requestedMode() == 1 ? 1 : (selection.requestedMode() == 3 ? 3 : (selection.requestedMode() == 4 ? 4 : 255)));
 		selection_status.variant_eff = selection.effectiveMode() == 0 ? 0
-				: (selection.effectiveMode() == 1 ? 1 : (selection.effectiveMode() == 3 ? 3 : 255));
+				: (selection.effectiveMode() == 1 ? 1 : (selection.effectiveMode() == 3 ? 3 : (selection.effectiveMode() == 4 ? 4 : 255)));
 		selection_status.eps_req[0] = _param_mpc_vc_eps_x.get();
 		selection_status.eps_req[1] = _param_mpc_vc_eps_y.get();
 		selection_status.eps_req[2] = _param_mpc_vc_eps_z.get();
 		for (int axis = 0; axis < 3; ++axis) {
-			selection_status.eps_eff[axis] = selection.effectiveMode() == 3
+			selection_status.eps_eff[axis] = (selection.effectiveMode() == 3 || selection.effectiveMode() == 4)
 				&& (selection.effectiveAxes() & (1 << axis)) ? effective_esta.epsilon[axis] : NAN;
 		}
 		selection_status.sta_gen = _control.velocityEstaGeneration();
@@ -636,6 +636,26 @@ void MulticopterPositionControl::Run()
 		selection_status.path_ns = pid_calls ? _control.velocityPathTimeNs() : 0;
 		selection_status.module_ns = host_started ? velocityHostClock() - host_started : 0;
 		selection_status.clock = host_started ? 1 : 0;
+		selection_status.ri_version = 1;
+		const auto &rista = _control.regularizedIstaDiagnostic();
+		const bool rista_invoked = pid_calls && selection.effectiveMode() == 4;
+		selection_status.ri_valid = rista_invoked && rista.valid;
+		selection_status.ri_cache_valid = rista_invoked && rista.cache_valid;
+		selection_status.ri_cache_sample = selection_status.ri_cache_valid ? rista.cache_sample : 0;
+		selection_status.ri_strict_axes = selection_status.ri_valid ? rista.strict_axes : 0;
+		selection_status.ri_commit_axes = rista_invoked ? rista.commit_axes : 0;
+		selection_status.ri_h = rista_invoked ? rista.h : NAN;
+		selection_status.ri_seed_h = rista_invoked ? rista.seed_h : NAN;
+		for (int axis = 0; axis < 3; ++axis) {
+			selection_status.ri_p[axis] = selection_status.ri_valid || (rista_invoked && rista.seed_h > 0.f) ? rista.p[axis] : NAN;
+			selection_status.ri_nu_candidate[axis] = selection_status.ri_valid ? rista.nu_candidate[axis] : NAN;
+			selection_status.ri_nu_applied[axis] = rista_invoked ? rista.nu_applied[axis] : NAN;
+			selection_status.ri_a_ideal[axis] = selection_status.ri_valid ? rista.a_ideal[axis] : NAN;
+			selection_status.ri_a_applied[axis] = rista_invoked ? rista.a_applied[axis] : NAN;
+			// A computed value is not published when output is suppressed/faulted.
+			selection_status.ri_acc_published[axis] = rista_invoked && output_timestamp ? rista.acc_published[axis] : NAN;
+			selection_status.ri_thrust_published[axis] = rista_invoked && output_timestamp ? rista.thrust_published[axis] : NAN;
+		}
 		_velocity_selection_pub.publish(selection_status);
 
 		// Final invocation only: failed-first-call output is never labelled as final.

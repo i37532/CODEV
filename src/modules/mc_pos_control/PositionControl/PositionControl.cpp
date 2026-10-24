@@ -74,7 +74,7 @@ void PositionControl::configureVelocityEsta(const StaVelocityProtection::Config 
 	for (unsigned axis = 0; axis < 3; ++axis) {
 		if (c.axes & (1u << axis)) {
 			different = different || memcmp(&c.gains[axis], &_esta_effective.gains[axis], sizeof(c.gains[axis]))
-				|| (c.variant == 3 && memcmp(&c.epsilon[axis], &_esta_effective.epsilon[axis], sizeof(float)))
+				|| ((c.variant == 3 || c.variant == 4) && memcmp(&c.epsilon[axis], &_esta_effective.epsilon[axis], sizeof(float)))
 				|| memcmp(&c.nu_limit[axis], &_esta_effective.nu_limit[axis], sizeof(float))
 				|| memcmp(&c.acceleration_limit[axis], &_esta_effective.acceleration_limit[axis], sizeof(float));
 		}
@@ -93,6 +93,7 @@ void PositionControl::configureVelocityControl(int32_t mode, int32_t axes, bool 
 	const int32_t previous_axes = _velocity_selector.effectiveAxes();
 	bool ready = false;
 	bool regularized_ready = false;
+	bool implicit_ready = false;
 #if defined(CONFIG_ARCH_BOARD_PX4_SITL)
 	ready = _esta_config_valid && _esta_requested.variant == 1 && (_decimation.divisor == 1 || axes == 1 || axes == 3);
 	// R03 gate D: NED XYZ is admitted after complete X, Z and XY gates passed.
@@ -101,12 +102,15 @@ void PositionControl::configureVelocityControl(int32_t mode, int32_t axes, bool 
 	const bool regularized_gate_admitted = axes == 1 || axes == 4 || axes == 3 || axes == 7;
 	regularized_ready = (regularized_gate_admitted || _regularized_test_admission) && _esta_config_valid
 		&& _esta_requested.variant == 3 && _decimation.divisor == 1;
+	implicit_ready = _regularized_ista_admission && _esta_config_valid && _esta_requested.variant == 4
+		&& _decimation.divisor == 1;
 #endif
-	_velocity_selector.configure(mode, axes, armed, ready, _esta_requested.axes, regularized_ready);
-	if (!armed && !_velocity_selector.reject() && (mode == 1 || mode == 3) && _esta_config_changed) {
+	_velocity_selector.configure(mode, axes, armed, ready, _esta_requested.axes, regularized_ready, implicit_ready);
+	if (!armed && !_velocity_selector.reject() && (mode == 1 || mode == 3 || mode == 4) && _esta_config_changed) {
 		_esta_effective = _esta_requested;
 		_esta_config_changed = false;
 		++_esta_config_generation;
+		_rista_cache_valid = false;
 	}
 	if (previous != _velocity_selector.effectiveMode() || previous_axes != _velocity_selector.effectiveAxes()) {
 		++_esta_config_generation;
@@ -115,6 +119,8 @@ void PositionControl::configureVelocityControl(int32_t mode, int32_t axes, bool 
 		if ((previous_axes | _velocity_selector.effectiveAxes()) & 2) { _vel_int(1) = 0.f; }
 		if ((previous_axes | _velocity_selector.effectiveAxes()) & 4) { _vel_int(2) = 0.f; }
 		_z_engaged = false;
+		_rista_cache_valid = false; _rista_processed_sample = 0;
+		_rista_diagnostic = {};
 		_decimation.invalidate();
 	}
 	StaVelocityProtection::Config c = _esta_effective;
@@ -127,6 +133,11 @@ void PositionControl::setVelocityFrame(const StaVelocityProtection::Frame &frame
 	++_velocity_frame_serial;
 	if (!frame.armed && _velocity_frame.armed) { _decimation.restart(); _interval_positive = _interval_negative = 0; }
 	_velocity_frame = frame;
+	if (_velocity_selector.effectiveMode() == 4 && (!frame.armed || !frame.enabled || !frame.flying
+	    || frame.landed || frame.contact || frame.unmatched_reset_axes || !frame.inner_valid)) {
+		_rista_cache_valid = false;
+	}
+	if (!frame.armed) { _rista_processed_sample = 0; }
 	if (!frame.enabled) {
 		const uint8_t latched = frame.armed ? _decimation.fault : 0;
 		_decimation.restart(); _decimation.fault = latched; _interval_positive = _interval_negative = 0;
@@ -163,6 +174,26 @@ void PositionControl::setThrustLimits(const float min, const float max)
 
 void PositionControl::updateHoverThrust(const float hover_thrust_new)
 {
+	if (_velocity_selector.effectiveMode() == 4) {
+		if (_esta_failed) { _rista_cache_valid = false; return; }
+		if ((_velocity_selector.effectiveAxes() & 4) && _z_engaged) {
+			const bool valid = _rista_cache_valid && _rista_cache_generation == _esta_config_generation
+				&& _rista_cache_sample == _velocity_protection.sample()
+				&& PX4_ISFINITE(hover_thrust_new) && hover_thrust_new >= .1f && hover_thrust_new <= .9f;
+			const float shift = valid ? (_hover_thrust / hover_thrust_new - 1.f)
+				* (_rista_cache_correction + _rista_cache_ff - CONSTANTS_ONE_G) : NAN;
+			if (!valid || !_velocity_protection.shiftZ(shift, _rista_cache_correction)) {
+				_esta_failed = true; _rista_cache_valid = false;
+				_velocity_protection.abortImplicit(StaVelocityProtection::Numerical);
+				return; // Invalid estimate/seed must not corrupt the hover map.
+			}
+			_rista_cache_correction += shift;
+			_correction(2) = _rista_cache_correction;
+			_z_hte_shift += shift;
+			setHoverThrust(hover_thrust_new);
+			return;
+		}
+	}
 	if (_velocity_selector.effectiveMode() == 3 && _esta_failed) {
 		// A rejected original XY pair can fail before opening the guard. Do not
 		// let a later HTE callback modify retained state, hover mapping or idle
@@ -217,6 +248,7 @@ void PositionControl::setInputSetpoint(const vehicle_local_position_setpoint_s &
 bool PositionControl::update(const float dt)
 {
 	const Vector3f integral_before = _vel_int;
+	const uint32_t sequence_before = _decimation.sequence;
 	// Observe only; PID operations and integration order remain untouched.
 	_pos_sp.copyTo(_diagnostic.p_sp);
 	_vel_sp.copyTo(_diagnostic.v_ff);
@@ -243,7 +275,16 @@ bool PositionControl::update(const float dt)
 	}
 #endif
 	const uint64_t velocity_started = velocityHostClock();
-	if (_velocity_selector.effectiveMode() == 3 && !valid) {
+	const bool implicit = _velocity_selector.effectiveMode() == 4;
+	const bool repeated_implicit = implicit && _velocity_frame.armed && _rista_processed_sample
+		&& _rista_processed_sample == _velocity_frame.sample;
+	if (implicit && (_esta_failed || !valid || repeated_implicit)) {
+		_esta_failed = true; _rista_cache_valid = false;
+		_velocity_protection.abortImplicit(repeated_implicit ? StaVelocityProtection::Time : StaVelocityProtection::Measurement,
+			repeated_implicit ? StaVelocityProtection::Duplicate : 0);
+		_decimation.updated = false; _decimation.held = false;
+		_acc_sp = Vector3f(NAN, NAN, NAN); _thr_sp = _acc_sp;
+	} else if (_velocity_selector.effectiveMode() == 3 && !valid) {
 		// The regularized path must not reset/seed a subset after position
 		// limiting hides an originally invalid XY pair. Legacy behavior stays.
 		_esta_failed = true;
@@ -251,7 +292,10 @@ bool PositionControl::update(const float dt)
 		// cadence flags or invent an update sequence for this rejected input.
 		_decimation.updated = false; _decimation.held = false;
 		_acc_sp = Vector3f(NAN, NAN, NAN); _thr_sp = _acc_sp;
-	} else { _velocityControl(dt); }
+	} else {
+		if (implicit) { _rista_processed_sample = _velocity_frame.sample; }
+		_velocityControl(dt);
+	}
 
 	_yawspeed_sp = PX4_ISFINITE(_yawspeed_sp) ? _yawspeed_sp : 0.f;
 	_yaw_sp = PX4_ISFINITE(_yaw_sp) ? _yaw_sp : _yaw; // TODO: better way to disable yaw control
@@ -297,6 +341,16 @@ bool PositionControl::update(const float dt)
 	_diagnostic.z_phase = _z_phase;
 	_diagnostic.z_hte_shift = _z_hte_shift;
 	_z_hte_shift = 0.f;
+	if (implicit) {
+		if (!success) {
+			_vel_int = integral_before; _rista_cache_valid = false;
+			// An attempted/rejected transaction is not an applied control update.
+			// Keep the existing MODE0/1/3 cadence semantics unchanged.
+			_decimation.sequence = sequence_before;
+			_decimation.updated = false; _decimation.held = false;
+		}
+		_recordRistaDiagnostic(success);
+	}
 	if (_decimation.divisor > 1) {
 		if (!success) { _vel_int = integral_before; _decimation.fault = _decimation.fault ? _decimation.fault : 3; _decimation.invalidate(); }
 		if (!_decimated_retry) {
@@ -314,6 +368,43 @@ bool PositionControl::update(const float dt)
 	}
 	_velocity_path_ns = velocity_started ? velocityHostClock() - velocity_started : 0;
 	return success;
+}
+
+void PositionControl::_recordRistaDiagnostic(bool success)
+{
+	const auto &r = _velocity_protection.result();
+	_rista_diagnostic = {};
+	_rista_diagnostic.h = r.kernel_dt;
+	_rista_diagnostic.seed_h = r.seed_dt;
+	_rista_diagnostic.valid = success && r.candidate_axes && r.committed_axes == r.candidate_axes;
+	_rista_diagnostic.commit_axes = r.committed_axes;
+	_rista_diagnostic.strict_axes = _rista_diagnostic.valid ? r.strict_axes : 0;
+	for (size_t i = 0; i < 3; ++i) {
+		const bool candidate = _rista_diagnostic.valid && (r.candidate_axes & (1u << i));
+		_rista_diagnostic.p[i] = (candidate || (r.seed_dt > 0.f && (r.active_axes & (1u << i)))) ? r.p[i] : NAN;
+		_rista_diagnostic.nu_candidate[i] = candidate ? r.nu_ideal[i] : NAN;
+		_rista_diagnostic.nu_applied[i] = (_velocity_selector.effectiveAxes() & (1u << i)) ? r.nu_applied[i] : NAN;
+		_rista_diagnostic.a_ideal[i] = candidate ? r.a_sta[i] : NAN;
+		_rista_diagnostic.a_applied[i] = success ? _correction(i) : NAN;
+		_rista_diagnostic.acc_published[i] = success ? _acc_sp(i) : NAN;
+		_rista_diagnostic.thrust_published[i] = success ? _thr_sp(i) : NAN;
+	}
+	// Cache precisely the closed transaction's applied correction, not a new
+	// evaluation from the already committed nu. Any protection defeats the
+	// simple HTE continuity relation; refuse rather than infer a missing value.
+	_rista_cache_valid = success && _z_engaged && !_diagnostic.constraint_bits
+		&& !(r.flags & (StaVelocityProtection::StateLimit | StaVelocityProtection::CorrectionLimit
+			| StaVelocityProtection::OutwardFreeze | StaVelocityProtection::Latched))
+		&& ((r.committed_axes & 4) || (r.flags & StaVelocityProtection::Priming))
+		&& PX4_ISFINITE(_correction(2));
+	if (_rista_cache_valid) {
+		_rista_cache_sample = _velocity_frame.sample;
+		_rista_cache_generation = _esta_config_generation;
+		_rista_cache_correction = _correction(2);
+		_rista_cache_ff = PX4_ISFINITE(_diagnostic.a_ff[2]) ? _diagnostic.a_ff[2] : 0.f;
+	}
+	_rista_diagnostic.cache_valid = _rista_cache_valid;
+	_rista_diagnostic.cache_sample = _rista_cache_valid ? _rista_cache_sample : 0;
 }
 
 uint16_t PositionControl::inputValidity() const
@@ -409,6 +500,7 @@ void PositionControl::_velocityControl(const float dt)
 		break;
 	case 1:
 	case 3:
+	case 4:
 		if (_velocity_selector.effectiveAxes() == 7) { _velocityControlEstaXYZ(dt); }
 		else if (_velocity_selector.effectiveAxes() == 4) { _velocityControlEstaZ(dt); }
 		else if (_velocity_selector.effectiveAxes() == 3) { _velocityControlEstaXY(dt); }
@@ -690,13 +782,14 @@ void PositionControl::_velocityControlEstaZ(const float dt)
 		_velocityControlPid(dt); // one boundary sample, same-frame PID output
 		const float s = _vel(2) - _vel_sp(2);
 		const float correction = _acc_sp(2) - ff;
-		const float nu = _esta_effective.variant == 3
+		float nu = _esta_effective.variant == 3
 			? correction + _esta_effective.gains[2].lambda1 * _regularizedPsi(s, 2)
 			: correction + _esta_effective.gains[2].lambda1 * sqrtf(fabsf(s)) * sign(s);
+		if (_esta_effective.variant == 4 && !_velocity_protection.implicitSeed(2, s, correction, nu)) { _esta_failed = true; }
 		const float ideal_z = (_acc_sp(2) / CONSTANTS_ONE_G - 1.f) * _hover_thrust;
 		if (!PX4_ISFINITE(correction) || fabsf(correction) > _esta_effective.acceleration_limit[2]
 		    || !PX4_ISFINITE(ideal_z) || fabsf(ideal_z - _thr_sp(2)) > 1e-6f
-		    || !_velocity_protection.seedZ(nu)) { _esta_failed = true; }
+		    || _esta_failed || !_velocity_protection.seedZ(nu)) { _esta_failed = true; }
 		_z_phase = 2;
 		_z_engaged = !_esta_failed;
 		return;
@@ -752,6 +845,7 @@ void PositionControl::_velocityControlEstaXYZ(const float dt)
 				seeds[i] = _esta_effective.variant == 3
 					? correction + _esta_effective.gains[i].lambda1 * _regularizedPsi(s, i)
 					: correction + _esta_effective.gains[i].lambda1 * sqrtf(fabsf(s)) * sign(s);
+				if (_esta_effective.variant == 4 && !_velocity_protection.implicitSeed(i, s, correction, seeds[i])) { _esta_failed = true; }
 				if (!PX4_ISFINITE(correction) || fabsf(correction) > _esta_effective.acceleration_limit[i]) { _esta_failed = true; }
 			}
 		}

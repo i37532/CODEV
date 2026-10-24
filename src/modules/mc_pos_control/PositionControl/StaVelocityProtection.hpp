@@ -2,6 +2,7 @@
 #pragma once
 #include "StaVelocityControl.hpp"
 #include "RegularizedStaVelocityControl.hpp"
+#include "RegularizedIstaVelocityControl.hpp"
 
 /** Acceleration-domain adapter; PositionControl admission is SITL only. Local NED.
  * Caller supplies the complete constrained thrust-map proxy, NOT measured
@@ -17,8 +18,8 @@ public:
 		std::array<StaVelocityControl::Parameters, 3> gains{};
 		Vec nu_limit{}, acceleration_limit{};
 		uint8_t axes{0};
-		uint8_t variant{1}; // 1: legacy hard-sign ESTA; 3: regularized explicit STA.
-		Vec epsilon{{.01f, .01f, .02f}}; // m/s, used/validated only by variant 3.
+		uint8_t variant{1}; // 1: ESTA; 3: R-STA; 4: R-ISTA (production admission closed).
+		Vec epsilon{{.01f, .01f, .02f}}; // m/s, used by variants 3/4.
 	};
 	struct Frame {
 		uint64_t sample{0};
@@ -39,6 +40,9 @@ public:
 		CorrectionLimit = 16, OutwardFreeze = 32, Latched = 64, Reset = 128, Held = 256 };
 	struct Result {
 		Vec s{}, nu_before{}, nu_ideal{}, nu_applied{}, a_sta{}, a_req{}, a_proxy{};
+		Vec p{}, psi{}, rho{}, correction_applied{};
+		float kernel_dt{0.f}, seed_dt{0.f};
+		uint8_t candidate_axes{0}, strict_axes{0};
 		float raw_dt{0.f};
 		uint8_t active_axes{0}, committed_axes{0};
 		uint16_t flags{0}, fault{0};
@@ -53,7 +57,12 @@ public:
 	// Validate ALL selected axes and feedback before any axis state is committed.
 	const Result &finish(const Vec &proxy, uint8_t constrained_axes, bool feedback_valid,
 		uint8_t interval_positive = 0, uint8_t interval_negative = 0);
-	const Vec &state() const { return _config.variant == 3 ? _regularized_kernel.state() : _kernel.state(); }
+	const Vec &state() const { return _config.variant == 4 ? _implicit_kernel.state() : (_config.variant == 3 ? _regularized_kernel.state() : _kernel.state()); }
+	const Result &result() const { return _result; }
+	uint64_t sample() const { return _last_sample; }
+	// Only RI02's implicit path calls these; legacy behavior is unchanged.
+	bool implicitSeed(size_t axis, float s, float correction, float &nu);
+	void abortImplicit(uint16_t reason, uint16_t flags = 0);
 	static bool validConfig(const Config &config);
 	// Z-only, closed-transaction state changes. No clipping on handover/HTE.
 	bool seedZ(float nu);
@@ -69,9 +78,11 @@ private:
 	void latch(uint16_t reason);
 	StaVelocityControl _kernel;
 	RegularizedStaVelocityControl _regularized_kernel;
+	RegularizedIstaVelocityControl _implicit_kernel;
 	Config _config{};
 	std::array<StaVelocityControl::Candidate, 3> _candidates{};
 	std::array<RegularizedStaVelocityControl::Candidate, 3> _regularized_candidates{};
+	std::array<RegularizedIstaVelocityControl::Candidate, 3> _implicit_candidates{};
 	Result _result{};
 	uint64_t _last_sample{0};
 	uint32_t _generation{0};

@@ -954,7 +954,8 @@ TEST(RegularizedIstaVelocityControl, ModeFourCannotBecomeEffectiveOrDisplaceExis
 				selector.configure(4, mask, armed, true, mask, true);
 				EXPECT_EQ(selector.requestedMode(), 4);
 				EXPECT_EQ(selector.requestedAxes(), mask);
-				EXPECT_NE(selector.reject() & VelocityControlSelector::ModeRange, 0);
+				// RI02 recognizes MODE4 but still has no production admission.
+				EXPECT_NE(selector.reject() & VelocityControlSelector::ModeUnimplemented, 0);
 				EXPECT_EQ(selector.effectiveMode(), mode);
 				EXPECT_EQ(selector.effectiveAxes(), previous_axes);
 				EXPECT_EQ(selector.pending(), armed);
