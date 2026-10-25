@@ -1,0 +1,123 @@
+{
+  "success": true,
+  "new_flights": 0,
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri06/test_design.py"
+      ],
+      "exit_code": 0,
+      "expected_tests": 25,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/final_checks01/0_test_design.log",
+      "log_sha256": "dc17e99401efac50013a62f1a1197fedd06621b1468cf6f04fdd5a90398cc1a1"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri06/test_freeze.py"
+      ],
+      "exit_code": 0,
+      "expected_tests": 7,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/final_checks01/1_test_freeze.log",
+      "log_sha256": "b360eeb5d049d720cd0fa667a572f7feb0466a4bfec0d1bdc179fe290d19cd93"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri06/test_statistics.py"
+      ],
+      "exit_code": 0,
+      "expected_tests": 14,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/final_checks01/2_test_statistics.log",
+      "log_sha256": "c85e44116f14ff1dd26195049beb85bb5d7d7acc141cfd198d549bea399f2258"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri06/test_package.py"
+      ],
+      "exit_code": 0,
+      "expected_tests": 7,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/final_checks01/3_test_package.log",
+      "log_sha256": "b579532df51de279e5e67c010618405654e930154f3e674fe3229d6e0cb80cd4"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri06/tools/test_tools.py"
+      ],
+      "exit_code": 0,
+      "expected_tests": 74,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/final_checks01/4_test_tools.log",
+      "log_sha256": "384e2c9454f46b3cd4408c13bffc9f4c957481d1d1dc9e63d8e6180f05ba6887"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri06/tools/test_transport.py"
+      ],
+      "exit_code": 0,
+      "expected_tests": 19,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/final_checks01/5_test_transport.log",
+      "log_sha256": "4fe1500929d2c4449479262aed4880590687caf7723dc0e4527cfb3601bcea63"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri06/results/final02/serialization_checks.py"
+      ],
+      "exit_code": 0,
+      "expected_tests": 14,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/final_checks01/6_serialization_checks.log",
+      "log_sha256": "ac6e9da8bd627c0143d4f0935a2191f667799eff6766b01790f29565bc679b61"
+    }
+  ],
+  "package_sha256": "d9351d9a4f76d66274739928b60cf8df6499f03ac21e6198f2e075ae6bd3e842",
+  "read_only_raw_inputs": true,
+  "actual_python_tests": 160,
+  "new_result_tests": 14,
+  "reexecuted_protocol_tests": 146,
+  "raw_ulog_count": 108,
+  "raw_ulog_bytes": 6565959652,
+  "zero_position_log_gaps": true,
+  "zero_same_sample_retries": true,
+  "all_landed_disarmed": true,
+  "planned": 54,
+  "attempted": 54,
+  "accepted": 54,
+  "independent_replays": 54,
+  "paired_checks": 36,
+  "individual_risk_conditions": 468,
+  "formal_attempts": 0,
+  "next_formal_budget": 200,
+  "qualified_source_heads": {
+    "TH": {
+      "source_head": "160a595a42898f9a9990a6047f982dd5cbacfb8b",
+      "firmware_sha256": "b4e4fa9eaa7a298e893496bb2be05c2fd90aebd2b63993ebc488f9624cc274b8"
+    },
+    "TV": {
+      "source_head": "160a595a42898f9a9990a6047f982dd5cbacfb8b",
+      "firmware_sha256": "b4e4fa9eaa7a298e893496bb2be05c2fd90aebd2b63993ebc488f9624cc274b8"
+    },
+    "VH": {
+      "source_head": "16113b0ab3a0569755a11282dfc79cfed148f66b",
+      "firmware_sha256": "b7548e2cc08208972e42501d1faf9e793a027224d30790264e9d16b316fcaaa1"
+    },
+    "VV": {
+      "source_head": "16113b0ab3a0569755a11282dfc79cfed148f66b",
+      "firmware_sha256": "b7548e2cc08208972e42501d1faf9e793a027224d30790264e9d16b316fcaaa1"
+    }
+  },
+  "production_changes": [],
+  "submodules": 33,
+  "summary_sha256": "1039de6ef6ba2ec5d28a1a9835b244c21ac5814c68fe2fd27b8db193e962773d",
+  "ulog_index_sha256": "c6c6a7460c8ffca8729f127f8d66b20d9a11c87543d81570e4ad544f2fcd9fea"
+}

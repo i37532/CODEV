@@ -1,0 +1,475 @@
+{
+  "stage": "RI06",
+  "accepted": true,
+  "planned": 54,
+  "attempts": 54,
+  "accepted_runs": 54,
+  "independent_replays": 54,
+  "paired_checks": 36,
+  "failed": 0,
+  "missing": 0,
+  "selection": {
+    "accepted": true,
+    "indices": {
+      "PID": 2,
+      "RSTA": 0,
+      "RISTA": 2
+    },
+    "scores": {
+      "PID": {
+        "0": 0.7769555599925511,
+        "1": 0.735250575183335,
+        "2": 0.6820140882235288
+      },
+      "RSTA": {
+        "0": 0.396368934853928,
+        "1": 0.401363113525112,
+        "2": 0.41347263568130865
+      },
+      "RISTA": {
+        "0": 0.40024357344046235,
+        "1": 0.4073219101600935,
+        "2": 0.39447615618909504
+      }
+    },
+    "training_runs": 36,
+    "validation_used": 0,
+    "rule": {
+      "formula": "mean over H/V x 2 seeds of (J / .01 + .10 * mean_axis_correction_TV_per_s)",
+      "J": "arithmetic mean of three time-weighted axis RMSE, m/s",
+      "task_weights": [
+        0.5,
+        0.5
+      ],
+      "failed_penalty": "infinity and stop entire batch",
+      "tie_tolerance": 1e-12,
+      "tie_order": [
+        1,
+        0,
+        2
+      ],
+      "eligibility": "four accepted complete runs, independent replay, paired development risk",
+      "validation_reselection": false,
+      "no_eligible": "stop; no validation/formal freeze",
+      "early_stop": "mandatory failure only"
+    },
+    "input_sha256": {
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TH/gate_pass.json": "3061e31d5d0df8f3337185793dab392d825c201e5ba88d8835d7f04bafc2e677",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TH/replay01/summary.json": "e09b79ba005936b471b7f372bc97abfe3ac2c35f752e5dc198f3def76f8bf8f5",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TH/batch01/ledger.json": "1f8c9374d6324453c8ae6380501a0e7b13da537585c68ba89c24d51286119c9a",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TH/batch01/run001/r03_metrics.json": "28df7052ec21074b3bac9284f98f3d195ed96bd4f2c78f91555d5f16103a8880",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TH/batch01/run002/r03_metrics.json": "7145444d93f3b0d7734477b6f5a3b794598bc910b2b807a2d6f162e754ee8f75",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TH/batch01/run003/r03_metrics.json": "cba5e1892e5aec9344535aeda3cf8fa91afe7d67e9b492708988ce06220e3e80",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TH/batch01/run004/r03_metrics.json": "37a06e08a90f843810bc231198afd93dc63d7a319e3600b2aa58983b35cfc737",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TH/batch01/run005/r03_metrics.json": "5496f4414e8c168ac3d5b98925c0d7566bc22eb55ec2538c1d5494c5acfb0577",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TH/batch01/run006/r03_metrics.json": "3b31f90b2e4f16f7563205085802ea5886f0c7b1858baaecd2d08319d1d3f251",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TH/batch01/run007/r03_metrics.json": "79acb4db4acc744947bdc9a7cca165191a7475737bef6b3365885814b731914f",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TH/batch01/run008/r03_metrics.json": "1ecab432657f484291d2ba4c87d1106ef4f6f7078ba52d2909ad6702aadb5cc7",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TH/batch01/run009/r03_metrics.json": "9104cc81f616c2060bd7b389be1186ed333544eca0366a498abc259c3ceb3f4f",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TH/batch01/run010/r03_metrics.json": "1f6a7da13786122f5159cd215abfded6af6295a46db8953556c90aff02cbf3f1",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TH/batch01/run011/r03_metrics.json": "fcbe441f1dfecd9b0ee42e6b7fb0b62d2819bf9260b02380011face62e75d6a7",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TH/batch01/run012/r03_metrics.json": "31d0bde3257e7b60d7d7afad4f21a0811212396908fd16218ed8e013704e245f",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TH/batch01/run013/r03_metrics.json": "20d1c7a4c5e0e884db56d499beee73274c6c2dab16906d186759e00979c6810a",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TH/batch01/run014/r03_metrics.json": "d3bee1e23918701b4f0a5b068de54a9e7f2754a34dabae3e7ad46a9c272f48f1",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TH/batch01/run015/r03_metrics.json": "eea206fe41586e59bb84b9086232ca7e750a17157fe49a7e9e867f3bcfe7db08",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TH/batch01/run016/r03_metrics.json": "876bec5220595466b4451c4b40e9846c8f16e06c459f33e2c4cca2de898f0f81",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TH/batch01/run017/r03_metrics.json": "47e284c1dde7275e720bf48e7206d7366117f90f555498a78a4c752ec930b51e",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TH/batch01/run018/r03_metrics.json": "a141c685e982d994247dca5ef46cca9814a3c1b8ab971bbfa02fe918d279e7b8",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TV/gate_pass.json": "d169f8e4c26212aa55104a807bf436cd933b53140f44408af049e2d32b8c3de6",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TV/replay01/summary.json": "d897d7d7d25b371a2989b6d91b9418fb6bd5d46ca8c5bab101a6fe02a7b705ef",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TV/batch01/ledger.json": "cac55d6485fb82f991c4069c9ae1a4564531ea2a38c64f24cad851e17afb6ca6",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TV/batch01/run019/r03_metrics.json": "c192e76cfc9eeb8f51ad93f276bb568c173635f0323386dc9fda8cb9e34a841f",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TV/batch01/run020/r03_metrics.json": "c7c894334c027bbb0b65be86f3ff117841584e8aad1cf53a0050e63f3aafe556",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TV/batch01/run021/r03_metrics.json": "127d0859c985523f1156f0b6d6b4f4ead009c035b8c6cb96a8b28562310ffb75",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TV/batch01/run022/r03_metrics.json": "5f3a9540242dd09080f7ef8d8db10461ba233cc152479bbc3e8bf542368c0365",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TV/batch01/run023/r03_metrics.json": "90a4e5bc034fed849ca66982924a34e891b019da54981cd0194f9014b23c437c",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TV/batch01/run024/r03_metrics.json": "ef0db3daedc990e98b74a2843f636cdacc2adeb4ed18962032493bbeef087452",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TV/batch01/run025/r03_metrics.json": "b995ed9178837ba0450b2c35798686d5459d001db2afdf7481c4380ffdbc25da",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TV/batch01/run026/r03_metrics.json": "64bfa8a69dc77a1b6c8364598a8c0d3028f7c5f6add1af5bf5f9bf21aa7a89d5",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TV/batch01/run027/r03_metrics.json": "f589f48a7a1cf7d1843f253b55b6d70aaa8f58e353b9bb7aeeebff8a1baec096",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TV/batch01/run028/r03_metrics.json": "528431cbb270d411ba3accd68cc72119d14e51bf1373ca01e63e1d7ffd906c0a",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TV/batch01/run029/r03_metrics.json": "fdd96aa474510fb5cab1aa35d860f00b0140bfe99b092a56875061bbfdc5bdf8",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TV/batch01/run030/r03_metrics.json": "d9888f8f8fb12adef6e02af60fcbff2795879fe69bfda20413161234c4a03f33",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TV/batch01/run031/r03_metrics.json": "5daa0dc62b2852a46eadac61ab7ad4621d05a8bc13e372b2ee45c861aefe9bde",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TV/batch01/run032/r03_metrics.json": "798115bff569da23d57a78569596eeb2bf08ee9b0db600aa4ca555a810d71fbe",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TV/batch01/run033/r03_metrics.json": "2b7bafc86e94b63eb99f4ae34bc122106587f98efe0c67539a2682187c44d594",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TV/batch01/run034/r03_metrics.json": "b51f9071ae38d5b487e5bc48d17eebc2d23554863f9196437ec1bcfce3a6c364",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TV/batch01/run035/r03_metrics.json": "e28ccceb987887ce20afd913186d4cdc6d9b5159036ddd9cc632a17ec3df3be9",
+      "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261025/RI06/TV/batch01/run036/r03_metrics.json": "923aefbba376819ab87ac3f6f5fc1e5c13034c593da2a5ac18d9fb34088028ab"
+    },
+    "source_head": "160a595a42898f9a9990a6047f982dd5cbacfb8b"
+  },
+  "rows": [
+    {
+      "job": {
+        "id": "run001",
+        "revision": "ri06",
+        "gate": "TH",
+        "task": "H",
+        "phase": "training",
+        "role": "equal_budget",
+        "seed": 84001,
+        "block": 1,
+        "position": 1,
+        "candidate": "PID",
+        "candidate_index": 1,
+        "mode": 0,
+        "axes": 0,
+        "divisor": 1,
+        "main_duration_s": 64,
+        "parameters": {
+          "MPC_YAW_MODE": 0,
+          "MC_AIRMODE": 0,
+          "MC_PITCHRATE_MAX": 220,
+          "MC_PITCH_P": 6.5,
+          "MC_RATT_TEST": 0,
+          "MC_ROLLRATE_MAX": 220,
+          "MC_ROLL_P": 6.5,
+          "MC_YAWRATE_MAX": 200,
+          "MC_YAW_P": 2.8,
+          "MC_YAW_WEIGHT": 0.4,
+          "MPC_YAWRAUTO_MAX": 45,
+          "MC_MAN_TILT_TAU": 0,
+          "MPC_ACC_DOWN_MAX": 3,
+          "MPC_ACC_HOR": 3,
+          "MPC_ACC_HOR_MAX": 5,
+          "MPC_ACC_UP_MAX": 4,
+          "MPC_ALT_MODE": 0,
+          "MPC_HOLD_DZ": 0.1,
+          "MPC_HOLD_MAX_XY": 0.8,
+          "MPC_HOLD_MAX_Z": 0.6,
+          "MPC_JERK_AUTO": 4,
+          "MPC_JERK_MAX": 8,
+          "MPC_LAND_ALT1": 10,
+          "MPC_LAND_ALT2": 5,
+          "MPC_LAND_SPEED": 0.6,
+          "MPC_MANTHR_MIN": 0.08,
+          "MPC_MAN_TILT_MAX": 35,
+          "MPC_MAN_Y_MAX": 150,
+          "MPC_MAN_Y_TAU": 0.08,
+          "MPC_POS_MODE": 4,
+          "MPC_SPOOLUP_TIME": 1,
+          "MPC_THR_CURVE": 0,
+          "MPC_THR_HOVER": 0.5,
+          "MPC_THR_MAX": 1,
+          "MPC_THR_MIN": 0.12,
+          "MPC_TILTMAX_AIR": 45,
+          "MPC_TILTMAX_LND": 12,
+          "MPC_TKO_RAMP_T": 3,
+          "MPC_TKO_SPEED": 1.5,
+          "MPC_USE_HTE": 1,
+          "MPC_VELD_LP": 5,
+          "MPC_VEL_MANUAL": 10,
+          "MPC_XY_CRUISE": 5,
+          "MPC_XY_ERR_MAX": 2,
+          "MPC_XY_MAN_EXPO": 0.6,
+          "MPC_XY_P": 0.95,
+          "MPC_XY_TRAJ_P": 0.5,
+          "MPC_XY_VEL_ALL": -10,
+          "MPC_XY_VEL_D_ACC": 0.24,
+          "MPC_XY_VEL_I_ACC": 0.48,
+          "MPC_XY_VEL_MAX": 12,
+          "MPC_XY_VEL_P_ACC": 2.16,
+          "MPC_YAW_EXPO": 0.6,
+          "MPC_Z_MAN_EXPO": 0.6,
+          "MPC_Z_P": 1,
+          "MPC_Z_VEL_ALL": -3,
+          "MPC_Z_VEL_D_ACC": 0.0,
+          "MPC_Z_VEL_I_ACC": 2.0,
+          "MPC_Z_VEL_MAX_DN": 0.55,
+          "MPC_Z_VEL_MAX_UP": 3,
+          "MPC_Z_VEL_P_ACC": 4.0,
+          "SYS_VEHICLE_RESP": -0.4,
+          "MC_ACRO_EXPO": 0.69,
+          "MC_ACRO_EXPO_Y": 0.69,
+          "MC_ACRO_P_MAX": 720,
+          "MC_ACRO_R_MAX": 720,
+          "MC_ACRO_SUPEXPO": 0.7,
+          "MC_ACRO_SUPEXPOY": 0.7,
+          "MC_ACRO_Y_MAX": 540,
+          "MC_BAT_SCALE_EN": 0,
+          "MC_PITCHRATE_D": 0.003,
+          "MC_PITCHRATE_FF": 0,
+          "MC_PITCHRATE_I": 0.2,
+          "MC_PITCHRATE_K": 1,
+          "MC_PITCHRATE_P": 0.15,
+          "MC_PR_INT_LIM": 0.3,
+          "MC_ROLLRATE_D": 0.003,
+          "MC_ROLLRATE_FF": 0,
+          "MC_ROLLRATE_I": 0.2,
+          "MC_ROLLRATE_K": 1,
+          "MC_ROLLRATE_P": 0.15,
+          "MC_RR_INT_LIM": 0.3,
+          "MC_RTC_DIV": 1,
+          "MC_RTC_MODE": 0,
+          "MC_STA_AXES": 0,
+          "MC_STA_G_P": 0,
+          "MC_STA_G_R": 0,
+          "MC_STA_G_Y": 0,
+          "MC_STA_L1_P": 0,
+          "MC_STA_L1_R": 0,
+          "MC_STA_L1_Y": 0,
+          "MC_STA_L2_P": 0,
+          "MC_STA_L2_R": 0,
+          "MC_STA_L2_Y": 0,
+          "MC_STA_NU_P": 0,
+          "MC_STA_NU_R": 0,
+          "MC_STA_NU_Y": 0,
+          "MC_STA_TKO_MGT": 0,
+          "MC_YAWRATE_D": 0,
+          "MC_YAWRATE_FF": 0,
+          "MC_YAWRATE_I": 0.1,
+          "MC_YAWRATE_K": 1,
+          "MC_YAWRATE_P": 0.2,
+          "MC_YR_INT_LIM": 0.3,
+          "MPC_LAND_RC_HELP": 0,
+          "MPC_VC_MODE": 0,
+          "MPC_VC_AXES": 0,
+          "MPC_VC_L1_X": 0.5,
+          "MPC_VC_L2_X": 0.1,
+          "MPC_VC_NU_X": 0.4,
+          "MPC_VC_A_X": 0.8,
+          "MIS_TAKEOFF_ALT": 2.5,
+          "SDLOG_DIRS_MAX": 1000,
+          "SDLOG_MODE": 1,
+          "MPC_VC_L1_Y": 0.5,
+          "MPC_VC_L2_Y": 0.1,
+          "MPC_VC_NU_Y": 0.4,
+          "MPC_VC_A_Y": 0.8,
+          "MPC_VC_L1_Z": 2.0,
+          "MPC_VC_L2_Z": 1.0,
+          "MPC_VC_NU_Z": 4.0,
+          "MPC_VC_A_Z": 6.0,
+          "MPC_VC_DIV": 1,
+          "MPC_VCT_TEST": 6,
+          "MPC_VC_EPS_X": 0.01,
+          "MPC_VC_EPS_Y": 0.01,
+          "MPC_VC_EPS_Z": 0.02
+        }
+      },
+      "accepted": true,
+      "J": 0.007632108601763724,
+      "velocity_rmse": [
+        0.010422944747150808,
+        0.009956619853508078,
+        0.002516761204632286
+      ],
+      "velocity_mean": [
+        -0.0020760975923112676,
+        -0.0012278384470482708,
+        -5.047379931784238e-05
+      ],
+      "velocity_variance": [
+        0.00010432759598935794,
+        9.762669165522111e-05,
+        6.331539356724575e-06
+      ],
+      "windows": {
+        "first_half": {
+          "error": {
+            "rmse": [
+              0.010734791052693798,
+              0.011117533573402413,
+              0.0023021693924752296
+            ],
+            "mean": [
+              -0.0025295362166943914,
+              -0.003373061915437573,
+              7.550527488638167e-05
+            ],
+            "variance": [
+              0.00010883718547342613,
+              0.00011222200607035418,
+              5.294282865114092e-06
+            ],
+            "std": [
+              0.010432506193308783,
+              0.010593488852609143,
+              0.0023009308692601114
+            ],
+            "max_abs": [
+              0.03184039145708084,
+              0.023694321513175964,
+              0.008277349174022675
+            ]
+          },
+          "J": 0.00805149800619048,
+          "seconds": 32.0,
+          "samples": 3200,
+          "actual_updates": 3200,
+          "constraint_fraction": 0.0,
+          "maximum_continuous_constraint_s": 0.0,
+          "iae_m": [
+            0.2671341804508112,
+            0.29911859494866777,
+            0.057709616681560875
+          ],
+          "nu_peak": {},
+          "acceleration_tv": [
+            3.4251596927642822,
+            3.4898295402526855,
+            2.5580639839172363
+          ],
+          "acceleration_tv_per_second": [
+            0.10703624039888382,
+            0.10905717313289642,
+            0.07993949949741364
+          ],
+          "normalized_thrust_tv": [
+            0.24788138270378113,
+            0.25256502628326416,
+            0.18611174821853638
+          ],
+          "normalized_thrust_tv_per_second": [
+            0.00774629320949316,
+            0.007892657071352005,
+            0.005815992131829262
+          ],
+          "correction_tv": [
+            3.4228310585021973,
+            3.4840266704559326,
+            2.5580639839172363
+          ],
+          "correction_tv_per_second": [
+            0.10696347057819366,
+            0.1088758334517479,
+            0.07993949949741364
+          ]
+        },
+        "second_half": {
+          "error": {
+            "rmse": [
+              0.01010147590500135,
+              0.008641122904970893,
+              0.0027144410125538847
+            ],
+            "mean": [
+              -0.0016226589679281486,
+              0.0009173850213410313,
+              -0.00017645287352206654
+            ],
+            "variance": [
+              9.940679333312508e-05,
+              7.382740978143175e-05,
+              7.337054394060358e-06
+            ],
+            "std": [
+              0.009970295548935602,
+              0.008592287808344862,
+              0.0027086997607819806
+            ],
+            "max_abs": [
+              0.027806762605905533,
+              0.023415664210915565,
+              0.007767334580421448
+            ]
+          },
+          "J": 0.0071523466075087095,
+          "seconds": 32.0,
+          "samples": 3200,
+          "actual_updates": 3200,
+          "constraint_fraction": 0.0,
+          "maximum_continuous_constraint_s": 0.0,
+          "iae_m": [
+            0.25427968652127314,
+            0.22505436322651834,
+            0.0686512432540768
+          ],
+          "nu_peak": {},
+          "acceleration_tv": [
+            3.5523500442504883,
+            3.2836852073669434,
+            2.693819284439087
+          ],
+          "acceleration_tv_per_second": [
+            0.11101093888282776,
+            0.10261516273021698,
+            0.08418185263872147
+          ],
+          "normalized_thrust_tv": [
+            0.2570156455039978,
+            0.23644056916236877,
+            0.19569015502929688
+          ],
+          "normalized_thrust_tv_per_second": [
+            0.008031738921999931,
+            0.007388767786324024,
+            0.006115317344665527
+          ],
+          "correction_tv": [
+            3.551913261413574,
+            3.2788007259368896,
+            2.693819284439087
+          ],
+          "correction_tv_per_second": [
+            0.1109972894191742,
+            0.1024625226855278,
+            0.08418185263872147
+          ]
+        }
+      },
+      "position_rmse": [
+        0.026754482779532865,
+        0.027123431281160543,
+        0.0363793046276852
+      ],
+      "yaw_rmse": 0.00012613449364488674,
+      "height": {
+        "rmse": 0.03643204904487974,
+        "mean": 0.01673817331619684,
+        "std": 0.032359353387320315,
+        "max_abs": 0.08330750465393066
+      },
+      "height_task": {
+        "heading": {
+          "primary": 0,
+          "through_us": 151100000,
+          "position_samples": 11652,
+          "confirmed": true,
+          "pending": false,
+          "quiet_s": 1.152,
+          "ready": true,
+          "latest_position": {
+            "timestamp": 151100000,
+            "timestamp_sample": 151100000,
+            "xy_valid": 1,
+            "z_valid": 1,
+            "v_xy_valid": 1,
+            "v_z_valid": 1,
+            "x": -0.017519352957606316,
+            "y": 0.0019039977341890335,
+            "z": 0.32712361216545105,
+            "delta_xy[0]": 0.000590394891332835,
+            "delta_xy[1]": 0.007461700588464737,
+            "xy_reset_counter": 2,
+            "delta_z": 0.0,
+            "z_reset_counter": 0,
+            "vx": 0.04336082562804222,
+            "vy": -0.036346204578876495,
+            "vz": -0.06608512997627258,
+            "z_deriv": -0.03665406256914139,
+            "delta_vxy[0]": 0.003682774258777499,
+            "delta_vxy[1]": 0.007580407429486513,
+            "vxy_reset_counter": 2,
+            "delta_vz": -0.00044956430792808533,
+            "vz_reset_counter": 1,
+            "ax": 0.02187259867787361,
+            "ay": -0.01932501047849655,
+            "az": 0.01740921102464199,
+            "heading": 1.5720701217651367,
+            "delta_heading": 0.0006361603736877441,
+            "heading_reset_counter": 3,
+            "xy_global": 1,
+            "z_global": 1,
+            "ref_timestamp": 1196000,
+            "ref_lat": 47.3977508,
+            "ref_lon": 8.5456073,
+            "ref_alt": 488.48114013671875,
+            "dist_bottom": 0.10253101587295532,
+            "dist_bottom_valid": 1,
+            "dist_bottom_sensor_bitfield": 0,
+            "eph": 0.49556031823158264,
+            "epv": 0.4658534824848175,
+            "evh": 0.19780099391937256,
+            "evv": 0.11123737692832947,
+            "vxy_max": 
