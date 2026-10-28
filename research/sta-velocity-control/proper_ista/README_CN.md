@@ -1,6 +1,6 @@
 # Proper-ISTA 速度环研究
 
-2026-10-28：**PV00离线审计完成，尚无Proper速度飞行资格；PV01未启动**。新分支 `research/proper-ista-velocity` 从 RI07 结果提交 `8079e17177e3edb597d8da1597081a82cbd6747a` 创建；原 `research/ista-velocity-regularized` 基线分支保持不变。
+2026-10-28：**PV00与PV01离线验收完成，尚无Proper速度飞行资格；PV02未启动**。新分支 `research/proper-ista-velocity` 从 RI07 结果提交 `8079e17177e3edb597d8da1597081a82cbd6747a` 创建；原 `research/ista-velocity-regularized` 基线分支保持不变。
 
 ## 计划入口
 
@@ -25,4 +25,12 @@
 
 PV00交付：[报告](../reports/PV00.md) · [数学/数值契约](pv00/CONTRACT_CN.md) · [离线复现](pv00/README_CN.md)。原144轨迹复现，新69诊断完成；12个极小数拒绝和不可行限幅反例保留。551个C++、46个Python实际检查通过；数值拒绝根因与滞后/噪声适用性分开，尚未修复生产控制律。
 
-本阶段明确范围提交计划快照、专项入口和PV00成果；完整SHA见实时进度表，未push。没有修改生产控制/参数/模型，没有飞行。入口原有两个README、使用手册和图表的未提交状态及指纹保留。下一步须另行启动PV01，不能直接切MODE5起飞。
+PV00明确范围提交计划快照、专项入口和审计成果；完整SHA见实时进度表，未push。入口原有两个README、使用手册和图表的未提交状态及指纹保留，不能直接切MODE5起飞。
+
+## PV01 独立速度核（离线passed）
+
+[报告](../reports/PV01.md) · [复现入口](pv01/README_CN.md) · [数学/数值/事务契约](pv01/NUMERICS_CN.md) · [结果](pv01/results/summary.json)。
+
+新C++14核仅测试目标链接，MODE5仍拒绝；796个C++检查（790具名＋6准入）、67个Python通过，SITL构建完成。6018正常输入a/nu与旧Proper核一致，122极值格点121接受/1预期拒绝；4历史极小数终点各4096步完整，52对象/190800更新无数值停止并独立回放。4不可行限幅反例保留，滞后与噪声风险未被数值修复消除。
+
+没有隐藏epsilon/死区/强制清零，没有保护/执行器接线、飞行或MATLAB重跑；旧PID/R-STA/R-ISTA/参数/模型不变。支持范围暂限x86 SSE渐进下溢和最近舍入。下一步需另行执行PV02，不自动进入、不push。

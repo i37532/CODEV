@@ -64,6 +64,20 @@ px4_add_unit_gtest(SRC ControlMathTest.cpp LINKLIBS PositionControl)
 px4_add_unit_gtest(SRC PositionControlTest.cpp LINKLIBS PositionControl)
 
 if(BUILD_TESTING)
+	# PV01: offline-only independent kernel. Not linked to PositionControl,
+	# its protection adapters, the dispatcher, or the SITL firmware.
+	px4_add_library(ProperIstaVelocityControl ProperIstaVelocityControl.cpp ProperIstaVelocityControl.hpp)
+	target_compile_features(ProperIstaVelocityControl PUBLIC cxx_std_14)
+	target_include_directories(ProperIstaVelocityControl PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+	# Keep the numerical contract local; do not alter old controller flags.
+	target_compile_options(ProperIstaVelocityControl PRIVATE
+		-fno-fast-math -fno-reciprocal-math -fsigned-zeros -ffp-contract=off -frounding-math)
+	px4_add_unit_gtest(SRC ProperIstaVelocityControlTest.cpp LINKLIBS ProperIstaVelocityControl)
+	# Tests intentionally compare exact IEEE boundaries and widen float inputs
+	# in the independent double oracle. Keep these exceptions test-local.
+	target_compile_options(unit-ProperIstaVelocityControl PRIVATE
+		-Wno-float-equal -Wno-double-promotion
+		-fno-fast-math -fno-reciprocal-math -fsigned-zeros -ffp-contract=off -frounding-math)
 	px4_add_unit_gtest(SRC RegularizedIstaVelocityControlTest.cpp LINKLIBS RegularizedIstaVelocityControl)
 	px4_add_library(RI01PositionReference
 		${PX4_SOURCE_DIR}/research/sta-velocity-control/regularized_ista/ri02/reference/RI01PositionControl.cpp
