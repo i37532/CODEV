@@ -1,0 +1,44 @@
+test_each_scored_mode_axis_fault_field_is_checked_by_collector (test_diagnostic_wiring.CollectorWiringTests) ... ok
+test_every_missing_topic_rejected_in_both_collection_paths (test_diagnostic_wiring.CollectorWiringTests) ... ok
+test_explicit_invalid_configuration_rejected_before_diagnostic_reads (test_diagnostic_wiring.CollectorWiringTests) ... ok
+test_failed_batch_and_old_asset_hash_cannot_be_reused (test_diagnostic_wiring.CollectorWiringTests) ... ok
+test_fixed_sta2_collector_actually_reads_missing_override_topic (test_diagnostic_wiring.CollectorWiringTests) ... ok
+test_fixture_manifest_fingerprint (test_diagnostic_wiring.CollectorWiringTests) ... ok
+test_four_systems_all_stages_read_actual_cli_and_keep_pid_modes (test_diagnostic_wiring.CollectorWiringTests) ... ok
+test_four_systems_parameter_verifier_and_sampler_collect_same_fields (test_diagnostic_wiring.CollectorWiringTests) ... FAIL
+test_frozen_runner_reproduces_original_failure_without_simulation (test_diagnostic_wiring.CollectorWiringTests) ... ok
+test_ground_to_active_and_landing_use_phase_specific_requirements (test_diagnostic_wiring.CollectorWiringTests) ... ok
+test_main_three_system_snapshots_equal_old_collector (test_diagnostic_wiring.CollectorWiringTests) ... FAIL
+test_missing_or_invalid_timestamp_never_accepted (test_diagnostic_wiring.CollectorWiringTests) ... ok
+test_no_cached_diagnostic_can_mask_later_missing_publication (test_diagnostic_wiring.CollectorWiringTests) ... ok
+test_absent_override_inherits_base_without_mutation (test_diagnostic_wiring.SelectionTests) ... ok
+test_all_four_actual_jobs_keep_existing_selected_requirements (test_diagnostic_wiring.SelectionTests) ... ok
+test_empty_field_map_is_not_empty_topic_configuration (test_diagnostic_wiring.SelectionTests) ... ok
+test_explicit_empty_null_or_wrong_type_never_means_fallback (test_diagnostic_wiring.SelectionTests) ... ok
+test_invalid_topics_fields_and_nonfinite_requirements_rejected (test_diagnostic_wiring.SelectionTests) ... ok
+test_manifest_diagnostic_requirements_cannot_change_between_tasks (test_diagnostic_wiring.SelectionTests) ... ok
+test_manifest_rejects_bad_override_before_runtime (test_diagnostic_wiring.SelectionTests) ... ok
+test_real_frozen_jobs_are_valid_with_absent_sta2_override (test_diagnostic_wiring.SelectionTests) ... ok
+
+======================================================================
+FAIL: test_four_systems_parameter_verifier_and_sampler_collect_same_fields (test_diagnostic_wiring.CollectorWiringTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/test_diagnostic_wiring.py", line 210, in test_four_systems_parameter_verifier_and_sampler_collect_same_fields
+    self.assertEqual(saved, sampled)
+AssertionError: {'sta[679 chars]p': ['NaN', 'NaN', 'NaN'], 'v_ff': ['NaN', 'Na[3079 chars]1.0}} != {'sta[679 chars]p': [nan, nan, nan], 'v_ff': [nan, nan, nan], [2993 chars]1.0}}
+Diff is 11058 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_main_three_system_snapshots_equal_old_collector (test_diagnostic_wiring.CollectorWiringTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/test_diagnostic_wiring.py", line 218, in test_main_three_system_snapshots_equal_old_collector
+    self.assertEqual(old['sample'](phase), current['sample'](phase))
+AssertionError: {'pha[6082 chars]k': True, 'div_wait': False, 'sat_valid': True, 'clock': 1.0}}} != {'pha[6082 chars]k': True, 'div_wait': False, 'sat_valid': True, 'clock': 1.0}}}
+Diff is 15121 characters long. Set self.maxDiff to None to see it.
+
+----------------------------------------------------------------------
+Ran 21 tests in 1.057s
+
+FAILED (failures=2)

@@ -1,0 +1,200 @@
+{
+  "commands": [
+    {
+      "name": "functional-ImuConversion",
+      "argv": [
+        "/home/yr/Desktop/Codev-SuperTwisting2-imu-fix/build/px4_sitl_test/functional-ImuConversion",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-QUICK-20261102/qualification02/functional-ImuConversion.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-QUICK-20261102/qualification02/functional-ImuConversion.log",
+      "log_sha256": "a37d64a82cdace2431d439efb8249db013ba1f1eb2394272677b92de5ffd7847"
+    },
+    {
+      "name": "unit-PositionControl",
+      "argv": [
+        "/home/yr/Desktop/Codev-SuperTwisting2-imu-fix/build/px4_sitl_test/unit-PositionControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-QUICK-20261102/qualification02/unit-PositionControl.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-QUICK-20261102/qualification02/unit-PositionControl.log",
+      "log_sha256": "090832d507878da954393d0420512682990e7e95a0f1f4d3980fef92993fc8d9"
+    },
+    {
+      "name": "unit-ControlMath",
+      "argv": [
+        "/home/yr/Desktop/Codev-SuperTwisting2-imu-fix/build/px4_sitl_test/unit-ControlMath",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-QUICK-20261102/qualification02/unit-ControlMath.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-QUICK-20261102/qualification02/unit-ControlMath.log",
+      "log_sha256": "5a6a6d9930f5b92e9590049445635481dcf5fc79edcd5f682629b4709b0cc77a"
+    },
+    {
+      "name": "unit-Takeoff",
+      "argv": [
+        "/home/yr/Desktop/Codev-SuperTwisting2-imu-fix/build/px4_sitl_test/unit-Takeoff",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-QUICK-20261102/qualification02/unit-Takeoff.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-QUICK-20261102/qualification02/unit-Takeoff.log",
+      "log_sha256": "655337ede04aab9ccf1c1a8d6f643431d56538c8c3bd1fb8cb1dc05df208f3bf"
+    },
+    {
+      "name": "unit-rate_control_test",
+      "argv": [
+        "/home/yr/Desktop/Codev-SuperTwisting2-imu-fix/build/px4_sitl_test/unit-rate_control_test",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-QUICK-20261102/qualification02/unit-rate_control_test.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-QUICK-20261102/qualification02/unit-rate_control_test.log",
+      "log_sha256": "d7624bb5a454a02bf68d408f76d5d9c0a605d0978f13f61e4f1e2f13d2f0b458"
+    },
+    {
+      "name": "unit-AttitudeControl",
+      "argv": [
+        "/home/yr/Desktop/Codev-SuperTwisting2-imu-fix/build/px4_sitl_test/unit-AttitudeControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-QUICK-20261102/qualification02/unit-AttitudeControl.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-QUICK-20261102/qualification02/unit-AttitudeControl.log",
+      "log_sha256": "ee15ea76f1530e3cec7675001255e41aacc7fad0a737fe644fdabc8ee87c5321"
+    },
+    {
+      "name": "quick_tests",
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/quick_check",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-QUICK-20261102/qualification02/quick_tests.log",
+      "log_sha256": "94ae56a9121d0c9952a6bf5e7a80397c1247368155d05206f5de7598f49d2f32"
+    },
+    {
+      "name": "old_offboard_tests",
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-QUICK-20261102/qualification02/old_offboard_tests.log",
+      "log_sha256": "396adac047f57c3340edc67ddb61f26c6234e4d2c3a6b786a2b3beff6698403e"
+    },
+    {
+      "name": "runtime",
+      "argv": [
+        "/usr/bin/python3",
+        "/home/yr/.local/share/codev-ros-offboard/preflight.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-QUICK-20261102/qualification02/runtime.log",
+      "log_sha256": "10719c69cef9a91eaaf9208bfd90ee419eb2180a7c105f859a7c27c837f3d9d3"
+    }
+  ],
+  "new_flights": 0,
+  "passed": true,
+  "cpp": {
+    "functional-ImuConversion": {
+      "tests": "14",
+      "failures": "0",
+      "disabled": "0",
+      "errors": "0",
+      "time": "0.072",
+      "timestamp": "2026-11-02T17:46:51.747",
+      "name": "AllTests"
+    },
+    "unit-PositionControl": {
+      "tests": "17",
+      "failures": "0",
+      "disabled": "0",
+      "errors": "0",
+      "time": "0",
+      "timestamp": "2026-11-02T17:46:51.863",
+      "name": "AllTests"
+    },
+    "unit-AttitudeControl": {
+      "tests": "3",
+      "failures": "0",
+      "disabled": "0",
+      "errors": "0",
+      "time": "0",
+      "timestamp": "2026-11-02T17:46:51.874",
+      "name": "AllTests"
+    },
+    "unit-ControlMath": {
+      "tests": "9",
+      "failures": "0",
+      "disabled": "0",
+      "errors": "0",
+      "time": "0",
+      "timestamp": "2026-11-02T17:46:51.867",
+      "name": "AllTests"
+    },
+    "unit-rate_control_test": {
+      "tests": "1",
+      "failures": "0",
+      "disabled": "0",
+      "errors": "0",
+      "time": "0",
+      "timestamp": "2026-11-02T17:46:51.873",
+      "name": "AllTests"
+    },
+    "unit-Takeoff": {
+      "tests": "2",
+      "failures": "0",
+      "disabled": "0",
+      "errors": "0",
+      "time": "0",
+      "timestamp": "2026-11-02T17:46:51.871",
+      "name": "AllTests"
+    }
+  },
+  "source_sha256": {
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/quick_check/test_forwarding.py": "536318d3e711e9b5978b050d1240e2453f92448ecad2c91349a7b43ac1eab7d9",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/quick_check/test_runner_contract.py": "5cd199e8ef7ef8b281a8f660c4e8fa0812f9e0296641eee759be1b17925753f4",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/quick_check/heading_check.py": "683989280f9afdcd65fad9406ce044aba0ab490004b8cf710d7970bcbc25b138",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/quick_check/ros_bridge.py": "39902e1d12dc3ad19fa706429826cbbf7d53301a58b6d0da90bedb57d742ef4e",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/quick_check/task_contract.py": "1dbc1e7875701b071184b34e011795dd63c2c31b1ba900c169173896e66c0a81",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/quick_check/test_heading_check.py": "5431e284911f0ad4edd6d1e71cb0078b9e63dee42fce97facea9fde4745f84fd",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/quick_check/test_quick.py": "cabc8f84565021683ad7a38ed6e73d65dccf86415d99001e462574bde7277aad",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/quick_check/runner_contract.py": "d0d65a7ab733d7c93c6ef5f3eb5268f0763a2195163741016ef9ed22dd0275c6",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/quick_check/test_landing_confirmation.py": "4af752254255f58e094a6520d1657e52c904797c71fbcf1a0c478166d5ad795d",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/quick_check/test_event_semantics.py": "99d8999dbe62f5304494a5fe5894a7971439650bc0224530be5ce295679ef6ee",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/quick_check/analyze.py": "6408256da01d17c0931172b6af39a99216eaac57dbc0ff819f4bbc95c3df685b",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/quick_check/test_task_contract.py": "944e7ea3993f911e95f3362f46847d25025a9ec4daee2fa58a634088065b2ad7",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/quick_check/test_run.py": "5abdc989e34b0ee0db0196cbb132463238bf0ceabc7ede2b12dfc328993a3456",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/quick_check/test_ros_bridge.py": "2ae71de6e5a3f3ac2498290130e630bde881260e02e0468a3e5f5d18415ae3eb",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/quick_check/test_diagnostic_wiring.py": "980d9772fd6d759b84621606c21f20bb4711da007a79acdde38727f5ed2ab88c",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/quick_check/qualify.py": "9034dc6c8542eb184d090ab9fdf7a379372999835aa09c4a2270649d976f0e26",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/quick_check/freeze_quick.py": "5148de671f4d48a5bccac3688524303404e329eaa7c8365f36a5d5d9d8a4974e",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/quick_check/run.py": "629a41456f1bc26e72caa8cf059a8f647f22c8f85326bd4302fdd4ffa3b24171",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/quick_check/test_analyze.py": "e30c353240c25a00bc7287f3798b9804bcdf98651aa242416939164d7094e32e",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/quick_check/contact.py": "8ed5ce10ee018c52d8f9f7ddc482697641187d989c462c6fd43b50ab741fa614"
+  },
+  "firmware_sha256": "71a3e620864fa1f00c9b3d43230146cda88237e2a6f7c7c56e2cbf09a39cbed4"
+}

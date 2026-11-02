@@ -1,0 +1,52 @@
+{
+  "new_flights": 0,
+  "diagnostic_only": true,
+  "new_manifest_created": false,
+  "cli_fixture_sha256": "7f81e32a34ee902ba527f6b26a097da05b00ab9cb2c5a7bdb26e537cc89e4bab",
+  "cli_replays": [
+    {
+      "system": "PID",
+      "original_stdout_verified": true,
+      "both_configuration_paths_passed": true
+    },
+    {
+      "system": "STA2",
+      "original_stdout_verified": true,
+      "both_configuration_paths_passed": true
+    },
+    {
+      "system": "RSTA",
+      "original_stdout_verified": true,
+      "both_configuration_paths_passed": true
+    },
+    {
+      "system": "RISTA",
+      "original_stdout_verified": true,
+      "both_configuration_paths_passed": true
+    }
+  ],
+  "ulog_replays": [
+    {
+      "id": "O001",
+      "original_success": true,
+      "complete_metrics_exact": true,
+      "ulog_sha256": "2d17de0c4d632f90a5c9130edd91ddf4545becf0f7cbc1c5f471a60ea9817b79"
+    },
+    {
+      "id": "O002",
+      "original_success": false,
+      "still_rejected": "Unpaired phase event: hover",
+      "native_diagnostic_samples": 12217,
+      "ulog_sha256": "1f2e8c364ec4308f527fc191b0d0fbe3002bd38a6ac178538e9c5b71b6097b96"
+    }
+  ],
+  "original_evidence_unchanged": true,
+  "protected_files": 73,
+  "source_sha256": {
+    "run.py": "45f48d8ce27e548770ed18b025dca3a7f514932168bdaa636b20f3f4b19ac3ab",
+    "runner_contract.py": "52459b55d3ed550282a6c5130903cc06ff5d98ca86eef01f6d21255cc5fea3fa",
+    "analyze.py": "6408256da01d17c0931172b6af39a99216eaac57dbc0ff819f4bbc95c3df685b",
+    "test_diagnostic_wiring.py": "a50f348382359c0b1ae5ea47556c2b546b81fdbc9541f458f4c22e6674a3b8b4",
+    "replay_diagnostic_fix.py": "4e2a8d82e7acf3461bd216c85d4d47e6d9346170a450b2c9959ff8cbc1abc56e"
+  }
+}

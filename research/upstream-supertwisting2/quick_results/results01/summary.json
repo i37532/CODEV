@@ -1,0 +1,503 @@
+{
+  "scope": "Exploratory system comparison, n=1; not gain tuning or causal algorithm ranking",
+  "manifest_sha256": "fd99b118eb0a74190d288255a4b8470639691fe05b6680f5987d0ab89158d770",
+  "source_script_sha256": "279e8c04dd3700b5ebda876530eb40caa6dcd0e5d93dc4c8ff056756101ad3e4",
+  "figures": [
+    {
+      "path": "actual_velocity_xyz.png",
+      "sha256": "21b12bcd030425a8784c62b643e258f621334a472a5e3bc8c085f99b510ad973"
+    },
+    {
+      "path": "actual_velocity_xyz.svg",
+      "sha256": "997d17d338136af91e57cec45541d8c8fb7ec455673e19b122491d17c28d6c21"
+    },
+    {
+      "path": "actual_displacement_xyz.png",
+      "sha256": "251b3bc3c3b363c9018bad96e96b21835dad6fe13bd26d94d9631bdbf942a933"
+    },
+    {
+      "path": "actual_displacement_xyz.svg",
+      "sha256": "164c90baa78b950197954adfbf0fb46f4ae15d30cc8aa36d408c943b3d9a9f51"
+    }
+  ],
+  "runs": [
+    {
+      "system": "PID",
+      "label": "PID",
+      "id": "O001",
+      "source": {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-11-02/08_51_07.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-QUICK-20261102/comparison/runs/O001/native_00.ulg",
+        "sha256": "6a526557da6f4dd6e395b3066595a7a1d34150bcc121d1c831e219b2fcaa71cb",
+        "bytes": 6910688
+      },
+      "directory": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-QUICK-20261102/comparison/runs/O001",
+      "result_sha256": "765b0a26867376be7295859eb96f3894f273aa7986f0a45062fffafb560da5cd",
+      "response": {
+        "crossings": {
+          "onset_0p1m": {
+            "first_sample_s": 2.06,
+            "bracket_s": [
+              1.96,
+              2.06
+            ]
+          },
+          "t10": {
+            "first_sample_s": 4.96,
+            "bracket_s": [
+              4.859999999999999,
+              4.96
+            ]
+          },
+          "t50": {
+            "first_sample_s": 10.251999999999999,
+            "bracket_s": [
+              10.16,
+              10.251999999999999
+            ]
+          },
+          "t90": {
+            "first_sample_s": 12.851999999999999,
+            "bracket_s": [
+              12.751999999999999,
+              12.851999999999999
+            ]
+          },
+          "t95": {
+            "first_sample_s": 13.452,
+            "bracket_s": [
+              13.36,
+              13.452
+            ]
+          },
+          "t98": {
+            "first_sample_s": 13.952,
+            "bracket_s": [
+              13.86,
+              13.952
+            ]
+          }
+        },
+        "rise_10_90_s": 7.891999999999999,
+        "settling_5pct": {
+          "first_sample_s": 13.452,
+          "observed_remaining_s": 18.868000000000002,
+          "bracket_s": [
+            13.36,
+            13.452
+          ]
+        },
+        "settling_2pct": null,
+        "overshoot_m": 0.06123592224121088,
+        "overshoot_percent": 2.4494368896484353,
+        "peak_upward_speed_m_s": 0.5434374213218689,
+        "median_sample_period_s": 0.09999999999999987,
+        "maximum_sample_period_s": 0.10800000000000409,
+        "analysis_end_s": 32.32,
+        "minimum_settling_observation_s": 2.0,
+        "climb_to_hover_entry_s": 19.151999999999997,
+        "land_to_disarm_s": 4.6,
+        "input_kind": "16 s quintic position ramp; not controller step response"
+      },
+      "hover_metrics": [
+        {
+          "phase": "hover",
+          "generation": 5,
+          "window_us": [
+            56556000,
+            66556000
+          ],
+          "seconds": 10.0,
+          "velocity_tracking_rmse_xyz_m_s": [
+            0.007580133253178325,
+            0.007951464407373144,
+            0.003031715936688489
+          ],
+          "actual_velocity_rms_xyz_m_s": [
+            0.03999987730904813,
+            0.01879489288842599,
+            0.034144567749262666
+          ],
+          "displacement_rms_xyz_m": [
+            0.042098615646025524,
+            0.023119578102606512,
+            2.4791482478437157
+          ],
+          "horizontal_displacement_max_m": 0.08034323865241749,
+          "height_mean_m": 2.479004209041595,
+          "height_min_m": 2.4499821838378906,
+          "height_max_m": 2.5339951690673828,
+          "source_clock": "timestamp_sample",
+          "position_samples": 101,
+          "reference_samples": 100,
+          "integration_intervals": 201,
+          "definition": "Full phase; exact ZOH time integral against actual published controller velocity setpoints, not ROS positions"
+        }
+      ],
+      "maximum_tilt_deg": 4.071894844765006,
+      "maximum_native_position_gap_s": 0.108
+    },
+    {
+      "system": "STA2",
+      "label": "STA2 + IMU fix",
+      "id": "O002",
+      "source": {
+        "source": "/home/yr/Desktop/Codev-SuperTwisting2-imu-fix/build/px4_sitl_default/rootfs/log/2026-11-02/08_52_43.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-QUICK-20261102/comparison/runs/O002/native_00.ulg",
+        "sha256": "45fd913d2b7502f3e4ea80e2ffb1634a0fffc3002572e88e265d080c0522edc6",
+        "bytes": 32890419
+      },
+      "directory": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-QUICK-20261102/comparison/runs/O002",
+      "result_sha256": "27eca4eaa36258ed7c99a45e2f5028bb759e3ce5a26a09a8e111c71054726351",
+      "response": {
+        "crossings": {
+          "onset_0p1m": {
+            "first_sample_s": 7.56,
+            "bracket_s": [
+              7.552,
+              7.56
+            ]
+          },
+          "t10": {
+            "first_sample_s": 8.08,
+            "bracket_s": [
+              8.072,
+              8.08
+            ]
+          },
+          "t50": {
+            "first_sample_s": 10.256,
+            "bracket_s": [
+              10.248,
+              10.256
+            ]
+          },
+          "t90": {
+            "first_sample_s": 13.76,
+            "bracket_s": [
+              13.751999999999999,
+              13.76
+            ]
+          },
+          "t95": {
+            "first_sample_s": 14.728,
+            "bracket_s": [
+              14.719999999999999,
+              14.728
+            ]
+          },
+          "t98": {
+            "first_sample_s": 15.84,
+            "bracket_s": [
+              15.831999999999999,
+              15.84
+            ]
+          }
+        },
+        "rise_10_90_s": 5.68,
+        "settling_5pct": {
+          "first_sample_s": 14.728,
+          "observed_remaining_s": 17.879999999999995,
+          "bracket_s": [
+            14.719999999999999,
+            14.728
+          ]
+        },
+        "settling_2pct": {
+          "first_sample_s": 15.84,
+          "observed_remaining_s": 16.767999999999997,
+          "bracket_s": [
+            15.831999999999999,
+            15.84
+          ]
+        },
+        "overshoot_m": 0.008907285156249944,
+        "overshoot_percent": 0.3562914062499978,
+        "peak_upward_speed_m_s": 0.5107994079589844,
+        "median_sample_period_s": 0.007999999999999119,
+        "maximum_sample_period_s": 0.008000000000002672,
+        "analysis_end_s": 32.608,
+        "minimum_settling_observation_s": 2.0,
+        "climb_to_hover_entry_s": 19.352,
+        "land_to_disarm_s": 4.4399999999999995,
+        "input_kind": "16 s quintic position ramp; not controller step response"
+      },
+      "hover_metrics": [
+        {
+          "phase": "hover",
+          "generation": 5,
+          "window_us": [
+            55076000,
+            65124000
+          ],
+          "seconds": 10.048,
+          "velocity_tracking_rmse_xyz_m_s": [
+            0.01268310588794815,
+            0.014050924416082284,
+            0.00225219965895046
+          ],
+          "actual_velocity_rms_xyz_m_s": [
+            0.04096790649530064,
+            0.07930770556713863,
+            0.01272789993321735
+          ],
+          "displacement_rms_xyz_m": [
+            0.040541062711223236,
+            0.08999888410567176,
+            2.489312258161068
+          ],
+          "horizontal_displacement_max_m": 0.12951739854747166,
+          "height_mean_m": 2.4893004944314163,
+          "height_min_m": 2.480312314453125,
+          "height_max_m": 2.504543271484375,
+          "source_clock": "timestamp_sample",
+          "position_samples": 1256,
+          "reference_samples": 101,
+          "integration_intervals": 1256,
+          "definition": "Full phase; exact ZOH time integral against actual published controller velocity setpoints, not ROS positions"
+        }
+      ],
+      "maximum_tilt_deg": 6.196956218078212,
+      "maximum_native_position_gap_s": 0.008
+    },
+    {
+      "system": "RSTA",
+      "label": "RSTA",
+      "id": "O003",
+      "source": {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-11-02/08_54_18.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-QUICK-20261102/comparison/runs/O003/native_00.ulg",
+        "sha256": "c5721c52a7c9fb2f64d460485905d9bf87ca5cfe06d0538a3c20e0f190852835",
+        "bytes": 7126915
+      },
+      "directory": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-QUICK-20261102/comparison/runs/O003",
+      "result_sha256": "cb236973e3e7f6b3b8ce3a064eb4055e8d4f9902a79f66234f51d55f114f3b09",
+      "response": {
+        "crossings": {
+          "onset_0p1m": {
+            "first_sample_s": 1.668,
+            "bracket_s": [
+              1.5679999999999998,
+              1.668
+            ]
+          },
+          "t10": {
+            "first_sample_s": 4.867999999999999,
+            "bracket_s": [
+              4.768,
+              4.867999999999999
+            ]
+          },
+          "t50": {
+            "first_sample_s": 10.068,
+            "bracket_s": [
+              9.968,
+              10.068
+            ]
+          },
+          "t90": {
+            "first_sample_s": 13.367999999999999,
+            "bracket_s": [
+              13.267999999999999,
+              13.367999999999999
+            ]
+          },
+          "t95": {
+            "first_sample_s": 14.267999999999999,
+            "bracket_s": [
+              14.16,
+              14.267999999999999
+            ]
+          },
+          "t98": {
+            "first_sample_s": 15.36,
+            "bracket_s": [
+              15.267999999999999,
+              15.36
+            ]
+          }
+        },
+        "rise_10_90_s": 8.5,
+        "settling_5pct": {
+          "first_sample_s": 14.267999999999999,
+          "observed_remaining_s": 18.171999999999997,
+          "bracket_s": [
+            14.16,
+            14.267999999999999
+          ]
+        },
+        "settling_2pct": {
+          "first_sample_s": 22.768,
+          "observed_remaining_s": 9.671999999999997,
+          "bracket_s": [
+            22.668,
+            22.768
+          ]
+        },
+        "overshoot_m": 0.0018560894012451534,
+        "overshoot_percent": 0.07424357604980614,
+        "peak_upward_speed_m_s": 0.714073657989502,
+        "median_sample_period_s": 0.09999999999999964,
+        "maximum_sample_period_s": 0.10800000000000054,
+        "analysis_end_s": 32.44,
+        "minimum_settling_observation_s": 2.0,
+        "climb_to_hover_entry_s": 19.268,
+        "land_to_disarm_s": 6.532,
+        "input_kind": "16 s quintic position ramp; not controller step response"
+      },
+      "hover_metrics": [
+        {
+          "phase": "hover",
+          "generation": 5,
+          "window_us": [
+            57584000,
+            67596000
+          ],
+          "seconds": 10.012,
+          "velocity_tracking_rmse_xyz_m_s": [
+            0.006322234635357316,
+            0.003814475854902936,
+            0.0012808211208144534
+          ],
+          "actual_velocity_rms_xyz_m_s": [
+            0.039614980099977576,
+            0.019408281834033394,
+            0.04442143096421267
+          ],
+          "displacement_rms_xyz_m": [
+            0.04075361650078355,
+            0.019881335142057827,
+            2.4592228050415947
+          ],
+          "horizontal_displacement_max_m": 0.07090852195791493,
+          "height_mean_m": 2.4591622132574513,
+          "height_min_m": 2.4293286808013916,
+          "height_max_m": 2.485467911529541,
+          "source_clock": "timestamp_sample",
+          "position_samples": 101,
+          "reference_samples": 100,
+          "integration_intervals": 201,
+          "definition": "Full phase; exact ZOH time integral against actual published controller velocity setpoints, not ROS positions"
+        }
+      ],
+      "maximum_tilt_deg": 4.680195304393496,
+      "maximum_native_position_gap_s": 0.108
+    },
+    {
+      "system": "RISTA",
+      "label": "RISTA",
+      "id": "O004",
+      "source": {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-11-02/08_55_57.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-QUICK-20261102/comparison/runs/O004/native_00.ulg",
+        "sha256": "1f738b9a75d80c13763fe5b5981a983587b55be78ed773a6e56f619790f68912",
+        "bytes": 7081619
+      },
+      "directory": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-QUICK-20261102/comparison/runs/O004",
+      "result_sha256": "bd99af26c5d07fe002b02a669b0c64dcc4b3097dd8c3652273dd4c095d343fa5",
+      "response": {
+        "crossings": {
+          "onset_0p1m": {
+            "first_sample_s": 1.8279999999999998,
+            "bracket_s": [
+              1.728,
+              1.8279999999999998
+            ]
+          },
+          "t10": {
+            "first_sample_s": 5.028,
+            "bracket_s": [
+              4.928,
+              5.028
+            ]
+          },
+          "t50": {
+            "first_sample_s": 9.927999999999999,
+            "bracket_s": [
+              9.828,
+              9.927999999999999
+            ]
+          },
+          "t90": {
+            "first_sample_s": 13.427999999999999,
+            "bracket_s": [
+              13.328,
+              13.427999999999999
+            ]
+          },
+          "t95": {
+            "first_sample_s": 14.128,
+            "bracket_s": [
+              14.027999999999999,
+              14.128
+            ]
+          },
+          "t98": {
+            "first_sample_s": 15.128,
+            "bracket_s": [
+              15.027999999999999,
+              15.128
+            ]
+          }
+        },
+        "rise_10_90_s": 8.399999999999999,
+        "settling_5pct": {
+          "first_sample_s": 14.128,
+          "observed_remaining_s": 18.36,
+          "bracket_s": [
+            14.027999999999999,
+            14.128
+          ]
+        },
+        "settling_2pct": null,
+        "overshoot_m": 0.025308686828613425,
+        "overshoot_percent": 1.012347473144537,
+        "peak_upward_speed_m_s": 0.6756981015205383,
+        "median_sample_period_s": 0.09999999999999998,
+        "maximum_sample_period_s": 0.10000000000000142,
+        "analysis_end_s": 32.488,
+        "minimum_settling_observation_s": 2.0,
+        "climb_to_hover_entry_s": 19.308,
+        "land_to_disarm_s": 5.728,
+        "input_kind": "16 s quintic position ramp; not controller step response"
+      },
+      "hover_metrics": [
+        {
+          "phase": "hover",
+          "generation": 5,
+          "window_us": [
+            57684000,
+            67756000
+          ],
+          "seconds": 10.072,
+          "velocity_tracking_rmse_xyz_m_s": [
+            0.0049720088238916,
+            0.00550195567775643,
+            0.0013238731608300326
+          ],
+          "actual_velocity_rms_xyz_m_s": [
+            0.046838930238557605,
+            0.017437011372826276,
+            0.03333650843334549
+          ],
+          "displacement_rms_xyz_m": [
+            0.04874447860414426,
+            0.017301699260911494,
+            2.4707741024375456
+          ],
+          "horizontal_displacement_max_m": 0.07888333331444088,
+          "height_mean_m": 2.4707232191863002,
+          "height_min_m": 2.4444163623809816,
+          "height_max_m": 2.513635474777222,
+          "source_clock": "timestamp_sample",
+          "position_samples": 102,
+          "reference_samples": 101,
+          "integration_intervals": 189,
+          "definition": "Full phase; exact ZOH time integral against actual published controller velocity setpoints, not ROS positions"
+        }
+      ],
+      "maximum_tilt_deg": 4.247190917637522,
+      "maximum_native_position_gap_s": 0.09999999999999999
+    }
+  ]
+}

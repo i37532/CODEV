@@ -1,0 +1,576 @@
+diff --git a/src/modules/mc_pos_control/PositionControl/PositionControlTest.cpp b/src/modules/mc_pos_control/PositionControl/PositionControlTest.cpp
+index 9c1e72b1a5..e021645f82 100644
+--- a/src/modules/mc_pos_control/PositionControl/PositionControlTest.cpp
++++ b/src/modules/mc_pos_control/PositionControl/PositionControlTest.cpp
+@@ -79,6 +79,14 @@ public:
+ 		_position_control.setHorizontalThrustMargin(HORIZONTAL_THRUST_MARGIN);
+ 		_position_control.setTiltLimit(1.f);
+ 		_position_control.setHoverThrust(.5f);
++		// Match the STA2 module's parameter initialization. The legacy fixture
++		// otherwise leaves XY normalization limits at zero (0/0 or finite/0).
++		// Values are the unchanged upstream defaults, not flight retuning.
++		_position_control._pos_sta_control.setPosStaParams(0.f, 1.f, 4.f, 2.f);
++		_position_control._pos_sta_control.setPosStaWlimit(9.8f);
++		_position_control._pos_sta_control.setPosStaNormLimit(1.f, .9f);
++		_position_control._pos_sta_control.setPosXyStaNormLimit(Vector2f(.9f, .9f), Vector2f(1.f, 1.f));
++		_position_control.resetIntegral();
+ 	}
+ 
+ 	bool runController()
+@@ -99,6 +107,16 @@ public:
+ 	static constexpr float HORIZONTAL_THRUST_MARGIN = 0.3f;
+ };
+ 
++TEST_F(PositionControlBasicTest, UpstreamStaNormalizationInitialized)
++{
++	for (size_t axis = 0; axis < 2; ++axis) {
++		EXPECT_FLOAT_EQ(_position_control._pos_sta_control.getVelErrorDivNorm(0.f, axis), 0.f);
++		EXPECT_FLOAT_EQ(_position_control._pos_sta_control.getVelErrorDivNorm(.45f, axis), .5f);
++		EXPECT_FLOAT_EQ(_position_control._pos_sta_control.getVelErrorDivNorm(-.45f, axis), -.5f);
++		EXPECT_FLOAT_EQ(_position_control._pos_sta_control.getVelErrorDivNorm(2.f, axis), 2.f);
++	}
++}
++
+ class PositionControlBasicDirectionTest : public PositionControlBasicTest
+ {
+ public:
+diff --git a/src/modules/simulation/simulator_mavlink/CMakeLists.txt b/src/modules/simulation/simulator_mavlink/CMakeLists.txt
+index f5f39d7106..bdacf5aa81 100644
+--- a/src/modules/simulation/simulator_mavlink/CMakeLists.txt
++++ b/src/modules/simulation/simulator_mavlink/CMakeLists.txt
+@@ -58,6 +58,21 @@ include(sitl_targets_gazebo-classic.cmake)
+ include(sitl_targets_jmavsim.cmake)
+ include(sitl_targets_jsbsim.cmake)
+ 
++# Offline conversion/driver/uORB integration only: never starts simulator networking.
++if(BUILD_TESTING)
++	px4_add_functional_gtest(SRC ImuConversionTest.cpp
++		EXTRA_SRCS SimulatorMavlink.cpp
++		INCLUDES ${CMAKE_BINARY_DIR}/mavlink ${CMAKE_BINARY_DIR}/mavlink/${CONFIG_MAVLINK_DIALECT}
++			${PX4_SOURCE_DIR}/src/modules/sensors
++		COMPILE_FLAGS -fno-access-control -Wno-double-promotion -Wno-address-of-packed-member
++		LINKLIBS vehicle_imu drivers_accelerometer drivers_gyroscope drivers_magnetometer
++			conversion geo sensor_calibration)
++	target_compile_definitions(functional-ImuConversion PRIVATE MODULE_NAME="imu_conversion_test")
++	add_dependencies(functional-ImuConversion mavlink_c_generate)
++	target_link_options(functional-ImuConversion PRIVATE -Wl,--no-export-dynamic
++		-Wl,--gc-sections -Wl,--wrap=hrt_call_after -Wl,--wrap=hrt_cancel)
++endif()
++
+ 
+ # none_iris (legacy compatibility launch helper)
+ add_custom_target(none_iris
+diff --git a/src/modules/simulation/simulator_mavlink/SimulatorMavlink.cpp b/src/modules/simulation/simulator_mavlink/SimulatorMavlink.cpp
+index 92c5fe73a5..2fc7a25139 100644
+--- a/src/modules/simulation/simulator_mavlink/SimulatorMavlink.cpp
++++ b/src/modules/simulation/simulator_mavlink/SimulatorMavlink.cpp
+@@ -202,10 +202,32 @@ void SimulatorMavlink::update_sensors(const hrt_abstime &time, const mavlink_hil
+ 			return;
+ 		}
+ 
+-		if (sensors.id == 0) {
++		const bool accel_finite = PX4_ISFINITE(sensors.xacc) && PX4_ISFINITE(sensors.yacc) && PX4_ISFINITE(sensors.zacc);
++
++		if (!accel_finite && !_accel_stuck[sensors.id] && !_accel_blocked[sensors.id]) {
++			// Reject the whole vector before conversion. Keep the last valid
++			// sample/time; do not publish zero or stale data as a fresh sample.
++			// Continue processing the packet's independent gyro/baro fields.
++			if (_accel_input_error_count[sensors.id] < UINT32_MAX) {
++				++_accel_input_error_count[sensors.id];
++			}
++
++			_px4_accel[sensors.id].set_error_count(_accel_input_error_count[sensors.id]);
++
++		} else if (sensors.id == 0) {
+ 			// accel 0 is simulated FIFO
+ 			static constexpr float ACCEL_FIFO_SCALE = CONSTANTS_ONE_G / 2048.f;
+ 			static constexpr float ACCEL_FIFO_RANGE = 16.f * CONSTANTS_ONE_G;
++			const auto fifo_sample = [](float acceleration) -> int16_t {
++				// Bound physical input first: FLT_MAX must not overflow scaling.
++				// Endpoint values preserve the driver's existing clipping signal.
++				if (acceleration >= INT16_MAX * ACCEL_FIFO_SCALE) { return INT16_MAX; }
++
++				if (acceleration <= INT16_MIN * ACCEL_FIFO_SCALE) { return INT16_MIN; }
++
++				return static_cast<int16_t>(math::constrain(acceleration / ACCEL_FIFO_SCALE,
++							   static_cast<float>(INT16_MIN), static_cast<float>(INT16_MAX)));
++			};
+ 
+ 			_px4_accel[sensors.id].set_scale(ACCEL_FIFO_SCALE);
+ 			_px4_accel[sensors.id].set_range(ACCEL_FIFO_RANGE);
+@@ -219,9 +241,9 @@ void SimulatorMavlink::update_sensors(const hrt_abstime &time, const mavlink_hil
+ 				_last_accel_fifo.samples = 1;
+ 				_last_accel_fifo.dt = time - _last_accel_fifo.timestamp_sample;
+ 				_last_accel_fifo.timestamp_sample = time;
+-				_last_accel_fifo.x[0] = sensors.xacc / ACCEL_FIFO_SCALE;
+-				_last_accel_fifo.y[0] = sensors.yacc / ACCEL_FIFO_SCALE;
+-				_last_accel_fifo.z[0] = sensors.zacc / ACCEL_FIFO_SCALE;
++				_last_accel_fifo.x[0] = fifo_sample(sensors.xacc);
++				_last_accel_fifo.y[0] = fifo_sample(sensors.yacc);
++				_last_accel_fifo.z[0] = fifo_sample(sensors.zacc);
+ 
+ 				_px4_accel[sensors.id].updateFIFO(_last_accel_fifo);
+ 			}
+diff --git a/src/modules/simulation/simulator_mavlink/SimulatorMavlink.hpp b/src/modules/simulation/simulator_mavlink/SimulatorMavlink.hpp
+index 291148b9cb..1e3d1548fd 100644
+--- a/src/modules/simulation/simulator_mavlink/SimulatorMavlink.hpp
++++ b/src/modules/simulation/simulator_mavlink/SimulatorMavlink.hpp
+@@ -279,6 +279,7 @@ private:
+ 
+ 	bool _accel_blocked[ACCEL_COUNT_MAX] {};
+ 	bool _accel_stuck[ACCEL_COUNT_MAX] {};
++	uint32_t _accel_input_error_count[ACCEL_COUNT_MAX] {};
+ 	sensor_accel_fifo_s _last_accel_fifo{};
+ 	matrix::Vector3f _last_accel[GYRO_COUNT_MAX] {};
+ 
+diff --git a/src/modules/simulation/simulator_mavlink/ImuConversionTest.cpp b/src/modules/simulation/simulator_mavlink/ImuConversionTest.cpp
+new file mode 100644
+index 0000000000..417599765a
+--- /dev/null
++++ b/src/modules/simulation/simulator_mavlink/ImuConversionTest.cpp
+@@ -0,0 +1,445 @@
++// Adapted offline fixture from Codev V04; upstream STA2 dispatches one sensor id per packet.
++// SPDX-License-Identifier: BSD-3-Clause
++// Offline diagnosis only. Compile with -fno-access-control for test access,
++// not production header edits. Never calls SimulatorMavlink::start/run or VehicleIMU::Start.
++#include <gtest/gtest.h>
++#include "SimulatorMavlink.hpp"
++#include <sensors/vehicle_imu/VehicleIMU.hpp>
++#include <platforms/posix/apps.h>
++#include <px4_platform_common/px4_work_queue/WorkQueueManager.hpp>
++#include <cstdlib>
++#include <cmath>
++
++// Only asynchronous scheduling is disabled; conversion, driver, uORB and IMU
++// Run/integration/publication are the actual production implementations.
++extern "C" void __wrap_hrt_call_after(hrt_call *, hrt_abstime, hrt_callout, void *) {}
++extern "C" void __wrap_hrt_cancel(hrt_call *) {}
++
++class ChainAnchor : public px4::WorkItem
++{
++public:
++	ChainAnchor() : WorkItem("imu_chain_anchor", px4::wq_configurations::nav_and_controllers) {}
++	void Run() override {}
++};
++static ChainAnchor *anchor = nullptr;
++
++class ImuConversionChain : public ::testing::Test
++{
++public:
++	static void SetUpTestSuite()
++	{
++		ASSERT_EQ(px4::WorkQueueManagerStart(), 0);
++		px4_usleep(20000);
++		anchor = new ChainAnchor();
++	}
++	static void TearDownTestSuite()
++	{
++		delete anchor; anchor = nullptr;
++		px4_usleep(20000);
++		EXPECT_EQ(px4::WorkQueueManagerStop(), 0);
++	}
++protected:
++	SimulatorMavlink *sim{nullptr};
++	sensors::VehicleIMU *imus[3]{};
++	uORB::Subscription accel[3]{{ORB_ID(sensor_accel),0},{ORB_ID(sensor_accel),1},{ORB_ID(sensor_accel),2}};
++	uORB::Subscription imu[3]{{ORB_ID(vehicle_imu),0},{ORB_ID(vehicle_imu),1},{ORB_ID(vehicle_imu),2}};
++	uORB::Subscription fifo{ORB_ID(sensor_accel_fifo)};
++	sensor_accel_s raw[3]{};
++	vehicle_imu_s integrated[3]{};
++	sensor_accel_fifo_s integer{};
++	uint64_t sample{1000000};
++	static constexpr float scale = CONSTANTS_ONE_G / 2048.f;
++	void update_all(uint64_t t, const mavlink_hil_sensor_t &input)
++	{
++		for (uint8_t id=0; id<3; ++id) {
++			auto packet=input; packet.id=id;
++			sim->update_sensors(t,packet);
++		}
++	}
++	void SetUp() override
++	{
++		apps_map_type apps; init_app_map(apps); ASSERT_TRUE(apps.empty());
++		param_control_autosave(false); param_reset_all();
++		int32_t hz = 250;
++		ASSERT_EQ(param_set_no_notification(param_find("IMU_INTEG_RATE"), &hz), 0);
++		sim = new SimulatorMavlink();
++		for (int j=0; j<3; ++j) {
++			ASSERT_EQ(sim->_px4_accel[j].get_instance(), j);
++			imus[j] = new sensors::VehicleIMU(j,j,j,px4::wq_configurations::nav_and_controllers);
++			// This upstream Run registers callbacks while learning intervals.
++			// Detach the test instance so only our synchronous calls can run it.
++			imus[j]->Deinit();
++			imu[j].ChangeInstance(imus[j]->_vehicle_imu_pub.get_instance());
++			// uORB retains queued samples across fixture destruction. A fresh
++			// offline case must not consume the preceding case's sensor clock.
++			sensor_accel_s old_accel{}; sensor_gyro_s old_gyro{};
++			while (imus[j]->_sensor_accel_sub.update(&old_accel)) {}
++			while (imus[j]->_sensor_gyro_sub.update(&old_gyro)) {}
++			while (accel[j].update(&raw[j])) {}
++			while (imu[j].update(&integrated[j])) {}
++		}
++		while (fifo.update(&integer)) {}
++		for (int k=0; k<150; ++k) { step(0.f,0.f,-CONSTANTS_ONE_G,false); }
++		for (int j=0; j<3; ++j) {
++			ASSERT_TRUE(imus[j]->_intervals_configured);
++			ASSERT_EQ(integrated[j].delta_velocity_dt, 4000);
++		}
++	}
++	void TearDown() override
++	{
++		for (auto *v : imus) { delete v; }
++		delete sim; param_reset_all();
++	}
++	void step(float x,float y,float z,bool require_integral=true)
++	{
++		sample += 4000;
++		mavlink_hil_sensor_t packet{};
++		packet.fields_updated = 0x3f; // accel + gyro only
++		packet.xacc=x; packet.yacc=y; packet.zacc=z;
++		// Actual production conversion; no copied narrowing expression in this test.
++		update_all(sample, packet);
++		ASSERT_TRUE(fifo.update(&integer));
++		for (int j=0; j<3; ++j) {
++			ASSERT_TRUE(accel[j].update(&raw[j]));
++			EXPECT_EQ(raw[j].timestamp_sample,sample);
++			imus[j]->Run(); imus[j]->ScheduleClear();
++			bool available=imu[j].update(&integrated[j]);
++			if (require_integral) {
++				ASSERT_TRUE(available);
++				EXPECT_EQ(integrated[j].timestamp_sample,sample);
++				EXPECT_EQ(integrated[j].delta_velocity_dt,4000);
++			}
++		}
++	}
++	static float component(const sensor_accel_s &v,int axis) { return axis==0 ? v.x : axis==1 ? v.y : v.z; }
++	void axis_step(int axis,float value)
++	{
++		float a[3]{0.f,0.f,0.f}; a[axis]=value; step(a[0],a[1],a[2]);
++	}
++	void emit(const char *tag,int axis,float input) const
++	{
++		std::printf("IMU_CHAIN_ROW {\"tag\":\"%s\",\"axis\":%d,\"input\":%.9g,\"sample\":%llu,\"fifo\":%d,\"a0\":%.9g,\"a1\":%.9g,\"a2\":%.9g,\"clip0\":%u,\"clip1\":%u,\"dv0\":%.9g,\"dv1\":%.9g,\"dv2\":%.9g,\"dv_clip0\":%u,\"dv_clip1\":%u}\n",
++			tag,axis,double(input),(unsigned long long)sample,
++			int(axis==0?integer.x[0]:axis==1?integer.y[0]:integer.z[0]),
++			double(component(raw[0],axis)),double(component(raw[1],axis)),double(component(raw[2],axis)),
++			unsigned(raw[0].clip_counter[axis]),unsigned(raw[1].clip_counter[axis]),
++			double(integrated[0].delta_velocity[axis]),double(integrated[1].delta_velocity[axis]),
++			double(integrated[2].delta_velocity[axis]),unsigned(integrated[0].delta_velocity_clipping),
++			unsigned(integrated[1].delta_velocity_clipping));
++	}
++};
++
++TEST_F(ImuConversionChain, InRangeThreeAxesAndDeviceIsolation)
++{
++	for(int axis=0;axis<3;++axis) {
++		for(float value : {-150.f,-100.f,-9.80665f,-1.f,0.f,1.f,100.f,150.f}) {
++			for(int k=0;k<3;++k) { axis_step(axis,value); }
++			EXPECT_NEAR(component(raw[0],axis),value,scale*1.01f);
++			EXPECT_FLOAT_EQ(component(raw[1],axis),value);
++			EXPECT_FLOAT_EQ(component(raw[2],axis),value);
++			for(int j=0;j<3;++j) {
++				EXPECT_NEAR(integrated[j].delta_velocity[axis],value*.004f,scale*.0041f);
++				EXPECT_EQ(integrated[j].delta_velocity_clipping,0);
++				for(int other=0;other<3;++other) {
++					if(other!=axis) { EXPECT_FLOAT_EQ(integrated[j].delta_velocity[other],0.f); }
++				}
++			}
++			emit("in_range",axis,value);
++		}
++	}
++}
++
++TEST_F(ImuConversionChain, SafeIntegerEdgesAndActualClipThreshold)
++{
++	for(float count : {-32768.f,-32767.f,-32735.f,-32734.f,32734.f,32735.f,32766.f,32767.f}) {
++		const float value=count*scale;
++		for(int k=0;k<3;++k) { axis_step(2,value); }
++		EXPECT_NEAR(component(raw[0],2),value,scale*1.01f);
++		// Assert against the published integer, not a floating-point boundary guess.
++		const bool clipped=integer.z[0] <= INT16_MIN + 1 || integer.z[0] >= INT16_MAX - 1;
++		EXPECT_EQ(raw[0].clip_counter[2]>0,clipped);
++		EXPECT_EQ((integrated[0].delta_velocity_clipping & vehicle_imu_s::CLIPPING_Z)>0,clipped);
++		emit("integer_edge",2,value);
++	}
++}
++
++TEST_F(ImuConversionChain, FifoDriverHalfSampleAndIntegratorPulseArea)
++{
++	for(int k=0;k<4;++k) { axis_step(2,0.f); }
++	double area[3]{};
++	for(int k=0;k<5;++k) {
++		axis_step(2,k==0?-100.f:0.f);
++		if(k<2) { EXPECT_NEAR(raw[0].z,-50.f,scale); }
++		else { EXPECT_FLOAT_EQ(raw[0].z,0.f); }
++		for(int j=0;j<3;++j) { area[j]+=double(integrated[j].delta_velocity[2]); }
++		emit("bounded_pulse",2,k==0?-100.f:0.f);
++	}
++	for(int j=0;j<3;++j) { EXPECT_NEAR(area[j],-.4,double(scale)*.0041); }
++}
++
++TEST_F(ImuConversionChain, NonAccelFieldMaskDoesNotPublishAcceleration)
++{
++	mavlink_hil_sensor_t packet{}; packet.fields_updated=0;
++	packet.xacc=packet.yacc=packet.zacc=NAN;
++	update_all(sample,packet);
++	for(auto &s : accel) { EXPECT_FALSE(s.updated()); }
++	EXPECT_FALSE(fifo.updated());
++}
++
++
++#include <cfloat>
++
++TEST_F(ImuConversionChain, RepairSaturatedPulseKeepsSignAndClippingXYZ)
++{
++	for (int axis=0; axis<3; ++axis) {
++		for (float input : {-250.f,250.f}) {
++			for (int k=0;k<4;++k) { axis_step(axis,0.f); }
++			double area[3]{};
++			for (int k=0;k<5;++k) {
++				axis_step(axis,k==0?input:0.f);
++				if (k==0) {
++					EXPECT_GT(component(raw[0],axis)*input,0.f);
++					for (int j=0;j<3;++j) {
++						EXPECT_EQ(raw[j].clip_counter[axis],1);
++						EXPECT_NE(integrated[j].delta_velocity_clipping & (1u<<axis),0);
++					}
++				}
++				for (int j=0;j<3;++j) { area[j]+=double(integrated[j].delta_velocity[axis]); }
++				emit("repaired_pulse",axis,k==0?input:0.f);
++			}
++			const double clipped=double(input<0.f?INT16_MIN:INT16_MAX)*double(scale);
++			EXPECT_NEAR(area[0],clipped*.004,1e-6);
++			EXPECT_NEAR(area[1],double(input)*.004,1e-6);
++			EXPECT_NEAR(area[2],area[1],1e-6);
++			EXPECT_EQ(integrated[0].delta_velocity_clipping,0);
++			std::printf("REPAIR_AREA {\"axis\":%d,\"input\":%.9g,\"dv0\":%.12g,\"dv1\":%.12g}\n",
++				axis,double(input),area[0],area[1]);
++		}
++	}
++}
++
++TEST_F(ImuConversionChain, RepairEdgesAndHugeFiniteBeforeScaling)
++{
++	for (int axis=0;axis<3;++axis) {
++		for (float value : {-FLT_MAX,-1e20f,-250.f,-157.f,-16.f*CONSTANTS_ONE_G,
++				    16.f*CONSTANTS_ONE_G,157.f,250.f,1e20f,FLT_MAX}) {
++			// Only conversion/driver checked for extreme float-path amplitudes.
++			// Do not claim IMU1/2 integration of FLT_MAX is a physical/safe model.
++			mavlink_hil_sensor_t packet{}; packet.fields_updated=7;
++			float a[3]{};a[axis]=value;
++			packet.xacc=a[0];packet.yacc=a[1];packet.zacc=a[2];
++			sample+=4000;update_all(sample,packet);
++			ASSERT_TRUE(fifo.update(&integer));
++			const int16_t count=axis==0?integer.x[0]:axis==1?integer.y[0]:integer.z[0];
++			EXPECT_EQ(count,value<0.f?INT16_MIN:INT16_MAX);
++			for(int j=0;j<3;++j) {
++				ASSERT_TRUE(accel[j].update(&raw[j]));
++				EXPECT_TRUE(std::isfinite(component(raw[j],axis)));
++				EXPECT_EQ(raw[j].clip_counter[axis],1);
++			}
++		}
++		for(float edge : {INT16_MIN*scale,INT16_MAX*scale,16.f*CONSTANTS_ONE_G}) {
++			for(float value : {std::nextafter(edge,-INFINITY),edge,std::nextafter(edge,INFINITY)}) {
++				mavlink_hil_sensor_t packet{};packet.fields_updated=7;
++				packet.xacc=value;sample+=4000;update_all(sample,packet);
++				ASSERT_TRUE(fifo.update(&integer));
++				EXPECT_GT(float(integer.x[0])*value,0.f);
++				EXPECT_NEAR(float(integer.x[0])*scale,value,scale*1.02f);
++				for(int j=0;j<3;++j) { ASSERT_TRUE(accel[j].update(&raw[j])); }
++				EXPECT_EQ(raw[0].clip_counter[0],1);
++			}
++		}
++	}
++}
++
++TEST_F(ImuConversionChain, RepairInvalidVectorAtomicRejectionAndRecovery)
++{
++	for(int k=0;k<4;++k) { step(0.f,0.f,0.f); }
++	uint32_t errors=0;
++	for(int axis=0;axis<3;++axis) {
++		for(float bad : {NAN,INFINITY,-INFINITY}) {
++			const auto before=sim->_last_accel_fifo;
++			mavlink_hil_sensor_t packet{};packet.fields_updated=0x3f;
++			float a[3]{};a[axis]=bad;
++			packet.xacc=a[0];packet.yacc=a[1];packet.zacc=a[2];
++			sample+=4000;update_all(sample,packet);++errors;
++			EXPECT_FALSE(fifo.updated());
++			EXPECT_EQ(sim->_last_accel_fifo.timestamp_sample,before.timestamp_sample);
++			EXPECT_EQ(sim->_last_accel_fifo.z[0],before.z[0]);
++			for(int j=0;j<3;++j) {
++				EXPECT_FALSE(accel[j].updated());
++				EXPECT_EQ(sim->_px4_accel[j]._error_count,errors);
++				imus[j]->Run();imus[j]->ScheduleClear();
++				EXPECT_FALSE(imu[j].updated());
++			}
++			// Recovery has a real 8 ms accelerometer gap, never a fabricated 4 ms.
++			packet.xacc=packet.yacc=packet.zacc=0.f;
++			sample+=4000;update_all(sample,packet);
++			ASSERT_TRUE(fifo.update(&integer));EXPECT_FLOAT_EQ(integer.dt,8000.f);
++			for(int j=0;j<3;++j) {
++				ASSERT_TRUE(accel[j].update(&raw[j]));
++				EXPECT_EQ(raw[j].error_count,errors);
++				EXPECT_EQ(raw[j].timestamp_sample,sample);
++				imus[j]->Run();imus[j]->ScheduleClear();
++				ASSERT_TRUE(imu[j].update(&integrated[j]));
++				EXPECT_EQ(integrated[j].delta_velocity_dt,8000);
++				EXPECT_FLOAT_EQ(integrated[j].delta_velocity[axis],0.f);
++				// Existing asynchronous gyro/accel alignment is not changed here.
++				EXPECT_LE(integrated[j].timestamp_sample,sample);
++			}
++			// Consume pending gyro and restore the fixture's nominal timing.
++			for(int k=0;k<4;++k) {
++				sample+=4000;update_all(sample,packet);
++				ASSERT_TRUE(fifo.update(&integer));
++				for(int j=0;j<3;++j) {
++					ASSERT_TRUE(accel[j].update(&raw[j]));
++					imus[j]->Run();imus[j]->ScheduleClear();
++					while(imu[j].update(&integrated[j])) {}
++				}
++			}
++		}
++	}
++}
++
++TEST_F(ImuConversionChain, RepairMissingFieldsAndLongInvalidStreak)
++{
++	for(int k=0;k<4;++k) { step(0.f,0.f,0.f); }
++	mavlink_hil_sensor_t packet{};packet.xacc=NAN;
++	for(uint32_t mask : {0u,1u,2u,3u,4u,5u,6u}) {
++		packet.fields_updated=mask;update_all(sample,packet);
++		for(int j=0;j<3;++j) {
++			EXPECT_FALSE(accel[j].updated());EXPECT_EQ(sim->_px4_accel[j]._error_count,0);
++		}
++	}
++	packet.fields_updated=0x3f;
++	const uint64_t last_valid=sim->_last_accel_fifo.timestamp_sample;
++	for(int k=0;k<20;++k) {
++		sample+=4000;update_all(sample,packet);
++		EXPECT_FALSE(fifo.updated());
++		for(int j=0;j<3;++j) {
++			EXPECT_FALSE(accel[j].updated());
++			imus[j]->Run();imus[j]->ScheduleClear();EXPECT_FALSE(imu[j].updated());
++		}
++	}
++	EXPECT_EQ(sim->_last_accel_fifo.timestamp_sample,last_valid);
++	packet.xacc=0.f;
++	bool recovered[3]{};
++	bool observed_gap[3]{};
++	for(int k=0;k<8;++k) {
++		sample+=4000;update_all(sample,packet);
++		ASSERT_TRUE(fifo.update(&integer));
++		if(k==0) { EXPECT_FLOAT_EQ(integer.dt,84000.f); }
++		for(int j=0;j<3;++j) {
++			ASSERT_TRUE(accel[j].update(&raw[j]));EXPECT_EQ(raw[j].error_count,20);
++			imus[j]->Run();imus[j]->ScheduleClear();
++			if(imu[j].update(&integrated[j])) {
++				recovered[j]=true;
++				// This upstream message uses uint32 dt and its original integrator
++				// accepts 84 ms. Do not import the old Codev uint16 assumption.
++				if (!observed_gap[j]) {
++					EXPECT_EQ(integrated[j].delta_velocity_dt,84000u);
++					observed_gap[j]=true;
++				} else {
++					EXPECT_EQ(integrated[j].delta_velocity_dt,4000u);
++				}
++				for(float v:integrated[j].delta_velocity) { EXPECT_TRUE(std::isfinite(v));EXPECT_FLOAT_EQ(v,0.f); }
++			}
++		}
++	}
++	for(bool v:recovered) { EXPECT_TRUE(v); }
++	for(bool v:observed_gap) { EXPECT_TRUE(v); }
++}
++
++TEST_F(ImuConversionChain, RepairInvalidFirstPacketDoesNotSeedFifo)
++{
++	delete sim;sim=new SimulatorMavlink();
++	for(int j=0;j<3;++j) { while(accel[j].update(&raw[j])) {} }
++	while(fifo.update(&integer)) {}
++	mavlink_hil_sensor_t packet{};packet.fields_updated=7;packet.zacc=NAN;
++	update_all(sample,packet);
++	EXPECT_EQ(sim->_last_accel_fifo.timestamp_sample,0);EXPECT_EQ(sim->_last_accel_fifo.samples,0);
++	EXPECT_FALSE(fifo.updated());
++	for(int j=0;j<3;++j) { EXPECT_FALSE(accel[j].updated()); }
++	packet.zacc=-CONSTANTS_ONE_G;sample+=4000;update_all(sample,packet);
++	ASSERT_TRUE(fifo.update(&integer));EXPECT_EQ(integer.z[0],-2048);
++	for(int j=0;j<3;++j) {
++		ASSERT_TRUE(accel[j].update(&raw[j]));EXPECT_EQ(raw[j].error_count,1);
++	}
++	EXPECT_FLOAT_EQ(raw[0].z,-.5f*CONSTANTS_ONE_G);
++}
++
++TEST_F(ImuConversionChain, RepairBlockedAndStuckInjectionPreserved)
++{
++	sim->_accel_stuck[0]=true;sim->_accel_blocked[1]=true;
++	const auto before=sim->_last_accel_fifo;
++	mavlink_hil_sensor_t packet{};packet.fields_updated=7;packet.zacc=NAN;
++	sample+=4000;update_all(sample,packet);
++	ASSERT_TRUE(fifo.update(&integer));EXPECT_EQ(integer.timestamp_sample,before.timestamp_sample);
++	EXPECT_TRUE(accel[0].update(&raw[0]));EXPECT_FALSE(accel[1].updated());EXPECT_FALSE(accel[2].updated());
++	EXPECT_EQ(sim->_px4_accel[0]._error_count,0);EXPECT_EQ(sim->_px4_accel[1]._error_count,0);
++	EXPECT_EQ(sim->_px4_accel[2]._error_count,1);
++	sim->_accel_stuck[0]=false;sim->_accel_blocked[1]=false;
++	packet.zacc=-CONSTANTS_ONE_G;sample+=4000;update_all(sample,packet);
++	ASSERT_TRUE(fifo.update(&integer));EXPECT_EQ(integer.timestamp_sample,sample);
++	for(int j=0;j<3;++j) { ASSERT_TRUE(accel[j].update(&raw[j])); }
++}
++
++TEST_F(ImuConversionChain, RepairValidTrace2048AgainstFrozenSource)
++{
++	uint32_t state=0x1066a1u;
++	for(int n=0;n<2048;++n) {
++		float a[3];
++		for(int axis=0;axis<3;++axis) {
++			state=1664525u*state+1013904223u;
++			a[axis]=float(int(state%60001u)-30000)*scale;
++		}
++		if(n<4) { a[0]=a[1]=a[2]= n==0?0.f:n==1?-0.f:n==2?FLT_MIN:std::numeric_limits<float>::denorm_min(); }
++		step(a[0],a[1],a[2]);
++		std::printf("REPAIR_TRACE %d %llu %d %d %d",n,(unsigned long long)sample,int(integer.x[0]),int(integer.y[0]),int(integer.z[0]));
++		for(int j=0;j<3;++j) {
++			std::printf(" %u %.9g %.9g %.9g %u %u %u %u %u %.9g %.9g %.9g %u",
++				unsigned(raw[j].device_id),double(raw[j].x),double(raw[j].y),double(raw[j].z),unsigned(raw[j].clip_counter[0]),
++				unsigned(raw[j].clip_counter[1]),unsigned(raw[j].clip_counter[2]),unsigned(raw[j].error_count),
++				unsigned(integrated[j].delta_velocity_dt),double(integrated[j].delta_velocity[0]),
++				double(integrated[j].delta_velocity[1]),double(integrated[j].delta_velocity[2]),unsigned(integrated[j].delta_velocity_clipping));
++		}
++		std::printf("\n");
++	}
++}
++
++TEST_F(ImuConversionChain, RepairRejectedAccelDoesNotSuppressIndependentGyro)
++{
++	uORB::Subscription gyro{ORB_ID(sensor_gyro),0};
++	sensor_gyro_s value{};
++	while(gyro.update(&value)) {}
++	mavlink_hil_sensor_t packet{};packet.fields_updated=0x3f;packet.id=0;
++	packet.zacc=NAN;packet.xgyro=.1f;sample+=4000;
++	sim->update_sensors(sample,packet);
++	EXPECT_FALSE(accel[0].updated());EXPECT_FALSE(fifo.updated());
++	ASSERT_TRUE(gyro.update(&value));EXPECT_EQ(value.timestamp_sample,sample);
++	EXPECT_GT(value.x,0.f);EXPECT_EQ(sim->_px4_accel[0]._error_count,1);
++	EXPECT_EQ(sim->_px4_accel[1]._error_count,0);EXPECT_EQ(sim->_px4_accel[2]._error_count,0);
++}
++
++TEST_F(ImuConversionChain, RepairPerIdIsolationAndOutOfRangeId)
++{
++	mavlink_hil_sensor_t packet{};packet.fields_updated=7;packet.id=1;packet.zacc=-10.f;
++	sample+=4000;sim->update_sensors(sample,packet);
++	EXPECT_FALSE(accel[0].updated());EXPECT_FALSE(fifo.updated());EXPECT_FALSE(accel[2].updated());
++	ASSERT_TRUE(accel[1].update(&raw[1]));EXPECT_FLOAT_EQ(raw[1].z,-10.f);
++	packet.id=255;packet.zacc=NAN;sample+=4000;sim->update_sensors(sample,packet);
++	EXPECT_FALSE(fifo.updated());
++	for(int j=0;j<3;++j) { EXPECT_FALSE(accel[j].updated());EXPECT_EQ(sim->_px4_accel[j]._error_count,0); }
++}
++
++TEST_F(ImuConversionChain, RepairErrorCounterSaturates)
++{
++	sim->_accel_input_error_count[0]=UINT32_MAX-1;
++	mavlink_hil_sensor_t packet{};packet.fields_updated=7;packet.id=0;packet.xacc=NAN;
++	for(int i=0;i<2;++i) {
++		sample+=4000;sim->update_sensors(sample,packet);
++		EXPECT_EQ(sim->_accel_input_error_count[0],UINT32_MAX);
++		EXPECT_EQ(sim->_px4_accel[0]._error_count,UINT32_MAX);
++		EXPECT_FALSE(fifo.updated());EXPECT_FALSE(accel[0].updated());
++	}
++}

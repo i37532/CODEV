@@ -1,0 +1,80 @@
+{
+  "status": "event_fix_offline_passed_full_sta2_chain_needs_terminal_capture_fix",
+  "branch": "research/upstream-supertwisting2",
+  "head": "1f6fe1c7a46c22ea41a6a6a51c51498142ca6d62",
+  "new_flights": 0,
+  "new_manifest": false,
+  "flight_qualified": false,
+  "committed": false,
+  "pushed": false,
+  "tests": {
+    "offboard": 306,
+    "upstream_tools": 72,
+    "legacy_heading": 10,
+    "total": 388,
+    "new_event_tests": 27,
+    "exit_codes": [
+      0,
+      0,
+      0
+    ],
+    "skipped": 0
+  },
+  "initial_targeted_run": {
+    "tests": 27,
+    "failures": 1,
+    "exit_code": 1,
+    "reason": "Strict post-end successor missing at exact end boundary, corrected before complete regression"
+  },
+  "initial_real_log_probe": {
+    "exit_code": 1,
+    "reason": "Stale final state receipts, kept as a real blocker"
+  },
+  "replays": {
+    "logs": 9,
+    "complete_task_logs": 8,
+    "partial_task_logs": 1,
+    "expected_failure_retained": true,
+    "exit_code": 0,
+    "real_log_memory_negatives": 4,
+    "old_cli_systems": 4,
+    "historical_results_unchanged": true
+  },
+  "unchanged_existing_files": 136,
+  "changed_existing_files": [
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/heading_check.py",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/README_CN.md",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/runner_contract.py",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/analyze.py"
+  ],
+  "previous_file_count": 140,
+  "firmware_and_parameter_sha256": {
+    "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/bin/px4": "a1ebc57f178c07713f14e2ed423c8b1d27dad251bc70e6047411bfa7877695d8",
+    "/home/yr/Desktop/Codev-SuperTwisting2-original/build/px4_sitl_default/bin/px4": "4416c1dc1b93c9a7c96dd0d252b100d1a209cbe5dc0d8baff808c96609983716",
+    "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/eeprom/parameters_10016": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc"
+  },
+  "source_sha256": {
+    "heading_check.py": "683989280f9afdcd65fad9406ce044aba0ab490004b8cf710d7970bcbc25b138",
+    "analyze.py": "6408256da01d17c0931172b6af39a99216eaac57dbc0ff819f4bbc95c3df685b",
+    "runner_contract.py": "52459b55d3ed550282a6c5130903cc06ff5d98ca86eef01f6d21255cc5fea3fa",
+    "test_event_semantics.py": "99d8999dbe62f5304494a5fe5894a7971439650bc0224530be5ce295679ef6ee",
+    "replay_event_fix.py": "33ce48fe1179a869986981f2b9656cc95055481a601296952893c9e1f293a971",
+    "EVENT_SEMANTICS_FIX_CN.md": "7d1fa49b4034352bae0671f9abf1e5233d550975db116e6b0e514711282991ec",
+    "README_CN.md": "6dec3c1b1d5aadcb3144964382842cf7ceb7a9618f4dad345aa2dbb68ff01e09"
+  },
+  "fixture_sha256": "edba2fda3494360152fe7532634d1302e34604c8eee1f5e7d62db4a592c49771",
+  "evidence_sha256": {
+    "replay02.json": "022a0e3dc9f23203f4ae785183623e786dfe995d5f814ef482f0ddf4279e98ef",
+    "diagnostic_regression02.json": "319635995ccbe5c76b7de584b1256b522cf4c9b2f056db86bbbb74b41371d953",
+    "offline_tests02.log": "be28d2dba7b5de2a306633cfc9fe0bfdca8508c41a36ed2cbe02020d3b45827a",
+    "upstream_tests02.log": "02c78fa3124ef74d2d5aad926669a4e7d5085b542323eeb6b08ce07ddd9ec694",
+    "legacy_heading_tests02.log": "3e840b4bc3a09c50881cf22b75ecfae0c4fb1d3a8234ff5ddc2b3b2e348a5db3"
+  },
+  "remaining_blocker": {
+    "id": "B03/O002",
+    "land_receipt_age_us": 904000,
+    "limit_us": 500000,
+    "old_result_stays_failed": true
+  },
+  "remaining_simulators": []
+}

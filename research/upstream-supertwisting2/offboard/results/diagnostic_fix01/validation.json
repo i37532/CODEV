@@ -1,0 +1,62 @@
+{
+  "status": "offline_passed_not_flight_qualified",
+  "head": "1f6fe1c7a46c22ea41a6a6a51c51498142ca6d62",
+  "branch": "research/upstream-supertwisting2",
+  "new_flights": 0,
+  "new_manifest": false,
+  "committed": false,
+  "pushed": false,
+  "tests": [
+    {
+      "log": "offboard_tests02.log",
+      "count": 271,
+      "exit_code": 0
+    },
+    {
+      "log": "legacy_tools_tests02.log",
+      "count": 72,
+      "exit_code": 0
+    },
+    {
+      "log": "legacy_heading_tests02.log",
+      "count": 10,
+      "exit_code": 0
+    }
+  ],
+  "total_tests": 353,
+  "new_test_methods": 21,
+  "first_targeted_tests": {
+    "count": 21,
+    "failures": 2,
+    "exit_code": 1,
+    "reason": "NaN raw/serialized comparison in test assertions; corrected using existing diagnostic_json"
+  },
+  "native_logs_replayed": 7,
+  "historical_memory_negative_cases": 17,
+  "protected_before_count": 379,
+  "changed_existing_files": [
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/README_CN.md",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/runner_contract.py",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/run.py"
+  ],
+  "unchanged_existing_files": 376,
+  "frozen_firmware_and_control_sources_unchanged": true,
+  "historical_manifests_outcomes_logs_unchanged": true,
+  "tool_and_doc_sha256": {
+    "run.py": "45f48d8ce27e548770ed18b025dca3a7f514932168bdaa636b20f3f4b19ac3ab",
+    "runner_contract.py": "cc0377e57aee794609fa19f5534f828f1db60568df6f5a4e251a9bcf8758ca53",
+    "test_diagnostic_wiring.py": "a50f348382359c0b1ae5ea47556c2b546b81fdbc9541f458f4c22e6674a3b8b4",
+    "replay_diagnostic_fix.py": "4e2a8d82e7acf3461bd216c85d4d47e6d9346170a450b2c9959ff8cbc1abc56e",
+    "DIAGNOSTIC_WIRING_FIX_CN.md": "1479325bc65ea0ece72fd5ce9c8230a1f546ce4319fdcc1c875c97552fa17bb1",
+    "README_CN.md": "95ccc440211848f31f5052949b0d41627a5359daec59e4679c822bdd77196682"
+  },
+  "evidence_sha256": {
+    "historical_replay02.json": "4b5a32b7c290b19487fa61b198e23a4a84d7bd35528401a531f6e40fdf6def69",
+    "legacy_tools_tests02.log": "b33cbc9c19c9192f524e84c9f4926c2b5a182a91cae14a9863ac98ba0c8f38b2",
+    "offboard_tests02.log": "830cad3fde6105d5741c570890be84ca390657df0f276d617d1520f6e648d485",
+    "b02_replay02.json": "7e4816ca9db6e068f0ac63b0eca2463d1de71558b56c27680306f05a9c6d305c",
+    "wiring_tests01.log": "52c99bb2fe87f7a32a7cbd29c60ecb1af97a4e2ba96d30ee7e59deb115d6c30b",
+    "cli_fixture.json": "7f81e32a34ee902ba527f6b26a097da05b00ab9cb2c5a7bdb26e537cc89e4bab",
+    "legacy_heading_tests02.log": "3fd35f5a9c2268f6bf8a11f9bf20fda34cca62f55fdd28f98eae7255d15e5fd1"
+  }
+}

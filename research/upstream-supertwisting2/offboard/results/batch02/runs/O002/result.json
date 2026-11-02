@@ -1,0 +1,120 @@
+{
+  "id": "O002",
+  "system": "STA2",
+  "task": "position",
+  "success": false,
+  "independent_replay_passed": false,
+  "events": [
+    {
+      "name": "control_change",
+      "timestamp_us": 31684000,
+      "generation": 1,
+      "phase": "prestream",
+      "enabled": false
+    },
+    {
+      "name": "control_change",
+      "timestamp_us": 32420000,
+      "generation": 2,
+      "phase": "prestream",
+      "enabled": true
+    },
+    {
+      "name": "prestream_start",
+      "timestamp_us": 32420000,
+      "status_timestamp_us": 32036000,
+      "land_timestamp_us": 32004000,
+      "generation": 2
+    },
+    {
+      "name": "prestream_end",
+      "timestamp_us": 34436000,
+      "status_timestamp_us": 33968000,
+      "land_timestamp_us": 34004000,
+      "generation": 2
+    },
+    {
+      "name": "arm_command",
+      "timestamp_us": 34556000,
+      "status_timestamp_us": 34472000,
+      "land_timestamp_us": 34004000,
+      "generation": 2
+    },
+    {
+      "name": "control_change",
+      "timestamp_us": 34676000,
+      "generation": 3,
+      "phase": "climb",
+      "enabled": true
+    },
+    {
+      "name": "climb_start",
+      "timestamp_us": 34676000,
+      "status_timestamp_us": 34580000,
+      "land_timestamp_us": 34004000,
+      "generation": 3
+    },
+    {
+      "name": "climb_end",
+      "timestamp_us": 50700000,
+      "status_timestamp_us": 50204000,
+      "land_timestamp_us": 50612000,
+      "generation": 3
+    },
+    {
+      "name": "control_change",
+      "timestamp_us": 50700000,
+      "generation": 4,
+      "phase": "recover",
+      "enabled": true
+    },
+    {
+      "name": "recover_start",
+      "timestamp_us": 50700000,
+      "status_timestamp_us": 50204000,
+      "land_timestamp_us": 50612000,
+      "generation": 4
+    },
+    {
+      "name": "recover_end",
+      "timestamp_us": 53812000,
+      "status_timestamp_us": 53732000,
+      "land_timestamp_us": 53612000,
+      "generation": 4
+    },
+    {
+      "name": "control_change",
+      "timestamp_us": 53828000,
+      "generation": 5,
+      "phase": "hover",
+      "enabled": true
+    },
+    {
+      "name": "hover_start",
+      "timestamp_us": 53828000,
+      "status_timestamp_us": 53732000,
+      "land_timestamp_us": 53612000,
+      "generation": 5
+    }
+  ],
+  "logs": [
+    {
+      "source": "/home/yr/Desktop/Codev-SuperTwisting2-original/build/px4_sitl_default/rootfs/log/2026-11-02/06_33_25.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102-B02/runs/O002/native_00.ulg",
+      "sha256": "1f2e8c364ec4308f527fc191b0d0fbe3002bd38a6ac178538e9c5b71b6097b96",
+      "bytes": 19317432
+    }
+  ],
+  "manifest_sha256": "51f69ef414d51e24e29b9c6b4dbcf2d08a5b38dcac27294fbc43f4d08cc04763",
+  "parameter_restore_exact": true,
+  "started_utc": "2026-11-02T06:33:23Z",
+  "launcher_pid": 2039238,
+  "error": "ValueError('diagnostic attitude_sta_status must be a mapping')",
+  "removed_new_parameter_files": [
+    "parameters.bson",
+    "parameters_backup.bson"
+  ],
+  "original_files": 0,
+  "remaining_simulators": [],
+  "finished_utc": "2026-11-02T06:34:18Z"
+}

@@ -1,0 +1,16 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-B",
+    "research/upstream-supertwisting2/offboard/plot_results.py",
+    "--manifest",
+    "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102/manifest.json",
+    "--output",
+    "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102/rejected_comparison01"
+  ],
+  "returncode": 1,
+  "output_exists": false,
+  "figures_created": 0,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/plot_results.py\", line 461, in <module>\n    raise SystemExit(main())\n  File \"/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/plot_results.py\", line 455, in main\n    report = generate(args.manifest, args.output)\n  File \"/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/plot_results.py\", line 389, in generate\n    manifest, records = audit_inputs(manifest_path)\n  File \"/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/plot_results.py\", line 248, in audit_inputs\n    require(result.get('success') is True and result.get('independent_replay_passed') is True,\n  File \"/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/plot_results.py\", line 25, in require\n    raise ValueError(message)\nValueError: Require success and independent_replay_passed: O001\n"
+}

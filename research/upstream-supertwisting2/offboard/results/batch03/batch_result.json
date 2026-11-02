@@ -1,0 +1,148 @@
+{
+  "status": "stopped_first_required_validity_failure",
+  "manifest_sha256": "da6402a35e09bea071e81df26eaab817fad6f1f88b7d54a0b80c40b872b11cf6",
+  "source_head": "1f6fe1c7a46c22ea41a6a6a51c51498142ca6d62",
+  "planned": 8,
+  "attempted": 2,
+  "took_off": 2,
+  "task_completed": 2,
+  "accepted": 1,
+  "rejected": 1,
+  "unattempted": 6,
+  "historical_attempts_before": 3,
+  "historical_attempts_after": 5,
+  "historical_maximum": 11,
+  "unused_batch_slots_closed": 6,
+  "offline_tests": {
+    "offboard": 279,
+    "upstream": 72,
+    "legacy_heading": 10,
+    "total": 361,
+    "exit_codes": [
+      0,
+      0,
+      0
+    ],
+    "skipped": 0
+  },
+  "execute_exit_codes": {
+    "O001": 0,
+    "O002": 1
+  },
+  "diagnostic_attempts": [
+    {
+      "exit_code": 1,
+      "reason": "diagnostic evidence lookup assumed EKF2.cpp was in manifest; corrected to compare pinned Git blob"
+    },
+    {
+      "exit_code": 0,
+      "output": "stop_diagnosis02.json"
+    }
+  ],
+  "archive_attempts": [
+    {
+      "exit_code": 1,
+      "reason": "Missing existing numpy PYTHONPATH; no copy had occurred"
+    },
+    {
+      "exit_code": 0,
+      "existing_pythonpath_restored": true
+    }
+  ],
+  "frozen_assets_verified": 108,
+  "source_assets_unchanged": true,
+  "submodules_unchanged": true,
+  "remaining_simulators": [],
+  "no_refly": true,
+  "no_retuning": true,
+  "no_changed_thresholds": true,
+  "no_push": true,
+  "rows": [
+    {
+      "id": "O001",
+      "system": "PID",
+      "task": "position",
+      "status": "accepted",
+      "attempted": true,
+      "result_path": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102-B03/runs/O001/result.json",
+      "result_sha256": "1b0d2567d2ee1b6b752ad7a8dcb3a0719efdfd2f35635139143a6a7b5df0ed21",
+      "success": true,
+      "task_completed": true,
+      "independent_replay_passed": true,
+      "parameter_restore_exact": true,
+      "logs": [
+        {
+          "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-11-02/07_00_14.ulg",
+          "archive": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102-B03/runs/O001/native_00.ulg",
+          "sha256": "7b87d1caa935f1427b4c0884132e317f5e739dcdb1175c270c3ee0f6d2ec332e",
+          "bytes": 8137787
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "O002",
+      "system": "STA2",
+      "task": "position",
+      "status": "rejected",
+      "attempted": true,
+      "result_path": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102-B03/runs/O002/result.json",
+      "result_sha256": "db72e72257819d883c1581aeeff2614cf50d507309e8520605beeb11159457eb",
+      "success": false,
+      "task_completed": true,
+      "independent_replay_passed": false,
+      "parameter_restore_exact": true,
+      "logs": [
+        {
+          "source": "/home/yr/Desktop/Codev-SuperTwisting2-original/build/px4_sitl_default/rootfs/log/2026-11-02/07_02_20.ulg",
+          "archive": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102-B03/runs/O002/native_00.ulg",
+          "sha256": "313aa66b75e244a8cd1f1082f0ac3361e76148d8acdfb763fbaed0d1c64ee998",
+          "bytes": 38478926
+        }
+      ],
+      "error": "ValueError('Heading evidence: unexpected reset_vel_to_gps')"
+    },
+    {
+      "id": "O003",
+      "system": "RSTA",
+      "task": "position",
+      "status": "unattempted_batch_stopped",
+      "attempted": false
+    },
+    {
+      "id": "O004",
+      "system": "RISTA",
+      "task": "position",
+      "status": "unattempted_batch_stopped",
+      "attempted": false
+    },
+    {
+      "id": "O005",
+      "system": "PID",
+      "task": "velocity",
+      "status": "unattempted_batch_stopped",
+      "attempted": false
+    },
+    {
+      "id": "O006",
+      "system": "STA2",
+      "task": "velocity",
+      "status": "unattempted_batch_stopped",
+      "attempted": false
+    },
+    {
+      "id": "O007",
+      "system": "RSTA",
+      "task": "velocity",
+      "status": "unattempted_batch_stopped",
+      "attempted": false
+    },
+    {
+      "id": "O008",
+      "system": "RISTA",
+      "task": "velocity",
+      "status": "unattempted_batch_stopped",
+      "attempted": false
+    }
+  ]
+}

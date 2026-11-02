@@ -1,0 +1,67 @@
+{
+  "test_logs": {
+    "legacy_tests01.log": {
+      "tests": 72,
+      "exit_code": 0,
+      "skips": 0,
+      "sha256": "b33cbc9c19c9192f524e84c9f4926c2b5a182a91cae14a9863ac98ba0c8f38b2"
+    },
+    "v04_policy_tests01.log": {
+      "tests": 10,
+      "exit_code": 0,
+      "skips": 0,
+      "sha256": "23df13403af0f453b2823c956738f1d537154866076ea8cf56fc68c7cca64dbb"
+    },
+    "offboard_tests03.log": {
+      "tests": 243,
+      "exit_code": 0,
+      "skips": 0,
+      "sha256": "249aa1fee06cc60e7662ae160ae4133f7568d5b9e069dcf7d3a152613067ac31"
+    }
+  },
+  "total_distinct_tests": 325,
+  "old_attempt_guards": {
+    "O001": "Attempt already exists; no retry or replacement",
+    "O002": "Previous attempt failed or lacks independent replay; stop batch"
+  },
+  "plot_rejection_exit_code": 1,
+  "plot_error": "Traceback (most recent call last):\n  File \"/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/plot_results.py\", line 461, in <module>\n    raise SystemExit(main())\n  File \"/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/plot_results.py\", line 455, in main\n    report = generate(args.manifest, args.output)\n  File \"/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/plot_results.py\", line 389, in generate\n    manifest, records = audit_inputs(manifest_path)\n  File \"/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/plot_results.py\", line 248, in audit_inputs\n    require(result.get('success') is True and result.get('independent_replay_passed') is True,\n  File \"/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/plot_results.py\", line 25, in require\n    raise ValueError(message)\nValueError: Require success and independent_replay_passed: O001\n",
+  "plot_output_created": false,
+  "snapshot_paths": 215,
+  "unchanged_paths": 212,
+  "intended_modified_paths": [
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/analyze.py",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/runner_contract.py",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/test_runner_contract.py"
+  ],
+  "head": "1f6fe1c7a46c22ea41a6a6a51c51498142ca6d62",
+  "new_flights": 0,
+  "commit": false,
+  "push": false,
+  "final_files": {
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/test_forwarding.py": "536318d3e711e9b5978b050d1240e2453f92448ecad2c91349a7b43ac1eab7d9",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/test_runner_contract.py": "5cd199e8ef7ef8b281a8f660c4e8fa0812f9e0296641eee759be1b17925753f4",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/heading_check.py": "b142a8c53a53e7e17ddc73a274650326a3d1dec7b4a79fe4dfa0c9efa26307ae",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/replay_heading_fix.py": "49e52fe44fd9798447d15db7fd79543b3230b49caf5521c207ac2898235e0407",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/test_prepare.py": "2903099f77655c106eba9f0b5920c99dbefc55d746c6d5a0555f2acfe98841d0",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/ros_bridge.py": "39902e1d12dc3ad19fa706429826cbbf7d53301a58b6d0da90bedb57d742ef4e",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/task_contract.py": "eae1d96e99e56602b0fee878716f82de5ecbbb62debda84f14dd65a00eef584f",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/test_heading_check.py": "5431e284911f0ad4edd6d1e71cb0078b9e63dee42fce97facea9fde4745f84fd",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/test_plot_results.py": "9fbb7176adbd4b304f6332f9f634d801a9f6dabde0a6b07f75fbb5cfeddfb2fc",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/runner_contract.py": "b59ba6a4d41a205d0e94eabe8fb93388315cb33bb7183c2cac0450be47283934",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/prepare.py": "57a3846f49156424374cd4f6d7ed947b84923b142d960391aaebead692a9e340",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/diagnose_reset.py": "6fb97ff78e53a3f0d12b83cf0da5296983de897c86eef17db22fe7af5b02c7dc",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/analyze.py": "ec987fe73f68389aa9ab5ae801ec37202d4c015a25f136bbaa135de43b5c441d",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/test_task_contract.py": "944e7ea3993f911e95f3362f46847d25025a9ec4daee2fa58a634088065b2ad7",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/plot_results.py": "76eb733f29bb1a330f3a0f286b6139263f1dcef49af87bba43dafaca890cc9f0",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/freeze.py": "55d9123f5cd57569c161d973bf009572147b0c14e455da9de661ec7d6abdb6c6",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/test_run.py": "5abdc989e34b0ee0db0196cbb132463238bf0ceabc7ede2b12dfc328993a3456",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/test_ros_bridge.py": "2ae71de6e5a3f3ac2498290130e630bde881260e02e0468a3e5f5d18415ae3eb",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/verify_live_bridge.py": "61305dab0a0a49c3845d5f10b68db8176b6ca9e8d0190c3e0e073b2edc10a65d",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/run.py": "67c4764e9966fcad7946de12c6965d69557c2e4f13e9062e5a508510957e9462",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/test_analyze.py": "e30c353240c25a00bc7287f3798b9804bcdf98651aa242416939164d7094e32e"
+  },
+  "replay": "replay02.json",
+  "replay_sha256": "4b5a32b7c290b19487fa61b198e23a4a84d7bd35528401a531f6e40fdf6def69",
+  "schema_evidence_sha256": "943c37fd74ee75c28f56f8f8a35b2120f8942e978b411241c2a73e635a97e7f6"
+}

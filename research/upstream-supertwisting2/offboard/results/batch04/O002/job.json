@@ -1,0 +1,86 @@
+{
+  "id": "O002",
+  "label": "Upstream STA2",
+  "repo": "/home/yr/Desktop/Codev-SuperTwisting2-original",
+  "bin": "/home/yr/Desktop/Codev-SuperTwisting2-original/build/px4_sitl_default/bin",
+  "rootfs": "/home/yr/Desktop/Codev-SuperTwisting2-original/build/px4_sitl_default/rootfs",
+  "parameters": {
+    "MIS_TAKEOFF_ALT": 2.5,
+    "SDLOG_MODE": 1
+  },
+  "expected_parameters": {
+    "ATT_STA_P_AL": 0.15,
+    "ATT_STA_P_C": 0.0,
+    "ATT_STA_P_I": 0.003,
+    "ATT_STA_P_LA": 0.2,
+    "ATT_STA_P_LIM": 0.3,
+    "ATT_STA_P_NMAX": 1.0,
+    "ATT_STA_P_NMIN": 0.9,
+    "ATT_STA_R_AL": 0.15,
+    "ATT_STA_R_C": 0.0,
+    "ATT_STA_R_I": 0.003,
+    "ATT_STA_R_LA": 0.2,
+    "ATT_STA_R_LIM": 0.3,
+    "ATT_STA_R_NMAX": 1.0,
+    "ATT_STA_R_NMIN": 0.9,
+    "ATT_STA_Y_AL": 0.2,
+    "ATT_STA_Y_C": 0.0,
+    "ATT_STA_Y_I": 0.0,
+    "ATT_STA_Y_LA": 0.1,
+    "ATT_STA_Y_LIM": 0.3,
+    "ATT_STA_Y_NMAX": 1.0,
+    "ATT_STA_Y_NMIN": 0.9,
+    "POS_STA_AL": 4.0,
+    "POS_STA_C": 1.0,
+    "POS_STA_LA": 2.0,
+    "POS_STA_MASS": 0.0,
+    "POS_STA_NMAX": 1.0,
+    "POS_STA_NMIN": 0.9,
+    "POS_STA_W_LIM": 9.8,
+    "MIS_TAKEOFF_ALT": 2.5,
+    "SDLOG_MODE": 1,
+    "SYS_AUTOSTART": 10015
+  },
+  "firmware_sha256": "4416c1dc1b93c9a7c96dd0d252b100d1a209cbe5dc0d8baff808c96609983716",
+  "source_head": "fc3720f67767c78cfab668777de13f68562fe2fd",
+  "source_assets": {
+    "src/lib/rate_control/attitude_sta_control.cpp": "c446dec2cd9008734a6c62e5749fbb01c0dd0c1bc47786b1b2c7e5fb289f94a3",
+    "src/lib/rate_control/rate_control.cpp": "07b2c94e626bbe023182d8879a522115f58ea799b44ee2048908f62e1cb2ad17",
+    "src/modules/mc_rate_control/MulticopterRateControl.cpp": "65f4fab691cfd220fcdda540e3da281845f285108371e563434482885d0c33a0",
+    "src/modules/mc_pos_control/PositionControl/PositionControl.cpp": "b9f2c874ff3d9c93aa78c43328f5b23d3ca4b36e4c8c42be547cced1d720de56",
+    "src/modules/mc_pos_control/PositionControl/PositionStaControl.cpp": "99b85512fbbb53a97062ad2dd9d5f2d6e0e14defb65d2619c7f64c25c694be0d",
+    "Tools/simulation/gazebo-classic/sitl_run.sh": "3ad5b32f713eb203041b92a53ab6e1232ad12a5ff53ddfdae81eaffdbabe115a"
+  },
+  "parameter_files": [
+    "parameters.bson",
+    "parameters_backup.bson"
+  ],
+  "diagnostic_expectations": {
+    "attitude_sta_status": {}
+  },
+  "launch_env": {
+    "HEADLESS": "1",
+    "PX4_SIM_SPEED_FACTOR": "1",
+    "GAZEBO_MASTER_URI": "http://127.0.0.1:11345",
+    "GAZEBO_MODEL_PATH": "",
+    "GAZEBO_PLUGIN_PATH": "",
+    "LD_LIBRARY_PATH": "",
+    "PX4_SITL_WORLD": ""
+  },
+  "launch_command": [
+    "bash",
+    "/home/yr/Desktop/Codev-SuperTwisting2-original/Tools/simulation/gazebo-classic/sitl_run.sh",
+    "/home/yr/Desktop/Codev-SuperTwisting2-original/build/px4_sitl_default/bin/px4",
+    "none",
+    "iris",
+    "none",
+    "/home/yr/Desktop/Codev-SuperTwisting2-original",
+    "/home/yr/Desktop/Codev-SuperTwisting2-original/build/px4_sitl_default"
+  ],
+  "system": "STA2",
+  "task": "position",
+  "status": "unattempted",
+  "heading_reset_policy": "offboard_first_takeoff_alignment_v1",
+  "event_semantics_policy": "upstream_fc3720_event_republication_v1",
+  "embedded_build_source_head": "fc3720f67767c78cfab668777de13f68562fe2fd"
+}

@@ -1,0 +1,190 @@
+{
+  "id": "O002",
+  "system": "STA2",
+  "task": "hover",
+  "success": true,
+  "independent_replay_passed": true,
+  "events": [
+    {
+      "name": "control_change",
+      "timestamp_us": 32764000,
+      "generation": 1,
+      "phase": "prestream",
+      "enabled": false
+    },
+    {
+      "name": "control_change",
+      "timestamp_us": 33388000,
+      "generation": 2,
+      "phase": "prestream",
+      "enabled": true
+    },
+    {
+      "name": "prestream_start",
+      "timestamp_us": 33388000,
+      "status_timestamp_us": 33368000,
+      "land_timestamp_us": 33156000,
+      "generation": 2
+    },
+    {
+      "name": "prestream_end",
+      "timestamp_us": 35476000,
+      "status_timestamp_us": 35432000,
+      "land_timestamp_us": 35156000,
+      "generation": 2
+    },
+    {
+      "name": "arm_command",
+      "timestamp_us": 35604000,
+      "status_timestamp_us": 35516000,
+      "land_timestamp_us": 35156000,
+      "generation": 2
+    },
+    {
+      "name": "control_change",
+      "timestamp_us": 35724000,
+      "generation": 3,
+      "phase": "climb",
+      "enabled": true
+    },
+    {
+      "name": "climb_start",
+      "timestamp_us": 35724000,
+      "status_timestamp_us": 35624000,
+      "land_timestamp_us": 35156000,
+      "generation": 3
+    },
+    {
+      "name": "climb_end",
+      "timestamp_us": 51796000,
+      "status_timestamp_us": 51752000,
+      "land_timestamp_us": 51676000,
+      "generation": 3
+    },
+    {
+      "name": "control_change",
+      "timestamp_us": 51796000,
+      "generation": 4,
+      "phase": "recover",
+      "enabled": true
+    },
+    {
+      "name": "recover_start",
+      "timestamp_us": 51796000,
+      "status_timestamp_us": 51752000,
+      "land_timestamp_us": 51676000,
+      "generation": 4
+    },
+    {
+      "name": "recover_end",
+      "timestamp_us": 55060000,
+      "status_timestamp_us": 54776000,
+      "land_timestamp_us": 54676000,
+      "generation": 4
+    },
+    {
+      "name": "control_change",
+      "timestamp_us": 55076000,
+      "generation": 5,
+      "phase": "hover",
+      "enabled": true
+    },
+    {
+      "name": "hover_start",
+      "timestamp_us": 55076000,
+      "status_timestamp_us": 54776000,
+      "land_timestamp_us": 54676000,
+      "generation": 5
+    },
+    {
+      "name": "hover_end",
+      "timestamp_us": 65124000,
+      "status_timestamp_us": 64856000,
+      "land_timestamp_us": 64676000,
+      "generation": 5
+    },
+    {
+      "name": "control_change",
+      "timestamp_us": 65124000,
+      "generation": 6,
+      "phase": "recover",
+      "enabled": true
+    },
+    {
+      "name": "recover_start",
+      "timestamp_us": 65124000,
+      "status_timestamp_us": 64856000,
+      "land_timestamp_us": 64676000,
+      "generation": 6
+    },
+    {
+      "name": "recover_end",
+      "timestamp_us": 68332000,
+      "status_timestamp_us": 67880000,
+      "land_timestamp_us": 67676000,
+      "generation": 6
+    },
+    {
+      "name": "control_change",
+      "timestamp_us": 68332000,
+      "generation": 7,
+      "phase": "descend",
+      "enabled": true
+    },
+    {
+      "name": "descend_start",
+      "timestamp_us": 68332000,
+      "status_timestamp_us": 67880000,
+      "land_timestamp_us": 67676000,
+      "generation": 7
+    },
+    {
+      "name": "descend_end",
+      "timestamp_us": 84364000,
+      "status_timestamp_us": 84008000,
+      "land_timestamp_us": 83676000,
+      "generation": 7
+    },
+    {
+      "name": "land_command",
+      "timestamp_us": 84364000,
+      "status_timestamp_us": 84008000,
+      "land_timestamp_us": 83676000,
+      "generation": 7
+    },
+    {
+      "name": "control_change",
+      "timestamp_us": 84484000,
+      "generation": 8,
+      "phase": "descend",
+      "enabled": false
+    },
+    {
+      "name": "landed_disarmed",
+      "timestamp_us": 88804000,
+      "status_timestamp_us": 88520000,
+      "land_timestamp_us": 88708000,
+      "generation": 8
+    }
+  ],
+  "logs": [
+    {
+      "source": "/home/yr/Desktop/Codev-SuperTwisting2-imu-fix/build/px4_sitl_default/rootfs/log/2026-11-02/08_52_43.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-QUICK-20261102/comparison/runs/O002/native_00.ulg",
+      "sha256": "45fd913d2b7502f3e4ea80e2ffb1634a0fffc3002572e88e265d080c0522edc6",
+      "bytes": 32890419
+    }
+  ],
+  "manifest_sha256": "fd99b118eb0a74190d288255a4b8470639691fe05b6680f5987d0ab89158d770",
+  "parameter_restore_exact": true,
+  "started_utc": "2026-11-02T08:52:42Z",
+  "launcher_pid": 2920745,
+  "task_completed": true,
+  "removed_new_parameter_files": [
+    "parameters.bson",
+    "parameters_backup.bson"
+  ],
+  "original_files": 0,
+  "remaining_simulators": [],
+  "finished_utc": "2026-11-02T08:54:15Z"
+}

@@ -1,0 +1,134 @@
+{
+  "status": "stopped_required_validity_failure",
+  "planned": 8,
+  "attempted": 2,
+  "took_off": 2,
+  "completed": 1,
+  "accepted": 1,
+  "invalid": 1,
+  "unattempted": 6,
+  "cumulative_attempts_including_old": 3,
+  "cumulative_authorized_cap": 9,
+  "manifest_sha256": "51f69ef414d51e24e29b9c6b4dbcf2d08a5b38dcac27294fbc43f4d08cc04763",
+  "frozen_assets_verified": 91,
+  "all_source_and_firmware_unchanged": true,
+  "submodules_unchanged": true,
+  "old_failure_unchanged": true,
+  "unittest_counts": [
+    250,
+    72,
+    10
+  ],
+  "unittest_exit_codes": [
+    0,
+    0,
+    0
+  ],
+  "diagnosis_exit_code": 0,
+  "execution_exit_codes": {
+    "O001": 0,
+    "O002": 1
+  },
+  "rows": [
+    {
+      "id": "O001",
+      "task": "position",
+      "system": "PID",
+      "attempted": true,
+      "success": true,
+      "independent_replay": true,
+      "parameter_restore_exact": true,
+      "raw_logs": [
+        {
+          "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-11-02/06_31_15.ulg",
+          "archive": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102-B02/runs/O001/native_00.ulg",
+          "sha256": "2d17de0c4d632f90a5c9130edd91ddf4545becf0f7cbc1c5f471a60ea9817b79",
+          "bytes": 8139960
+        }
+      ],
+      "result_sha256": "6c40e6f05aa70229c6550c9a9aaf481c252fdfc1b2082609ca6fd89d93f8e4b1",
+      "error": null
+    },
+    {
+      "id": "O002",
+      "task": "position",
+      "system": "STA2",
+      "attempted": true,
+      "success": false,
+      "independent_replay": false,
+      "parameter_restore_exact": true,
+      "raw_logs": [
+        {
+          "source": "/home/yr/Desktop/Codev-SuperTwisting2-original/build/px4_sitl_default/rootfs/log/2026-11-02/06_33_25.ulg",
+          "archive": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102-B02/runs/O002/native_00.ulg",
+          "sha256": "1f2e8c364ec4308f527fc191b0d0fbe3002bd38a6ac178538e9c5b71b6097b96",
+          "bytes": 19317432
+        }
+      ],
+      "result_sha256": "f7f9e13698fb642672664065f0d3ceca55e5dde460dce27c7ed47dbf9dd5ee66",
+      "error": "ValueError('diagnostic attitude_sta_status must be a mapping')"
+    },
+    {
+      "id": "O003",
+      "task": "position",
+      "system": "RSTA",
+      "attempted": false,
+      "status": "unattempted_after_first_failure"
+    },
+    {
+      "id": "O004",
+      "task": "position",
+      "system": "RISTA",
+      "attempted": false,
+      "status": "unattempted_after_first_failure"
+    },
+    {
+      "id": "O005",
+      "task": "velocity",
+      "system": "PID",
+      "attempted": false,
+      "status": "unattempted_after_first_failure"
+    },
+    {
+      "id": "O006",
+      "task": "velocity",
+      "system": "STA2",
+      "attempted": false,
+      "status": "unattempted_after_first_failure"
+    },
+    {
+      "id": "O007",
+      "task": "velocity",
+      "system": "RSTA",
+      "attempted": false,
+      "status": "unattempted_after_first_failure"
+    },
+    {
+      "id": "O008",
+      "task": "velocity",
+      "system": "RISTA",
+      "attempted": false,
+      "status": "unattempted_after_first_failure"
+    }
+  ],
+  "evidence": {
+    "manifest.json": "51f69ef414d51e24e29b9c6b4dbcf2d08a5b38dcac27294fbc43f4d08cc04763",
+    "offline_tests01.log": "b19f59b58d2f4fb910505946f5c28ef7a3838506a4ae9b8b3c3a0146790f637d",
+    "legacy_tools_tests01.log": "b33cbc9c19c9192f524e84c9f4926c2b5a182a91cae14a9863ac98ba0c8f38b2",
+    "legacy_heading_tests01.log": "3e840b4bc3a09c50881cf22b75ecfae0c4fb1d3a8234ff5ddc2b3b2e348a5db3",
+    "submodules_main.txt": "20028a594d20cfd6abf4713c4767d687b7d2e82c2d0ab6f2f3530b1ee3396b55",
+    "submodules_original.txt": "4991483db067662ef584ea213be4238eacf48b69ca2f4d4a923e5922b770f885",
+    "workspace_before.txt": "a1c04f37ff4ad2f53476ded1c5de71a447b568f7c44ffce6aa84e412e2f6ab01",
+    "preflight_sha256.txt": "a5420bfc15118b5bed7d82c70e5c76f423c7e24dbcb3833422c2cf8cb4e27720",
+    "execute_O001.log": "1f43022190222053a9fabca87af79253d7b6be31a6fdac43824c2a9630f3b722",
+    "execute_O002.log": "46f3f90df8db5ef6876d182114fba75efa4615246cdec760a2170f05ba9ef9e3",
+    "stop_diagnosis02.json": "feb1df0bc56681bf611e25cc0929874db928428370d922918a77002a8ccbc65e",
+    "live_bridge02/verification.json": "054a56aaa85ee044a5abe1141cdedef9cd59723d16171ecee8b4cf3c7f9c79b1",
+    "runs/O001/result.json": "6c40e6f05aa70229c6550c9a9aaf481c252fdfc1b2082609ca6fd89d93f8e4b1",
+    "runs/O001/metrics.json": "eaab9c400d36c5dba2c0d5ba16fefb49b768cc25fdbb4fc1d2c3d40a1dbfa752",
+    "runs/O001/independent_replay.json": "eaab9c400d36c5dba2c0d5ba16fefb49b768cc25fdbb4fc1d2c3d40a1dbfa752",
+    "runs/O001/origin.json": "2fde7817da5559377fea8c315d4c26159c9c6b1070bc25a42abad517c76e2da2",
+    "runs/O002/result.json": "f7f9e13698fb642672664065f0d3ceca55e5dde460dce27c7ed47dbf9dd5ee66",
+    "runs/O002/origin.json": "d7eb9ba712768c1b6a72185804d6d1af082db2d57ff6aa6877a46a1e0201b85d"
+  }
+}

@@ -1,0 +1,39 @@
+test_benign_new_event_and_its_republications (test_event_semantics.EventHistoryTests) ... ok
+test_both_closed_boundaries_and_delayed_successor_reject_new_reset (test_event_semantics.EventHistoryTests) ... test_counter_gap_before_left_boundary_is_not_hidden_by_cache (test_event_semantics.EventHistoryTests) ... ok
+test_counter_jump_reverse_invalid_fraction_and_wrap_jump (test_event_semantics.EventHistoryTests) ... ok
+test_every_changed_cached_payload_field_rejected (test_event_semantics.EventHistoryTests) ... ok
+test_every_new_forbidden_flag_rejected (test_event_semantics.EventHistoryTests) ... ok
+test_missing_periodic_record_and_over_limit_gap_rejected (test_event_semantics.EventHistoryTests) ... ok
+test_missing_predecessor_or_successor_rejected (test_event_semantics.EventHistoryTests) ... ok
+test_new_counter_with_empty_payload_rejected (test_event_semantics.EventHistoryTests) ... ok
+test_old_forbidden_payload_is_not_new_event_no_deduplication (test_event_semantics.EventHistoryTests) ... ok
+test_pre_window_new_event_then_cached_and_strictly_post_window_event (test_event_semantics.EventHistoryTests) ... ok
+test_publication_duplicate_reverse_zero_fraction_nan (test_event_semantics.EventHistoryTests) ... ok
+test_real_sta2_periodic_fixture (test_event_semantics.EventHistoryTests) ... ok
+test_same_flag_true_again_with_advanced_counter_is_new_event (test_event_semantics.EventHistoryTests) ... ok
+test_sample_change_without_event_and_event_without_sample_advance (test_event_semantics.EventHistoryTests) ... ok
+test_sample_negative_zero_future_reverse_fraction_nan (test_event_semantics.EventHistoryTests) ... ok
+test_single_uint32_wrap_with_benign_event_is_valid (test_event_semantics.EventHistoryTests) ... ok
+test_unknown_missing_fields_or_nonbinary_payload_rejected (test_event_semantics.EventHistoryTests) ... ok
+test_all_four_systems_both_task_shapes_complete_chain (test_event_semantics.EventIntegrationTests) ... ok
+test_full_chain_downstream_stale_final_receipt_not_excused (test_event_semantics.EventIntegrationTests) ... ok
+test_inflight_reset_counter_even_without_flag_still_rejected (test_event_semantics.EventIntegrationTests) ... ok
+test_main_event_only_no_heartbeat_and_forbidden_new_event_still_rejected (test_event_semantics.EventIntegrationTests) ... ok
+test_main_three_systems_exact_legacy_outputs (test_event_semantics.EventIntegrationTests) ... ok
+test_missing_periodic_topic_sample_clock_and_primary_switch_rejected (test_event_semantics.EventIntegrationTests) ... ok
+test_new_policy_requires_uniform_explicit_manifest_declaration (test_event_semantics.EventIntegrationTests) ... ok
+test_old_policy_keeps_old_sta2_rejection (test_event_semantics.EventIntegrationTests) ... ok
+test_unpinned_version_unknown_policy_and_missing_heading_policy_rejected (test_event_semantics.EventIntegrationTests) ... ok
+
+======================================================================
+FAIL: test_both_closed_boundaries_and_delayed_successor_reject_new_reset (test_event_semantics.EventHistoryTests) (t=11000000, sample=10000000)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/test_event_semantics.py", line 136, in test_both_closed_boundaries_and_delayed_successor_reject_new_reset
+    with self.subTest(t=t,sample=sample),self.assertRaisesRegex(ValueError,'reset_vel_to_gps'):check(d)
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 27 tests in 2.822s
+
+FAILED (failures=1)

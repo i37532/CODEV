@@ -1,0 +1,230 @@
+{
+  "id": "O001",
+  "system": "PID",
+  "task": "position",
+  "success": false,
+  "independent_replay_passed": false,
+  "events": [
+    {
+      "name": "control_change",
+      "timestamp_us": 35040000,
+      "generation": 1,
+      "phase": "prestream",
+      "enabled": false
+    },
+    {
+      "name": "control_change",
+      "timestamp_us": 36168000,
+      "generation": 2,
+      "phase": "prestream",
+      "enabled": true
+    },
+    {
+      "name": "prestream_start",
+      "timestamp_us": 36168000,
+      "status_timestamp_us": 35840000,
+      "land_timestamp_us": 35508000,
+      "generation": 2
+    },
+    {
+      "name": "prestream_end",
+      "timestamp_us": 38188000,
+      "status_timestamp_us": 37724000,
+      "land_timestamp_us": 37508000,
+      "generation": 2
+    },
+    {
+      "name": "arm_command",
+      "timestamp_us": 38200000,
+      "status_timestamp_us": 38204000,
+      "land_timestamp_us": 37508000,
+      "generation": 2
+    },
+    {
+      "name": "control_change",
+      "timestamp_us": 38208000,
+      "generation": 3,
+      "phase": "climb",
+      "enabled": true
+    },
+    {
+      "name": "climb_start",
+      "timestamp_us": 38208000,
+      "status_timestamp_us": 38216000,
+      "land_timestamp_us": 37508000,
+      "generation": 3
+    },
+    {
+      "name": "climb_end",
+      "timestamp_us": 54308000,
+      "status_timestamp_us": 53840000,
+      "land_timestamp_us": 54008000,
+      "generation": 3
+    },
+    {
+      "name": "control_change",
+      "timestamp_us": 54308000,
+      "generation": 4,
+      "phase": "recover",
+      "enabled": true
+    },
+    {
+      "name": "recover_start",
+      "timestamp_us": 54308000,
+      "status_timestamp_us": 53840000,
+      "land_timestamp_us": 54008000,
+      "generation": 4
+    },
+    {
+      "name": "recover_end",
+      "timestamp_us": 57500000,
+      "status_timestamp_us": 57368000,
+      "land_timestamp_us": 57008000,
+      "generation": 4
+    },
+    {
+      "name": "control_change",
+      "timestamp_us": 57520000,
+      "generation": 5,
+      "phase": "hover",
+      "enabled": true
+    },
+    {
+      "name": "hover_start",
+      "timestamp_us": 57520000,
+      "status_timestamp_us": 57368000,
+      "land_timestamp_us": 57008000,
+      "generation": 5
+    },
+    {
+      "name": "hover_end",
+      "timestamp_us": 67608000,
+      "status_timestamp_us": 67448000,
+      "land_timestamp_us": 67008000,
+      "generation": 5
+    },
+    {
+      "name": "control_change",
+      "timestamp_us": 67608000,
+      "generation": 6,
+      "phase": "step_up",
+      "enabled": true
+    },
+    {
+      "name": "step_up_start",
+      "timestamp_us": 67608000,
+      "status_timestamp_us": 67448000,
+      "land_timestamp_us": 67008000,
+      "generation": 6
+    },
+    {
+      "name": "step_up_end",
+      "timestamp_us": 75688000,
+      "status_timestamp_us": 75512000,
+      "land_timestamp_us": 75008000,
+      "generation": 6
+    },
+    {
+      "name": "control_change",
+      "timestamp_us": 75688000,
+      "generation": 7,
+      "phase": "step_down",
+      "enabled": true
+    },
+    {
+      "name": "step_down_start",
+      "timestamp_us": 75688000,
+      "status_timestamp_us": 75512000,
+      "land_timestamp_us": 75008000,
+      "generation": 7
+    },
+    {
+      "name": "step_down_end",
+      "timestamp_us": 83780000,
+      "status_timestamp_us": 83576000,
+      "land_timestamp_us": 83008000,
+      "generation": 7
+    },
+    {
+      "name": "control_change",
+      "timestamp_us": 83780000,
+      "generation": 8,
+      "phase": "recover",
+      "enabled": true
+    },
+    {
+      "name": "recover_start",
+      "timestamp_us": 83780000,
+      "status_timestamp_us": 83576000,
+      "land_timestamp_us": 83008000,
+      "generation": 8
+    },
+    {
+      "name": "recover_end",
+      "timestamp_us": 86960000,
+      "status_timestamp_us": 86600000,
+      "land_timestamp_us": 86008000,
+      "generation": 8
+    },
+    {
+      "name": "control_change",
+      "timestamp_us": 86960000,
+      "generation": 9,
+      "phase": "descend",
+      "enabled": true
+    },
+    {
+      "name": "descend_start",
+      "timestamp_us": 86960000,
+      "status_timestamp_us": 86600000,
+      "land_timestamp_us": 86008000,
+      "generation": 9
+    },
+    {
+      "name": "descend_end",
+      "timestamp_us": 103048000,
+      "status_timestamp_us": 102728000,
+      "land_timestamp_us": 103008000,
+      "generation": 9
+    },
+    {
+      "name": "land_command",
+      "timestamp_us": 103048000,
+      "status_timestamp_us": 102728000,
+      "land_timestamp_us": 103008000,
+      "generation": 9
+    },
+    {
+      "name": "control_change",
+      "timestamp_us": 103060000,
+      "generation": 10,
+      "phase": "descend",
+      "enabled": false
+    },
+    {
+      "name": "landed_disarmed",
+      "timestamp_us": 107968000,
+      "status_timestamp_us": 107888000,
+      "land_timestamp_us": 107880000,
+      "generation": 10
+    }
+  ],
+  "logs": [
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-11-02/04_03_38.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102/runs/O001/native_00.ulg",
+      "sha256": "6b710e4c35aa52765f880dff00fa6085abfe3300216694ba326e21bee80dd813",
+      "bytes": 8225665
+    }
+  ],
+  "manifest_sha256": "f8be458bf753b66c204ce0176220681e6753ff14a2364718cedac10d6ffbb24c",
+  "parameter_restore_exact": true,
+  "started_utc": "2026-11-02T04:03:36Z",
+  "launcher_pid": 1159519,
+  "task_completed": true,
+  "removed_new_parameter_files": [],
+  "original_files": 1,
+  "remaining_simulators": [],
+  "analysis_error": "ValueError('Native estimator reset: heading_reset_counter')",
+  "finished_utc": "2026-11-02T04:05:28Z"
+}

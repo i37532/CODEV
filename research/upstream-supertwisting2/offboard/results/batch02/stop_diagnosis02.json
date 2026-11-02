@@ -1,0 +1,51 @@
+{
+  "scope": "offline diagnostic only; zero flights; no historical acceptance change",
+  "frozen_runner_sha256": "67c4764e9966fcad7946de12c6965d69557c2e4f13e9062e5a508510957e9462",
+  "manifest_sha256": "51f69ef414d51e24e29b9c6b4dbcf2d08a5b38dcac27294fbc43f4d08cc04763",
+  "result_sha256": "f7f9e13698fb642672664065f0d3ceca55e5dde460dce27c7ed47dbf9dd5ee66",
+  "ulog_sha256": "1f2e8c364ec4308f527fc191b0d0fbe3002bd38a6ac178538e9c5b71b6097b96",
+  "missing_hover_configuration": true,
+  "actual_collector_expectations": {},
+  "actual_verifier_expectations": {},
+  "checker_fallback": {
+    "attitude_sta_status": {}
+  },
+  "reproduced_error": "ValueError('diagnostic attitude_sta_status must be a mapping')",
+  "recorded_diagnostic_snapshot_passed": true,
+  "successful_diagnostic_cli_reads": 197,
+  "last_cli_diagnostic": {
+    "timestamp": 53836000.0,
+    "att_roll_ita": -0.02508,
+    "att_pitch_ita": 0.01313,
+    "att_yaw_ita": 0.00258,
+    "att_roll_torque": -0.00473,
+    "att_pitch_torque": 0.00132,
+    "att_yaw_torque": 0.00058,
+    "att_roll_w": -0.0001,
+    "att_pitch_w": 0.00231,
+    "att_yaw_w": 4e-05,
+    "att_roll_w_dot": -0.00557,
+    "att_pitch_w_dot": 0.00292,
+    "att_yaw_w_dot": 0.00029
+  },
+  "native_topic": {
+    "samples": 12217,
+    "first_us": 380000,
+    "last_us": 54060000,
+    "maximum_gap_s": 0.008,
+    "twelve_fields_finite": true,
+    "dropout_count": 0,
+    "file_corruption": false
+  },
+  "checks": [
+    "frozen_runner_matches_manifest",
+    "missing_hover_configuration",
+    "both_collectors_select_empty",
+    "checker_reproduces_recorded_error",
+    "recorded_snapshot_has_required_diagnostics",
+    "native_topic_finite_monotonic_present",
+    "next_job_rejected"
+  ],
+  "next_job_rejected": true,
+  "interpretation": "Collector/checker configuration fallback mismatch, not absent native publication. Partial flight remains invalid; no complete safety or performance conclusion."
+}

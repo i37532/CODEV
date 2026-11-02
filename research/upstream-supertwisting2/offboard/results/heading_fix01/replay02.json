@@ -1,0 +1,239 @@
+{
+  "diagnostic_only": true,
+  "flight_accepted": false,
+  "new_flights": 0,
+  "original_success": false,
+  "original_outcome_unchanged": true,
+  "frozen_error": "ValueError('Native estimator reset: heading_reset_counter')",
+  "revised_strict_error": "ValueError('Native estimator reset: heading_reset_counter')",
+  "revised_offline_checks_passed": true,
+  "deterministic_replay_equal": true,
+  "heading_evidence": {
+    "policy": "offboard_first_takeoff_alignment_v1",
+    "estimator_schema": "codev_ecl_v1",
+    "primary_instance": 0,
+    "interval_us": [
+      38208000,
+      107968000
+    ],
+    "classification": "expected_first_takeoff_alignment",
+    "event_count": 1,
+    "target_yaw_changed": false,
+    "warning_event_counter_available": true,
+    "ground_flag_clear_us": [
+      105888000
+    ],
+    "position_observation_us": [
+      49588000,
+      49688000
+    ],
+    "attitude_observation_us": [
+      49660000,
+      49716000
+    ],
+    "estimator_observation_us": [
+      49480000,
+      49680000
+    ],
+    "possible_event_us": [
+      49620000,
+      49680000
+    ],
+    "alignment_flag_us": 49680000,
+    "confirmed_us": 49716000,
+    "heading_delta_rad": -0.0038480781950056553,
+    "quaternion_delta_rad": -0.0038480789483270844,
+    "height_m": 1.734606962776184,
+    "quiet_window_us": [
+      56520000,
+      57520000
+    ],
+    "maximum_quiet_yaw_error_rad": 0.0004884004592895508
+  },
+  "in_memory_negative_cases": [
+    {
+      "case": "late/xy_reset_counter",
+      "rejected": true,
+      "error": "ValueError('Native estimator reset: xy_reset_counter')",
+      "memory_only": true
+    },
+    {
+      "case": "late/z_reset_counter",
+      "rejected": true,
+      "error": "ValueError('Native estimator reset: z_reset_counter')",
+      "memory_only": true
+    },
+    {
+      "case": "late/vxy_reset_counter",
+      "rejected": true,
+      "error": "ValueError('Native estimator reset: vxy_reset_counter')",
+      "memory_only": true
+    },
+    {
+      "case": "late/vz_reset_counter",
+      "rejected": true,
+      "error": "ValueError('Native estimator reset: vz_reset_counter')",
+      "memory_only": true
+    },
+    {
+      "case": "late/heading_reset_counter",
+      "rejected": true,
+      "error": "ValueError('Heading evidence: counter jump heading_reset_counter')",
+      "memory_only": true
+    },
+    {
+      "case": "selector/primary_instance",
+      "rejected": true,
+      "error": "ValueError('Heading evidence: changed/nonfinite primary_instance')",
+      "memory_only": true
+    },
+    {
+      "case": "selector/instance_changed_count",
+      "rejected": true,
+      "error": "ValueError('Heading evidence: changed/nonfinite instance_changed_count')",
+      "memory_only": true
+    },
+    {
+      "case": "selector/gyro_fault_detected",
+      "rejected": true,
+      "error": "ValueError('Heading evidence: unexpected gyro_fault_detected')",
+      "memory_only": true
+    },
+    {
+      "case": "missing_flags",
+      "rejected": true,
+      "error": "ValueError('Heading evidence: missing/ambiguous topic estimator_status_flags instance 0')",
+      "memory_only": true
+    },
+    {
+      "case": "missing_alignment",
+      "rejected": true,
+      "error": "ValueError('Heading evidence: repeated/unpaired heading, quaternion, estimator or alignment transition')",
+      "memory_only": true
+    },
+    {
+      "case": "bad_quaternion",
+      "rejected": true,
+      "error": "ValueError('Heading evidence: invalid reset quaternion norm')",
+      "memory_only": true
+    },
+    {
+      "case": "filter_fault",
+      "rejected": true,
+      "error": "ValueError('Heading evidence: unexpected filter_fault_flags')",
+      "memory_only": true
+    },
+    {
+      "case": "wrong_inner_mode",
+      "rejected": true,
+      "error": "ValueError('Wrong active controller sta_rate_ctrl_status.effective_mode')",
+      "memory_only": true
+    },
+    {
+      "case": "wrong_outer_mode",
+      "rejected": true,
+      "error": "ValueError('Wrong active controller sta_velocity_ctrl_status.effective_mode')",
+      "memory_only": true
+    },
+    {
+      "case": "future_position_sample",
+      "rejected": true,
+      "error": "ValueError('Non-increasing timestamp_sample; no silent sorting/deduplication')",
+      "memory_only": true
+    },
+    {
+      "case": "wrong_actual_target",
+      "rejected": true,
+      "error": "ValueError('Native trajectory has no matching past actual-send target at 68232000')",
+      "memory_only": true
+    },
+    {
+      "case": "yaw_not_settled",
+      "rejected": true,
+      "error": "ValueError('Heading evidence: not quiet against fixed task yaw')",
+      "memory_only": true
+    }
+  ],
+  "historical_four_system_replays": [
+    {
+      "id": "S101",
+      "result_sha256": "86d3795500a688f47626f58fb737313006082bf91a2aa0d8a57d03f6fcd7d95f",
+      "ulog": {
+        "archive": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/runs/S101/native_00.ulg",
+        "sha256": "ebfbc82cb5a324e76a390d45dbb422374dbaf767812cbbaa42ddb0521e440c3b",
+        "bytes": 23286037
+      },
+      "original_acceptance_unchanged": true,
+      "metrics_exact": true
+    },
+    {
+      "id": "S202",
+      "result_sha256": "5c755e1d8868f2d0f973bc8064933ced5b31a7d8cdf7428fabbb157d633e514e",
+      "ulog": {
+        "archive": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/runs/S202/native_00.ulg",
+        "sha256": "81c1ce92e1644a13fad263ced50064da0d268b7b83eb469e8247ce2309f543fd",
+        "bytes": 5282474
+      },
+      "original_acceptance_unchanged": true,
+      "metrics_exact": true
+    },
+    {
+      "id": "S203",
+      "result_sha256": "9df03870fa20ad9c0a8efc63c899973c2dc0e32331f244f562a20a67fd3136a5",
+      "ulog": {
+        "archive": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/runs/S203/native_00.ulg",
+        "sha256": "35afa64fd73a9678c070130235fcb640aef7b62aa2ddc276944552b3b73389ed",
+        "bytes": 5181586
+      },
+      "original_acceptance_unchanged": true,
+      "metrics_exact": true
+    },
+    {
+      "id": "S304",
+      "result_sha256": "2dddc5eb86c2c4f254aef4c834695e69c1a3eef427f11d07536ad68a23fd5a54",
+      "ulog": {
+        "archive": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/runs/S304/native_00.ulg",
+        "sha256": "339ee30f0035575d011e91de31a44f41954e72f91da28ce03f9bfbf33819bf90",
+        "bytes": 5150774
+      },
+      "original_acceptance_unchanged": true,
+      "metrics_exact": true
+    }
+  ],
+  "protected_sha256": {
+    "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102/runs/O001/mavlink_events.jsonl": "8e124c929174f1cc9426e62f68e883e657fc2190b73c4272b581c69636e5ad34",
+    "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102/runs/O001/parameters_hover.txt": "c943e257fe7480f7cf76e3b3a3f4434d01f1eefa199b9e3c03e1d3e45e045082",
+    "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102/runs/O001/origin.json": "9177acc5969228bf9fccda1d897d88e24ceeb2461b9608fca30d77cadb219bb8",
+    "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102/runs/O001/console.log": "0fba2b25d60a2aab78ed098e558dc4010a1c0bea7494142f67e7303cb4698111",
+    "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102/runs/O001/ros_console.log": "a6e399378ef560fe5380d1aac082b4534f0e6a5e677d62f11adb9065a65dcb7f",
+    "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102/runs/O001/manifest.json": "f8be458bf753b66c204ce0176220681e6753ff14a2364718cedac10d6ffbb24c",
+    "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102/runs/O001/parameter_backup_000.bin": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+    "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102/runs/O001/diagnostics_start.json": "b023ce85e5ba25d44895fbca1adbab2b510b99d474aa25575f8a92c3e458ace9",
+    "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102/runs/O001/diagnostics_hover.json": "51325e7d31daa284c03cc9e319d0f34a81d202ecd3e3af8a15913c2821516e8e",
+    "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102/runs/O001/parameters_end.txt": "f27282ecb961960c7f80f51c5ea1b1c61a19a8061f9839f3170b43120b63eb80",
+    "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102/runs/O001/samples.jsonl": "dfbb5f9f63a72aadcff4f24e5e9bcbb939317568e752cc881a0e456926b6780e",
+    "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102/runs/O001/runtime.json": "10719c69cef9a91eaaf9208bfd90ee419eb2180a7c105f859a7c27c837f3d9d3",
+    "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102/runs/O001/parameters_before.txt": "c7c61c0ade7d27955a48724a5d86e8ef7f3175393721f2e1db217a04cb839271",
+    "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102/runs/O001/control.json": "620fb0b6e377b82a78e649b52d967ccf49c8198329347a2e37f83e5c12304eef",
+    "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102/runs/O001/parameter_backup.json": "a2c69ef8552d290c6369970783ae89f6a7c867d870a709dcbdb0fcb7a2edfd4f",
+    "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102/runs/O001/commands.jsonl": "de423a4dfd110a11d0089bb5b3293ee4beae00d0e9462a3eb06bcea3509c94c2",
+    "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102/runs/O001/result.json": "a81202f4f260e32baba6a75ebee6e8345e11ba55e37bc8d4304a34a8297fc1df",
+    "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102/runs/O001/job.json": "3bafb3bb4f72af63255bd181faa8774b3a41752fe4d119276e48ba272ecaee8c",
+    "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102/runs/O001/diagnostics_end.json": "43ed8f91486ed82da1103781828e7753d3b1bed7931201ab797435b16aed05dd",
+    "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102/runs/O001/parameters_start.txt": "211b0a53d18f9cc141384db6414bd1265992c83370d869cb1cac4bfeba9b8fd4",
+    "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102/runs/O001/native_00.ulg": "6b710e4c35aa52765f880dff00fa6085abfe3300216694ba326e21bee80dd813",
+    "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102/runs/O001/ros/ros_published.jsonl": "9157dd609100d8504951912146e4bd4595bc07dda280947ad7c30156b9188c58",
+    "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102/runs/O001/ros/sent.jsonl": "52143639cbd815c43296fce12edbc9752b9ae539896e8547ebd4fbb9a2b0f933",
+    "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102/runs/O001/ros/receipt.json": "0f773a4d16db690ab1dfc1c5af0f34ed0d651c1f082ed0604a1e092a8808825b",
+    "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102/runs/O001/ros/fatal.json": "0f773a4d16db690ab1dfc1c5af0f34ed0d651c1f082ed0604a1e092a8808825b",
+    "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102/manifest.json": "f8be458bf753b66c204ce0176220681e6753ff14a2364718cedac10d6ffbb24c"
+  },
+  "protected_after_equal": true,
+  "frozen_analyzer_sha256": "e07bd463ac4dae466a54582b51504d02c925293407cc5b51be99d19115165754",
+  "tool_sha256": {
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/analyze.py": "ec987fe73f68389aa9ab5ae801ec37202d4c015a25f136bbaa135de43b5c441d",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/heading_check.py": "b142a8c53a53e7e17ddc73a274650326a3d1dec7b4a79fe4dfa0c9efa26307ae",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/replay_heading_fix.py": "49e52fe44fd9798447d15db7fd79543b3230b49caf5521c207ac2898235e0407"
+  },
+  "note": "Policy-development replay only. O001 stays failed; not a new flight or accepted comparison sample."
+}

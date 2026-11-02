@@ -1,0 +1,20 @@
+{"id": "O002", "system": "STA2", "task": "position", "execute": true}
+O002 prestream_start
+O002 prestream_end
+O002 arm_command
+O002 climb_start
+O002 climb_end
+O002 recover_start
+O002 recover_end
+O002 hover_start
+O002 FAILED ValueError('diagnostic attitude_sta_status must be a mapping')
+Traceback (most recent call last):
+  File "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/run.py", line 458, in <module>
+    raise SystemExit(main())
+  File "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/run.py", line 453, in main
+    execute(args.manifest.resolve(), manifest, job)
+  File "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/run.py", line 434, in execute
+    require(result['success'], 'Attempt failed; stop finite batch and preserve all evidence')
+  File "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/tools/run_hover.py", line 24, in require
+    raise ValueError(message)
+ValueError: Attempt failed; stop finite batch and preserve all evidence

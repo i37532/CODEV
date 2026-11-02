@@ -1,0 +1,41 @@
+{
+  "test_logs": {
+    "offboard_tests02.log": {
+      "tests": 238,
+      "exit_code": 0,
+      "skips": 0,
+      "sha256": "6f62e74f02f8c57cdece688d62805a916ca0f36261b674280ae62ee9ba199803"
+    },
+    "legacy_tests01.log": {
+      "tests": 72,
+      "exit_code": 0,
+      "skips": 0,
+      "sha256": "b33cbc9c19c9192f524e84c9f4926c2b5a182a91cae14a9863ac98ba0c8f38b2"
+    },
+    "v04_policy_tests01.log": {
+      "tests": 10,
+      "exit_code": 0,
+      "skips": 0,
+      "sha256": "23df13403af0f453b2823c956738f1d537154866076ea8cf56fc68c7cca64dbb"
+    }
+  },
+  "total_distinct_tests": 320,
+  "old_attempt_guards": {
+    "O001": "Attempt already exists; no retry or replacement",
+    "O002": "Previous attempt failed or lacks independent replay; stop batch"
+  },
+  "plot_rejection_exit_code": 1,
+  "plot_error": "Traceback (most recent call last):\n  File \"/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/plot_results.py\", line 461, in <module>\n    raise SystemExit(main())\n  File \"/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/plot_results.py\", line 455, in main\n    report = generate(args.manifest, args.output)\n  File \"/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/plot_results.py\", line 389, in generate\n    manifest, records = audit_inputs(manifest_path)\n  File \"/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/plot_results.py\", line 248, in audit_inputs\n    require(result.get('success') is True and result.get('independent_replay_passed') is True,\n  File \"/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/plot_results.py\", line 25, in require\n    raise ValueError(message)\nValueError: Require success and independent_replay_passed: O001\n",
+  "plot_output_created": false,
+  "snapshot_paths": 215,
+  "unchanged_paths": 212,
+  "intended_modified_paths": [
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/analyze.py",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/runner_contract.py",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/test_runner_contract.py"
+  ],
+  "head": "1f6fe1c7a46c22ea41a6a6a51c51498142ca6d62",
+  "new_flights": 0,
+  "commit": false,
+  "push": false
+}

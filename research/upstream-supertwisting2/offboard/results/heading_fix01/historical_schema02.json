@@ -1,0 +1,141 @@
+{
+  "rows": [
+    {
+      "id": "S101",
+      "schema": "upstream_sta2_fc3720",
+      "passed": true,
+      "ulog_sha256": "ebfbc82cb5a324e76a390d45dbb422374dbaf767812cbbaa42ddb0521e440c3b",
+      "required_flags": [
+        "cs_mag_fault",
+        "cs_mag_field_disturbed",
+        "cs_ev_yaw",
+        "cs_gnss_yaw",
+        "cs_gnss_yaw_fault",
+        "cs_ev_yaw_fault",
+        "cs_inertial_dead_reckoning",
+        "cs_wind_dead_reckoning",
+        "cs_fake_pos",
+        "cs_fake_hgt"
+      ],
+      "required_events": [
+        "reset_vel_to_gps",
+        "reset_vel_to_flow",
+        "reset_vel_to_vision",
+        "reset_vel_to_zero",
+        "reset_pos_to_last_known",
+        "reset_pos_to_gps",
+        "reset_pos_to_vision",
+        "starting_vision_yaw_fusion",
+        "yaw_aligned_to_imu_gps",
+        "reset_hgt_to_baro",
+        "reset_hgt_to_gps",
+        "reset_hgt_to_rng",
+        "reset_hgt_to_ev"
+      ],
+      "event_counters": [
+        "information_event_changes"
+      ]
+    },
+    {
+      "id": "S202",
+      "schema": "codev_ecl_v1",
+      "passed": true,
+      "ulog_sha256": "81c1ce92e1644a13fad263ced50064da0d268b7b83eb469e8247ce2309f543fd",
+      "required_flags": [
+        "cs_mag_fault",
+        "cs_mag_field_disturbed",
+        "cs_ev_yaw",
+        "cs_gps_yaw"
+      ],
+      "required_events": [
+        "reset_vel_to_gps",
+        "reset_vel_to_flow",
+        "reset_vel_to_vision",
+        "reset_vel_to_zero",
+        "reset_pos_to_last_known",
+        "reset_pos_to_gps",
+        "reset_pos_to_vision",
+        "starting_vision_yaw_fusion",
+        "yaw_aligned_to_imu_gps",
+        "bad_yaw_using_gps_course",
+        "emergency_yaw_reset_mag_stopped",
+        "stopping_mag_use",
+        "stopping_navigation"
+      ],
+      "event_counters": [
+        "information_event_changes",
+        "warning_event_changes"
+      ]
+    },
+    {
+      "id": "S203",
+      "schema": "codev_ecl_v1",
+      "passed": true,
+      "ulog_sha256": "35afa64fd73a9678c070130235fcb640aef7b62aa2ddc276944552b3b73389ed",
+      "required_flags": [
+        "cs_mag_fault",
+        "cs_mag_field_disturbed",
+        "cs_ev_yaw",
+        "cs_gps_yaw"
+      ],
+      "required_events": [
+        "reset_vel_to_gps",
+        "reset_vel_to_flow",
+        "reset_vel_to_vision",
+        "reset_vel_to_zero",
+        "reset_pos_to_last_known",
+        "reset_pos_to_gps",
+        "reset_pos_to_vision",
+        "starting_vision_yaw_fusion",
+        "yaw_aligned_to_imu_gps",
+        "bad_yaw_using_gps_course",
+        "emergency_yaw_reset_mag_stopped",
+        "stopping_mag_use",
+        "stopping_navigation"
+      ],
+      "event_counters": [
+        "information_event_changes",
+        "warning_event_changes"
+      ]
+    },
+    {
+      "id": "S304",
+      "schema": "codev_ecl_v1",
+      "passed": true,
+      "ulog_sha256": "339ee30f0035575d011e91de31a44f41954e72f91da28ce03f9bfbf33819bf90",
+      "required_flags": [
+        "cs_mag_fault",
+        "cs_mag_field_disturbed",
+        "cs_ev_yaw",
+        "cs_gps_yaw"
+      ],
+      "required_events": [
+        "reset_vel_to_gps",
+        "reset_vel_to_flow",
+        "reset_vel_to_vision",
+        "reset_vel_to_zero",
+        "reset_pos_to_last_known",
+        "reset_pos_to_gps",
+        "reset_pos_to_vision",
+        "starting_vision_yaw_fusion",
+        "yaw_aligned_to_imu_gps",
+        "bad_yaw_using_gps_course",
+        "emergency_yaw_reset_mag_stopped",
+        "stopping_mag_use",
+        "stopping_navigation"
+      ],
+      "event_counters": [
+        "information_event_changes",
+        "warning_event_changes"
+      ]
+    }
+  ],
+  "sources": {
+    "/home/yr/Desktop/Codev-SuperTwisting2-original/msg/EstimatorEventFlags.msg": "7abe754c8530fe1be7aef425716df82b983946cfe81f92a09973ea0e8e9c8b78",
+    "/home/yr/Desktop/Codev-SuperTwisting2-original/msg/EstimatorStatusFlags.msg": "265506ee09e64231bde67421d604b2cfa684da6e099bfc259c74fc833ce712a0",
+    "/home/yr/Desktop/Codev-SuperTwisting2-original/src/modules/ekf2/EKF/aid_sources/gnss/gps_control.cpp": "da9c261026598caf7ffc68548ce2504a948013facbd6bc414d583d24fe865a2a",
+    "/home/yr/Desktop/Codev-SuperTwisting2-original/src/modules/ekf2/EKF/aid_sources/magnetometer/mag_control.cpp": "c4c4d174657dd9e58ad94062eb527574a5ced34ca285358a3ddd47a11ed548e5"
+  },
+  "not_flight_acceptance": true,
+  "scope": "Raw versioned field contracts only; old Navigator flights are not Offboard samples"
+}

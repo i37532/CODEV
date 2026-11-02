@@ -1,0 +1,84 @@
+{
+  "scope": "Read-only failure diagnosis, not acceptance or a revised validator",
+  "original_outcome_unchanged": true,
+  "frozen_rejection_reproduced": "ValueError('Heading evidence: unexpected reset_vel_to_gps')",
+  "source_sha256": "4cca4a2401de5f3ec2d8fbfb76ae37e3228a87c8dcbf07c40403f2657548d008",
+  "protected_sha256": {
+    "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102-B03/manifest.json": "da6402a35e09bea071e81df26eaab817fad6f1f88b7d54a0b80c40b872b11cf6",
+    "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102-B03/runs/O002/result.json": "db72e72257819d883c1581aeeff2614cf50d507309e8520605beeb11159457eb",
+    "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102-B03/runs/O002/native_00.ulg": "313aa66b75e244a8cd1f1082f0ac3361e76148d8acdfb763fbaed0d1c64ee998",
+    "/home/yr/Desktop/Codev-SuperTwisting2-original/src/modules/ekf2/EKF2.cpp": "c032e72d2ff4582a319baa7cc44016ea5e7869fc8bd0ad5630a46fe6e5cf6bd5",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/heading_check.py": "b142a8c53a53e7e17ddc73a274650326a3d1dec7b4a79fe4dfa0c9efa26307ae",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/analyze.py": "ec987fe73f68389aa9ab5ae801ec37202d4c015a25f136bbaa135de43b5c441d",
+    "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/run.py": "45f48d8ce27e548770ed18b025dca3a7f514932168bdaa636b20f3f4b19ac3ab"
+  },
+  "flight_window_us": [
+    34800000,
+    103560000
+  ],
+  "selected_estimator": 0,
+  "last_new_information_event": {
+    "timestamp_us": 2744000,
+    "timestamp_sample_us": 2592000,
+    "counter": 5,
+    "true_flags": [
+      "reset_vel_to_gps",
+      "reset_pos_to_gps",
+      "starting_gps_fusion"
+    ]
+  },
+  "periodic_republication": {
+    "rows_during_flight": 68,
+    "counter_changes_during_flight": 0,
+    "first_after_start_us": 35744000,
+    "last_before_end_us": 102744000,
+    "all_payload_fields_identical": true,
+    "period_us": 1000000
+  },
+  "position_velocity_reset_counters": {
+    "xy_reset_counter": {
+      "value": 4,
+      "changed": false,
+      "boundary_rows_included": true
+    },
+    "z_reset_counter": {
+      "value": 2,
+      "changed": false,
+      "boundary_rows_included": true
+    },
+    "vxy_reset_counter": {
+      "value": 3,
+      "changed": false,
+      "boundary_rows_included": true
+    },
+    "vz_reset_counter": {
+      "value": 2,
+      "changed": false,
+      "boundary_rows_included": true
+    }
+  },
+  "ulog": {
+    "samples_event_flags": 107,
+    "dropout_count": 0,
+    "file_corruption": false
+  },
+  "source_contract": {
+    "path": "/home/yr/Desktop/Codev-SuperTwisting2-original/src/modules/ekf2/EKF2.cpp",
+    "function": "EKF2::PublishEventFlags",
+    "verified_against_git_commit": "fc3720f67767c78cfab668777de13f68562fe2fd",
+    "line_start": 1119,
+    "new_event_counter_line": 1127,
+    "periodic_republication_line": 1160,
+    "meaning": "New events increment counter; otherwise the cached payload is republished every second with only publication timestamp refreshed."
+  },
+  "checker_contract": {
+    "path": "/home/yr/Desktop/Codev-autopilot/research/upstream-supertwisting2/offboard/heading_check.py",
+    "lines": [
+      187,
+      193
+    ],
+    "meaning": "Every publication after start is checked as a new event, despite unchanged information-event counter/sample."
+  },
+  "next_job_blocked": "ValueError('Previous attempt failed or lacks independent replay; stop batch')",
+  "interpretation": "This rejection is caused by treating repeated preflight event payload as a new in-flight GPS reset. No in-flight position/velocity reset is observed in the full boundary counters. Other full-log checks after the rejection were NOT certified; acceptance remains false."
+}

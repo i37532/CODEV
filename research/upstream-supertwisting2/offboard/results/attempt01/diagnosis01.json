@@ -1,0 +1,592 @@
+{
+  "schema": 1,
+  "diagnostic_only": true,
+  "not_acceptance": true,
+  "original_success": false,
+  "original_analysis_error": "ValueError('Native estimator reset: heading_reset_counter')",
+  "original_outcome_unchanged": true,
+  "source_attempt": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-ROS-OFFBOARD-20261102/runs/O001",
+  "source_script_sha256": "6fb97ff78e53a3f0d12b83cf0da5296983de897c86eef17db22fe7af5b02c7dc",
+  "protected_sha256_before": {
+    "ulog": "6b710e4c35aa52765f880dff00fa6085abfe3300216694ba326e21bee80dd813",
+    "result": "a81202f4f260e32baba6a75ebee6e8345e11ba55e37bc8d4304a34a8297fc1df"
+  },
+  "protected_sha256_after": {
+    "ulog": "6b710e4c35aa52765f880dff00fa6085abfe3300216694ba326e21bee80dd813",
+    "result": "a81202f4f260e32baba6a75ebee6e8345e11ba55e37bc8d4304a34a8297fc1df"
+  },
+  "checks": [
+    {
+      "name": "frozen_complete_audit_unchanged",
+      "passed": false,
+      "error": "ValueError('Native estimator reset: heading_reset_counter')"
+    },
+    {
+      "name": "topics_publication_clocks_and_integrity",
+      "passed": true,
+      "evidence": {
+        "dropouts": 0,
+        "file_corruption": false,
+        "topics": {
+          "vehicle_local_position": {
+            "records": 1095,
+            "publication_first_us": 684000,
+            "publication_last_us": 109980000
+          },
+          "vehicle_attitude": {
+            "records": 2112,
+            "publication_first_us": 4464000,
+            "publication_last_us": 109964000
+          },
+          "vehicle_status": {
+            "records": 229,
+            "publication_first_us": 16000,
+            "publication_last_us": 109904000
+          },
+          "vehicle_land_detected": {
+            "records": 114,
+            "publication_first_us": 504000,
+            "publication_last_us": 109880000
+          },
+          "takeoff_status": {
+            "records": 15,
+            "publication_first_us": 1428000,
+            "publication_last_us": 108760000
+          },
+          "trajectory_setpoint": {
+            "records": 544,
+            "publication_first_us": 1428000,
+            "publication_last_us": 109828000
+          },
+          "vehicle_local_position_setpoint": {
+            "records": 1086,
+            "publication_first_us": 1500000,
+            "publication_last_us": 109900000
+          },
+          "sta_velocity_ctrl_status": {
+            "records": 1088,
+            "publication_first_us": 1300000,
+            "publication_last_us": 109828000
+          },
+          "sta_rate_ctrl_status": {
+            "records": 1100,
+            "publication_first_us": 156000,
+            "publication_last_us": 109876000
+          }
+        }
+      }
+    },
+    {
+      "name": "expected_native_parameters",
+      "passed": true,
+      "evidence": {
+        "verified_count": 128,
+        "matching_change_records": 0
+      }
+    },
+    {
+      "name": "no_reset/xy_reset_counter",
+      "passed": true,
+      "evidence": {
+        "values": [
+          2
+        ],
+        "changes": 0,
+        "first_changed_samples_us": []
+      }
+    },
+    {
+      "name": "no_reset/z_reset_counter",
+      "passed": true,
+      "evidence": {
+        "values": [
+          0
+        ],
+        "changes": 0,
+        "first_changed_samples_us": []
+      }
+    },
+    {
+      "name": "no_reset/vxy_reset_counter",
+      "passed": true,
+      "evidence": {
+        "values": [
+          2
+        ],
+        "changes": 0,
+        "first_changed_samples_us": []
+      }
+    },
+    {
+      "name": "no_reset/vz_reset_counter",
+      "passed": true,
+      "evidence": {
+        "values": [
+          1
+        ],
+        "changes": 0,
+        "first_changed_samples_us": []
+      }
+    },
+    {
+      "name": "no_reset/heading_reset_counter",
+      "passed": false,
+      "error": "ValueError('Native estimator reset: heading_reset_counter')"
+    },
+    {
+      "name": "full_flight_safety_independent_of_reset_rule",
+      "passed": true,
+      "evidence": {
+        "window_us": [
+          38208000,
+          107968000
+        ],
+        "position_records": 698,
+        "position_clock": "timestamp_sample",
+        "maximum_position_gap_s": 0.108,
+        "height_range_m": [
+          -0.07232071819305419,
+          2.760196071243286
+        ],
+        "maximum_absolute_vz_m_s": 0.6607980132102966,
+        "maximum_xy_speed_m_s": 0.2569494415682689,
+        "maximum_xy_displacement_m": 0.1582636833567602,
+        "maximum_tilt_deg": 4.5304155026582125
+      }
+    },
+    {
+      "name": "hover/native_state_and_safety",
+      "passed": true,
+      "evidence": {
+        "window_us": [
+          57520000,
+          67608000
+        ],
+        "position_samples": 101,
+        "maximum_absolute_height_error_m": 0.04619302215576182,
+        "maximum_absolute_vz_m_s": 0.04845704510807991
+      }
+    },
+    {
+      "name": "hover/actual_controller_identity",
+      "passed": true,
+      "evidence": {
+        "sta_velocity_ctrl_status": {
+          "samples": 101,
+          "expected_fields": {
+            "effective_mode": 0,
+            "effective_axes": 0,
+            "active_axes": 0,
+            "inner_mode": 0,
+            "inner_axes": 0,
+            "fault": 0
+          }
+        },
+        "sta_rate_ctrl_status": {
+          "samples": 101,
+          "expected_fields": {
+            "effective_mode": 0,
+            "effective_axes": 0,
+            "fault": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "hover/descriptive_metrics_not_accepted",
+      "passed": true,
+      "evidence": {
+        "window_us": [
+          57520000,
+          67608000
+        ],
+        "seconds": 10.088,
+        "velocity_tracking_rmse_xyz_m_s": [
+          0.0073204741068211765,
+          0.0066791694421292225,
+          0.00262127849409327
+        ],
+        "actual_velocity_rms_xyz_m_s": [
+          0.043812899773679435,
+          0.016064894610349323,
+          0.03217276722289609
+        ],
+        "displacement_rms_xyz_m": [
+          0.0454033379136692,
+          0.020032677628771464,
+          2.473522541874706
+        ],
+        "horizontal_displacement_max_m": 0.07563154387523621,
+        "height_mean_m": 2.473465107367664,
+        "height_min_m": 2.453806977844238,
+        "height_max_m": 2.5163951927185058,
+        "source_clock": "timestamp_sample",
+        "position_samples": 102,
+        "reference_samples": 101,
+        "integration_intervals": 203,
+        "definition": "Full phase; exact ZOH time integral against actual published controller velocity setpoints, not ROS positions"
+      }
+    },
+    {
+      "name": "step_up/native_state_and_safety",
+      "passed": true,
+      "evidence": {
+        "window_us": [
+          67608000,
+          75688000
+        ],
+        "position_samples": 81
+      }
+    },
+    {
+      "name": "step_up/actual_controller_identity",
+      "passed": true,
+      "evidence": {
+        "sta_velocity_ctrl_status": {
+          "samples": 81,
+          "expected_fields": {
+            "effective_mode": 0,
+            "effective_axes": 0,
+            "active_axes": 0,
+            "inner_mode": 0,
+            "inner_axes": 0,
+            "fault": 0
+          }
+        },
+        "sta_rate_ctrl_status": {
+          "samples": 81,
+          "expected_fields": {
+            "effective_mode": 0,
+            "effective_axes": 0,
+            "fault": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "step_up/descriptive_metrics_not_accepted",
+      "passed": true,
+      "evidence": {
+        "window_us": [
+          67608000,
+          75688000
+        ],
+        "seconds": 8.08,
+        "velocity_tracking_rmse_xyz_m_s": [
+          0.013179717213972738,
+          0.005757328093764733,
+          0.031103291271183248
+        ],
+        "actual_velocity_rms_xyz_m_s": [
+          0.03514904644319274,
+          0.00973068145905407,
+          0.1139634376798536
+        ],
+        "displacement_rms_xyz_m": [
+          0.031533567820567696,
+          0.011187636728786225,
+          2.706044532416252
+        ],
+        "horizontal_displacement_max_m": 0.05608084588600893,
+        "height_mean_m": 2.7050838071813676,
+        "height_min_m": 2.455602508163452,
+        "height_max_m": 2.760196071243286,
+        "source_clock": "timestamp_sample",
+        "position_samples": 82,
+        "reference_samples": 80,
+        "integration_intervals": 162,
+        "definition": "Full phase; exact ZOH time integral against actual published controller velocity setpoints, not ROS positions"
+      }
+    },
+    {
+      "name": "step_down/native_state_and_safety",
+      "passed": true,
+      "evidence": {
+        "window_us": [
+          75688000,
+          83780000
+        ],
+        "position_samples": 80
+      }
+    },
+    {
+      "name": "step_down/actual_controller_identity",
+      "passed": true,
+      "evidence": {
+        "sta_velocity_ctrl_status": {
+          "samples": 81,
+          "expected_fields": {
+            "effective_mode": 0,
+            "effective_axes": 0,
+            "active_axes": 0,
+            "inner_mode": 0,
+            "inner_axes": 0,
+            "fault": 0
+          }
+        },
+        "sta_rate_ctrl_status": {
+          "samples": 81,
+          "expected_fields": {
+            "effective_mode": 0,
+            "effective_axes": 0,
+            "fault": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "step_down/descriptive_metrics_not_accepted",
+      "passed": true,
+      "evidence": {
+        "window_us": [
+          75688000,
+          83780000
+        ],
+        "seconds": 8.092,
+        "velocity_tracking_rmse_xyz_m_s": [
+          0.008880753530524596,
+          0.0032156132147722616,
+          0.035815927061445624
+        ],
+        "actual_velocity_rms_xyz_m_s": [
+          0.02388870974009614,
+          0.005379893837574342,
+          0.08158508514405292
+        ],
+        "displacement_rms_xyz_m": [
+          0.0227684632544299,
+          0.008128939275023523,
+          2.48168645303002
+        ],
+        "horizontal_displacement_max_m": 0.041024705098199596,
+        "height_mean_m": 2.480355366528558,
+        "height_min_m": 2.4312995487213134,
+        "height_max_m": 2.7580376678466796,
+        "source_clock": "timestamp_sample",
+        "position_samples": 81,
+        "reference_samples": 81,
+        "integration_intervals": 162,
+        "definition": "Full phase; exact ZOH time integral against actual published controller velocity setpoints, not ROS positions"
+      }
+    },
+    {
+      "name": "final_landed_disarmed_native_receipts",
+      "passed": true,
+      "evidence": {
+        "status_timestamp_us": 107888000,
+        "land_timestamp_us": 107880000,
+        "landed": true,
+        "disarmed": true
+      }
+    },
+    {
+      "name": "ROS_publisher_to_actual_wire_receipts",
+      "passed": true,
+      "evidence": {
+        "published_count": 1339,
+        "sent_count": 1339,
+        "ros_payload_wire_identity": true,
+        "float_conversion": "Explicit MAVLink float32; target matching absolute tolerance 1e-4"
+      }
+    },
+    {
+      "name": "native_trajectory_against_past_wire_receipts",
+      "passed": true,
+      "evidence": [
+        {
+          "phase": "climb",
+          "generation": 3,
+          "matched_native_samples": 75,
+          "interior_us": [
+            38708000,
+            53808000
+          ]
+        },
+        {
+          "phase": "recover",
+          "generation": 4,
+          "matched_native_samples": 11,
+          "interior_us": [
+            54808000,
+            57000000
+          ]
+        },
+        {
+          "phase": "hover",
+          "generation": 5,
+          "matched_native_samples": 46,
+          "interior_us": [
+            58020000,
+            67108000
+          ]
+        },
+        {
+          "phase": "step_up",
+          "generation": 6,
+          "matched_native_samples": 35,
+          "interior_us": [
+            68108000,
+            75188000
+          ]
+        },
+        {
+          "phase": "step_down",
+          "generation": 7,
+          "matched_native_samples": 36,
+          "interior_us": [
+            76188000,
+            83280000
+          ]
+        },
+        {
+          "phase": "recover",
+          "generation": 8,
+          "matched_native_samples": 11,
+          "interior_us": [
+            84280000,
+            86460000
+          ]
+        },
+        {
+          "phase": "descend",
+          "generation": 9,
+          "matched_native_samples": 75,
+          "interior_us": [
+            87460000,
+            102548000
+          ]
+        }
+      ]
+    }
+  ],
+  "heading_events": [
+    {
+      "timestamp_us": 4488000,
+      "previous_sample_us": 4388000,
+      "counter_before": 1,
+      "counter_after": 2,
+      "delta_heading_rad": -0.0031130327843129635,
+      "delta_heading_deg": -0.17836364002699232,
+      "height_above_origin_m": -0.11152746143341064,
+      "during_frozen_flight": false,
+      "phase": null
+    },
+    {
+      "timestamp_us": 49688000,
+      "previous_sample_us": 49588000,
+      "counter_before": 2,
+      "counter_after": 3,
+      "delta_heading_rad": -0.0038480781950056553,
+      "delta_heading_deg": -0.22047863981014382,
+      "height_above_origin_m": 1.734606962776184,
+      "during_frozen_flight": true,
+      "phase": "climb"
+    }
+  ],
+  "reset_counter_evidence": {
+    "xy_reset_counter": {
+      "values": [
+        2
+      ],
+      "changes": 0,
+      "first_changed_samples_us": []
+    },
+    "z_reset_counter": {
+      "values": [
+        0
+      ],
+      "changes": 0,
+      "first_changed_samples_us": []
+    },
+    "vxy_reset_counter": {
+      "values": [
+        2
+      ],
+      "changes": 0,
+      "first_changed_samples_us": []
+    },
+    "vz_reset_counter": {
+      "values": [
+        1
+      ],
+      "changes": 0,
+      "first_changed_samples_us": []
+    },
+    "heading_reset_counter": {
+      "values": [
+        2,
+        3
+      ],
+      "changes": 1,
+      "first_changed_samples_us": [
+        49688000
+      ]
+    }
+  },
+  "estimator0_alignment_flags": [
+    {
+      "before": {
+        "timestamp": 49548000,
+        "timestamp_sample": 49548000,
+        "cs_in_air": 1,
+        "cs_fixed_wing": 0,
+        "cs_yaw_align": 1,
+        "cs_ev_yaw": 0,
+        "cs_gps_yaw": 0,
+        "cs_mag_aligned_in_flight": 0,
+        "cs_mag_hdg": 1,
+        "cs_mag_3d": 0,
+        "cs_mag_fault": 0,
+        "cs_mag_field_disturbed": 0,
+        "reject_yaw": 0
+      },
+      "after": {
+        "timestamp": 49680000,
+        "timestamp_sample": 49680000,
+        "cs_in_air": 1,
+        "cs_fixed_wing": 0,
+        "cs_yaw_align": 1,
+        "cs_ev_yaw": 0,
+        "cs_gps_yaw": 0,
+        "cs_mag_aligned_in_flight": 1,
+        "cs_mag_hdg": 1,
+        "cs_mag_3d": 0,
+        "cs_mag_fault": 0,
+        "cs_mag_field_disturbed": 0,
+        "reject_yaw": 0
+      }
+    }
+  ],
+  "selected_estimator": {
+    "primary_instances": [
+      0
+    ],
+    "instance_changed_counts": [
+      1
+    ]
+  },
+  "emergency_yaw_events": {
+    "emergency_yaw_reset_mag_stopped": false,
+    "bad_yaw_using_gps_course": false,
+    "yaw_aligned_to_imu_gps": false,
+    "stopping_mag_use": false
+  },
+  "interpretation": "Evidence supports the normal first in-air magnetic yaw alignment path. The frozen no-heading-reset requirement remains violated; independent checks do not change acceptance.",
+  "source_evidence": [
+    {
+      "path": "src/lib/ecl/EKF/mag_control.cpp",
+      "line": 127,
+      "meaning": "First in-air yaw reset requested above internal 1.5 m HAGL threshold"
+    },
+    {
+      "path": "src/lib/ecl/EKF/mag_control.cpp",
+      "line": 167,
+      "meaning": "In-air magnetic reset marks mag_aligned_in_flight"
+    },
+    {
+      "path": "src/lib/ecl/EKF/ekf_helper.cpp",
+      "line": 1585,
+      "meaning": "Yaw reset records quaternion delta and increments reset counter"
+    }
+  ]
+}
