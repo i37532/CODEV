@@ -1,0 +1,175 @@
+{
+  "verified": true,
+  "process_launches": 5,
+  "prearm_tooling_failures": 2,
+  "takeoffs": 3,
+  "completed_flights": 3,
+  "retries_of_airborne_tasks": 0,
+  "parameter_restore_exact": true,
+  "protected_user_files": 99,
+  "branch": "research/upstream-supertwisting2",
+  "head": "8079e17177e3edb597d8da1597081a82cbd6747a",
+  "author_head": "fc3720f67767c78cfab668777de13f68562fe2fd",
+  "original_tracked_control_changes": 0,
+  "independent_analysis_equal": true,
+  "offline_script_tests": 49,
+  "records": [
+    {
+      "id": "S001",
+      "success": false,
+      "takeoff": false,
+      "result_path": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/runs/S001/result.json",
+      "result_sha256": "f4e06c8f09c42d63c834c6a698de563f46431ac93ae51c51fd430b72dabc449e",
+      "ulog": [
+        {
+          "source": "/home/yr/Desktop/Codev-SuperTwisting2-original/build/px4_sitl_default/rootfs/log/2026-11-02/02_04_23.ulg",
+          "archive": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/runs/S001/native_00.ulg",
+          "sha256": "02a198ddb5fbacbe583f18423ff4ff3a41825282c838fb3bb082ada521474737",
+          "bytes": 399328
+        }
+      ],
+      "failure": "ValueError('Missing topic vehicle_attitude')"
+    },
+    {
+      "id": "S101",
+      "success": true,
+      "takeoff": true,
+      "result_path": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/runs/S101/result.json",
+      "result_sha256": "86d3795500a688f47626f58fb737313006082bf91a2aa0d8a57d03f6fcd7d95f",
+      "ulog": [
+        {
+          "source": "/home/yr/Desktop/Codev-SuperTwisting2-original/build/px4_sitl_default/rootfs/log/2026-11-02/02_06_38.ulg",
+          "archive": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/runs/S101/native_00.ulg",
+          "sha256": "ebfbc82cb5a324e76a390d45dbb422374dbaf767812cbbaa42ddb0521e440c3b",
+          "bytes": 23286037
+        }
+      ],
+      "failure": null
+    },
+    {
+      "id": "S102",
+      "success": false,
+      "takeoff": false,
+      "result_path": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/runs/S102/result.json",
+      "result_sha256": "fa55975c1f4a8be53870ff6407372d65cd1586915b7c0389aaa04102ec33df3f",
+      "ulog": [
+        {
+          "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-11-02/02_08_21.ulg",
+          "archive": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/runs/S102/native_00.ulg",
+          "sha256": "a8d6f981b248e642422507be220fd13360d63f5addc747a16b245d59e3687f34",
+          "bytes": 140948
+        }
+      ],
+      "failure": "ValueError('Out of range float values are not JSON compliant: nan')"
+    },
+    {
+      "id": "S202",
+      "success": true,
+      "takeoff": true,
+      "result_path": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/runs/S202/result.json",
+      "result_sha256": "5c755e1d8868f2d0f973bc8064933ced5b31a7d8cdf7428fabbb157d633e514e",
+      "ulog": [
+        {
+          "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-11-02/02_10_06.ulg",
+          "archive": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/runs/S202/native_00.ulg",
+          "sha256": "81c1ce92e1644a13fad263ced50064da0d268b7b83eb469e8247ce2309f543fd",
+          "bytes": 5282474
+        }
+      ],
+      "failure": null
+    },
+    {
+      "id": "S203",
+      "success": true,
+      "takeoff": true,
+      "result_path": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/runs/S203/result.json",
+      "result_sha256": "9df03870fa20ad9c0a8efc63c899973c2dc0e32331f244f562a20a67fd3136a5",
+      "ulog": [
+        {
+          "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-11-02/02_11_36.ulg",
+          "archive": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/runs/S203/native_00.ulg",
+          "sha256": "35afa64fd73a9678c070130235fcb640aef7b62aa2ddc276944552b3b73389ed",
+          "bytes": 5181586
+        }
+      ],
+      "failure": null
+    }
+  ],
+  "analysis_metrics_sha256": "8044cfa6f406206de71975493f0bb01f6785fd5549b4275811d951a359cbe31e",
+  "native_position_logging_hz": {
+    "Upstream STA2": 125,
+    "RSTA": 10,
+    "RISTA": 10
+  },
+  "limitations": [
+    "one flight per complete system",
+    "different PX4/controller/model systems",
+    "native logging rates differ; not a high-frequency jitter comparison",
+    "queued vehicle_local_position_log was not present; no invented dense data",
+    "two startup-only harness failures retained; numerical/flight thresholds unchanged"
+  ],
+  "build_logs": [
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/build_firmware02.log",
+      "sha256": "06a76df9b5e42a6de051be6ae1c68963d1a5971cec97c72713ae611e0bc59cd8"
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/build_gazebo03.log",
+      "sha256": "a8393827a5af4606c5816f700579163b62d7b64f03cd0b0a8046788332fb8709"
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/build_original01.log",
+      "sha256": "bcb0e84c19fa0456ff38e948e0be87f10370952a074ea4468761749eb7879907"
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/configure_gazebo02.log",
+      "sha256": "9989cb0447624fe2b4204e85506d34a4d5ea038428b930aa0280e81309ecfc53"
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/dry_run01.log",
+      "sha256": "fb9ffcbd2f807825a347c31795f284adb9b3f5fd93911178a47b1a457545511c"
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/execute_S001.log",
+      "sha256": "bde4ba83e3e692cf0bb0be61d1d922564449eb80e686fa5a857df046d30720a4"
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/execute_S101.log",
+      "sha256": "84f961a1821b48c6a8859462061d8d7f1b9eeecc5a179d34d004ec1f3f0b9aa9"
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/execute_S102.log",
+      "sha256": "e4ce5910ad61a5c4f8a8a54e333c3cd311a9d97b939884b566e5d688ca6def92"
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/execute_S202.log",
+      "sha256": "2249f8e66efed0fdcfee93f18497bd4eb3c26a9326056409a6bbfbb9d2bb2f77"
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/execute_S203.log",
+      "sha256": "b09b2ac1759588c36d234f8641a12c6443ed53cc6e29c317bfb8fbbfd7958af5"
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/offline_tests01.log",
+      "sha256": "2ffa9b7483d63910a20557855ed793ed9c9d515607b0fffc634c5bc7fb73f185"
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/offline_tests02.log",
+      "sha256": "629720a099c2b26602fb7bcf5d28baeda6dd2e3746f57615931623cf0aef0bfa"
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/offline_tests03.log",
+      "sha256": "2a74af5fe7ef5259fb70da1e1a318e4833b888bf77cf1fa9ebe2b8d8c6940d71"
+    }
+  ],
+  "figures": [
+    {
+      "name": "displacement.png",
+      "sha256": "5714d12c151925dfa79dea1f19088bd0f32142e7d6656ba6617211422f5aec7e"
+    },
+    {
+      "name": "velocity.png",
+      "sha256": "86bd07b4d68a912deb3f6c9444df83f5d8ca74aeeb301eb8ca59017bf48e4e82"
+    }
+  ]
+}

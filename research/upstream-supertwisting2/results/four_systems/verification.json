@@ -1,0 +1,118 @@
+{
+  "verified": true,
+  "new_attempts": 1,
+  "new_takeoffs": 1,
+  "new_accepted": 1,
+  "total_launches": 6,
+  "total_takeoffs": 4,
+  "total_accepted": 4,
+  "historical_prearm_failures": 2,
+  "historical_records_unchanged": true,
+  "historical_metrics_unchanged": true,
+  "redecoded_metrics_equal": true,
+  "protected_user_files": 99,
+  "parameter_restore_exact": true,
+  "branch": "research/upstream-supertwisting2",
+  "head": "8079e17177e3edb597d8da1597081a82cbd6747a",
+  "firmware_sha256": "a1ebc57f178c07713f14e2ed423c8b1d27dad251bc70e6047411bfa7877695d8",
+  "runner_tests": 57,
+  "diagnostics": {
+    "sta_velocity_ctrl_status": {
+      "samples": 100,
+      "verified_fields": {
+        "effective_mode": 0,
+        "effective_axes": 0,
+        "active_axes": 0,
+        "committed_axes": 0,
+        "pid_axes": 7,
+        "inner_mode": 0,
+        "inner_axes": 0,
+        "inner_divisor": 1,
+        "inner_valid": 1,
+        "fault": 0
+      }
+    },
+    "sta_rate_ctrl_status": {
+      "samples": 100,
+      "verified_fields": {
+        "effective_mode": 0,
+        "effective_axes": 0,
+        "div_eff": 1,
+        "pid_updated": 1,
+        "experiment_updated": 0,
+        "fault": 0
+      }
+    }
+  },
+  "manifest_sha256": "038bf46e1056ebf7aaa5eb91efcd8390cd61feaeefc28c415afd4b2086625c5c",
+  "metrics_sha256": "34fb9d33e6273840b18272a0397b53bd6bda9c1936bafddad1f236f7aebee029",
+  "old_receipt_sha256": "41e2666d119eb3c49c37d75001c2fd654fec47c2a1a64f4c242a3e5f41d1ad4a",
+  "records": [
+    {
+      "id": "S101",
+      "label": "Upstream STA2",
+      "result_path": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/runs/S101/result.json",
+      "result_sha256": "86d3795500a688f47626f58fb737313006082bf91a2aa0d8a57d03f6fcd7d95f",
+      "logs": [
+        {
+          "source": "/home/yr/Desktop/Codev-SuperTwisting2-original/build/px4_sitl_default/rootfs/log/2026-11-02/02_06_38.ulg",
+          "archive": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/runs/S101/native_00.ulg",
+          "sha256": "ebfbc82cb5a324e76a390d45dbb422374dbaf767812cbbaa42ddb0521e440c3b",
+          "bytes": 23286037
+        }
+      ]
+    },
+    {
+      "id": "S202",
+      "label": "RSTA",
+      "result_path": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/runs/S202/result.json",
+      "result_sha256": "5c755e1d8868f2d0f973bc8064933ced5b31a7d8cdf7428fabbb157d633e514e",
+      "logs": [
+        {
+          "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-11-02/02_10_06.ulg",
+          "archive": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/runs/S202/native_00.ulg",
+          "sha256": "81c1ce92e1644a13fad263ced50064da0d268b7b83eb469e8247ce2309f543fd",
+          "bytes": 5282474
+        }
+      ]
+    },
+    {
+      "id": "S203",
+      "label": "RISTA",
+      "result_path": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/runs/S203/result.json",
+      "result_sha256": "9df03870fa20ad9c0a8efc63c899973c2dc0e32331f244f562a20a67fd3136a5",
+      "logs": [
+        {
+          "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-11-02/02_11_36.ulg",
+          "archive": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/runs/S203/native_00.ulg",
+          "sha256": "35afa64fd73a9678c070130235fcb640aef7b62aa2ddc276944552b3b73389ed",
+          "bytes": 5181586
+        }
+      ]
+    },
+    {
+      "id": "S304",
+      "label": "PID",
+      "result_path": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/runs/S304/result.json",
+      "result_sha256": "2dddc5eb86c2c4f254aef4c834695e69c1a3eef427f11d07536ad68a23fd5a54",
+      "logs": [
+        {
+          "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-11-02/02_28_25.ulg",
+          "archive": "/home/yr/Desktop/codev doc/experiments/UPSTREAM-STA2-HOVER-20261102/runs/S304/native_00.ulg",
+          "sha256": "339ee30f0035575d011e91de31a44f41954e72f91da28ce03f9bfbf33819bf90",
+          "bytes": 5150774
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "path": "displacement.png",
+      "sha256": "bd4fc4cb4a25d1ab0db7f7cc184e2355187a3c09f9f27c093d358f0f42be790e"
+    },
+    {
+      "path": "velocity.png",
+      "sha256": "dd1c7dc3ec3d47c9444a6396193eaa418ec0fe247fde61a0250f32b57e813707"
+    }
+  ]
+}
