@@ -1,0 +1,51 @@
+{
+  "source_head": "914c2213d895f842c723c64d3fa14fc374833950",
+  "branch": "research/sta-velocity-control",
+  "binary_sha256": "e06043ca97672e3ed4d59d07e8186011697105501a4e75a09a06f1cbd1db3e75",
+  "runner_sha256": "19625274c9496c2e7667c0ab32e676ad375deee405b34a10dcd211efc7fba8e1",
+  "command": [
+    "./sitl/run.sh",
+    "--headless",
+    "--backend",
+    "gazebo",
+    "--model",
+    "iris"
+  ],
+  "pid_parameters_modified": false,
+  "success": false,
+  "events": [
+    {
+      "name": "ready",
+      "timestamp_us": 30884000.0
+    },
+    {
+      "name": "takeoff_command",
+      "timestamp_us": 30896000
+    }
+  ],
+  "scenario_sha256": "f3980e89986772943328cf7b54da2656c2a94ae2bf59288738f721d1ca6be21a",
+  "scenario_path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v07/protocol05/execution.json",
+  "simulation_speed_requested": 1.0,
+  "explicit_environment": {
+    "PX4_SITL_WORLD": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world",
+    "GAZEBO_MASTER_URI": "http://127.0.0.1:11345"
+  },
+  "launcher_pid": 1005294,
+  "error": "RuntimeError('Live ULog transport stale/future')",
+  "launcher_returncode": 0,
+  "logs": [
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-29/04_32_43.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LIVEPOLL/series05/run02/04_32_43.ulg",
+      "sha256": "78cd3631349aba4207b4c6ecf0f23d6504c1ff6ff4997167b7ebdcc6a9b62388",
+      "bytes": 213894
+    },
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/sess007/log001.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LIVEPOLL/series05/run02/log001.ulg",
+      "sha256": "4f489f4c957d1cee95501f6e8bdd1c94898c93e8251a19f4e76075deae279dfb",
+      "bytes": 24813901
+    }
+  ],
+  "finished_utc": "2026-09-29T04:33:22Z"
+}

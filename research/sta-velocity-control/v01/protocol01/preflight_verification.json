@@ -1,0 +1,232 @@
+{
+  "base": "b11068e2ddb0c6734ae566045dc096eaf7a7c834",
+  "commands": [
+    {
+      "name": "head",
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "status",
+      "command": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "submodules",
+      "command": [
+        "git",
+        "submodule",
+        "status",
+        "--recursive"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "submodule_workspaces",
+      "command": [
+        "git",
+        "submodule",
+        "foreach",
+        "--recursive",
+        "--quiet",
+        "git status --porcelain"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "compiler",
+      "command": [
+        "g++",
+        "--version"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "gazebo",
+      "command": [
+        "pkg-config",
+        "--modversion",
+        "gazebo"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "build_sitl",
+      "command": [
+        "make",
+        "px4_sitl_default",
+        "-j4"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "build_tests",
+      "command": [
+        "make",
+        "tests",
+        "TESTFILTER=VelocityControl",
+        "-j4"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "PositionControl",
+      "command": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-PositionControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260921/V01/verification02/PositionControl.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "ControlMath",
+      "command": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-ControlMath",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260921/V01/verification02/ControlMath.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "Takeoff",
+      "command": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-Takeoff",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260921/V01/verification02/Takeoff.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "RateControl",
+      "command": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RateControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260921/V01/verification02/RateControl.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "RateControlDispatcher",
+      "command": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RateControlDispatcher",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260921/V01/verification02/RateControlDispatcher.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "VelocityControl",
+      "command": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-VelocityControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260921/V01/verification02/VelocityControl.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "VelocitySelectionParam",
+      "command": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/functional-VelocitySelectionParam",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260921/V01/verification02/VelocitySelectionParam.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "python_tools",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "research/sta-velocity-control/scripts",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "references": {
+    "src/modules/mc_pos_control/PositionControl/PositionControl.hpp": {
+      "original_sha256": "fa0536781f6b69ba6ce5b1521f6b347ab30db4caea425572fb9eb420a5f55ec2",
+      "reference_sha256": "0fd813b79fbe173488af399f87baa3308b752736b93114a017a37efd77c34a8a",
+      "transformations": "Identifier/include renaming; PositionControl friend test access only"
+    },
+    "src/modules/mc_pos_control/PositionControl/PositionControl.cpp": {
+      "original_sha256": "8bc5a6509b0bbb8df05b2348552d0dc639e72280cc0e5448c6b082018bfad499",
+      "reference_sha256": "58fdf50653cf1d88bf4202d86e68caf4fbface83af84ccbe3953c8c033689024",
+      "transformations": "Identifier/include renaming; PositionControl friend test access only"
+    },
+    "src/modules/mc_pos_control/PositionControl/ControlMath.hpp": {
+      "original_sha256": "6222dd0d4b796e84be0f69ce6697885e81dce272ca495cb8582915a6b9d2e705",
+      "reference_sha256": "aa726314f734debb1be8afe79e19296f9219da749f52f5af3daa08e9cea40f16",
+      "transformations": "Identifier/include renaming; PositionControl friend test access only"
+    },
+    "src/modules/mc_pos_control/PositionControl/ControlMath.cpp": {
+      "original_sha256": "db01884a4bb523300c03bcad63a7e634105e81d0cc499a6f8c8897f612656294",
+      "reference_sha256": "70bceda27e3c124811028a0b87beb23c2869743546dab179b9c3cc47f9b185e0",
+      "transformations": "Identifier/include renaming; PositionControl friend test access only"
+    },
+    "src/modules/mc_pos_control/Takeoff/Takeoff.hpp": {
+      "original_sha256": "7723fee15bacdfe9a97e6960136eaf96c397a4323263a03b94ce2bbd8ae09cfa",
+      "reference_sha256": "94d357916f4e18a53c443a362fd9bf51fbc3b78b647c41db4e70960ac61ad978",
+      "transformations": "Identifier/include renaming; PositionControl friend test access only"
+    },
+    "src/modules/mc_pos_control/Takeoff/Takeoff.cpp": {
+      "original_sha256": "e8040562fb7d31d359e6ae5822f46e9f98ae01d7ea5a1d95a8ee7f0e81a74a6b",
+      "reference_sha256": "1338551e21b3593cb384ac448395b4e2cd3b5d1e5f1ebe56b2707b181479f1df",
+      "transformations": "Identifier/include renaming; PositionControl friend test access only"
+    }
+  },
+  "tests": {
+    "PositionControl": {
+      "tests": 15,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "ControlMath": {
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "Takeoff": {
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "RateControl": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "RateControlDispatcher": {
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocityControl": {
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocitySelectionParam": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    }
+  },
+  "success": true,
+  "original_parameter_state_failsafe_functions_unchanged": true,
+  "unique_cpp_tests": 44
+}

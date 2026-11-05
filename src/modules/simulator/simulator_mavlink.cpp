@@ -209,11 +209,31 @@ void Simulator::update_sensors(const hrt_abstime &time, const mavlink_hil_sensor
 
 	// accel
 	if ((sensors.fields_updated & SensorSource::ACCEL) == SensorSource::ACCEL) {
+		const bool accel_finite = PX4_ISFINITE(sensors.xacc) && PX4_ISFINITE(sensors.yacc) && PX4_ISFINITE(sensors.zacc);
+
 		for (int i = 0; i < ACCEL_COUNT_MAX; i++) {
+			// All simulated accelerometers consume the same vector. Do not convert
+			// or publish a partially invalid vector as a fresh measurement. Preserve
+			// the last valid sample/time and existing blocked/stuck fault injection.
+			if (!accel_finite && !_accel_blocked[i] && !_accel_stuck[i]) {
+				_px4_accel[i].increase_error_count();
+				continue;
+			}
+
 			if (i == 0) {
 				// accel 0 is simulated FIFO
 				static constexpr float ACCEL_FIFO_SCALE = CONSTANTS_ONE_G / 2048.f;
 				static constexpr float ACCEL_FIFO_RANGE = 16.f * CONSTANTS_ONE_G;
+				const auto fifo_sample = [](float acceleration) -> int16_t {
+					// Bound in physical units first, so even FLT_MAX cannot overflow
+					// the scaling operation. In-range quantization is unchanged.
+					if (acceleration >= INT16_MAX * ACCEL_FIFO_SCALE) { return INT16_MAX; }
+
+					if (acceleration <= INT16_MIN * ACCEL_FIFO_SCALE) { return INT16_MIN; }
+
+					return static_cast<int16_t>(math::constrain(acceleration / ACCEL_FIFO_SCALE,
+								   static_cast<float>(INT16_MIN), static_cast<float>(INT16_MAX)));
+				};
 
 				_px4_accel[i].set_scale(ACCEL_FIFO_SCALE);
 				_px4_accel[i].set_range(ACCEL_FIFO_RANGE);
@@ -227,9 +247,9 @@ void Simulator::update_sensors(const hrt_abstime &time, const mavlink_hil_sensor
 					_last_accel_fifo.samples = 1;
 					_last_accel_fifo.dt = time - _last_accel_fifo.timestamp_sample;
 					_last_accel_fifo.timestamp_sample = time;
-					_last_accel_fifo.x[0] = sensors.xacc / ACCEL_FIFO_SCALE;
-					_last_accel_fifo.y[0] = sensors.yacc / ACCEL_FIFO_SCALE;
-					_last_accel_fifo.z[0] = sensors.zacc / ACCEL_FIFO_SCALE;
+					_last_accel_fifo.x[0] = fifo_sample(sensors.xacc);
+					_last_accel_fifo.y[0] = fifo_sample(sensors.yacc);
+					_last_accel_fifo.z[0] = fifo_sample(sensors.zacc);
 
 					_px4_accel[i].updateFIFO(_last_accel_fifo);
 				}

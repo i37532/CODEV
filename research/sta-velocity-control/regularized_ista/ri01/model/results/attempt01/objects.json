@@ -1,0 +1,3343 @@
+{
+  "trajectories": [
+    {
+      "id": "XY_fixed_8ms_001",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "constant",
+        "d": -0.15,
+        "nu0": -0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000006715,
+      "steps": 7500,
+      "max_double_reference_velocity_difference": 1.431059870882212e-07,
+      "tail_time_weighted_mean": -2.3275613512452007e-08,
+      "tail_time_weighted_rmse": 2.327563793431668e-08,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_ideal_constant_equilibrium_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_8ms_001.csv",
+        "bytes": 1396919,
+        "sha256": "6a8e5a67c07f615a5f9058a82b49645538c39e01563229cd44c2f87daf9f1528"
+      }
+    },
+    {
+      "id": "XY_fixed_8ms_002",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "constant",
+        "d": -0.15,
+        "nu0": 0.0
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000006715,
+      "steps": 7500,
+      "max_double_reference_velocity_difference": 5.2307772717419265e-08,
+      "tail_time_weighted_mean": 4.635751581156533e-09,
+      "tail_time_weighted_rmse": 4.6358741991745256e-09,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_ideal_constant_equilibrium_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_8ms_002.csv",
+        "bytes": 1378414,
+        "sha256": "7db46168a5e5e208fed308bac24d1d2695c28500cbe9cbbbd7fc5f51605e5265"
+      }
+    },
+    {
+      "id": "XY_fixed_8ms_003",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "constant",
+        "d": -0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000006715,
+      "steps": 7500,
+      "max_double_reference_velocity_difference": 7.769553870778985e-08,
+      "tail_time_weighted_mean": 7.597208052419734e-08,
+      "tail_time_weighted_rmse": 7.597208800634196e-08,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_ideal_constant_equilibrium_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_8ms_003.csv",
+        "bytes": 1378850,
+        "sha256": "2cb515b01221e514b6b74fc4ae5e111c1fddb65ed5ddc0cbf835763482caf651"
+      }
+    },
+    {
+      "id": "XY_fixed_8ms_004",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.0,
+        "nu0": -0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 32.60799999999757,
+      "steps": 4076,
+      "max_double_reference_velocity_difference": 3.2263248623057295e-08,
+      "tail_time_weighted_mean": -1.1864128563663658e-28,
+      "tail_time_weighted_rmse": 1.9766677113407028e-26,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": {
+        "time": 32.60799999999757,
+        "status": 5,
+        "last_velocity": 9.504736652372221e-38,
+        "last_nu": -1.3626608317107835e-35,
+        "reference_velocity": 9.508277388648607e-38,
+        "reference_nu": -1.3626516701976113e-35,
+        "state_unchanged": true
+      },
+      "conclusion": "numeric_domain_exhausted_not_full_60s",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_8ms_004.csv",
+        "bytes": 793906,
+        "sha256": "f7421b569931bb2bb2c35ea744ad679e7ed0522764af589a073bb6ef701155a0"
+      }
+    },
+    {
+      "id": "XY_fixed_8ms_005",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.0,
+        "nu0": 0.0
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 32.72799999999761,
+      "steps": 4091,
+      "max_double_reference_velocity_difference": 1.199323978670619e-09,
+      "tail_time_weighted_mean": 1.3772425596473728e-28,
+      "tail_time_weighted_rmse": 4.093336039087606e-27,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": {
+        "time": 32.72799999999761,
+        "status": 5,
+        "last_velocity": 1.3141607993503509e-37,
+        "last_nu": -2.2505479325106545e-36,
+        "reference_velocity": 1.3142830216615178e-37,
+        "reference_nu": -2.250514998413932e-36,
+        "state_unchanged": true
+      },
+      "conclusion": "numeric_domain_exhausted_not_full_60s",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_8ms_005.csv",
+        "bytes": 798012,
+        "sha256": "27f9e903f3ab283141c9e0d6718a3c974f0d6f2fd917a560ce3235f186858c3e"
+      }
+    },
+    {
+      "id": "XY_fixed_8ms_006",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.0,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 31.967999999997367,
+      "steps": 3996,
+      "max_double_reference_velocity_difference": 4.260813505317651e-08,
+      "tail_time_weighted_mean": 6.402660784678936e-28,
+      "tail_time_weighted_rmse": 5.1117012555397494e-26,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": {
+        "time": 31.967999999997367,
+        "status": 5,
+        "last_velocity": -1.55488979439024e-38,
+        "last_nu": 3.636089291103276e-35,
+        "reference_velocity": -1.565505301379231e-38,
+        "reference_nu": 3.636050665517107e-35,
+        "state_unchanged": true
+      },
+      "conclusion": "numeric_domain_exhausted_not_full_60s",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_8ms_006.csv",
+        "bytes": 778958,
+        "sha256": "e21f695491f844c398b8adf56b314f46a211a8a3a32241bf7583abd34a267c92"
+      }
+    },
+    {
+      "id": "XY_fixed_8ms_007",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.15,
+        "nu0": -0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000006715,
+      "steps": 7500,
+      "max_double_reference_velocity_difference": 2.0639080733829002e-08,
+      "tail_time_weighted_mean": 2.0170211514464137e-08,
+      "tail_time_weighted_rmse": 2.0170239696309815e-08,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_ideal_constant_equilibrium_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_8ms_007.csv",
+        "bytes": 1406046,
+        "sha256": "6ebad89924be768796c5b929220f6b5c746b0b08579d10835052148888670e48"
+      }
+    },
+    {
+      "id": "XY_fixed_8ms_008",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.15,
+        "nu0": 0.0
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000006715,
+      "steps": 7500,
+      "max_double_reference_velocity_difference": 6.079318622120855e-08,
+      "tail_time_weighted_mean": 7.772445347976351e-09,
+      "tail_time_weighted_rmse": 7.772518482168904e-09,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_ideal_constant_equilibrium_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_8ms_008.csv",
+        "bytes": 1388917,
+        "sha256": "8303a04d91da236c041fb243e12e227766f355c6852ae314e8291b8aa673a495"
+      }
+    },
+    {
+      "id": "XY_fixed_8ms_009",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000006715,
+      "steps": 7500,
+      "max_double_reference_velocity_difference": 1.50761629919699e-07,
+      "tail_time_weighted_mean": 2.6381015507441604e-08,
+      "tail_time_weighted_rmse": 2.6381037054525283e-08,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_ideal_constant_equilibrium_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_8ms_009.csv",
+        "bytes": 1410624,
+        "sha256": "098465ec163fb2e397c5e1834c72a9c1c374065f305e0e4635c561c0949fc696"
+      }
+    },
+    {
+      "id": "XY_fixed_8ms_010",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "ramp",
+        "d": 0.03,
+        "ramp": -0.002,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000006715,
+      "steps": 7500,
+      "max_double_reference_velocity_difference": 5.186361688724883e-08,
+      "tail_time_weighted_mean": -0.00020812955886931979,
+      "tail_time_weighted_rmse": 0.00020812955886943065,
+      "ramp_theory": -0.00020812799999999997,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_layer_ramp_bias_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_8ms_010.csv",
+        "bytes": 1544964,
+        "sha256": "bf0344201cc1d0497c8aa7a57b08a28b29acc0903a6045b731c7585a4624d138"
+      }
+    },
+    {
+      "id": "XY_fixed_8ms_011",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "ramp",
+        "d": 0.03,
+        "ramp": 0.002,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000006715,
+      "steps": 7500,
+      "max_double_reference_velocity_difference": 5.2462990417223576e-08,
+      "tail_time_weighted_mean": 0.00020808190583116592,
+      "tail_time_weighted_rmse": 0.00020808190583318758,
+      "ramp_theory": 0.00020812799999999997,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_layer_ramp_bias_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_8ms_011.csv",
+        "bytes": 1517016,
+        "sha256": "54e509e014ad438a8632b5977e915e4249677c0118cfdd4b9292af9bf3ab44b9"
+      }
+    },
+    {
+      "id": "XY_fixed_8ms_012",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "target_ff",
+        "d": 0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000006715,
+      "steps": 7500,
+      "max_double_reference_velocity_difference": 1.5178113627056788e-07,
+      "tail_time_weighted_mean": 2.650127834473796e-08,
+      "tail_time_weighted_rmse": 2.650970040991738e-08,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_8ms_012.csv",
+        "bytes": 1535907,
+        "sha256": "2e2fea7aca593466cac8a6dd3d284fae60e45768e83a343f7071957b953ce300"
+      }
+    },
+    {
+      "id": "XY_fixed_8ms_013",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "measurement_noise",
+        "d": 0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000006715,
+      "steps": 7500,
+      "max_double_reference_velocity_difference": 1.5029838493912928e-07,
+      "tail_time_weighted_mean": -1.308865550027113e-07,
+      "tail_time_weighted_rmse": 0.0006608860257349603,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_8ms_013.csv",
+        "bytes": 1396677,
+        "sha256": "97e8d2f317d064c8e482ac1ef52de011c06d8e88ea74c14bce917a97149d628e"
+      }
+    },
+    {
+      "id": "XY_fixed_8ms_014",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "two_stage_lag",
+        "d": 0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000006715,
+      "steps": 7500,
+      "max_double_reference_velocity_difference": 1.6208635948700145e-07,
+      "tail_time_weighted_mean": 1.0906959954945045e-08,
+      "tail_time_weighted_rmse": 1.0907804673997061e-08,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_8ms_014.csv",
+        "bytes": 1399943,
+        "sha256": "e160fee39c42788f93b4a80d534c8428860b617f67ae7b13443ecac8b6163ea7"
+      }
+    },
+    {
+      "id": "XY_fixed_8ms_015",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "lag_and_noise",
+        "d": 0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000006715,
+      "steps": 7500,
+      "max_double_reference_velocity_difference": 1.6121551890159458e-07,
+      "tail_time_weighted_mean": 1.3011634933186726e-06,
+      "tail_time_weighted_rmse": 0.0005047593368996561,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_8ms_015.csv",
+        "bytes": 1396960,
+        "sha256": "6e29b4dbba40b5b112c0388bdbe3b1171b25e20b046259d32e4c42880669d861"
+      }
+    },
+    {
+      "id": "XY_fixed_8ms_016",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "limited",
+        "d": 0.15,
+        "nu0": 0.0,
+        "limit": 0.3
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000006715,
+      "steps": 7500,
+      "max_double_reference_velocity_difference": 6.079318622120855e-08,
+      "tail_time_weighted_mean": 7.772445347976351e-09,
+      "tail_time_weighted_rmse": 7.772518482168904e-09,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_8ms_016.csv",
+        "bytes": 1388917,
+        "sha256": "8303a04d91da236c041fb243e12e227766f355c6852ae314e8291b8aa673a495"
+      }
+    },
+    {
+      "id": "XY_fixed_8ms_017",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "limited",
+        "d": 0.15,
+        "nu0": 0.0,
+        "limit": 0.05
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000006715,
+      "steps": 7500,
+      "max_double_reference_velocity_difference": 0.0,
+      "tail_time_weighted_mean": 5.550399999999638,
+      "tail_time_weighted_rmse": 5.557901891900868,
+      "ramp_theory": null,
+      "protection_steps": 7500,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "infeasible_actuation_not_convergent",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_8ms_017.csv",
+        "bytes": 1078245,
+        "sha256": "7c5d46dfae526b0dfd388547836a2ec32f0c3c76e21a97b620611195754fa10d"
+      }
+    },
+    {
+      "id": "XY_fixed_12ms_018",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "constant",
+        "d": -0.15,
+        "nu0": -0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000001826,
+      "steps": 5000,
+      "max_double_reference_velocity_difference": 3.7056736350817886e-08,
+      "tail_time_weighted_mean": -3.639451002704739e-08,
+      "tail_time_weighted_rmse": 3.6394545126821465e-08,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_ideal_constant_equilibrium_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_12ms_018.csv",
+        "bytes": 931576,
+        "sha256": "72eb4066c0a5e089669520ac5ed94308228635eb9697bcf42723d09a9e10d8c5"
+      }
+    },
+    {
+      "id": "XY_fixed_12ms_019",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "constant",
+        "d": -0.15,
+        "nu0": 0.0
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000001826,
+      "steps": 5000,
+      "max_double_reference_velocity_difference": 1.1442627636678326e-08,
+      "tail_time_weighted_mean": -1.1096894420245437e-08,
+      "tail_time_weighted_rmse": 1.1097009813233854e-08,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_ideal_constant_equilibrium_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_12ms_019.csv",
+        "bytes": 924617,
+        "sha256": "742e14a1be2f7e1a01105599f9dfa55a53edd38c8d7f0ce6d4013d62b46e417e"
+      }
+    },
+    {
+      "id": "XY_fixed_12ms_020",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "constant",
+        "d": -0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000001826,
+      "steps": 5000,
+      "max_double_reference_velocity_difference": 2.9028743021050637e-08,
+      "tail_time_weighted_mean": 2.686091923696408e-08,
+      "tail_time_weighted_rmse": 2.686096679447896e-08,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_ideal_constant_equilibrium_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_12ms_020.csv",
+        "bytes": 929236,
+        "sha256": "2b38bc4da362dbd85c44456e5d7af0bb66b8ed976465ce6054cc843745709949"
+      }
+    },
+    {
+      "id": "XY_fixed_12ms_021",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.0,
+        "nu0": -0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 33.78000000000083,
+      "steps": 2815,
+      "max_double_reference_velocity_difference": 1.8333457783153984e-08,
+      "tail_time_weighted_mean": -6.766082306825894e-28,
+      "tail_time_weighted_rmse": 3.875674901073126e-27,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": {
+        "time": 33.78000000000083,
+        "status": 5,
+        "last_velocity": -6.034726996961422e-37,
+        "last_nu": -5.730727218407957e-38,
+        "reference_velocity": -6.034791449570734e-37,
+        "reference_nu": -5.733067906814107e-38,
+        "state_unchanged": true
+      },
+      "conclusion": "numeric_domain_exhausted_not_full_60s",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_12ms_021.csv",
+        "bytes": 548590,
+        "sha256": "ece00045dc772d5db8cecaf41348ae0b1b88de0d617f270a4cb938f5d5d0d9fd"
+      }
+    },
+    {
+      "id": "XY_fixed_12ms_022",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.0,
+        "nu0": 0.0
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 32.32800000000078,
+      "steps": 2694,
+      "max_double_reference_velocity_difference": 2.2222272880352556e-09,
+      "tail_time_weighted_mean": 5.7737076320094096e-27,
+      "tail_time_weighted_rmse": 3.2983841174966843e-26,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": {
+        "time": 32.32800000000078,
+        "status": 5,
+        "last_velocity": 5.150753461858394e-36,
+        "last_nu": 5.848401425105449e-37,
+        "reference_velocity": 5.150807777163591e-36,
+        "reference_nu": 5.850375248978975e-37,
+        "state_unchanged": true
+      },
+      "conclusion": "numeric_domain_exhausted_not_full_60s",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_12ms_022.csv",
+        "bytes": 525530,
+        "sha256": "ee163a9a9ec65c3e230fe1ae257c190ddc044dd79b8ad583dd65c689f0a3947a"
+      }
+    },
+    {
+      "id": "XY_fixed_12ms_023",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.0,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 33.13200000000081,
+      "steps": 2761,
+      "max_double_reference_velocity_difference": 1.8162027708157336e-08,
+      "tail_time_weighted_mean": 1.7745063295699655e-27,
+      "tail_time_weighted_rmse": 1.0143877353456079e-26,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": {
+        "time": 33.13200000000081,
+        "status": 5,
+        "last_velocity": 1.582962461775023e-36,
+        "last_nu": 1.726686469765914e-37,
+        "reference_velocity": 1.5829705254364288e-36,
+        "reference_nu": 1.7270580120749129e-37,
+        "state_unchanged": true
+      },
+      "conclusion": "numeric_domain_exhausted_not_full_60s",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_12ms_023.csv",
+        "bytes": 537840,
+        "sha256": "dc3714e43984471a59949d908fc0089e48be9c153126123cbc5e4d053abd8c3d"
+      }
+    },
+    {
+      "id": "XY_fixed_12ms_024",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.15,
+        "nu0": -0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000001826,
+      "steps": 5000,
+      "max_double_reference_velocity_difference": 3.3836668751616155e-08,
+      "tail_time_weighted_mean": 3.3235463850370586e-08,
+      "tail_time_weighted_rmse": 3.323550228639085e-08,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_ideal_constant_equilibrium_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_12ms_024.csv",
+        "bytes": 939549,
+        "sha256": "eb40af34b6adb2c85eb93e3c82a5efcdce31983d1ee6408071c776e284c2f475"
+      }
+    },
+    {
+      "id": "XY_fixed_12ms_025",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.15,
+        "nu0": 0.0
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000001826,
+      "steps": 5000,
+      "max_double_reference_velocity_difference": 2.1040350526495322e-08,
+      "tail_time_weighted_mean": 2.0593490260666173e-08,
+      "tail_time_weighted_rmse": 2.059355229181105e-08,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_ideal_constant_equilibrium_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_12ms_025.csv",
+        "bytes": 941031,
+        "sha256": "37a59a9d5b31bbfc36758e30e4dcf0eb60cccb5ac8a65c3e08619a51696c5b81"
+      }
+    },
+    {
+      "id": "XY_fixed_12ms_026",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000001826,
+      "steps": 5000,
+      "max_double_reference_velocity_difference": 4.02425391499885e-08,
+      "tail_time_weighted_mean": 3.954776724910622e-08,
+      "tail_time_weighted_rmse": 3.954779955027674e-08,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_ideal_constant_equilibrium_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_12ms_026.csv",
+        "bytes": 938787,
+        "sha256": "d9b4d020070862c6d3a516066a50efe9b2c651b3edbc1f1961bd61446410ae09"
+      }
+    },
+    {
+      "id": "XY_fixed_12ms_027",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "ramp",
+        "d": 0.03,
+        "ramp": -0.002,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000001826,
+      "steps": 5000,
+      "max_double_reference_velocity_difference": 1.8906467125548703e-08,
+      "tail_time_weighted_mean": -0.0002123057240786578,
+      "tail_time_weighted_rmse": 0.0002123057240790735,
+      "ramp_theory": -0.00021228799999999998,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_layer_ramp_bias_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_12ms_027.csv",
+        "bytes": 1030451,
+        "sha256": "fafb510139677be423c3f9c280f1cbbbf539ced18bd02a3c26dc08d511f4bccb"
+      }
+    },
+    {
+      "id": "XY_fixed_12ms_028",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "ramp",
+        "d": 0.03,
+        "ramp": 0.002,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000001826,
+      "steps": 5000,
+      "max_double_reference_velocity_difference": 1.876169319290624e-08,
+      "tail_time_weighted_mean": 0.0002122733062829117,
+      "tail_time_weighted_rmse": 0.00021227330628351203,
+      "ramp_theory": 0.00021228799999999998,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_layer_ramp_bias_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_12ms_028.csv",
+        "bytes": 1011544,
+        "sha256": "668a31db9496af902e2f573ae9c4e824c4a4140ceb0577a37428ea6582735799"
+      }
+    },
+    {
+      "id": "XY_fixed_12ms_029",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "target_ff",
+        "d": 0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000001826,
+      "steps": 5000,
+      "max_double_reference_velocity_difference": 4.124640508307298e-08,
+      "tail_time_weighted_mean": 3.9716281748902496e-08,
+      "tail_time_weighted_rmse": 3.9719410987869656e-08,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_12ms_029.csv",
+        "bytes": 1020826,
+        "sha256": "08761ebac4a34afa4d7fe0e929ffddba5488b430f07feb31ad54c67dba44262b"
+      }
+    },
+    {
+      "id": "XY_fixed_12ms_030",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "measurement_noise",
+        "d": 0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000001826,
+      "steps": 5000,
+      "max_double_reference_velocity_difference": 3.500995437999421e-08,
+      "tail_time_weighted_mean": -5.577399614600429e-08,
+      "tail_time_weighted_rmse": 0.0006574897088101755,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_12ms_030.csv",
+        "bytes": 931098,
+        "sha256": "bdb97cf15eda20abb8db712a6b47a770bb30375b8705b46151305811e8245e77"
+      }
+    },
+    {
+      "id": "XY_fixed_12ms_031",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "two_stage_lag",
+        "d": 0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000001826,
+      "steps": 5000,
+      "max_double_reference_velocity_difference": 3.463459004662828e-08,
+      "tail_time_weighted_mean": 2.694115830147431e-08,
+      "tail_time_weighted_rmse": 2.6941554008383718e-08,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_12ms_031.csv",
+        "bytes": 939923,
+        "sha256": "e7f17538fb677dd01e6fadbfb0a6c94817fd22e890aa584d891b73a2243e0848"
+      }
+    },
+    {
+      "id": "XY_fixed_12ms_032",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "lag_and_noise",
+        "d": 0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000001826,
+      "steps": 5000,
+      "max_double_reference_velocity_difference": 3.448852547299763e-08,
+      "tail_time_weighted_mean": 1.7545173150814243e-06,
+      "tail_time_weighted_rmse": 0.0004956368257834117,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_12ms_032.csv",
+        "bytes": 931239,
+        "sha256": "c5b9a696598eb238edacaafe573ac17d8f18c262a2b9f4e1f421fbea5fb764c7"
+      }
+    },
+    {
+      "id": "XY_fixed_12ms_033",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "limited",
+        "d": 0.15,
+        "nu0": 0.0,
+        "limit": 0.3
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000001826,
+      "steps": 5000,
+      "max_double_reference_velocity_difference": 2.1040350526495322e-08,
+      "tail_time_weighted_mean": 2.0593490260666173e-08,
+      "tail_time_weighted_rmse": 2.059355229181105e-08,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_12ms_033.csv",
+        "bytes": 941031,
+        "sha256": "37a59a9d5b31bbfc36758e30e4dcf0eb60cccb5ac8a65c3e08619a51696c5b81"
+      }
+    },
+    {
+      "id": "XY_fixed_12ms_034",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "limited",
+        "d": 0.15,
+        "nu0": 0.0,
+        "limit": 0.05
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000001826,
+      "steps": 5000,
+      "max_double_reference_velocity_difference": 0.0,
+      "tail_time_weighted_mean": 5.550199999999708,
+      "tail_time_weighted_rmse": 5.5577141560174335,
+      "ramp_theory": null,
+      "protection_steps": 5000,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "infeasible_actuation_not_convergent",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_fixed_12ms_034.csv",
+        "bytes": 723312,
+        "sha256": "54bc5248ddd19312a48264824197443ab922a5cd2f612a2a0348edd2b7e3bfdc"
+      }
+    },
+    {
+      "id": "XY_measured_sequence_035",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "constant",
+        "d": -0.15,
+        "nu0": -0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.00000000000378,
+      "steps": 6000,
+      "max_double_reference_velocity_difference": 6.912600321318241e-08,
+      "tail_time_weighted_mean": -3.322851635672049e-08,
+      "tail_time_weighted_rmse": 3.32285601713156e-08,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_measured_sequence_035.csv",
+        "bytes": 1111984,
+        "sha256": "fc979908bee3dae8da4789dfa49bed321e939c7fa107fcdade5532660eb38aaf"
+      }
+    },
+    {
+      "id": "XY_measured_sequence_036",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "constant",
+        "d": -0.15,
+        "nu0": 0.0
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.00000000000378,
+      "steps": 6000,
+      "max_double_reference_velocity_difference": 2.5312465908033932e-08,
+      "tail_time_weighted_mean": -4.752158858305189e-09,
+      "tail_time_weighted_rmse": 4.752465213390552e-09,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_measured_sequence_036.csv",
+        "bytes": 1102598,
+        "sha256": "1ec8b37584f31c7887a74f0a57e582a2894366bf94767f9ce0c0a66cb2f44cb8"
+      }
+    },
+    {
+      "id": "XY_measured_sequence_037",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "constant",
+        "d": -0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.00000000000378,
+      "steps": 6000,
+      "max_double_reference_velocity_difference": 4.1376932547997156e-08,
+      "tail_time_weighted_mean": 3.9426684684116766e-08,
+      "tail_time_weighted_rmse": 3.9426700255012355e-08,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_measured_sequence_037.csv",
+        "bytes": 1095620,
+        "sha256": "606dd785b8bf649fc69d0a49441d825c8b1ca07c3f6ca9951834f4a12f7390a9"
+      }
+    },
+    {
+      "id": "XY_measured_sequence_038",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.0,
+        "nu0": -0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 32.55999999999949,
+      "steps": 3256,
+      "max_double_reference_velocity_difference": 2.4606057438120166e-08,
+      "tail_time_weighted_mean": 4.782770140406721e-29,
+      "tail_time_weighted_rmse": 3.1800054744967815e-26,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": {
+        "time": 32.55999999999949,
+        "status": 5,
+        "last_velocity": -2.0483727704629603e-38,
+        "last_nu": -2.5296009930518796e-35,
+        "reference_velocity": -2.0413718003488186e-38,
+        "reference_nu": -2.5295763820254456e-35,
+        "state_unchanged": true
+      },
+      "conclusion": "numeric_domain_exhausted_not_full_60s",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_measured_sequence_038.csv",
+        "bytes": 634413,
+        "sha256": "2772256ad65578a9d3ab8b4e736e68ffccf617f99f424e6f210bb0681c61746f"
+      }
+    },
+    {
+      "id": "XY_measured_sequence_039",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.0,
+        "nu0": 0.0
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 32.69199999999951,
+      "steps": 3269,
+      "max_double_reference_velocity_difference": 1.412855090733578e-09,
+      "tail_time_weighted_mean": 1.894405291177402e-28,
+      "tail_time_weighted_rmse": 6.299882506183971e-27,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": {
+        "time": 32.69199999999951,
+        "status": 5,
+        "last_velocity": 1.2580772050285843e-37,
+        "last_nu": -4.280745560300381e-36,
+        "reference_velocity": 1.258317558226251e-37,
+        "reference_nu": -4.280682701420337e-36,
+        "state_unchanged": true
+      },
+      "conclusion": "numeric_domain_exhausted_not_full_60s",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_measured_sequence_039.csv",
+        "bytes": 637952,
+        "sha256": "97663a54306e0d5492aa6a2f042ba0c7eb0e7d6e9284f6d54378fd8c903a666a"
+      }
+    },
+    {
+      "id": "XY_measured_sequence_040",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.0,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 31.911999999999406,
+      "steps": 3191,
+      "max_double_reference_velocity_difference": 2.7592155334849044e-08,
+      "tail_time_weighted_mean": -5.956135649131991e-28,
+      "tail_time_weighted_rmse": 8.586230727026241e-26,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": {
+        "time": 31.911999999999406,
+        "status": 5,
+        "last_velocity": -5.704823496039264e-38,
+        "last_nu": 6.648455999119217e-35,
+        "reference_velocity": -5.721066403041402e-38,
+        "reference_nu": 6.648396431511901e-35,
+        "state_unchanged": true
+      },
+      "conclusion": "numeric_domain_exhausted_not_full_60s",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_measured_sequence_040.csv",
+        "bytes": 621993,
+        "sha256": "8109f4cf3f407587598cbb10120f1dd23a0548a01d969a3e41c009fb414101c7"
+      }
+    },
+    {
+      "id": "XY_measured_sequence_041",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.15,
+        "nu0": -0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.00000000000378,
+      "steps": 6000,
+      "max_double_reference_velocity_difference": 2.747146223748694e-08,
+      "tail_time_weighted_mean": 2.6910423936210296e-08,
+      "tail_time_weighted_rmse": 2.6910478037680086e-08,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_measured_sequence_041.csv",
+        "bytes": 1132541,
+        "sha256": "4a341feef7bff17a135803a2487c0fe0c8504f45d84c2d7b4bafb940bef8732f"
+      }
+    },
+    {
+      "id": "XY_measured_sequence_042",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.15,
+        "nu0": 0.0
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.00000000000378,
+      "steps": 6000,
+      "max_double_reference_velocity_difference": 2.5317658507856278e-08,
+      "tail_time_weighted_mean": 1.4214634599631843e-08,
+      "tail_time_weighted_rmse": 1.4214737021519912e-08,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_measured_sequence_042.csv",
+        "bytes": 1122053,
+        "sha256": "2b50fc59176c97d1cc4b61b655a431af943fd073308322beebe2c14662dfb980"
+      }
+    },
+    {
+      "id": "XY_measured_sequence_043",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.00000000000378,
+      "steps": 6000,
+      "max_double_reference_velocity_difference": 7.822280984060015e-08,
+      "tail_time_weighted_mean": 3.635752164563279e-08,
+      "tail_time_weighted_rmse": 3.635756168945562e-08,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_measured_sequence_043.csv",
+        "bytes": 1127802,
+        "sha256": "0580d62d64978c41e6ed82e6e839f83fa4d024271653e271906a1d225420ccb4"
+      }
+    },
+    {
+      "id": "XY_measured_sequence_044",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "ramp",
+        "d": 0.03,
+        "ramp": -0.002,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.00000000000378,
+      "steps": 6000,
+      "max_double_reference_velocity_difference": 3.198897204764739e-08,
+      "tail_time_weighted_mean": -0.00021061818816461584,
+      "tail_time_weighted_rmse": 0.00021061819169593312,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_measured_sequence_044.csv",
+        "bytes": 1236056,
+        "sha256": "5c36862c7cf85c7b1409d7ae46b169f08589918959de2a55f39f08d8b760bfd7"
+      }
+    },
+    {
+      "id": "XY_measured_sequence_045",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "ramp",
+        "d": 0.03,
+        "ramp": 0.002,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.00000000000378,
+      "steps": 6000,
+      "max_double_reference_velocity_difference": 3.2594355301590605e-08,
+      "tail_time_weighted_mean": 0.00021060682131212433,
+      "tail_time_weighted_rmse": 0.00021060682484244178,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_measured_sequence_045.csv",
+        "bytes": 1213863,
+        "sha256": "b56c8464bcd4c12ed9634dca4eb9fe53daf0db5296f6425fd1594b6e14f68a09"
+      }
+    },
+    {
+      "id": "XY_measured_sequence_046",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "target_ff",
+        "d": 0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.00000000000378,
+      "steps": 6000,
+      "max_double_reference_velocity_difference": 7.780557756409401e-08,
+      "tail_time_weighted_mean": 3.618365846048943e-08,
+      "tail_time_weighted_rmse": 3.6187149138608785e-08,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_measured_sequence_046.csv",
+        "bytes": 1190219,
+        "sha256": "aab8410e22038aeddd384c0580adbb1f3991367e5334d3106ed9c64677a0a426"
+      }
+    },
+    {
+      "id": "XY_measured_sequence_047",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "measurement_noise",
+        "d": 0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.00000000000378,
+      "steps": 6000,
+      "max_double_reference_velocity_difference": 7.836337740513288e-08,
+      "tail_time_weighted_mean": -1.240953210800334e-07,
+      "tail_time_weighted_rmse": 0.0006591210748542006,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_measured_sequence_047.csv",
+        "bytes": 1117310,
+        "sha256": "50352afa99e897e12569f151f4a508bf352251231d330b325138369fcf8916d6"
+      }
+    },
+    {
+      "id": "XY_measured_sequence_048",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "two_stage_lag",
+        "d": 0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.00000000000378,
+      "steps": 6000,
+      "max_double_reference_velocity_difference": 8.215056338661819e-08,
+      "tail_time_weighted_mean": 2.052839147887765e-08,
+      "tail_time_weighted_rmse": 2.0528491731464776e-08,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_measured_sequence_048.csv",
+        "bytes": 1128094,
+        "sha256": "e2f95084b3d51cbef07c67619b70f623ea23e0ec053d59e771284b2a71936a14"
+      }
+    },
+    {
+      "id": "XY_measured_sequence_049",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "lag_and_noise",
+        "d": 0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.00000000000378,
+      "steps": 6000,
+      "max_double_reference_velocity_difference": 8.312616477101908e-08,
+      "tail_time_weighted_mean": 1.2918427589024841e-06,
+      "tail_time_weighted_rmse": 0.0004991657565948614,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_measured_sequence_049.csv",
+        "bytes": 1117567,
+        "sha256": "110424fb8f38cfbe5467d90a73a0f98db4895c936b35542203f017a2d2de6005"
+      }
+    },
+    {
+      "id": "XY_measured_sequence_050",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "limited",
+        "d": 0.15,
+        "nu0": 0.0,
+        "limit": 0.3
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.00000000000378,
+      "steps": 6000,
+      "max_double_reference_velocity_difference": 2.5317658507856278e-08,
+      "tail_time_weighted_mean": 1.4214634599631843e-08,
+      "tail_time_weighted_rmse": 1.4214737021519912e-08,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_measured_sequence_050.csv",
+        "bytes": 1122053,
+        "sha256": "2b50fc59176c97d1cc4b61b655a431af943fd073308322beebe2c14662dfb980"
+      }
+    },
+    {
+      "id": "XY_measured_sequence_051",
+      "family": "XY",
+      "gains": [
+        0.5,
+        0.1,
+        0.01,
+        0.4
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "limited",
+        "d": 0.15,
+        "nu0": 0.0,
+        "limit": 0.05
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.00000000000378,
+      "steps": 6000,
+      "max_double_reference_velocity_difference": 0.0,
+      "tail_time_weighted_mean": 5.550519999999681,
+      "tail_time_weighted_rmse": 5.558021718561026,
+      "ramp_theory": null,
+      "protection_steps": 6000,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "infeasible_actuation_not_convergent",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/XY_measured_sequence_051.csv",
+        "bytes": 865665,
+        "sha256": "5a3978fbe30b9d7f2a1f13da03d1d56cc02b716c6920cf6fc25085332d1a8193"
+      }
+    },
+    {
+      "id": "Z_fixed_8ms_052",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "constant",
+        "d": -0.15,
+        "nu0": -0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000006715,
+      "steps": 7500,
+      "max_double_reference_velocity_difference": 1.1205780502130831e-08,
+      "tail_time_weighted_mean": 1.1157989806026444e-08,
+      "tail_time_weighted_rmse": 1.1158040750049582e-08,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_ideal_constant_equilibrium_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_8ms_052.csv",
+        "bytes": 1397146,
+        "sha256": "4f702aa96df7186d584fb6b96240eb45d0791f9ba179d99fda85d60ae3d2f7c9"
+      }
+    },
+    {
+      "id": "Z_fixed_8ms_053",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "constant",
+        "d": -0.15,
+        "nu0": 0.0
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000006715,
+      "steps": 7500,
+      "max_double_reference_velocity_difference": 1.12057510447258e-08,
+      "tail_time_weighted_mean": 1.11579898013835e-08,
+      "tail_time_weighted_rmse": 1.1158040745406663e-08,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_ideal_constant_equilibrium_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_8ms_053.csv",
+        "bytes": 1397107,
+        "sha256": "1b7903de4f8ed72d571a5b2c68f9eccfe3c244382067f3bcfe4b08cfbc558553"
+      }
+    },
+    {
+      "id": "Z_fixed_8ms_054",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "constant",
+        "d": -0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000006715,
+      "steps": 7500,
+      "max_double_reference_velocity_difference": 1.4747729696477485e-08,
+      "tail_time_weighted_mean": 1.4699995821000808e-08,
+      "tail_time_weighted_rmse": 1.470003448995313e-08,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_ideal_constant_equilibrium_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_8ms_054.csv",
+        "bytes": 1385603,
+        "sha256": "d2be8c3000475e980c91b501758a1f71d028389a4207de356250f37f1016d4f0"
+      }
+    },
+    {
+      "id": "Z_fixed_8ms_055",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.0,
+        "nu0": -0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 12.735999999999484,
+      "steps": 1592,
+      "max_double_reference_velocity_difference": 1.7807935785707496e-09,
+      "tail_time_weighted_mean": 4.7737476499699005e-11,
+      "tail_time_weighted_rmse": 2.7188273689372727e-10,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": {
+        "time": 12.735999999999484,
+        "status": 5,
+        "last_velocity": -3.2554066675788916e-38,
+        "last_nu": -2.099293973507426e-37,
+        "reference_velocity": -3.2554089989542485e-38,
+        "reference_nu": -2.099298537257347e-37,
+        "state_unchanged": true
+      },
+      "conclusion": "numeric_domain_exhausted_not_full_60s",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_8ms_055.csv",
+        "bytes": 310058,
+        "sha256": "2b2cd50a13946fbba08ca73df1d3fb65888be2341b655a0d7a4045a9e46ba2e1"
+      }
+    },
+    {
+      "id": "Z_fixed_8ms_056",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.0,
+        "nu0": 0.0
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 11.783999999999589,
+      "steps": 1473,
+      "max_double_reference_velocity_difference": 5.625893362282142e-10,
+      "tail_time_weighted_mean": -6.2254834115939386e-09,
+      "tail_time_weighted_rmse": 5.339403112872848e-08,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": {
+        "time": 11.783999999999589,
+        "status": 5,
+        "last_velocity": -1.8237846736797788e-38,
+        "last_nu": -2.2670410136487788e-35,
+        "reference_velocity": -1.8131152696373073e-38,
+        "reference_nu": -2.2669664777063455e-35,
+        "state_unchanged": true
+      },
+      "conclusion": "numeric_domain_exhausted_not_full_60s",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_8ms_056.csv",
+        "bytes": 286582,
+        "sha256": "2ca6b21bef91aed5e154b65059fc150420cb8c0f3588597daa5bd3a7fe23a6f9"
+      }
+    },
+    {
+      "id": "Z_fixed_8ms_057",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.0,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 12.647999999999493,
+      "steps": 1581,
+      "max_double_reference_velocity_difference": 8.113652670733995e-10,
+      "tail_time_weighted_mean": 4.207168185872563e-11,
+      "tail_time_weighted_rmse": 2.285848469573545e-10,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": {
+        "time": 12.647999999999493,
+        "status": 5,
+        "last_velocity": -3.1867678903049965e-38,
+        "last_nu": -2.2230979081033834e-37,
+        "reference_velocity": -3.186759730132611e-38,
+        "reference_nu": -2.2230947578618988e-37,
+        "state_unchanged": true
+      },
+      "conclusion": "numeric_domain_exhausted_not_full_60s",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_8ms_057.csv",
+        "bytes": 308117,
+        "sha256": "30e41aaf2d092551eda61c29dc369fa269c398780686617ad2f33a84ddb72b01"
+      }
+    },
+    {
+      "id": "Z_fixed_8ms_058",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.15,
+        "nu0": -0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000006715,
+      "steps": 7500,
+      "max_double_reference_velocity_difference": 1.3589885179265647e-08,
+      "tail_time_weighted_mean": 1.3542174983403591e-08,
+      "tail_time_weighted_rmse": 1.3542216958441216e-08,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_ideal_constant_equilibrium_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_8ms_058.csv",
+        "bytes": 1425380,
+        "sha256": "01ca79addae9ec0fd16f83d29cf2c417394f51ced731ffdeeef1e21de1245f8c"
+      }
+    },
+    {
+      "id": "Z_fixed_8ms_059",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.15,
+        "nu0": 0.0
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000006715,
+      "steps": 7500,
+      "max_double_reference_velocity_difference": 3.1054931633633687e-09,
+      "tail_time_weighted_mean": 2.9563900859056646e-09,
+      "tail_time_weighted_rmse": 2.9565823527205065e-09,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_ideal_constant_equilibrium_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_8ms_059.csv",
+        "bytes": 1405641,
+        "sha256": "09bc8b01875550d3f119e191095256470d7439c2e740bb4400f71d43ff8e69d1"
+      }
+    },
+    {
+      "id": "Z_fixed_8ms_060",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000006715,
+      "steps": 7500,
+      "max_double_reference_velocity_difference": 4.532833370247746e-09,
+      "tail_time_weighted_mean": -4.100799874606546e-09,
+      "tail_time_weighted_rmse": 4.100938487705931e-09,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_ideal_constant_equilibrium_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_8ms_060.csv",
+        "bytes": 1430181,
+        "sha256": "b2eec53bb555c56f70033ac68ef9139d9490dfd99ada4892867968acb8503f26"
+      }
+    },
+    {
+      "id": "Z_fixed_8ms_061",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "ramp",
+        "d": 0.03,
+        "ramp": -0.002,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000006715,
+      "steps": 7500,
+      "max_double_reference_velocity_difference": 4.870077115846504e-09,
+      "tail_time_weighted_mean": -4.465382825347025e-05,
+      "tail_time_weighted_rmse": 4.465382825348689e-05,
+      "ramp_theory": -4.465348339959391e-05,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_layer_ramp_bias_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_8ms_061.csv",
+        "bytes": 1538285,
+        "sha256": "1a4172e7ae9534f5031ed69ce6264a8d210568d95355089a0ddde33360ec988c"
+      }
+    },
+    {
+      "id": "Z_fixed_8ms_062",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "ramp",
+        "d": 0.03,
+        "ramp": 0.002,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000006715,
+      "steps": 7500,
+      "max_double_reference_velocity_difference": 1.0482939856089628e-08,
+      "tail_time_weighted_mean": 4.4643644608299836e-05,
+      "tail_time_weighted_rmse": 4.464364460906991e-05,
+      "ramp_theory": 4.465348339959391e-05,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_layer_ramp_bias_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_8ms_062.csv",
+        "bytes": 1508203,
+        "sha256": "dbd696235d00770f5dc590b15ca1261a5cd8ec9421cb527d9e9a6e5d85b79289"
+      }
+    },
+    {
+      "id": "Z_fixed_8ms_063",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "target_ff",
+        "d": 0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000006715,
+      "steps": 7500,
+      "max_double_reference_velocity_difference": 4.053103561107996e-09,
+      "tail_time_weighted_mean": -1.6670065912603833e-09,
+      "tail_time_weighted_rmse": 1.7809573132699556e-09,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_8ms_063.csv",
+        "bytes": 1465146,
+        "sha256": "91f2f5d9d7b20ed4fb083beb8afe3cbf36d2d3a6660b7e11edc7de588fff8426"
+      }
+    },
+    {
+      "id": "Z_fixed_8ms_064",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "measurement_noise",
+        "d": 0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000006715,
+      "steps": 7500,
+      "max_double_reference_velocity_difference": 3.893670988061593e-09,
+      "tail_time_weighted_mean": -1.8982696536257736e-06,
+      "tail_time_weighted_rmse": 0.0016323493381004668,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_8ms_064.csv",
+        "bytes": 1395685,
+        "sha256": "89eb3c751970e8dbc2750298b2e14c07e4b74e479e576e0442ea3960796c7d9f"
+      }
+    },
+    {
+      "id": "Z_fixed_8ms_065",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "two_stage_lag",
+        "d": 0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000006715,
+      "steps": 7500,
+      "max_double_reference_velocity_difference": 8.826473292707082e-09,
+      "tail_time_weighted_mean": -6.413898122820252e-09,
+      "tail_time_weighted_rmse": 6.415781623077149e-09,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_8ms_065.csv",
+        "bytes": 1420278,
+        "sha256": "0366bad82499357b6c4fa31886c1cd661f5c51b1a948029e20aafd388aa29662"
+      }
+    },
+    {
+      "id": "Z_fixed_8ms_066",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "lag_and_noise",
+        "d": 0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000006715,
+      "steps": 7500,
+      "max_double_reference_velocity_difference": 6.746787415204403e-09,
+      "tail_time_weighted_mean": 5.052809273103166e-06,
+      "tail_time_weighted_rmse": 0.0021707600738266547,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_8ms_066.csv",
+        "bytes": 1392048,
+        "sha256": "e741fd9d6e11638359ffb9a65fb2dd97cb380e966e075d903e2796d4d4beed5c"
+      }
+    },
+    {
+      "id": "Z_fixed_8ms_067",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "limited",
+        "d": 0.15,
+        "nu0": 0.0,
+        "limit": 0.3
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000006715,
+      "steps": 7500,
+      "max_double_reference_velocity_difference": 7.689091298580435e-09,
+      "tail_time_weighted_mean": -7.629394823323793e-09,
+      "tail_time_weighted_rmse": 7.629469328763177e-09,
+      "ramp_theory": null,
+      "protection_steps": 22,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_8ms_067.csv",
+        "bytes": 1414585,
+        "sha256": "7a7f2d4259213bb68b1675742ff9bbf7557c30949499cca8b4e0cac592e26a63"
+      }
+    },
+    {
+      "id": "Z_fixed_8ms_068",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_8ms",
+      "scenario": {
+        "kind": "limited",
+        "d": 0.15,
+        "nu0": 0.0,
+        "limit": 0.05
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000006715,
+      "steps": 7500,
+      "max_double_reference_velocity_difference": 0.0,
+      "tail_time_weighted_mean": 5.550399999999638,
+      "tail_time_weighted_rmse": 5.557901891900868,
+      "ramp_theory": null,
+      "protection_steps": 7500,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "infeasible_actuation_not_convergent",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_8ms_068.csv",
+        "bytes": 1066798,
+        "sha256": "0ddc0cc937140943c0d51ca6ecd2fd1f40cb94f92c46e0d712cc89dc48ff7d78"
+      }
+    },
+    {
+      "id": "Z_fixed_12ms_069",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "constant",
+        "d": -0.15,
+        "nu0": -0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000001826,
+      "steps": 5000,
+      "max_double_reference_velocity_difference": 5.642845577343536e-09,
+      "tail_time_weighted_mean": 5.555153191860499e-09,
+      "tail_time_weighted_rmse": 5.555383695657088e-09,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_ideal_constant_equilibrium_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_12ms_069.csv",
+        "bytes": 922219,
+        "sha256": "9e833b9ecfc3e4e70b5eeca11c01766f40a01a2a20b34427ec30c9bc05d0f63a"
+      }
+    },
+    {
+      "id": "Z_fixed_12ms_070",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "constant",
+        "d": -0.15,
+        "nu0": 0.0
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000001826,
+      "steps": 5000,
+      "max_double_reference_velocity_difference": 5.65634392316859e-09,
+      "tail_time_weighted_mean": 5.572948839053173e-09,
+      "tail_time_weighted_rmse": 5.573178055840897e-09,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_ideal_constant_equilibrium_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_12ms_070.csv",
+        "bytes": 922783,
+        "sha256": "3b45027da25760469c7bfb460a32e56233ab5182de5ec778d2089bc26f26b0d0"
+      }
+    },
+    {
+      "id": "Z_fixed_12ms_071",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "constant",
+        "d": -0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000001826,
+      "steps": 5000,
+      "max_double_reference_velocity_difference": 5.6471724972936135e-09,
+      "tail_time_weighted_mean": 5.568091212483902e-09,
+      "tail_time_weighted_rmse": 5.568320629233095e-09,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_ideal_constant_equilibrium_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_12ms_071.csv",
+        "bytes": 922557,
+        "sha256": "6de0df520286270d94200272fdd8249f7bb6edabe6e6b7e537028006a9df9af1"
+      }
+    },
+    {
+      "id": "Z_fixed_12ms_072",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.0,
+        "nu0": -0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 12.852000000000043,
+      "steps": 1071,
+      "max_double_reference_velocity_difference": 9.521188872041453e-10,
+      "tail_time_weighted_mean": 2.0221354412504372e-11,
+      "tail_time_weighted_rmse": 1.4074988899511996e-10,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": {
+        "time": 12.852000000000043,
+        "status": 5,
+        "last_velocity": 4.237332318031023e-38,
+        "last_nu": 1.6426368120834658e-38,
+        "reference_velocity": 4.2371839539549945e-38,
+        "reference_nu": 1.6415153904730516e-38,
+        "state_unchanged": true
+      },
+      "conclusion": "numeric_domain_exhausted_not_full_60s",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_12ms_072.csv",
+        "bytes": 208379,
+        "sha256": "0c057b216840e6df6c6ec6e51e65cf587457a77c2f1adffd6d8481f081c5b5f5"
+      }
+    },
+    {
+      "id": "Z_fixed_12ms_073",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.0,
+        "nu0": 0.0
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 12.888000000000044,
+      "steps": 1074,
+      "max_double_reference_velocity_difference": 9.755340320272143e-10,
+      "tail_time_weighted_mean": 1.2588424749162605e-11,
+      "tail_time_weighted_rmse": 8.728628540634137e-11,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": {
+        "time": 12.888000000000044,
+        "status": 5,
+        "last_velocity": 2.694544946571419e-38,
+        "last_nu": 1.637363866092058e-38,
+        "reference_velocity": 2.69447357522311e-38,
+        "reference_nu": 1.6367790159176704e-38,
+        "state_unchanged": true
+      },
+      "conclusion": "numeric_domain_exhausted_not_full_60s",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_12ms_073.csv",
+        "bytes": 208958,
+        "sha256": "4d2544b51fbd86c4e8e8450ffd09f687baa579aa3a4809aec7a241e08e0b2fae"
+      }
+    },
+    {
+      "id": "Z_fixed_12ms_074",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.0,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 12.912000000000045,
+      "steps": 1076,
+      "max_double_reference_velocity_difference": 1.4502048537728962e-09,
+      "tail_time_weighted_mean": 8.767801401443858e-12,
+      "tail_time_weighted_rmse": 5.884220579600159e-11,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": {
+        "time": 12.912000000000045,
+        "status": 5,
+        "last_velocity": 2.2108264966236947e-38,
+        "last_nu": 4.764082951228026e-38,
+        "reference_velocity": 2.2107757739587921e-38,
+        "reference_nu": 4.763664164727149e-38,
+        "state_unchanged": true
+      },
+      "conclusion": "numeric_domain_exhausted_not_full_60s",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_12ms_074.csv",
+        "bytes": 209602,
+        "sha256": "88dccaf5e8fbe18594c0cffd8753d30caf9dd6325067b432d65bbf7debf9fed7"
+      }
+    },
+    {
+      "id": "Z_fixed_12ms_075",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.15,
+        "nu0": -0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000001826,
+      "steps": 5000,
+      "max_double_reference_velocity_difference": 5.666361070262446e-09,
+      "tail_time_weighted_mean": 5.590915389997e-09,
+      "tail_time_weighted_rmse": 5.591144419440446e-09,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_ideal_constant_equilibrium_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_12ms_075.csv",
+        "bytes": 928467,
+        "sha256": "53852df8fbf40704658ca15317f25bd80b5ab2c064a0a3563459364ecb5a7554"
+      }
+    },
+    {
+      "id": "Z_fixed_12ms_076",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.15,
+        "nu0": 0.0
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000001826,
+      "steps": 5000,
+      "max_double_reference_velocity_difference": 6.915452293595554e-09,
+      "tail_time_weighted_mean": 6.842612927702966e-09,
+      "tail_time_weighted_rmse": 6.842800062788794e-09,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_ideal_constant_equilibrium_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_12ms_076.csv",
+        "bytes": 937294,
+        "sha256": "34595d273f8662391d9e5dde1df9c8b73a364af91c640e57f261b66abee1dad2"
+      }
+    },
+    {
+      "id": "Z_fixed_12ms_077",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000001826,
+      "steps": 5000,
+      "max_double_reference_velocity_difference": 6.914307335313749e-09,
+      "tail_time_weighted_mean": 6.842612921845637e-09,
+      "tail_time_weighted_rmse": 6.84280005693163e-09,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_ideal_constant_equilibrium_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_12ms_077.csv",
+        "bytes": 937314,
+        "sha256": "8d787476f26ca5edc12fde04697201df9fa87cb6eec3c77c0bb31b56f9e8b6d0"
+      }
+    },
+    {
+      "id": "Z_fixed_12ms_078",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "ramp",
+        "d": 0.03,
+        "ramp": -0.002,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000001826,
+      "steps": 5000,
+      "max_double_reference_velocity_difference": 4.091559965157697e-09,
+      "tail_time_weighted_mean": -4.70801953963802e-05,
+      "tail_time_weighted_rmse": 4.708019539640703e-05,
+      "ramp_theory": -4.7076225099390856e-05,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_layer_ramp_bias_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_12ms_078.csv",
+        "bytes": 1025956,
+        "sha256": "bd02fc40d8fe64ab6db2ccf9ed1325cab71526310560cc712282cc54ff1d29b2"
+      }
+    },
+    {
+      "id": "Z_fixed_12ms_079",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "ramp",
+        "d": 0.03,
+        "ramp": 0.002,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000001826,
+      "steps": 5000,
+      "max_double_reference_velocity_difference": 4.194503892621917e-09,
+      "tail_time_weighted_mean": 4.707304227068903e-05,
+      "tail_time_weighted_rmse": 4.707304227161323e-05,
+      "ramp_theory": 4.7076225099390856e-05,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "fixed_h_layer_ramp_bias_checked",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_12ms_079.csv",
+        "bytes": 1007258,
+        "sha256": "688081daee6d73a9760c431b60ae68b5f43dd59ce31df9a5cb7a98694d4256ec"
+      }
+    },
+    {
+      "id": "Z_fixed_12ms_080",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "target_ff",
+        "d": 0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000001826,
+      "steps": 5000,
+      "max_double_reference_velocity_difference": 8.094308459605237e-09,
+      "tail_time_weighted_mean": 5.836403436351883e-09,
+      "tail_time_weighted_rmse": 5.887737577226549e-09,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_12ms_080.csv",
+        "bytes": 995692,
+        "sha256": "7f3be3ac8b6ffc53066014aea10856abd4afe54e9f30b38f7183f6707c5933b9"
+      }
+    },
+    {
+      "id": "Z_fixed_12ms_081",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "measurement_noise",
+        "d": 0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000001826,
+      "steps": 5000,
+      "max_double_reference_velocity_difference": 3.816227454704613e-09,
+      "tail_time_weighted_mean": -2.1830602304101095e-06,
+      "tail_time_weighted_rmse": 0.0016132392749877195,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_12ms_081.csv",
+        "bytes": 930540,
+        "sha256": "14bd559f7df9c5765875bdab26ba4dee207b84848d75b75cc7dc1bf59e2f0668"
+      }
+    },
+    {
+      "id": "Z_fixed_12ms_082",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "two_stage_lag",
+        "d": 0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000001826,
+      "steps": 5000,
+      "max_double_reference_velocity_difference": 9.96885048576597e-09,
+      "tail_time_weighted_mean": -6.758282539482869e-09,
+      "tail_time_weighted_rmse": 6.7605690663774185e-09,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_12ms_082.csv",
+        "bytes": 943884,
+        "sha256": "ce902be0f33aa9a9c518ec851c6563ddf839a28bfa15605ced4b18af5c71087d"
+      }
+    },
+    {
+      "id": "Z_fixed_12ms_083",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "lag_and_noise",
+        "d": 0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000001826,
+      "steps": 5000,
+      "max_double_reference_velocity_difference": 4.520015124340193e-09,
+      "tail_time_weighted_mean": 6.73394589577462e-06,
+      "tail_time_weighted_rmse": 0.0020034356849759636,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_12ms_083.csv",
+        "bytes": 928585,
+        "sha256": "f29e5815f44052fefbe4025eecf1ecd3dd0ee216a332044c48077368e59bfc0c"
+      }
+    },
+    {
+      "id": "Z_fixed_12ms_084",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "limited",
+        "d": 0.15,
+        "nu0": 0.0,
+        "limit": 0.3
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000001826,
+      "steps": 5000,
+      "max_double_reference_velocity_difference": 3.997881253261712e-09,
+      "tail_time_weighted_mean": -3.099356098014441e-09,
+      "tail_time_weighted_rmse": 3.099768233546161e-09,
+      "ramp_theory": null,
+      "protection_steps": 15,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_12ms_084.csv",
+        "bytes": 951479,
+        "sha256": "7c72f7110b14915246d41324356328b49c2514c159ffceb527afd7bbc9b16d41"
+      }
+    },
+    {
+      "id": "Z_fixed_12ms_085",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "fixed_12ms",
+      "scenario": {
+        "kind": "limited",
+        "d": 0.15,
+        "nu0": 0.0,
+        "limit": 0.05
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.000000000001826,
+      "steps": 5000,
+      "max_double_reference_velocity_difference": 0.0,
+      "tail_time_weighted_mean": 5.550199999999708,
+      "tail_time_weighted_rmse": 5.5577141560174335,
+      "ramp_theory": null,
+      "protection_steps": 5000,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "infeasible_actuation_not_convergent",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_fixed_12ms_085.csv",
+        "bytes": 715702,
+        "sha256": "e0448fce97530129ec45282a31b8c0d2df27045303bc9132aad4ef455b271801"
+      }
+    },
+    {
+      "id": "Z_measured_sequence_086",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "constant",
+        "d": -0.15,
+        "nu0": -0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.00000000000378,
+      "steps": 6000,
+      "max_double_reference_velocity_difference": 6.750321321682971e-09,
+      "tail_time_weighted_mean": 6.718635859254871e-09,
+      "tail_time_weighted_rmse": 6.718727232676638e-09,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_measured_sequence_086.csv",
+        "bytes": 1101232,
+        "sha256": "bd9c8b71f2bc83db69ac14e8a693750a3a2c3eff2b3c27c8f191171bdcddb5b4"
+      }
+    },
+    {
+      "id": "Z_measured_sequence_087",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "constant",
+        "d": -0.15,
+        "nu0": 0.0
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.00000000000378,
+      "steps": 6000,
+      "max_double_reference_velocity_difference": 6.779278594564153e-09,
+      "tail_time_weighted_mean": 6.748438185777737e-09,
+      "tail_time_weighted_rmse": 6.748529155683367e-09,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_measured_sequence_087.csv",
+        "bytes": 1107056,
+        "sha256": "90c1517017baed5e4358ec12fe7d639cd5204523d3e89446d36fca5ae1c30563"
+      }
+    },
+    {
+      "id": "Z_measured_sequence_088",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "constant",
+        "d": -0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.00000000000378,
+      "steps": 6000,
+      "max_double_reference_velocity_difference": 8.01156151860107e-09,
+      "tail_time_weighted_mean": 7.981509282707302e-09,
+      "tail_time_weighted_rmse": 7.981586198731923e-09,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_measured_sequence_088.csv",
+        "bytes": 1105217,
+        "sha256": "62a0c6e2385c534a6c8d50a0cba865495bdc4031495d999327240228e0287dd7"
+      }
+    },
+    {
+      "id": "Z_measured_sequence_089",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.0,
+        "nu0": -0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 12.951999999999812,
+      "steps": 1295,
+      "max_double_reference_velocity_difference": 1.4279061839178597e-09,
+      "tail_time_weighted_mean": 1.1137724327986289e-11,
+      "tail_time_weighted_rmse": 7.31322536931717e-11,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": {
+        "time": 12.951999999999812,
+        "status": 5,
+        "last_velocity": 2.990035062303088e-38,
+        "last_nu": 1.947647023152474e-37,
+        "reference_velocity": 2.990044862068617e-38,
+        "reference_nu": 1.947651084066346e-37,
+        "state_unchanged": true
+      },
+      "conclusion": "numeric_domain_exhausted_not_full_60s",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_measured_sequence_089.csv",
+        "bytes": 252038,
+        "sha256": "0d63b9e19e3cfb7107f5ebddb2e11e15ebbcac1cfa6b0521510874c0ca987441"
+      }
+    },
+    {
+      "id": "Z_measured_sequence_090",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.0,
+        "nu0": 0.0
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 12.911999999999813,
+      "steps": 1291,
+      "max_double_reference_velocity_difference": 7.794262370935945e-10,
+      "tail_time_weighted_mean": 1.2599534243747876e-11,
+      "tail_time_weighted_rmse": 8.019947670385625e-11,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": {
+        "time": 12.911999999999813,
+        "status": 5,
+        "last_velocity": 2.948533616669968e-38,
+        "last_nu": 1.99777001187097e-37,
+        "reference_velocity": 2.948540461855614e-38,
+        "reference_nu": 1.9977723851798428e-37,
+        "state_unchanged": true
+      },
+      "conclusion": "numeric_domain_exhausted_not_full_60s",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_measured_sequence_090.csv",
+        "bytes": 251429,
+        "sha256": "5c05fe11854e3fe8ac99d9efe582bbfc36a1825577210d1f72bbf5eb2da7e050"
+      }
+    },
+    {
+      "id": "Z_measured_sequence_091",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.0,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 12.251999999999827,
+      "steps": 1225,
+      "max_double_reference_velocity_difference": 5.731371592598844e-10,
+      "tail_time_weighted_mean": 5.896074419409233e-10,
+      "tail_time_weighted_rmse": 3.026073162594985e-09,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": {
+        "time": 12.251999999999827,
+        "status": 5,
+        "last_velocity": -2.9857741233058833e-38,
+        "last_nu": 2.6729686146957815e-36,
+        "reference_velocity": -2.9849367230499934e-38,
+        "reference_nu": 2.673027209506584e-36,
+        "state_unchanged": true
+      },
+      "conclusion": "numeric_domain_exhausted_not_full_60s",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_measured_sequence_091.csv",
+        "bytes": 238666,
+        "sha256": "47ea8b8c882feac13b7f8f6bf28c0469dd7bba447c4a6a43abce54ceacc02056"
+      }
+    },
+    {
+      "id": "Z_measured_sequence_092",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.15,
+        "nu0": -0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.00000000000378,
+      "steps": 6000,
+      "max_double_reference_velocity_difference": 8.154668088854935e-09,
+      "tail_time_weighted_mean": 8.075117775251318e-09,
+      "tail_time_weighted_rmse": 8.075298067198416e-09,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_measured_sequence_092.csv",
+        "bytes": 1124427,
+        "sha256": "f829d1ccd9d75de12d86c802b649c3613a2d31eb3e2df18f605d4e76dde96610"
+      }
+    },
+    {
+      "id": "Z_measured_sequence_093",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.15,
+        "nu0": 0.0
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.00000000000378,
+      "steps": 6000,
+      "max_double_reference_velocity_difference": 1.0597952894667706e-08,
+      "tail_time_weighted_mean": 1.051902740549446e-08,
+      "tail_time_weighted_rmse": 1.051916614884972e-08,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_measured_sequence_093.csv",
+        "bytes": 1133508,
+        "sha256": "f6f36b26173db60987aafaf646eb76b08cff4b4e504b67dec54085da07edb810"
+      }
+    },
+    {
+      "id": "Z_measured_sequence_094",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "constant",
+        "d": 0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.00000000000378,
+      "steps": 6000,
+      "max_double_reference_velocity_difference": 2.829164795869316e-09,
+      "tail_time_weighted_mean": 6.127354377404777e-10,
+      "tail_time_weighted_rmse": 6.13736535093748e-10,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_measured_sequence_094.csv",
+        "bytes": 1123584,
+        "sha256": "566f479a6a202f1ebef311dc703d40fb0ae474dc2e67b9001778232ef285b954"
+      }
+    },
+    {
+      "id": "Z_measured_sequence_095",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "ramp",
+        "d": 0.03,
+        "ramp": -0.002,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.00000000000378,
+      "steps": 6000,
+      "max_double_reference_velocity_difference": 5.142573597158567e-09,
+      "tail_time_weighted_mean": -4.609677463552264e-05,
+      "tail_time_weighted_rmse": 4.609682252361074e-05,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_measured_sequence_095.csv",
+        "bytes": 1230213,
+        "sha256": "0061b68a7060b3b58cf8a5803656464dc83efdf03885cf361d1dae4adcebfc86"
+      }
+    },
+    {
+      "id": "Z_measured_sequence_096",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "ramp",
+        "d": 0.03,
+        "ramp": 0.002,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.00000000000378,
+      "steps": 6000,
+      "max_double_reference_velocity_difference": 5.164083765384704e-09,
+      "tail_time_weighted_mean": 4.6101999308313634e-05,
+      "tail_time_weighted_rmse": 4.610204721581117e-05,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_measured_sequence_096.csv",
+        "bytes": 1207201,
+        "sha256": "2696201a32d9cd67f9e905249b5db80be99025923770809c5c409579673001a4"
+      }
+    },
+    {
+      "id": "Z_measured_sequence_097",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "target_ff",
+        "d": 0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.00000000000378,
+      "steps": 6000,
+      "max_double_reference_velocity_difference": 7.319450268106209e-09,
+      "tail_time_weighted_mean": 4.4085261216781716e-09,
+      "tail_time_weighted_rmse": 4.4873948228535156e-09,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_measured_sequence_097.csv",
+        "bytes": 1185557,
+        "sha256": "663e643a8cd55276fbcb58c358f4805f9b5c57dacbc04c233cd2c27687008e9f"
+      }
+    },
+    {
+      "id": "Z_measured_sequence_098",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "measurement_noise",
+        "d": 0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.00000000000378,
+      "steps": 6000,
+      "max_double_reference_velocity_difference": 4.507301918635007e-09,
+      "tail_time_weighted_mean": -1.840563428690579e-06,
+      "tail_time_weighted_rmse": 0.0016217037797082532,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_measured_sequence_098.csv",
+        "bytes": 1116512,
+        "sha256": "2473a4bad1e07fbf5c7c468f72267296e9da46f27f12777dfa730fc3fd5fee78"
+      }
+    },
+    {
+      "id": "Z_measured_sequence_099",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "two_stage_lag",
+        "d": 0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.00000000000378,
+      "steps": 6000,
+      "max_double_reference_velocity_difference": 8.155558279925035e-09,
+      "tail_time_weighted_mean": -5.51936357583601e-09,
+      "tail_time_weighted_rmse": 5.519363580442117e-09,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_measured_sequence_099.csv",
+        "bytes": 1132067,
+        "sha256": "0c5a0a27f0fc6040aa8f489955e03506fd8dfd0c935b0ec0bb9c583f6f2eed34"
+      }
+    },
+    {
+      "id": "Z_measured_sequence_100",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "lag_and_noise",
+        "d": 0.15,
+        "nu0": 0.1
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.00000000000378,
+      "steps": 6000,
+      "max_double_reference_velocity_difference": 5.909723716900767e-09,
+      "tail_time_weighted_mean": 4.936325391532317e-06,
+      "tail_time_weighted_rmse": 0.0020690337814794697,
+      "ramp_theory": null,
+      "protection_steps": 0,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_measured_sequence_100.csv",
+        "bytes": 1114055,
+        "sha256": "3421a933f839aa705d68a2c13e7877b85332285a62aaf9b793b63e221335cfaa"
+      }
+    },
+    {
+      "id": "Z_measured_sequence_101",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "limited",
+        "d": 0.15,
+        "nu0": 0.0,
+        "limit": 0.3
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.00000000000378,
+      "steps": 6000,
+      "max_double_reference_velocity_difference": 5.6319529226718215e-09,
+      "tail_time_weighted_mean": -5.526542979156456e-09,
+      "tail_time_weighted_rmse": 5.526654061754635e-09,
+      "ramp_theory": null,
+      "protection_steps": 18,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "finite_trajectory_consistency_only",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_measured_sequence_101.csv",
+        "bytes": 1137867,
+        "sha256": "be039f2d9c77c2745a1aab58d5181dbe8e3d080ba96908ec08359d8eff9f3527"
+      }
+    },
+    {
+      "id": "Z_measured_sequence_102",
+      "family": "Z",
+      "gains": [
+        2.0,
+        1.0,
+        0.02,
+        4.0
+      ],
+      "timing": "measured_sequence",
+      "scenario": {
+        "kind": "limited",
+        "d": 0.15,
+        "nu0": 0.0,
+        "limit": 0.05
+      },
+      "planned_duration_s": 60.0,
+      "executed_duration_s": 60.00000000000378,
+      "steps": 6000,
+      "max_double_reference_velocity_difference": 0.0,
+      "tail_time_weighted_mean": 5.550519999999681,
+      "tail_time_weighted_rmse": 5.558021718561026,
+      "ramp_theory": null,
+      "protection_steps": 6000,
+      "numeric_domain_exhaustion": null,
+      "conclusion": "infeasible_actuation_not_convergent",
+      "trajectory": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/Z_measured_sequence_102.csv",
+        "bytes": 856484,
+        "sha256": "a0c04c84abacc1804ce5373565bef4db0f9a393a31ffc03abcf9807fde1eabd5"
+      }
+    }
+  ],
+  "count": 102,
+  "kernel_updates": 559827,
+  "actual_cadence_json_sha256": "5e0dde6a0c2194efea25f024105beca0314fd774959f499929c83966790b2d95",
+  "actual_cadence_delta_sha256": "1bec48156a508a1834849738072437dad847f75d37e47f6bd3ad7f1cd867885b",
+  "matlab_executed": false,
+  "simulator_executed": false,
+  "new_flight_seeds": 0,
+  "independent_double_reference": true,
+  "not_independent_statistical_samples": true
+}

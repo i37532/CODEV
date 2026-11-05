@@ -1,0 +1,507 @@
+{
+  "kind": "diagnosis_not_acceptance",
+  "formal_accepted": false,
+  "runtime_success": false,
+  "runtime_error": "ValueError('CLI reference representation changed: ref_alt')",
+  "ulog": {
+    "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-26/09_19_16.ulg",
+    "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/diagnostic11/run01/09_19_16.ulg",
+    "sha256": "b9f9aeb7d122be458d969037cae5d8da1b94483520d8b8db72c499c179d91ede",
+    "bytes": 77859649
+  },
+  "events": {
+    "ready": 30944000,
+    "takeoff_command": 30956000,
+    "reposition_command": 40236000,
+    "handoff_ready": 40616000,
+    "hover_start": 48684000,
+    "hover_end": 109164000,
+    "land_command": 109164000
+  },
+  "dropout_count": 0,
+  "corruption": false,
+  "topics": {
+    "estimator_attitude:0": {
+      "samples": 24240,
+      "median_interval_us": 4000,
+      "max_interval_us": 8000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_attitude:1": {
+      "samples": 24400,
+      "median_interval_us": 4000,
+      "max_interval_us": 8000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_attitude:2": {
+      "samples": 24270,
+      "median_interval_us": 4000,
+      "max_interval_us": 8000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_attitude:3": {
+      "samples": 23531,
+      "median_interval_us": 4000,
+      "max_interval_us": 8000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_attitude:4": {
+      "samples": 23631,
+      "median_interval_us": 4000,
+      "max_interval_us": 8000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_attitude:5": {
+      "samples": 23614,
+      "median_interval_us": 4000,
+      "max_interval_us": 8000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_local_position:0": {
+      "samples": 11216,
+      "median_interval_us": 8000,
+      "max_interval_us": 12000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_local_position:1": {
+      "samples": 11216,
+      "median_interval_us": 12000,
+      "max_interval_us": 12000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_local_position:2": {
+      "samples": 11216,
+      "median_interval_us": 8000,
+      "max_interval_us": 12000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_local_position:3": {
+      "samples": 11215,
+      "median_interval_us": 10000,
+      "max_interval_us": 12000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_local_position:4": {
+      "samples": 11216,
+      "median_interval_us": 12000,
+      "max_interval_us": 12000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_local_position:5": {
+      "samples": 11216,
+      "median_interval_us": 8000,
+      "max_interval_us": 12000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_selector_status:0": {
+      "samples": 117,
+      "median_interval_us": 1008000,
+      "max_interval_us": 1012000,
+      "duplicate_publish_times": 0
+    },
+    "estimator_status:0": {
+      "samples": 11216,
+      "median_interval_us": 8000,
+      "max_interval_us": 12000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_status:1": {
+      "samples": 11216,
+      "median_interval_us": 12000,
+      "max_interval_us": 12000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_status:2": {
+      "samples": 11216,
+      "median_interval_us": 8000,
+      "max_interval_us": 12000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_status:3": {
+      "samples": 11215,
+      "median_interval_us": 10000,
+      "max_interval_us": 12000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_status:4": {
+      "samples": 11216,
+      "median_interval_us": 12000,
+      "max_interval_us": 12000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_status:5": {
+      "samples": 11216,
+      "median_interval_us": 8000,
+      "max_interval_us": 12000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_status_flags:0": {
+      "samples": 120,
+      "median_interval_us": 1000000,
+      "max_interval_us": 1000000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_status_flags:1": {
+      "samples": 120,
+      "median_interval_us": 1000000,
+      "max_interval_us": 1004000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_status_flags:2": {
+      "samples": 121,
+      "median_interval_us": 1000000,
+      "max_interval_us": 1004000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_status_flags:3": {
+      "samples": 120,
+      "median_interval_us": 1000000,
+      "max_interval_us": 1000000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_status_flags:4": {
+      "samples": 120,
+      "median_interval_us": 1000000,
+      "max_interval_us": 1008000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_status_flags:5": {
+      "samples": 120,
+      "median_interval_us": 1000000,
+      "max_interval_us": 1000000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "sensor_accel:0": {
+      "samples": 28039,
+      "median_interval_us": 4000,
+      "max_interval_us": 4000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "sensor_accel:1": {
+      "samples": 28039,
+      "median_interval_us": 4000,
+      "max_interval_us": 4000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "sensor_accel:2": {
+      "samples": 28039,
+      "median_interval_us": 4000,
+      "max_interval_us": 4000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "sta_rate_ctrl_status:0": {
+      "samples": 28039,
+      "median_interval_us": 4000,
+      "max_interval_us": 4000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "sta_velocity_ctrl_status:0": {
+      "samples": 11217,
+      "median_interval_us": 8000,
+      "max_interval_us": 12000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "vehicle_imu:0": {
+      "samples": 24582,
+      "median_interval_us": 4000,
+      "max_interval_us": 8000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "vehicle_imu:1": {
+      "samples": 24587,
+      "median_interval_us": 4000,
+      "max_interval_us": 8000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "vehicle_imu:2": {
+      "samples": 24460,
+      "median_interval_us": 4000,
+      "max_interval_us": 8000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "vehicle_imu_status:0": {
+      "samples": 1123,
+      "median_interval_us": 100000,
+      "max_interval_us": 100000,
+      "duplicate_publish_times": 0
+    },
+    "vehicle_imu_status:1": {
+      "samples": 1123,
+      "median_interval_us": 100000,
+      "max_interval_us": 100000,
+      "duplicate_publish_times": 0
+    },
+    "vehicle_imu_status:2": {
+      "samples": 1123,
+      "median_interval_us": 100000,
+      "max_interval_us": 100000,
+      "duplicate_publish_times": 0
+    },
+    "vehicle_land_detected:0": {
+      "samples": 115,
+      "median_interval_us": 1000000,
+      "max_interval_us": 1000000,
+      "duplicate_publish_times": 0
+    },
+    "vehicle_local_position:0": {
+      "samples": 11217,
+      "median_interval_us": 8000,
+      "max_interval_us": 12000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "vehicle_local_position_groundtruth:0": {
+      "samples": 26214,
+      "median_interval_us": 4000,
+      "max_interval_us": 8000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 26213
+    }
+  },
+  "faults": [
+    {
+      "instance": 0,
+      "t": 113784000,
+      "sample": 113784000,
+      "flags": [
+        "fs_bad_acc_clipping"
+      ]
+    },
+    {
+      "instance": 1,
+      "t": 113776000,
+      "sample": 113776000,
+      "flags": [
+        "fs_bad_acc_clipping"
+      ]
+    },
+    {
+      "instance": 2,
+      "t": 113780000,
+      "sample": 113780000,
+      "flags": [
+        "fs_bad_acc_clipping"
+      ]
+    },
+    {
+      "instance": 3,
+      "t": 113780000,
+      "sample": 113780000,
+      "flags": [
+        "fs_bad_acc_clipping"
+      ]
+    },
+    {
+      "instance": 4,
+      "t": 113784000,
+      "sample": 113784000,
+      "flags": [
+        "fs_bad_acc_clipping"
+      ]
+    },
+    {
+      "instance": 5,
+      "t": 113784000,
+      "sample": 113784000,
+      "flags": [
+        "fs_bad_acc_clipping"
+      ]
+    }
+  ],
+  "clipping": [
+    {
+      "instance": 0,
+      "t": 113668000,
+      "sample": 113668000,
+      "clips": [
+        0,
+        0,
+        1
+      ],
+      "xyz": [
+        -1.766920804977417,
+        -0.05506663769483566,
+        -83.37328338623047
+      ]
+    },
+    {
+      "instance": 1,
+      "t": 113668000,
+      "sample": 113668000,
+      "clips": [
+        0,
+        0,
+        1
+      ],
+      "xyz": [
+        -3.5327911376953125,
+        -0.20229384303092957,
+        -186.64552307128906
+      ]
+    },
+    {
+      "instance": 2,
+      "t": 113668000,
+      "sample": 113668000,
+      "clips": [
+        0,
+        0,
+        1
+      ],
+      "xyz": [
+        -3.5327911376953125,
+        -0.20229384303092957,
+        -186.64552307128906
+      ]
+    }
+  ],
+  "selector": [
+    {
+      "t": 113784000,
+      "primary": 4,
+      "healthy": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "t": 113788000,
+      "primary": 2,
+      "healthy": [
+        0,
+        1,
+        1,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "reset_changes": [
+    {
+      "t": 113784000,
+      "sample": 113784000,
+      "fields": [
+        "xy_reset_counter",
+        "z_reset_counter",
+        "vxy_reset_counter",
+        "vz_reset_counter",
+        "heading_reset_counter",
+        "ref_alt"
+      ]
+    },
+    {
+      "t": 113788000,
+      "sample": 113788000,
+      "fields": [
+        "xy_reset_counter",
+        "z_reset_counter",
+        "vxy_reset_counter",
+        "vz_reset_counter",
+        "heading_reset_counter"
+      ]
+    }
+  ],
+  "timing_faults": [],
+  "initial_parameters": {
+    "MPC_LAND_SPEED": 0.699999988079071,
+    "MPC_VC_MODE": 0,
+    "MPC_VC_AXES": 0,
+    "MC_RTC_MODE": 0,
+    "MC_STA_AXES": 0,
+    "MC_RTC_DIV": 1,
+    "SDLOG_PROFILE": 1171
+  },
+  "effective_mode": [
+    0
+  ],
+  "effective_axes": [
+    0
+  ],
+  "inner_mode": [
+    0
+  ],
+  "inner_axes": [
+    0
+  ],
+  "inner_divisor": [
+    1
+  ],
+  "timing": [
+    0
+  ],
+  "excitation_fault": [
+    0,
+    2
+  ]
+}

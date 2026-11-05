@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="15" failures="0" disabled="0" errors="0" timestamp="2026-10-24T09:31:52" time="0.001" name="AllTests">
+  <testsuite name="PositionControlTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="EmptySetpoint" status="run" time="0" classname="PositionControlTest" />
+  </testsuite>
+  <testsuite name="PositionControlBasicDirectionTest" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="PositionDirection" status="run" time="0" classname="PositionControlBasicDirectionTest" />
+    <testcase name="VelocityDirection" status="run" time="0" classname="PositionControlBasicDirectionTest" />
+  </testsuite>
+  <testsuite name="PositionControlBasicTest" tests="12" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="TiltLimit" status="run" time="0" classname="PositionControlBasicTest" />
+    <testcase name="VelocityLimit" status="run" time="0" classname="PositionControlBasicTest" />
+    <testcase name="PositionControlMaxThrustLimit" status="run" time="0" classname="PositionControlBasicTest" />
+    <testcase name="PositionControlMinThrustLimit" status="run" time="0" classname="PositionControlBasicTest" />
+    <testcase name="FailsafeInput" status="run" time="0" classname="PositionControlBasicTest" />
+    <testcase name="IdleThrustInput" status="run" time="0" classname="PositionControlBasicTest" />
+    <testcase name="InputCombinationsPosition" status="run" time="0" classname="PositionControlBasicTest" />
+    <testcase name="InputCombinationsPositionVelocity" status="run" time="0" classname="PositionControlBasicTest" />
+    <testcase name="SetpointValiditySimple" status="run" time="0" classname="PositionControlBasicTest" />
+    <testcase name="SetpointValidityAllCombinations" status="run" time="0" classname="PositionControlBasicTest" />
+    <testcase name="InvalidState" status="run" time="0" classname="PositionControlBasicTest" />
+    <testcase name="UpdateHoverThrust" status="run" time="0" classname="PositionControlBasicTest" />
+  </testsuite>
+</testsuites>

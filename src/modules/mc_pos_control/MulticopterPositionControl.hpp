@@ -64,6 +64,16 @@
 #include <uORB/topics/vehicle_land_detected.h>
 #include <uORB/topics/vehicle_local_position.h>
 #include <uORB/topics/vehicle_local_position_setpoint.h>
+#include <uORB/topics/velocity_ctrl_selection.h>
+#include <uORB/topics/sta_velocity_ctrl_status.h>
+#include <uORB/topics/sta_rate_ctrl_status.h>
+#include <uORB/topics/vehicle_status.h>
+#include "PositionControl/VelocityDiagnosticExcitation.hpp"
+#include "PositionControl/VelocityXYDiagnosticExcitation.hpp"
+#include "PositionControl/VelocityXYZDiagnosticExcitation.hpp"
+#include "PositionControl/VelocityResearchTask.hpp"
+#include "PositionControl/VelocityAxisAblationTask.hpp"
+#include "PositionControl/VelocityDiagnosticInput.hpp"
 
 using namespace time_literals;
 
@@ -86,6 +96,9 @@ public:
 	bool init();
 
 private:
+	friend class VelocityModuleTestAccess;
+	friend class RegularizedVelocityModuleTestAccess;
+	friend class RegularizedIstaVelocityModuleTestAccess;
 	void Run() override;
 
 	Takeoff _takeoff; /**< state machine and ramp to bring the vehicle off the ground without jumps */
@@ -93,6 +106,16 @@ private:
 	orb_advert_t _mavlink_log_pub{nullptr};
 
 	uORB::PublicationData<takeoff_status_s> _takeoff_status_pub{ORB_ID(takeoff_status)};
+	uORB::Publication<velocity_ctrl_selection_s> _velocity_selection_pub{ORB_ID(velocity_ctrl_selection)};
+	uint32_t _velocity_selection_seq{0};
+	uORB::Publication<sta_velocity_ctrl_status_s> _velocity_diagnostic_pub{ORB_ID(sta_velocity_ctrl_status)};
+	uORB::Subscription _rate_diagnostic_sub{ORB_ID(sta_rate_ctrl_status)};
+	sta_rate_ctrl_status_s _rate_diagnostic{};
+	uORB::Subscription _velocity_vehicle_status_sub{ORB_ID(vehicle_status)};
+	vehicle_status_s _velocity_vehicle_status{};
+	uint32_t _velocity_update_seq{0};
+	uint64_t _velocity_sample_last{0};
+	VelocityDiagnosticExcitation _velocity_excitation;
 	uORB::Publication<vehicle_attitude_setpoint_s>	_vehicle_attitude_setpoint_pub;
 	uORB::Publication<vehicle_local_position_setpoint_s> _local_pos_sp_pub{ORB_ID(vehicle_local_position_setpoint)};	/**< vehicle local position setpoint publication */
 
@@ -131,6 +154,25 @@ private:
 
 	DEFINE_PARAMETERS(
 		// Position Control
+		(ParamInt<px4::params::MPC_VC_MODE>) _param_mpc_vc_mode,
+		(ParamInt<px4::params::MPC_VC_DIV>) _param_mpc_vc_div,
+		(ParamInt<px4::params::MPC_VC_AXES>) _param_mpc_vc_axes,
+		(ParamFloat<px4::params::MPC_VC_EPS_X>) _param_mpc_vc_eps_x,
+		(ParamFloat<px4::params::MPC_VC_EPS_Y>) _param_mpc_vc_eps_y,
+		(ParamFloat<px4::params::MPC_VC_EPS_Z>) _param_mpc_vc_eps_z,
+		(ParamFloat<px4::params::MPC_VC_L1_X>) _param_mpc_vc_l1_x,
+		(ParamFloat<px4::params::MPC_VC_L2_X>) _param_mpc_vc_l2_x,
+		(ParamFloat<px4::params::MPC_VC_NU_X>) _param_mpc_vc_nu_x,
+		(ParamFloat<px4::params::MPC_VC_A_X>) _param_mpc_vc_a_x,
+		(ParamFloat<px4::params::MPC_VC_L1_Y>) _param_mpc_vc_l1_y,
+		(ParamFloat<px4::params::MPC_VC_L2_Y>) _param_mpc_vc_l2_y,
+		(ParamFloat<px4::params::MPC_VC_NU_Y>) _param_mpc_vc_nu_y,
+		(ParamFloat<px4::params::MPC_VC_A_Y>) _param_mpc_vc_a_y,
+		(ParamFloat<px4::params::MPC_VC_L1_Z>) _param_mpc_vc_l1_z,
+		(ParamFloat<px4::params::MPC_VC_L2_Z>) _param_mpc_vc_l2_z,
+		(ParamFloat<px4::params::MPC_VC_NU_Z>) _param_mpc_vc_nu_z,
+		(ParamFloat<px4::params::MPC_VC_A_Z>) _param_mpc_vc_a_z,
+		(ParamInt<px4::params::MPC_VCT_TEST>) _param_mpc_vct_test,
 		(ParamFloat<px4::params::MPC_XY_P>) _param_mpc_xy_p,
 		(ParamFloat<px4::params::MPC_Z_P>) _param_mpc_z_p,
 		(ParamFloat<px4::params::MPC_XY_VEL_P_ACC>) _param_mpc_xy_vel_p_acc,

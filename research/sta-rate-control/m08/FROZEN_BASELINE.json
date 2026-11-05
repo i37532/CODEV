@@ -1,0 +1,36 @@
+{
+  "milestone": "M08",
+  "date": "2026-09-17",
+  "scope": "Iris 10016 quad_w empty_grey.world nominal SITL development only",
+  "starting_head": "d1f43ff63f211d3c95b2bf8fafba27e8c1a0fdb1",
+  "flight_source": "Starting HEAD plus archived M08 patch and new-file snapshots, not a future clean commit",
+  "firmware_sha256": "b2107aba0033321623f7787363f36670021f1a1cd221b6eee338d366f263a795",
+  "accepted_configurations": {
+    "iris_pid.json": "4cda967ab775f4b9e206069f2526b31672d6e65411ef1e34d1fe718e2bcfd4e2",
+    "iris_esta_rpy.json": "0a949cf0a85d5ceb5b1dbf6ff5c0863f547c4b5264eecf0d029ed6fcfd9f8cfe",
+    "iris_ista_roll.json": "f37af8ba80a816357a512bff38627d8fcd10955c467952b6a32a0fe1fb72f55b",
+    "iris_ista_rp_candidate02.json": "0777bc7bb5575bf765cfd60b929f5ad607c2dce2b6349418dd37cd109c231f8e",
+    "iris_ista_rpy_candidate02.json": "20328efbc3410b9b67edb3a2f7d5819dbe0fb0be14f600591c678080d0a9bcd1"
+  },
+  "protocol_sha256": "d013af15450869012f666a7e9bc26ca3a7dda6b6955edbf291603960c8e69fa9",
+  "calibration_sha256": "9364a6255feef140612dfddbf726a336df3d03ef1a05874042fb2e3555da41be",
+  "comparison": "/home/yr/Desktop/codev doc/experiments/M08-20260917/final01/comparison.json",
+  "comparison_sha256": "db37d9ec8327f59c0f0c19903a618154de7ff0fe8a1a2d1c4548bbb1cf5d8bb4",
+  "same_binary_repeats_per_mode": 3,
+  "rmse_comparisons_passed": 90,
+  "rmse_comparisons_total": 90,
+  "rmse_ratio_limit": 1.25,
+  "max_esta_ratio": 1.233325158638757,
+  "max_ista_ratio": 1.1783929123483303,
+  "not_equal_gain_discretization_experiment": "ISTA pitch lambda1=2.0; frozen M06 ESTA pitch lambda1=2.4; all other experimental gains and g are equal",
+  "rejected_candidate": "iris_ista_rp.json candidate01 exceeded noncommand pitch ratio at 1.3155429264802694; raw logs/gate retained; iris_ista_rpy.json is the unflown full-axis counterpart, not the accepted configuration",
+  "limitations": [
+    "Not DP1000 hardware, no board real-time timing",
+    "No MATLAB execution, independent binary64 reference used",
+    "No guaranteed paired random seeds or held-out paper dataset",
+    "Raw motor_limits has missing samples; embedded consumed feedback and controller diagnostics were complete at 250 Hz",
+    "Constrained applied ISTA output is not a strict ideal implicit solution",
+    "Fault injection tested offline; no automatic airborne PID takeover",
+    "No M09 decimation or timing implementation"
+  ]
+}

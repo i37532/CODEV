@@ -37,10 +37,32 @@
 #include <circuit_breaker/circuit_breaker.h>
 #include <mathlib/math/Limits.hpp>
 #include <mathlib/math/Functions.hpp>
+#if defined(__PX4_POSIX) && defined(__linux__)
+#include <time.h>
+#endif
+
+// Explicit host clock: px4_clock_gettime/hrt are virtual under Gazebo lockstep.
+static uint64_t research_cost_clock()
+{
+#if defined(__PX4_POSIX) && defined(__linux__)
+	struct timespec ts {};
+	if (system_clock_gettime(CLOCK_MONOTONIC, &ts) == 0) {
+		return uint64_t(ts.tv_sec) * 1000000000ULL + uint64_t(ts.tv_nsec);
+	}
+#endif
+	return 0;
+}
 
 using namespace matrix;
 using namespace time_literals;
 using math::radians;
+
+static_assert(ControllerSelection::PID == rate_ctrl_selection_s::MODE_PID, "selection mode ABI");
+static_assert(ControllerSelection::PROPER_ISTA == rate_ctrl_selection_s::MODE_PROPER_ISTA, "selection mode ABI");
+static_assert(ControllerSelection::Accepted == rate_ctrl_selection_s::REQUEST_ACCEPTED, "selection status ABI");
+static_assert(ControllerSelection::Unsupported == rate_ctrl_selection_s::REQUEST_UNSUPPORTED, "selection status ABI");
+static_assert(ControllerSelection::InvalidMode == rate_ctrl_selection_s::REQUEST_INVALID_MODE, "selection status ABI");
+static_assert(ControllerSelection::InvalidAxes == rate_ctrl_selection_s::REQUEST_INVALID_AXES, "selection status ABI");
 
 MulticopterRateControl::MulticopterRateControl(bool vtol) :
 	ModuleParams(nullptr),
@@ -87,6 +109,35 @@ MulticopterRateControl::parameters_updated()
 
 	_rate_control.setFeedForwardGain(
 		Vector3f(_param_mc_rollrate_ff.get(), _param_mc_pitchrate_ff.get(), _param_mc_yawrate_ff.get()));
+	// Diagnostic copies only: original PID setters and their timing are untouched.
+	_research_p = rate_k.emult(Vector3f(_param_mc_rollrate_p.get(), _param_mc_pitchrate_p.get(),
+					    _param_mc_yawrate_p.get()));
+	_research_d = rate_k.emult(Vector3f(_param_mc_rollrate_d.get(), _param_mc_pitchrate_d.get(),
+					    _param_mc_yawrate_d.get()));
+	_research_ff = Vector3f(_param_mc_rollrate_ff.get(), _param_mc_pitchrate_ff.get(), _param_mc_yawrate_ff.get());
+	_sta_requested.mode = _param_mc_rtc_mode.get();
+	_sta_requested.axes = _param_mc_sta_axes.get();
+	const int32_t takeoff_manager = _param_mc_sta_tko_mgt.get();
+	_sta_requested.takeoff.enabled = takeoff_manager == 1;
+	_sta_requested.c_limit = (takeoff_manager == 0 || takeoff_manager == 1) ? 0.15f : 0.f;
+#if defined(CONFIG_ARCH_BOARD_PX4_SITL)
+	int32_t airframe = 0;
+	param_get(param_find("SYS_AUTOSTART"), &airframe);
+	_research_iris = airframe == 10016;
+#endif
+	// Uncalibrated defaults are zero. Read/stage as one configuration; begin()
+	// applies it only while disarmed. No experimental values affect original PID.
+	const char *l1[] = {"MC_STA_L1_R", "MC_STA_L1_P", "MC_STA_L1_Y"};
+	const char *l2[] = {"MC_STA_L2_R", "MC_STA_L2_P", "MC_STA_L2_Y"};
+	const char *g[] = {"MC_STA_G_R", "MC_STA_G_P", "MC_STA_G_Y"};
+	const char *nu[] = {"MC_STA_NU_R", "MC_STA_NU_P", "MC_STA_NU_Y"};
+
+	for (size_t i = 0; i < 3; ++i) {
+		param_get(param_find(l1[i]), &_sta_requested.gains[i].lambda1);
+		param_get(param_find(l2[i]), &_sta_requested.gains[i].lambda2);
+		param_get(param_find(g[i]), &_sta_requested.gains[i].g);
+		param_get(param_find(nu[i]), &_sta_requested.nu_limit[i]);
+	}
 
 
 	// manual rate control acro mode rate limits
@@ -99,6 +150,7 @@ MulticopterRateControl::parameters_updated()
 void
 MulticopterRateControl::Run()
 {
+	const uint64_t module_begin = research_cost_clock();
 	if (should_exit()) {
 		_vehicle_angular_velocity_sub.unregisterCallback();
 		exit_and_cleanup();
@@ -149,6 +201,35 @@ MulticopterRateControl::Run()
 
 		_vehicle_status_sub.update(&_vehicle_status);
 
+		// Selection uses the latest arming state. Existing PID parameter updates
+		// above remain immediate and retain their original scheduling/order.
+		const bool experiment_ready = StaAxesApplication::ready(_research_iris, _sta_requested);
+		const bool selection_changed = _rate_control.select(_param_mc_rtc_mode.get(), _param_mc_sta_axes.get(),
+					       _v_control_mode.flag_armed, experiment_ready && _sta_requested.mode == 1,
+					       experiment_ready && _sta_requested.mode == 2,
+					       experiment_ready && _sta_requested.mode == 3);
+
+		if (selection_changed || !_selection_published) {
+			const auto &selection = _rate_control.selectionStatus();
+			rate_ctrl_selection_s status{};
+			status.timestamp = hrt_absolute_time();
+			status.requested_mode = selection.requested_mode;
+			status.requested_axes = selection.requested_axes;
+			status.effective_mode = selection.effective_mode;
+			status.effective_axes = selection.effective_axes;
+			status.request_status = selection.request_status;
+			status.pending = selection.pending;
+			_selection_status_pub.publish(status);
+			_selection_published = true;
+
+			if (selection.request_status != ControllerSelection::Accepted) {
+				PX4_WARN("controller request mode=%ld axes=%ld: %s; effective=%u axes=%u, pending=%d",
+					 (long)selection.requested_mode, (long)selection.requested_axes,
+					 ControllerSelection::statusName(selection.request_status), (unsigned)selection.effective_mode,
+					 (unsigned)selection.effective_axes, (int)selection.pending);
+			}
+		}
+
 		if (_landing_gear_sub.updated()) {
 			landing_gear_s landing_gear;
 
@@ -191,11 +272,117 @@ MulticopterRateControl::Run()
 			vehicle_rates_setpoint_s v_rates_sp;
 
 			if (_v_rates_sp_sub.update(&v_rates_sp)) {
+				_research_input_valid = PX4_ISFINITE(v_rates_sp.roll) && PX4_ISFINITE(v_rates_sp.pitch)
+							&& PX4_ISFINITE(v_rates_sp.yaw) && PX4_ISFINITE(v_rates_sp.thrust_body[2]);
+				_research_sp_timestamp = v_rates_sp.timestamp;
 				_rates_sp(0) = PX4_ISFINITE(v_rates_sp.roll)  ? v_rates_sp.roll  : rates(0);
 				_rates_sp(1) = PX4_ISFINITE(v_rates_sp.pitch) ? v_rates_sp.pitch : rates(1);
 				_rates_sp(2) = PX4_ISFINITE(v_rates_sp.yaw)   ? v_rates_sp.yaw   : rates(2);
 				_thrust_sp = -v_rates_sp.thrust_body[2];
+				_research_test_addition = v_rates_sp.research_roll_addition;
+				_research_pitch_addition = v_rates_sp.research_pitch_addition;
+				_research_yaw_addition = v_rates_sp.research_yaw_addition;
+				_research_test_elapsed = v_rates_sp.research_elapsed;
 			}
+		}
+
+		// Research timing does not replace legacy clamped dt. Mixer diagnostics
+		// below record the exact feedback consumed by PID, without another read.
+		StaProtection::Frame frame{};
+		_decimation.configure(_param_mc_rtc_div.get(), _v_control_mode.flag_armed);
+		frame.decimated = _decimation.divisor() > 1;
+		frame.sample = now; frame.armed = _v_control_mode.flag_armed;
+		frame.rate_enabled = _v_control_mode.flag_control_rates_enabled && !_actuators_0_circuit_breaker_enabled;
+		frame.landed = _landed; frame.maybe_landed = _maybe_landed;
+		vehicle_local_position_s local_position{};
+		_vehicle_local_position_sub.copy(&local_position);
+		const uint64_t clock_now = hrt_absolute_time();
+		frame.local_position_valid = local_position.timestamp > 0 && clock_now >= local_position.timestamp
+					     && clock_now - local_position.timestamp < 200000
+					     && local_position.z_valid && local_position.v_z_valid
+					     && PX4_ISFINITE(local_position.z) && PX4_ISFINITE(local_position.vz);
+		frame.local_z = local_position.z;
+		frame.local_vz = local_position.vz;
+
+		for (int i = 0; i < 3; ++i) {
+			frame.measurement_valid = frame.measurement_valid && PX4_ISFINITE(rates(i))
+						  && PX4_ISFINITE(angular_accel(i)) && PX4_ISFINITE(_rates_sp(i));
+		}
+
+		frame.experiment_active = _rate_control.selectionStatus().effective_mode != ControllerSelection::PID;
+
+		if (frame.experiment_active) {
+			frame.measurement_valid = frame.measurement_valid && _research_input_valid
+						  && _research_sp_timestamp > 0 && clock_now >= _research_sp_timestamp
+						  && clock_now - _research_sp_timestamp < 100000;
+		}
+
+		StaProtection::Config staged = _sta_requested;
+
+		if (staged.mode != 0 && !experiment_ready) { staged.c_limit = 0.f; }
+
+		_sta_guard.begin(staged, frame);
+		const auto &takeoff = _sta_guard.takeoffDecision();
+		sta_takeoff_status_s takeoff_status{};
+		takeoff_status.timestamp = clock_now;
+		takeoff_status.timestamp_sample = now;
+		takeoff_status.publish_seq = ++_research_takeoff_publish_seq;
+		takeoff_status.config_seq = _sta_guard.configSequence();
+		takeoff_status.requested_enable = _param_mc_sta_tko_mgt.get();
+		takeoff_status.effective_enable = _sta_guard.config().takeoff.enabled;
+		takeoff_status.config_pending = _sta_guard.pending();
+		takeoff_status.state = static_cast<uint8_t>(takeoff.state);
+		takeoff_status.event = static_cast<uint8_t>(takeoff.event);
+		takeoff_status.freeze = takeoff.freeze;
+		takeoff_status.reset = takeoff.reset;
+		takeoff_status.abort = takeoff.abort;
+		takeoff_status.estimate_valid = frame.local_position_valid;
+		takeoff_status.local_z = frame.local_z;
+		takeoff_status.local_vz = frame.local_vz;
+		takeoff_status.armed = frame.armed;
+		takeoff_status.landed = frame.landed;
+		takeoff_status.maybe_landed = frame.maybe_landed;
+		_sta_takeoff_status_pub.publish(takeoff_status);
+		// Safety/lifecycle invalidates a held command immediately. Termination is
+		// still handled by the original rate-disabled commander branch below.
+		_decimation.lifecycle(frame, _sta_guard.resetReason() != 0, _sta_guard.abortRequested());
+		sta_rate_ctrl_status_s research{};
+		research.div_req = _decimation.requested(); research.div_eff = _decimation.divisor();
+		research.div_ok = _decimation.valid(); research.div_wait = _decimation.pending();
+		research.measurement_valid = frame.measurement_valid;
+		research.timestamp_sample = now;
+		research.publish_seq = ++_research_publish_seq;
+		research.config_seq = _sta_guard.configSequence();
+		research.config_pending = _sta_guard.pending(); research.config_valid = _sta_guard.configValid();
+		research.raw_dt = _sta_guard.rawDt(); research.dt = NAN; // no algorithm h on a held callback
+		research.timing_status = _sta_guard.timing(); research.fault = _sta_guard.fault();
+		research.reset_reason = _sta_guard.resetReason(); research.abort_requested = _sta_guard.abortRequested();
+		const auto &selection = _rate_control.selectionStatus();
+		research.requested_mode = selection.requested_mode; research.requested_axes = selection.requested_axes;
+		research.effective_mode = selection.effective_mode; research.effective_axes = selection.effective_axes;
+		research.request_status = selection.request_status; research.pending = selection.pending;
+		research.armed = frame.armed; research.landed = _landed; research.maybe_landed = _maybe_landed;
+		research.rate_enabled = frame.rate_enabled;
+		research.experiment_frozen = true;
+		research.research_roll_addition = _research_test_addition;
+		research.research_pitch_addition = _research_pitch_addition;
+		research.research_yaw_addition = _research_yaw_addition;
+		research.research_elapsed = _research_test_elapsed;
+		research.battery_scale = 1.f;
+
+		for (int i = 0; i < 3; ++i) {
+			research.rate[i] = rates(i); research.rate_sp[i] = _rates_sp(i); research.angular_accel[i] = angular_accel(i);
+			research.s[i] = rates(i) - _rates_sp(i); research.nu[i] = _sta_guard.state()[i];
+			research.nu_before[i] = _sta_guard.state()[i];
+			research.lambda1[i] = _sta_guard.config().gains[i].lambda1;
+			research.lambda2[i] = _sta_guard.config().gains[i].lambda2;
+			research.g[i] = _sta_guard.config().gains[i].g;
+			research.a_raw[i] = research.xi[i] = research.virtual_state[i] = NAN;
+			research.nu_candidate[i] = research.a_protected[i] = NAN;
+			research.c_raw[i] = research.c_applied[i] = NAN;
+			research.pid_integral_before[i] = research.pid_integral_after[i] = NAN;
+			research.ista_branch[i] = 255;
+			research.pid_p[i] = _research_p(i); research.pid_d[i] = _research_d(i); research.pid_ff[i] = _research_ff(i);
 		}
 
 		// run the rate controller
@@ -204,6 +391,7 @@ MulticopterRateControl::Run()
 			// reset integral if disarmed
 			if (!_v_control_mode.flag_armed || _vehicle_status.vehicle_type != vehicle_status_s::VEHICLE_TYPE_ROTARY_WING) {
 				_rate_control.resetIntegral();
+				research.pid_reset = true;
 			}
 
 			// update saturation status from mixer feedback
@@ -215,15 +403,83 @@ MulticopterRateControl::Run()
 					saturation_status.value = motor_limits.saturation_status;
 
 					_rate_control.setSaturationStatus(saturation_status);
+					_research_motor = motor_limits; // exact already-consumed feedback; no extra subscription copy
 				}
 			}
 
+			rate_ctrl_status_s integral_before{};
+			_rate_control.getRateControlStatus(integral_before);
+			research.pid_integral_before[0] = integral_before.rollspeed_integ;
+			research.pid_integral_before[1] = integral_before.pitchspeed_integ;
+			research.pid_integral_before[2] = integral_before.yawspeed_integ;
+			research.pid_frozen = _maybe_landed || _landed;
 			// run rate controller
-			const Vector3f att_control = _rate_control.update(rates, _rates_sp, angular_accel, dt, _maybe_landed || _landed);
+			const uint64_t feedback_now = hrt_absolute_time();
+			_decimation.observe({_research_motor.timestamp, feedback_now, _research_motor.saturation_status});
+			research.sat_bits = _decimation.bits();
+			research.sat_valid = _decimation.feedbackValid();
+			research.sat_n = _decimation.observations();
+			const bool safe = !(frame.experiment_active || frame.decimated) || !_sta_guard.abortRequested();
+			const bool update = safe && _decimation.due(now, dt);
+			Vector3f att_control{_decimation.command().data()};
+			StaProtection::Output experiment{};
+			bool emit = safe && _decimation.cached();
+
+			if (update) {
+				const uint64_t kernel_begin = research_cost_clock();
+				research.dt = frame.decimated ? _decimation.dt() : dt;
+				if (frame.decimated) {
+					MultirotorMixer::saturation_status interval;
+					// On unknown feedback freeze BOTH directions on all PID axes.
+					interval.value = research.sat_valid ? research.sat_bits : uint16_t(0x1f8);
+					_rate_control.setSaturationStatus(interval);
+				}
+				att_control = _rate_control.update(rates, _rates_sp, angular_accel, research.dt, _maybe_landed || _landed);
+				research.pid_updated = _rate_control.pidRequired();
+				if (frame.experiment_active && frame.armed) {
+					experiment = _sta_guard.step({rates(0), rates(1), rates(2)}, {_rates_sp(0), _rates_sp(1), _rates_sp(2)},
+					{_research_motor.timestamp, feedback_now, research.sat_bits}, true,
+					frame.decimated ? research.dt : 0.f);
+				}
+
+				std::array<float, 3> mixed{};
+				emit = StaAxesApplication::apply(selection.effective_axes, frame.armed, experiment,
+				{att_control(0), att_control(1), att_control(2)}, mixed);
+
+				for (int i = 0; i < 3; ++i) { att_control(i) = mixed[i]; }
+				if (emit) { _decimation.commit(now, mixed); }
+				research.kern_ns = kernel_begin ? research_cost_clock() - kernel_begin : 0;
+			}
+			research.pid_frozen = research.pid_frozen || !research.pid_updated;
+			research.held = emit && !update;
+
+			research.fault = _sta_guard.fault(); research.abort_requested = _sta_guard.abortRequested();
+
+			if (frame.experiment_active && update) {
+				research.experiment_updated = experiment.updated;
+				research.experiment_frozen = !experiment.updated;
+				for (int i = 0; i < 3; ++i) {
+					if (selection.effective_axes & (1 << i)) {
+						research.a_raw[i] = experiment.a[i]; research.nu[i] = _sta_guard.state()[i];
+						research.limits[i] = experiment.limits[i];
+						research.nu_candidate[i] = experiment.nu_candidate[i];
+						research.a_protected[i] = experiment.a_protected[i];
+						research.xi[i] = experiment.xi[i]; research.virtual_state[i] = experiment.virtual_s[i];
+						research.ista_branch[i] = experiment.branch[i];
+					}
+				}
+			}
 
 			// publish rate controller status
 			rate_ctrl_status_s rate_ctrl_status{};
 			_rate_control.getRateControlStatus(rate_ctrl_status);
+			research.pid_integral_after[0] = rate_ctrl_status.rollspeed_integ;
+			research.pid_integral_after[1] = rate_ctrl_status.pitchspeed_integ;
+			research.pid_integral_after[2] = rate_ctrl_status.yawspeed_integ;
+			research.updated = update && emit;
+
+			if (research.updated) { ++_research_update_seq; }
+
 			rate_ctrl_status.timestamp = hrt_absolute_time();
 			_controller_status_pub.publish(rate_ctrl_status);
 
@@ -247,16 +503,42 @@ MulticopterRateControl::Run()
 				}
 
 				if (_battery_status_scale > 0.0f) {
+					research.battery_scale = _battery_status_scale;
+					const auto scaled = _decimation.output(actuators.control[actuator_controls_s::INDEX_THROTTLE], _battery_status_scale);
 					for (int i = 0; i < 4; i++) {
-						actuators.control[i] *= _battery_status_scale;
+						actuators.control[i] = scaled[i];
 					}
 				}
 			}
 
 			actuators.timestamp = hrt_absolute_time();
-			_actuators_0_pub.publish(actuators);
+			research.thrust = actuators.control[actuator_controls_s::INDEX_THROTTLE];
+
+			// Invalid ESTA suppresses publication; no zero-torque or PID fallback.
+			// The local monitor aborts SITL even if lockstep stops at this sample.
+			if (emit) { _actuators_0_pub.publish(actuators); }
+
+			research.output_valid = emit;
+
+			for (int i = 0; i < 3; ++i) {
+				research.c_held[i] = att_control(i);
+				research.c_raw[i] = att_control(i);
+				research.c_applied[i] = actuators.control[i];
+				research.output_valid = research.output_valid && PX4_ISFINITE(att_control(i)) && PX4_ISFINITE(actuators.control[i]);
+			}
+
+			if (frame.experiment_active && frame.armed) {
+				for (int i = 0; i < 3; ++i) {
+					if (selection.effective_axes & (1 << i)) { research.c_raw[i] = experiment.c_raw[i]; }
+				}
+			}
+
+			if (!emit) { for (int i = 0; i < 3; ++i) { research.c_applied[i] = NAN; } }
+			if (!update) { for (int i = 0; i < 3; ++i) { research.c_raw[i] = NAN; } }
 
 		} else if (_v_control_mode.flag_control_termination_enabled) {
+			research.termination = true;
+
 			if (!_vehicle_status.is_vtol) {
 				// publish actuator controls
 				actuator_controls_s actuators{};
@@ -264,9 +546,39 @@ MulticopterRateControl::Run()
 				_actuators_0_pub.publish(actuators);
 			}
 		}
+
+		research.update_seq = _research_update_seq;
+		research.pid_update_seq = _rate_control.pidUpdateSequence();
+		research.timestamp = hrt_absolute_time();
+		research.motor_timestamp = _research_motor.timestamp;
+		research.motor_update_seq = _research_motor.update_seq;
+		research.motor_saturation = _research_motor.saturation_status;
+		research.motor_valid = StaProtection::Feedback{_research_motor.timestamp, research.timestamp, _research_motor.saturation_status}.valid();
+		research.clock = module_begin ? 1 : 0;
+		research.mod_ns = module_begin ? research_cost_clock() - module_begin : 0;
+		_sta_status_pub.publish(research);
 	}
 
 	perf_end(_loop_perf);
+}
+
+int MulticopterRateControl::print_status()
+{
+	// Read a uORB snapshot instead of racing the work queue's controller state.
+	uORB::Subscription sub{ORB_ID(rate_ctrl_selection)};
+	rate_ctrl_selection_s status{};
+
+	if (sub.copy(&status)) {
+		PX4_INFO("requested: mode=%ld axes=%ld; effective: mode=%u axes=%u; request=%s; pending=%d",
+			 (long)status.requested_mode, (long)status.requested_axes,
+			 (unsigned)status.effective_mode, (unsigned)status.effective_axes,
+			 ControllerSelection::statusName(status.request_status), (int)status.pending);
+
+	} else {
+		PX4_INFO("selection status awaiting first gyro update");
+	}
+
+	return 0;
 }
 
 int MulticopterRateControl::task_spawn(int argc, char *argv[])

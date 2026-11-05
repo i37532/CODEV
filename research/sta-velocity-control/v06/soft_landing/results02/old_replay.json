@@ -1,0 +1,36 @@
+{
+  "success": true,
+  "protocol": "sl_protocol01",
+  "commands": [
+    {
+      "run": "run01",
+      "argv": [
+        "/usr/bin/python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v06/sl_protocol01/analyze.py",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/series01/run01",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/replay01_full/run01"
+      ],
+      "exit_code": 0,
+      "expected_accepted": true,
+      "actual_accepted": true,
+      "flight_completed": true,
+      "identical_metrics": true
+    },
+    {
+      "run": "run02",
+      "argv": [
+        "/usr/bin/python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v06/sl_protocol01/analyze.py",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/series01/run02",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/replay01_full/run02"
+      ],
+      "exit_code": 1,
+      "expected_accepted": false,
+      "actual_accepted": false,
+      "flight_completed": true,
+      "identical_metrics": true
+    }
+  ]
+}

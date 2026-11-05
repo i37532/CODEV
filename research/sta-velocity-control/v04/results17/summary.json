@@ -1,0 +1,535 @@
+{
+  "source_head": "85771e4cf02d0c959b0c79fcde41b9c88368554f",
+  "accepted": true,
+  "runs": [
+    {
+      "run": "run01",
+      "seed": 17001,
+      "mode": 0,
+      "accepted": true,
+      "events": {
+        "ready": 30916000.0,
+        "takeoff_command": 30924000,
+        "reposition_command": 39516000.0,
+        "handoff_ready": 39904000.0,
+        "hover_start": 48364000.0,
+        "hover_end": 108616000.0,
+        "land_command": 108616000.0,
+        "landed_disarmed": 117416000.0
+      },
+      "observation_s": 60.252,
+      "velocity_rmse": [
+        0.04181710432166549,
+        0.008217496024718234,
+        0.0033578593674268194
+      ],
+      "acceleration_tv": [
+        3.268791437149048,
+        2.920281171798706,
+        4.286606788635254
+      ],
+      "position_rmse": [
+        0.07088123309017676,
+        0.027492056261814102,
+        0.07682636731486445
+      ],
+      "yaw_rmse": 0.00013952961550792693,
+      "height": {
+        "rmse": 0.07680881344556899,
+        "mean": 0.03086975469628805,
+        "std": 0.07033243965559008,
+        "max_abs": 0.18144440650939941
+      },
+      "tilt": {
+        "rmse": 0.36667121116685664,
+        "mean": 0.3089839374065808,
+        "std": 0.19742518462267086,
+        "max_abs": 0.8504183292388916
+      },
+      "nu_peak": null,
+      "constraint_fraction": 0.0,
+      "hz": 99.99999999999999,
+      "maximum_gap_s": 0.012,
+      "local_output": {
+        "matched": 6025,
+        "denominator": 6025,
+        "coverage": 1.0,
+        "max_gap_s": 0.012,
+        "max_abs_error": 0.0
+      },
+      "attitude_output": {
+        "matched": 6025,
+        "denominator": 6025,
+        "coverage": 1.0,
+        "max_gap_s": 0.012,
+        "max_abs_error": 0.0
+      },
+      "mixer": {
+        "count": 15063,
+        "bit_histogram": {
+          "1": 15063
+        },
+        "feedback_valid_fraction": 1.0,
+        "raw_nonzero_fraction": 1.0,
+        "saturation_fraction_among_valid": 0.0,
+        "rate_direction_saturation_fraction_among_valid": 0.0
+      },
+      "ulog": {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-26/11_10_47.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series15/run01/11_10_47.ulg",
+        "sha256": "0b6d1780a8364219351f782a741594dbddd9c6ab7d217dc053b7e24210002b4a",
+        "bytes": 80792351
+      }
+    },
+    {
+      "run": "run02",
+      "seed": 17001,
+      "mode": 1,
+      "accepted": true,
+      "events": {
+        "ready": 30020000.0,
+        "takeoff_command": 30040000,
+        "reposition_command": 38548000.0,
+        "handoff_ready": 38920000.0,
+        "hover_start": 47528000.0,
+        "hover_end": 108048000.0,
+        "land_command": 108048000.0,
+        "landed_disarmed": 116880000.0
+      },
+      "observation_s": 60.52,
+      "velocity_rmse": [
+        0.015247061753005473,
+        0.007916342344825335,
+        0.003152472776629248
+      ],
+      "acceleration_tv": [
+        22.5247802734375,
+        2.9182496070861816,
+        4.184014320373535
+      ],
+      "position_rmse": [
+        0.06006310568867251,
+        0.028003612254365234,
+        0.0763131628090296
+      ],
+      "yaw_rmse": 0.00015844887718645712,
+      "height": {
+        "rmse": 0.07630092794017086,
+        "mean": 0.031738755644667806,
+        "std": 0.06938647558897348,
+        "max_abs": 0.18262290954589844
+      },
+      "tilt": {
+        "rmse": 0.7195918518970565,
+        "mean": 0.6506572340968136,
+        "std": 0.3073395468112096,
+        "max_abs": 1.480151653289795
+      },
+      "nu_peak": 0.15279994904994965,
+      "constraint_fraction": 0.0,
+      "hz": 99.99669487043892,
+      "maximum_gap_s": 0.012,
+      "local_output": {
+        "matched": 6052,
+        "denominator": 6052,
+        "coverage": 1.0,
+        "max_gap_s": 0.012,
+        "max_abs_error": 0.0
+      },
+      "attitude_output": {
+        "matched": 6052,
+        "denominator": 6052,
+        "coverage": 1.0,
+        "max_gap_s": 0.012,
+        "max_abs_error": 0.0
+      },
+      "mixer": {
+        "count": 15130,
+        "bit_histogram": {
+          "1": 15130
+        },
+        "feedback_valid_fraction": 1.0,
+        "raw_nonzero_fraction": 1.0,
+        "saturation_fraction_among_valid": 0.0,
+        "rate_direction_saturation_fraction_among_valid": 0.0
+      },
+      "ulog": {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-26/11_12_53.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series15/run02/11_12_53.ulg",
+        "sha256": "983ab9128c6fead6d927777799a15863e99e2d1b002ab51ceabdfddc7f9d1c46",
+        "bytes": 80474894
+      }
+    },
+    {
+      "run": "run03",
+      "seed": 17002,
+      "mode": 0,
+      "accepted": true,
+      "events": {
+        "ready": 30024000.0,
+        "takeoff_command": 30036000,
+        "reposition_command": 38624000.0,
+        "handoff_ready": 38996000.0,
+        "hover_start": 47444000.0,
+        "hover_end": 108104000.0,
+        "land_command": 108104000.0,
+        "landed_disarmed": 117396000.0
+      },
+      "observation_s": 60.66,
+      "velocity_rmse": [
+        0.043322688340206424,
+        0.009387873874941227,
+        0.0024172388751151673
+      ],
+      "acceleration_tv": [
+        3.3236663341522217,
+        2.8564281463623047,
+        2.6503772735595703
+      ],
+      "position_rmse": [
+        0.07231112828809214,
+        0.028670573472142084,
+        0.04243497006813447
+      ],
+      "yaw_rmse": 0.00013782242426662315,
+      "height": {
+        "rmse": 0.04271813195116955,
+        "mean": 0.004888493158697021,
+        "std": 0.04243750030379859,
+        "max_abs": 0.07910633087158203
+      },
+      "tilt": {
+        "rmse": 0.5078840707717422,
+        "mean": 0.4754203361298721,
+        "std": 0.17866654230111334,
+        "max_abs": 0.895037055015564
+      },
+      "nu_peak": null,
+      "constraint_fraction": 0.0,
+      "hz": 99.99670249950537,
+      "maximum_gap_s": 0.012,
+      "local_output": {
+        "matched": 6066,
+        "denominator": 6066,
+        "coverage": 1.0,
+        "max_gap_s": 0.012,
+        "max_abs_error": 0.0
+      },
+      "attitude_output": {
+        "matched": 6066,
+        "denominator": 6066,
+        "coverage": 1.0,
+        "max_gap_s": 0.012,
+        "max_abs_error": 0.0
+      },
+      "mixer": {
+        "count": 15165,
+        "bit_histogram": {
+          "1": 15165
+        },
+        "feedback_valid_fraction": 1.0,
+        "raw_nonzero_fraction": 1.0,
+        "saturation_fraction_among_valid": 0.0,
+        "rate_direction_saturation_fraction_among_valid": 0.0
+      },
+      "ulog": {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-26/11_14_57.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series15/run03/11_14_57.ulg",
+        "sha256": "e4b4d89d064a1e3af621a6e6a86500eac680e5853139585675ab998ff83c6027",
+        "bytes": 80785611
+      }
+    },
+    {
+      "run": "run04",
+      "seed": 17002,
+      "mode": 1,
+      "accepted": true,
+      "events": {
+        "ready": 30060000.0,
+        "takeoff_command": 30068000,
+        "reposition_command": 38708000.0,
+        "handoff_ready": 39088000.0,
+        "hover_start": 47180000.0,
+        "hover_end": 107648000.0,
+        "land_command": 107648000.0,
+        "landed_disarmed": 116888000.0
+      },
+      "observation_s": 60.468,
+      "velocity_rmse": [
+        0.014474852462438743,
+        0.009591098921370191,
+        0.002230826027415336
+      ],
+      "acceleration_tv": [
+        22.604185104370117,
+        2.8808536529541016,
+        2.573023557662964
+      ],
+      "position_rmse": [
+        0.06019715344694275,
+        0.02726352369816663,
+        0.04452527225324475
+      ],
+      "yaw_rmse": 0.00015807858105594788,
+      "height": {
+        "rmse": 0.04485214404362962,
+        "mean": 0.0032437702082436363,
+        "std": 0.04473469324972075,
+        "max_abs": 0.08568215370178223
+      },
+      "tilt": {
+        "rmse": 0.7763904506727904,
+        "mean": 0.7212201149761512,
+        "std": 0.28744334685235934,
+        "max_abs": 1.4775049686431885
+      },
+      "nu_peak": 0.13039998710155487,
+      "constraint_fraction": 0.0,
+      "hz": 99.99999999999999,
+      "maximum_gap_s": 0.012,
+      "local_output": {
+        "matched": 6047,
+        "denominator": 6047,
+        "coverage": 1.0,
+        "max_gap_s": 0.012,
+        "max_abs_error": 0.0
+      },
+      "attitude_output": {
+        "matched": 6047,
+        "denominator": 6047,
+        "coverage": 1.0,
+        "max_gap_s": 0.012,
+        "max_abs_error": 0.0
+      },
+      "mixer": {
+        "count": 15117,
+        "bit_histogram": {
+          "1": 15117
+        },
+        "feedback_valid_fraction": 1.0,
+        "raw_nonzero_fraction": 1.0,
+        "saturation_fraction_among_valid": 0.0,
+        "rate_direction_saturation_fraction_among_valid": 0.0
+      },
+      "ulog": {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-26/11_17_03.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series15/run04/11_17_03.ulg",
+        "sha256": "5a13da5b7518113d148261748440a28b7049dfb03b3e88a4c109e1838fe530d5",
+        "bytes": 80490160
+      }
+    },
+    {
+      "run": "run05",
+      "seed": 17003,
+      "mode": 0,
+      "accepted": true,
+      "events": {
+        "ready": 30024000.0,
+        "takeoff_command": 30036000,
+        "reposition_command": 39284000.0,
+        "handoff_ready": 39644000.0,
+        "hover_start": 47776000.0,
+        "hover_end": 108444000.0,
+        "land_command": 108444000.0,
+        "landed_disarmed": 117704000.0
+      },
+      "observation_s": 60.668,
+      "velocity_rmse": [
+        0.0418940901574106,
+        0.008102700872423914,
+        0.002504778127655094
+      ],
+      "acceleration_tv": [
+        3.165052890777588,
+        2.8975045680999756,
+        2.4212076663970947
+      ],
+      "position_rmse": [
+        0.07447298499101027,
+        0.023028070516883235,
+        0.03476492458939153
+      ],
+      "yaw_rmse": 0.0001451492666414391,
+      "height": {
+        "rmse": 0.034662530664220474,
+        "mean": 0.024708810268368776,
+        "std": 0.024309786654139492,
+        "max_abs": 0.08492183685302734
+      },
+      "tilt": {
+        "rmse": 0.38296106978911987,
+        "mean": 0.33355212041098903,
+        "std": 0.18815462774898792,
+        "max_abs": 1.0828169584274292
+      },
+      "nu_peak": null,
+      "constraint_fraction": 0.0,
+      "hz": 100.0,
+      "maximum_gap_s": 0.012,
+      "local_output": {
+        "matched": 6067,
+        "denominator": 6067,
+        "coverage": 1.0,
+        "max_gap_s": 0.012,
+        "max_abs_error": 0.0
+      },
+      "attitude_output": {
+        "matched": 6067,
+        "denominator": 6067,
+        "coverage": 1.0,
+        "max_gap_s": 0.012,
+        "max_abs_error": 0.0
+      },
+      "mixer": {
+        "count": 15167,
+        "bit_histogram": {
+          "1": 15167
+        },
+        "feedback_valid_fraction": 1.0,
+        "raw_nonzero_fraction": 1.0,
+        "saturation_fraction_among_valid": 0.0,
+        "rate_direction_saturation_fraction_among_valid": 0.0
+      },
+      "ulog": {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-26/11_19_07.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series15/run05/11_19_07.ulg",
+        "sha256": "78a2e2f62e5ead40ff3f33bb09d58d45c3260314e45b1423a2ea0d9c5f2cc9e4",
+        "bytes": 81098724
+      }
+    },
+    {
+      "run": "run06",
+      "seed": 17003,
+      "mode": 1,
+      "accepted": true,
+      "events": {
+        "ready": 30016000.0,
+        "takeoff_command": 30036000,
+        "reposition_command": 39004000.0,
+        "handoff_ready": 39384000.0,
+        "hover_start": 47964000.0,
+        "hover_end": 107976000.0,
+        "land_command": 107976000.0,
+        "landed_disarmed": 117164000.0
+      },
+      "observation_s": 60.012,
+      "velocity_rmse": [
+        0.01438315375325431,
+        0.00792640024428963,
+        0.002497676953593989
+      ],
+      "acceleration_tv": [
+        22.586017608642578,
+        2.9057424068450928,
+        2.401855707168579
+      ],
+      "position_rmse": [
+        0.06087910787522164,
+        0.02334427796388852,
+        0.03478519168722731
+      ],
+      "yaw_rmse": 0.0001624059450968875,
+      "height": {
+        "rmse": 0.03468058349211405,
+        "mean": 0.02516170442749949,
+        "std": 0.023866954176363732,
+        "max_abs": 0.08412933349609375
+      },
+      "tilt": {
+        "rmse": 0.7154765614518461,
+        "mean": 0.6216997811410752,
+        "std": 0.3541131063884768,
+        "max_abs": 1.6800456047058105
+      },
+      "nu_peak": 0.1695999801158905,
+      "constraint_fraction": 0.0,
+      "hz": 100.0,
+      "maximum_gap_s": 0.012,
+      "local_output": {
+        "matched": 6001,
+        "denominator": 6001,
+        "coverage": 1.0,
+        "max_gap_s": 0.012,
+        "max_abs_error": 0.0
+      },
+      "attitude_output": {
+        "matched": 6001,
+        "denominator": 6001,
+        "coverage": 1.0,
+        "max_gap_s": 0.012,
+        "max_abs_error": 0.0
+      },
+      "mixer": {
+        "count": 15003,
+        "bit_histogram": {
+          "1": 15003
+        },
+        "feedback_valid_fraction": 1.0,
+        "raw_nonzero_fraction": 1.0,
+        "saturation_fraction_among_valid": 0.0,
+        "rate_direction_saturation_fraction_among_valid": 0.0
+      },
+      "ulog": {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-26/11_21_13.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series15/run06/11_21_13.ulg",
+        "sha256": "c9d08d7ffa5589be79b4dd84e3e67d9b9872333f1d920a227e59987137761413",
+        "bytes": 80531986
+      }
+    }
+  ],
+  "pairs": [
+    {
+      "accepted": true,
+      "checks": {
+        "velocity_0": true,
+        "position_0": true,
+        "velocity_1": true,
+        "position_1": true,
+        "velocity_2": true,
+        "position_2": true,
+        "yaw": true
+      },
+      "seed": 17001,
+      "imu_prefix_max_difference": 0.0,
+      "paired_noise": true
+    },
+    {
+      "accepted": true,
+      "checks": {
+        "velocity_0": true,
+        "position_0": true,
+        "velocity_1": true,
+        "position_1": true,
+        "velocity_2": true,
+        "position_2": true,
+        "yaw": true
+      },
+      "seed": 17002,
+      "imu_prefix_max_difference": 0.0,
+      "paired_noise": true
+    },
+    {
+      "accepted": true,
+      "checks": {
+        "velocity_0": true,
+        "position_0": true,
+        "velocity_1": true,
+        "position_1": true,
+        "velocity_2": true,
+        "position_2": true,
+        "yaw": true
+      },
+      "seed": 17003,
+      "imu_prefix_max_difference": 0.0,
+      "paired_noise": true
+    }
+  ],
+  "frozen_asset_count": 405,
+  "cpp_tests": 140,
+  "python_tests": 395,
+  "mean_x_rmse_pid": 0.0423446276064275,
+  "mean_x_rmse_esta": 0.01470168932289951,
+  "relative_mean_x_reduction": 0.6528086287699946,
+  "mean_x_tv_pid": 3.2525035540262857,
+  "mean_x_tv_esta": 22.5716609954834
+}

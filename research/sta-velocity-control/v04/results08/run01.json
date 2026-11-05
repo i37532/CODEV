@@ -1,0 +1,63 @@
+{
+  "source_head": "8df90c62a148d9b4b18c18e0c96796f1cebf932b",
+  "branch": "research/sta-velocity-control",
+  "binary_sha256": "9a18f907affbd4231e62603d2bd5db884887ef37343d88712e93b59ccd589f0a",
+  "runner_sha256": "0d669c7d71e38ac9659bcfa8f18618f1a4e6819798840238b3603a88ff915368",
+  "command": [
+    "./sitl/run.sh",
+    "--headless",
+    "--backend",
+    "gazebo",
+    "--model",
+    "iris"
+  ],
+  "pid_parameters_modified": false,
+  "success": false,
+  "events": [
+    {
+      "name": "ready",
+      "timestamp_us": 30056000.0
+    },
+    {
+      "name": "takeoff_command",
+      "timestamp_us": 30056000
+    },
+    {
+      "name": "reposition_command",
+      "timestamp_us": 38436000.0
+    },
+    {
+      "name": "handoff_ready",
+      "timestamp_us": 38756000.0
+    },
+    {
+      "name": "hover_start",
+      "timestamp_us": 47016000.0
+    }
+  ],
+  "scenario_sha256": "fcffd1d0ce5f5cf1020516c88dcd27c681a6d318a5202ba82325187fc471afc8",
+  "scenario_path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/protocol08/execution.json",
+  "simulation_speed_requested": 1.0,
+  "explicit_environment": {
+    "PX4_SITL_WORLD": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world",
+    "GAZEBO_MASTER_URI": "http://127.0.0.1:11345"
+  },
+  "launcher_pid": 1267396,
+  "error": "ValueError('Empty/nonmonotonic vehicle_attitude')",
+  "launcher_returncode": 0,
+  "logs": [
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/12_25_15.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series07/run01/12_25_15.ulg",
+      "sha256": "1ef6a9fd58ae673d6c297a04a6cec1f9488bde5bf6f1b7440c4db8f0af1220ae",
+      "bytes": 192990
+    },
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/12_25_16.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series07/run01/12_25_16.ulg",
+      "sha256": "de1f5a137d2d583621d684e751004cc18bc620d41850412368e39f6cb7380d34",
+      "bytes": 18543593
+    }
+  ],
+  "finished_utc": "2026-09-23T12:26:15Z"
+}

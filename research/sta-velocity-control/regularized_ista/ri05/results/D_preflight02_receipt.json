@@ -1,0 +1,765 @@
+{
+  "stage": "RI05-D",
+  "success": true,
+  "approved": false,
+  "source_head": "de1823566ec6c89cd416252db079d2044f41f905",
+  "counts": {
+    "cpp_unique_tests": 751,
+    "cpp_targets": 48,
+    "python_tests": 982,
+    "model_oracle_tests": 6,
+    "historical_accepted_replays": 18,
+    "historical_failure_audits": 2,
+    "new_flights": 0
+  },
+  "firmware_sha256": "34df28445e20ff4793b2f933dd9560e2710edaddbdfa76ca45073a5de9eaca08",
+  "frozen_sha256": "9a318cd8a58987ef101cd11eb5be1b77c880df9c8bbf02f40354888f887ce10e",
+  "generated_schema": {
+    "velocity_ctrl_selection": {
+      "ulog_format_bytes_including_nul": 1018,
+      "queue": 8,
+      "generated_sha256": "3e12e3e5184e9b5573a2affed61be1f9f28c1dfb9bea589db39b3d6c6d7be67d",
+      "header_sha256": "65f55776c55514895dad260064cdd9d41c28654356677e7d2f97ba3bdc7aff81"
+    },
+    "sta_velocity_ctrl_status": {
+      "ulog_format_bytes_including_nul": 1475,
+      "queue": 8,
+      "generated_sha256": "2229f14718321b1924021e6cb7c716b89bce0c061fbfdd04a108df28b0bef1a0",
+      "header_sha256": "01fdbb8a5f5cec079209fd28cc5ed39d99a9bbc8119960d948bbe5625b0f1901"
+    }
+  },
+  "model_limit": "Ideal, variable sample, noise, constrained and lagged models reported separately; 18 expected tiny-float rejection trajectories and six infeasible-limit cases are not convergence passes",
+  "not_executed": [
+    "MATLAB/Simulink rerun",
+    "flight",
+    "hardware",
+    "RI06",
+    "old R04/R05",
+    "tuning",
+    "push",
+    "Proper-ISTA integration"
+  ],
+  "commands": [
+    {
+      "name": "ri02_frozen_reference",
+      "exit_code": 0,
+      "wall_seconds": 0.11844068602658808,
+      "log_sha256": "be6e7fd525c799ff71a77e98ae95b655cb5f9b828d63b6295a371feb92f789dd"
+    },
+    {
+      "name": "source_package",
+      "exit_code": 0,
+      "wall_seconds": 0.007726962969172746,
+      "log_sha256": "3c8645f70ac39ed17189eefa215e985b114a8c32d9aec8c33b7d24d2b74d466f"
+    },
+    {
+      "name": "recorded_failure_fixture",
+      "exit_code": 0,
+      "wall_seconds": 1.067384091031272,
+      "log_sha256": "c681d011e02e3b3f50593acb6830bbb6d68409b7b034e626ca4b325b6e693d45"
+    },
+    {
+      "name": "configure_tests",
+      "exit_code": 0,
+      "wall_seconds": 0.5707140269805677,
+      "log_sha256": "c5af052f6fc38a8323734f4cabb9b37ded0766410a8db4043c6770cf61193f15"
+    },
+    {
+      "name": "build_test_targets",
+      "exit_code": 0,
+      "wall_seconds": 0.21447032201103866,
+      "log_sha256": "8c35b1682f73592d30612d7b0fabdb384fcfff35cb5a076cb48b85b1368aa794"
+    },
+    {
+      "name": "unit-RegularizedIstaVelocityControl",
+      "exit_code": 0,
+      "wall_seconds": 0.033999518025666475,
+      "log_sha256": "580c6977aa70bb610f689658d35e90e44a67373456ec9b8053bca4b1128b9b1e"
+    },
+    {
+      "name": "unit-PositionControl",
+      "exit_code": 0,
+      "wall_seconds": 0.004630898998584598,
+      "log_sha256": "66e9858cf2dc328e76779d465c83e69caf04cedb7775d13ffb2e0fc1cb91acd2"
+    },
+    {
+      "name": "unit-ControlMath",
+      "exit_code": 0,
+      "wall_seconds": 0.0035882849479094148,
+      "log_sha256": "c536db783b90094db2aaf58e7700e93ce12ffb38ca9d7f1a2b04e54a51e02d4f"
+    },
+    {
+      "name": "unit-Takeoff",
+      "exit_code": 0,
+      "wall_seconds": 0.005593175999820232,
+      "log_sha256": "aee7006df06648fc270f5eae86a1e07bda684ba71c7ce24e10d995107977a7ba"
+    },
+    {
+      "name": "unit-VelocityControl",
+      "exit_code": 0,
+      "wall_seconds": 0.015897743054665625,
+      "log_sha256": "bd213b5715075e309c775a0f70059f8ebed317a21c90a7ecde27ca280437381e"
+    },
+    {
+      "name": "unit-StaVelocityControl",
+      "exit_code": 0,
+      "wall_seconds": 0.031970907002687454,
+      "log_sha256": "8d134b4bcf575f35836ff218a1e87632711f03e70a5edb14cc4abcd2b3381ee8"
+    },
+    {
+      "name": "unit-RegularizedStaVelocityControl",
+      "exit_code": 0,
+      "wall_seconds": 0.0038908729911781847,
+      "log_sha256": "7926e677055add7b6827c0efe94b452082a786d755f228dc05ace1e40a5da040"
+    },
+    {
+      "name": "unit-StaVelocityProtection",
+      "exit_code": 0,
+      "wall_seconds": 0.0036563739995472133,
+      "log_sha256": "9c8fe0cd59074415ac69ae1f453c7baa62c1b43a483c9f7e29b8bf8b4e3234f2"
+    },
+    {
+      "name": "unit-VelocityEsta",
+      "exit_code": 0,
+      "wall_seconds": 0.01594256900716573,
+      "log_sha256": "a6a848ff4b79dc5a2e10e19ff2634da730af9f684216d7f0ac655e6fd7ebc923"
+    },
+    {
+      "name": "unit-VelocityEstaZ",
+      "exit_code": 0,
+      "wall_seconds": 0.008025427989196032,
+      "log_sha256": "ae6ec15ed1d9b9fca64ea3e288936b63b62a9bde7cbc67a143228154e21e370e"
+    },
+    {
+      "name": "unit-VelocityZIntegration",
+      "exit_code": 0,
+      "wall_seconds": 0.007837964047212154,
+      "log_sha256": "0d1ab55fbb01773fa65811f4e4e2bef60855da93226564f0572c29d3ad229e04"
+    },
+    {
+      "name": "unit-VelocityXYIntegration",
+      "exit_code": 0,
+      "wall_seconds": 0.018758833000902086,
+      "log_sha256": "9960fcc06bfaed6f971a2aa09d569a374e7d5621c118020f6ac56ee5681519d4"
+    },
+    {
+      "name": "unit-VelocityXYZIntegration",
+      "exit_code": 0,
+      "wall_seconds": 0.015818942978512496,
+      "log_sha256": "33d2a76a36eab1ea2c2e5f9b752db50b20cd4cab39e409a2fc5e7ff7c43c6b26"
+    },
+    {
+      "name": "unit-VelocityAxes",
+      "exit_code": 0,
+      "wall_seconds": 0.06598910497268662,
+      "log_sha256": "477d9b805d8a2e5aaee5033f1f867d1607144b02c24479cab2c4ecfd05df9036"
+    },
+    {
+      "name": "unit-VelocityDecimation",
+      "exit_code": 0,
+      "wall_seconds": 0.007841626007575542,
+      "log_sha256": "ff774ad39ab45c008a85163317559131fea965d662dd12e6aafeb0281d709dbf"
+    },
+    {
+      "name": "unit-RegularizedVelocityRegression",
+      "exit_code": 0,
+      "wall_seconds": 0.06440382200526074,
+      "log_sha256": "4ec71c9b65c5afce7884394de931365fc4b49fde9749e57403df7285e6f78afc"
+    },
+    {
+      "name": "unit-RegularizedVelocityIntegration",
+      "exit_code": 0,
+      "wall_seconds": 0.007856839976739138,
+      "log_sha256": "1ad8fbafb11956d627f511042ffa66fe68eb24a453093bb321dde0d0414423ec"
+    },
+    {
+      "name": "unit-VelocityResearchTask",
+      "exit_code": 0,
+      "wall_seconds": 0.004090292030014098,
+      "log_sha256": "61f3ca672dafff0eb4d33ad6e123b21615b5f013cd864b0baf716746390f737c"
+    },
+    {
+      "name": "unit-VelocityAblationTask",
+      "exit_code": 0,
+      "wall_seconds": 0.1156936910119839,
+      "log_sha256": "69319a1d34e5e820c3e5cc3dbff9714411376b444de6428165d68b4017ef7961"
+    },
+    {
+      "name": "unit-RateControl",
+      "exit_code": 0,
+      "wall_seconds": 0.0035187749890610576,
+      "log_sha256": "a457cb84d53aeb021996e4ac9da269e567ea7403968ca71a19ca5e2d915fa2c4"
+    },
+    {
+      "name": "unit-RateControlDispatcher",
+      "exit_code": 0,
+      "wall_seconds": 0.007771803007926792,
+      "log_sha256": "66d233c166265cf5e1362c57cffb38fc5f4dfa22989e7aa10bd3615dd6d5a4e1"
+    },
+    {
+      "name": "unit-StaRateControl",
+      "exit_code": 0,
+      "wall_seconds": 0.007683506002649665,
+      "log_sha256": "1cb4fe30cb35d763e3f4a746c9fd06f526f9c3dc28c09c1edfa7a0eddd55ecbf"
+    },
+    {
+      "name": "unit-ControllerSelection",
+      "exit_code": 0,
+      "wall_seconds": 0.002942077990155667,
+      "log_sha256": "57bd1553e85c82f56343c7bd16eaf60842216c4f7adf36d49aa089881c766cb8"
+    },
+    {
+      "name": "unit-StaProtection",
+      "exit_code": 0,
+      "wall_seconds": 0.03266191598959267,
+      "log_sha256": "36bb7913064f511eb99aec87ae83e72295a836039adde93325adf39de402dd6a"
+    },
+    {
+      "name": "unit-StaAxesApplication",
+      "exit_code": 0,
+      "wall_seconds": 0.03242643899284303,
+      "log_sha256": "39364b8a42519a461ae0ce7257d83f573c28d8f3a549a875e6fd3a0523cce56e"
+    },
+    {
+      "name": "unit-TakeoffNuManager",
+      "exit_code": 0,
+      "wall_seconds": 0.004867429030127823,
+      "log_sha256": "1b5381923c66e8d8d75641785532eaaa793f46031a565f301a8ab6573fda30f4"
+    },
+    {
+      "name": "unit-IstaRateControl",
+      "exit_code": 0,
+      "wall_seconds": 0.0037403370370157063,
+      "log_sha256": "3a456422a63de2cc6e69092b881d8db92bdc23337583ad8f8a0332d95c3a6b2d"
+    },
+    {
+      "name": "unit-IstaIntegration",
+      "exit_code": 0,
+      "wall_seconds": 0.033350155979860574,
+      "log_sha256": "9c0fd2eccfb7d7797d4ca8fedce0a15f85394a711f06982d351caa08ddea6729"
+    },
+    {
+      "name": "unit-ProperIstaRateControl",
+      "exit_code": 0,
+      "wall_seconds": 0.003671567013952881,
+      "log_sha256": "38de812611d94e5ecc9651afea5de3e890d5b49f6fadc7f63621b721e32b4d88"
+    },
+    {
+      "name": "unit-ProperIstaIntegration",
+      "exit_code": 0,
+      "wall_seconds": 0.003936319029890001,
+      "log_sha256": "c79db63921d8f9fe19631e597cb2c173828a675b18024d42f5b274069c50505c"
+    },
+    {
+      "name": "unit-ProperIstaProtection",
+      "exit_code": 0,
+      "wall_seconds": 0.004271141020581126,
+      "log_sha256": "5cb22270f63a4086eaba1c524b2cfa5b4fd71198c31c17e271aeb33fcc2f500e"
+    },
+    {
+      "name": "unit-ControlDecimation",
+      "exit_code": 0,
+      "wall_seconds": 0.0078117899829521775,
+      "log_sha256": "a56d502f9e1aa560412fb181512d68007eadd4d0bbf033834f8168c5d61253ce"
+    },
+    {
+      "name": "unit-AttitudeControl",
+      "exit_code": 0,
+      "wall_seconds": 0.003681935020722449,
+      "log_sha256": "7f3fbc1dc90aa4376e9a979a40f2534f96867b44f98e2223434027b8482a4a6d"
+    },
+    {
+      "name": "functional-VelocitySelectionParam",
+      "exit_code": 0,
+      "wall_seconds": 0.06416055600857362,
+      "log_sha256": "5f5c38c4e1307d34de4b0996cefeff4c7b60f23a270ada9c84e63da7f1982a68"
+    },
+    {
+      "name": "functional-VelocityDiagnosticInput",
+      "exit_code": 0,
+      "wall_seconds": 0.0023175040259957314,
+      "log_sha256": "b52d9e5aca81a0100b73e3976b27adefbe030ab8d339d1f6c41602f7e022415d"
+    },
+    {
+      "name": "functional-VelocityModule",
+      "exit_code": 0,
+      "wall_seconds": 0.26472097099758685,
+      "log_sha256": "3a32ffb468550f264b7ff19816d9a6033e9b46c4b22d1aeedf17ea309bfd722d"
+    },
+    {
+      "name": "functional-RegularizedVelocityParam",
+      "exit_code": 0,
+      "wall_seconds": 0.06479895598022267,
+      "log_sha256": "32ea5a1db2d28e8163fc22c40bb8fbe39290802b10fb3410ffc689175a46a3fe"
+    },
+    {
+      "name": "functional-RegularizedVelocityModule",
+      "exit_code": 0,
+      "wall_seconds": 0.11420241196174175,
+      "log_sha256": "cf15512375deda5f617aa0b36e0d56c9c1db6f131e919f649715726e1e66ad94"
+    },
+    {
+      "name": "unit-RegularizedIstaRegression",
+      "exit_code": 0,
+      "wall_seconds": 0.11578650900628418,
+      "log_sha256": "1ccd5f4d79a50eb5fc637371884e0fdbc23584929ab24646554631d51a9c8f90"
+    },
+    {
+      "name": "unit-RegularizedIstaProtection",
+      "exit_code": 0,
+      "wall_seconds": 0.006505745055619627,
+      "log_sha256": "5d7e95770779ad9670a6be66f8e84cbc21be0238411be56fa0aa13e12585aa88"
+    },
+    {
+      "name": "unit-RegularizedIstaPosition",
+      "exit_code": 0,
+      "wall_seconds": 0.008284830953925848,
+      "log_sha256": "6aa308de6ccaf1b20a5abf3ac543485735703955a30ac54e9a4ed90189b14b57"
+    },
+    {
+      "name": "unit-RegularizedIstaNonSitl",
+      "exit_code": 0,
+      "wall_seconds": 0.0036474689841270447,
+      "log_sha256": "218e4062ca98e3aa3303db7f767470edaf4d6d0d3226beaa5de2a2b9fce71fe9"
+    },
+    {
+      "name": "functional-RegularizedIstaVelocityParam",
+      "exit_code": 0,
+      "wall_seconds": 0.018934129970148206,
+      "log_sha256": "79955ab5a7242f76f114aff6f542134c6367f3f0294c31f0d240c4f63bef2557"
+    },
+    {
+      "name": "functional-RegularizedIstaVelocityModule",
+      "exit_code": 0,
+      "wall_seconds": 0.16510062897577882,
+      "log_sha256": "0df079f478803449e0b2ed6a750d7af0a3e3b09fd3207b6d441dab8e245e9cfb"
+    },
+    {
+      "name": "functional-VehicleIMU",
+      "exit_code": 0,
+      "wall_seconds": 0.21553988294908777,
+      "log_sha256": "33e411efa955387f4c62591f607ca085b131478f1fa89e0c5d8dc9ac42c5ca3c"
+    },
+    {
+      "name": "functional-EKF2SelectorTiming",
+      "exit_code": 0,
+      "wall_seconds": 0.06510278698988259,
+      "log_sha256": "f31ff2945ee78356f35f7af9d204f2760edf57437f9993182c0ff99ff566e4d7"
+    },
+    {
+      "name": "functional-EKF2Selector",
+      "exit_code": 0,
+      "wall_seconds": 0.0643557509756647,
+      "log_sha256": "dbb5b4de2390e7e48cdfd6448a08eb6d56a49f346773f02c311c6a09d26bb9dc"
+    },
+    {
+      "name": "functional-EstimatorDiagnosticTopics",
+      "exit_code": 0,
+      "wall_seconds": 0.007919454015791416,
+      "log_sha256": "771be29c0cee59fcaf5b76834fdace5ed97ec9778873e35f1a36eb7e93f85ce7"
+    },
+    {
+      "name": "strict_cxx14",
+      "exit_code": 0,
+      "wall_seconds": 0.16770474897930399,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "py00_tools_test_tools",
+      "exit_code": 0,
+      "wall_seconds": 4.481354305986315,
+      "log_sha256": "4b5b2a13c9677994443828431307e33f1f5681564c6b784df5a2f18fe19da189"
+    },
+    {
+      "name": "py01_r03_position11_test_adapter",
+      "exit_code": 0,
+      "wall_seconds": 0.715862917015329,
+      "log_sha256": "ca05da6f9cd07b326004c319fad86d1984a56a8a5d87a289e4aedfc1e22b1842"
+    },
+    {
+      "name": "py02_r03_position11_test_callbacks",
+      "exit_code": 0,
+      "wall_seconds": 0.16615325200837106,
+      "log_sha256": "311ccd0abb1b81ebcfad22ab42711a5a2673b606f93b01357ee3681a9b7b8e7b"
+    },
+    {
+      "name": "py03_r03_position11_test_policy",
+      "exit_code": 0,
+      "wall_seconds": 0.21606631600297987,
+      "log_sha256": "b132f67cfafc913f9a0f2ffd387c52a3239225658a1b429d694ea88a4c2fc771"
+    },
+    {
+      "name": "py04_r03_position11_test_recorded",
+      "exit_code": 0,
+      "wall_seconds": 6.493510160013102,
+      "log_sha256": "b50de418fb2dff9a3d6e156dc6b3a3c07a65331519286eb08f49bdc78b4788bf"
+    },
+    {
+      "name": "py05_r03_warmup10_test_evidence",
+      "exit_code": 0,
+      "wall_seconds": 0.06406884000170976,
+      "log_sha256": "9666de1f56cdacc1534f5f66cc61c246831bc274203df01e69ad6fb390528ca0"
+    },
+    {
+      "name": "py06_r03_warmup10_test_failed_prefix",
+      "exit_code": 0,
+      "wall_seconds": 0.265024041000288,
+      "log_sha256": "b05765043cfbcac0b17e0ef67c0bba40f9f559d384d4a52414d6ca6551ce86d8"
+    },
+    {
+      "name": "py07_r03_warmup10_test_readiness",
+      "exit_code": 0,
+      "wall_seconds": 0.06410671095363796,
+      "log_sha256": "9ffa3f724c3704259bd161920cc014b7c8d92cdc1d286a5405f199a75dc77a19"
+    },
+    {
+      "name": "py08_r03_monitor02_test_incremental",
+      "exit_code": 0,
+      "wall_seconds": 0.2650636120233685,
+      "log_sha256": "ab8425150c9468b7dd6657b9268f5b5b9172bc4b4776714bf17e8ced643b84b5"
+    },
+    {
+      "name": "py09_r03_monitor02_test_integration",
+      "exit_code": 0,
+      "wall_seconds": 1.3174932580441236,
+      "log_sha256": "656b09cec90c7e39526049c17784e0a84fe1c9413d0cc3fe06f69ff7a5765b62"
+    },
+    {
+      "name": "py10_r03_prearm04_test_adversarial",
+      "exit_code": 0,
+      "wall_seconds": 1.171787499974016,
+      "log_sha256": "b15cbe91eda8274ee794b79ce5739b84871ee289ddecb4240c8d1e747f475829"
+    },
+    {
+      "name": "py11_r03_prearm04_test_integration",
+      "exit_code": 0,
+      "wall_seconds": 1.1169997199904174,
+      "log_sha256": "e7cbcae3840365fe0e1ab209410fc5f5bbed395894806b094a888bdac7c4c6c3"
+    },
+    {
+      "name": "py12_r03_prearm04_test_replay",
+      "exit_code": 0,
+      "wall_seconds": 0.31473120499867946,
+      "log_sha256": "dc4cf1f035ae98f74a1bdf3b50013d1e04223960fb38c2ed78aa94ee1a266c79"
+    },
+    {
+      "name": "py13_r03_numeric05_test_checker",
+      "exit_code": 0,
+      "wall_seconds": 0.2645248190383427,
+      "log_sha256": "a5ac180d5ab6ed95861a4390a2dfb6a12e747ab2c07929a78330be7e2b228149"
+    },
+    {
+      "name": "py14_r03_handoff06_test_adapter",
+      "exit_code": 0,
+      "wall_seconds": 1.3210168280056678,
+      "log_sha256": "f1dce2e80d310842e3eb869080b0625356fefb1ba29a21dddf72ff14d94b3f44"
+    },
+    {
+      "name": "py15_r03_upstream08_test_analyzer",
+      "exit_code": 0,
+      "wall_seconds": 1.220886307011824,
+      "log_sha256": "f36683081f0b03be7b7ecbab918ec49f3fcac28204d6ed596f39d43708ddd997"
+    },
+    {
+      "name": "py16_r03_upstream08_test_protocol",
+      "exit_code": 0,
+      "wall_seconds": 1.722212980967015,
+      "log_sha256": "875b188b6be08ff8e77bfdd1db61a1ad5651a7fdb07558a3e513967c0feeacbb"
+    },
+    {
+      "name": "py17_r03_upstream08_test_runner",
+      "exit_code": 0,
+      "wall_seconds": 6.0859644649899565,
+      "log_sha256": "605c28a9810691f12fceac43ab026701a70e2c5053d0e04272c57218de94c75a"
+    },
+    {
+      "name": "py18_r03_upstream08_test_timing",
+      "exit_code": 0,
+      "wall_seconds": 0.21542871702695265,
+      "log_sha256": "e58ea79ab7bf5610e79361bd0649f34f27118403b7a508448afcb27c4d1ea4f6"
+    },
+    {
+      "name": "py19_r03_upstream08_test_verify",
+      "exit_code": 0,
+      "wall_seconds": 0.21476559800794348,
+      "log_sha256": "e70c0892d8e06803840d6056c513b1ba94abbb4fb2d6b4d7a383eb5f577226a4"
+    },
+    {
+      "name": "py20_protocol02_test_cli_clock",
+      "exit_code": 0,
+      "wall_seconds": 0.2656498599681072,
+      "log_sha256": "d3b98e492f767a4bfff5375294cd6fd96028d778deff3cec3d558003773ec742"
+    },
+    {
+      "name": "py21_protocol03b_test_validation",
+      "exit_code": 0,
+      "wall_seconds": 5.033752680988982,
+      "log_sha256": "89b2c63ad80ee93894235b60ef3e97900c7e52a43faa79f8cda793fa070da2b9"
+    },
+    {
+      "name": "py22_protocol03b_test_task_output",
+      "exit_code": 0,
+      "wall_seconds": 0.3144622269901447,
+      "log_sha256": "681b5fdab96b3f4b3ea3cc23f4fb4d2ad6088b1d4ab603f33550acb0cda33bbd"
+    },
+    {
+      "name": "py23_protocol04_test_pilot",
+      "exit_code": 0,
+      "wall_seconds": 7.847934693971183,
+      "log_sha256": "6d7977eaa5b37d7662ccc415df30159ed163f8f4eb540eb42815510b777ee7cd"
+    },
+    {
+      "name": "py24_protocol04_test_design",
+      "exit_code": 0,
+      "wall_seconds": 0.3155237510218285,
+      "log_sha256": "56add7522ad17337fc9b50d9f0601a5677a619ce06df93ffe9970faa6f34b75d"
+    },
+    {
+      "name": "py25_protocol04_test_formal_design",
+      "exit_code": 0,
+      "wall_seconds": 0.21645191201241687,
+      "log_sha256": "a1f3b680e6cdf22ab490b2f0d565d4d10b69df63fe12e3358c18286b655c6ab6"
+    },
+    {
+      "name": "py26_evidence_tools_test_replay_batch",
+      "exit_code": 0,
+      "wall_seconds": 0.06499515601899475,
+      "log_sha256": "87c60991f8bf5ff67e50756d1cb28057dda10b5919f220859feb30a1e080dfec"
+    },
+    {
+      "name": "py27_protocol05_test_mass",
+      "exit_code": 0,
+      "wall_seconds": 7.69824143598089,
+      "log_sha256": "c4519896f7de150fa5d5248b465af3d2f5e69095c8207ddb0dfd0f427db917b1"
+    },
+    {
+      "name": "py28_formal_test_runtime",
+      "exit_code": 0,
+      "wall_seconds": 18.983981514989864,
+      "log_sha256": "c47b8542ec288b00306f79b9c81862da599d0cfb9a45b135053fe155747ba29a"
+    },
+    {
+      "name": "py29_formal_test_formal_package",
+      "exit_code": 0,
+      "wall_seconds": 0.4153018289944157,
+      "log_sha256": "3829d931a60823ef14a75e9aa07b92e3ad4c40d9de1199ebc8bd08b01db5ee5e"
+    },
+    {
+      "name": "py30_evidence_tools_test_qualified_gate_summary",
+      "exit_code": 0,
+      "wall_seconds": 0.2188501869677566,
+      "log_sha256": "267326d210b7fd5cc869662e17884af425092a6cce5e4b36d885d33391920a9b"
+    },
+    {
+      "name": "py31_ri04_hte_fix_test_fixture",
+      "exit_code": 0,
+      "wall_seconds": 1.2217469729948789,
+      "log_sha256": "73834c84bd6a13b19f7ee47cd70c882c3555e59c227a92bc199f6d5890ef4b50"
+    },
+    {
+      "name": "py32_ri04_hte_fix_test_verify",
+      "exit_code": 0,
+      "wall_seconds": 0.11418823600979522,
+      "log_sha256": "c4e394aa2d283e8c1466e555ff568b9a2c129d47849147b85a3b190402f4dc39"
+    },
+    {
+      "name": "py33_ri04_revision01_test_receipt",
+      "exit_code": 0,
+      "wall_seconds": 0.21475450799334794,
+      "log_sha256": "382d004d7684fe4d786d1e148d4befa47e2a975879005e9da2bd453ca9507f1f"
+    },
+    {
+      "name": "py34_tools_test_cache",
+      "exit_code": 0,
+      "wall_seconds": 3.779168634035159,
+      "log_sha256": "2566d5509d2d1d949b3501ef952f89005a3b096481faeb358a007239f473e21a"
+    },
+    {
+      "name": "py35_tools_test_tools",
+      "exit_code": 0,
+      "wall_seconds": 4.685420223977417,
+      "log_sha256": "9a9cc29c7b8ac35b21f32051349c4e196762ef5929cc4b27367d1e12e91f4470"
+    },
+    {
+      "name": "py36_ri05_test_freeze",
+      "exit_code": 0,
+      "wall_seconds": 0.3648042099666782,
+      "log_sha256": "02cbc752d66f4d0fc906de16c393af0398727e92e5efc641361b0a31e472c01d"
+    },
+    {
+      "name": "py37_ri05_test_protocol",
+      "exit_code": 0,
+      "wall_seconds": 0.11430504999589175,
+      "log_sha256": "34ee88d48526fad89fec6a71d8ea2f10ec8e3c20b3aa7c462076516c5d355980"
+    },
+    {
+      "name": "py38_tools_test_tools",
+      "exit_code": 0,
+      "wall_seconds": 7.091250553959981,
+      "log_sha256": "d1960c9d2ad1f1bb08e4afdeb7c20c263f0a2749ab3afe7a24a07b4b2bbd1d09"
+    },
+    {
+      "name": "py39_tools_test_transport",
+      "exit_code": 0,
+      "wall_seconds": 2.5793106560013257,
+      "log_sha256": "4ed984f7621be3267f055a8366d02dc4ef707f02286156d02063d5cbf9a27a05"
+    },
+    {
+      "name": "r02_tools",
+      "exit_code": 0,
+      "wall_seconds": 0.7682969230227172,
+      "log_sha256": "24b1c6a194d7b2050d02dfd7d2b1dcb91948a14bc2184d86f1447dc93c941098"
+    },
+    {
+      "name": "model_reference",
+      "exit_code": 0,
+      "wall_seconds": 32.7994791350211,
+      "log_sha256": "29d667b26b80037e96c34d635d10520f871eca6b1116ed5c79e232c2a676d535"
+    },
+    {
+      "name": "history_X_001",
+      "exit_code": 0,
+      "wall_seconds": 22.20770360698225,
+      "log_sha256": "d30623c90a22541c34a48de32d61963028b72e63025978d24402c94a97098d52"
+    },
+    {
+      "name": "history_X_002",
+      "exit_code": 0,
+      "wall_seconds": 22.507317657000385,
+      "log_sha256": "0cf8ada0b4e5a9ffb235edcfe4b9f95f6f653db9dc96f0d9549ead02f77eeb11"
+    },
+    {
+      "name": "history_X_003",
+      "exit_code": 0,
+      "wall_seconds": 25.818397968017962,
+      "log_sha256": "ac8ebd872fc03024bfe7b38a7489270f5f014e4e3ae1bd2e1f75ec1e4bac78f4"
+    },
+    {
+      "name": "history_Z_010",
+      "exit_code": 0,
+      "wall_seconds": 20.995746190019418,
+      "log_sha256": "afda10807a0d3855cdf94a2979d58a33c9d0df422f3304c3f199523c640097c8"
+    },
+    {
+      "name": "history_Z_011",
+      "exit_code": 0,
+      "wall_seconds": 25.916289072018117,
+      "log_sha256": "4f2d45e73ecad88ad510c91b42c2418927b4db5beb170bd6af0ecee16159aa8c"
+    },
+    {
+      "name": "history_Z_012",
+      "exit_code": 0,
+      "wall_seconds": 21.91006807697704,
+      "log_sha256": "86c52bfc3485c352128af566d0f2c97b03a09d6e9168503cd19e4c1d210ba506"
+    },
+    {
+      "name": "history_C_019",
+      "exit_code": 0,
+      "wall_seconds": 20.743374031968415,
+      "log_sha256": "94716b0b14ff02292a20cd0962f05c98a640d0830c9fa1440a276244e8325fb4"
+    },
+    {
+      "name": "history_C_020",
+      "exit_code": 0,
+      "wall_seconds": 20.5633698659949,
+      "log_sha256": "5b1e611ab67e91bb818b11a9464a5e85922e58991c6f038687ff8c52aad06233"
+    },
+    {
+      "name": "history_C_021",
+      "exit_code": 0,
+      "wall_seconds": 28.49556074902648,
+      "log_sha256": "c93aa36da1a52828bb65ded339d174a1add26e9bd963a0f9d2842b158221280e"
+    },
+    {
+      "name": "history_D_028",
+      "exit_code": 0,
+      "wall_seconds": 32.44673456501914,
+      "log_sha256": "38cbb25bbecc7a2bc540a4b1ab8ef5557c11b439b04077460800a196f77f2102"
+    },
+    {
+      "name": "history_D_029",
+      "exit_code": 0,
+      "wall_seconds": 44.0784710959997,
+      "log_sha256": "0f19f50f0499ca330b4170ff886037cb439b9a1f5f57154d19c7d40324e2ba8a"
+    },
+    {
+      "name": "history_D_030",
+      "exit_code": 0,
+      "wall_seconds": 32.646096604003105,
+      "log_sha256": "8f1cf4292e8af1e80080fde290f35b5a0d77fda6792348f5053ee935d7343a8e"
+    },
+    {
+      "name": "ri03_X_001",
+      "exit_code": 0,
+      "wall_seconds": 23.855231910012662,
+      "log_sha256": "4718e5a1cdae7652b52d6b604725385489e36d1c3723941c1ae0017893067d6a"
+    },
+    {
+      "name": "ri03_X_002",
+      "exit_code": 0,
+      "wall_seconds": 28.12421074003214,
+      "log_sha256": "a4ed808131d93182aac74eef71e3bfc8fc6d88c2a7f46f2f10a8ca0d1afa9c01"
+    },
+    {
+      "name": "ri03_X_003",
+      "exit_code": 0,
+      "wall_seconds": 25.70771941600833,
+      "log_sha256": "c473162d82e7e4963f048ac3df0154c640495ef992bc690afbc877261c29fdc2"
+    },
+    {
+      "name": "ri04_Z_001",
+      "exit_code": 0,
+      "wall_seconds": 22.242517663980834,
+      "log_sha256": "506f95f207dee4b102b3c32cac0bc144441901b065069948eee4090fbe751271"
+    },
+    {
+      "name": "ri04_Z_002",
+      "exit_code": 0,
+      "wall_seconds": 26.35797882801853,
+      "log_sha256": "efdb5ba0f94f3cbb67771ca16823058e4428cbc283df58e5153e33b2159e82fc"
+    },
+    {
+      "name": "ri04_Z_003",
+      "exit_code": 0,
+      "wall_seconds": 26.30963252001675,
+      "log_sha256": "997ea5f0c344a00953fb026bbc7ccb0249c5e882786246c1323955d5d5b4f473"
+    },
+    {
+      "name": "original_failure_exact_prefix",
+      "exit_code": 0,
+      "wall_seconds": 3.3740790559677407,
+      "log_sha256": "5373e235d3903ba8787073914a815755c07788f9d85efd724c19440034ab6914"
+    },
+    {
+      "name": "build_sitl",
+      "exit_code": 0,
+      "wall_seconds": 7.499619125970639,
+      "log_sha256": "d070091ddde9e88ea6de3b6e33d8699f85865ad6ee7f1a8c75b1bcb9177474da"
+    },
+    {
+      "name": "gazebo_build_only",
+      "exit_code": 0,
+      "wall_seconds": 0.3191056699724868,
+      "log_sha256": "f0d69c065a37b774ce973a42328870749fe612caf106649aeb417a3bfc10262d"
+    },
+    {
+      "name": "diff_check",
+      "exit_code": 0,
+      "wall_seconds": 0.11405317799653858,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "external_evidence": {
+    "preflight01": {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI05/D/preflight01/evidence.json",
+      "bytes": 558966,
+      "sha256": "20d3381431d4c8d15a05914aca8ed00edcdf8f3f93ab9f46d4f0331716332904"
+    },
+    "preflight02": {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI05/D/preflight02/evidence.json",
+      "bytes": 798251,
+      "sha256": "bebc23bd6c5fe48e7b35606b213ea7f68319cc5595d7ba959d754f1250677a3d"
+    }
+  },
+  "scope": "Preflight, not flight qualification. Complete raw commands/XML/reference/replay evidence remain externally indexed."
+}

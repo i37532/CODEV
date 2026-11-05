@@ -1,0 +1,16 @@
+{
+  "milestone": "M06",
+  "version": 1,
+  "frozen_before_esta_flight": true,
+  "date": "2026-09-16",
+  "model": "Iris 10016 quad_w; empty_grey.world",
+  "scenario_parameters": {"MPC_LAND_SPEED": 0.3, "LNDMC_Z_VEL_MAX": 0.3},
+  "hover_seconds": 60,
+  "trigger": 4,
+  "tracking_seconds": 36,
+  "windows": {"yaw_only": [0,12], "synchronous_low": [12,24], "synchronous_repeat": [24,36]},
+  "excitation": {"publisher": "existing mc_att_control only; position/attitude/thrust source unchanged", "amplitudes_rad_s": [0.04,0.08,0.12], "period_seconds": 4, "start_after_hover_seconds": 15, "phase_seconds": 12, "yaw_frame": "world-z mapped by q.inverse().dcm_z() to body rates, original attitude quaternion law retained"},
+  "limits": {"tilt_deg": 15, "height_error_m": 1, "rate_rad_s": 1, "roll_command_abs": 0.15, "pitch_command_abs": 0.15, "yaw_command_abs": 1.0, "esta_command_abs": 0.15, "nu_abs_rad_s2": 3, "rmse_ratio_max": 1.25},
+  "analysis": {"ratio": "Each ESTA R/P/Y rate-error RMSE <= 1.25 times three PID median, in hover, tracking and every fixed phase; no adaptive floor", "yaw_command_bound": "New yaw acceptance bound is normalized physical maximum 1; existing M05 PID has liftoff peaks up to .698. ESTA internal bound remains .15 on every selected axis. R/P previous limits unchanged.", "staging": "First separate trigger=3 yaw-only PID and ESTA flights, then trigger=4 comparison; AXES=1 and 3 regress historical scenes separately", "fault_policy": "No automatic PID takeover. Latch and suppress publication; host SITL abort. Disarm reset before mode changes.", "scope": "Small rate excitation with original attitude loop active, not large-heading mission or hardware certification"},
+  "required": {"each_mode_repeats": 3, "nan": 0, "fallback": 0, "abort": 0, "failsafe": 0, "landed_disarmed": true}
+}

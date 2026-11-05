@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="26" failures="0" disabled="0" errors="0" timestamp="2026-10-24T09:31:52" time="0.036" name="AllTests">
+  <testsuite name="VelocityAxesBoundary" tests="8" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="InvalidRequestCannotContaminateEffectiveGains" status="run" time="0" classname="VelocityAxesBoundary" />
+    <testcase name="NewMasksNeverAdmitDivisorsTwoOrFour" status="run" time="0" classname="VelocityAxesBoundary" />
+    <testcase name="NewMasksFaultTimeMeasurementResetAndSameSample" status="run" time="0.001" classname="VelocityAxesBoundary" />
+    <testcase name="CoupledGroundHandoverHteContactAndRemainingPid" status="run" time="0" classname="VelocityAxesBoundary" />
+    <testcase name="CoupledInactiveComponentsReprimeWithoutStaleNu" status="run" time="0" classname="VelocityAxesBoundary" />
+    <testcase name="CoupledInvalidLastSeedAndFeedbackAreAtomic" status="run" time="0" classname="VelocityAxesBoundary" />
+    <testcase name="HandoverCannotClipAndHteFailureCannotTakeover" status="run" time="0" classname="VelocityAxesBoundary" />
+    <testcase name="ConstraintsFreezeSelectedStatesAndKeepOtherPid" status="run" time="0" classname="VelocityAxesBoundary" />
+  </testsuite>
+  <testsuite name="VelocityAxesRegression" tests="1" failures="0" disabled="0" errors="0" time="0.018">
+    <testcase name="ExistingMasksTwoSequencesEach2048Bitwise" status="run" time="0.018" classname="VelocityAxesRegression" />
+  </testsuite>
+  <testsuite name="VelocityAxesModel" tests="1" failures="0" disabled="0" errors="0" time="0.017">
+    <testcase name="IndependentDoublePlantWithAttitudeMotorLagAndCoupling" status="run" time="0.017" classname="VelocityAxesModel" />
+  </testsuite>
+  <testsuite name="AllMasks/VelocityAxes" tests="16" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="SignedAdmissionAndExclusiveAxesWithOneFeedforward/0" value_param="0" status="run" time="0" classname="AllMasks/VelocityAxes" />
+    <testcase name="SignedAdmissionAndExclusiveAxesWithOneFeedforward/1" value_param="1" status="run" time="0" classname="AllMasks/VelocityAxes" />
+    <testcase name="SignedAdmissionAndExclusiveAxesWithOneFeedforward/2" value_param="2" status="run" time="0" classname="AllMasks/VelocityAxes" />
+    <testcase name="SignedAdmissionAndExclusiveAxesWithOneFeedforward/3" value_param="3" status="run" time="0" classname="AllMasks/VelocityAxes" />
+    <testcase name="SignedAdmissionAndExclusiveAxesWithOneFeedforward/4" value_param="4" status="run" time="0" classname="AllMasks/VelocityAxes" />
+    <testcase name="SignedAdmissionAndExclusiveAxesWithOneFeedforward/5" value_param="5" status="run" time="0" classname="AllMasks/VelocityAxes" />
+    <testcase name="SignedAdmissionAndExclusiveAxesWithOneFeedforward/6" value_param="6" status="run" time="0" classname="AllMasks/VelocityAxes" />
+    <testcase name="SignedAdmissionAndExclusiveAxesWithOneFeedforward/7" value_param="7" status="run" time="0" classname="AllMasks/VelocityAxes" />
+    <testcase name="ArmedPendingCancellationDisarmAndFreshState/0" value_param="0" status="run" time="0" classname="AllMasks/VelocityAxes" />
+    <testcase name="ArmedPendingCancellationDisarmAndFreshState/1" value_param="1" status="run" time="0" classname="AllMasks/VelocityAxes" />
+    <testcase name="ArmedPendingCancellationDisarmAndFreshState/2" value_param="2" status="run" time="0" classname="AllMasks/VelocityAxes" />
+    <testcase name="ArmedPendingCancellationDisarmAndFreshState/3" value_param="3" status="run" time="0" classname="AllMasks/VelocityAxes" />
+    <testcase name="ArmedPendingCancellationDisarmAndFreshState/4" value_param="4" status="run" time="0" classname="AllMasks/VelocityAxes" />
+    <testcase name="ArmedPendingCancellationDisarmAndFreshState/5" value_param="5" status="run" time="0" classname="AllMasks/VelocityAxes" />
+    <testcase name="ArmedPendingCancellationDisarmAndFreshState/6" value_param="6" status="run" time="0" classname="AllMasks/VelocityAxes" />
+    <testcase name="ArmedPendingCancellationDisarmAndFreshState/7" value_param="7" status="run" time="0" classname="AllMasks/VelocityAxes" />
+  </testsuite>
+</testsuites>

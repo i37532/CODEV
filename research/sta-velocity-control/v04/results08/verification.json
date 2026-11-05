@@ -1,0 +1,113 @@
+{
+  "evidence": {
+    "protocol08_verify01": {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/protocol08_verify01/evidence.json",
+      "sha256": "a46d37dc88269e4a5363c50a361eabf98602fb7bbd3920e7b9096c3e4c1be2ab",
+      "evidence": {
+        "kind": "offline_only_no_flight",
+        "source_head": "1f743f779f591abd57585911f391f64f292497f9"
+      }
+    },
+    "protocol08_verify02": {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/protocol08_verify02/evidence.json",
+      "sha256": "ee10955d656b762f0b967520392969d8bf348cf8c787209925ad80a42bf37a27",
+      "evidence": {
+        "kind": "offline_only_no_flight",
+        "source_head": "1f743f779f591abd57585911f391f64f292497f9",
+        "success": true,
+        "cpp_tests": 109,
+        "python_tests": 222
+      }
+    },
+    "protocol08_imu01": {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/protocol08_imu01/evidence.json",
+      "sha256": "9629816b433f9721de3879c50466f907cf6e2cf7f4447c2e4f9b785f506a6732",
+      "evidence": {
+        "kind": "offline_actual_sources_not_flight",
+        "head": "1f743f779f591abd57585911f391f64f292497f9",
+        "passed": true,
+        "unique_gtests": 11,
+        "tests": {
+          "repaired": {
+            "tests": 11,
+            "failures": 0,
+            "errors": 0,
+            "disabled": 0
+          },
+          "sanitized_repaired": {
+            "tests": 11,
+            "failures": 0,
+            "errors": 0,
+            "disabled": 0
+          },
+          "frozen_valid_trace": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "disabled": 0
+          }
+        },
+        "equivalent_samples": 2048,
+        "expected_negative_control_failures": 1
+      }
+    },
+    "protocol08_committed01": {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/protocol08_committed01/evidence.json",
+      "sha256": "f12d36cc3cb5c69c65fa5804acd6fb2b4ee76e4dbedace657c5c3dd3293c42d0",
+      "evidence": {
+        "kind": "offline_only_no_flight",
+        "source_head": "8df90c62a148d9b4b18c18e0c96796f1cebf932b",
+        "success": true,
+        "cpp_tests": 109,
+        "python_tests": 222
+      }
+    },
+    "protocol08_imu_committed01": {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/protocol08_imu_committed01/evidence.json",
+      "sha256": "a526d42cfedee44bf3e3f8157805b12162b585f498858fefa61e1e0db3a30975",
+      "evidence": {
+        "kind": "offline_actual_sources_not_flight",
+        "head": "8df90c62a148d9b4b18c18e0c96796f1cebf932b",
+        "passed": true,
+        "unique_gtests": 11,
+        "tests": {
+          "repaired": {
+            "tests": 11,
+            "failures": 0,
+            "errors": 0,
+            "disabled": 0
+          },
+          "sanitized_repaired": {
+            "tests": 11,
+            "failures": 0,
+            "errors": 0,
+            "disabled": 0
+          },
+          "frozen_valid_trace": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "disabled": 0
+          }
+        },
+        "equivalent_samples": 2048,
+        "expected_negative_control_failures": 1
+      }
+    }
+  },
+  "launch": {
+    "entry": "run_v04_protocol08.py",
+    "source_head": "8df90c62a148d9b4b18c18e0c96796f1cebf932b",
+    "authorization": "V04-protocol08-series07-six-attempts",
+    "output": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series07",
+    "exit_code": 1
+  },
+  "dry_run_exit_code": 0,
+  "reanalysis_exit_code": 1,
+  "audit_exit_code": 0,
+  "final_python_tests": 222,
+  "final_python_exit_code": 0,
+  "unique_cpp_tests": 120,
+  "archive_file_count": 263,
+  "archive_index_sha256": "aa71f001fcd9d9e90e632e2502486a5535344c093399f678d2cefb43c475b777"
+}

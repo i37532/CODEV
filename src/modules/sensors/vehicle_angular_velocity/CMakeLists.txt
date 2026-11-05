@@ -38,6 +38,8 @@ px4_add_library(vehicle_angular_velocity
 
 target_compile_options(vehicle_angular_velocity PRIVATE ${MAX_CUSTOM_OPT_LEVEL})
 
+px4_add_unit_gtest(SRC GyroPublicationGuardTest.cpp)
+
 target_link_libraries(vehicle_angular_velocity
 	PRIVATE
 		mathlib

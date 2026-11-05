@@ -1,0 +1,938 @@
+{
+  "stage": "R02",
+  "success": true,
+  "baseline": "9d1c74fce9fa386e94e790514aeb8f2c718abc47",
+  "head": "9d1c74fce9fa386e94e790514aeb8f2c718abc47",
+  "counts": {
+    "cpp_unique_tests": 473,
+    "python_tests": 709,
+    "fixed_legacy_samples": 32768,
+    "fixed_same_sample_recalculations": 256,
+    "new_flights": 0,
+    "count_policy": "Completed XML testcase identities and leaf unittest summaries; no duplicate execution inflation"
+  },
+  "scope": [
+    "msg/velocity_ctrl_selection.msg",
+    "src/modules/mc_pos_control/CMakeLists.txt",
+    "src/modules/mc_pos_control/MulticopterPositionControl.cpp",
+    "src/modules/mc_pos_control/MulticopterPositionControl.hpp",
+    "src/modules/mc_pos_control/PositionControl/CMakeLists.txt",
+    "src/modules/mc_pos_control/PositionControl/PositionControl.cpp",
+    "src/modules/mc_pos_control/PositionControl/PositionControl.hpp",
+    "src/modules/mc_pos_control/PositionControl/RegularizedVelocityIntegrationTest.cpp",
+    "src/modules/mc_pos_control/PositionControl/RegularizedVelocityParamTest.cpp",
+    "src/modules/mc_pos_control/PositionControl/RegularizedVelocityRegressionTest.cpp",
+    "src/modules/mc_pos_control/PositionControl/StaVelocityProtection.cpp",
+    "src/modules/mc_pos_control/PositionControl/StaVelocityProtection.hpp",
+    "src/modules/mc_pos_control/PositionControl/VelocityControlSelector.hpp",
+    "src/modules/mc_pos_control/RegularizedVelocityModuleTest.cpp",
+    "src/modules/mc_pos_control/mc_pos_control_params.c"
+  ],
+  "reference": {
+    "research/sta-velocity-control/regularized_sta/r02/reference/R01PositionControl.cpp": "18f6f3a2c8d31004bc3a8e4112c7d892193d8dda5486be3b0e8ea1a665326e20",
+    "research/sta-velocity-control/regularized_sta/r02/reference/R01PositionControl.hpp": "d686e4c80eaa4879415b3cee62bcaad0878b145a6d5e4044e2d69af05313cb90",
+    "research/sta-velocity-control/regularized_sta/r02/reference/R01StaVelocityProtection.cpp": "a89eab49950de620cabd9b07559ec67256d7a68e12c49007378f09f9cf1baeb4",
+    "research/sta-velocity-control/regularized_sta/r02/reference/R01StaVelocityProtection.hpp": "05ef205acf8bdfbdd395e5ecdd9041683e08664ef5636d1dd92b86f203005da5",
+    "research/sta-velocity-control/regularized_sta/r02/reference/R01VelocityControlSelector.hpp": "d49e18e86598a1c9055d2d09e2c257b7b44f2fdad904218fa18739f4946c221f"
+  },
+  "closed_admission": {
+    "private_default": false,
+    "source_consumers": [
+      "src/modules/mc_pos_control/PositionControl/PositionControl.cpp",
+      "src/modules/mc_pos_control/PositionControl/PositionControl.hpp",
+      "src/modules/mc_pos_control/PositionControl/RegularizedVelocityIntegrationTest.cpp",
+      "src/modules/mc_pos_control/PositionControl/RegularizedVelocityParamTest.cpp",
+      "src/modules/mc_pos_control/RegularizedVelocityModuleTest.cpp"
+    ],
+    "actual_run_test": "RegularizedVelocityModule.ProductionRejectsNewModeAllMasksWithoutEffectiveMutation",
+    "not_claimed": "Core is linked in R02; absence of symbols is NOT the admission proof"
+  },
+  "metadata": {
+    "MPC_VC_EPS_X": {
+      "default": 0.01,
+      "min": 0.001,
+      "max": 1.0,
+      "unit": "m/s"
+    },
+    "MPC_VC_EPS_Y": {
+      "default": 0.01,
+      "min": 0.001,
+      "max": 1.0,
+      "unit": "m/s"
+    },
+    "MPC_VC_EPS_Z": {
+      "default": 0.02,
+      "min": 0.001,
+      "max": 1.0,
+      "unit": "m/s"
+    },
+    "formats": {
+      "sta_velocity_ctrl_status": {
+        "bytes": 1475,
+        "queue": 8
+      },
+      "velocity_ctrl_selection": {
+        "bytes": 708,
+        "queue": 8
+      }
+    }
+  },
+  "firmware_sha256": "62fadb939eed08eba1fe25ccc079615a5ce9a990024485f16f42ff68369be523",
+  "eeprom_before": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+  "eeprom_final": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+  "eeprom_unchanged_at_exit": true,
+  "submodules": [
+    " 7c2c623da9f5dcb3f01d32830af1a2ed958de363 Tools/flightgear_bridge (7c2c623)",
+    " cbdb2fc7dd44331da1dcd04a891ed7f8c27b1ef0 Tools/flightgear_bridge/models/Rascal (remotes/origin/electric-14-gcbdb2fc)",
+    " 4540de7ae8e71b9bd6e6f67d085695be0ab36bc3 Tools/flightgear_bridge/models/TF-G1 (4540de7)",
+    " 562ee71388c493675269210f7692d8b7a8bb800d Tools/flightgear_bridge/models/TF-G2 (562ee71)",
+    " 158e429a0110589b1e2adfe868e166271470e144 Tools/flightgear_bridge/models/TF-R1 (heads/master)",
+    " 0a816d8100e9860a031ccfccfb9941bcd6eedc81 Tools/jMAVSim (0a816d8)",
+    " c08380767b21938391bec676a43b36b837af9ba4 Tools/jMAVSim/jMAVlib (heads/master)",
+    " e070c50d591541d440510b65c9da5cad1db5aa9a Tools/jsbsim_bridge (e070c50)",
+    " 40571cd808a204f4062128daeb6bb6db8c134c48 Tools/jsbsim_bridge/models/ATI-Resolution (2019.1)",
+    " d0d1db1961549e557885002cf9c3cff40cc27be2 Tools/jsbsim_bridge/models/Rascal (remotes/origin/preserve-this-branch-for-px4-submodules)",
+    " 822050a7ab6fd87972e59f16312f451bce217a56 Tools/sitl_gazebo (822050a)",
+    " 28ef45c1fcb532b2bfd54c16b059c6a545143b2f Tools/sitl_gazebo/external/OpticalFlow (28ef45c)",
+    " 9b5b567ae77f93d1ef4d36151529ba2506a46e7a Tools/sitl_gazebo/external/OpticalFlow/external/klt_feature_tracker (heads/master)",
+    " 08fd0a73045346448adf6969660196228b23e1fa boards/atlflight/cmake_hexagon (remotes/origin/px4)",
+    " 636fae5ca34eff6007344718755d78fcdf94238e mavlink/include/mavlink/v2.0 (636fae5c)",
+    " 979e27408fa90a3c3d6432190c8f65cc80c3e6b6 platforms/nuttx/NuttX/apps (nuttx-8.2-590-g979e27408)",
+    " bf660cba2af81f055002b3817c87b1f63a78fd09 platforms/nuttx/NuttX/nuttx (nuttx-8.2-3070-gbf660cba2a)",
+    " 0322a4e345e48ea28cb1cee14a33033cdaf0b16a platforms/qurt/dspal (heads/master)",
+    " 07168bd5715818802b78f674816ec851307998a7 platforms/qurt/dspal/cmake_hexagon (remotes/origin/sdk3.1-4-g07168bd)",
+    " c34ef0ce3100684a927c6aecebf0c904bee251b3 src/drivers/gps/devices (remotes/origin/codev_main_12.3_gps_update)",
+    " 29e1aa6c12e3590252b102153d8c62155047a676 src/drivers/uavcan/libuavcan (remotes/origin/pr-nuttx_update_7.31+-4-g29e1aa6c)",
+    " 192295c4f9b67f4a20b0eabf74757b6597415f2b src/drivers/uavcan/libuavcan/dsdl (192295c)",
+    " c58477a644d20ccf95a20c151f3a0402f271c3b8 src/drivers/uavcan/libuavcan/libuavcan/dsdl_compiler/pyuavcan (v1.0.0dev3~7)",
+    " fd12483ddd4e58242d61d74a163e7aeaa1e0f466 src/drivers/uavcan/libuavcan/libuavcan/dsdl_compiler/pyuavcan/dsdl (fd12483)",
+    " 36a01e428b110ff84c8babe5b65667b5e3037d5e src/drivers/uavcan_v1/legacy_data_types (remotes/origin/legacy)",
+    " 2a116170285fb47fcaae150ad21c2ccde0756a5f src/drivers/uavcan_v1/libcanard (1.1.0)",
+    " 0a773b93ce5c94e1d2791b180058cb9897fab7e1 src/drivers/uavcan_v1/public_regulated_data_types (0a773b9)",
+    " 2a116170285fb47fcaae150ad21c2ccde0756a5f src/drivers/uavcannode_gps_demo/libcanard (1.1.0)",
+    " 0a773b93ce5c94e1d2791b180058cb9897fab7e1 src/drivers/uavcannode_gps_demo/public_regulated_data_types (0a773b9)",
+    " baca5d31259c598540e4d1284bc8d8f793abf83a src/lib/crypto/monocypher (3.1.2)",
+    " b3fed06fe822d08d19ab1d2c2f8daf7b7d21951c src/lib/ecl (v1.9.0-rc1-591-gb3fed06)",
+    " b8568a89db8455d0ab2e2e391e2149ba2e5e10dd src/lib/matrix (v1.0.2-195-gb8568a8)",
+    " 21d3cfe3ae570d1674da0105ab23b80958e0449a src/modules/micrortps_bridge/micro-CDR (v1.0.0beta2-54-g21d3cfe)"
+  ],
+  "not_executed": [
+    "MATLAB",
+    "SITL flight",
+    "real parameter changes",
+    "hardware build/deployment",
+    "V08/AX04 frozen-source qualification"
+  ],
+  "commands": [
+    {
+      "name": "head",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.003985195999121061
+    },
+    {
+      "name": "branch",
+      "argv": [
+        "git",
+        "branch",
+        "--show-current"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.0015377670006273547
+    },
+    {
+      "name": "ancestor",
+      "argv": [
+        "git",
+        "merge-base",
+        "--is-ancestor",
+        "9d1c74fce9fa386e94e790514aeb8f2c718abc47",
+        "HEAD"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.0035540680000849534
+    },
+    {
+      "name": "workspace",
+      "argv": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.16428670800087275
+    },
+    {
+      "name": "submodules",
+      "argv": [
+        "git",
+        "submodule",
+        "status",
+        "--recursive"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.4148764649999066
+    },
+    {
+      "name": "submodules_clean",
+      "argv": [
+        "git",
+        "submodule",
+        "foreach",
+        "--quiet",
+        "--recursive",
+        "git status --porcelain --untracked-files=all"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.21433297700059484
+    },
+    {
+      "name": "scope",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "9d1c74fce9fa386e94e790514aeb8f2c718abc47",
+        "--",
+        "src",
+        "msg",
+        "Tools",
+        "sitl",
+        "ROMFS",
+        "boards",
+        "platforms"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.11451158500130987
+    },
+    {
+      "name": "untracked",
+      "argv": [
+        "git",
+        "ls-files",
+        "--others",
+        "--exclude-standard",
+        "--",
+        "src",
+        "msg",
+        "Tools",
+        "sitl",
+        "ROMFS",
+        "boards",
+        "platforms"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.015905222000583308
+    },
+    {
+      "name": "protected_scope",
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "9d1c74fce9fa386e94e790514aeb8f2c718abc47",
+        "--",
+        "src/modules/mc_pos_control/PositionControl/RegularizedStaVelocityControl.cpp",
+        "src/modules/mc_pos_control/PositionControl/RegularizedStaVelocityControl.hpp",
+        "src/modules/mc_pos_control/PositionControl/RegularizedStaVelocityControlTest.cpp",
+        "msg/sta_velocity_ctrl_status.msg",
+        "research/sta-velocity-control/axis_ablation",
+        "research/sta-velocity-control/v08",
+        "research/sta-velocity-control/v07",
+        "research/sta-velocity-control/scripts",
+        "sim_scripts"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.007820836999599123
+    },
+    {
+      "name": "source_package",
+      "argv": [
+        "sha256sum",
+        "-c",
+        "SHA256SUMS.txt"
+      ],
+      "cwd": "/home/yr/Desktop/STA-ISTA-MATLAB-PX4",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.007955617000334314
+    },
+    {
+      "name": "new_audit_helpers",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r02/verification/test_verify.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.11631261799993808
+    },
+    {
+      "name": "historical_ax01",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax01/verify.py",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/verification01/historical_ax01"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 111.7795728730016
+    },
+    {
+      "name": "ax02_test_protocol",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax02/test_protocol.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 2.6225236000009318
+    },
+    {
+      "name": "ax02_test_targets",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax02/test_targets.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.31616066999959
+    },
+    {
+      "name": "build_extra_tests",
+      "argv": [
+        "cmake",
+        "--build",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test",
+        "--target",
+        "unit-RegularizedStaVelocityControl",
+        "unit-RegularizedVelocityRegression",
+        "unit-RegularizedVelocityIntegration",
+        "functional-RegularizedVelocityParam",
+        "functional-RegularizedVelocityModule",
+        "unit-ControllerSelection",
+        "unit-StaProtection",
+        "unit-StaAxesApplication",
+        "unit-TakeoffNuManager",
+        "unit-IstaRateControl",
+        "unit-IstaIntegration",
+        "unit-ControlDecimation",
+        "unit-ProperIstaRateControl",
+        "unit-ProperIstaIntegration",
+        "unit-ProperIstaProtection",
+        "unit-VelocityAblationTask",
+        "--parallel",
+        "4"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.2145471420008107
+    },
+    {
+      "name": "RegularizedStaVelocityControl",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RegularizedStaVelocityControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/verification01/RegularizedStaVelocityControl.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.007724323999354965
+    },
+    {
+      "name": "RegularizedVelocityRegression",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RegularizedVelocityRegression",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/verification01/RegularizedVelocityRegression.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.06397833399933006
+    },
+    {
+      "name": "RegularizedVelocityIntegration",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RegularizedVelocityIntegration",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/verification01/RegularizedVelocityIntegration.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.0041599889991630334
+    },
+    {
+      "name": "RegularizedVelocityParam",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/functional-RegularizedVelocityParam",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/verification01/RegularizedVelocityParam.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.007682847999603837
+    },
+    {
+      "name": "RegularizedVelocityModule",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/functional-RegularizedVelocityModule",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/verification01/RegularizedVelocityModule.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.11434899999949266
+    },
+    {
+      "name": "ControllerSelection",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-ControllerSelection",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/verification01/ControllerSelection.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.003689858000143431
+    },
+    {
+      "name": "StaProtection",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaProtection",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/verification01/StaProtection.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.03189133399973798
+    },
+    {
+      "name": "StaAxesApplication",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaAxesApplication",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/verification01/StaAxesApplication.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.03328952499941806
+    },
+    {
+      "name": "TakeoffNuManager",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-TakeoffNuManager",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/verification01/TakeoffNuManager.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.003655292000985355
+    },
+    {
+      "name": "IstaRateControl",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-IstaRateControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/verification01/IstaRateControl.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.0036344030013424344
+    },
+    {
+      "name": "IstaIntegration",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-IstaIntegration",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/verification01/IstaIntegration.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.03213939699890034
+    },
+    {
+      "name": "ControlDecimation",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-ControlDecimation",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/verification01/ControlDecimation.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.003760751998925116
+    },
+    {
+      "name": "ProperIstaRateControl",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-ProperIstaRateControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/verification01/ProperIstaRateControl.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.003477361999102868
+    },
+    {
+      "name": "ProperIstaIntegration",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-ProperIstaIntegration",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/verification01/ProperIstaIntegration.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.0035678659987752326
+    },
+    {
+      "name": "ProperIstaProtection",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-ProperIstaProtection",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/verification01/ProperIstaProtection.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.003705649000039557
+    },
+    {
+      "name": "VelocityAblationTask",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-VelocityAblationTask",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/verification01/VelocityAblationTask.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.1141603110008873
+    },
+    {
+      "name": "new_tools",
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r02/tools",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.8163201100014703
+    },
+    {
+      "name": "helper_regression",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r01/verification/test_verify.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.06408059000023059
+    },
+    {
+      "name": "scope_after",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "9d1c74fce9fa386e94e790514aeb8f2c718abc47",
+        "--",
+        "src",
+        "msg",
+        "Tools",
+        "sitl",
+        "ROMFS",
+        "boards",
+        "platforms"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.11436799800139852
+    },
+    {
+      "name": "untracked_after",
+      "argv": [
+        "git",
+        "ls-files",
+        "--others",
+        "--exclude-standard",
+        "--",
+        "src",
+        "msg",
+        "Tools",
+        "sitl",
+        "ROMFS",
+        "boards",
+        "platforms"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.015802713000084623
+    },
+    {
+      "name": "submodules_after",
+      "argv": [
+        "git",
+        "submodule",
+        "status",
+        "--recursive"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.31559290699988196
+    },
+    {
+      "name": "submodules_clean_after",
+      "argv": [
+        "git",
+        "submodule",
+        "foreach",
+        "--quiet",
+        "--recursive",
+        "git status --porcelain --untracked-files=all"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.2144643379997433
+    },
+    {
+      "name": "protected_scope_after",
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "9d1c74fce9fa386e94e790514aeb8f2c718abc47",
+        "--",
+        "src/modules/mc_pos_control/PositionControl/RegularizedStaVelocityControl.cpp",
+        "src/modules/mc_pos_control/PositionControl/RegularizedStaVelocityControl.hpp",
+        "src/modules/mc_pos_control/PositionControl/RegularizedStaVelocityControlTest.cpp",
+        "msg/sta_velocity_ctrl_status.msg",
+        "research/sta-velocity-control/axis_ablation",
+        "research/sta-velocity-control/v08",
+        "research/sta-velocity-control/v07",
+        "research/sta-velocity-control/scripts",
+        "sim_scripts"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.007736389001365751
+    },
+    {
+      "name": "diff_check",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.114056813001298
+    }
+  ],
+  "external_verification": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/verification01/evidence.json",
+  "evidence_sha256": "014e2029f5bf4af21afd7940a9d952486af3153e4f6905da947608f38e04cd3b",
+  "artifacts_index_sha256": "8d8ba23d9946d837e9c138c73a19aa3ad1d870183d92151b404ccf7815066243",
+  "verified_input_count": 558,
+  "xml_count": 43,
+  "new_test_targets": [
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/verification01/RegularizedStaVelocityControl.xml",
+      "tests": 27,
+      "sha256": "79bd3935b522f0dfc861f8ed4652b17c5bbfa566b8a874a9c8377de9ba18abf7"
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/verification01/RegularizedVelocityIntegration.xml",
+      "tests": 26,
+      "sha256": "7a93e12dc071df8ac53cf90354d34d03701cbc9c8a4215219e5c7d082d9e3fa9"
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/verification01/RegularizedVelocityModule.xml",
+      "tests": 13,
+      "sha256": "df6c16afc61e1c63dbc15abf34d7a33b15d777b00826a12a53e51f31a79cef35"
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/verification01/RegularizedVelocityParam.xml",
+      "tests": 7,
+      "sha256": "5c1320f5e02954e9aa41dee7024122b749029e04b1c16784249d5fb7adc5b11a"
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/verification01/RegularizedVelocityRegression.xml",
+      "tests": 16,
+      "sha256": "10719d5d1f01c2797beb905a880293cb6745fa07b83e8c1df7a5d64d724cb9f5"
+    }
+  ],
+  "old_full_replay": {
+    "evidence": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/tools_replay01/evidence.json",
+    "sha256": "cc29024d9a5286025c19184ad89b9e709e1a1efb34f1f9e3950737f000a3f23e",
+    "runs": [
+      {
+        "id": "run007",
+        "task": "H",
+        "candidate": "PID",
+        "command": [
+          "/usr/bin/python3",
+          "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax04/analyze.py",
+          "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/formal01/run007",
+          "--output",
+          "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/tools_replay01/run007"
+        ],
+        "exit_code": 0,
+        "raw_ulog_sha256": "445aaa0e306ccf876a7617da250ea334f17a7e208010eb9db2c9157ccac78149",
+        "original_accepted": true,
+        "replay_accepted": true,
+        "original_files_unchanged": true,
+        "result_sha256": "f8bef7e21f41890f8962b1935d916fb7490f7bd0b1dc2b2dbac2d9b77a2a3545",
+        "whole_chain_keys": [
+          "accepted",
+          "attitude_output",
+          "baseline_accepted",
+          "cli_receipts",
+          "diagnostic",
+          "exit",
+          "first_invocation",
+          "flight",
+          "formal_binding",
+          "height",
+          "height_task",
+          "job",
+          "landing10",
+          "landing_health",
+          "local_output",
+          "mixer",
+          "pid_reconstruction",
+          "position_log",
+          "position_rmse",
+          "postland_tail",
+          "spectral_summary",
+          "task_targets",
+          "yaw_rmse"
+        ],
+        "error": null
+      },
+      {
+        "id": "run008",
+        "task": "H",
+        "candidate": "XYZ",
+        "command": [
+          "/usr/bin/python3",
+          "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax04/analyze.py",
+          "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/formal01/run008",
+          "--output",
+          "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/tools_replay01/run008"
+        ],
+        "exit_code": 0,
+        "raw_ulog_sha256": "b52c7067a4d994223bd8e23ee4fa10ee6dd97ada8316610a1461e7f6a3dd4d14",
+        "original_accepted": true,
+        "replay_accepted": true,
+        "original_files_unchanged": true,
+        "result_sha256": "6a0ca1b19f4f7280ec2ed270e7234e01bf0a34ee8b554547436880dd1ed391b8",
+        "whole_chain_keys": [
+          "accepted",
+          "attitude_output",
+          "baseline_accepted",
+          "cli_receipts",
+          "diagnostic",
+          "exit",
+          "first_invocation",
+          "flight",
+          "formal_binding",
+          "height",
+          "height_task",
+          "job",
+          "landing10",
+          "landing_health",
+          "local_output",
+          "mixer",
+          "pid_reconstruction",
+          "position_log",
+          "position_rmse",
+          "postland_tail",
+          "spectral_summary",
+          "task_targets",
+          "yaw_rmse"
+        ],
+        "error": null
+      },
+      {
+        "id": "run163",
+        "task": "V",
+        "candidate": "PID",
+        "command": [
+          "/usr/bin/python3",
+          "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax04/analyze.py",
+          "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/formal01/run163",
+          "--output",
+          "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/tools_replay01/run163"
+        ],
+        "exit_code": 0,
+        "raw_ulog_sha256": "583d3507cdef7228c989cd92c18e44894fdbdc7d3e8f10d272c2af01176ecc88",
+        "original_accepted": true,
+        "replay_accepted": true,
+        "original_files_unchanged": true,
+        "result_sha256": "8be151d77e5ee139c42e776e7e05ffbf2e148a11846fd4808c59d4f95a7be81f",
+        "whole_chain_keys": [
+          "accepted",
+          "attitude_output",
+          "baseline_accepted",
+          "cli_receipts",
+          "diagnostic",
+          "exit",
+          "first_invocation",
+          "flight",
+          "formal_binding",
+          "height",
+          "height_task",
+          "job",
+          "landing10",
+          "landing_health",
+          "local_output",
+          "mixer",
+          "pid_reconstruction",
+          "position_log",
+          "position_rmse",
+          "postland_tail",
+          "spectral_summary",
+          "task_targets",
+          "yaw_rmse"
+        ],
+        "error": null
+      },
+      {
+        "id": "run165",
+        "task": "V",
+        "candidate": "XYZ",
+        "command": [
+          "/usr/bin/python3",
+          "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax04/analyze.py",
+          "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/formal01/run165",
+          "--output",
+          "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/tools_replay01/run165"
+        ],
+        "exit_code": 0,
+        "raw_ulog_sha256": "e027df95bd2fbdd134802a44cbd43ad5239ed9070afde46da27ee5af77e9391a",
+        "original_accepted": true,
+        "replay_accepted": true,
+        "original_files_unchanged": true,
+        "result_sha256": "bad4aa81c6535ef7a568f893da8e48dd26794eaf4ee8d21c25011adef9a43cad",
+        "whole_chain_keys": [
+          "accepted",
+          "attitude_output",
+          "baseline_accepted",
+          "cli_receipts",
+          "diagnostic",
+          "exit",
+          "first_invocation",
+          "flight",
+          "formal_binding",
+          "height",
+          "height_task",
+          "job",
+          "landing10",
+          "landing_health",
+          "local_output",
+          "mixer",
+          "pid_reconstruction",
+          "position_log",
+          "position_rmse",
+          "postland_tail",
+          "spectral_summary",
+          "task_targets",
+          "yaw_rmse"
+        ],
+        "error": null
+      }
+    ]
+  },
+  "new_composition_on_old_logs": [
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/tools_replay01/new_chain04_run007.json",
+      "sha256": "27dca9dd72d67e251e8e332defeee291089ae50594c317446340e89841dae00b",
+      "success": true,
+      "flight_accepted": false,
+      "raw_ulog": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/formal01/run007/log001.ulg",
+      "raw_sha256": "445aaa0e306ccf876a7617da250ea334f17a7e208010eb9db2c9157ccac78149",
+      "old_mode": 0,
+      "old_axes": 0,
+      "new_metadata_present": false,
+      "raw_unchanged": true,
+      "source_inputs_unchanged": true
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/tools_replay01/new_chain04_run008.json",
+      "sha256": "ce1b6df640360b79cff81b2c1efd4cf82b83592d80b4a1edc9f9c88c68a1c67e",
+      "success": true,
+      "flight_accepted": false,
+      "raw_ulog": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/formal01/run008/log001.ulg",
+      "raw_sha256": "b52c7067a4d994223bd8e23ee4fa10ee6dd97ada8316610a1461e7f6a3dd4d14",
+      "old_mode": 1,
+      "old_axes": 7,
+      "new_metadata_present": false,
+      "raw_unchanged": true,
+      "source_inputs_unchanged": true
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/tools_replay01/new_chain04_run163.json",
+      "sha256": "f8b44b31316dc2ed55abe97110d585fb853ee48d6997d4fe510551dabccede61",
+      "success": true,
+      "flight_accepted": false,
+      "raw_ulog": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/formal01/run163/log001.ulg",
+      "raw_sha256": "583d3507cdef7228c989cd92c18e44894fdbdc7d3e8f10d272c2af01176ecc88",
+      "old_mode": 0,
+      "old_axes": 0,
+      "new_metadata_present": false,
+      "raw_unchanged": true,
+      "source_inputs_unchanged": true
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R02/tools_replay01/new_chain04_run165.json",
+      "sha256": "2c9a1dddde6df529a85c76f839e70c0dd992300ccdb6137cc650723ddfd2c6a7",
+      "success": true,
+      "flight_accepted": false,
+      "raw_ulog": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/formal01/run165/log001.ulg",
+      "raw_sha256": "e027df95bd2fbdd134802a44cbd43ad5239ed9070afde46da27ee5af77e9391a",
+      "old_mode": 1,
+      "old_axes": 7,
+      "new_metadata_present": false,
+      "raw_unchanged": true,
+      "source_inputs_unchanged": true
+    }
+  ]
+}

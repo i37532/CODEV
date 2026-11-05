@@ -1,0 +1,277 @@
+/****************************************************************************
+ *
+ *   Copyright (c) 2018 - 2019 PX4 Development Team. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
+ * 3. Neither the name PX4 nor the names of its contributors may be
+ *    used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+ * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+ * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS
+ * OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
+ * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ *
+ ****************************************************************************/
+
+/**
+ * @file RI01PositionControl.hpp
+ *
+ * A cascaded position controller for position/velocity control only.
+ */
+
+#pragma once
+
+#include <lib/mathlib/mathlib.h>
+#include <matrix/matrix/math.hpp>
+#include <uORB/topics/vehicle_attitude_setpoint.h>
+#include <uORB/topics/vehicle_local_position_setpoint.h>
+#include "RI01VelocityControlSelector.hpp"
+#include "RI01StaVelocityProtection.hpp"
+#include "RI01VelocityDecimation.hpp"
+#include <uORB/topics/sta_velocity_ctrl_status.h>
+
+struct RI01PositionControlStates {
+	matrix::Vector3f position;
+	matrix::Vector3f velocity;
+	matrix::Vector3f acceleration;
+	float yaw;
+};
+
+/**
+ * 	Core Position-Control for MC.
+ * 	This class contains P-controller for position and
+ * 	PID-controller for velocity.
+ * 	Inputs:
+ * 		vehicle position/velocity/yaw
+ * 		desired set-point position/velocity/thrust/yaw/yaw-speed
+ * 		constraints that are stricter than global limits
+ * 	Output
+ * 		thrust vector and a yaw-setpoint
+ *
+ * 	If there is a position and a velocity set-point present, then
+ * 	the velocity set-point is used as feed-forward. If feed-forward is
+ * 	active, then the velocity component of the P-controller output has
+ * 	priority over the feed-forward component.
+ *
+ * 	A setpoint that is NAN is considered as not set.
+ * 	If there is a position/velocity- and thrust-setpoint present, then
+ *  the thrust-setpoint is ommitted and recomputed from position-velocity-PID-loop.
+ */
+class RI01PositionControl
+{
+public:
+
+	RI01PositionControl() = default;
+	~RI01PositionControl() = default;
+
+	/**
+	 * Set the position control gains
+	 * @param P 3D vector of proportional gains for x,y,z axis
+	 */
+	void setPositionGains(const matrix::Vector3f &P) { _gain_pos_p = P; }
+
+	/**
+	 * Set the velocity control gains
+	 * @param P 3D vector of proportional gains for x,y,z axis
+	 * @param I 3D vector of integral gains
+	 * @param D 3D vector of derivative gains
+	 */
+	void setVelocityGains(const matrix::Vector3f &P, const matrix::Vector3f &I, const matrix::Vector3f &D);
+
+	/**
+	 * Set the maximum velocity to execute with feed forward and position control
+	 * @param vel_horizontal horizontal velocity limit
+	 * @param vel_up upwards velocity limit
+	 * @param vel_down downwards velocity limit
+	 */
+	void setVelocityLimits(const float vel_horizontal, const float vel_up, float vel_down);
+
+	/**
+	 * Set the minimum and maximum collective normalized thrust [0,1] that can be output by the controller
+	 * @param min minimum thrust e.g. 0.1 or 0
+	 * @param max maximum thrust e.g. 0.9 or 1
+	 */
+	void setThrustLimits(const float min, const float max);
+
+	/**
+	 * Set the maximum tilt angle in radians the output attitude is allowed to have
+	 * @param tilt angle in radians from level orientation
+	 */
+	void setTiltLimit(const float tilt) { _lim_tilt = tilt; }
+
+	/**
+	 * Set the normalized hover thrust
+	 * @param thrust [0.1, 0.9] with which the vehicle hovers not acelerating down or up with level orientation
+	 */
+	void setHoverThrust(const float hover_thrust) { _hover_thrust = math::constrain(hover_thrust, 0.1f, 0.9f); }
+
+	/**
+	 * Update the hover thrust without immediately affecting the output
+	 * by adjusting the integrator. This prevents propagating the dynamics
+	 * of the hover thrust signal directly to the output of the controller.
+	 */
+	void updateHoverThrust(const float hover_thrust_new);
+
+	/**
+	 * Pass the current vehicle state to the controller
+	 * @param RI01PositionControlStates structure
+	 */
+	void setState(const RI01PositionControlStates &states);
+
+	/**
+	 * Pass the desired setpoints
+	 * Note: NAN value means no feed forward/leave state uncontrolled if there's no higher order setpoint.
+	 * @param setpoint a vehicle_local_position_setpoint_s structure
+	 */
+	void setInputSetpoint(const vehicle_local_position_setpoint_s &setpoint);
+
+	/**
+	 * Apply P-position and PID-velocity controller that updates the member
+	 * thrust, yaw- and yawspeed-setpoints.
+	 * @see _thr_sp
+	 * @see _yaw_sp
+	 * @see _yawspeed_sp
+	 * @param dt time in seconds since last iteration
+	 * @return true if update succeeded and output setpoint is executable, false if not
+	 */
+	bool update(const float dt);
+
+	void configureVelocityControl(int32_t mode, int32_t axes, bool armed);
+	void configureVelocityDivisor(int32_t divisor, bool armed);
+	const RI01VelocityDecimation &velocityDecimation() const { return _decimation; }
+	const matrix::Vector3f &velocityCorrection() const { return _correction; }
+	const matrix::Vector3f &velocityIntegral() const { return _vel_int; }
+	uint8_t intervalPositive() const { return _interval_positive; }
+	uint8_t intervalNegative() const { return _interval_negative; }
+	uint64_t velocityPathTimeNs() const { return _velocity_path_ns; }
+	void configureVelocityEsta(const RI01StaVelocityProtection::Config &config, bool armed);
+	const RI01StaVelocityProtection::Config &requestedVelocityEsta() const { return _esta_requested; }
+	const RI01StaVelocityProtection::Config &effectiveVelocityEsta() const { return _esta_effective; }
+	bool velocityEstaPending() const { return _esta_pending; }
+	bool velocityEstaRejected() const { return !_esta_config_valid; }
+	uint32_t velocityEstaGeneration() const { return _esta_config_generation; }
+	void setVelocityFrame(const RI01StaVelocityProtection::Frame &frame);
+	const RI01VelocityControlSelector &velocitySelection() const { return _velocity_selector; }
+	const sta_velocity_ctrl_status_s &diagnostic() const { return _diagnostic; }
+	uint16_t inputValidity() const;
+	uint16_t failureReason() const;
+	bool velocityOutputPublishable() const { return !_decimation.fault && (_velocity_selector.effectiveMode() == 0 || _diagnostic.valid); }
+	void setDiagnosticExcitation(float velocity, bool vertical = false) { _diagnostic_excitation = velocity; _diagnostic_excitation_y = _diagnostic_excitation_z = 0.f; _diagnostic_vertical = vertical; }
+	void setDiagnosticExcitationXY(float x, float y) { setDiagnosticExcitation(x); _diagnostic_excitation_y = y; }
+	void setDiagnosticExcitationXYZ(float x, float y, float z) { setDiagnosticExcitationXY(x, y); _diagnostic_excitation_z = z; }
+
+	/**
+	 * Set the integral term in xy to 0.
+	 * @see _vel_int
+	 */
+	void resetIntegral() { _vel_int.setZero(); _decimation.invalidate(); }
+
+	/**
+	 * Get the controllers output local position setpoint
+	 * These setpoints are the ones which were executed on including PID output and feed-forward.
+	 * The acceleration or thrust setpoints can be used for attitude control.
+	 * @param local_position_setpoint reference to struct to fill up
+	 */
+	void getLocalPositionSetpoint(vehicle_local_position_setpoint_s &local_position_setpoint) const;
+
+	/**
+	 * Get the controllers output attitude setpoint
+	 * This attitude setpoint was generated from the resulting acceleration setpoint after position and velocity control.
+	 * It needs to be executed by the attitude controller to achieve velocity and position tracking.
+	 * @param attitude_setpoint reference to struct to fill up
+	 */
+	void getAttitudeSetpoint(vehicle_attitude_setpoint_s &attitude_setpoint) const;
+
+private:
+	friend class RI01VelocityControlTestAccess;
+	friend class RI01RegularizedVelocityTestAccess;
+	// Offline-only override for later masks; production admission is explicitly
+	// gated in configureVelocityControl, with no setter/parameter for this flag.
+	// The only writer is the explicitly named offline test friend.
+	bool _regularized_test_admission{false};
+	bool _staEffective() const { return _velocity_selector.effectiveMode() == 1 || _velocity_selector.effectiveMode() == 3; }
+	float _regularizedPsi(float s, size_t axis) const;
+	RI01VelocityControlSelector _velocity_selector;
+	RI01VelocityDecimation _decimation;
+	matrix::Vector3f _correction{NAN, NAN, NAN}; // never includes acceleration FF
+	uint32_t _velocity_frame_serial{0}, _consumed_frame_serial{0};
+	uint8_t _interval_positive{0}, _interval_negative{0};
+	bool _decimated_retry{false};
+	uint64_t _velocity_path_ns{0};
+	void _velocityControlDecimated(float dt);
+	void _mapHeldCorrection();
+	sta_velocity_ctrl_status_s _diagnostic{};
+	float _diagnostic_excitation{0.f};
+	float _diagnostic_excitation_y{0.f};
+	float _diagnostic_excitation_z{0.f};
+	bool _diagnostic_vertical{false};
+	RI01StaVelocityProtection _velocity_protection;
+	RI01StaVelocityProtection::Frame _velocity_frame{};
+	RI01StaVelocityProtection::Config _esta_requested{}, _esta_effective{};
+	bool _esta_config_valid{false}, _esta_pending{false}, _esta_failed{false}, _esta_config_changed{false};
+	bool _z_engaged{false};
+	uint8_t _z_phase{0}; // 0 not Z,1 ground/ramp PID,2 PID handover,3 ESTA,4 acceleration-only
+	float _z_hte_shift{0.f};
+	uint32_t _esta_config_generation{0};
+	void _recordDiagnostic(bool success);
+	bool _updateSuccessful();
+
+	void _positionControl(); ///< Position proportional control
+	void _velocityControl(const float dt); ///< Velocity PID control
+	void _velocityControlPid(const float dt); ///< V00 PID operations, unchanged order
+	void _velocityControlEstaX(const float dt);
+	void _velocityControlEstaXY(const float dt);
+	void _velocityControlEstaZ(const float dt);
+	void _velocityControlEstaXYZ(const float dt);
+	void _velocityControlEstaMixed(const float dt); // AX01 Y/XZ/YZ, DIV1 only
+	void _accelerationControl(); ///< Acceleration setpoint processing
+
+	// Gains
+	matrix::Vector3f _gain_pos_p; ///< Position control proportional gain
+	matrix::Vector3f _gain_vel_p; ///< Velocity control proportional gain
+	matrix::Vector3f _gain_vel_i; ///< Velocity control integral gain
+	matrix::Vector3f _gain_vel_d; ///< Velocity control derivative gain
+
+	// Limits
+	float _lim_vel_horizontal{}; ///< Horizontal velocity limit with feed forward and position control
+	float _lim_vel_up{}; ///< Upwards velocity limit with feed forward and position control
+	float _lim_vel_down{}; ///< Downwards velocity limit with feed forward and position control
+	float _lim_thr_min{}; ///< Minimum collective thrust allowed as output [-1,0] e.g. -0.9
+	float _lim_thr_max{}; ///< Maximum collective thrust allowed as output [-1,0] e.g. -0.1
+	float _lim_tilt{}; ///< Maximum tilt from level the output attitude is allowed to have
+
+	float _hover_thrust{}; ///< Thrust [0.1, 0.9] with which the vehicle hovers not accelerating down or up with level orientation
+
+	// States
+	matrix::Vector3f _pos; /**< current position */
+	matrix::Vector3f _vel; /**< current velocity */
+	matrix::Vector3f _vel_dot; /**< velocity derivative (replacement for acceleration estimate) */
+	matrix::Vector3f _vel_int; /**< integral term of the velocity controller */
+	float _yaw{}; /**< current heading */
+
+	// Setpoints
+	matrix::Vector3f _pos_sp; /**< desired position */
+	matrix::Vector3f _vel_sp; /**< desired velocity */
+	matrix::Vector3f _acc_sp; /**< desired acceleration */
+	matrix::Vector3f _thr_sp; /**< desired thrust */
+	float _yaw_sp{}; /**< desired heading */
+	float _yawspeed_sp{}; /** desired yaw-speed */
+};

@@ -1,0 +1,113 @@
+{
+  "success": true,
+  "commands": [
+    {
+      "name": "tail_tests",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v06/soft_landing/test_postland.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "contact_tests",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v06/soft_landing/test_contact.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "contact_object",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v06/soft_landing/test_contact_object.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "health_tests",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v06/soft_landing/test_health.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "binding",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v06/sl_protocol02/test_protocol.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "landing_tests",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v06/sl_protocol02/test_landing.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "dry_run",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v06/sl_protocol02/run.py",
+        "--source-head",
+        "94da9279307147154c1bc89de161f3b46b1c6ac9",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/verification_committed02/NOT_CREATED"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "controls",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/z_velocity/verify_z02.py",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/verification_committed02/controls"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "xy_unit",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-VelocityXYIntegration",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/verification_committed02/xy_unit.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "xyz_unit",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-VelocityXYZIntegration",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/verification_committed02/xyz_unit.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "task_unit",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-VelocityResearchTask",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/verification_committed02/task_unit.xml"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "new_flights": 0,
+  "head": "94da9279307147154c1bc89de161f3b46b1c6ac9",
+  "xyz_tests": 12,
+  "xy_tests": 11,
+  "task_tests": 5,
+  "cpp_tests": 196,
+  "python_tests": 461,
+  "assets_checked": 664
+}

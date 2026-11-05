@@ -1,0 +1,117 @@
+{
+  "stage": "V04-protocol05-series04",
+  "status": "authorized_after_clean_protocol_commit_build_and_offline_validation",
+  "execution_ready": true,
+  "flight_authorized": true,
+  "maximum_attempts": 6,
+  "seeds": [
+    9401,
+    9402,
+    9403
+  ],
+  "jobs": [
+    {
+      "id": "run01",
+      "seed": 9401,
+      "mode": 0,
+      "axes": 0,
+      "parameters": {
+        "MPC_VC_L1_X": 1,
+        "MPC_VC_L2_X": 0.2,
+        "MPC_VC_NU_X": 0.4,
+        "MPC_VC_A_X": 0.8,
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0
+      }
+    },
+    {
+      "id": "run02",
+      "seed": 9401,
+      "mode": 1,
+      "axes": 1,
+      "parameters": {
+        "MPC_VC_L1_X": 1,
+        "MPC_VC_L2_X": 0.2,
+        "MPC_VC_NU_X": 0.4,
+        "MPC_VC_A_X": 0.8,
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1
+      }
+    },
+    {
+      "id": "run03",
+      "seed": 9402,
+      "mode": 0,
+      "axes": 0,
+      "parameters": {
+        "MPC_VC_L1_X": 1,
+        "MPC_VC_L2_X": 0.2,
+        "MPC_VC_NU_X": 0.4,
+        "MPC_VC_A_X": 0.8,
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0
+      }
+    },
+    {
+      "id": "run04",
+      "seed": 9402,
+      "mode": 1,
+      "axes": 1,
+      "parameters": {
+        "MPC_VC_L1_X": 1,
+        "MPC_VC_L2_X": 0.2,
+        "MPC_VC_NU_X": 0.4,
+        "MPC_VC_A_X": 0.8,
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1
+      }
+    },
+    {
+      "id": "run05",
+      "seed": 9403,
+      "mode": 0,
+      "axes": 0,
+      "parameters": {
+        "MPC_VC_L1_X": 1,
+        "MPC_VC_L2_X": 0.2,
+        "MPC_VC_NU_X": 0.4,
+        "MPC_VC_A_X": 0.8,
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0
+      }
+    },
+    {
+      "id": "run06",
+      "seed": 9403,
+      "mode": 1,
+      "axes": 1,
+      "parameters": {
+        "MPC_VC_L1_X": 1,
+        "MPC_VC_L2_X": 0.2,
+        "MPC_VC_NU_X": 0.4,
+        "MPC_VC_A_X": 0.8,
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1
+      }
+    }
+  ],
+  "automatic_retry": false,
+  "stop_on_any_required_failure": true,
+  "artifacts": {
+    "new_run_root": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series04"
+  },
+  "budget": {
+    "old_remaining_attempts_reused": 0,
+    "extra_smoke_or_tuning_attempts": 0,
+    "attempt_consumed_at": "before owned project launcher including startup failures"
+  },
+  "live_transport": {
+    "source": "read-only tail of owned restarted logger ULog; complete records only, original file retained",
+    "max_age_us": 500000,
+    "age_scope": "CLI latest local_position timestamp minus decoded watermark. Separate transport stop guard, not relaxation of raw 40ms sample/target gaps or 0.5s alignment evidence deadline.",
+    "missing": "stop; no forced flush, no estimator publications, no silent snapshot-only fallback",
+    "scope": "host supervision cannot guarantee per-callback abort; full ULog mandatory before next attempt"
+  },
+  "authorization": "User explicitly approved freezing a separate protocol then executing at most six attempts; stop on first required failure, no retry/push/XY.",
+  "cli_reference": "Pinned uORB printed representation comparison; raw reference/counter invariance remains exact. Repair commit 85b8647644c5d316d41005ce0ddd26f250fa5a81."
+}

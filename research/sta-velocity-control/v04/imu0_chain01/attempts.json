@@ -1,0 +1,547 @@
+{
+  "attempts": [
+    {
+      "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/imu0_chain_verify01",
+      "passed": false,
+      "commands": [
+        {
+          "name": "compiler",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "harness",
+          "exit_code": 1,
+          "expected_exit": 0
+        }
+      ],
+      "suites": {}
+    },
+    {
+      "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/imu0_chain_verify02",
+      "passed": false,
+      "commands": [
+        {
+          "name": "compiler",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "harness",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "simulator_mavlink",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "PX4Accelerometer",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "VehicleIMU",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "link_chain",
+          "exit_code": 1,
+          "expected_exit": 0
+        }
+      ],
+      "suites": {}
+    },
+    {
+      "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/imu0_chain_verify03",
+      "passed": false,
+      "commands": [
+        {
+          "name": "compiler",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "harness",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "simulator_mavlink",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "PX4Accelerometer",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "VehicleIMU",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "link_chain",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "range_valid",
+          "exit_code": 1,
+          "expected_exit": 0
+        }
+      ],
+      "suites": {
+        "range_valid.xml": {
+          "tests": "4",
+          "failures": "3",
+          "disabled": "0",
+          "errors": "0",
+          "timestamp": "2026-09-23T19:35:55",
+          "time": "0.054",
+          "name": "AllTests"
+        }
+      }
+    },
+    {
+      "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/imu0_chain_verify04",
+      "passed": false,
+      "commands": [
+        {
+          "name": "compiler",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "harness",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "simulator_mavlink",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "PX4Accelerometer",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "VehicleIMU",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "link_chain",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "range_valid",
+          "exit_code": 1,
+          "expected_exit": 0
+        }
+      ],
+      "suites": {
+        "range_valid.xml": {
+          "tests": "4",
+          "failures": "3",
+          "disabled": "0",
+          "errors": "0",
+          "timestamp": "2026-09-23T19:36:48",
+          "time": "0.054",
+          "name": "AllTests"
+        }
+      }
+    },
+    {
+      "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/imu0_chain_verify05",
+      "passed": false,
+      "commands": [
+        {
+          "name": "compiler",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "harness",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "simulator_mavlink",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "PX4Accelerometer",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "VehicleIMU",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "link_chain",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "range_valid",
+          "exit_code": 1,
+          "expected_exit": 0
+        }
+      ],
+      "suites": {
+        "range_valid.xml": {
+          "tests": "4",
+          "failures": "2",
+          "disabled": "0",
+          "errors": "0",
+          "timestamp": "2026-09-23T19:37:45",
+          "time": "0.053",
+          "name": "AllTests"
+        }
+      }
+    },
+    {
+      "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/imu0_chain_verify06",
+      "passed": true,
+      "commands": [
+        {
+          "name": "compiler",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "harness",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "simulator_mavlink",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "PX4Accelerometer",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "VehicleIMU",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "link_chain",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "range_valid",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "defect_reproduction",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "simulator_mavlink_ubsan",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "link_chain_ubsan",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "sanitized_range_valid",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "sanitized_invalid_0",
+          "exit_code": 1,
+          "expected_exit": 1
+        },
+        {
+          "name": "sanitized_invalid_1",
+          "exit_code": 1,
+          "expected_exit": 1
+        },
+        {
+          "name": "sanitized_invalid_2",
+          "exit_code": 1,
+          "expected_exit": 1
+        },
+        {
+          "name": "sanitized_invalid_3",
+          "exit_code": 1,
+          "expected_exit": 1
+        },
+        {
+          "name": "sanitized_invalid_4",
+          "exit_code": 1,
+          "expected_exit": 1
+        },
+        {
+          "name": "sanitized_invalid_5",
+          "exit_code": 1,
+          "expected_exit": 1
+        },
+        {
+          "name": "sanitized_invalid_6",
+          "exit_code": 1,
+          "expected_exit": 1
+        },
+        {
+          "name": "sanitized_invalid_7",
+          "exit_code": 1,
+          "expected_exit": 1
+        }
+      ],
+      "suites": {
+        "defect_reproduction.xml": {
+          "tests": "1",
+          "failures": "0",
+          "disabled": "0",
+          "errors": "0",
+          "timestamp": "2026-09-23T19:40:33",
+          "time": "0.053",
+          "name": "AllTests"
+        },
+        "range_valid.xml": {
+          "tests": "4",
+          "failures": "0",
+          "disabled": "0",
+          "errors": "0",
+          "timestamp": "2026-09-23T19:40:33",
+          "time": "0.054",
+          "name": "AllTests"
+        },
+        "sanitized_range_valid.xml": {
+          "tests": "4",
+          "failures": "0",
+          "disabled": "0",
+          "errors": "0",
+          "timestamp": "2026-09-23T19:40:35",
+          "time": "0.055",
+          "name": "AllTests"
+        }
+      }
+    },
+    {
+      "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/imu0_chain_verify07",
+      "passed": true,
+      "commands": [
+        {
+          "name": "compiler",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "harness",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "simulator_mavlink",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "PX4Accelerometer",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "VehicleIMU",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "link_chain",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "range_valid",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "defect_reproduction",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "simulator_mavlink_ubsan",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "link_chain_ubsan",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "sanitized_range_valid",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "sanitized_invalid_0",
+          "exit_code": 1,
+          "expected_exit": 1
+        },
+        {
+          "name": "sanitized_invalid_1",
+          "exit_code": 1,
+          "expected_exit": 1
+        },
+        {
+          "name": "sanitized_invalid_2",
+          "exit_code": 1,
+          "expected_exit": 1
+        },
+        {
+          "name": "sanitized_invalid_3",
+          "exit_code": 1,
+          "expected_exit": 1
+        },
+        {
+          "name": "sanitized_invalid_4",
+          "exit_code": 1,
+          "expected_exit": 1
+        },
+        {
+          "name": "sanitized_invalid_5",
+          "exit_code": 1,
+          "expected_exit": 1
+        },
+        {
+          "name": "sanitized_invalid_6",
+          "exit_code": 1,
+          "expected_exit": 1
+        },
+        {
+          "name": "sanitized_invalid_7",
+          "exit_code": 1,
+          "expected_exit": 1
+        },
+        {
+          "name": "sanitized_invalid_8",
+          "exit_code": 1,
+          "expected_exit": 1
+        },
+        {
+          "name": "sanitized_invalid_9",
+          "exit_code": 1,
+          "expected_exit": 1
+        }
+      ],
+      "suites": {
+        "defect_reproduction.xml": {
+          "tests": "1",
+          "failures": "0",
+          "disabled": "0",
+          "errors": "0",
+          "timestamp": "2026-09-23T19:41:32",
+          "time": "0.052",
+          "name": "AllTests"
+        },
+        "range_valid.xml": {
+          "tests": "4",
+          "failures": "0",
+          "disabled": "0",
+          "errors": "0",
+          "timestamp": "2026-09-23T19:41:32",
+          "time": "0.054",
+          "name": "AllTests"
+        },
+        "sanitized_range_valid.xml": {
+          "tests": "4",
+          "failures": "0",
+          "disabled": "0",
+          "errors": "0",
+          "timestamp": "2026-09-23T19:41:34",
+          "time": "0.055",
+          "name": "AllTests"
+        }
+      }
+    },
+    {
+      "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/imu0_chain_regression01",
+      "passed": true,
+      "commands": [
+        {
+          "name": "regression",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "attitude",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "compiler",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "compile_probe",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "probe_in_range",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "probe_out_of_range_nonportable",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "compile_sanitized",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "sanitized_in_range",
+          "exit_code": 0,
+          "expected_exit": 0
+        },
+        {
+          "name": "sanitized_out_of_range_expected_failure",
+          "exit_code": 1,
+          "expected_exit": 1
+        }
+      ],
+      "suites": {
+        "attitude.xml": {
+          "tests": "3",
+          "failures": "0",
+          "disabled": "0",
+          "errors": "0",
+          "timestamp": "2026-09-23T19:41:40",
+          "time": "0.001",
+          "name": "AllTests"
+        }
+      }
+    }
+  ],
+  "file_count": 175
+}

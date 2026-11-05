@@ -1,0 +1,196 @@
+{
+  "success": true,
+  "flights": 0,
+  "px4_started": false,
+  "fixture_only": true,
+  "probes": [
+    {
+      "case": "nominal_cli",
+      "scene": "heading",
+      "route": "cli",
+      "argv": [
+        "gzserver",
+        "--verbose",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/transport_probe03/nominal_cli/probe.world"
+      ],
+      "controlled_stop_exit_code": 0,
+      "removed_fixture_plugins": [
+        "rosbag",
+        "front_right_motor_model",
+        "back_left_motor_model",
+        "front_left_motor_model",
+        "back_right_motor_model",
+        "groundtruth_plugin",
+        "magnetometer_plugin",
+        "barometer_plugin",
+        "mavlink_interface",
+        "rotors_gazebo_imu_plugin",
+        "gps::sensor::gps",
+        "gps::plugin::gps_plugin"
+      ],
+      "loaded_model": {
+        "links": [
+          "/imu_link",
+          "base_link",
+          "gps0::link",
+          "rotor_0",
+          "rotor_1",
+          "rotor_2",
+          "rotor_3"
+        ],
+        "mass_kg": 1.5499999999999994,
+        "nominal_mass_kg": 1.5499999999999994,
+        "cog_model_m": [
+          0.0009677419354838729,
+          0.0,
+          0.00029677419354838747
+        ],
+        "density_scale": 1.0,
+        "inertia_rule": "nominal",
+        "sha256": "e6265d9434a02a7656bff259749cddb4122cae164eba70044b7cfc876cea1395"
+      },
+      "strict_model_match": true
+    },
+    {
+      "case": "mass_cli",
+      "scene": "mass",
+      "route": "cli",
+      "argv": [
+        "gzserver",
+        "--verbose",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/transport_probe03/mass_cli/probe.world"
+      ],
+      "controlled_stop_exit_code": 0,
+      "removed_fixture_plugins": [
+        "rosbag",
+        "front_right_motor_model",
+        "back_left_motor_model",
+        "front_left_motor_model",
+        "back_right_motor_model",
+        "groundtruth_plugin",
+        "magnetometer_plugin",
+        "barometer_plugin",
+        "mavlink_interface",
+        "rotors_gazebo_imu_plugin",
+        "gps::sensor::gps",
+        "gps::plugin::gps_plugin"
+      ],
+      "loaded_model": {
+        "links": [
+          "/imu_link",
+          "base_link",
+          "gps0::link",
+          "rotor_0",
+          "rotor_1",
+          "rotor_2",
+          "rotor_3"
+        ],
+        "mass_kg": 1.705,
+        "nominal_mass_kg": 1.5499999999999994,
+        "cog_model_m": [
+          0.0009677419354838725,
+          0.0,
+          0.0002967741935483873
+        ],
+        "density_scale": 1.1,
+        "inertia_rule": "Q6(1.10 I)",
+        "sha256": "eaa0261557727ae3ff3bd033cf9f10c65dbc59efb37b03e9bb33932e726d23b2"
+      },
+      "strict_model_match": true
+    },
+    {
+      "case": "nominal_raw",
+      "scene": "heading",
+      "route": "raw",
+      "argv": [
+        "gzserver",
+        "--verbose",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/transport_probe03/nominal_raw/probe.world"
+      ],
+      "controlled_stop_exit_code": 0,
+      "removed_fixture_plugins": [
+        "rosbag",
+        "front_right_motor_model",
+        "back_left_motor_model",
+        "front_left_motor_model",
+        "back_right_motor_model",
+        "groundtruth_plugin",
+        "magnetometer_plugin",
+        "barometer_plugin",
+        "mavlink_interface",
+        "rotors_gazebo_imu_plugin",
+        "gps::sensor::gps",
+        "gps::plugin::gps_plugin"
+      ],
+      "loaded_model": {
+        "links": [
+          "/imu_link",
+          "base_link",
+          "gps0::link",
+          "rotor_0",
+          "rotor_1",
+          "rotor_2",
+          "rotor_3"
+        ],
+        "mass_kg": 1.5499999999999994,
+        "nominal_mass_kg": 1.5499999999999994,
+        "cog_model_m": [
+          0.0009677419354838729,
+          0.0,
+          0.00029677419354838747
+        ],
+        "density_scale": 1.0,
+        "inertia_rule": "nominal",
+        "sha256": "e6265d9434a02a7656bff259749cddb4122cae164eba70044b7cfc876cea1395"
+      },
+      "strict_model_match": true
+    },
+    {
+      "case": "mass_raw",
+      "scene": "mass",
+      "route": "raw",
+      "argv": [
+        "gzserver",
+        "--verbose",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/transport_probe03/mass_raw/probe.world"
+      ],
+      "controlled_stop_exit_code": 0,
+      "removed_fixture_plugins": [
+        "rosbag",
+        "front_right_motor_model",
+        "back_left_motor_model",
+        "front_left_motor_model",
+        "back_right_motor_model",
+        "groundtruth_plugin",
+        "magnetometer_plugin",
+        "barometer_plugin",
+        "mavlink_interface",
+        "rotors_gazebo_imu_plugin",
+        "gps::sensor::gps",
+        "gps::plugin::gps_plugin"
+      ],
+      "loaded_model": {
+        "links": [
+          "/imu_link",
+          "base_link",
+          "gps0::link",
+          "rotor_0",
+          "rotor_1",
+          "rotor_2",
+          "rotor_3"
+        ],
+        "mass_kg": 1.705,
+        "nominal_mass_kg": 1.5499999999999994,
+        "cog_model_m": [
+          0.0009677419354838725,
+          0.0,
+          0.0002967741935483873
+        ],
+        "density_scale": 1.1,
+        "inertia_rule": "Q6(1.10 I)",
+        "sha256": "eaa0261557727ae3ff3bd033cf9f10c65dbc59efb37b03e9bb33932e726d23b2"
+      },
+      "strict_model_match": true
+    }
+  ]
+}

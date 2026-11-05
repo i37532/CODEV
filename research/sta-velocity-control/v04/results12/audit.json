@@ -1,0 +1,413 @@
+{
+  "kind": "diagnosis_not_acceptance",
+  "formal_accepted": false,
+  "runtime_success": false,
+  "runtime_error": "ValueError('Unexpected oversized flight log')",
+  "ulog": {
+    "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-26/09_38_11.ulg",
+    "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series10/run01/09_38_11.ulg",
+    "sha256": "b73d52811ce32c5825ba14307f6dc92d68aab523094f70e19c4957b42fd2dc40",
+    "bytes": 134661449
+  },
+  "events": {
+    "ready": 30948000.0,
+    "takeoff_command": 30948000,
+    "reposition_command": 39568000.0,
+    "handoff_ready": 39948000.0,
+    "hover_start": 48020000.0,
+    "hover_end": 108648000.0,
+    "land_command": 108648000.0
+  },
+  "dropout_count": 0,
+  "corruption": false,
+  "topics": {
+    "estimator_attitude:0": {
+      "samples": 42514,
+      "median_interval_us": 4000.0,
+      "max_interval_us": 8000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_attitude:1": {
+      "samples": 42996,
+      "median_interval_us": 4000.0,
+      "max_interval_us": 8000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_attitude:2": {
+      "samples": 42651,
+      "median_interval_us": 4000.0,
+      "max_interval_us": 8000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_attitude:3": {
+      "samples": 41143,
+      "median_interval_us": 4000.0,
+      "max_interval_us": 8000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_attitude:4": {
+      "samples": 41368,
+      "median_interval_us": 4000.0,
+      "max_interval_us": 8000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_attitude:5": {
+      "samples": 41165,
+      "median_interval_us": 4000.0,
+      "max_interval_us": 8000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_local_position:0": {
+      "samples": 19311,
+      "median_interval_us": 10000.0,
+      "max_interval_us": 12000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_local_position:1": {
+      "samples": 19312,
+      "median_interval_us": 12000.0,
+      "max_interval_us": 12000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_local_position:2": {
+      "samples": 19312,
+      "median_interval_us": 8000.0,
+      "max_interval_us": 12000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_local_position:3": {
+      "samples": 19311,
+      "median_interval_us": 10000.0,
+      "max_interval_us": 12000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_local_position:4": {
+      "samples": 19311,
+      "median_interval_us": 10000.0,
+      "max_interval_us": 12000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_local_position:5": {
+      "samples": 19311,
+      "median_interval_us": 10000.0,
+      "max_interval_us": 12000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_selector_status:0": {
+      "samples": 193,
+      "median_interval_us": 1010000.0,
+      "max_interval_us": 1012000,
+      "duplicate_publish_times": 0
+    },
+    "estimator_status:0": {
+      "samples": 19311,
+      "median_interval_us": 10000.0,
+      "max_interval_us": 12000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_status:1": {
+      "samples": 19312,
+      "median_interval_us": 12000.0,
+      "max_interval_us": 12000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_status:2": {
+      "samples": 19312,
+      "median_interval_us": 8000.0,
+      "max_interval_us": 12000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_status:3": {
+      "samples": 19311,
+      "median_interval_us": 10000.0,
+      "max_interval_us": 12000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_status:4": {
+      "samples": 19311,
+      "median_interval_us": 10000.0,
+      "max_interval_us": 12000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_status:5": {
+      "samples": 19311,
+      "median_interval_us": 10000.0,
+      "max_interval_us": 12000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_status_flags:0": {
+      "samples": 197,
+      "median_interval_us": 1000000.0,
+      "max_interval_us": 1000000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_status_flags:1": {
+      "samples": 199,
+      "median_interval_us": 1000000.0,
+      "max_interval_us": 1004000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_status_flags:2": {
+      "samples": 200,
+      "median_interval_us": 1000000.0,
+      "max_interval_us": 1004000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_status_flags:3": {
+      "samples": 199,
+      "median_interval_us": 1000000.0,
+      "max_interval_us": 1000000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_status_flags:4": {
+      "samples": 199,
+      "median_interval_us": 1000000.0,
+      "max_interval_us": 1008000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "estimator_status_flags:5": {
+      "samples": 198,
+      "median_interval_us": 1000000.0,
+      "max_interval_us": 1000000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "sensor_accel:0": {
+      "samples": 48278,
+      "median_interval_us": 4000.0,
+      "max_interval_us": 4000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "sensor_accel:1": {
+      "samples": 48278,
+      "median_interval_us": 4000.0,
+      "max_interval_us": 4000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "sensor_accel:2": {
+      "samples": 48278,
+      "median_interval_us": 4000.0,
+      "max_interval_us": 4000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "sta_rate_ctrl_status:0": {
+      "samples": 48278,
+      "median_interval_us": 4000.0,
+      "max_interval_us": 4000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "sta_velocity_ctrl_status:0": {
+      "samples": 19311,
+      "median_interval_us": 10000.0,
+      "max_interval_us": 12000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "vehicle_imu:0": {
+      "samples": 42766,
+      "median_interval_us": 4000.0,
+      "max_interval_us": 8000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "vehicle_imu:1": {
+      "samples": 42721,
+      "median_interval_us": 4000.0,
+      "max_interval_us": 8000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "vehicle_imu:2": {
+      "samples": 42368,
+      "median_interval_us": 4000.0,
+      "max_interval_us": 8000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "vehicle_imu_status:0": {
+      "samples": 1932,
+      "median_interval_us": 100000.0,
+      "max_interval_us": 100000,
+      "duplicate_publish_times": 0
+    },
+    "vehicle_imu_status:1": {
+      "samples": 1932,
+      "median_interval_us": 100000.0,
+      "max_interval_us": 100000,
+      "duplicate_publish_times": 0
+    },
+    "vehicle_imu_status:2": {
+      "samples": 1932,
+      "median_interval_us": 100000.0,
+      "max_interval_us": 100000,
+      "duplicate_publish_times": 0
+    },
+    "vehicle_land_detected:0": {
+      "samples": 194,
+      "median_interval_us": 1000000.0,
+      "max_interval_us": 1000000,
+      "duplicate_publish_times": 0
+    },
+    "vehicle_local_position:0": {
+      "samples": 19311,
+      "median_interval_us": 10000.0,
+      "max_interval_us": 12000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 0
+    },
+    "vehicle_local_position_groundtruth:0": {
+      "samples": 46477,
+      "median_interval_us": 4000.0,
+      "max_interval_us": 8000,
+      "duplicate_publish_times": 0,
+      "sample_reversals": 0,
+      "sample_equal": 46476
+    }
+  },
+  "faults": [],
+  "clipping": [],
+  "selector": [],
+  "reset_changes": [],
+  "timing_faults": [],
+  "initial_parameters": {
+    "MPC_LAND_SPEED": 0.699999988079071,
+    "MPC_VC_MODE": 0,
+    "MPC_VC_AXES": 0,
+    "MC_RTC_MODE": 0,
+    "MC_STA_AXES": 0,
+    "MC_RTC_DIV": 1,
+    "SDLOG_PROFILE": 1171
+  },
+  "effective_mode": [
+    0
+  ],
+  "effective_axes": [
+    0
+  ],
+  "inner_mode": [
+    0
+  ],
+  "inner_axes": [
+    0
+  ],
+  "inner_divisor": [
+    1
+  ],
+  "timing": [
+    0
+  ],
+  "excitation_fault": [
+    0,
+    2
+  ],
+  "contact_window": [],
+  "parameters": {
+    "MPC_LAND_SPEED": 0.699999988079071,
+    "MPC_Z_VEL_MAX_DN": 0.5
+  },
+  "landing_intent_threshold": 0.629999989271164,
+  "post_touchdown": {
+    "trajectory_setpoint": {
+      "vz": {
+        "min": 0.4999999701976776,
+        "max": 0.4999999701976776
+      },
+      "samples": 1500
+    },
+    "vehicle_land_detected": {
+      "landed": {
+        "min": 0.0,
+        "max": 0.0
+      },
+      "ground_contact": {
+        "min": 0.0,
+        "max": 0.0
+      },
+      "in_descend": {
+        "min": 0.0,
+        "max": 0.0
+      },
+      "has_low_throttle": {
+        "min": 1.0,
+        "max": 1.0
+      },
+      "vertical_movement": {
+        "min": 0.0,
+        "max": 0.0
+      },
+      "horizontal_movement": {
+        "min": 0.0,
+        "max": 0.0
+      },
+      "samples": 30
+    },
+    "vehicle_local_position_groundtruth": {
+      "vz": {
+        "min": 0.0,
+        "max": 0.019999999552965164
+      },
+      "samples": 7186
+    }
+  },
+  "landing_target_satisfies_intent": 0
+}

@@ -31,6 +31,26 @@
 #
 ############################################################################
 
+px4_add_library(StaVelocityControl StaVelocityControl.cpp StaVelocityControl.hpp StaVelocityProtection.cpp StaVelocityProtection.hpp)
+target_compile_features(StaVelocityControl PUBLIC cxx_std_14)
+target_include_directories(StaVelocityControl PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+# R02: the protection adapter may evaluate the independent regularized kernel
+# in offline fixtures. Production selector admission remains closed.
+px4_add_library(RegularizedStaVelocityControl
+	RegularizedStaVelocityControl.cpp
+	RegularizedStaVelocityControl.hpp
+)
+target_compile_features(RegularizedStaVelocityControl PUBLIC cxx_std_14)
+target_include_directories(RegularizedStaVelocityControl PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(StaVelocityControl PUBLIC RegularizedStaVelocityControl)
+
+# RI05 B: production MODE4 admission is limited to SITL NED X/Z/XY/XYZ and DIV1.
+px4_add_library(RegularizedIstaVelocityControl RegularizedIstaVelocityControl.cpp RegularizedIstaVelocityControl.hpp)
+target_compile_features(RegularizedIstaVelocityControl PUBLIC cxx_std_14)
+target_include_directories(RegularizedIstaVelocityControl PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(StaVelocityControl PUBLIC RegularizedIstaVelocityControl)
+
 px4_add_library(PositionControl
 	ControlMath.cpp
 	ControlMath.hpp
@@ -38,6 +58,69 @@ px4_add_library(PositionControl
 	PositionControl.hpp
 )
 target_include_directories(PositionControl PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(PositionControl PUBLIC StaVelocityControl)
 
 px4_add_unit_gtest(SRC ControlMathTest.cpp LINKLIBS PositionControl)
 px4_add_unit_gtest(SRC PositionControlTest.cpp LINKLIBS PositionControl)
+
+if(BUILD_TESTING)
+	px4_add_unit_gtest(SRC RegularizedIstaVelocityControlTest.cpp LINKLIBS RegularizedIstaVelocityControl)
+	px4_add_library(RI01PositionReference
+		${PX4_SOURCE_DIR}/research/sta-velocity-control/regularized_ista/ri02/reference/RI01PositionControl.cpp
+		${PX4_SOURCE_DIR}/research/sta-velocity-control/regularized_ista/ri02/reference/RI01ControlMath.cpp
+		${PX4_SOURCE_DIR}/research/sta-velocity-control/regularized_ista/ri02/reference/RI01StaVelocityProtection.cpp
+		${PX4_SOURCE_DIR}/research/sta-velocity-control/regularized_ista/ri02/reference/RI01StaVelocityControl.cpp
+		${PX4_SOURCE_DIR}/research/sta-velocity-control/regularized_ista/ri02/reference/RI01RegularizedStaVelocityControl.cpp
+	)
+	target_compile_features(RI01PositionReference PUBLIC cxx_std_14)
+	target_include_directories(RI01PositionReference PUBLIC
+		${PX4_SOURCE_DIR}/research/sta-velocity-control/regularized_ista/ri02/reference
+		${CMAKE_CURRENT_SOURCE_DIR})
+	target_link_libraries(RI01PositionReference PUBLIC PositionControl)
+	px4_add_unit_gtest(SRC RegularizedIstaRegressionTest.cpp LINKLIBS PositionControl RI01PositionReference)
+	px4_add_unit_gtest(SRC RegularizedIstaProtectionTest.cpp LINKLIBS PositionControl)
+	px4_add_unit_gtest(SRC RegularizedIstaPositionTest.cpp LINKLIBS PositionControl)
+	px4_add_unit_gtest(SRC RegularizedIstaNonSitlTest.cpp LINKLIBS PositionControl)
+	px4_add_functional_gtest(SRC RegularizedIstaVelocityParamTest.cpp LINKLIBS PositionControl parameters)
+
+	px4_add_library(R01PositionReference
+		${PX4_SOURCE_DIR}/research/sta-velocity-control/regularized_sta/r02/reference/R01PositionControl.cpp
+		${PX4_SOURCE_DIR}/research/sta-velocity-control/regularized_sta/r02/reference/R01StaVelocityProtection.cpp
+	)
+	target_include_directories(R01PositionReference PUBLIC
+		${PX4_SOURCE_DIR}/research/sta-velocity-control/regularized_sta/r02/reference
+		${CMAKE_CURRENT_SOURCE_DIR})
+	target_link_libraries(R01PositionReference PUBLIC PositionControl)
+	px4_add_library(AX00PositionReference
+		${PX4_SOURCE_DIR}/research/sta-velocity-control/axis_ablation/ax01/reference/AX00PositionControl.cpp
+		${PX4_SOURCE_DIR}/research/sta-velocity-control/axis_ablation/ax01/reference/AX00StaVelocityProtection.cpp
+	)
+	target_include_directories(AX00PositionReference PUBLIC
+		${PX4_SOURCE_DIR}/research/sta-velocity-control/axis_ablation/ax01/reference
+		${CMAKE_CURRENT_SOURCE_DIR})
+	target_link_libraries(AX00PositionReference PUBLIC PositionControl)
+	px4_add_library(V00PositionReference
+		test/v00/V00PositionControl.cpp
+		test/v00/V00ControlMath.cpp
+		test/v00/V00Takeoff.cpp
+	)
+	target_link_libraries(V00PositionReference PRIVATE hysteresis)
+endif()
+px4_add_unit_gtest(SRC VelocityControlTest.cpp LINKLIBS PositionControl V00PositionReference Takeoff)
+px4_add_functional_gtest(SRC VelocitySelectionParamTest.cpp LINKLIBS PositionControl parameters)
+px4_add_functional_gtest(SRC VelocityDiagnosticInputTest.cpp LINKLIBS PositionControl parameters)
+px4_add_unit_gtest(SRC StaVelocityControlTest.cpp LINKLIBS StaVelocityControl)
+px4_add_unit_gtest(SRC RegularizedStaVelocityControlTest.cpp LINKLIBS RegularizedStaVelocityControl)
+px4_add_unit_gtest(SRC RegularizedVelocityRegressionTest.cpp LINKLIBS PositionControl R01PositionReference)
+px4_add_unit_gtest(SRC RegularizedVelocityIntegrationTest.cpp LINKLIBS PositionControl)
+px4_add_functional_gtest(SRC RegularizedVelocityParamTest.cpp LINKLIBS PositionControl parameters)
+px4_add_unit_gtest(SRC StaVelocityProtectionTest.cpp LINKLIBS StaVelocityControl PositionControl)
+px4_add_unit_gtest(SRC VelocityEstaTest.cpp LINKLIBS PositionControl)
+px4_add_unit_gtest(SRC VelocityEstaZTest.cpp LINKLIBS PositionControl)
+px4_add_unit_gtest(SRC VelocityZIntegrationTest.cpp LINKLIBS PositionControl)
+px4_add_unit_gtest(SRC VelocityXYIntegrationTest.cpp LINKLIBS PositionControl)
+px4_add_unit_gtest(SRC VelocityXYZIntegrationTest.cpp LINKLIBS PositionControl)
+px4_add_unit_gtest(SRC VelocityResearchTaskTest.cpp LINKLIBS PositionControl)
+px4_add_unit_gtest(SRC VelocityAblationTaskTest.cpp LINKLIBS PositionControl)
+px4_add_unit_gtest(SRC VelocityDecimationTest.cpp LINKLIBS PositionControl)
+px4_add_unit_gtest(SRC VelocityAxesTest.cpp LINKLIBS PositionControl AX00PositionReference)

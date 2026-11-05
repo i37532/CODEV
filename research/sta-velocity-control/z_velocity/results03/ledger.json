@@ -1,0 +1,197 @@
+{
+  "source_head": "d6ea312f7383b7492f554e00ee873a06270d7fe3",
+  "planned": 6,
+  "attempts": [
+    {
+      "attempt": 1,
+      "job": {
+        "id": "run01",
+        "seed": 19001,
+        "mode": 0,
+        "axes": 0,
+        "parameters": {
+          "MPC_VC_L1_X": 0,
+          "MPC_VC_L2_X": 0,
+          "MPC_VC_NU_X": 0,
+          "MPC_VC_A_X": 0,
+          "MPC_VC_L1_Z": 2.0,
+          "MPC_VC_L2_Z": 1.0,
+          "MPC_VC_NU_Z": 4.0,
+          "MPC_VC_A_Z": 6.0,
+          "MPC_VC_MODE": 0,
+          "MPC_VC_AXES": 0
+        }
+      },
+      "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01/run01",
+      "status": "accepted"
+    },
+    {
+      "attempt": 2,
+      "job": {
+        "id": "run02",
+        "seed": 19001,
+        "mode": 1,
+        "axes": 4,
+        "parameters": {
+          "MPC_VC_L1_X": 0,
+          "MPC_VC_L2_X": 0,
+          "MPC_VC_NU_X": 0,
+          "MPC_VC_A_X": 0,
+          "MPC_VC_L1_Z": 2.0,
+          "MPC_VC_L2_Z": 1.0,
+          "MPC_VC_NU_Z": 4.0,
+          "MPC_VC_A_Z": 6.0,
+          "MPC_VC_MODE": 1,
+          "MPC_VC_AXES": 4
+        }
+      },
+      "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01/run02",
+      "status": "accepted"
+    },
+    {
+      "attempt": 3,
+      "job": {
+        "id": "run03",
+        "seed": 19002,
+        "mode": 0,
+        "axes": 0,
+        "parameters": {
+          "MPC_VC_L1_X": 0,
+          "MPC_VC_L2_X": 0,
+          "MPC_VC_NU_X": 0,
+          "MPC_VC_A_X": 0,
+          "MPC_VC_L1_Z": 2.0,
+          "MPC_VC_L2_Z": 1.0,
+          "MPC_VC_NU_Z": 4.0,
+          "MPC_VC_A_Z": 6.0,
+          "MPC_VC_MODE": 0,
+          "MPC_VC_AXES": 0
+        }
+      },
+      "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01/run03",
+      "status": "accepted"
+    },
+    {
+      "attempt": 4,
+      "job": {
+        "id": "run04",
+        "seed": 19002,
+        "mode": 1,
+        "axes": 4,
+        "parameters": {
+          "MPC_VC_L1_X": 0,
+          "MPC_VC_L2_X": 0,
+          "MPC_VC_NU_X": 0,
+          "MPC_VC_A_X": 0,
+          "MPC_VC_L1_Z": 2.0,
+          "MPC_VC_L2_Z": 1.0,
+          "MPC_VC_NU_Z": 4.0,
+          "MPC_VC_A_Z": 6.0,
+          "MPC_VC_MODE": 1,
+          "MPC_VC_AXES": 4
+        }
+      },
+      "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01/run04",
+      "status": "accepted"
+    },
+    {
+      "attempt": 5,
+      "job": {
+        "id": "run05",
+        "seed": 19003,
+        "mode": 0,
+        "axes": 0,
+        "parameters": {
+          "MPC_VC_L1_X": 0,
+          "MPC_VC_L2_X": 0,
+          "MPC_VC_NU_X": 0,
+          "MPC_VC_A_X": 0,
+          "MPC_VC_L1_Z": 2.0,
+          "MPC_VC_L2_Z": 1.0,
+          "MPC_VC_NU_Z": 4.0,
+          "MPC_VC_A_Z": 6.0,
+          "MPC_VC_MODE": 0,
+          "MPC_VC_AXES": 0
+        }
+      },
+      "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01/run05",
+      "status": "accepted"
+    },
+    {
+      "attempt": 6,
+      "job": {
+        "id": "run06",
+        "seed": 19003,
+        "mode": 1,
+        "axes": 4,
+        "parameters": {
+          "MPC_VC_L1_X": 0,
+          "MPC_VC_L2_X": 0,
+          "MPC_VC_NU_X": 0,
+          "MPC_VC_A_X": 0,
+          "MPC_VC_L1_Z": 2.0,
+          "MPC_VC_L2_Z": 1.0,
+          "MPC_VC_NU_Z": 4.0,
+          "MPC_VC_A_Z": 6.0,
+          "MPC_VC_MODE": 1,
+          "MPC_VC_AXES": 4
+        }
+      },
+      "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01/run06",
+      "status": "accepted"
+    }
+  ],
+  "pairs": [
+    {
+      "accepted": true,
+      "checks": {
+        "velocity_0": true,
+        "position_0": true,
+        "velocity_1": true,
+        "position_1": true,
+        "velocity_2": true,
+        "position_2": true,
+        "yaw": true
+      },
+      "seed": 19001,
+      "imu_prefix_max_difference": 0.0,
+      "paired_noise": true
+    },
+    {
+      "accepted": true,
+      "checks": {
+        "velocity_0": true,
+        "position_0": true,
+        "velocity_1": true,
+        "position_1": true,
+        "velocity_2": true,
+        "position_2": true,
+        "yaw": true
+      },
+      "seed": 19002,
+      "imu_prefix_max_difference": 0.0,
+      "paired_noise": true
+    },
+    {
+      "accepted": true,
+      "checks": {
+        "velocity_0": true,
+        "position_0": true,
+        "velocity_1": true,
+        "position_1": true,
+        "velocity_2": true,
+        "position_2": true,
+        "yaw": true
+      },
+      "seed": 19003,
+      "imu_prefix_max_difference": 0.0,
+      "paired_noise": true
+    }
+  ],
+  "success": true,
+  "firmware_sha256": "c96694037c4a1e977469437ee4ce95964fe67e34e9c798433502b828b95922a3",
+  "original_parameter_sha256": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+  "applied_profile": 1171,
+  "parameter_restore_exact": true,
+  "remaining_simulators": []
+}

@@ -1,0 +1,407 @@
+{
+  "original_accepted": false,
+  "new_flights": 0,
+  "ulog": {
+    "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-28/09_48_05.ulg",
+    "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V07/series01/run11/09_48_05.ulg",
+    "sha256": "d3f1023a6be49415ea75e8dc68f7e5718c00943d82e2e1aef2a9c485dcabe643",
+    "bytes": 104199232
+  },
+  "dropouts": 0,
+  "corrupt": false,
+  "source_head": "c8319664a09bea74fec5d352f478bad4bcf6dc0a",
+  "events": {
+    "ready": 30904000.0,
+    "takeoff_command": 30916000,
+    "reposition_command": 39660000.0,
+    "handoff_ready": 40048000.0,
+    "hover_start": 48204000.0,
+    "hover_end": 138836000.0,
+    "land_command": 138836000.0,
+    "landed_disarmed": 147096000.0
+  },
+  "topics": [
+    {
+      "name": "sensor_accel",
+      "instance": 0,
+      "samples": 37001,
+      "first_us": 1628000,
+      "last_us": 149628000,
+      "nonpositive": 0,
+      "start_missing": false,
+      "end_missing": false,
+      "violations": []
+    },
+    {
+      "name": "sensor_accel",
+      "instance": 1,
+      "samples": 37001,
+      "first_us": 1628000,
+      "last_us": 149628000,
+      "nonpositive": 0,
+      "start_missing": false,
+      "end_missing": false,
+      "violations": []
+    },
+    {
+      "name": "sensor_accel",
+      "instance": 2,
+      "samples": 37001,
+      "first_us": 1628000,
+      "last_us": 149628000,
+      "nonpositive": 0,
+      "start_missing": false,
+      "end_missing": false,
+      "violations": []
+    },
+    {
+      "name": "vehicle_imu",
+      "instance": 0,
+      "samples": 32735,
+      "first_us": 1628000,
+      "last_us": 149628000,
+      "nonpositive": 0,
+      "start_missing": false,
+      "end_missing": false,
+      "violations": []
+    },
+    {
+      "name": "vehicle_imu",
+      "instance": 1,
+      "samples": 32715,
+      "first_us": 1628000,
+      "last_us": 149628000,
+      "nonpositive": 0,
+      "start_missing": false,
+      "end_missing": false,
+      "violations": [
+        {
+          "index": 30717,
+          "timestamp_before": 140508000,
+          "timestamp_after": 140508000,
+          "delta_us": 0,
+          "changed_fields": [
+            "timestamp_sample",
+            "delta_angle[0]",
+            "delta_angle[1]",
+            "delta_angle[2]",
+            "delta_velocity[0]",
+            "delta_velocity[1]",
+            "delta_velocity[2]"
+          ],
+          "changed_values": {
+            "timestamp_sample": [
+              140504000.0,
+              140508000.0
+            ],
+            "delta_angle[0]": [
+              -2.735991301960894e-06,
+              -1.962299165825243e-06
+            ],
+            "delta_angle[1]": [
+              1.9355546100996435e-05,
+              1.3017348464927636e-05
+            ],
+            "delta_angle[2]": [
+              2.0984064121876145e-06,
+              5.202081865718355e-06
+            ],
+            "delta_velocity[0]": [
+              -0.0001377559674438089,
+              -0.00022037165763322264
+            ],
+            "delta_velocity[1]": [
+              -3.214244497939944e-05,
+              -8.77608108567074e-05
+            ],
+            "delta_velocity[2]": [
+              -0.038988400250673294,
+              -0.038900747895240784
+            ]
+          },
+          "phase": "landing or after disarm"
+        }
+      ]
+    },
+    {
+      "name": "vehicle_imu",
+      "instance": 2,
+      "samples": 32578,
+      "first_us": 1628000,
+      "last_us": 149628000,
+      "nonpositive": 0,
+      "start_missing": false,
+      "end_missing": false,
+      "violations": []
+    },
+    {
+      "name": "estimator_status",
+      "instance": 0,
+      "samples": 14801,
+      "first_us": 1624000,
+      "last_us": 149624000,
+      "nonpositive": 0,
+      "start_missing": false,
+      "end_missing": false,
+      "violations": []
+    },
+    {
+      "name": "estimator_status",
+      "instance": 1,
+      "samples": 14800,
+      "first_us": 1628000,
+      "last_us": 149620000,
+      "nonpositive": 0,
+      "start_missing": false,
+      "end_missing": false,
+      "violations": []
+    },
+    {
+      "name": "estimator_status",
+      "instance": 2,
+      "samples": 14799,
+      "first_us": 1628000,
+      "last_us": 149616000,
+      "nonpositive": 0,
+      "start_missing": false,
+      "end_missing": false,
+      "violations": []
+    },
+    {
+      "name": "estimator_status",
+      "instance": 3,
+      "samples": 14801,
+      "first_us": 1620000,
+      "last_us": 149620000,
+      "nonpositive": 0,
+      "start_missing": false,
+      "end_missing": false,
+      "violations": []
+    },
+    {
+      "name": "estimator_status",
+      "instance": 4,
+      "samples": 14800,
+      "first_us": 1624000,
+      "last_us": 149616000,
+      "nonpositive": 0,
+      "start_missing": false,
+      "end_missing": false,
+      "violations": []
+    },
+    {
+      "name": "estimator_status",
+      "instance": 5,
+      "samples": 14800,
+      "first_us": 1624000,
+      "last_us": 149624000,
+      "nonpositive": 0,
+      "start_missing": false,
+      "end_missing": false,
+      "violations": []
+    },
+    {
+      "name": "estimator_selector_status",
+      "instance": 0,
+      "samples": 148,
+      "first_us": 764000,
+      "last_us": 149224000,
+      "nonpositive": 0,
+      "start_missing": false,
+      "end_missing": false,
+      "violations": []
+    }
+  ],
+  "frozen_tail": {
+    "passed": false,
+    "error": "ValueError('Invalid pre-existing health timeline')"
+  },
+  "frozen_landing_health": {
+    "passed": false,
+    "error": "ValueError('Invalid health publication clock')"
+  },
+  "diagnostic_only": {
+    "n": 9063,
+    "inner": {
+      "max_age_us": 4000,
+      "median_age_us": 0.0,
+      "maximum_reads": 4
+    },
+    "maximum_gap_s": 0.012,
+    "hz": 99.99999999999999,
+    "cadence": {
+      "updates": 4531,
+      "holds": 4532,
+      "update_hz": 50.0,
+      "h_min": 0.019999999552965164,
+      "h_max": 0.019999999552965164,
+      "host_cost": {
+        "path_ns": {
+          "update": {
+            "median": 1.456,
+            "p95": 3.0675,
+            "p99": 5.8218999999999985,
+            "max": 21.805
+          },
+          "hold": {
+            "median": 1.133,
+            "p95": 2.64845,
+            "p99": 6.72349999999998,
+            "max": 20.928
+          }
+        },
+        "module_ns": {
+          "update": {
+            "median": 10.02,
+            "p95": 23.069,
+            "p99": 31.779299999999996,
+            "max": 228.921
+          },
+          "hold": {
+            "median": 8.2005,
+            "p95": 20.02205,
+            "p99": 28.26194999999994,
+            "max": 904.052
+          }
+        }
+      },
+      "host_us_per_sim_second": {
+        "path_ns": 158.2737475171044,
+        "module_ns": 1070.113716618848
+      }
+    },
+    "windows": {
+      "first_loop": {
+        "error": {
+          "rmse": [
+            0.01296721867074104,
+            0.010699145327413385,
+            0.00253782300279619
+          ],
+          "mean": [
+            -0.0034541633429034813,
+            -0.003335722305317175,
+            6.313916430053723e-05
+          ],
+          "std": [
+            0.012498700558672348,
+            0.0101658579293103,
+            0.0025370374533011733
+          ],
+          "max_abs": [
+            0.03163786605000496,
+            0.027881454676389694,
+            0.007477071136236191
+          ]
+        },
+        "iae_m": [
+          0.34996622554073104,
+          0.27620651506260097,
+          0.06463455325398534
+        ],
+        "acceleration_tv": [
+          2.154136896133423,
+          2.194856643676758,
+          2.5544416904449463
+        ],
+        "normalized_thrust_tv": [
+          0.1553884595632553,
+          0.15868277847766876,
+          0.1857692003250122
+        ],
+        "samples": 3200,
+        "seconds": 32.0,
+        "constraint_fraction": 0.0,
+        "maximum_continuous_constraint_s": 0.0,
+        "nu_peak": null
+      },
+      "second_loop": {
+        "error": {
+          "rmse": [
+            0.01068941446102658,
+            0.010826873147145259,
+            0.0031898120065411172
+          ],
+          "mean": [
+            0.0019620108682138404,
+            0.0024960684440866326,
+            -0.0001965915420369128
+          ],
+          "std": [
+            0.010507811136131773,
+            0.010535218292318876,
+            0.003183748168852778
+          ],
+          "max_abs": [
+            0.02940686047077179,
+            0.027740009129047394,
+            0.010320909321308136
+          ]
+        },
+        "iae_m": [
+          0.2748619743240999,
+          0.2854948712550687,
+          0.08201647209492505
+        ],
+        "acceleration_tv": [
+          2.735025405883789,
+          2.242051601409912,
+          3.221985101699829
+        ],
+        "normalized_thrust_tv": [
+          0.1974678635597229,
+          0.16186289489269257,
+          0.23395460844039917
+        ],
+        "samples": 3200,
+        "seconds": 32.0,
+        "constraint_fraction": 0.0,
+        "maximum_continuous_constraint_s": 0.0,
+        "nu_peak": null
+      }
+    },
+    "error": {
+      "rmse": [
+        0.011883020272102932,
+        0.010763198708596978,
+        0.002882312112748668
+      ],
+      "mean": [
+        -0.0007460762373448226,
+        -0.0004198269306152714,
+        -6.67261888681879e-05
+      ],
+      "std": [
+        0.01185957592139276,
+        0.01075500775402201,
+        0.0028815396459213986
+      ],
+      "max_abs": [
+        0.03163786605000496,
+        0.027881454676389694,
+        0.010320909321308136
+      ]
+    },
+    "iae_m": [
+      0.6248281998648295,
+      0.5617013863176699,
+      0.14665102534891045
+    ],
+    "acceleration_tv": [
+      4.891481876373291,
+      4.4403557777404785,
+      5.7784423828125
+    ],
+    "normalized_thrust_tv": [
+      0.35302498936653137,
+      0.3207947909832001,
+      0.41987067461013794
+    ],
+    "samples": 6400,
+    "seconds": 64.0,
+    "constraint_fraction": 0.0,
+    "maximum_continuous_constraint_s": 0.0,
+    "nu_peak": null
+  },
+  "diagnostic_only_note": "Exploratory component only; no full-chain acceptance or flight regrading."
+}

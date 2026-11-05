@@ -1,0 +1,1022 @@
+{
+  "schema": 1,
+  "stage": "R01 offline independent model",
+  "success": false,
+  "commands": [
+    {
+      "argv": [
+        "g++",
+        "-std=c++14",
+        "-O2",
+        "-fPIC",
+        "-shared",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic-errors",
+        "-I",
+        "/home/yr/Desktop/Codev-autopilot/src/modules/mc_pos_control/PositionControl",
+        "/home/yr/Desktop/Codev-autopilot/src/modules/mc_pos_control/PositionControl/RegularizedStaVelocityControl.cpp",
+        "/home/yr/Desktop/Codev-autopilot/src/modules/mc_pos_control/PositionControl/StaVelocityControl.cpp",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r01/model/bridge.cpp",
+        "-o",
+        "/tmp/r01-model-ol_w1rcj/bridge.so"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "protocol_sha256": "fed42b2f051d9187025a7a56e9cbf3363dff0338e033143e2251de9220c405de",
+  "intended_matrix": [
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "fixed_008",
+      "scenario": "zero"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "fixed_008",
+      "scenario": "constant_positive"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "fixed_008",
+      "scenario": "constant_negative"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "fixed_008",
+      "scenario": "ramp_positive"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "fixed_008",
+      "scenario": "ramp_negative"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "fixed_008",
+      "scenario": "tracking_ff"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "fixed_008",
+      "scenario": "noise"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "fixed_008",
+      "scenario": "lag"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "fixed_008",
+      "scenario": "infeasible"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "fixed_008",
+      "scenario": "lag_noise_tracking"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "fixed_010",
+      "scenario": "zero"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "fixed_010",
+      "scenario": "constant_positive"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "fixed_010",
+      "scenario": "constant_negative"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "fixed_010",
+      "scenario": "ramp_positive"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "fixed_010",
+      "scenario": "ramp_negative"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "fixed_010",
+      "scenario": "tracking_ff"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "fixed_010",
+      "scenario": "noise"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "fixed_010",
+      "scenario": "lag"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "fixed_010",
+      "scenario": "infeasible"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "fixed_010",
+      "scenario": "lag_noise_tracking"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "fixed_012",
+      "scenario": "zero"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "fixed_012",
+      "scenario": "constant_positive"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "fixed_012",
+      "scenario": "constant_negative"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "fixed_012",
+      "scenario": "ramp_positive"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "fixed_012",
+      "scenario": "ramp_negative"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "fixed_012",
+      "scenario": "tracking_ff"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "fixed_012",
+      "scenario": "noise"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "fixed_012",
+      "scenario": "lag"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "fixed_012",
+      "scenario": "infeasible"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "fixed_012",
+      "scenario": "lag_noise_tracking"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "actual_log",
+      "scenario": "zero"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "actual_log",
+      "scenario": "constant_positive"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "actual_log",
+      "scenario": "constant_negative"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "actual_log",
+      "scenario": "ramp_positive"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "actual_log",
+      "scenario": "ramp_negative"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "actual_log",
+      "scenario": "tracking_ff"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "actual_log",
+      "scenario": "noise"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "actual_log",
+      "scenario": "lag"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "actual_log",
+      "scenario": "infeasible"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "xy",
+      "timing": "actual_log",
+      "scenario": "lag_noise_tracking"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "fixed_008",
+      "scenario": "zero"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "fixed_008",
+      "scenario": "constant_positive"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "fixed_008",
+      "scenario": "constant_negative"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "fixed_008",
+      "scenario": "ramp_positive"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "fixed_008",
+      "scenario": "ramp_negative"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "fixed_008",
+      "scenario": "tracking_ff"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "fixed_008",
+      "scenario": "noise"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "fixed_008",
+      "scenario": "lag"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "fixed_008",
+      "scenario": "infeasible"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "fixed_008",
+      "scenario": "lag_noise_tracking"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "fixed_010",
+      "scenario": "zero"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "fixed_010",
+      "scenario": "constant_positive"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "fixed_010",
+      "scenario": "constant_negative"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "fixed_010",
+      "scenario": "ramp_positive"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "fixed_010",
+      "scenario": "ramp_negative"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "fixed_010",
+      "scenario": "tracking_ff"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "fixed_010",
+      "scenario": "noise"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "fixed_010",
+      "scenario": "lag"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "fixed_010",
+      "scenario": "infeasible"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "fixed_010",
+      "scenario": "lag_noise_tracking"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "fixed_012",
+      "scenario": "zero"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "fixed_012",
+      "scenario": "constant_positive"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "fixed_012",
+      "scenario": "constant_negative"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "fixed_012",
+      "scenario": "ramp_positive"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "fixed_012",
+      "scenario": "ramp_negative"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "fixed_012",
+      "scenario": "tracking_ff"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "fixed_012",
+      "scenario": "noise"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "fixed_012",
+      "scenario": "lag"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "fixed_012",
+      "scenario": "infeasible"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "fixed_012",
+      "scenario": "lag_noise_tracking"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "actual_log",
+      "scenario": "zero"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "actual_log",
+      "scenario": "constant_positive"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "actual_log",
+      "scenario": "constant_negative"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "actual_log",
+      "scenario": "ramp_positive"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "actual_log",
+      "scenario": "ramp_negative"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "actual_log",
+      "scenario": "tracking_ff"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "actual_log",
+      "scenario": "noise"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "actual_log",
+      "scenario": "lag"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "actual_log",
+      "scenario": "infeasible"
+    },
+    {
+      "algorithm": "esta",
+      "gain_class": "z",
+      "timing": "actual_log",
+      "scenario": "lag_noise_tracking"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "fixed_008",
+      "scenario": "zero"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "fixed_008",
+      "scenario": "constant_positive"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "fixed_008",
+      "scenario": "constant_negative"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "fixed_008",
+      "scenario": "ramp_positive"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "fixed_008",
+      "scenario": "ramp_negative"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "fixed_008",
+      "scenario": "tracking_ff"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "fixed_008",
+      "scenario": "noise"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "fixed_008",
+      "scenario": "lag"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "fixed_008",
+      "scenario": "infeasible"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "fixed_008",
+      "scenario": "lag_noise_tracking"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "fixed_010",
+      "scenario": "zero"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "fixed_010",
+      "scenario": "constant_positive"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "fixed_010",
+      "scenario": "constant_negative"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "fixed_010",
+      "scenario": "ramp_positive"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "fixed_010",
+      "scenario": "ramp_negative"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "fixed_010",
+      "scenario": "tracking_ff"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "fixed_010",
+      "scenario": "noise"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "fixed_010",
+      "scenario": "lag"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "fixed_010",
+      "scenario": "infeasible"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "fixed_010",
+      "scenario": "lag_noise_tracking"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "fixed_012",
+      "scenario": "zero"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "fixed_012",
+      "scenario": "constant_positive"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "fixed_012",
+      "scenario": "constant_negative"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "fixed_012",
+      "scenario": "ramp_positive"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "fixed_012",
+      "scenario": "ramp_negative"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "fixed_012",
+      "scenario": "tracking_ff"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "fixed_012",
+      "scenario": "noise"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "fixed_012",
+      "scenario": "lag"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "fixed_012",
+      "scenario": "infeasible"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "fixed_012",
+      "scenario": "lag_noise_tracking"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "actual_log",
+      "scenario": "zero"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "actual_log",
+      "scenario": "constant_positive"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "actual_log",
+      "scenario": "constant_negative"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "actual_log",
+      "scenario": "ramp_positive"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "actual_log",
+      "scenario": "ramp_negative"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "actual_log",
+      "scenario": "tracking_ff"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "actual_log",
+      "scenario": "noise"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "actual_log",
+      "scenario": "lag"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "actual_log",
+      "scenario": "infeasible"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "xy",
+      "timing": "actual_log",
+      "scenario": "lag_noise_tracking"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "fixed_008",
+      "scenario": "zero"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "fixed_008",
+      "scenario": "constant_positive"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "fixed_008",
+      "scenario": "constant_negative"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "fixed_008",
+      "scenario": "ramp_positive"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "fixed_008",
+      "scenario": "ramp_negative"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "fixed_008",
+      "scenario": "tracking_ff"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "fixed_008",
+      "scenario": "noise"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "fixed_008",
+      "scenario": "lag"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "fixed_008",
+      "scenario": "infeasible"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "fixed_008",
+      "scenario": "lag_noise_tracking"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "fixed_010",
+      "scenario": "zero"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "fixed_010",
+      "scenario": "constant_positive"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "fixed_010",
+      "scenario": "constant_negative"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "fixed_010",
+      "scenario": "ramp_positive"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "fixed_010",
+      "scenario": "ramp_negative"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "fixed_010",
+      "scenario": "tracking_ff"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "fixed_010",
+      "scenario": "noise"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "fixed_010",
+      "scenario": "lag"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "fixed_010",
+      "scenario": "infeasible"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "fixed_010",
+      "scenario": "lag_noise_tracking"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "fixed_012",
+      "scenario": "zero"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "fixed_012",
+      "scenario": "constant_positive"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "fixed_012",
+      "scenario": "constant_negative"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "fixed_012",
+      "scenario": "ramp_positive"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "fixed_012",
+      "scenario": "ramp_negative"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "fixed_012",
+      "scenario": "tracking_ff"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "fixed_012",
+      "scenario": "noise"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "fixed_012",
+      "scenario": "lag"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "fixed_012",
+      "scenario": "infeasible"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "fixed_012",
+      "scenario": "lag_noise_tracking"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "actual_log",
+      "scenario": "zero"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "actual_log",
+      "scenario": "constant_positive"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "actual_log",
+      "scenario": "constant_negative"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "actual_log",
+      "scenario": "ramp_positive"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "actual_log",
+      "scenario": "ramp_negative"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "actual_log",
+      "scenario": "tracking_ff"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "actual_log",
+      "scenario": "noise"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "actual_log",
+      "scenario": "lag"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "actual_log",
+      "scenario": "infeasible"
+    },
+    {
+      "algorithm": "rsta",
+      "gain_class": "z",
+      "timing": "actual_log",
+      "scenario": "lag_noise_tracking"
+    }
+  ],
+  "rows": [],
+  "matlab_executed": false,
+  "flights": 0,
+  "epsilon_search_points": 0,
+  "fixed_epsilon": [
+    0.01,
+    0.01,
+    0.02
+  ],
+  "sanitizer": false,
+  "build_directory": "/tmp/r01-model-ol_w1rcj",
+  "source_sha256": {
+    "src/modules/mc_pos_control/PositionControl/RegularizedStaVelocityControl.cpp": "af9d37a1cea7eb6e28c152efda726703c3fd99c00686e31c4d4049ba7b06bbea",
+    "src/modules/mc_pos_control/PositionControl/StaVelocityControl.cpp": "d0bec410e23c6b855b3becac9d0ad6c192b058d5683e8522a3e4362a27a3a872",
+    "research/sta-velocity-control/regularized_sta/r01/model/bridge.cpp": "f66d35292fa7177d57728dba2771a57f0b337d8533e6ac471a89065c55d3381c",
+    "src/modules/mc_pos_control/PositionControl/RegularizedStaVelocityControl.hpp": "29b788fd5f58b92e6898b1a61294a8ee3c6f4a02dcf4b96c721a95c91e9fc855",
+    "src/modules/mc_pos_control/PositionControl/StaVelocityControl.hpp": "af42dd240bd1502335d185e58ef3f74f787ad093430e070ff944b46e9f191e8e",
+    "research/sta-velocity-control/regularized_sta/r01/model/model_reference.py": "f2fa6e93db7f6978123f83164a0d80c3b45af855c59cc32bfb1a62ba8c408088",
+    "research/sta-velocity-control/regularized_sta/r01/model/test_reference.py": "146a3acaa0bf00ee77ee13d81b03d353e9ece27ecef3ecc8850b160221a4630d",
+    "research/sta-velocity-control/regularized_sta/r01/model/run_model.py": "84d2d68ad2dd5778569e6c81beb1da924afc49d29cffced81c45fb960d1b274a"
+  },
+  "unit_tests": {
+    "count": 10,
+    "failures": 0,
+    "errors": 0,
+    "output": "test_01_matrix_fixed_finite (test_reference.ReferenceTests) ... ok\ntest_02_reference_odd_and_old_nu (test_reference.ReferenceTests) ... ok\ntest_03_zero_constant_equilibrium (test_reference.ReferenceTests) ... ok\ntest_04_ff_once_and_limit_order (test_reference.ReferenceTests) ... ok\ntest_05_freeze_and_unwind (test_reference.ReferenceTests) ... ok\ntest_06_lag_exact_vs_independent_rk4 (test_reference.ReferenceTests) ... ok\ntest_07_ramp_exact_integral (test_reference.ReferenceTests) ... ok\ntest_08_reference_target_derivative (test_reference.ReferenceTests) ... ok\ntest_09_float_neighbors (test_reference.ReferenceTests) ... ok\ntest_10_deterministic_noise_bounded (test_reference.ReferenceTests) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.007s\n\nOK\n"
+  },
+  "error": "Traceback (most recent call last):\n  File \"/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r01/model/run_model.py\", line 238, in main\n    intervals, result[\"actual_clock\"] = actual_clock()\n  File \"/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r01/model/run_model.py\", line 73, in actual_clock\n    from pyulog import ULog\nModuleNotFoundError: No module named 'pyulog'\n"
+}

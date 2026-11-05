@@ -1,0 +1,720 @@
+{
+  "revision": "r03_revision04",
+  "stage": "R03 revision04 result summary",
+  "definitions": {
+    "rmse": "Per-axis time-weighted consumed velocity error, m/s, frozen main window",
+    "J": "Arithmetic mean of three axis RMSEs, then arithmetic mean across accepted runs",
+    "tv": "Per-axis total variation on actual controller updates; TV/T divides by main seconds",
+    "tv_units": "correction/acceleration TV m/s^2, TV/T m/s^3; normalized thrust dimensionless and 1/s",
+    "takeoffs": "Separate takeoff-command and airborne-task event counts; commands alone do not prove lift-off",
+    "missing": "Missing evidence stays null/explicit; failed rows excluded from accepted means, never filled with zero",
+    "pid_calls": "Module update invocations, not PID-axis calculations; not used in this summary"
+  },
+  "limitations": [
+    "Descriptive development means only; no significance or universal superiority claim",
+    "Different gates have different tasks and source commits; do not pool their means",
+    "No gate_pass is created; passed requires an existing receipt and full read-only proof",
+    "TV is not energy; host cost is not board CPU; no flight or log redecoding is performed"
+  ],
+  "gate": {
+    "gate": "B",
+    "planned": 9,
+    "status": "stopped_failed",
+    "gate_passed": false,
+    "ledger": {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/ledger.json",
+      "sha256": "71fe39dafc449aeeea8762742a5716aea1394ed257e22f577aac9d10d43d9883"
+    },
+    "journal": {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/journal.jsonl",
+      "sha256": "1c4bf03d85149519e20dce755bbd01d5d0009e0e73c323ebf51ef7abb0dcbaf5"
+    },
+    "attempted": 6,
+    "accepted_recorded": 5,
+    "accepted_metrics_verified": 5,
+    "failed": 1,
+    "missing_results": 0,
+    "missing_metrics": 0,
+    "unattempted": 3,
+    "takeoff_commands": 6,
+    "airborne_task_reached": 6,
+    "paired_recorded": {
+      "total": 3,
+      "accepted": 3,
+      "failed": 0,
+      "scope": "Recorded decisions, not independent recomputation"
+    },
+    "independent_replays_recorded": null,
+    "gate_pass": null,
+    "replay": null,
+    "rows": [
+      {
+        "id": "run010",
+        "candidate": "PID",
+        "mode": 0,
+        "axes": 0,
+        "seed": 71211,
+        "status": "accepted",
+        "result": {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/run010/result.json",
+          "sha256": "b38e2b2103e651fa3330400b5edfb4ec4d3aceb9ce1790cb50f6f8178a9eaebd"
+        },
+        "metrics": {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/run010/r03_metrics.json",
+          "sha256": "186e2e404de706bbb29c9399b5489462b6bb9d052919169aa8e68d72b6f34163"
+        },
+        "parameter_restore": {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/run010/parameter_restore.json",
+          "sha256": "5dac0e23cabf133cb472ded13de8db626926e5dd781cab918878eab58c9744d5"
+        },
+        "takeoff_command": true,
+        "airborne_task_reached": true,
+        "landed_disarmed": true,
+        "metrics_verified": true,
+        "issues": [],
+        "runner_success": true,
+        "error": null,
+        "logs": [
+          {
+            "source": "/dev/shm/px4-v07-qr36d3ky/2026-10-19/09_39_11.ulg",
+            "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/run010/09_39_11.ulg",
+            "sha256": "428137edf1de19ce5502a29657c09f2a24a8b818bc5d75562739f2625f04ba1f",
+            "bytes": 2161900,
+            "durable_copy_verified": true,
+            "volatile_source_retained": true
+          },
+          {
+            "source": "/dev/shm/px4-v07-qr36d3ky/sess001/log001.ulg",
+            "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/run010/log001.ulg",
+            "sha256": "5e6bff0b6706ceb906e7f63acf758b8bfa736bc64e14619046cec3dc9566277d",
+            "bytes": 104430441,
+            "durable_copy_verified": true,
+            "volatile_source_retained": true
+          }
+        ],
+        "log_hash_scope": "Recorded result.json fingerprints; complete gate proof verifies raw files",
+        "measures": {
+          "velocity_rmse_m_s": [
+            0.009325895489284601,
+            0.005723541982309771,
+            0.004258569174414858
+          ],
+          "J_m_s": 0.006436002215336411,
+          "seconds": 32,
+          "correction_tv": [
+            3.4168663024902344,
+            3.147739887237549,
+            4.363378524780273
+          ],
+          "correction_tv_per_second": [
+            0.10677707195281982,
+            0.0983668714761734,
+            0.13635557889938354
+          ],
+          "acceleration_tv": [
+            3.4168663024902344,
+            3.147739887237549,
+            4.363378524780273
+          ],
+          "acceleration_tv_per_second": [
+            0.10677707195281982,
+            0.0983668714761734,
+            0.13635557889938354
+          ],
+          "normalized_thrust_tv": [
+            0.24815277755260468,
+            0.22771848738193512,
+            0.3157944083213806
+          ],
+          "normalized_thrust_tv_per_second": [
+            0.007754774298518896,
+            0.0071162027306854725,
+            0.009868575260043144
+          ]
+        }
+      },
+      {
+        "id": "run011",
+        "candidate": "RSTA",
+        "mode": 3,
+        "axes": 4,
+        "seed": 71211,
+        "status": "accepted",
+        "result": {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/run011/result.json",
+          "sha256": "e1284009982656ecb272547a342acd7ddc22ca67c4185852bb24ede0ddae8b10"
+        },
+        "metrics": {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/run011/r03_metrics.json",
+          "sha256": "bc9c15aebba7fc3d97e999b7a568fa43d881f15c70d052219fae558768e5dca8"
+        },
+        "parameter_restore": {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/run011/parameter_restore.json",
+          "sha256": "eba56ef59fc33ffe539366afdeec5978cea9851e6ee552e1d3980d9ffb3b0b01"
+        },
+        "takeoff_command": true,
+        "airborne_task_reached": true,
+        "landed_disarmed": true,
+        "metrics_verified": true,
+        "issues": [],
+        "runner_success": true,
+        "error": null,
+        "logs": [
+          {
+            "source": "/dev/shm/px4-v07-zqcv8rg4/2026-10-19/09_42_10.ulg",
+            "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/run011/09_42_10.ulg",
+            "sha256": "ac58609d95b2f33dec8a53da54da5e3a95b1aaef013cce8d540daefb3b721827",
+            "bytes": 2219412,
+            "durable_copy_verified": true,
+            "volatile_source_retained": true
+          },
+          {
+            "source": "/dev/shm/px4-v07-zqcv8rg4/sess001/log001.ulg",
+            "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/run011/log001.ulg",
+            "sha256": "2a2566d28c75cb5d7bb7bf6cdb7dbb3c690b3287bd304db98713d01ff6d74082",
+            "bytes": 105482346,
+            "durable_copy_verified": true,
+            "volatile_source_retained": true
+          }
+        ],
+        "log_hash_scope": "Recorded result.json fingerprints; complete gate proof verifies raw files",
+        "measures": {
+          "velocity_rmse_m_s": [
+            0.00868443571684501,
+            0.007123373594600471,
+            0.002228269191058972
+          ],
+          "J_m_s": 0.006012026167501484,
+          "seconds": 32,
+          "correction_tv": [
+            3.382495164871216,
+            3.216535806655884,
+            18.98269271850586
+          ],
+          "correction_tv_per_second": [
+            0.1057029739022255,
+            0.10051674395799637,
+            0.5932091474533081
+          ],
+          "acceleration_tv": [
+            3.382495164871216,
+            3.216535806655884,
+            18.98269271850586
+          ],
+          "acceleration_tv_per_second": [
+            0.1057029739022255,
+            0.10051674395799637,
+            0.5932091474533081
+          ],
+          "normalized_thrust_tv": [
+            0.2475120574235916,
+            0.2339298129081726,
+            1.3711496591567993
+          ],
+          "normalized_thrust_tv_per_second": [
+            0.007734751794487238,
+            0.007310306653380394,
+            0.04284842684864998
+          ]
+        }
+      },
+      {
+        "id": "run012",
+        "candidate": "ESTA",
+        "mode": 1,
+        "axes": 4,
+        "seed": 71211,
+        "status": "accepted",
+        "result": {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/run012/result.json",
+          "sha256": "8ce7ca9f02480bf1984ffab49f2e05fda017d487b9b1626588d2a02bd11453e1"
+        },
+        "metrics": {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/run012/r03_metrics.json",
+          "sha256": "3f0e825047fb9c6126ea1ff999459dfb0b00f67f92b1f9d3926744a01255f8d2"
+        },
+        "parameter_restore": {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/run012/parameter_restore.json",
+          "sha256": "76761f5bacaba8e25dcb22731fe5dae8f49541a8280ff6fb43cc8da04e0bb084"
+        },
+        "takeoff_command": true,
+        "airborne_task_reached": true,
+        "landed_disarmed": true,
+        "metrics_verified": true,
+        "issues": [],
+        "runner_success": true,
+        "error": null,
+        "logs": [
+          {
+            "source": "/dev/shm/px4-v07-hl5um4nb/2026-10-19/09_45_10.ulg",
+            "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/run012/09_45_10.ulg",
+            "sha256": "7d9d2f44c985185d93178a1247de3969b029c6530717951d5cedb8cb82963653",
+            "bytes": 2203691,
+            "durable_copy_verified": true,
+            "volatile_source_retained": true
+          },
+          {
+            "source": "/dev/shm/px4-v07-hl5um4nb/sess001/log001.ulg",
+            "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/run012/log001.ulg",
+            "sha256": "67a65c869b1ce2572f29750ec69c99ff09a8ea12513d9d4d0809d49b8647ef69",
+            "bytes": 105304478,
+            "durable_copy_verified": true,
+            "volatile_source_retained": true
+          }
+        ],
+        "log_hash_scope": "Recorded result.json fingerprints; complete gate proof verifies raw files",
+        "measures": {
+          "velocity_rmse_m_s": [
+            0.00746291717029483,
+            0.0063740075242881425,
+            0.009699869196372843
+          ],
+          "J_m_s": 0.007845597963651939,
+          "seconds": 32,
+          "correction_tv": [
+            3.395589828491211,
+            3.170146942138672,
+            134.5182647705078
+          ],
+          "correction_tv_per_second": [
+            0.10611218214035034,
+            0.0990670919418335,
+            4.203695774078369
+          ],
+          "acceleration_tv": [
+            3.395589828491211,
+            3.170146942138672,
+            134.5182647705078
+          ],
+          "acceleration_tv_per_second": [
+            0.10611218214035034,
+            0.0990670919418335,
+            4.203695774078369
+          ],
+          "normalized_thrust_tv": [
+            0.2469860166311264,
+            0.23104998469352722,
+            9.700946807861328
+          ],
+          "normalized_thrust_tv_per_second": [
+            0.0077183130197227,
+            0.007220312021672726,
+            0.3031545877456665
+          ]
+        }
+      },
+      {
+        "id": "run013",
+        "candidate": "PID",
+        "mode": 0,
+        "axes": 0,
+        "seed": 71212,
+        "status": "accepted",
+        "result": {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/run013/result.json",
+          "sha256": "079dacfcff1a07f7fd2bd2153e3fb7144779664962d7e0dab836919ea1bab3b6"
+        },
+        "metrics": {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/run013/r03_metrics.json",
+          "sha256": "9cc33d15c5e876cf7a9ddec1fba215fc7216d1fafeffad1e530bac139bc74c32"
+        },
+        "parameter_restore": {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/run013/parameter_restore.json",
+          "sha256": "1633a4dc4fb9c1591886d6274302074c45dc8f7e57fec1f525e0cdac32425439"
+        },
+        "takeoff_command": true,
+        "airborne_task_reached": true,
+        "landed_disarmed": true,
+        "metrics_verified": true,
+        "issues": [],
+        "runner_success": true,
+        "error": null,
+        "logs": [
+          {
+            "source": "/dev/shm/px4-v07-1hufzxhp/2026-10-19/09_48_10.ulg",
+            "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/run013/09_48_10.ulg",
+            "sha256": "9a8b455903ca80ddc912e83bc1bfd3d830367e644e3283dbaba2e834ba1d9541",
+            "bytes": 2212059,
+            "durable_copy_verified": true,
+            "volatile_source_retained": true
+          },
+          {
+            "source": "/dev/shm/px4-v07-1hufzxhp/sess001/log001.ulg",
+            "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/run013/log001.ulg",
+            "sha256": "490c5c55e3be46807c8b21e3a03a38c8636e4041adf2e7cedd6dd6ca21ccb251",
+            "bytes": 105022291,
+            "durable_copy_verified": true,
+            "volatile_source_retained": true
+          }
+        ],
+        "log_hash_scope": "Recorded result.json fingerprints; complete gate proof verifies raw files",
+        "measures": {
+          "velocity_rmse_m_s": [
+            0.009387627868916068,
+            0.009182283839730609,
+            0.004115123474427308
+          ],
+          "J_m_s": 0.0075616783943579955,
+          "seconds": 32,
+          "correction_tv": [
+            3.968330144882202,
+            3.2840845584869385,
+            2.9202969074249268
+          ],
+          "correction_tv_per_second": [
+            0.12401031702756882,
+            0.10262764245271683,
+            0.09125927835702896
+          ],
+          "acceleration_tv": [
+            3.968330144882202,
+            3.2840845584869385,
+            2.9202969074249268
+          ],
+          "acceleration_tv_per_second": [
+            0.12401031702756882,
+            0.10262764245271683,
+            0.09125927835702896
+          ],
+          "normalized_thrust_tv": [
+            0.28825220465660095,
+            0.23875267803668976,
+            0.21236634254455566
+          ],
+          "normalized_thrust_tv_per_second": [
+            0.00900788139551878,
+            0.007461021188646555,
+            0.0066364482045173645
+          ]
+        }
+      },
+      {
+        "id": "run014",
+        "candidate": "ESTA",
+        "mode": 1,
+        "axes": 4,
+        "seed": 71212,
+        "status": "accepted",
+        "result": {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/run014/result.json",
+          "sha256": "a407f53993b0ab96dacd4f2ded69033ffe4661f4f9ebcfdba4b2032a5a78403d"
+        },
+        "metrics": {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/run014/r03_metrics.json",
+          "sha256": "78d0e409bcb90fabc025c25bb5811216564a39ffd7f1f01d938fc042c0b2cdf2"
+        },
+        "parameter_restore": {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/run014/parameter_restore.json",
+          "sha256": "90d6a2ae77f0be14ce45d7c3f93cf223830c46f36aa4a7e6257e08e9ab291008"
+        },
+        "takeoff_command": true,
+        "airborne_task_reached": true,
+        "landed_disarmed": true,
+        "metrics_verified": true,
+        "issues": [],
+        "runner_success": true,
+        "error": null,
+        "logs": [
+          {
+            "source": "/dev/shm/px4-v07-ld_yrxr5/2026-10-19/09_51_11.ulg",
+            "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/run014/09_51_11.ulg",
+            "sha256": "772b40d2e44ec5a55f9b2f84a43766b20124d488d51e72368037b679fd6aa151",
+            "bytes": 2181259,
+            "durable_copy_verified": true,
+            "volatile_source_retained": true
+          },
+          {
+            "source": "/dev/shm/px4-v07-ld_yrxr5/sess001/log001.ulg",
+            "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/run014/log001.ulg",
+            "sha256": "59a0d55fb49fa97c834fab485077bea9dba4d72de8758a1e2ac9c1bf018347d6",
+            "bytes": 105701739,
+            "durable_copy_verified": true,
+            "volatile_source_retained": true
+          }
+        ],
+        "log_hash_scope": "Recorded result.json fingerprints; complete gate proof verifies raw files",
+        "measures": {
+          "velocity_rmse_m_s": [
+            0.009229738533317385,
+            0.009104161539421486,
+            0.009762005498060724
+          ],
+          "J_m_s": 0.009365301856933197,
+          "seconds": 32,
+          "correction_tv": [
+            3.9652786254882812,
+            3.318234443664551,
+            135.60597229003906
+          ],
+          "correction_tv_per_second": [
+            0.12391495704650879,
+            0.10369482636451721,
+            4.237686634063721
+          ],
+          "acceleration_tv": [
+            3.9652786254882812,
+            3.318234443664551,
+            135.60597229003906
+          ],
+          "acceleration_tv_per_second": [
+            0.12391495704650879,
+            0.10369482636451721,
+            4.237686634063721
+          ],
+          "normalized_thrust_tv": [
+            0.2919570803642273,
+            0.24177569150924683,
+            9.804865837097168
+          ],
+          "normalized_thrust_tv_per_second": [
+            0.009123658761382103,
+            0.007555490359663963,
+            0.3064020574092865
+          ]
+        }
+      },
+      {
+        "id": "run015",
+        "candidate": "RSTA",
+        "mode": 3,
+        "axes": 4,
+        "seed": 71212,
+        "status": "failed",
+        "result": {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/run015/result.json",
+          "sha256": "8e719a5bdb9a7ffd58ec56d20b271b154cbe31ce0637b5027e5ab0c0340ca720"
+        },
+        "metrics": {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/run015/r03_metrics.json",
+          "sha256": "34bce52d6695f10b05fb6c4d4a324c49fab7c4978469197166a95f71961d6389"
+        },
+        "parameter_restore": {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/run015/parameter_restore.json",
+          "sha256": "eda36dd4a2d6aa84784ab9f33514dc29fc09ccc109ebf596bf49a1688108b9a7"
+        },
+        "takeoff_command": true,
+        "airborne_task_reached": true,
+        "landed_disarmed": true,
+        "metrics_verified": false,
+        "issues": [
+          "Nonaccepted attempt retained; metric excluded from means"
+        ],
+        "runner_success": true,
+        "error": null,
+        "logs": [
+          {
+            "source": "/dev/shm/px4-v07-lg18so5o/2026-10-19/09_54_11.ulg",
+            "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/run015/09_54_11.ulg",
+            "sha256": "8dc36f1b65ffab055c28871ed06a23c870f1eb239387e085fd082dcdd08bb6de",
+            "bytes": 2271129,
+            "durable_copy_verified": true,
+            "volatile_source_retained": true
+          },
+          {
+            "source": "/dev/shm/px4-v07-lg18so5o/sess001/log001.ulg",
+            "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/batch01/run015/log001.ulg",
+            "sha256": "cd31086c5374cc0bc1db07445a18d0f8dd05c498681be4109702c00e1b2b0872",
+            "bytes": 104394049,
+            "durable_copy_verified": true,
+            "volatile_source_retained": true
+          }
+        ],
+        "log_hash_scope": "Recorded result.json fingerprints; complete gate proof verifies raw files"
+      }
+    ],
+    "algorithms": {
+      "PID": {
+        "n": 2,
+        "aggregation": "Arithmetic mean of accepted run metrics only",
+        "velocity_rmse_m_s": [
+          0.009356761679100335,
+          0.007452912911020191,
+          0.004186846324421083
+        ],
+        "J_m_s": 0.006998840304847203,
+        "seconds": 32,
+        "correction_tv": [
+          3.6925982236862183,
+          3.2159122228622437,
+          3.6418377161026
+        ],
+        "correction_tv_per_second": [
+          0.11539369449019432,
+          0.10049725696444511,
+          0.11380742862820625
+        ],
+        "acceleration_tv": [
+          3.6925982236862183,
+          3.2159122228622437,
+          3.6418377161026
+        ],
+        "acceleration_tv_per_second": [
+          0.11539369449019432,
+          0.10049725696444511,
+          0.11380742862820625
+        ],
+        "normalized_thrust_tv": [
+          0.2682024911046028,
+          0.23323558270931244,
+          0.26408037543296814
+        ],
+        "normalized_thrust_tv_per_second": [
+          0.008381327847018838,
+          0.007288611959666014,
+          0.008252511732280254
+        ]
+      },
+      "ESTA": {
+        "n": 2,
+        "aggregation": "Arithmetic mean of accepted run metrics only",
+        "velocity_rmse_m_s": [
+          0.008346327851806107,
+          0.007739084531854814,
+          0.009730937347216783
+        ],
+        "J_m_s": 0.008605449910292568,
+        "seconds": 32,
+        "correction_tv": [
+          3.680434226989746,
+          3.2441906929016113,
+          135.06211853027344
+        ],
+        "correction_tv_per_second": [
+          0.11501356959342957,
+          0.10138095915317535,
+          4.220691204071045
+        ],
+        "acceleration_tv": [
+          3.680434226989746,
+          3.2441906929016113,
+          135.06211853027344
+        ],
+        "acceleration_tv_per_second": [
+          0.11501356959342957,
+          0.10138095915317535,
+          4.220691204071045
+        ],
+        "normalized_thrust_tv": [
+          0.26947154849767685,
+          0.23641283810138702,
+          9.752906322479248
+        ],
+        "normalized_thrust_tv_per_second": [
+          0.008420985890552402,
+          0.0073879011906683445,
+          0.3047783225774765
+        ]
+      },
+      "RSTA": {
+        "n": 1,
+        "aggregation": "Arithmetic mean of accepted run metrics only",
+        "velocity_rmse_m_s": [
+          0.00868443571684501,
+          0.007123373594600471,
+          0.002228269191058972
+        ],
+        "J_m_s": 0.006012026167501484,
+        "seconds": 32,
+        "correction_tv": [
+          3.382495164871216,
+          3.216535806655884,
+          18.98269271850586
+        ],
+        "correction_tv_per_second": [
+          0.1057029739022255,
+          0.10051674395799637,
+          0.5932091474533081
+        ],
+        "acceleration_tv": [
+          3.382495164871216,
+          3.216535806655884,
+          18.98269271850586
+        ],
+        "acceleration_tv_per_second": [
+          0.1057029739022255,
+          0.10051674395799637,
+          0.5932091474533081
+        ],
+        "normalized_thrust_tv": [
+          0.2475120574235916,
+          0.2339298129081726,
+          1.3711496591567993
+        ],
+        "normalized_thrust_tv_per_second": [
+          0.007734751794487238,
+          0.007310306653380394,
+          0.04284842684864998
+        ]
+      }
+    },
+    "issues": [],
+    "source_head": "e12ca285b721b4de6f143378a7a58899b5004e0b",
+    "firmware_sha256": "bb734f0592066acd57676696a15a0e05c72fab2997fb860e31b1f67de73d008b",
+    "parameter_restore_exact": true,
+    "remaining_simulators": []
+  },
+  "checkpoint": {
+    "source_head": "e12ca285b721b4de6f143378a7a58899b5004e0b",
+    "r03_accepted": false,
+    "new_matrix": {
+      "planned": 36,
+      "attempted": 15,
+      "takeoffs": 15,
+      "accepted": 14,
+      "failed": 1,
+      "unattempted": 21
+    },
+    "cumulative": {
+      "attempted": 30,
+      "takeoffs": 29,
+      "accepted": 26,
+      "failed": 4,
+      "total_budget": 51
+    },
+    "failure": "RSTA rho/raw-dt candidate mismatch",
+    "partial_replay": {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/partial_replay01/summary02.json",
+      "sha256": "5f044c4ed715f3f5f5b133bb12a22f3a82a0b88dbc5ccb08f2dd15ad6be77dcc",
+      "attempts": 6,
+      "accepted": 5,
+      "failed": 1,
+      "unchanged": true,
+      "gate_pass_created": false
+    },
+    "diagnosis": {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/failure_diagnostic_math01/diagnosis.json",
+      "sha256": "9b3b7055601dbb6c8745621b860c8d3ac4d34c3bbff10a5e314b6c25bdc4d1ca",
+      "original_failure_unchanged": true
+    },
+    "cxx_all_sample_replay": {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/failure_diagnostic_math02/evidence.json",
+      "sha256": "0c707362013c6d6e907e7a6bbb1daa9c7b910719f5b9a3652278643c837f5ad9",
+      "distinct_samples": 21976,
+      "actual_evaluate_calls": 43952,
+      "bit_mismatches": 0,
+      "closed_loop": false
+    },
+    "numeric05": {
+      "scope": "Offline ideal nu candidate checker only; not integrated or authorizing; original failure unchanged",
+      "unit_tests": 41,
+      "unit_exit_code": 0,
+      "independent_rounding_cases": 9174,
+      "logged_candidates": 21976,
+      "one_ulp_mutations_rejected": 48,
+      "evidence": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/B/numeric05_log_audit01/evidence.json",
+        "sha256": "34ce53de8168dd987b4d6c6d6264ecdf74767a0da251b321f7b95aa9fea36411"
+      }
+    },
+    "next_budget_proposal": {
+      "activated": false,
+      "retains_passed_A": true,
+      "new_B_C_D": 27,
+      "used": 30,
+      "proposed_total": 57,
+      "current_authorized_total": 51,
+      "increase": 6,
+      "flights_authorized": false
+    }
+  }
+}

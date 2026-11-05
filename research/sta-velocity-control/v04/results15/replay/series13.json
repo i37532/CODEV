@@ -1,0 +1,117 @@
+[
+  {
+    "run": "run01",
+    "original_accepted": true,
+    "original_error": null,
+    "diagnostic_candidate_accepted": true,
+    "candidate_error": null,
+    "publication_window": {
+      "window_start_us": 40308000,
+      "window_end_us": 109348000,
+      "predecessor_group_us": 39956000,
+      "retained_rows": 59,
+      "checked_rows": 1,
+      "unresolved_outside_groups": []
+    },
+    "all_rows_retained": 59,
+    "equal_timestamp_rows": [],
+    "sha256": "029f748cd9bb0770e351897042bebd9c6f1f471c7a8848b6453df7f41cc9f988",
+    "not_a_formal_reacceptance": true
+  },
+  {
+    "run": "run02",
+    "original_accepted": true,
+    "original_error": null,
+    "diagnostic_candidate_accepted": true,
+    "candidate_error": null,
+    "publication_window": {
+      "window_start_us": 39404000,
+      "window_end_us": 108176000,
+      "predecessor_group_us": 39040000,
+      "retained_rows": 61,
+      "checked_rows": 1,
+      "unresolved_outside_groups": []
+    },
+    "all_rows_retained": 61,
+    "equal_timestamp_rows": [],
+    "sha256": "40c8f514ebc76c670e0489346c3ca9ae1d102297eb61abaa3ba1e2673d463190",
+    "not_a_formal_reacceptance": true
+  },
+  {
+    "run": "run03",
+    "original_accepted": true,
+    "original_error": null,
+    "diagnostic_candidate_accepted": true,
+    "candidate_error": null,
+    "publication_window": {
+      "window_start_us": 39176000,
+      "window_end_us": 108084000,
+      "predecessor_group_us": 38812000,
+      "retained_rows": 54,
+      "checked_rows": 1,
+      "unresolved_outside_groups": []
+    },
+    "all_rows_retained": 54,
+    "equal_timestamp_rows": [],
+    "sha256": "a4d8ff421294013e38422ce8c2facc2aa130da06b45bb85082ed147fc93880df",
+    "not_a_formal_reacceptance": true
+  },
+  {
+    "run": "run04",
+    "original_accepted": true,
+    "original_error": null,
+    "diagnostic_candidate_accepted": true,
+    "candidate_error": null,
+    "publication_window": {
+      "window_start_us": 40164000,
+      "window_end_us": 108724000,
+      "predecessor_group_us": 39796000,
+      "retained_rows": 58,
+      "checked_rows": 1,
+      "unresolved_outside_groups": []
+    },
+    "all_rows_retained": 58,
+    "equal_timestamp_rows": [],
+    "sha256": "19994d0dfa2b5ca5855bbff5bddc2144253f5b991676e2b025424e1b3598cbd7",
+    "not_a_formal_reacceptance": true
+  },
+  {
+    "run": "run05",
+    "original_accepted": false,
+    "original_error": "Ambiguous equal-time triplet field previous.timestamp",
+    "diagnostic_candidate_accepted": true,
+    "candidate_error": null,
+    "publication_window": {
+      "window_start_us": 38976000,
+      "window_end_us": 107724000,
+      "predecessor_group_us": 38620000,
+      "retained_rows": 54,
+      "checked_rows": 1,
+      "unresolved_outside_groups": [
+        {
+          "timestamp_us": 37216000,
+          "first_row": 2,
+          "row_count": 2,
+          "changed_fields": [
+            "previous.timestamp",
+            "current.lat",
+            "current.lon",
+            "current.alt",
+            "current.yaw",
+            "current.valid",
+            "current.type",
+            "current.loiter_direction",
+            "next.timestamp"
+          ],
+          "reason": "superseded before entry"
+        }
+      ]
+    },
+    "all_rows_retained": 54,
+    "equal_timestamp_rows": [
+      37216000
+    ],
+    "sha256": "94ecc612184c2677245b05b79de53b62264eddebde070a8ef3abd647b5341227",
+    "not_a_formal_reacceptance": true
+  }
+]

@@ -37,6 +37,7 @@
 #include <lib/mathlib/mathlib.h>
 #include <lib/matrix/matrix/math.hpp>
 #include "PositionControl/ControlMath.hpp"
+#include "PositionControl/VelocityHostClock.hpp"
 
 using namespace matrix;
 
@@ -248,6 +249,7 @@ PositionControlStates MulticopterPositionControl::set_vehicle_states(const vehic
 
 void MulticopterPositionControl::Run()
 {
+	const uint64_t host_started = velocityHostClock();
 	if (should_exit()) {
 		_local_pos_sub.unregisterCallback();
 		exit_and_cleanup();
@@ -263,7 +265,14 @@ void MulticopterPositionControl::Run()
 	vehicle_local_position_s local_pos;
 
 	if (_local_pos_sub.update(&local_pos)) {
+		const hrt_abstime module_started = hrt_absolute_time();
 		const hrt_abstime time_stamp_now = local_pos.timestamp;
+		const float input_dt = _time_stamp_last_loop ? static_cast<float>((static_cast<int64_t>(time_stamp_now)
+				- static_cast<int64_t>(_time_stamp_last_loop)) * 1e-6) : NAN;
+		const float raw_dt = _velocity_sample_last ? static_cast<float>((static_cast<int64_t>(local_pos.timestamp_sample)
+				- static_cast<int64_t>(_velocity_sample_last)) * 1e-6) : NAN;
+		const uint8_t timing = !_velocity_sample_last ? 1 : (raw_dt <= 0.f ? 2 : (raw_dt < .002f || raw_dt > .04f ? 3 : 0));
+		_velocity_sample_last = local_pos.timestamp_sample;
 		const float dt = math::constrain(((time_stamp_now - _time_stamp_last_loop) * 1e-6f), 0.002f, 0.04f);
 		_time_stamp_last_loop = time_stamp_now;
 
@@ -275,6 +284,44 @@ void MulticopterPositionControl::Run()
 
 		_control_mode_sub.update(&_control_mode);
 		_vehicle_land_detected_sub.update(&_vehicle_land_detected);
+		StaVelocityProtection::Config esta_config{};
+		// Validate the signed request before narrowing. Invalid/disabled is not X.
+		const int32_t requested_axes = _param_mpc_vc_axes.get();
+		esta_config.axes = requested_axes >= 1 && requested_axes <= 7 ? static_cast<uint8_t>(requested_axes) : 0;
+		// Each regularized algorithm consumes the whole configuration. MODE4
+		// is recognized here; PositionControl restricts RI05 B admission to SITL X/Z/XY/XYZ.
+		esta_config.variant = _param_mpc_vc_mode.get() == 4 ? 4 : (_param_mpc_vc_mode.get() == 3 ? 3 : 1);
+		esta_config.epsilon = {{_param_mpc_vc_eps_x.get(), _param_mpc_vc_eps_y.get(), _param_mpc_vc_eps_z.get()}};
+		esta_config.gains[0] = {_param_mpc_vc_l1_x.get(), _param_mpc_vc_l2_x.get()};
+		esta_config.nu_limit[0] = _param_mpc_vc_nu_x.get();
+		esta_config.acceleration_limit[0] = _param_mpc_vc_a_x.get();
+		esta_config.gains[1] = {_param_mpc_vc_l1_y.get(), _param_mpc_vc_l2_y.get()};
+		esta_config.nu_limit[1] = _param_mpc_vc_nu_y.get();
+		esta_config.acceleration_limit[1] = _param_mpc_vc_a_y.get();
+		esta_config.gains[2] = {_param_mpc_vc_l1_z.get(), _param_mpc_vc_l2_z.get()};
+		esta_config.nu_limit[2] = _param_mpc_vc_nu_z.get();
+		esta_config.acceleration_limit[2] = _param_mpc_vc_a_z.get();
+		_control.configureVelocityEsta(esta_config, _control_mode.flag_armed);
+		_control.configureVelocityDivisor(_param_mpc_vc_div.get(), _control_mode.flag_armed);
+		_control.configureVelocityControl(_param_mpc_vc_mode.get(), _param_mpc_vc_axes.get(), _control_mode.flag_armed);
+		uint8_t pid_calls = 0;
+		uint16_t first_fail = 0, first_input = 0;
+		uint8_t retry_result = 0;
+		uint32_t controller_time_us = 0;
+		uint64_t output_timestamp = 0, attitude_timestamp = 0;
+		float q_sp[4] = {NAN, NAN, NAN, NAN};
+		float excitation = 0.f;
+		float excitation_y = 0.f;
+		float excitation_z = 0.f;
+		uint8_t reset_bits = (local_pos.vxy_reset_counter != _vxy_reset_counter ? 1 : 0)
+				     | (local_pos.vz_reset_counter != _vz_reset_counter ? 2 : 0)
+				     | (local_pos.xy_reset_counter != _xy_reset_counter ? 4 : 0)
+				     | (local_pos.z_reset_counter != _z_reset_counter ? 8 : 0)
+				     | (local_pos.heading_reset_counter != _heading_reset_counter ? 16 : 0);
+		const uint8_t inner_reads = VelocityDiagnosticInput::drain(_rate_diagnostic_sub, _rate_diagnostic);
+		const uint64_t inner_check_timestamp = hrt_absolute_time();
+		_velocity_vehicle_status_sub.update(&_velocity_vehicle_status);
+		const bool inner_valid = VelocityDiagnosticInput::fresh(inner_check_timestamp, _rate_diagnostic.timestamp);
 
 		if (_param_mpc_use_hte.get()) {
 			hover_thrust_estimate_s hte;
@@ -363,16 +410,20 @@ void MulticopterPositionControl::Run()
 			const bool not_taken_off = (_takeoff.getTakeoffState() < TakeoffState::rampup);
 			const bool flying = (_takeoff.getTakeoffState() >= TakeoffState::flight);
 			const bool flying_but_ground_contact = (flying && _vehicle_land_detected.ground_contact);
+			// Keep the EKF-adjusted trajectory cache intact across callbacks without
+			// a new trajectory message. Takeoff suppression is local to this frame.
+			vehicle_local_position_setpoint_s frame_setpoint = _setpoint;
 
 			// make sure takeoff ramp is not amended by acceleration feed-forward
 			if (!flying) {
-				_setpoint.acceleration[2] = NAN;
+				frame_setpoint.acceleration[2] = NAN;
 			}
 
 			if (not_taken_off || flying_but_ground_contact) {
+				reset_bits |= 32;
 				// we are not flying yet and need to avoid any corrections
-				reset_setpoint_to_nan(_setpoint);
-				Vector3f(0.f, 0.f, 100.f).copyTo(_setpoint.acceleration); // High downwards acceleration to make sure there's no thrust
+				reset_setpoint_to_nan(frame_setpoint);
+				Vector3f(0.f, 0.f, 100.f).copyTo(frame_setpoint.acceleration); // High downwards acceleration to make sure there's no thrust
 
 				// prevent any integrator windup
 				_control.resetIntegral();
@@ -400,25 +451,82 @@ void MulticopterPositionControl::Run()
 				math::min(speed_up, _param_mpc_z_vel_max_up.get()), // takeoff ramp starts with negative velocity limit
 				math::constrain(speed_down, 0.f, _param_mpc_z_vel_max_dn.get()));
 
-			_control.setInputSetpoint(_setpoint);
+			_control.setInputSetpoint(frame_setpoint);
 
 			// update states
-			if (!PX4_ISFINITE(_setpoint.z)
-			    && PX4_ISFINITE(_setpoint.vz) && (fabsf(_setpoint.vz) > FLT_EPSILON)
+			if (!PX4_ISFINITE(frame_setpoint.z)
+			    && PX4_ISFINITE(frame_setpoint.vz) && (fabsf(frame_setpoint.vz) > FLT_EPSILON)
 			    && PX4_ISFINITE(local_pos.z_deriv) && local_pos.z_valid && local_pos.v_z_valid) {
 				// A change in velocity is demanded and the altitude is not controlled.
 				// Set velocity to the derivative of position
 				// because it has less bias but blend it in across the landing speed range
 				//  <  MPC_LAND_SPEED: ramp up using altitude derivative without a step
 				//  >= MPC_LAND_SPEED: use altitude derivative
-				float weighting = fminf(fabsf(_setpoint.vz) / _param_mpc_land_speed.get(), 1.f);
+				float weighting = fminf(fabsf(frame_setpoint.vz) / _param_mpc_land_speed.get(), 1.f);
 				states.velocity(2) = local_pos.z_deriv * weighting + local_pos.vz * (1.f - weighting);
 			}
 
 			_control.setState(states);
+			StaVelocityProtection::Frame velocity_frame{};
+			velocity_frame.sample = local_pos.timestamp_sample;
+			velocity_frame.armed = _control_mode.flag_armed;
+			velocity_frame.enabled = true;
+			velocity_frame.flying = flying;
+			velocity_frame.landed = _vehicle_land_detected.landed;
+			velocity_frame.contact = _vehicle_land_detected.ground_contact;
+			velocity_frame.inner_valid = inner_valid && _rate_diagnostic.effective_mode == 0
+				&& _rate_diagnostic.effective_axes == 0 && _rate_diagnostic.div_eff == 1
+				&& _rate_diagnostic.measurement_valid && _rate_diagnostic.output_valid
+				&& !_rate_diagnostic.fault && !_rate_diagnostic.termination;
+			// A reset with a freshly replaced target has no evidence of a matching delta.
+			velocity_frame.unmatched_reset_axes = (reset_bits & 1) && _setpoint.timestamp >= local_pos.timestamp ? 3 : 0;
+			// Z blends vz/z_deriv during descent. There is no evidence that both
+			// estimates and the active target share a reset delta: fail closed.
+			if (reset_bits & (2 | 8)) { velocity_frame.unmatched_reset_axes |= 4; }
+			_control.setVelocityFrame(velocity_frame);
+
+#if defined(CONFIG_ARCH_BOARD_PX4_SITL)
+			const bool excitation_gate = (_param_mpc_vct_test.get() >= 1 && _param_mpc_vct_test.get() <= 8) && flying
+				&& _velocity_vehicle_status.nav_state == vehicle_status_s::NAVIGATION_STATE_AUTO_LOITER
+				&& !_vehicle_land_detected.landed && !_vehicle_land_detected.ground_contact
+				&& _control_mode.flag_control_auto_enabled && !_control.velocitySelection().pending()
+				&& !_control.velocitySelection().reject()
+				&& inner_valid && _rate_diagnostic.effective_mode == 0 && _rate_diagnostic.effective_axes == 0
+				&& _rate_diagnostic.div_eff == 1 && !_rate_diagnostic.fault;
+			excitation = _velocity_excitation.update(local_pos.timestamp_sample, _control_mode.flag_armed, excitation_gate);
+			if (_param_mpc_vct_test.get() == 2) { excitation *= .5f; }
+			if (_param_mpc_vct_test.get() == 3 && excitation_gate && !_velocity_excitation.fault()) {
+				VelocityXYDiagnosticExcitation::waveform(_velocity_excitation.time(), excitation, excitation_y);
+			}
+			if (_param_mpc_vct_test.get() == 4 && excitation_gate && !_velocity_excitation.fault()) {
+				VelocityXYZDiagnosticExcitation::waveform(_velocity_excitation.time(), excitation, excitation_y, excitation_z);
+			}
+			if (VelocityResearchTask::valid(_param_mpc_vct_test.get()) || _param_mpc_vct_test.get() == 8) {
+				// Task inputs precede original position P; never also add velocity
+				// excitation. Keep the cached upstream target unchanged each frame.
+				excitation = 0.f;
+				if (excitation_gate && !_velocity_excitation.fault()) {
+					if (_param_mpc_vct_test.get() == 8) {
+						VelocityAxisAblationTask::apply(frame_setpoint, _velocity_excitation.time());
+					} else {
+						const auto task = VelocityResearchTask::evaluate(_param_mpc_vct_test.get(), _velocity_excitation.time());
+						VelocityResearchTask::apply(frame_setpoint, task);
+					}
+					_control.setInputSetpoint(frame_setpoint);
+				}
+			}
+#endif
+			_control.setDiagnosticExcitation(excitation, _param_mpc_vct_test.get() == 2);
+			if (_param_mpc_vct_test.get() == 3) { _control.setDiagnosticExcitationXY(excitation, excitation_y); }
+			if (_param_mpc_vct_test.get() == 4) { _control.setDiagnosticExcitationXYZ(excitation, excitation_y, excitation_z); }
 
 			// Run position control
-			if (_control.update(dt)) {
+			const hrt_abstime controller_started = hrt_absolute_time();
+			++pid_calls;
+			bool output_valid = _control.update(dt);
+			first_fail = _control.failureReason();
+			first_input = _control.inputValidity();
+			if (output_valid) {
 				_failsafe_land_hysteresis.set_state_and_update(false, time_stamp_now);
 
 			} else {
@@ -429,6 +537,11 @@ void MulticopterPositionControl::Run()
 				}
 
 				vehicle_local_position_setpoint_s failsafe_setpoint{};
+				_velocity_excitation.abort();
+				excitation = 0.f;
+				excitation_y = 0.f;
+				excitation_z = 0.f;
+				_control.setDiagnosticExcitation(0.f);
 
 				failsafe(time_stamp_now, failsafe_setpoint, states, !was_in_failsafe);
 
@@ -437,27 +550,170 @@ void MulticopterPositionControl::Run()
 
 				_control.setInputSetpoint(failsafe_setpoint);
 				_control.setVelocityLimits(_param_mpc_xy_vel_max.get(), _param_mpc_z_vel_max_up.get(), _param_mpc_z_vel_max_dn.get());
-				_control.update(dt);
+				++pid_calls;
+				output_valid = _control.update(dt);
+				retry_result = output_valid ? 1 : 2;
 			}
+			controller_time_us = hrt_elapsed_time(&controller_started);
+			_velocity_update_seq += pid_calls;
 
 			// Publish internal position control setpoints
-			// on top of the input/feed-forward setpoints these containt the PID corrections
-			// This message is used by other modules (such as Landdetector) to determine vehicle intention.
-			vehicle_local_position_setpoint_s local_pos_sp{};
-			_control.getLocalPositionSetpoint(local_pos_sp);
-			local_pos_sp.timestamp = hrt_absolute_time();
-			_local_pos_sp_pub.publish(local_pos_sp);
+			// Never publish a failed final invocation, including a failed PID retry.
+			// No publication is NOT a safe hover/takeover; experiments must abort.
+			if (output_valid && _control.velocityOutputPublishable()) {
+				// on top of the input/feed-forward setpoints these containt the PID corrections
+				// This message is used by other modules (such as Landdetector) to determine vehicle intention.
+				vehicle_local_position_setpoint_s local_pos_sp{};
+				_control.getLocalPositionSetpoint(local_pos_sp);
+				local_pos_sp.timestamp = hrt_absolute_time();
+				output_timestamp = local_pos_sp.timestamp;
+				_local_pos_sp_pub.publish(local_pos_sp);
 
-			// Publish attitude setpoint output
-			vehicle_attitude_setpoint_s attitude_setpoint{};
-			_control.getAttitudeSetpoint(attitude_setpoint);
-			attitude_setpoint.timestamp = hrt_absolute_time();
-			_vehicle_attitude_setpoint_pub.publish(attitude_setpoint);
+				// Publish attitude setpoint output
+				vehicle_attitude_setpoint_s attitude_setpoint{};
+				_control.getAttitudeSetpoint(attitude_setpoint);
+				attitude_setpoint.timestamp = hrt_absolute_time();
+				attitude_timestamp = attitude_setpoint.timestamp;
+				memcpy(q_sp, attitude_setpoint.q_d, sizeof(q_sp));
+				_vehicle_attitude_setpoint_pub.publish(attitude_setpoint);
+			}
 
 		} else {
 			// an update is necessary here because otherwise the takeoff state doesn't get skiped with non-altitude-controlled modes
+			_velocity_excitation.update(local_pos.timestamp_sample, _control_mode.flag_armed, false);
+			StaVelocityProtection::Frame inactive{};
+			inactive.sample = local_pos.timestamp_sample;
+			inactive.armed = _control_mode.flag_armed;
+			_control.setVelocityFrame(inactive);
 			_takeoff.updateTakeoffState(_control_mode.flag_armed, _vehicle_land_detected.landed, false, 10.f, true, time_stamp_now);
 		}
+
+		// Record selection after the actual controller calls for this input sample.
+		const auto &selection = _control.velocitySelection();
+		velocity_ctrl_selection_s selection_status{};
+		selection_status.timestamp = hrt_absolute_time();
+		selection_status.timestamp_sample = local_pos.timestamp_sample;
+		selection_status.input_timestamp = local_pos.timestamp;
+		selection_status.publish_seq = ++_velocity_selection_seq;
+		selection_status.requested_mode = selection.requestedMode();
+		selection_status.requested_axes = selection.requestedAxes();
+		selection_status.effective_mode = selection.effectiveMode();
+		selection_status.effective_axes = selection.effectiveAxes();
+		selection_status.pending = selection.pending();
+		selection_status.reject = selection.reject();
+		selection_status.armed = _control_mode.flag_armed;
+		selection_status.enabled = _control_mode.flag_multicopter_position_control_enabled;
+		selection_status.pid_calls = pid_calls;
+		const auto &effective_esta = _control.effectiveVelocityEsta();
+		selection_status.variant_req = selection.requestedMode() == 0 ? 0
+				: (selection.requestedMode() == 1 ? 1 : (selection.requestedMode() == 3 ? 3 : (selection.requestedMode() == 4 ? 4 : 255)));
+		selection_status.variant_eff = selection.effectiveMode() == 0 ? 0
+				: (selection.effectiveMode() == 1 ? 1 : (selection.effectiveMode() == 3 ? 3 : (selection.effectiveMode() == 4 ? 4 : 255)));
+		selection_status.eps_req[0] = _param_mpc_vc_eps_x.get();
+		selection_status.eps_req[1] = _param_mpc_vc_eps_y.get();
+		selection_status.eps_req[2] = _param_mpc_vc_eps_z.get();
+		for (int axis = 0; axis < 3; ++axis) {
+			selection_status.eps_eff[axis] = (selection.effectiveMode() == 3 || selection.effectiveMode() == 4)
+				&& (selection.effectiveAxes() & (1 << axis)) ? effective_esta.epsilon[axis] : NAN;
+		}
+		selection_status.sta_gen = _control.velocityEstaGeneration();
+		selection_status.sta_pending = _control.velocityEstaPending();
+		selection_status.sta_reject = _control.velocityEstaRejected();
+		const auto &cadence = _control.velocityDecimation();
+		selection_status.div_req = cadence.requested;
+		selection_status.div_eff = cadence.divisor;
+		selection_status.div_pending = cadence.pending;
+		selection_status.div_reject = cadence.rejected;
+		selection_status.control_seq = cadence.sequence;
+		selection_status.h = cadence.h;
+		selection_status.control_updated = pid_calls && cadence.updated;
+		selection_status.control_held = pid_calls && cadence.held;
+		selection_status.control_fault = cadence.fault;
+		selection_status.interval_pos = _control.intervalPositive();
+		selection_status.interval_neg = _control.intervalNegative();
+		_control.velocityCorrection().copyTo(selection_status.correction);
+		_control.velocityIntegral().copyTo(selection_status.integral);
+		selection_status.path_ns = pid_calls ? _control.velocityPathTimeNs() : 0;
+		selection_status.module_ns = host_started ? velocityHostClock() - host_started : 0;
+		selection_status.clock = host_started ? 1 : 0;
+		selection_status.ri_version = 1;
+		const auto &rista = _control.regularizedIstaDiagnostic();
+		const bool rista_invoked = pid_calls && selection.effectiveMode() == 4;
+		selection_status.ri_valid = rista_invoked && rista.valid;
+		selection_status.ri_cache_valid = rista_invoked && rista.cache_valid;
+		selection_status.ri_cache_sample = selection_status.ri_cache_valid ? rista.cache_sample : 0;
+		selection_status.ri_strict_axes = selection_status.ri_valid ? rista.strict_axes : 0;
+		selection_status.ri_commit_axes = rista_invoked ? rista.commit_axes : 0;
+		selection_status.ri_h = rista_invoked ? rista.h : NAN;
+		selection_status.ri_seed_h = rista_invoked ? rista.seed_h : NAN;
+		for (int axis = 0; axis < 3; ++axis) {
+			selection_status.ri_p[axis] = selection_status.ri_valid || (rista_invoked && rista.seed_h > 0.f) ? rista.p[axis] : NAN;
+			selection_status.ri_nu_candidate[axis] = selection_status.ri_valid ? rista.nu_candidate[axis] : NAN;
+			selection_status.ri_nu_applied[axis] = rista_invoked ? rista.nu_applied[axis] : NAN;
+			selection_status.ri_a_ideal[axis] = selection_status.ri_valid ? rista.a_ideal[axis] : NAN;
+			selection_status.ri_a_applied[axis] = rista_invoked ? rista.a_applied[axis] : NAN;
+			// A computed value is not published when output is suppressed/faulted.
+			selection_status.ri_acc_published[axis] = rista_invoked && output_timestamp ? rista.acc_published[axis] : NAN;
+			selection_status.ri_thrust_published[axis] = rista_invoked && output_timestamp ? rista.thrust_published[axis] : NAN;
+		}
+		_velocity_selection_pub.publish(selection_status);
+
+		// Final invocation only: failed-first-call output is never labelled as final.
+		sta_velocity_ctrl_status_s diagnostic = pid_calls ? _control.diagnostic() : sta_velocity_ctrl_status_s{};
+		if (!pid_calls) {
+			for (int i = 0; i < 3; ++i) {
+				diagnostic.p_sp[i] = diagnostic.v_ff[i] = diagnostic.v_sp[i] = diagnostic.v[i] = diagnostic.v_dot[i] = NAN;
+				diagnostic.a_ff[i] = diagnostic.s[i] = diagnostic.nu_before[i] = diagnostic.nu_ideal[i] = NAN;
+				diagnostic.nu_applied[i] = diagnostic.a_sta[i] = diagnostic.a_req[i] = diagnostic.a_proxy[i] = diagnostic.thrust[i] = NAN;
+			}
+		}
+		diagnostic.timestamp = hrt_absolute_time();
+		diagnostic.timestamp_sample = local_pos.timestamp_sample;
+		diagnostic.input_timestamp = local_pos.timestamp;
+		diagnostic.setpoint_timestamp = _setpoint.timestamp;
+		diagnostic.output_timestamp = output_timestamp;
+		diagnostic.attitude_timestamp = attitude_timestamp;
+		diagnostic.publish_seq = _velocity_selection_seq;
+		diagnostic.update_seq = _velocity_update_seq;
+		diagnostic.requested_mode = selection.requestedMode();
+		diagnostic.requested_axes = selection.requestedAxes();
+		diagnostic.effective_mode = selection.effectiveMode();
+		diagnostic.effective_axes = selection.effectiveAxes();
+		diagnostic.raw_dt = raw_dt;
+		diagnostic.input_dt = input_dt;
+		diagnostic.used_dt = dt;
+		diagnostic.excitation = excitation;
+		diagnostic.excitation_y = excitation_y;
+		diagnostic.excitation_z = excitation_z;
+		diagnostic.excitation_time = _velocity_excitation.time();
+		diagnostic.controller_time_us = controller_time_us;
+		diagnostic.module_time_us = hrt_elapsed_time(&module_started);
+		diagnostic.pid_calls = pid_calls;
+		diagnostic.first_fail = first_fail;
+		diagnostic.first_input = first_input;
+		diagnostic.retry_result = retry_result;
+		diagnostic.excitation_fault = _velocity_excitation.fault();
+		diagnostic.reset_bits = reset_bits;
+		diagnostic.timing = timing;
+		diagnostic.takeoff_state = static_cast<uint8_t>(_takeoff.getTakeoffState());
+		diagnostic.reject = selection.reject();
+		diagnostic.inner_mode = inner_valid ? _rate_diagnostic.effective_mode : -1;
+		diagnostic.inner_axes = _rate_diagnostic.effective_axes;
+		diagnostic.inner_divisor = _rate_diagnostic.div_eff;
+		diagnostic.inner_valid = inner_valid;
+		diagnostic.inner_timestamp = _rate_diagnostic.timestamp;
+		diagnostic.inner_check_timestamp = inner_check_timestamp;
+		diagnostic.inner_seq = _rate_diagnostic.publish_seq;
+		diagnostic.inner_reads = inner_reads;
+		diagnostic.updated = pid_calls > 0;
+		diagnostic.pending = selection.pending();
+		diagnostic.armed = _control_mode.flag_armed;
+		diagnostic.enabled = _control_mode.flag_multicopter_position_control_enabled;
+		diagnostic.landed = _vehicle_land_detected.landed;
+		diagnostic.contact = _vehicle_land_detected.ground_contact;
+		diagnostic.failsafe = _in_failsafe;
+		memcpy(diagnostic.q_sp, q_sp, sizeof(q_sp));
+		_velocity_diagnostic_pub.publish(diagnostic);
 
 		// Publish takeoff status
 		const uint8_t takeoff_state = static_cast<uint8_t>(_takeoff.getTakeoffState());
@@ -489,47 +745,48 @@ void MulticopterPositionControl::failsafe(const hrt_abstime &now, vehicle_local_
 		warn = false;
 	}
 
-	// Only react after a short delay
+	// Retain the reporting hysteresis, but NEVER leave the caller's zero-
+	// initialized struct as an accidental world-origin/yaw-zero command.
+	// Select the existing stop/descend strategy from the first failed frame.
 	_failsafe_land_hysteresis.set_state_and_update(true, now);
+	warn = warn && _failsafe_land_hysteresis.get_state();
+	_in_failsafe = _failsafe_land_hysteresis.get_state();
 
-	if (_failsafe_land_hysteresis.get_state()) {
-		reset_setpoint_to_nan(setpoint);
+	reset_setpoint_to_nan(setpoint);
 
-		if (PX4_ISFINITE(states.velocity(0)) && PX4_ISFINITE(states.velocity(1))) {
-			// don't move along xy
-			setpoint.vx = setpoint.vy = 0.f;
+	if (PX4_ISFINITE(states.velocity(0)) && PX4_ISFINITE(states.velocity(1))
+	    && PX4_ISFINITE(states.acceleration(0)) && PX4_ISFINITE(states.acceleration(1))) {
+		// don't move along xy
+		setpoint.vx = setpoint.vy = 0.f;
 
-			if (warn) {
-				PX4_WARN("Failsafe: stop and wait");
-			}
-
-		} else {
-			// descend with land speed since we can't stop
-			setpoint.acceleration[0] = setpoint.acceleration[1] = 0.f;
-			setpoint.vz = _param_mpc_land_speed.get();
-
-			if (warn) {
-				PX4_WARN("Failsafe: blind land");
-			}
+		if (warn) {
+			PX4_WARN("Failsafe: stop and wait");
 		}
 
-		if (PX4_ISFINITE(states.velocity(2))) {
-			// don't move along z if we can stop in all dimensions
-			if (!PX4_ISFINITE(setpoint.vz)) {
-				setpoint.vz = 0.f;
-			}
+	} else {
+		// descend with land speed since we can't stop
+		setpoint.acceleration[0] = setpoint.acceleration[1] = 0.f;
+		setpoint.vz = _param_mpc_land_speed.get();
 
-		} else {
-			// emergency descend with a bit below hover thrust
-			setpoint.vz = NAN;
-			setpoint.acceleration[2] = .3f;
+		if (warn) {
+			PX4_WARN("Failsafe: blind land");
+		}
+	}
 
-			if (warn) {
-				PX4_WARN("Failsafe: blind descend");
-			}
+	if (PX4_ISFINITE(states.velocity(2)) && PX4_ISFINITE(states.acceleration(2))) {
+		// don't move along z if we can stop in all dimensions
+		if (!PX4_ISFINITE(setpoint.vz)) {
+			setpoint.vz = 0.f;
 		}
 
-		_in_failsafe = true;
+	} else {
+		// emergency descend with a bit below hover thrust
+		setpoint.vz = NAN;
+		setpoint.acceleration[2] = .3f;
+
+		if (warn) {
+			PX4_WARN("Failsafe: blind descend");
+		}
 	}
 }
 

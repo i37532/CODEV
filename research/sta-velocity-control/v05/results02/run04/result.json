@@ -1,0 +1,74 @@
+{
+  "source_head": "969ca4afe7163d27d83282ecff49f080599b41c5",
+  "branch": "research/sta-velocity-control",
+  "binary_sha256": "f3e482023148f69b419059ec98cbcc34a6bdda496f7693f4704e3ab2ca7dd8a3",
+  "runner_sha256": "93a064418ac6776d245943007e24bc4ac2db1e7193f1509d14309e5a0fba8d3a",
+  "command": [
+    "./sitl/run.sh",
+    "--headless",
+    "--backend",
+    "gazebo",
+    "--model",
+    "iris"
+  ],
+  "pid_parameters_modified": false,
+  "success": true,
+  "events": [
+    {
+      "name": "ready",
+      "timestamp_us": 30924000.0
+    },
+    {
+      "name": "takeoff_command",
+      "timestamp_us": 30936000
+    },
+    {
+      "name": "reposition_command",
+      "timestamp_us": 39564000.0
+    },
+    {
+      "name": "handoff_ready",
+      "timestamp_us": 39924000.0
+    },
+    {
+      "name": "hover_start",
+      "timestamp_us": 48056000.0
+    },
+    {
+      "name": "hover_end",
+      "timestamp_us": 138084000.0
+    },
+    {
+      "name": "land_command",
+      "timestamp_us": 138084000.0
+    },
+    {
+      "name": "landed_disarmed",
+      "timestamp_us": 147184000.0
+    }
+  ],
+  "scenario_sha256": "7cb861c1049e9c7d80a1370cf09591151b0fbf957931f5aa36012c9aa41bceb5",
+  "scenario_path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v05/protocol02/execution.json",
+  "simulation_speed_requested": 1.0,
+  "explicit_environment": {
+    "PX4_SITL_WORLD": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world",
+    "GAZEBO_MASTER_URI": "http://127.0.0.1:11345"
+  },
+  "launcher_pid": 437586,
+  "launcher_returncode": 0,
+  "logs": [
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-27/07_53_15.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/V05/paired02/run04/07_53_15.ulg",
+      "sha256": "8fad23dc5c95380f632fd7f8ec1b80805d4b9bb8e0ed8ff001a586cf5083db2f",
+      "bytes": 220220
+    },
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-27/07_53_16.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/V05/paired02/run04/07_53_16.ulg",
+      "sha256": "31eb20f9d5aec24d3efba4c2c3a57a678e163545f46383e3a5fe5ea2cb113ccb",
+      "bytes": 101892400
+    }
+  ],
+  "finished_utc": "2026-09-27T07:55:42Z"
+}

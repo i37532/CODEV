@@ -53,6 +53,28 @@
 PARAM_DEFINE_FLOAT(MPC_THR_MIN, 0.12f);
 
 /**
+ * Default-off velocity diagnostic excitation (SITL only)
+ *
+ * One X/North 32 second smooth sine after 12 seconds airborne settling.
+ * Value 2 uses half amplitude in Down/Z for the Z03 protocol.
+ * Never use on hardware. Not a controller mode.
+ *
+ * @value 0 Disabled
+ * @value 1 Single shot PID X excitation
+ * @value 2 Single shot Z excitation (0.1 m/s)
+ * @value 3 X then Y then XY excitation (64 s, horizontal norm <= 0.2 m/s)
+ * @value 4 Z then XY then XYZ excitation (64 s, horizontal 0.2, vertical 0.1 m/s)
+ * @value 5 V06 hover trajectory (64 s, no velocity excitation)
+ * @value 6 V06 low-speed NED figure8 (64 s, position/velocity/acceleration FF)
+ * @value 7 V06 same figure8 with smooth heading variation (up to 30 degrees)
+ * @value 8 AX02 fixed-yaw figure8 with smooth NED Z addition (<=0.1 m)
+ * @min 0
+ * @max 8
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_INT32(MPC_VCT_TEST, 0);
+
+/**
  * Hover thrust
  *
  * Vertical thrust required to hover.
@@ -217,6 +239,193 @@ PARAM_DEFINE_FLOAT(MPC_Z_VEL_MAX_DN, 1.0f);
  * @group Multicopter Position Control
  */
 PARAM_DEFINE_FLOAT(MPC_XY_P, 0.95f);
+
+/**
+ * Velocity controller request
+ *
+ * Accepts PID/AXES=0 or SITL ESTA/AXES=1..7 with valid independent gains.
+ * AX01 Y/XZ/YZ require DIV1. MODE2 remains reserved and rejected.
+ * R03 gate D admits MODE3 regularized explicit STA on NED X, Z, XY or XYZ (AXES=1/4/3/7),
+ * in SITL with DIV1 and valid gains/epsilon. Other MODE3 masks remain rejected.
+ * RI05 gate B admits MODE4 compensated regularized implicit STA on NED X, Z, XY or XYZ
+ * (AXES=1/4/3/7), in SITL with DIV1 and valid gains/epsilon. Other axes remain PID.
+ * All other MODE4 masks remain rejected. The configuration retains all 15 values.
+ * Armed requests are pending until
+ * disarm; requesting the effective configuration cancels pending changes.
+ * Original PID gain updates are unaffected.
+ *
+ * @value 0 PID
+ * @value 1 ESTA selected NED axes (SITL only)
+ * @value 2 Reserved (unavailable)
+ * @value 3 Regularized explicit STA X, Z, XY or XYZ (SITL only, R03 gate D)
+ * @value 4 Regularized implicit STA X/Z/XY/XYZ (SITL only, RI05 B)
+ * @min 0
+ * @max 4
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_INT32(MPC_VC_MODE, 0);
+
+/**
+ * Experimental velocity axes request
+ *
+ * Local NED axes, not body rates. MODE0 requires 0; MODE1 permits
+ * 1 X, 2 Y, 3 XY, 4 Z, 5 XZ, 6 YZ or 7 XYZ with valid gains in SITL.
+ * Other axes remain PID. XY uses independent gains and an atomic transaction.
+ * Z retains PID during ground/takeoff ramp and one handover sample.
+ * XZ/YZ/XYZ retain ground/ramp PID and a bounded atomic handover; normal flight
+ * computes only selected ESTA axes. All rate controllers must remain PID.
+ * MODE3 permits 1 X, 4 Z, 3 XY or 7 XYZ with DIV1 in SITL (R03 gate D).
+ * Its 2/5/6 masks remain unavailable; MODE1 masks are unchanged.
+ * MODE4 permits only 1 X, 3 XY, 4 Z or 7 XYZ with DIV1 in SITL (RI05 B); other masks are rejected.
+ *
+ * @min 0
+ * @max 7
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_INT32(MPC_VC_AXES, 0);
+
+/**
+ * Regularized STA North velocity boundary width
+ *
+ * Width in velocity-error units, not an acceleration gain. Used by MODE3
+ * on selected X in SITL (R03 gate D), and MODE4 X/XY/XYZ in SITL (RI05 B).
+ * Does not change PID or MODE1 ESTA.
+ * Valid domain is checked without clamping; disarmed changes only.
+ * @unit m/s
+ * @min 0.001
+ * @max 1.0
+ * @decimal 3
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_FLOAT(MPC_VC_EPS_X, 0.01f);
+
+/**
+ * Regularized STA East velocity boundary width
+ *
+ * MODE3 Y is admitted as part of XY/XYZ in R03 gate D; MODE4 XY/XYZ is admitted in RI05 B.
+ * Ignored by PID and MODE1.
+ * Invalid values are rejected without clamping; disarmed changes only.
+ * @unit m/s
+ * @min 0.001
+ * @max 1.0
+ * @decimal 3
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_FLOAT(MPC_VC_EPS_Y, 0.01f);
+
+/**
+ * Regularized STA Down velocity boundary width
+ *
+ * MODE3 Z/XYZ are admitted in R03 gate D; MODE4 Z/XYZ is admitted in SITL (RI05 B).
+ * Ignored by PID and MODE1.
+ * Invalid values are rejected without clamping; disarmed changes only.
+ * @unit m/s
+ * @min 0.001
+ * @max 1.0
+ * @decimal 3
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_FLOAT(MPC_VC_EPS_Z, 0.02f);
+
+/**
+ * ESTA North velocity square-root gain
+ *
+ * Units (m/s^2)/sqrt(m/s). Zero disables admission. Disarmed changes only.
+ * @min 0
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_FLOAT(MPC_VC_L1_X, 0.f);
+
+/**
+ * ESTA North velocity integral gain
+ *
+ * Units m/s^3. Zero disables admission. Disarmed changes only.
+ * @min 0
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_FLOAT(MPC_VC_L2_X, 0.f);
+
+/**
+ * ESTA North nu absolute limit
+ *
+ * Units m/s^2. Zero disables admission. Disarmed changes only.
+ * @min 0
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_FLOAT(MPC_VC_NU_X, 0.f);
+
+/**
+ * ESTA North acceleration correction absolute limit
+ *
+ * Units m/s^2 before original acceleration feed-forward. Disarmed changes only.
+ * @min 0
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_FLOAT(MPC_VC_A_X, 0.f);
+
+/**
+ * ESTA Y gain lambda1 (SITL only, zero is unconfigured)
+ * @min 0
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_FLOAT(MPC_VC_L1_Y, 0.f);
+
+/**
+ * ESTA Y gain lambda2 (m/s^3, SITL only)
+ * @min 0
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_FLOAT(MPC_VC_L2_Y, 0.f);
+
+/**
+ * ESTA Y independent state bound (m/s^2, SITL only)
+ * @min 0
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_FLOAT(MPC_VC_NU_Y, 0.f);
+
+/**
+ * ESTA Y correction bound before feed-forward (m/s^2, SITL only)
+ * @min 0
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_FLOAT(MPC_VC_A_Y, 0.f);
+
+/**
+ * ESTA Down velocity square-root gain
+ *
+ * Units (m/s^2)/sqrt(m/s). Zero disables admission. Disarmed changes only.
+ * @min 0
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_FLOAT(MPC_VC_L1_Z, 0.f);
+
+/**
+ * ESTA Down velocity integral gain
+ *
+ * Units m/s^3. Zero disables admission. Disarmed changes only.
+ * @min 0
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_FLOAT(MPC_VC_L2_Z, 0.f);
+
+/**
+ * ESTA Down nu absolute limit
+ *
+ * Units m/s^2. Zero disables admission. Disarmed changes only.
+ * @min 0
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_FLOAT(MPC_VC_NU_Z, 0.f);
+
+/**
+ * ESTA Down acceleration correction absolute limit
+ *
+ * Units m/s^2 before FF. Zero disables admission. Disarmed changes only.
+ * @min 0
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_FLOAT(MPC_VC_A_Z, 0.f);
 
 /**
  * Proportional gain for horizontal velocity error
@@ -783,3 +992,17 @@ PARAM_DEFINE_FLOAT(MPC_XY_VEL_ALL, -10.0f);
  * @group Multicopter Position Control
  */
 PARAM_DEFINE_FLOAT(MPC_Z_VEL_ALL, -3.0f);
+
+/**
+ * Velocity feedback update divisor (SITL research)
+ *
+ * Only feedback correction and integral/nu are decimated. Position P,
+ * acceleration feedforward, mapping and lifecycle run every callback.
+ * DIV>1 only supports PID and X/XY ESTA; Y/Z/XZ/YZ/XYZ require DIV1.
+ * Armed changes are deferred until disarm. Invalid values are rejected.
+ * @value 1 Every callback (legacy PID)
+ * @value 2 Every second callback
+ * @value 4 Every fourth callback
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_INT32(MPC_VC_DIV, 1);

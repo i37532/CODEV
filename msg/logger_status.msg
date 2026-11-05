@@ -18,4 +18,4 @@ uint32 message_gaps            # messages misssed
 uint32 buffer_used_bytes       # current buffer fill in Bytes
 uint32 buffer_size_bytes       # total buffer size in Bytes
 
-uint8 num_messages
+uint16 num_messages

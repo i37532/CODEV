@@ -1,0 +1,573 @@
+{
+  "success": true,
+  "commands": [
+    {
+      "name": "workspace",
+      "argv": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "submodules",
+      "argv": [
+        "git",
+        "submodule",
+        "status",
+        "--recursive"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "build_tests",
+      "argv": [
+        "make",
+        "tests",
+        "TESTFILTER=VelocityDecimation",
+        "-j4"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "build_sitl",
+      "argv": [
+        "make",
+        "px4_sitl_default",
+        "-j4"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "PositionControl",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-PositionControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/verification_committed04/PositionControl.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "ControlMath",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-ControlMath",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/verification_committed04/ControlMath.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "Takeoff",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-Takeoff",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/verification_committed04/Takeoff.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "RateControl",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RateControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/verification_committed04/RateControl.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "RateControlDispatcher",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RateControlDispatcher",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/verification_committed04/RateControlDispatcher.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "VelocityControl",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-VelocityControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/verification_committed04/VelocityControl.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "VelocitySelectionParam",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/functional-VelocitySelectionParam",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/verification_committed04/VelocitySelectionParam.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "StaVelocityControl",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaVelocityControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/verification_committed04/StaVelocityControl.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "StaVelocityProtection",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaVelocityProtection",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/verification_committed04/StaVelocityProtection.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "StaRateControl",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaRateControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/verification_committed04/StaRateControl.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "VelocityDiagnosticInput",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/functional-VelocityDiagnosticInput",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/verification_committed04/VelocityDiagnosticInput.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "VelocityEsta",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-VelocityEsta",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/verification_committed04/VelocityEsta.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "VelocityModule",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/functional-VelocityModule",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/verification_committed04/VelocityModule.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "VelocityEstaZ",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-VelocityEstaZ",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/verification_committed04/VelocityEstaZ.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "VelocityZIntegration",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-VelocityZIntegration",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/verification_committed04/VelocityZIntegration.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "EKF2Selector",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/functional-EKF2Selector",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/verification_committed04/EKF2Selector.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "LandingDescentContract",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/functional-LandingDescentContract",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/verification_committed04/LandingDescentContract.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "EstimatorDiagnosticTopics",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/functional-EstimatorDiagnosticTopics",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/verification_committed04/EstimatorDiagnosticTopics.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "VelocityXYIntegration",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-VelocityXYIntegration",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/verification_committed04/VelocityXYIntegration.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "VelocityXYZIntegration",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-VelocityXYZIntegration",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/verification_committed04/VelocityXYZIntegration.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "VelocityResearchTask",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-VelocityResearchTask",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/verification_committed04/VelocityResearchTask.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "VelocityDecimation",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-VelocityDecimation",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/verification_committed04/VelocityDecimation.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "candidate_compile",
+      "argv": [
+        "g++",
+        "-std=c++14",
+        "-O2",
+        "-fno-rtti",
+        "-fno-exceptions",
+        "-pthread",
+        "-I/home/yr/Desktop/Codev-autopilot/src/modules/mc_pos_control/PositionControl",
+        "-I/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/googletest-src/googletest/include",
+        "/home/yr/Desktop/Codev-autopilot/src/modules/mc_pos_control/PositionControl/StaVelocityControl.cpp",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v03/preflight/CandidateAuditTest.cpp",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/lib/libgtest_main.a",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/lib/libgtest.a",
+        "-o",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/verification_committed04/candidate_audit"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "candidate_audit",
+      "argv": [
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/verification_committed04/candidate_audit",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/verification_committed04/candidate_audit.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "imu_clock_chain",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v07/imu_clock01/verify.py",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/verification_committed04/imu_clock_chain"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "logger_file_chain",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v07/logger_file04/verify.py",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/verification_committed04/logger_file_chain"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "historical_python",
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/scripts",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "cadence",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v07/protocol04/test_cadence.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "landing",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v07/protocol04/test_landing.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "protocol",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v07/protocol04/test_protocol.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "imu_health",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v07/protocol04/test_imu_health.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "position_log",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v07/protocol04/test_position_log.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "logger_file",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v07/protocol04/test_logger_file.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "dry_run",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v07/protocol04/run.py",
+        "--source-head",
+        "d37a4cb3ed4e8351acc0ab027dd4149dd1bc1eb2",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/verification_committed04/NOT_CREATED"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "gazebo_build_only",
+      "argv": [
+        "env",
+        "DONT_RUN=1",
+        "make",
+        "px4_sitl_default",
+        "gazebo_iris",
+        "-j4"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "diff_check",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "tests": {
+    "PositionControl": {
+      "tests": 15,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "ControlMath": {
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "Takeoff": {
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "RateControl": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "RateControlDispatcher": {
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocityControl": {
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocitySelectionParam": {
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "StaVelocityControl": {
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "StaVelocityProtection": {
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "StaRateControl": {
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocityDiagnosticInput": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocityEsta": {
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocityModule": {
+      "tests": 28,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocityEstaZ": {
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocityZIntegration": {
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "EKF2Selector": {
+      "tests": 15,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "LandingDescentContract": {
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "EstimatorDiagnosticTopics": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocityXYIntegration": {
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocityXYZIntegration": {
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocityResearchTask": {
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocityDecimation": {
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "candidate_audit": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "ImuPublicationClock": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "LoggerFileNaming": {
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    }
+  },
+  "new_flights": 0,
+  "head": "d37a4cb3ed4e8351acc0ab027dd4149dd1bc1eb2",
+  "eeprom_before": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+  "formats": {
+    "sta_velocity_ctrl_status": 1475,
+    "velocity_ctrl_selection": 584,
+    "vehicle_local_position_log": 761,
+    "logger_status": 245
+  },
+  "cpp_tests": 226,
+  "python_tests": 471,
+  "firmware_sha256": "0e46f38f2e681b419544c6aa32955345fd0543d73fa4d8783e28817455d4b76e",
+  "assets_checked": 1248,
+  "eeprom_after": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc"
+}

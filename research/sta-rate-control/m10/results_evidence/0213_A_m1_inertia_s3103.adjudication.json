@@ -1,0 +1,22 @@
+{
+  "disposition": "retain_failed_attempt_and_continue",
+  "retained_prearm_gap": false,
+  "user_authorized_inflight_data_loss": true,
+  "analysis_resolved_without_reflight": false,
+  "flight_repeated": false,
+  "accepted": false,
+  "user_authorization": "允许第 214 轮也保持无效、不补飞，记录新的协议偏离后继续剩余 386 次",
+  "reason": "Explicit exception for attempt 214 only. Six diagnostic gaps include armed flight and the main analysis window; 1817 samples are missing and the main ULog contains 16 dropout markers. Keep the original data-quality rejection, no accepted metrics, no replacement flight. This does not satisfy the frozen pre-arm-gap rule, and does not assert that missing intervals were fault-free.",
+  "protocol_deviation": "An external resume adapter extends only the orchestration review for this exact authorized attempt. Frozen tracked source, firmware, plugins, parameters, jobs and analyses remain unchanged. Future unresolved out-of-protocol failures still halt.",
+  "original_execution": "/home/yr/Desktop/codev doc/experiments/M10-20260917/formal01/0213_A_m1_inertia_s3103.execution.json",
+  "original_execution_sha256": "920d145bf4b1e169a2dd83dc736ef1de280f1b3850dbb1fa9850b712cf317b62",
+  "new_analysis_sha256": "0413dd63db4a2527cd3aeaeac544a66f32470fff21b6f47c69d37b292d180489",
+  "result_sha256": "636f9dc24f3393b9557a6b8e7b5ebb304d0982d24cb85a960e01fb4fa7681bb3",
+  "missing_diagnostic_samples": 1817,
+  "diagnostic_gap_intervals": 6,
+  "ulog_dropout_markers": 16,
+  "ulogs": {
+    "/home/yr/Desktop/codev doc/experiments/M10-20260917/formal01/0213_A_m1_inertia_s3103/13_02_23.ulg": "0c1edffd3b0b73fe1c421d5ac97a94d2c567b42f6dd0cf9bfd4458de86c238c5",
+    "/home/yr/Desktop/codev doc/experiments/M10-20260917/formal01/0213_A_m1_inertia_s3103/13_02_29.ulg": "71441e5d60d178ac4ab4d85172c28974cc50906372306c1cfd5769708dd77f86"
+  }
+}

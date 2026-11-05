@@ -1,0 +1,585 @@
+{
+  "milestone": "M03",
+  "start_head": "0e8cc0c1fa4109c14fa7db5a5c407b6eed04c393",
+  "branch": "research/sta-rate-control",
+  "scope": "unit + PID SITL; ESTA not enabled; raw motor topic not TV-ready",
+  "tested_run03_patch_sha256": "aa73db700e9064889fa572dba0fb573975fcc26ce75dd27713a5a96b09a7151b",
+  "source_files": {
+    "msg/CMakeLists.txt": "a8138e787e99586b84bec171fa31cf46a30dfaad2b6ede74d9fa19578f0c8a08",
+    "msg/multirotor_motor_limits.msg": "0a38e28b14c7cd98d6a5290a2a8da16e4846785d5b7abe113ef323a6a60a816e",
+    "msg/sta_rate_ctrl_status.msg": "f518223c54be1facb26220ecd3bd3e28457708042be6c24442358fa1349e5249",
+    "research/sta-rate-control/m03/late_logged_baseline.json": "1f353f1b9e76612f461de29a5bf6bd8d654c97a5b9d63d0f52f21f5ed7120541",
+    "research/sta-rate-control/scripts/analyze_m00.py": "bf751adaef58ce9865bad9c909983a787040ec5269d1887a5dff62a1ed307c8e",
+    "research/sta-rate-control/scripts/analyze_m03.py": "26f896bd1097a95ff29dbbe333f6bbeda4882948c890cf228828310bd53f83c4",
+    "research/sta-rate-control/scripts/run_m00.py": "00db523d9ad84d7b968e178bbffc11b3168833b53ebfcc4070e704acfe76ce23",
+    "research/sta-rate-control/scripts/run_m03.py": "973f1304e8a851ac9582122ec2b1ec9cb71a57bf420f32e58a982c5084b1169c",
+    "research/sta-rate-control/scripts/test_m03.py": "e30821009f3ad03515cb48def862a6a1671886736293d801466761400114762e",
+    "src/lib/mixer_module/mixer_module.cpp": "b229d306061f7c770dfa68d9837c95d3e7b3a575408e2a89a73d2dfddb6a780a",
+    "src/lib/mixer_module/mixer_module.hpp": "5159ae5df6bd90bbbee700905de52f68228cf88d3cba0d4d3242dfa5ed162777",
+    "src/modules/logger/logged_topics.cpp": "20187df2a637c695e5ec9c601abc48541c4679d4ac6999f8f852e02a46f39245",
+    "src/modules/mc_rate_control/CMakeLists.txt": "a413fd82245209881d1cd99b5f0afc8b093ec4770e2bfd9da54774e1e498b093",
+    "src/modules/mc_rate_control/MulticopterRateControl.cpp": "18b251f69b276b85a405740b11f0181259ffca8810914d273adc4c4f6ae2c81b",
+    "src/modules/mc_rate_control/MulticopterRateControl.hpp": "56ac874d503792efc9985785f2adc90043fa1e55ef00fee279624bcd2998ae5d",
+    "src/modules/mc_rate_control/StaRateControl/CMakeLists.txt": "9252dad630952733aca1392b3eb62092c01451a68d1ebb197d1eacbbef1122f6",
+    "src/modules/mc_rate_control/StaRateControl/StaProtection.cpp": "2d9f46358abfc5202a3e2fb279b7a7921911e1421827711ecd2ce467441e9ca5",
+    "src/modules/mc_rate_control/StaRateControl/StaProtection.hpp": "12a55917fe20c6e19346bee03c9aa0a945145f1e497742e32fa662d17a2ec5c2",
+    "src/modules/mc_rate_control/StaRateControl/StaProtectionTest.cpp": "8523ad0386fac9a6181f92f0953eacc28829eecd83a35c9f96ac06b04acea79a",
+    "src/modules/mc_rate_control/mc_rate_control_params.c": "874d011f6f48f457a459ee9820503cc9b94700fdaf47ab787cfb02d5174d0f4f"
+  },
+  "tests": {
+    "StaProtection": {
+      "tests": "10",
+      "failures": "0",
+      "disabled": "0",
+      "errors": "0",
+      "timestamp": "2026-09-13T10:23:14",
+      "time": "0",
+      "name": "AllTests"
+    },
+    "StaRateControl": {
+      "tests": "11",
+      "failures": "0",
+      "disabled": "0",
+      "errors": "0",
+      "timestamp": "2026-09-13T10:23:14",
+      "time": "0.002",
+      "name": "AllTests"
+    },
+    "RateControl": {
+      "tests": "1",
+      "failures": "0",
+      "disabled": "0",
+      "errors": "0",
+      "timestamp": "2026-09-13T10:23:14",
+      "time": "0",
+      "name": "AllTests"
+    },
+    "RateControlDispatcher": {
+      "tests": "3",
+      "failures": "0",
+      "disabled": "0",
+      "errors": "0",
+      "timestamp": "2026-09-13T10:23:14",
+      "time": "0.002",
+      "name": "AllTests"
+    },
+    "ControllerSelection": {
+      "tests": "5",
+      "failures": "0",
+      "disabled": "0",
+      "errors": "0",
+      "timestamp": "2026-09-13T10:23:14",
+      "time": "0.001",
+      "name": "AllTests"
+    }
+  },
+  "python_tests": {
+    "m03": 5,
+    "m00_regression": 3
+  },
+  "runs": [
+    {
+      "name": "run01",
+      "source_head": "0e8cc0c1fa4109c14fa7db5a5c407b6eed04c393",
+      "branch": "research/sta-rate-control",
+      "binary_sha256": "a5aa4fb6f1394b06a659a2d0f5925fc245692f40e744482c81d11b86ab8febd7",
+      "runner_sha256": "00db523d9ad84d7b968e178bbffc11b3168833b53ebfcc4070e704acfe76ce23",
+      "command": [
+        "./sitl/run.sh",
+        "--headless",
+        "--backend",
+        "gazebo",
+        "--model",
+        "iris"
+      ],
+      "pid_parameters_modified": false,
+      "success": false,
+      "events": [],
+      "scenario_sha256": "9335d3ccde8ead22f37fffdbf9df625a0349c39c8d4c23d4e39d88ebc4379182",
+      "scenario_path": "/home/yr/Desktop/Codev-autopilot/research/sta-rate-control/scripts/run_m03.py",
+      "explicit_environment": {
+        "PX4_SITL_WORLD": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world",
+        "GAZEBO_MASTER_URI": "http://127.0.0.1:11345"
+      },
+      "launcher_pid": 202880,
+      "error": "KeyError('timestamp')",
+      "launcher_returncode": 0,
+      "logs": [
+        {
+          "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-13/02_23_16.ulg",
+          "archive": "/home/yr/Desktop/codev doc/experiments/M03-20260913/run01/02_23_16.ulg",
+          "sha256": "521d2897ddf451f04e816160f46508d2d7f753db50e2f787897820be612bd369",
+          "bytes": 97265
+        }
+      ],
+      "finished_utc": "2026-09-13T02:23:16Z"
+    },
+    {
+      "name": "run02",
+      "source_head": "0e8cc0c1fa4109c14fa7db5a5c407b6eed04c393",
+      "branch": "research/sta-rate-control",
+      "binary_sha256": "a5aa4fb6f1394b06a659a2d0f5925fc245692f40e744482c81d11b86ab8febd7",
+      "runner_sha256": "00db523d9ad84d7b968e178bbffc11b3168833b53ebfcc4070e704acfe76ce23",
+      "command": [
+        "./sitl/run.sh",
+        "--headless",
+        "--backend",
+        "gazebo",
+        "--model",
+        "iris"
+      ],
+      "pid_parameters_modified": false,
+      "success": true,
+      "events": [
+        {
+          "name": "ready",
+          "timestamp_us": 30724000
+        },
+        {
+          "name": "takeoff_command",
+          "timestamp_us": 30724000
+        },
+        {
+          "name": "hold_command_after_takeoff",
+          "timestamp_us": 37824000
+        },
+        {
+          "name": "hover_start",
+          "timestamp_us": 42396000
+        },
+        {
+          "name": "hover_end",
+          "timestamp_us": 102864000
+        },
+        {
+          "name": "land_command",
+          "timestamp_us": 102864000
+        },
+        {
+          "name": "landed_disarmed",
+          "timestamp_us": 110988000
+        }
+      ],
+      "scenario_sha256": "d608189bd0b7dd3d0834f7923c477d821a90ae4834bac265a3aa7fd203941156",
+      "scenario_path": "/home/yr/Desktop/Codev-autopilot/research/sta-rate-control/scripts/run_m03.py",
+      "explicit_environment": {
+        "PX4_SITL_WORLD": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world",
+        "GAZEBO_MASTER_URI": "http://127.0.0.1:11345"
+      },
+      "launcher_pid": 203642,
+      "launcher_returncode": 0,
+      "logs": [
+        {
+          "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-13/02_24_11.ulg",
+          "archive": "/home/yr/Desktop/codev doc/experiments/M03-20260913/run02/02_24_11.ulg",
+          "sha256": "d6f153eb27c3ca0f034805d03d938f8a6ea77b562f557455176195163561975e",
+          "bytes": 21886484
+        },
+        {
+          "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-13/02_24_12.ulg",
+          "archive": "/home/yr/Desktop/codev doc/experiments/M03-20260913/run02/02_24_12.ulg",
+          "sha256": "79e2156b7e6a39c90b066d13cc3e0cb3745173452790b0709e67c49de588a461",
+          "bytes": 97232
+        }
+      ],
+      "finished_utc": "2026-09-13T02:26:03Z",
+      "analysis": {
+        "success": true,
+        "ulog_index": 0,
+        "ulog_sha256": "d6f153eb27c3ca0f034805d03d938f8a6ea77b562f557455176195163561975e",
+        "profile_original": 131,
+        "profile_research": 147,
+        "pid_compared_samples": 27617,
+        "pid_bit_mismatches": 0,
+        "actuator_matched_samples": 25422,
+        "mixer_matched_sequences": 13732,
+        "sequences": {
+          "status_publications": {
+            "count": 15118,
+            "missing": 0,
+            "logged_hz": 250.00000000000003,
+            "producer_hz": 250.00000000000003,
+            "max_interval_s": 0.004
+          },
+          "controller_updates": {
+            "count": 15118,
+            "missing": 0,
+            "logged_hz": 250.00000000000003,
+            "producer_hz": 250.00000000000003,
+            "max_interval_s": 0.004
+          },
+          "motor_publications": {
+            "count": 13732,
+            "missing": 1385,
+            "logged_hz": 227.09380788568404,
+            "producer_hz": 250,
+            "max_interval_s": 0.012
+          }
+        },
+        "motor_valid_ratio": 1,
+        "raw_dt_min": 0.004000000189989805,
+        "raw_dt_max": 0.004000000189989805,
+        "logger_dropout_count": 0,
+        "suitable_for_full_rate_tv": false,
+        "qualification": "NOT suitable for full-rate TV/spectrum",
+        "parameter_differences_vs_M00": {
+          "COM_FLIGHT_UUID": [
+            4,
+            6
+          ],
+          "MC_STA_L2_P": [
+            null,
+            0
+          ],
+          "BAT_V_DIV": [
+            null,
+            -1
+          ],
+          "SDLOG_PROFILE": [
+            131,
+            147
+          ],
+          "MC_STA_L1_P": [
+            null,
+            0
+          ],
+          "MC_STA_G_P": [
+            null,
+            0
+          ],
+          "MC_STA_G_R": [
+            null,
+            0
+          ],
+          "MC_RTC_MODE": [
+            null,
+            0
+          ],
+          "MC_STA_L1_Y": [
+            null,
+            0
+          ],
+          "MC_STA_NU_Y": [
+            null,
+            0
+          ],
+          "MC_STA_L1_R": [
+            null,
+            0
+          ],
+          "MC_STA_NU_P": [
+            null,
+            0
+          ],
+          "COM_MOD_SHOW": [
+            null,
+            8388646
+          ],
+          "MC_STA_NU_R": [
+            null,
+            0
+          ],
+          "MC_STA_AXES": [
+            null,
+            0
+          ],
+          "MC_STA_L2_R": [
+            null,
+            0
+          ],
+          "MC_STA_L2_Y": [
+            null,
+            0
+          ],
+          "CAL_MAG3_ROT": [
+            null,
+            -1
+          ],
+          "MC_STA_G_Y": [
+            null,
+            0
+          ],
+          "BAT_A_PER_V": [
+            null,
+            -1
+          ],
+          "LND_FLIGHT_T_LO": [
+            34680000,
+            195428000
+          ],
+          "CAL_MAG2_ROT": [
+            null,
+            -1
+          ]
+        },
+        "runtime_parameter_changes": [
+          [
+            540000,
+            "SDLOG_PROFILE",
+            147
+          ],
+          [
+            42404000,
+            "MC_STA_L1_R",
+            0.125
+          ]
+        ]
+      },
+      "metrics": {
+        "hover_duration_s": 60.467999999999996,
+        "acceptance": {
+          "hover_60s": true,
+          "hover_auto_loiter_only": true,
+          "hover_armed": true,
+          "hover_no_failsafe": true,
+          "hover_not_landed": true,
+          "logged_landed_disarmed": true,
+          "armed_flight_no_failsafe": true,
+          "armed_flight_no_failure_detector": true,
+          "hover_controls_finite": true
+        },
+        "rate_rmse": [
+          0.004230451304465532,
+          0.0031663852278143167,
+          0.0016004323260858655
+        ],
+        "tilt_max": 0.7063753604888916
+      }
+    },
+    {
+      "name": "run03",
+      "source_head": "0e8cc0c1fa4109c14fa7db5a5c407b6eed04c393",
+      "branch": "research/sta-rate-control",
+      "binary_sha256": "710adba648a8026299919f65ac534a36f73be463e23996c12631eeb7d8630b87",
+      "runner_sha256": "00db523d9ad84d7b968e178bbffc11b3168833b53ebfcc4070e704acfe76ce23",
+      "command": [
+        "./sitl/run.sh",
+        "--headless",
+        "--backend",
+        "gazebo",
+        "--model",
+        "iris"
+      ],
+      "pid_parameters_modified": false,
+      "success": true,
+      "events": [
+        {
+          "name": "ready",
+          "timestamp_us": 30768000
+        },
+        {
+          "name": "takeoff_command",
+          "timestamp_us": 30768000
+        },
+        {
+          "name": "hold_command_after_takeoff",
+          "timestamp_us": 37856000
+        },
+        {
+          "name": "hover_start",
+          "timestamp_us": 42416000
+        },
+        {
+          "name": "hover_end",
+          "timestamp_us": 102856000
+        },
+        {
+          "name": "land_command",
+          "timestamp_us": 102856000
+        },
+        {
+          "name": "landed_disarmed",
+          "timestamp_us": 108936000
+        }
+      ],
+      "scenario_sha256": "973f1304e8a851ac9582122ec2b1ec9cb71a57bf420f32e58a982c5084b1169c",
+      "scenario_path": "/home/yr/Desktop/Codev-autopilot/research/sta-rate-control/scripts/run_m03.py",
+      "explicit_environment": {
+        "PX4_SITL_WORLD": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world",
+        "GAZEBO_MASTER_URI": "http://127.0.0.1:11345"
+      },
+      "launcher_pid": 2109348,
+      "launcher_returncode": 0,
+      "logs": [
+        {
+          "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-13/08_37_09.ulg",
+          "archive": "/home/yr/Desktop/codev doc/experiments/M03-20260913/run03/08_37_09.ulg",
+          "sha256": "c5c7668531fa414e61d269951da43a45c6852da32b4e5969ca1b365b271ce3a8",
+          "bytes": 21483351
+        }
+      ],
+      "finished_utc": "2026-09-13T08:38:58Z",
+      "analysis": {
+        "success": true,
+        "ulog_index": 0,
+        "ulog_sha256": "c5c7668531fa414e61d269951da43a45c6852da32b4e5969ca1b365b271ce3a8",
+        "profile_original": 131,
+        "profile_research": 147,
+        "pid_compared_samples": 27093,
+        "pid_bit_mismatches": 0,
+        "actuator_matched_samples": 24752,
+        "mixer_matched_sequences": 13526,
+        "sequences": {
+          "status_publications": {
+            "count": 15111,
+            "missing": 0,
+            "logged_hz": 250,
+            "producer_hz": 250,
+            "max_interval_s": 0.004
+          },
+          "controller_updates": {
+            "count": 15111,
+            "missing": 0,
+            "logged_hz": 250,
+            "producer_hz": 250,
+            "max_interval_s": 0.004
+          },
+          "motor_publications": {
+            "count": 13526,
+            "missing": 1585,
+            "logged_hz": 223.77564526803442,
+            "producer_hz": 250,
+            "max_interval_s": 0.008
+          },
+          "motor_consumed_by_pid": {
+            "count": 15111,
+            "missing": 0,
+            "logged_hz": 250,
+            "producer_hz": 250,
+            "max_interval_s": 0.004
+          }
+        },
+        "motor_valid_ratio": 1,
+        "raw_dt_min": 0.004000000189989805,
+        "raw_dt_max": 0.004000000189989805,
+        "logger_dropout_count": 0,
+        "suitable_for_full_rate_tv": false,
+        "qualification": "NOT suitable for full-rate TV/spectrum",
+        "parameter_differences_vs_M00": {
+          "BAT_V_DIV": [
+            null,
+            -1
+          ],
+          "MC_STA_AXES": [
+            null,
+            0
+          ],
+          "MC_STA_L1_Y": [
+            null,
+            0
+          ],
+          "MC_STA_L2_P": [
+            null,
+            0
+          ],
+          "COM_MOD_SHOW": [
+            null,
+            8388646
+          ],
+          "COM_FLIGHT_UUID": [
+            4,
+            7
+          ],
+          "MC_RTC_MODE": [
+            null,
+            0
+          ],
+          "LND_FLIGHT_T_LO": [
+            34680000,
+            274404000
+          ],
+          "MC_STA_G_Y": [
+            null,
+            0
+          ],
+          "MC_STA_NU_P": [
+            null,
+            0
+          ],
+          "CAL_MAG3_ROT": [
+            null,
+            -1
+          ],
+          "MC_STA_NU_R": [
+            null,
+            0
+          ],
+          "MC_STA_G_R": [
+            null,
+            0
+          ],
+          "MC_STA_L1_P": [
+            null,
+            0
+          ],
+          "MC_STA_L2_Y": [
+            null,
+            0
+          ],
+          "BAT_A_PER_V": [
+            null,
+            -1
+          ],
+          "SDLOG_PROFILE": [
+            131,
+            147
+          ],
+          "MC_STA_G_P": [
+            null,
+            0
+          ],
+          "MC_STA_NU_Y": [
+            null,
+            0
+          ],
+          "CAL_MAG2_ROT": [
+            null,
+            -1
+          ],
+          "MC_STA_L2_R": [
+            null,
+            0
+          ],
+          "MC_STA_L1_R": [
+            null,
+            0
+          ]
+        },
+        "runtime_parameter_changes": [
+          [
+            588000,
+            "SDLOG_PROFILE",
+            147
+          ],
+          [
+            42424000,
+            "MC_STA_L1_R",
+            0.125
+          ]
+        ]
+      },
+      "metrics": {
+        "hover_duration_s": 60.44,
+        "acceptance": {
+          "hover_60s": true,
+          "hover_auto_loiter_only": true,
+          "hover_armed": true,
+          "hover_no_failsafe": true,
+          "hover_not_landed": true,
+          "logged_landed_disarmed": true,
+          "armed_flight_no_failsafe": true,
+          "armed_flight_no_failure_detector": true,
+          "hover_controls_finite": true
+        },
+        "rate_rmse": [
+          0.004338008817285299,
+          0.003313834546133876,
+          0.0018411686178296804
+        ],
+        "tilt_max": 0.7705019116401672
+      }
+    }
+  ],
+  "submodules": " 7c2c623da9f5dcb3f01d32830af1a2ed958de363 Tools/flightgear_bridge (7c2c623)\n cbdb2fc7dd44331da1dcd04a891ed7f8c27b1ef0 Tools/flightgear_bridge/models/Rascal (remotes/origin/electric-14-gcbdb2fc)\n 4540de7ae8e71b9bd6e6f67d085695be0ab36bc3 Tools/flightgear_bridge/models/TF-G1 (4540de7)\n 562ee71388c493675269210f7692d8b7a8bb800d Tools/flightgear_bridge/models/TF-G2 (562ee71)\n 158e429a0110589b1e2adfe868e166271470e144 Tools/flightgear_bridge/models/TF-R1 (heads/master)\n 0a816d8100e9860a031ccfccfb9941bcd6eedc81 Tools/jMAVSim (0a816d8)\n c08380767b21938391bec676a43b36b837af9ba4 Tools/jMAVSim/jMAVlib (heads/master)\n e070c50d591541d440510b65c9da5cad1db5aa9a Tools/jsbsim_bridge (e070c50)\n 40571cd808a204f4062128daeb6bb6db8c134c48 Tools/jsbsim_bridge/models/ATI-Resolution (2019.1)\n d0d1db1961549e557885002cf9c3cff40cc27be2 Tools/jsbsim_bridge/models/Rascal (remotes/origin/preserve-this-branch-for-px4-submodules)\n 822050a7ab6fd87972e59f16312f451bce217a56 Tools/sitl_gazebo (822050a)\n 28ef45c1fcb532b2bfd54c16b059c6a545143b2f Tools/sitl_gazebo/external/OpticalFlow (28ef45c)\n 9b5b567ae77f93d1ef4d36151529ba2506a46e7a Tools/sitl_gazebo/external/OpticalFlow/external/klt_feature_tracker (heads/master)\n 08fd0a73045346448adf6969660196228b23e1fa boards/atlflight/cmake_hexagon (remotes/origin/px4)\n 636fae5ca34eff6007344718755d78fcdf94238e mavlink/include/mavlink/v2.0 (636fae5c)\n 979e27408fa90a3c3d6432190c8f65cc80c3e6b6 platforms/nuttx/NuttX/apps (nuttx-8.2-590-g979e27408)\n bf660cba2af81f055002b3817c87b1f63a78fd09 platforms/nuttx/NuttX/nuttx (nuttx-8.2-3070-gbf660cba2a)\n 0322a4e345e48ea28cb1cee14a33033cdaf0b16a platforms/qurt/dspal (heads/master)\n 07168bd5715818802b78f674816ec851307998a7 platforms/qurt/dspal/cmake_hexagon (remotes/origin/sdk3.1-4-g07168bd)\n c34ef0ce3100684a927c6aecebf0c904bee251b3 src/drivers/gps/devices (remotes/origin/codev_main_12.3_gps_update)\n 29e1aa6c12e3590252b102153d8c62155047a676 src/drivers/uavcan/libuavcan (remotes/origin/pr-nuttx_update_7.31+-4-g29e1aa6c)\n 192295c4f9b67f4a20b0eabf74757b6597415f2b src/drivers/uavcan/libuavcan/dsdl (192295c)\n c58477a644d20ccf95a20c151f3a0402f271c3b8 src/drivers/uavcan/libuavcan/libuavcan/dsdl_compiler/pyuavcan (v1.0.0dev3~7)\n fd12483ddd4e58242d61d74a163e7aeaa1e0f466 src/drivers/uavcan/libuavcan/libuavcan/dsdl_compiler/pyuavcan/dsdl (fd12483)\n 36a01e428b110ff84c8babe5b65667b5e3037d5e src/drivers/uavcan_v1/legacy_data_types (remotes/origin/legacy)\n 2a116170285fb47fcaae150ad21c2ccde0756a5f src/drivers/uavcan_v1/libcanard (1.1.0)\n 0a773b93ce5c94e1d2791b180058cb9897fab7e1 src/drivers/uavcan_v1/public_regulated_data_types (0a773b9)\n 2a116170285fb47fcaae150ad21c2ccde0756a5f src/drivers/uavcannode_gps_demo/libcanard (1.1.0)\n 0a773b93ce5c94e1d2791b180058cb9897fab7e1 src/drivers/uavcannode_gps_demo/public_regulated_data_types (0a773b9)\n baca5d31259c598540e4d1284bc8d8f793abf83a src/lib/crypto/monocypher (3.1.2)\n b3fed06fe822d08d19ab1d2c2f8daf7b7d21951c src/lib/ecl (v1.9.0-rc1-591-gb3fed06)\n b8568a89db8455d0ab2e2e391e2149ba2e5e10dd src/lib/matrix (v1.0.2-195-gb8568a8)\n 21d3cfe3ae570d1674da0105ab23b80958e0449a src/modules/micrortps_bridge/micro-CDR (v1.0.0beta2-54-g21d3cfe)\n",
+  "raw_artifact_count": 91
+}

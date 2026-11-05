@@ -1,0 +1,70 @@
+{
+  "historical_accepted": false,
+  "flight_completed": true,
+  "logs": [
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/validation01/run06/log001.ulg",
+      "sha256": "2f88f099ae7aa982dfd9f06fdbf0ef9588383ea4be1a7a472bb575341497b6e2"
+    }
+  ],
+  "diagnostic_samples": 9030,
+  "recorded_exact_matches": 9029,
+  "missing_output_stamps": [
+    69540000
+  ],
+  "diagnostic_publish_contiguous": true,
+  "ulog_dropout_count": 0,
+  "ulog_corrupt": false,
+  "modes": {
+    "effective_mode": [
+      1
+    ],
+    "effective_axes": [
+      3
+    ],
+    "inner_mode": [
+      0
+    ],
+    "inner_axes": [
+      0
+    ],
+    "inner_divisor": [
+      1
+    ],
+    "fault": [
+      0
+    ],
+    "sta_fault": [
+      0
+    ]
+  },
+  "exact_downstream_existing_v03_policy": {
+    "matched": 9029,
+    "denominator": 9030,
+    "coverage": 0.9998892580287929,
+    "max_gap_s": 0.02,
+    "max_abs_error": 0.0
+  },
+  "missing_neighbors": [
+    {
+      "stamp": 69540000,
+      "diagnostic_index": 2082,
+      "diagnostic_publish": 69540000,
+      "sample": 69536000,
+      "neighboring_recorded_stamps": [
+        69516000,
+        69524000,
+        69544000,
+        69556000
+      ],
+      "neighboring_diagnostic_stamps": [
+        69516000,
+        69524000,
+        69540000,
+        69544000,
+        69556000
+      ]
+    }
+  ],
+  "interpretation": "Task checker demanded100% attitude output while V03 downstream policy is bounded exact partial overlap. Missing row is not recreated; historical failed run stays failed. Queue1 overwrite is possible, not a measured scheduler cause."
+}

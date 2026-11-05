@@ -1,0 +1,227 @@
+{
+  "qualified": true,
+  "scope": "Iris compliant-contact SITL qualification only; not hardware or controller superiority",
+  "source_head": "94da9279307147154c1bc89de161f3b46b1c6ac9",
+  "firmware_sha256": "4344902ecbe0d2e0de912b3e8ab4651fb9418ecd73181d7b6060e992d1ef6055",
+  "protocol_sha256": "64d011aa1ca05590681d8cfc3065b4ff8e5ec6a05290ca8f01da8292634d563e",
+  "contact_settings": {
+    "surface/contact/ode/kp": "2500",
+    "surface/contact/ode/kd": "50",
+    "surface/contact/ode/max_vel": "0.2",
+    "max_contacts": "4"
+  },
+  "contact_source_sha256": "791425fedd47242f4a385f2df8b703fbd9087723bcded60046d76c69724929cc",
+  "original_iris_sha256": "366bf1264ce86c0c65b837a5323410c7cd695b0ffa23cdd29e6c52f6315dc00e",
+  "planned": 6,
+  "accepted": 6,
+  "pairs": 3,
+  "rows": [
+    {
+      "id": "run01",
+      "seed": 26001,
+      "mode": 0,
+      "velocity_rmse": [
+        0.00900543071827887,
+        0.008220385150454805,
+        0.0028603270045257576
+      ],
+      "acceleration_tv": [
+        5.621809482574463,
+        5.722105026245117,
+        5.7591633796691895
+      ],
+      "position_rmse": [
+        0.023751589847128808,
+        0.022153920561600177,
+        0.03969700305213376
+      ],
+      "yaw_rmse": 0.0001309955602623583,
+      "hz": 99.99999999999999,
+      "peak_abs_acceleration": 56.199378967285156,
+      "tail_reads": 2
+    },
+    {
+      "id": "run02",
+      "seed": 26001,
+      "mode": 1,
+      "velocity_rmse": [
+        0.014334408418957934,
+        0.01689428995677925,
+        0.009785609726972287
+      ],
+      "acceleration_tv": [
+        46.81966781616211,
+        50.91243362426758,
+        270.7421875
+      ],
+      "position_rmse": [
+        0.022248970036990858,
+        0.017098617996440864,
+        0.03881987229195749
+      ],
+      "yaw_rmse": 0.00021163052530050666,
+      "hz": 99.99999999999999,
+      "peak_abs_acceleration": 53.38679122924805,
+      "tail_reads": 1
+    },
+    {
+      "id": "run03",
+      "seed": 26002,
+      "mode": 0,
+      "velocity_rmse": [
+        0.008728714902025756,
+        0.010012171464913316,
+        0.0028039643044421403
+      ],
+      "acceleration_tv": [
+        6.014598369598389,
+        5.8955230712890625,
+        7.270621299743652
+      ],
+      "position_rmse": [
+        0.029095995218830984,
+        0.027602399739465322,
+        0.05572041782948751
+      ],
+      "yaw_rmse": 0.00019752462919109452,
+      "hz": 99.99999999999999,
+      "peak_abs_acceleration": 51.14463424682617,
+      "tail_reads": 2
+    },
+    {
+      "id": "run04",
+      "seed": 26002,
+      "mode": 1,
+      "velocity_rmse": [
+        0.014487632213960284,
+        0.017322396594926858,
+        0.009776832658038094
+      ],
+      "acceleration_tv": [
+        47.01477813720703,
+        51.0009651184082,
+        270.6434326171875
+      ],
+      "position_rmse": [
+        0.029309685300870424,
+        0.028230275620702037,
+        0.0560156505322745
+      ],
+      "yaw_rmse": 0.00021474899440865314,
+      "hz": 99.99777758022934,
+      "peak_abs_acceleration": 50.965232849121094,
+      "tail_reads": 2
+    },
+    {
+      "id": "run05",
+      "seed": 26003,
+      "mode": 0,
+      "velocity_rmse": [
+        0.00849829443586648,
+        0.008981033386233957,
+        0.0031887124012104045
+      ],
+      "acceleration_tv": [
+        5.878475666046143,
+        6.083957195281982,
+        9.77513599395752
+      ],
+      "position_rmse": [
+        0.02500352337255234,
+        0.028174052640908727,
+        0.09397364110176223
+      ],
+      "yaw_rmse": 0.00012766820690646738,
+      "hz": 99.99999999999999,
+      "peak_abs_acceleration": 66.00502014160156,
+      "tail_reads": 1
+    },
+    {
+      "id": "run06",
+      "seed": 26003,
+      "mode": 1,
+      "velocity_rmse": [
+        0.014616783509751147,
+        0.017224546442071574,
+        0.009802226217867319
+      ],
+      "acceleration_tv": [
+        47.31834030151367,
+        51.64248275756836,
+        269.4906921386719
+      ],
+      "position_rmse": [
+        0.025742478793705593,
+        0.026099870383452437,
+        0.09451114624931786
+      ],
+      "yaw_rmse": 0.00022962721983107946,
+      "hz": 99.99999999999999,
+      "peak_abs_acceleration": 55.640872955322266,
+      "tail_reads": 2
+    }
+  ],
+  "means": {
+    "0": {
+      "velocity_rmse": [
+        0.008744146685390369,
+        0.009071196667200692,
+        0.002951001236726101
+      ],
+      "position_rmse": [
+        0.025950369479504045,
+        0.02597679098065807,
+        0.06313035399446117
+      ],
+      "yaw_rmse": 0.00015206279878664006,
+      "acceleration_tv": [
+        5.838294506072998,
+        5.900528430938721,
+        7.601640224456787
+      ]
+    },
+    "1": {
+      "velocity_rmse": [
+        0.014479608047556455,
+        0.01714707766459256,
+        0.0097882228676259
+      ],
+      "position_rmse": [
+        0.025767044710522293,
+        0.023809588000198445,
+        0.06311555635784995
+      ],
+      "yaw_rmse": 0.00021866891318007975,
+      "acceleration_tv": [
+        47.0509287516276,
+        51.18529383341471,
+        270.29210408528644
+      ]
+    }
+  },
+  "evidence_sha256": {
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/series02/ledger.json": "62d0c6a2e88b4a3ed0025f7a91ae1143a84271b1d61788eaba57c39500fbd4f0",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/replay02/evidence.json": "4b43af1c671e3673e298137853b8ae4ec7ceb8eaedb1f5a189d662226f5338c5",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/verification_committed02/evidence.json": "20c0ed1bddd4488c4c8946da441256564730471fefecdaa5ab4ca91560a52271",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/series02/run01/xyz_metrics.json": "7a547c003d51febcb9753187be4b2ce54595c21b8c6abf9cc02a45ec33be886c",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/series02/run01/07_04_40.ulg": "bccfcf0b1e248e303f365bff3888ac3190f23235c20133ea5b9f3dff19f2dd4b",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/series02/run01/07_04_41.ulg": "fd09ba0a0936a602c6e82730fee1e4d23e8b4e21c01597a6da46d2fc1019c62b",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/series02/run02/xyz_metrics.json": "208c120905dd79fb83e7b30dd6dd68e0be6ceac8122dcbdcf5c99c9c601575b5",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/series02/run02/07_07_23.ulg": "f50074dead813722b6246cd3134a2211bd7f5775252b8cc5e10e22941e8a32fa",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/series02/run02/07_07_25.ulg": "df7b82437c3ce3ce43c2fa27e170f1bdb8a05490f00577d76839fa9e960ea54d",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/series02/run03/xyz_metrics.json": "9add947807207e17add2b5ac9faf1d230e70eb583fa807c7e0979cdd68835cff",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/series02/run03/07_10_05.ulg": "4fb2eb60e2545c265aea7b4f896950b86b931116fb004066b5cdd9f99585c46e",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/series02/run03/07_10_06.ulg": "20256eb6a9e5b4f953cd1dc0c141b67c2d0fab19454e9a29d61b7909ebc1ba1f",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/series02/run04/xyz_metrics.json": "7004a0c97e0757f98918d4ebbdf725b56bcb7a4bb893c9a929e22539ff1f63b7",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/series02/run04/07_12_46.ulg": "3f86b7fb8b3dbfa911e4e92edf1d17b9b84213e52b726b5ba91858a24beac53f",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/series02/run04/07_12_47.ulg": "d178cb85bacb08c606100b25d375cf57c9460e7045cdee4e92c49ecb2df9caa5",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/series02/run05/xyz_metrics.json": "90f75b107f44b769f871ee6946b15c6c8e0dbef30a246721c000dc4a74678509",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/series02/run05/07_15_28.ulg": "7dfecef166ec05bee291422c7faa25c5e82f3559f367277a27c1450f1939559c",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/series02/run05/07_15_29.ulg": "b844edc5b4110a3b9a410b8b60a270749531360c6d90ab55e8665e88fb1ba021",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/series02/run06/xyz_metrics.json": "5a1b389894ed52073e66a42de7f06ceb996ca2156142d7f4b38236b05f496dfe",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/series02/run06/07_18_08.ulg": "d39190053d98a172a11cac571df62ac0aecc1456c3f700d0c61ff26a728af6eb",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260928/V06/soft_landing/series02/run06/07_18_09.ulg": "5ada98c86354e26ac3bd331648743501ae4e1053d778fae3a19a3c83d7b24c7e"
+  },
+  "cpp_tests": 196,
+  "python_tests": 461
+}

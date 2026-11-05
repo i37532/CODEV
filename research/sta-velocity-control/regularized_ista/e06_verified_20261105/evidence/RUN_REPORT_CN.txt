@@ -1,0 +1,57 @@
+E06 固定候选快速验证：已完成，未push
+
+按用户本轮授权，固定ISTA Z lambda1=3.3、lambda2=1.56、epsilon=.06，XYZ速度环；
+PID/STA参数、XYZ其余参数、BARO=.3、加速度随机游走0、任务和安全门槛均不变。
+本轮只有外部实验工具/数据/报告新增，未修改生产控制律、估计器或默认配置。
+
+预算最多9；实际9起飞、9接受、9独立进程回放一致。无失败、无补飞、无追加调参。
+3个新IMU种子99601/99602/99603；种子查重记录见 SEED_AUDIT_CN.txt。
+具体Q001..Q009顺序及参数已提前冻结在 trial01/manifest.json 与 qualification/。
+
+每算法3次均值（不是挑最佳轮，悬停固定起飞命令后20..30s）：
+                  PID          STA           ISTA E06
+真值上升90% s      8.877333     7.598667      7.453333
+真值高度RMSE mm    12.374418    14.172662     11.675586
+真值高度STD mm     9.938412     9.552983      8.328423
+真值高度偏差 mm    +7.033577    +9.562642     +7.758496
+
+预定三项均值门槛全部满足：起飞快于两参照至少.02s；RMSE/STD分别小于较好参照的.99倍。
+但不是每轮、每项都赢：起飞和STD均3/3低于每个参照；RMSE均2/3低于每个参照。
+第一块99601的ISTA RMSE仍较两参照高，原始数据/图全部保留。
+平均高度偏差本身并非最小；不能把三项均值达标写成任何指标/任务/环境均优。
+此前E04验证结果保留不改判。本批是追加候选验证，不是三算法等预算重新调参，n=3不作显著性宣称。
+只有IMU随机源被种子控制，其他传感器随机源和宿主调度不独立受控。
+真值只用于离线测量，没有反馈给控制器。结论仅限当前Iris SITL任务，不是硬件验证。
+
+完整报告、逐轮及配对指标：trial01/plots01/RESULTS_CN.txt、summary.json
+三组全起降与悬停放大：trial01/plots01/all_seeds_true_height.png
+主指标全种子及均值：trial01/plots01/all_seeds_primary_metrics_and_means.png
+另有估计高度、XYZ位移、XYZ速度图。彩色实线为PID/STA/ISTA；灰虚线为参考/命令，不是第四算法。
+原始ULog/目标/恢复：trial01/batch01/Q001..Q009；独立解码：trial01/replay01。
+各轮参数精确恢复，固件及源状态不变，残留仿真进程0；见 trial01/postflight.json。
+
+版本：research/ista-velocity-regularized
+HEAD：8079e17177e3edb597d8da1597081a82cbd6747a
+固件SHA256：96f20a849bbd1ad0f1c9222c26ba2ebb79ed74bfda5ca10cbf67436b791cab00
+EEPROM恢复SHA256：06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc
+预先存在的工作区改动按source_before/source_after逐一比对保留；本轮无Git提交、无push。
+
+实际执行（仓库工作目录 /home/yr/Desktop/Codev-autopilot；python均 -B）：
+依赖环境 PYTHONDONTWRITEBYTECODE=1，PYTHONPATH：
+/home/yr/Desktop/codev doc/experiments/M00-20260912/python:
+/home/yr/Desktop/codev doc/experiments/M10-20260917/plot_dependencies01/python
+
+1. tools/prepare_e06.py --evidence preparation01：退出0。
+   新固定候选/接线29测试，父比较21测试，父检查12测试，共62实际测试通过。
+   9份参数BSON往返通过，父T003原日志全链回放通过。
+   引用既有实际C++核/对象资格，核对全部原始指纹：2100标量、2100保护commit、20 XYZ、144滞后对象；
+   原矩阵包含epsilon .06。本轮未冒充重跑C++、未重建固件、未运行MATLAB。
+2. tools/e06_runner.py --execute：退出0，恰9轮全部接受。
+   每轮沿项目sitl/run.sh Iris启动器；实际独立e06_analyze.py回放9次均退出0。
+3. tools/e06_postflight.py --output trial01/postflight.json：退出0，完整9/9、精确恢复、源不变。
+4. analysis_tools/test_e06_results.py：14实际测试通过，退出0；含临时合成数据完整5图/报告冒烟。
+5. analysis_tools/e06_results.py --output trial01/plots01：退出0，全部9轮指纹复核，scientific_success=true。
+6. git diff --check：退出0；源/固件/EEPROM未被本实验改变。
+
+脚本只用于上述已结束批次复现证据，运行器拒绝重复已有批次；不要直接重启清单当成新样本。
+没有永久安装E06默认值，原参数已恢复；合格候选的完整实验参数保存在qualification/Q003_parameters.json。

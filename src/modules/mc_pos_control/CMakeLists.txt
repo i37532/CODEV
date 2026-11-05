@@ -49,3 +49,16 @@ px4_add_module(
 		ecl_geo
 		SlewRate
 	)
+
+px4_add_functional_gtest(SRC VelocityModuleTest.cpp LINKLIBS modules__mc_pos_control)
+px4_add_functional_gtest(SRC RegularizedVelocityModuleTest.cpp LINKLIBS modules__mc_pos_control)
+px4_add_functional_gtest(SRC RegularizedIstaVelocityModuleTest.cpp LINKLIBS modules__mc_pos_control)
+if(BUILD_TESTING)
+	set_property(TARGET functional-RegularizedIstaVelocityModule APPEND_STRING PROPERTY LINK_FLAGS
+		" -Wl,--wrap=hrt_call_after -Wl,--wrap=hrt_cancel")
+	set_property(TARGET functional-RegularizedVelocityModule APPEND_STRING PROPERTY LINK_FLAGS
+		" -Wl,--wrap=hrt_call_after -Wl,--wrap=hrt_cancel")
+	# Synchronous Run() tests: suppress only the backup timer and cancellation.
+	set_property(TARGET functional-VelocityModule APPEND_STRING PROPERTY LINK_FLAGS
+		" -Wl,--wrap=hrt_call_after -Wl,--wrap=hrt_cancel")
+endif()

@@ -1,0 +1,109 @@
+{
+  "status": "passed",
+  "exit_code": 0,
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "branch",
+        "--show-current"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "output": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/command_01.log",
+      "sha256": "a1313da0370fcdcb70b9cf37453d7c07aab31a68b43947fe7065c21e04b17cd8"
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "output": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/command_02.log",
+      "sha256": "157d314a46856312520a074b422d1cf6154a47f95b0d8b9bd66e0fc0a4aab783"
+    },
+    {
+      "argv": [
+        "g++",
+        "--version"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "output": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/command_03.log",
+      "sha256": "9eaf9b7f4b11c2e84e2478c2ceb0e4f48f4ba88565bcfc832b3bce49847dda6d"
+    },
+    {
+      "argv": [
+        "sha256sum",
+        "--check",
+        "SHA256SUMS.txt"
+      ],
+      "cwd": "/home/yr/Desktop/STA-ISTA-MATLAB-PX4",
+      "exit_code": 0,
+      "output": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/command_04.log",
+      "sha256": "3c8645f70ac39ed17189eefa215e985b114a8c32d9aec8c33b7d24d2b74d466f"
+    },
+    {
+      "argv": [
+        "g++",
+        "-std=c++14",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic-errors",
+        "-fPIC",
+        "-shared",
+        "-I/home/yr/Desktop/Codev-autopilot/src/modules/mc_pos_control/PositionControl",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri01/model/kernel_bridge.cpp",
+        "/home/yr/Desktop/Codev-autopilot/src/modules/mc_pos_control/PositionControl/RegularizedIstaVelocityControl.cpp",
+        "-o",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/ri01_model_bridge.so"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "output": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI01/model_attempt01/command_05.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "oracle_tests": 6,
+  "grid": {
+    "cases": 720,
+    "max_scaled_candidate_error": 1.4352404972568336e-07,
+    "max_scaled_three_equation_residual": 1.6047404215451348e-07,
+    "max_scaled_oracle_residual": 1.3546592230319602e-16,
+    "tolerance": 3e-06,
+    "oracle_tolerance": 2e-12
+  },
+  "fixture": {
+    "path": "/home/yr/Desktop/STA-ISTA-MATLAB-PX4/tests/matlab/controller_reference.csv",
+    "sha256": "ebf558d8bc2f28c61f3502b73ceba3b267c0c66b209b77f048fab881fc3e81d0",
+    "total_csv_rows": 7980,
+    "rista_rows": 3990,
+    "old_sta_rows_not_counted": 3990,
+    "protected_wrapper_rows": 2464,
+    "max_scaled_errors": {
+      "correction": 2.1448100174830533e-07,
+      "raw": 1.093137006173719e-06,
+      "limited": 1.093137006173719e-06,
+      "applied_nu": 5.931893057814647e-08
+    },
+    "tolerance": 3e-05,
+    "matlab_executed": false,
+    "mapping": "s=-error; nu unchanged; remove FF for pure-core check; then independently reconstruct original wrapper"
+  },
+  "object_trajectories": 102,
+  "kernel_updates": 559827,
+  "numeric_domain_exhaustions": 18,
+  "infeasible_counterexamples": 6,
+  "max_object_difference": 1.6208635948700145e-07,
+  "matlab_available": null,
+  "matlab_executed": false,
+  "no_flight": true,
+  "no_new_seed": true,
+  "inputs_unchanged": true,
+  "library_sha256": "f810b9f523f235216ccb0bf0614451a6e533e461ff685b3fbcd77779d21e8f09",
+  "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]"
+}

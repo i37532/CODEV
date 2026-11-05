@@ -1,0 +1,1537 @@
+{
+  "revision": "r03_revision05",
+  "generated_utc": "2026-10-19T14:36:33.116431+00:00",
+  "total_budget": 57,
+  "new_matrix_planned": 27,
+  "historical": {
+    "attempts": 30,
+    "takeoffs": 29,
+    "accepted": 26,
+    "failed": 4,
+    "pooled_into_new_results": false
+  },
+  "tool": {
+    "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/offline_development/result_summary.py",
+    "sha256": "ae1e833ee2cbebb6ede8df750d11acf62cefd89fb34dc9e190432f8824b634b8"
+  },
+  "reader_sources": {
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_revision05/protocol.py": "574de59849c14d04af46b8a4be9844f76dda22999b6f0c72dd4579094f0cd255",
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_revision05/replay.py": "f99353ebc2698a1538a2fac641bdd95fb729742ef44a1281c7997181493a0f0d",
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_revision04/protocol.py": "2b9c91c5c616ca5e017d19436b4e6d0149883176a581e777d1df7f2158dad71c",
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_revision04/replay.py": "db8c69f4f0d8086ade4a2f92f7a639a519d7036b89b203fe2c36cd3640f97ff3"
+  },
+  "requested_scope_verified": true,
+  "all_r03_gates_verified": false,
+  "definitions": {
+    "rmse": "Time-weighted consumed velocity error per axis, m/s; frozen main window",
+    "J": "Arithmetic mean of three per-axis RMSEs; run metrics averaged descriptively",
+    "tv": "Actual-update correction / total acceleration / normalized thrust kept separate; not energy",
+    "tv_units": "Acceleration TV m/s^2; TV/T m/s^3. Normalized thrust TV dimensionless; TV/T 1/s",
+    "missing": "Unknown stays null; failed/missing not filled with zero; no old runs fill new gates",
+    "takeoffs": "Command, airborne-task and landed-disarmed events separate; command is not proof of lift-off"
+  },
+  "limitations": [
+    "Per-algorithm planned n=3 development samples, not significance or universal superiority",
+    "Only observed attempts serialized; only accepted independently bound metrics enter means",
+    "Partial accepted means may have selection bias; different gates not pooled",
+    "Retained A retains its original source and checker, not regraded by revision05",
+    "Raw hashes and existing replay proof checked; no ULog decoding, flight, or new gate receipt",
+    "Summary has no execution authority; host cost is not board CPU and TV is not energy"
+  ],
+  "retained_a": {
+    "revision": "r03_revision04",
+    "gate": "A",
+    "status": "passed",
+    "source_head": "d6a80776b478adbbbe03a1967140d55c62bd618b",
+    "firmware_sha256": "50b747719dff4905ea1ed80f23897880e8f12176fb4db6b747701fe4214f71f1",
+    "gate_pass": {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/A/gate_pass.json",
+      "sha256": "6e0498bf52c69239f13b294ce9059473827af8ec4e1b0595ef8dc2ccf659e8d2"
+    },
+    "replay": {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision04/A/replay01/summary.json",
+      "sha256": "b1ec614842f397d5e50f872378222442f8c5d5596a536f9379ea5d4385027d44"
+    },
+    "attempted": 9,
+    "accepted_recorded": 9
+  },
+  "gates": [
+    {
+      "revision": "r03_revision05",
+      "gate": "B",
+      "status": "passed",
+      "gate_passed": true,
+      "planned": 9,
+      "attempted": 9,
+      "accepted_recorded": 9,
+      "failed": 0,
+      "unattempted": 0,
+      "source_head": "e4987db64083482b3227ba01a7fdf3f027e006c6",
+      "firmware_sha256": "47aa3245b9933f51942fdf6ce36612e167af033a6ac82d05961d4df196e221ed",
+      "qualification": {
+        "evidence": {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/qualification01/evidence.json",
+          "sha256": "220680bb2a2f851a6de8d752d601dd86393804b1be63f7a563fbd28fb215c23f"
+        },
+        "authorization": {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/qualification01/authorization.json",
+          "sha256": "995e7f00d135ac70317dd586befde8ef7e5d1c0619892ea95de52fe9c89c28ca"
+        },
+        "counts": {
+          "cpp_unique_tests": 488,
+          "python_tests": 1430,
+          "fixed_legacy_samples": 32768,
+          "fixed_same_sample_recalculations": 256,
+          "new_flights": 0
+        },
+        "source_head": "e4987db64083482b3227ba01a7fdf3f027e006c6",
+        "firmware_sha256": "47aa3245b9933f51942fdf6ce36612e167af033a6ac82d05961d4df196e221ed",
+        "scope": "Historical source-bound offline evidence; no comparison to current HEAD or current binary"
+      },
+      "ledger": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/ledger.json",
+        "sha256": "275d512c8b157e2070eb456b65c45afce4ddca4b7e89d942134ad7da4c5cb611"
+      },
+      "journal": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/journal.jsonl",
+        "sha256": "ee4bd80fafa45d23466fb532e77f43c0a03abc61574d6fd3d576c8e809c2395c"
+      },
+      "replay": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/replay01/summary.json",
+        "sha256": "08933485a9e18e129f266fccae4404ef664b87f967d27be67acaa01aac5559ef"
+      },
+      "gate_pass": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/gate_pass.json",
+        "sha256": "198c15655a94abdd8a6b96e78c70e2c91556fa27842e3e425fe494d6c1d73886"
+      },
+      "parameter_restore_exact": true,
+      "remaining_simulators": [],
+      "ulog_files_verified": 18,
+      "inputs_unchanged": true,
+      "algorithms": {
+        "PID": {
+          "n": 3,
+          "ids": [
+            "run010",
+            "run013",
+            "run016"
+          ],
+          "aggregation": "Descriptive arithmetic mean of accepted, individually verified run metrics only",
+          "mean": {
+            "velocity_rmse_m_s": [
+              0.007263497877423699,
+              0.00791829520119126,
+              0.004147729044440297
+            ],
+            "J_m_s": 0.006443174041018418,
+            "seconds": 32,
+            "position_rmse_m": [
+              0.02546355352548011,
+              0.026010534430763996,
+              0.0487848186267973
+            ],
+            "yaw_rmse_rad": 0.0001572915703683989,
+            "correction_tv": [
+              3.3582959175109863,
+              3.4662617842356362,
+              2.9246095021565757
+            ],
+            "correction_tv_per_second": [
+              0.10494674742221832,
+              0.10832068075736363,
+              0.09139404694239299
+            ],
+            "acceleration_tv": [
+              3.3582959175109863,
+              3.4662617842356362,
+              2.9246095021565757
+            ],
+            "acceleration_tv_per_second": [
+              0.10494674742221832,
+              0.10832068075736363,
+              0.09139404694239299
+            ],
+            "normalized_thrust_tv": [
+              0.2437568207581838,
+              0.2519766887029012,
+              0.21255787213643393
+            ],
+            "normalized_thrust_tv_per_second": [
+              0.007617400648693244,
+              0.007874271521965662,
+              0.00664243350426356
+            ]
+          },
+          "range": {
+            "velocity_rmse_m_s": [
+              [
+                0.006738853944286593,
+                0.008033786272044572
+              ],
+              [
+                0.007672023090954922,
+                0.008049067854285413
+              ],
+              [
+                0.004066406683871701,
+                0.0042682522216298075
+              ]
+            ],
+            "J_m_s": [
+              0.006284776160814569,
+              0.006658020528209767
+            ],
+            "seconds": [
+              32,
+              32
+            ],
+            "position_rmse_m": [
+              [
+                0.02154444161713995,
+                0.02923175733464696
+              ],
+              [
+                0.01666951062242228,
+                0.031715045973972705
+              ],
+              [
+                0.04097536665837747,
+                0.05537020244801401
+              ]
+            ],
+            "yaw_rmse_rad": [
+              0.00013430957841899116,
+              0.0001690111766059686
+            ],
+            "correction_tv": [
+              [
+                3.189973831176758,
+                3.5450356006622314
+              ],
+              [
+                3.3877925872802734,
+                3.5754594802856445
+              ],
+              [
+                2.628257989883423,
+                3.1339938640594482
+              ]
+            ],
+            "correction_tv_per_second": [
+              [
+                0.09968668222427368,
+                0.11078236252069473
+              ],
+              [
+                0.10586851835250854,
+                0.11173310875892639
+              ],
+              [
+                0.08213306218385696,
+                0.09793730825185776
+              ]
+            ],
+            "acceleration_tv": [
+              [
+                3.189973831176758,
+                3.5450356006622314
+              ],
+              [
+                3.3877925872802734,
+                3.5754594802856445
+              ],
+              [
+                2.628257989883423,
+                3.1339938640594482
+              ]
+            ],
+            "acceleration_tv_per_second": [
+              [
+                0.09968668222427368,
+                0.11078236252069473
+              ],
+              [
+                0.10586851835250854,
+                0.11173310875892639
+              ],
+              [
+                0.08213306218385696,
+                0.09793730825185776
+              ]
+            ],
+            "normalized_thrust_tv": [
+              [
+                0.23131388425827026,
+                0.25604063272476196
+              ],
+              [
+                0.24851994216442108,
+                0.2588494122028351
+              ],
+              [
+                0.19084715843200684,
+                0.22783207893371582
+              ]
+            ],
+            "normalized_thrust_tv_per_second": [
+              [
+                0.007228558883070946,
+                0.008001269772648811
+              ],
+              [
+                0.007766248192638159,
+                0.008089044131338596
+              ],
+              [
+                0.005963973701000214,
+                0.007119752466678619
+              ]
+            ]
+          }
+        },
+        "ESTA": {
+          "n": 3,
+          "ids": [
+            "run012",
+            "run014",
+            "run018"
+          ],
+          "aggregation": "Descriptive arithmetic mean of accepted, individually verified run metrics only",
+          "mean": {
+            "velocity_rmse_m_s": [
+              0.007240799007813418,
+              0.007768182574529411,
+              0.01047499658109593
+            ],
+            "J_m_s": 0.00849465938781292,
+            "seconds": 32,
+            "position_rmse_m": [
+              0.02558393480814478,
+              0.02621767067994104,
+              0.049118477762949336
+            ],
+            "yaw_rmse_rad": 0.00015707897369785347,
+            "correction_tv": [
+              3.3474972248077393,
+              3.4840070406595864,
+              136.70541381835938
+            ],
+            "correction_tv_per_second": [
+              0.10460928827524185,
+              0.10887522002061208,
+              4.2720441818237305
+            ],
+            "acceleration_tv": [
+              3.3474972248077393,
+              3.4840070406595864,
+              136.70541381835938
+            ],
+            "acceleration_tv_per_second": [
+              0.10460928827524185,
+              0.10887522002061208,
+              4.2720441818237305
+            ],
+            "normalized_thrust_tv": [
+              0.24424461523691812,
+              0.26049742102622986,
+              9.881251653035482
+            ],
+            "normalized_thrust_tv_per_second": [
+              0.007632644226153691,
+              0.008140544407069683,
+              0.3087891141573588
+            ]
+          },
+          "range": {
+            "velocity_rmse_m_s": [
+              [
+                0.006589284048003333,
+                0.008378824231033347
+              ],
+              [
+                0.007363614813294779,
+                0.008170042985990987
+              ],
+              [
+                0.009673546337850093,
+                0.011918142809420615
+              ]
+            ],
+            "J_m_s": [
+              0.008197542543337134,
+              0.008814440492708886
+            ],
+            "seconds": [
+              32,
+              32
+            ],
+            "position_rmse_m": [
+              [
+                0.022178519430130633,
+                0.02914620747490725
+              ],
+              [
+                0.017831364078135573,
+                0.031061685366085102
+              ],
+              [
+                0.040203076370544405,
+                0.05398037851050781
+              ]
+            ],
+            "yaw_rmse_rad": [
+              0.000137432234302805,
+              0.00016780123520614222
+            ],
+            "correction_tv": [
+              [
+                3.1721763610839844,
+                3.5270862579345703
+              ],
+              [
+                3.449847936630249,
+                3.5406577587127686
+              ],
+              [
+                135.10311889648438,
+                138.9832763671875
+              ]
+            ],
+            "correction_tv_per_second": [
+              [
+                0.09913051128387451,
+                0.11022144556045532
+              ],
+              [
+                0.10780774801969528,
+                0.11064555495977402
+              ],
+              [
+                4.221972465515137,
+                4.343227386474609
+              ]
+            ],
+            "acceleration_tv": [
+              [
+                3.1721763610839844,
+                3.5270862579345703
+              ],
+              [
+                3.449847936630249,
+                3.5406577587127686
+              ],
+              [
+                135.10311889648438,
+                138.9832763671875
+              ]
+            ],
+            "acceleration_tv_per_second": [
+              [
+                0.09913051128387451,
+                0.11022144556045532
+              ],
+              [
+                0.10780774801969528,
+                0.11064555495977402
+              ],
+              [
+                4.221972465515137,
+                4.343227386474609
+              ]
+            ],
+            "normalized_thrust_tv": [
+              [
+                0.23169827461242676,
+                0.25692546367645264
+              ],
+              [
+                0.258872389793396,
+                0.26151329278945923
+              ],
+              [
+                9.750056266784668,
+                10.057361602783203
+              ]
+            ],
+            "normalized_thrust_tv_per_second": [
+              [
+                0.007240571081638336,
+                0.008028920739889145
+              ],
+              [
+                0.008089762181043625,
+                0.008172290399670601
+              ],
+              [
+                0.3046892583370209,
+                0.3142925500869751
+              ]
+            ]
+          }
+        },
+        "RSTA": {
+          "n": 3,
+          "ids": [
+            "run011",
+            "run015",
+            "run017"
+          ],
+          "aggregation": "Descriptive arithmetic mean of accepted, individually verified run metrics only",
+          "mean": {
+            "velocity_rmse_m_s": [
+              0.007393987721222379,
+              0.007565988133122272,
+              0.0015608328094055773
+            ],
+            "J_m_s": 0.005506936221250076,
+            "seconds": 32,
+            "position_rmse_m": [
+              0.0258945861755667,
+              0.026158802777065622,
+              0.049186716451687276
+            ],
+            "yaw_rmse_rad": 0.0001568909164152031,
+            "correction_tv": [
+              3.3497132460276284,
+              3.469586213429769,
+              13.349271774291992
+            ],
+            "correction_tv_per_second": [
+              0.10467853893836339,
+              0.10842456916968028,
+              0.41716474294662476
+            ],
+            "acceleration_tv": [
+              3.3497132460276284,
+              3.469586213429769,
+              13.349271774291992
+            ],
+            "acceleration_tv_per_second": [
+              0.10467853893836339,
+              0.10842456916968028,
+              0.41716474294662476
+            ],
+            "normalized_thrust_tv": [
+              0.2418914039929708,
+              0.2509782165288925,
+              0.9668991565704346
+            ],
+            "normalized_thrust_tv_per_second": [
+              0.007559106374780337,
+              0.007843069266527891,
+              0.03021559864282608
+            ]
+          },
+          "range": {
+            "velocity_rmse_m_s": [
+              [
+                0.0063971158305575196,
+                0.008965375182391946
+              ],
+              [
+                0.006726251003835646,
+                0.008164613696029234
+              ],
+              [
+                0.001259153002613254,
+                0.001814048332009337
+              ]
+            ],
+            "J_m_s": [
+              0.005390342206726965,
+              0.005650259729613615
+            ],
+            "seconds": [
+              32,
+              32
+            ],
+            "position_rmse_m": [
+              [
+                0.02191974125878422,
+                0.028641675657912292
+              ],
+              [
+                0.01656931572237734,
+                0.031533676556449064
+              ],
+              [
+                0.04037137285093746,
+                0.05427539541632103
+              ]
+            ],
+            "yaw_rmse_rad": [
+              0.00013505117895393006,
+              0.0001682429334162995
+            ],
+            "correction_tv": [
+              [
+                3.1770453453063965,
+                3.5525169372558594
+              ],
+              [
+                3.414245367050171,
+                3.56093168258667
+              ],
+              [
+                11.467299461364746,
+                15.111626625061035
+              ]
+            ],
+            "correction_tv_per_second": [
+              [
+                0.09928266704082489,
+                0.1110161542892456
+              ],
+              [
+                0.10669516772031784,
+                0.11127911508083344
+              ],
+              [
+                0.3583531081676483,
+                0.47223833203315735
+              ]
+            ],
+            "acceleration_tv": [
+              [
+                3.1770453453063965,
+                3.5525169372558594
+              ],
+              [
+                3.414245367050171,
+                3.56093168258667
+              ],
+              [
+                11.467299461364746,
+                15.111626625061035
+              ]
+            ],
+            "acceleration_tv_per_second": [
+              [
+                0.09928266704082489,
+                0.1110161542892456
+              ],
+              [
+                0.10669516772031784,
+                0.11127911508083344
+              ],
+              [
+                0.3583531081676483,
+                0.47223833203315735
+              ]
+            ],
+            "normalized_thrust_tv": [
+              [
+                0.2295703887939453,
+                0.2569026052951813
+              ],
+              [
+                0.2471979260444641,
+                0.2579055726528168
+              ],
+              [
+                0.829301118850708,
+                1.0956523418426514
+              ]
+            ],
+            "normalized_thrust_tv_per_second": [
+              [
+                0.007174074649810791,
+                0.008028206415474415
+              ],
+              [
+                0.0077249351888895035,
+                0.008059549145400524
+              ],
+              [
+                0.025915659964084625,
+                0.034239135682582855
+              ]
+            ]
+          }
+        }
+      },
+      "rows": [
+        {
+          "id": "run010",
+          "candidate": "PID",
+          "mode": 0,
+          "axes": 0,
+          "seed": 71311,
+          "status": "accepted",
+          "metrics_verified": true,
+          "issues": [],
+          "result": {
+            "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run010/result.json",
+            "sha256": "f85c0291ef2db9044f1a35009d4d9efb49b7f164e72bfabd1573de5f87e7b3ed"
+          },
+          "metrics": {
+            "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run010/r03_metrics.json",
+            "sha256": "380983364b24b6cffdc00b3b2d1475e0a7f9e684a6ef28521b9ba2df221cfc1d"
+          },
+          "takeoff_command": true,
+          "airborne_task_reached": true,
+          "landed_disarmed": true,
+          "logs": [
+            {
+              "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run010/14_06_00.ulg",
+              "source": "/dev/shm/px4-v07-7ub7tb_o/2026-10-19/14_06_00.ulg",
+              "bytes": 2293868,
+              "recorded_sha256": "18f02104b08594fe18160bc0753917a9ce0ce2eb6100f798e5006c6bbecb6edd",
+              "verified_sha256": "18f02104b08594fe18160bc0753917a9ce0ce2eb6100f798e5006c6bbecb6edd"
+            },
+            {
+              "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run010/log001.ulg",
+              "source": "/dev/shm/px4-v07-7ub7tb_o/sess001/log001.ulg",
+              "bytes": 105272908,
+              "recorded_sha256": "d94f1b2dce2cefd533f203e67234268876cf330ffab780e23cb292b4f8a02aba",
+              "verified_sha256": "d94f1b2dce2cefd533f203e67234268876cf330ffab780e23cb292b4f8a02aba"
+            }
+          ],
+          "runner_success": true,
+          "error": null,
+          "parameter_restore": {
+            "receipt": {
+              "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run010/parameter_restore.json",
+              "sha256": "248efe598b1dc4d8d6e0e7faab8110ad0f220db3e3c8cd5b0e11d3ee0e05db9d"
+            },
+            "backup": {
+              "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/original_parameters.bson",
+              "sha256": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc"
+            },
+            "exact": true,
+            "scope": "Recorded per-run restoration; current EEPROM is not substituted for historical evidence"
+          },
+          "measures": {
+            "velocity_rmse_m_s": [
+              0.006738853944286593,
+              0.008049067854285413,
+              0.004066406683871701
+            ],
+            "J_m_s": 0.006284776160814569,
+            "seconds": 32,
+            "position_rmse_m": [
+              0.02154444161713995,
+              0.031715045973972705,
+              0.04097536665837747
+            ],
+            "yaw_rmse_rad": 0.0001690111766059686,
+            "correction_tv": [
+              3.3398783206939697,
+              3.5754594802856445,
+              3.1339938640594482
+            ],
+            "correction_tv_per_second": [
+              0.10437119752168655,
+              0.11173310875892639,
+              0.09793730825185776
+            ],
+            "acceleration_tv": [
+              3.3398783206939697,
+              3.5754594802856445,
+              3.1339938640594482
+            ],
+            "acceleration_tv_per_second": [
+              0.10437119752168655,
+              0.11173310875892639,
+              0.09793730825185776
+            ],
+            "normalized_thrust_tv": [
+              0.24391594529151917,
+              0.2588494122028351,
+              0.22783207893371582
+            ],
+            "normalized_thrust_tv_per_second": [
+              0.007622373290359974,
+              0.008089044131338596,
+              0.007119752466678619
+            ]
+          }
+        },
+        {
+          "id": "run011",
+          "candidate": "RSTA",
+          "mode": 3,
+          "axes": 4,
+          "seed": 71311,
+          "status": "accepted",
+          "metrics_verified": true,
+          "issues": [],
+          "result": {
+            "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run011/result.json",
+            "sha256": "6cb811f5d4b4e85af5b64c06676a7cfa6d625b1efabd13b40a3ed855caeab5c2"
+          },
+          "metrics": {
+            "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run011/r03_metrics.json",
+            "sha256": "51d53719ad04c69672313eb957b4bebb5c5da6cd75451032317ce474f26628ad"
+          },
+          "takeoff_command": true,
+          "airborne_task_reached": true,
+          "landed_disarmed": true,
+          "logs": [
+            {
+              "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run011/14_09_00.ulg",
+              "source": "/dev/shm/px4-v07-i_eor6dk/2026-10-19/14_09_00.ulg",
+              "bytes": 2290999,
+              "recorded_sha256": "93a2dae13073fa59f1782dfd66ae7f90ee941eb0a70332b76bc39f23777d761f",
+              "verified_sha256": "93a2dae13073fa59f1782dfd66ae7f90ee941eb0a70332b76bc39f23777d761f"
+            },
+            {
+              "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run011/log001.ulg",
+              "source": "/dev/shm/px4-v07-i_eor6dk/sess001/log001.ulg",
+              "bytes": 105857367,
+              "recorded_sha256": "9b150352a6956aefe0007d0bf565d5eb157900c5e48cef3115cf99d436641a6a",
+              "verified_sha256": "9b150352a6956aefe0007d0bf565d5eb157900c5e48cef3115cf99d436641a6a"
+            }
+          ],
+          "runner_success": true,
+          "error": null,
+          "parameter_restore": {
+            "receipt": {
+              "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run011/parameter_restore.json",
+              "sha256": "5096ce0139a40472296142b849acfe1ea7b58599bdd82625f89dd2c3331b5f18"
+            },
+            "backup": {
+              "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/original_parameters.bson",
+              "sha256": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc"
+            },
+            "exact": true,
+            "scope": "Recorded per-run restoration; current EEPROM is not substituted for historical evidence"
+          },
+          "measures": {
+            "velocity_rmse_m_s": [
+              0.0063971158305575196,
+              0.008164613696029234,
+              0.0016092970935941409
+            ],
+            "J_m_s": 0.005390342206726965,
+            "seconds": 32,
+            "position_rmse_m": [
+              0.02191974125878422,
+              0.031533676556449064,
+              0.04037137285093746
+            ],
+            "yaw_rmse_rad": 0.00016737863687537973,
+            "correction_tv": [
+              3.31957745552063,
+              3.56093168258667,
+              13.468889236450195
+            ],
+            "correction_tv_per_second": [
+              0.10373679548501968,
+              0.11127911508083344,
+              0.4209027886390686
+            ],
+            "acceleration_tv": [
+              3.31957745552063,
+              3.56093168258667,
+              13.468889236450195
+            ],
+            "acceleration_tv_per_second": [
+              0.10373679548501968,
+              0.11127911508083344,
+              0.4209027886390686
+            ],
+            "normalized_thrust_tv": [
+              0.23920121788978577,
+              0.2579055726528168,
+              0.9757440090179443
+            ],
+            "normalized_thrust_tv_per_second": [
+              0.007475038059055805,
+              0.008059549145400524,
+              0.03049200028181076
+            ]
+          }
+        },
+        {
+          "id": "run012",
+          "candidate": "ESTA",
+          "mode": 1,
+          "axes": 4,
+          "seed": 71311,
+          "status": "accepted",
+          "metrics_verified": true,
+          "issues": [],
+          "result": {
+            "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run012/result.json",
+            "sha256": "c8356c0a1ee74bd7a7b08ed5c285942e7afb557fe5ffa4c3be475b434b8426db"
+          },
+          "metrics": {
+            "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run012/r03_metrics.json",
+            "sha256": "2d5f45182dc2d22fb9981e7788b2151adcbbe5f462c6df424747190081adc942"
+          },
+          "takeoff_command": true,
+          "airborne_task_reached": true,
+          "landed_disarmed": true,
+          "logs": [
+            {
+              "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run012/14_12_06.ulg",
+              "source": "/dev/shm/px4-v07-nf9kq8oz/2026-10-19/14_12_06.ulg",
+              "bytes": 2326525,
+              "recorded_sha256": "11f71f24970e74285728eae315fe57135fde985907cbb7c6996fdd0970796481",
+              "verified_sha256": "11f71f24970e74285728eae315fe57135fde985907cbb7c6996fdd0970796481"
+            },
+            {
+              "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run012/log001.ulg",
+              "source": "/dev/shm/px4-v07-nf9kq8oz/sess001/log001.ulg",
+              "bytes": 105766469,
+              "recorded_sha256": "b2f4d3c21d5635f0ac41d3987e5b5d1ff12799dfe242555f2f18f47dea6cec00",
+              "verified_sha256": "b2f4d3c21d5635f0ac41d3987e5b5d1ff12799dfe242555f2f18f47dea6cec00"
+            }
+          ],
+          "runner_success": true,
+          "error": null,
+          "parameter_restore": {
+            "receipt": {
+              "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run012/parameter_restore.json",
+              "sha256": "3da2c9af47730480bdf2a82fa5bb60e8d3aa819876341f8a76832141eb44195c"
+            },
+            "backup": {
+              "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/original_parameters.bson",
+              "sha256": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc"
+            },
+            "exact": true,
+            "scope": "Recorded per-run restoration; current EEPROM is not substituted for historical evidence"
+          },
+          "measures": {
+            "velocity_rmse_m_s": [
+              0.006589284048003333,
+              0.008170042985990987,
+              0.009833300596017084
+            ],
+            "J_m_s": 0.008197542543337134,
+            "seconds": 32,
+            "position_rmse_m": [
+              0.022178519430130633,
+              0.031061685366085102,
+              0.040203076370544405
+            ],
+            "yaw_rmse_rad": 0.00016600345158461317,
+            "correction_tv": [
+              3.343229055404663,
+              3.5406577587127686,
+              136.02984619140625
+            ],
+            "correction_tv_per_second": [
+              0.10447590798139572,
+              0.11064555495977402,
+              4.250932693481445
+            ],
+            "acceleration_tv": [
+              3.343229055404663,
+              3.5406577587127686,
+              136.02984619140625
+            ],
+            "acceleration_tv_per_second": [
+              0.10447590798139572,
+              0.11064555495977402,
+              4.250932693481445
+            ],
+            "normalized_thrust_tv": [
+              0.244110107421875,
+              0.26110658049583435,
+              9.836337089538574
+            ],
+            "normalized_thrust_tv_per_second": [
+              0.007628440856933594,
+              0.008159580640494823,
+              0.30738553404808044
+            ]
+          }
+        },
+        {
+          "id": "run013",
+          "candidate": "PID",
+          "mode": 0,
+          "axes": 0,
+          "seed": 71312,
+          "status": "accepted",
+          "metrics_verified": true,
+          "issues": [],
+          "result": {
+            "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run013/result.json",
+            "sha256": "735d538eecdfa8cc8812e862fc5c1e1df184d88b0567fcf8d52d09e6a4117c31"
+          },
+          "metrics": {
+            "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run013/r03_metrics.json",
+            "sha256": "94fdbcb56d6ad8f3f649e8ff47cafb26a36c13a94f4002ff2ac3a4449e89765a"
+          },
+          "takeoff_command": true,
+          "airborne_task_reached": true,
+          "landed_disarmed": true,
+          "logs": [
+            {
+              "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run013/14_15_06.ulg",
+              "source": "/dev/shm/px4-v07-8jnu1y5s/2026-10-19/14_15_06.ulg",
+              "bytes": 2322148,
+              "recorded_sha256": "5963287c791ef03736c22bf540100bbb583075a5618a49f1fe4c5e6d001a6127",
+              "verified_sha256": "5963287c791ef03736c22bf540100bbb583075a5618a49f1fe4c5e6d001a6127"
+            },
+            {
+              "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run013/log001.ulg",
+              "source": "/dev/shm/px4-v07-8jnu1y5s/sess001/log001.ulg",
+              "bytes": 106266028,
+              "recorded_sha256": "020cfdce6713e768d16b619fd698ec9f971f93b61cab1939b1c12c08cf74cc15",
+              "verified_sha256": "020cfdce6713e768d16b619fd698ec9f971f93b61cab1939b1c12c08cf74cc15"
+            }
+          ],
+          "runner_success": true,
+          "error": null,
+          "parameter_restore": {
+            "receipt": {
+              "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run013/parameter_restore.json",
+              "sha256": "4bcffdb476eb15d71fd544cd7681244bdf6388a74956eabd90247f1fc75e6f6c"
+            },
+            "backup": {
+              "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/original_parameters.bson",
+              "sha256": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc"
+            },
+            "exact": true,
+            "scope": "Recorded per-run restoration; current EEPROM is not substituted for historical evidence"
+          },
+          "measures": {
+            "velocity_rmse_m_s": [
+              0.00701785341593993,
+              0.008033794658333447,
+              0.004108528227819382
+            ],
+            "J_m_s": 0.006386725434030919,
+            "seconds": 32,
+            "position_rmse_m": [
+              0.02923175733464696,
+              0.029647046695897003,
+              0.05000888677400042
+            ],
+            "yaw_rmse_rad": 0.00013430957841899116,
+            "correction_tv": [
+              3.189973831176758,
+              3.3877925872802734,
+              3.0115766525268555
+            ],
+            "correction_tv_per_second": [
+              0.09968668222427368,
+              0.10586851835250854,
+              0.09411177039146423
+            ],
+            "acceleration_tv": [
+              3.189973831176758,
+              3.3877925872802734,
+              3.0115766525268555
+            ],
+            "acceleration_tv_per_second": [
+              0.09968668222427368,
+              0.10586851835250854,
+              0.09411177039146423
+            ],
+            "normalized_thrust_tv": [
+              0.23131388425827026,
+              0.24851994216442108,
+              0.2189943790435791
+            ],
+            "normalized_thrust_tv_per_second": [
+              0.007228558883070946,
+              0.007766248192638159,
+              0.006843574345111847
+            ]
+          }
+        },
+        {
+          "id": "run014",
+          "candidate": "ESTA",
+          "mode": 1,
+          "axes": 4,
+          "seed": 71312,
+          "status": "accepted",
+          "metrics_verified": true,
+          "issues": [],
+          "result": {
+            "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run014/result.json",
+            "sha256": "cc03cfa4f3d69c4f9cfe07a62ed203bfd190efcf2801756e567719a267c550a2"
+          },
+          "metrics": {
+            "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run014/r03_metrics.json",
+            "sha256": "a79a5ba5329b12f9937ff1397ca3032b332dcc4189b6674805ba3f070f63a8e7"
+          },
+          "takeoff_command": true,
+          "airborne_task_reached": true,
+          "landed_disarmed": true,
+          "logs": [
+            {
+              "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run014/14_18_09.ulg",
+              "source": "/dev/shm/px4-v07-v8lvqv37/2026-10-19/14_18_09.ulg",
+              "bytes": 2304394,
+              "recorded_sha256": "a94220bad88ef14ced77cb1f97d61549f525051f0057ca4f55db22de24a7bfd1",
+              "verified_sha256": "a94220bad88ef14ced77cb1f97d61549f525051f0057ca4f55db22de24a7bfd1"
+            },
+            {
+              "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run014/log001.ulg",
+              "source": "/dev/shm/px4-v07-v8lvqv37/sess001/log001.ulg",
+              "bytes": 107317059,
+              "recorded_sha256": "fca2bf406e9f366a3b94f3adc770e652ceb3e431236e9784557308c189df73b0",
+              "verified_sha256": "fca2bf406e9f366a3b94f3adc770e652ceb3e431236e9784557308c189df73b0"
+            }
+          ],
+          "runner_success": true,
+          "error": null,
+          "parameter_restore": {
+            "receipt": {
+              "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run014/parameter_restore.json",
+              "sha256": "ffb30cc92d772c530520e332141cd6aec38b6f0568486ba65e789533d447ae98"
+            },
+            "backup": {
+              "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/original_parameters.bson",
+              "sha256": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc"
+            },
+            "exact": true,
+            "scope": "Recorded per-run restoration; current EEPROM is not substituted for historical evidence"
+          },
+          "measures": {
+            "velocity_rmse_m_s": [
+              0.006754288744403576,
+              0.0077708899243024675,
+              0.011918142809420615
+            ],
+            "J_m_s": 0.008814440492708886,
+            "seconds": 32,
+            "position_rmse_m": [
+              0.02914620747490725,
+              0.029759962595602443,
+              0.053171978407795785
+            ],
+            "yaw_rmse_rad": 0.000137432234302805,
+            "correction_tv": [
+              3.1721763610839844,
+              3.449847936630249,
+              138.9832763671875
+            ],
+            "correction_tv_per_second": [
+              0.09913051128387451,
+              0.10780774801969528,
+              4.343227386474609
+            ],
+            "acceleration_tv": [
+              3.1721763610839844,
+              3.449847936630249,
+              138.9832763671875
+            ],
+            "acceleration_tv_per_second": [
+              0.09913051128387451,
+              0.10780774801969528,
+              4.343227386474609
+            ],
+            "normalized_thrust_tv": [
+              0.23169827461242676,
+              0.258872389793396,
+              10.057361602783203
+            ],
+            "normalized_thrust_tv_per_second": [
+              0.007240571081638336,
+              0.008089762181043625,
+              0.3142925500869751
+            ]
+          }
+        },
+        {
+          "id": "run015",
+          "candidate": "RSTA",
+          "mode": 3,
+          "axes": 4,
+          "seed": 71312,
+          "status": "accepted",
+          "metrics_verified": true,
+          "issues": [],
+          "result": {
+            "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run015/result.json",
+            "sha256": "87b4eefe2c53a8fb996428e204c753e505c815303552f0c418514375183a55e6"
+          },
+          "metrics": {
+            "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run015/r03_metrics.json",
+            "sha256": "c7b0667343d1ed2181d424c4a2f9bd713f55b1278a9baff156e69f0188d4ab48"
+          },
+          "takeoff_command": true,
+          "airborne_task_reached": true,
+          "landed_disarmed": true,
+          "logs": [
+            {
+              "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run015/14_21_13.ulg",
+              "source": "/dev/shm/px4-v07-3fk1ej67/2026-10-19/14_21_13.ulg",
+              "bytes": 2303492,
+              "recorded_sha256": "1de3f999dbd166821a111d821214fe4a2ba2db71b95c2a26bcb53d598d238939",
+              "verified_sha256": "1de3f999dbd166821a111d821214fe4a2ba2db71b95c2a26bcb53d598d238939"
+            },
+            {
+              "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run015/log001.ulg",
+              "source": "/dev/shm/px4-v07-3fk1ej67/sess001/log001.ulg",
+              "bytes": 106639018,
+              "recorded_sha256": "822a7ad0b70db0f0602a70019bc0c04366413dbc5600282b00ef6c9a4f95038d",
+              "verified_sha256": "822a7ad0b70db0f0602a70019bc0c04366413dbc5600282b00ef6c9a4f95038d"
+            }
+          ],
+          "runner_success": true,
+          "error": null,
+          "parameter_restore": {
+            "receipt": {
+              "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run015/parameter_restore.json",
+              "sha256": "7208be3db8f67afc0360151210561b4e8020262353acbb782c9df94604d45e99"
+            },
+            "backup": {
+              "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/original_parameters.bson",
+              "sha256": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc"
+            },
+            "exact": true,
+            "scope": "Recorded per-run restoration; current EEPROM is not substituted for historical evidence"
+          },
+          "measures": {
+            "velocity_rmse_m_s": [
+              0.00681947215071767,
+              0.007807099699501936,
+              0.001814048332009337
+            ],
+            "J_m_s": 0.005480206727409648,
+            "seconds": 32,
+            "position_rmse_m": [
+              0.028641675657912292,
+              0.03037341605237046,
+              0.05291338108780334
+            ],
+            "yaw_rmse_rad": 0.00013505117895393006,
+            "correction_tv": [
+              3.1770453453063965,
+              3.433581590652466,
+              15.111626625061035
+            ],
+            "correction_tv_per_second": [
+              0.09928266704082489,
+              0.10729942470788956,
+              0.47223833203315735
+            ],
+            "acceleration_tv": [
+              3.1770453453063965,
+              3.433581590652466,
+              15.111626625061035
+            ],
+            "acceleration_tv_per_second": [
+              0.09928266704082489,
+              0.10729942470788956,
+              0.47223833203315735
+            ],
+            "normalized_thrust_tv": [
+              0.2295703887939453,
+              0.24783115088939667,
+              1.0956523418426514
+            ],
+            "normalized_thrust_tv_per_second": [
+              0.007174074649810791,
+              0.007744723465293646,
+              0.034239135682582855
+            ]
+          }
+        },
+        {
+          "id": "run016",
+          "candidate": "PID",
+          "mode": 0,
+          "axes": 0,
+          "seed": 71313,
+          "status": "accepted",
+          "metrics_verified": true,
+          "issues": [],
+          "result": {
+            "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run016/result.json",
+            "sha256": "b52854c73316fd49fc7a97a85173acb7bf45f7311b8cd70110d2fea7996e1364"
+          },
+          "metrics": {
+            "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run016/r03_metrics.json",
+            "sha256": "cc19f0ee6de2b2303ff8fc21d251972165667719054db3eebbe83c3c87524fbd"
+          },
+          "takeoff_command": true,
+          "airborne_task_reached": true,
+          "landed_disarmed": true,
+          "logs": [
+            {
+              "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run016/14_24_20.ulg",
+              "source": "/dev/shm/px4-v07-7im7w638/2026-10-19/14_24_20.ulg",
+              "bytes": 2303672,
+              "recorded_sha256": "0e5ea827d5502f31a5ea8f3dd8cf22180ef7c35bfe2d56ec9fbfb82891fe47b4",
+              "verified_sha256": "0e5ea827d5502f31a5ea8f3dd8cf22180ef7c35bfe2d56ec9fbfb82891fe47b4"
+            },
+            {
+              "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run016/log001.ulg",
+              "source": "/dev/shm/px4-v07-7im7w638/sess001/log001.ulg",
+              "bytes": 105889106,
+              "recorded_sha256": "61434dbc047d44d5f72e014fa96ff97547974b5073835946682b180654166f3c",
+              "verified_sha256": "61434dbc047d44d5f72e014fa96ff97547974b5073835946682b180654166f3c"
+            }
+          ],
+          "runner_success": true,
+          "error": null,
+          "parameter_restore": {
+            "receipt": {
+              "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run016/parameter_restore.json",
+              "sha256": "da174071888ed1fca65746900ba2c197365c34de77278e17e8d186ce5c2f1e27"
+            },
+            "backup": {
+              "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/original_parameters.bson",
+              "sha256": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc"
+            },
+            "exact": true,
+            "scope": "Recorded per-run restoration; current EEPROM is not substituted for historical evidence"
+          },
+          "measures": {
+            "velocity_rmse_m_s": [
+              0.008033786272044572,
+              0.007672023090954922,
+              0.0042682522216298075
+            ],
+            "J_m_s": 0.006658020528209767,
+            "seconds": 32,
+            "position_rmse_m": [
+              0.025614461624653417,
+              0.01666951062242228,
+              0.05537020244801401
+            ],
+            "yaw_rmse_rad": 0.00016855395608023695,
+            "correction_tv": [
+              3.5450356006622314,
+              3.435533285140991,
+              2.628257989883423
+            ],
+            "correction_tv_per_second": [
+              0.11078236252069473,
+              0.10736041516065598,
+              0.08213306218385696
+            ],
+            "acceleration_tv": [
+              3.5450356006622314,
+              3.435533285140991,
+              2.628257989883423
+            ],
+            "acceleration_tv_per_second": [
+              0.11078236252069473,
+              0.10736041516065598,
+              0.08213306218385696
+            ],
+            "normalized_thrust_tv": [
+              0.25604063272476196,
+              0.24856071174144745,
+              0.19084715843200684
+            ],
+            "normalized_thrust_tv_per_second": [
+              0.008001269772648811,
+              0.007767522241920233,
+              0.005963973701000214
+            ]
+          }
+        },
+        {
+          "id": "run017",
+          "candidate": "RSTA",
+          "mode": 3,
+          "axes": 4,
+          "seed": 71313,
+          "status": "accepted",
+          "metrics_verified": true,
+          "issues": [],
+          "result": {
+            "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run017/result.json",
+            "sha256": "e82e0cc0bfa9d6bf3e8ee06115481a5e3e1494f4119ccdf127f6abbef2e2c835"
+          },
+          "metrics": {
+            "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run017/r03_metrics.json",
+            "sha256": "98f42d689a57662d75b03cf0656a956eae98b210e0dbf384047d0390e7ae20fa"
+          },
+          "takeoff_command": true,
+          "airborne_task_reached": true,
+          "landed_disarmed": true,
+          "logs": [
+            {
+              "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run017/14_27_22.ulg",
+              "source": "/dev/shm/px4-v07-nd2rztb4/2026-10-19/14_27_22.ulg",
+              "bytes": 2298006,
+              "recorded_sha256": "99e383ff24982067af178c5fa76a46c963b7e00caf6b27bffe0cb32da5c48f9e",
+              "verified_sha256": "99e383ff24982067af178c5fa76a46c963b7e00caf6b27bffe0cb32da5c48f9e"
+            },
+            {
+              "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run017/log001.ulg",
+              "source": "/dev/shm/px4-v07-nd2rztb4/sess001/log001.ulg",
+              "bytes": 106355826,
+              "recorded_sha256": "d55bb199519b4d27c3392fe78c0d3c568b768e001f7ffaec3c98a6fce12dbe5a",
+              "verified_sha256": "d55bb199519b4d27c3392fe78c0d3c568b768e001f7ffaec3c98a6fce12dbe5a"
+            }
+          ],
+          "runner_success": true,
+          "error": null,
+          "parameter_restore": {
+            "receipt": {
+              "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run017/parameter_restore.json",
+              "sha256": "4472dfa642a1cc7ed8eb1efc454d5d5634ecf9f41dc007435af53adbc0c10d18"
+            },
+            "backup": {
+              "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/original_parameters.bson",
+              "sha256": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc"
+            },
+            "exact": true,
+            "scope": "Recorded per-run restoration; current EEPROM is not substituted for historical evidence"
+          },
+          "measures": {
+            "velocity_rmse_m_s": [
+              0.008965375182391946,
+              0.006726251003835646,
+              0.001259153002613254
+            ],
+            "J_m_s": 0.005650259729613615,
+            "seconds": 32,
+            "position_rmse_m": [
+              0.027122341610003594,
+              0.01656931572237734,
+              0.05427539541632103
+            ],
+            "yaw_rmse_rad": 0.0001682429334162995,
+            "correction_tv": [
+              3.5525169372558594,
+              3.414245367050171,
+              11.467299461364746
+            ],
+            "correction_tv_per_second": [
+              0.1110161542892456,
+              0.10669516772031784,
+              0.3583531081676483
+            ],
+            "acceleration_tv": [
+              3.5525169372558594,
+              3.414245367050171,
+              11.467299461364746
+            ],
+            "acceleration_tv_per_second": [
+              0.1110161542892456,
+              0.10669516772031784,
+              0.3583531081676483
+            ],
+            "normalized_thrust_tv": [
+              0.2569026052951813,
+              0.2471979260444641,
+              0.829301118850708
+            ],
+            "normalized_thrust_tv_per_second": [
+              0.008028206415474415,
+              0.0077249351888895035,
+              0.025915659964084625
+            ]
+          }
+        },
+        {
+          "id": "run018",
+          "candidate": "ESTA",
+          "mode": 1,
+          "axes": 4,
+          "seed": 71313,
+          "status": "accepted",
+          "metrics_verified": true,
+          "issues": [],
+          "result": {
+            "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run018/result.json",
+            "sha256": "8ee95b6265dc8a3465199b1e4a25f41c85ed45c36e45314606f0daf3d9e1fa32"
+          },
+          "metrics": {
+            "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run018/r03_metrics.json",
+            "sha256": "32912c9c7f47401b2e7a9eba6ece0a2d278b920de44da5b12f6b81ce08e9c11a"
+          },
+          "takeoff_command": true,
+          "airborne_task_reached": true,
+          "landed_disarmed": true,
+          "logs": [
+            {
+              "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run018/14_30_28.ulg",
+              "source": "/dev/shm/px4-v07-sl_ne4d8/2026-10-19/14_30_28.ulg",
+              "bytes": 2316972,
+              "recorded_sha256": "e77b64931ec65f1393b3ef72ccc1530fa9f9c00c19a338a17bf8bbeb996cd0d6",
+              "verified_sha256": "e77b64931ec65f1393b3ef72ccc1530fa9f9c00c19a338a17bf8bbeb996cd0d6"
+            },
+            {
+              "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run018/log001.ulg",
+              "source": "/dev/shm/px4-v07-sl_ne4d8/sess001/log001.ulg",
+              "bytes": 106507442,
+              "recorded_sha256": "3e428f31cd278a82a5f105b88d72f5b7e4e4e803593e4edb5bb787a8c5c10a4d",
+              "verified_sha256": "3e428f31cd278a82a5f105b88d72f5b7e4e4e803593e4edb5bb787a8c5c10a4d"
+            }
+          ],
+          "runner_success": true,
+          "error": null,
+          "parameter_restore": {
+            "receipt": {
+              "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/run018/parameter_restore.json",
+              "sha256": "14920db0d568959806b152f72d661e8200be7dbf7caf3e134fdb96f680e610f7"
+            },
+            "backup": {
+              "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05/B/batch01/original_parameters.bson",
+              "sha256": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc"
+            },
+            "exact": true,
+            "scope": "Recorded per-run restoration; current EEPROM is not substituted for historical evidence"
+          },
+          "measures": {
+            "velocity_rmse_m_s": [
+              0.008378824231033347,
+              0.007363614813294779,
+              0.009673546337850093
+            ],
+            "J_m_s": 0.00847199512739274,
+            "seconds": 32,
+            "position_rmse_m": [
+              0.02542707751939646,
+              0.017831364078135573,
+              0.05398037851050781
+            ],
+            "yaw_rmse_rad": 0.00016780123520614222,
+            "correction_tv": [
+              3.5270862579345703,
+              3.461515426635742,
+              135.10311889648438
+            ],
+            "correction_tv_per_second": [
+              0.11022144556045532,
+              0.10817235708236694,
+              4.221972465515137
+            ],
+            "acceleration_tv": [
+              3.5270862579345703,
+              3.461515426635742,
+              135.10311889648438
+            ],
+            "acceleration_tv_per_second": [
+              0.11022144556045532,
+              0.10817235708236694,
+              4.221972465515137
+            ],
+            "normalized_thrust_tv": [
+              0.25692546367645264,
+              0.26151329278945923,
+              9.750056266784668
+            ],
+            "normalized_thrust_tv_per_second": [
+              0.008028920739889145,
+              0.008172290399670601,
+              0.3046892583370209
+            ]
+          }
+        }
+      ],
+      "paired_recorded": {
+        "total": 6,
+        "accepted": 6,
+        "scope": "Stored decisions only until complete proof"
+      },
+      "previous_gates_verified": [
+        {
+          "gate": "A",
+          "revision": "r03_revision04",
+          "receipt_sha256": "6e0498bf52c69239f13b294ce9059473827af8ec4e1b0595ef8dc2ccf659e8d2"
+        }
+      ]
+    }
+  ],
+  "external_summary": {
+    "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision05_summaries/B_result01/summary.json",
+    "sha256": "7e51ffc63455dde8d7a767adc88369dee53a6890a096e3554166901a3c302b2b"
+  }
+}

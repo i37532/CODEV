@@ -272,6 +272,9 @@ private:
 	// publications with topic dependent on multi-mode
 	uORB::PublicationMulti<vehicle_attitude_s>           _attitude_pub;
 	uORB::PublicationMulti<vehicle_local_position_s>     _local_position_pub;
+#if defined(CONFIG_ARCH_BOARD_PX4_SITL)
+	LocalPositionLog _local_position_log;
+#endif
 	uORB::PublicationMulti<vehicle_global_position_s>    _global_position_pub;
 	uORB::PublicationMulti<vehicle_odometry_s>           _odometry_pub;
 	uORB::PublicationMulti<wind_s>              _wind_pub;

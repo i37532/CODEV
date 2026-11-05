@@ -1,0 +1,1040 @@
+{
+  "stage": "R00",
+  "audit": "baseline-parameters-assets-four-raw-log-periods",
+  "success": true,
+  "source_head": "794301664cc0aacee6b5c62987531ab6f0b33fdf",
+  "result_and_branch_origin_head": "0a5796c3ed69d2e415696cf2450fbde74d56e6ea",
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "branch",
+        "--show-current"
+      ],
+      "exit_code": 0,
+      "stdout": "research/sta-velocity-regularized\n"
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "stdout": "0a5796c3ed69d2e415696cf2450fbde74d56e6ea\n"
+    },
+    {
+      "argv": [
+        "git",
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all"
+      ],
+      "exit_code": 0,
+      "stdout": "?? research/sta-velocity-control/regularized_sta/plan/v1/VELOCITY_STA_REGULARIZED_PROMPTS_CN.md\n?? research/sta-velocity-control/regularized_sta/plan/v1/VELOCITY_STA_REGULARIZED_STATUS_CN.md\n?? research/sta-velocity-control/regularized_sta/plan/v1/VELOCITY_STA_REGULARIZED_TODO_CN.md\n?? research/sta-velocity-control/regularized_sta/r00/evidence/audit_baseline.py\n?? research/sta-velocity-control/regularized_sta/r00/interface/audit.py\n"
+    },
+    {
+      "argv": [
+        "git",
+        "submodule",
+        "status",
+        "--recursive"
+      ],
+      "exit_code": 0,
+      "stdout": " 7c2c623da9f5dcb3f01d32830af1a2ed958de363 Tools/flightgear_bridge (7c2c623)\n cbdb2fc7dd44331da1dcd04a891ed7f8c27b1ef0 Tools/flightgear_bridge/models/Rascal (remotes/origin/electric-14-gcbdb2fc)\n 4540de7ae8e71b9bd6e6f67d085695be0ab36bc3 Tools/flightgear_bridge/models/TF-G1 (4540de7)\n 562ee71388c493675269210f7692d8b7a8bb800d Tools/flightgear_bridge/models/TF-G2 (562ee71)\n 158e429a0110589b1e2adfe868e166271470e144 Tools/flightgear_bridge/models/TF-R1 (heads/master)\n 0a816d8100e9860a031ccfccfb9941bcd6eedc81 Tools/jMAVSim (0a816d8)\n c08380767b21938391bec676a43b36b837af9ba4 Tools/jMAVSim/jMAVlib (heads/master)\n e070c50d591541d440510b65c9da5cad1db5aa9a Tools/jsbsim_bridge (e070c50)\n 40571cd808a204f4062128daeb6bb6db8c134c48 Tools/jsbsim_bridge/models/ATI-Resolution (2019.1)\n d0d1db1961549e557885002cf9c3cff40cc27be2 Tools/jsbsim_bridge/models/Rascal (remotes/origin/preserve-this-branch-for-px4-submodules)\n 822050a7ab6fd87972e59f16312f451bce217a56 Tools/sitl_gazebo (822050a)\n 28ef45c1fcb532b2bfd54c16b059c6a545143b2f Tools/sitl_gazebo/external/OpticalFlow (28ef45c)\n 9b5b567ae77f93d1ef4d36151529ba2506a46e7a Tools/sitl_gazebo/external/OpticalFlow/external/klt_feature_tracker (heads/master)\n 08fd0a73045346448adf6969660196228b23e1fa boards/atlflight/cmake_hexagon (remotes/origin/px4)\n 636fae5ca34eff6007344718755d78fcdf94238e mavlink/include/mavlink/v2.0 (636fae5c)\n 979e27408fa90a3c3d6432190c8f65cc80c3e6b6 platforms/nuttx/NuttX/apps (nuttx-8.2-590-g979e27408)\n bf660cba2af81f055002b3817c87b1f63a78fd09 platforms/nuttx/NuttX/nuttx (nuttx-8.2-3070-gbf660cba2a)\n 0322a4e345e48ea28cb1cee14a33033cdaf0b16a platforms/qurt/dspal (heads/master)\n 07168bd5715818802b78f674816ec851307998a7 platforms/qurt/dspal/cmake_hexagon (remotes/origin/sdk3.1-4-g07168bd)\n c34ef0ce3100684a927c6aecebf0c904bee251b3 src/drivers/gps/devices (remotes/origin/codev_main_12.3_gps_update)\n 29e1aa6c12e3590252b102153d8c62155047a676 src/drivers/uavcan/libuavcan (remotes/origin/pr-nuttx_update_7.31+-4-g29e1aa6c)\n 192295c4f9b67f4a20b0eabf74757b6597415f2b src/drivers/uavcan/libuavcan/dsdl (192295c)\n c58477a644d20ccf95a20c151f3a0402f271c3b8 src/drivers/uavcan/libuavcan/libuavcan/dsdl_compiler/pyuavcan (v1.0.0dev3~7)\n fd12483ddd4e58242d61d74a163e7aeaa1e0f466 src/drivers/uavcan/libuavcan/libuavcan/dsdl_compiler/pyuavcan/dsdl (fd12483)\n 36a01e428b110ff84c8babe5b65667b5e3037d5e src/drivers/uavcan_v1/legacy_data_types (remotes/origin/legacy)\n 2a116170285fb47fcaae150ad21c2ccde0756a5f src/drivers/uavcan_v1/libcanard (1.1.0)\n 0a773b93ce5c94e1d2791b180058cb9897fab7e1 src/drivers/uavcan_v1/public_regulated_data_types (0a773b9)\n 2a116170285fb47fcaae150ad21c2ccde0756a5f src/drivers/uavcannode_gps_demo/libcanard (1.1.0)\n 0a773b93ce5c94e1d2791b180058cb9897fab7e1 src/drivers/uavcannode_gps_demo/public_regulated_data_types (0a773b9)\n baca5d31259c598540e4d1284bc8d8f793abf83a src/lib/crypto/monocypher (3.1.2)\n b3fed06fe822d08d19ab1d2c2f8daf7b7d21951c src/lib/ecl (v1.9.0-rc1-591-gb3fed06)\n b8568a89db8455d0ab2e2e391e2149ba2e5e10dd src/lib/matrix (v1.0.2-195-gb8568a8)\n 21d3cfe3ae570d1674da0105ab23b80958e0449a src/modules/micrortps_bridge/micro-CDR (v1.0.0beta2-54-g21d3cfe)\n"
+    },
+    {
+      "argv": [
+        "git",
+        "submodule",
+        "foreach",
+        "--quiet",
+        "--recursive",
+        "git status --porcelain --untracked-files=all"
+      ],
+      "exit_code": 0,
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "794301664cc0aacee6b5c62987531ab6f0b33fdf",
+        "0a5796c3ed69d2e415696cf2450fbde74d56e6ea",
+        "--stat",
+        "--",
+        "src",
+        "msg",
+        "Tools",
+        "sitl",
+        "ROMFS"
+      ],
+      "exit_code": 0,
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "g++",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "g++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0\nCopyright (C) 2021 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n"
+    },
+    {
+      "argv": [
+        "cmake",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "cmake version 3.22.1\n\nCMake suite maintained and supported by Kitware (kitware.com/cmake).\n"
+    },
+    {
+      "argv": [
+        "ninja",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "1.10.1\n"
+    },
+    {
+      "argv": [
+        "gazebo",
+        "--version"
+      ],
+      "exit_code": 255,
+      "stdout": "Gazebo multi-robot simulator, version 11.10.2\nCopyright (C) 2012 Open Source Robotics Foundation.\nReleased under the Apache 2 License.\nhttp://gazebosim.org\n\n\n"
+    },
+    {
+      "argv": [
+        "uname",
+        "-a"
+      ],
+      "exit_code": 0,
+      "stdout": "Linux yr-G15 6.8.0-138-generic #138~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Aug  7 13:43:15 UTC  x86_64 x86_64 x86_64 GNU/Linux\n"
+    },
+    {
+      "argv": [
+        "df",
+        "-B1",
+        "/home/yr/Desktop/Codev-autopilot",
+        "/dev/shm"
+      ],
+      "exit_code": 0,
+      "stdout": "Filesystem        1B-blocks         Used   Available Use% Mounted on\n/dev/nvme0n1p3 422528196608 331236208640 69753556992  83% /\ntmpfs            8277499904    183140352  8094359552   3% /dev/shm\n"
+    },
+    {
+      "argv": [
+        "pgrep",
+        "-a",
+        "-x",
+        "px4|gzserver|gzclient"
+      ],
+      "exit_code": 1,
+      "stdout": ""
+    }
+  ],
+  "submodule_count": 33,
+  "submodules": [
+    " 7c2c623da9f5dcb3f01d32830af1a2ed958de363 Tools/flightgear_bridge (7c2c623)",
+    " cbdb2fc7dd44331da1dcd04a891ed7f8c27b1ef0 Tools/flightgear_bridge/models/Rascal (remotes/origin/electric-14-gcbdb2fc)",
+    " 4540de7ae8e71b9bd6e6f67d085695be0ab36bc3 Tools/flightgear_bridge/models/TF-G1 (4540de7)",
+    " 562ee71388c493675269210f7692d8b7a8bb800d Tools/flightgear_bridge/models/TF-G2 (562ee71)",
+    " 158e429a0110589b1e2adfe868e166271470e144 Tools/flightgear_bridge/models/TF-R1 (heads/master)",
+    " 0a816d8100e9860a031ccfccfb9941bcd6eedc81 Tools/jMAVSim (0a816d8)",
+    " c08380767b21938391bec676a43b36b837af9ba4 Tools/jMAVSim/jMAVlib (heads/master)",
+    " e070c50d591541d440510b65c9da5cad1db5aa9a Tools/jsbsim_bridge (e070c50)",
+    " 40571cd808a204f4062128daeb6bb6db8c134c48 Tools/jsbsim_bridge/models/ATI-Resolution (2019.1)",
+    " d0d1db1961549e557885002cf9c3cff40cc27be2 Tools/jsbsim_bridge/models/Rascal (remotes/origin/preserve-this-branch-for-px4-submodules)",
+    " 822050a7ab6fd87972e59f16312f451bce217a56 Tools/sitl_gazebo (822050a)",
+    " 28ef45c1fcb532b2bfd54c16b059c6a545143b2f Tools/sitl_gazebo/external/OpticalFlow (28ef45c)",
+    " 9b5b567ae77f93d1ef4d36151529ba2506a46e7a Tools/sitl_gazebo/external/OpticalFlow/external/klt_feature_tracker (heads/master)",
+    " 08fd0a73045346448adf6969660196228b23e1fa boards/atlflight/cmake_hexagon (remotes/origin/px4)",
+    " 636fae5ca34eff6007344718755d78fcdf94238e mavlink/include/mavlink/v2.0 (636fae5c)",
+    " 979e27408fa90a3c3d6432190c8f65cc80c3e6b6 platforms/nuttx/NuttX/apps (nuttx-8.2-590-g979e27408)",
+    " bf660cba2af81f055002b3817c87b1f63a78fd09 platforms/nuttx/NuttX/nuttx (nuttx-8.2-3070-gbf660cba2a)",
+    " 0322a4e345e48ea28cb1cee14a33033cdaf0b16a platforms/qurt/dspal (heads/master)",
+    " 07168bd5715818802b78f674816ec851307998a7 platforms/qurt/dspal/cmake_hexagon (remotes/origin/sdk3.1-4-g07168bd)",
+    " c34ef0ce3100684a927c6aecebf0c904bee251b3 src/drivers/gps/devices (remotes/origin/codev_main_12.3_gps_update)",
+    " 29e1aa6c12e3590252b102153d8c62155047a676 src/drivers/uavcan/libuavcan (remotes/origin/pr-nuttx_update_7.31+-4-g29e1aa6c)",
+    " 192295c4f9b67f4a20b0eabf74757b6597415f2b src/drivers/uavcan/libuavcan/dsdl (192295c)",
+    " c58477a644d20ccf95a20c151f3a0402f271c3b8 src/drivers/uavcan/libuavcan/libuavcan/dsdl_compiler/pyuavcan (v1.0.0dev3~7)",
+    " fd12483ddd4e58242d61d74a163e7aeaa1e0f466 src/drivers/uavcan/libuavcan/libuavcan/dsdl_compiler/pyuavcan/dsdl (fd12483)",
+    " 36a01e428b110ff84c8babe5b65667b5e3037d5e src/drivers/uavcan_v1/legacy_data_types (remotes/origin/legacy)",
+    " 2a116170285fb47fcaae150ad21c2ccde0756a5f src/drivers/uavcan_v1/libcanard (1.1.0)",
+    " 0a773b93ce5c94e1d2791b180058cb9897fab7e1 src/drivers/uavcan_v1/public_regulated_data_types (0a773b9)",
+    " 2a116170285fb47fcaae150ad21c2ccde0756a5f src/drivers/uavcannode_gps_demo/libcanard (1.1.0)",
+    " 0a773b93ce5c94e1d2791b180058cb9897fab7e1 src/drivers/uavcannode_gps_demo/public_regulated_data_types (0a773b9)",
+    " baca5d31259c598540e4d1284bc8d8f793abf83a src/lib/crypto/monocypher (3.1.2)",
+    " b3fed06fe822d08d19ab1d2c2f8daf7b7d21951c src/lib/ecl (v1.9.0-rc1-591-gb3fed06)",
+    " b8568a89db8455d0ab2e2e391e2149ba2e5e10dd src/lib/matrix (v1.0.2-195-gb8568a8)",
+    " 21d3cfe3ae570d1674da0105ab23b80958e0449a src/modules/micrortps_bridge/micro-CDR (v1.0.0beta2-54-g21d3cfe)"
+  ],
+  "assets_checked": 500,
+  "external_assets_checked": 7,
+  "asset_mismatches": [],
+  "frozen_sha256": "0cf4d1a6626ed0cb19ce7cf0af822fe16f9a9fb70f3d3209dfe8d51cd7695f3a",
+  "parameters": {
+    "common_parameters": {
+      "MPC_YAW_MODE": 0,
+      "MC_AIRMODE": 0,
+      "MC_PITCHRATE_MAX": 220,
+      "MC_PITCH_P": 6.5,
+      "MC_RATT_TEST": 0,
+      "MC_ROLLRATE_MAX": 220,
+      "MC_ROLL_P": 6.5,
+      "MC_YAWRATE_MAX": 200,
+      "MC_YAW_P": 2.8,
+      "MC_YAW_WEIGHT": 0.4,
+      "MPC_YAWRAUTO_MAX": 45,
+      "MC_MAN_TILT_TAU": 0,
+      "MPC_ACC_DOWN_MAX": 3,
+      "MPC_ACC_HOR": 3,
+      "MPC_ACC_HOR_MAX": 5,
+      "MPC_ACC_UP_MAX": 4,
+      "MPC_ALT_MODE": 0,
+      "MPC_HOLD_DZ": 0.1,
+      "MPC_HOLD_MAX_XY": 0.8,
+      "MPC_HOLD_MAX_Z": 0.6,
+      "MPC_JERK_AUTO": 4,
+      "MPC_JERK_MAX": 8,
+      "MPC_LAND_ALT1": 10,
+      "MPC_LAND_ALT2": 5,
+      "MPC_LAND_SPEED": 0.6,
+      "MPC_MANTHR_MIN": 0.08,
+      "MPC_MAN_TILT_MAX": 35,
+      "MPC_MAN_Y_MAX": 150,
+      "MPC_MAN_Y_TAU": 0.08,
+      "MPC_POS_MODE": 4,
+      "MPC_SPOOLUP_TIME": 1,
+      "MPC_THR_CURVE": 0,
+      "MPC_THR_HOVER": 0.5,
+      "MPC_THR_MAX": 1,
+      "MPC_THR_MIN": 0.12,
+      "MPC_TILTMAX_AIR": 45,
+      "MPC_TILTMAX_LND": 12,
+      "MPC_TKO_RAMP_T": 3,
+      "MPC_TKO_SPEED": 1.5,
+      "MPC_USE_HTE": 1,
+      "MPC_VELD_LP": 5,
+      "MPC_VEL_MANUAL": 10,
+      "MPC_XY_CRUISE": 5,
+      "MPC_XY_ERR_MAX": 2,
+      "MPC_XY_MAN_EXPO": 0.6,
+      "MPC_XY_P": 0.95,
+      "MPC_XY_TRAJ_P": 0.5,
+      "MPC_XY_VEL_ALL": -10,
+      "MPC_XY_VEL_D_ACC": 0.24,
+      "MPC_XY_VEL_I_ACC": 0.48,
+      "MPC_XY_VEL_MAX": 12,
+      "MPC_XY_VEL_P_ACC": 2.16,
+      "MPC_YAW_EXPO": 0.6,
+      "MPC_Z_MAN_EXPO": 0.6,
+      "MPC_Z_P": 1,
+      "MPC_Z_VEL_ALL": -3,
+      "MPC_Z_VEL_D_ACC": 0,
+      "MPC_Z_VEL_I_ACC": 2,
+      "MPC_Z_VEL_MAX_DN": 0.55,
+      "MPC_Z_VEL_MAX_UP": 3,
+      "MPC_Z_VEL_P_ACC": 4,
+      "SYS_VEHICLE_RESP": -0.4,
+      "MC_ACRO_EXPO": 0.69,
+      "MC_ACRO_EXPO_Y": 0.69,
+      "MC_ACRO_P_MAX": 720,
+      "MC_ACRO_R_MAX": 720,
+      "MC_ACRO_SUPEXPO": 0.7,
+      "MC_ACRO_SUPEXPOY": 0.7,
+      "MC_ACRO_Y_MAX": 540,
+      "MC_BAT_SCALE_EN": 0,
+      "MC_PITCHRATE_D": 0.003,
+      "MC_PITCHRATE_FF": 0,
+      "MC_PITCHRATE_I": 0.2,
+      "MC_PITCHRATE_K": 1,
+      "MC_PITCHRATE_P": 0.15,
+      "MC_PR_INT_LIM": 0.3,
+      "MC_ROLLRATE_D": 0.003,
+      "MC_ROLLRATE_FF": 0,
+      "MC_ROLLRATE_I": 0.2,
+      "MC_ROLLRATE_K": 1,
+      "MC_ROLLRATE_P": 0.15,
+      "MC_RR_INT_LIM": 0.3,
+      "MC_RTC_DIV": 1,
+      "MC_RTC_MODE": 0,
+      "MC_STA_AXES": 0,
+      "MC_STA_G_P": 0,
+      "MC_STA_G_R": 0,
+      "MC_STA_G_Y": 0,
+      "MC_STA_L1_P": 0,
+      "MC_STA_L1_R": 0,
+      "MC_STA_L1_Y": 0,
+      "MC_STA_L2_P": 0,
+      "MC_STA_L2_R": 0,
+      "MC_STA_L2_Y": 0,
+      "MC_STA_NU_P": 0,
+      "MC_STA_NU_R": 0,
+      "MC_STA_NU_Y": 0,
+      "MC_STA_TKO_MGT": 0,
+      "MC_YAWRATE_D": 0,
+      "MC_YAWRATE_FF": 0,
+      "MC_YAWRATE_I": 0.1,
+      "MC_YAWRATE_K": 1,
+      "MC_YAWRATE_P": 0.2,
+      "MC_YR_INT_LIM": 0.3,
+      "MPC_LAND_RC_HELP": 0,
+      "MPC_VC_L1_X": 0.5,
+      "MPC_VC_L2_X": 0.1,
+      "MPC_VC_NU_X": 0.4,
+      "MPC_VC_A_X": 0.8,
+      "MIS_TAKEOFF_ALT": 2.5,
+      "SDLOG_DIRS_MAX": 1000,
+      "SDLOG_MODE": 1,
+      "MPC_VC_L1_Y": 0.5,
+      "MPC_VC_L2_Y": 0.1,
+      "MPC_VC_NU_Y": 0.4,
+      "MPC_VC_A_Y": 0.8,
+      "MPC_VC_L1_Z": 2.0,
+      "MPC_VC_L2_Z": 1.0,
+      "MPC_VC_NU_Z": 4.0,
+      "MPC_VC_A_Z": 6.0,
+      "MPC_VC_DIV": 1,
+      "MPC_VCT_TEST": 0
+    },
+    "configurations": {
+      "pid": {
+        "parameter_count": 124,
+        "mode": 0,
+        "axes": 0
+      },
+      "x": {
+        "parameter_count": 124,
+        "mode": 1,
+        "axes": 1
+      },
+      "y": {
+        "parameter_count": 124,
+        "mode": 1,
+        "axes": 2
+      },
+      "xy": {
+        "parameter_count": 124,
+        "mode": 1,
+        "axes": 3
+      },
+      "z": {
+        "parameter_count": 124,
+        "mode": 1,
+        "axes": 4
+      },
+      "xz": {
+        "parameter_count": 124,
+        "mode": 1,
+        "axes": 5
+      },
+      "yz": {
+        "parameter_count": 124,
+        "mode": 1,
+        "axes": 6
+      },
+      "xyz": {
+        "parameter_count": 124,
+        "mode": 1,
+        "axes": 7
+      }
+    },
+    "files": {
+      "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax04/parameters/pid.json": "a4e78f28af6374fdf12ef6a4bfef1574840e81d792969579edae3312342994a4",
+      "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax04/parameters/x.json": "f8c85bb0fab546ab933ab1d63c5228dbde9f84cc38d39f8af523ab87dcecb809",
+      "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax04/parameters/y.json": "493eb6d669861e6f22cc8568ddb77d8fc880df0866821e5f55984bcb451b6b76",
+      "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax04/parameters/xy.json": "c2af2d7c2bcdd8230200ee971f2f38209b1502fff407ab23a4e51f1ba75e527f",
+      "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax04/parameters/z.json": "6e1e068ad3c349c0b51d71bdd3bb7fa562f9c6dfc1a33c743c1f7f329c30bad7",
+      "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax04/parameters/xz.json": "960f993e51a776b10b1b7a7278b59774b92f9ac482960fb8185b7cd14fd2d1d7",
+      "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax04/parameters/yz.json": "d29dab0b351772867b58b888c83aa16799dfcbdfd96f9d589b5a7e7e81bf2b70",
+      "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax04/parameters/xyz.json": "9c6890500899604dffcca097608b44c0233b1f0d1b72b5359c99cb652d0cd1ea"
+    }
+  },
+  "raw_log_samples": [
+    {
+      "id": "run007",
+      "task": "H",
+      "candidate": "PID",
+      "seed": 52020,
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/formal01/run007/log001.ulg",
+      "bytes": 110245962,
+      "sha256": "445aaa0e306ccf876a7617da250ea334f17a7e208010eb9db2c9157ccac78149",
+      "source_head": "794301664cc0aacee6b5c62987531ab6f0b33fdf",
+      "firmware_sha256": "3c31069dc295edfa535b87909e39544d09a42acb2c54182421324e435386fa09",
+      "sampling": "earliest PID and XYZ per H/V, full 64 s excitation window",
+      "filtered_topics": [
+        "sta_velocity_ctrl_status",
+        "velocity_ctrl_selection",
+        "vehicle_local_position_log"
+      ],
+      "stream_dropouts": 0,
+      "stream_corruption": false,
+      "sample_clock": {
+        "samples": 6400,
+        "intervals": 6399,
+        "duration_s": 63.988,
+        "mean_hz": 100.00312558604739,
+        "min_us": 8000,
+        "max_us": 12000,
+        "p01_p50_p99_us": [
+          8000.0,
+          8000.0,
+          12000.0
+        ],
+        "histogram_us": {
+          "8000": 3200,
+          "12000": 3199
+        }
+      },
+      "input_publication_clock": {
+        "samples": 6400,
+        "intervals": 6399,
+        "duration_s": 63.988,
+        "mean_hz": 100.00312558604739,
+        "min_us": 8000,
+        "max_us": 12000,
+        "p01_p50_p99_us": [
+          8000.0,
+          8000.0,
+          12000.0
+        ],
+        "histogram_us": {
+          "8000": 3200,
+          "12000": 3199
+        }
+      },
+      "diagnostic_publication_clock": {
+        "samples": 6400,
+        "intervals": 6399,
+        "duration_s": 63.988,
+        "mean_hz": 100.00312558604739,
+        "min_us": 8000,
+        "max_us": 12000,
+        "p01_p50_p99_us": [
+          8000.0,
+          8000.0,
+          12000.0
+        ],
+        "histogram_us": {
+          "8000": 3200,
+          "12000": 3199
+        }
+      },
+      "actual_mode_values": {
+        "effective_mode": [
+          0
+        ],
+        "effective_axes": [
+          0
+        ],
+        "active_axes": [
+          0
+        ],
+        "committed_axes": [
+          0
+        ],
+        "pid_axes": [
+          7
+        ],
+        "inner_mode": [
+          0
+        ],
+        "inner_axes": [
+          0
+        ],
+        "inner_divisor": [
+          1
+        ],
+        "z_phase": [
+          0
+        ],
+        "timing": [
+          0
+        ]
+      },
+      "dt_fields_s": {
+        "raw_dt": {
+          "min": 0.00800000037997961,
+          "max": 0.012000000104308128,
+          "values": [
+            0.00800000037997961,
+            0.012000000104308128
+          ]
+        },
+        "input_dt": {
+          "min": 0.00800000037997961,
+          "max": 0.012000000104308128,
+          "values": [
+            0.00800000037997961,
+            0.012000000104308128
+          ]
+        },
+        "used_dt": {
+          "min": 0.00800000037997961,
+          "max": 0.012000000104308128,
+          "values": [
+            0.00800000037997961,
+            0.012000000104308128
+          ]
+        }
+      },
+      "selection_h_s": [
+        0.00800000037997961,
+        0.012000000104308128
+      ],
+      "runtime_parameters_sha256": "4955ef9d1c894ddd25219001a42379ffaf4b16f9164a7ff3a078789f4ba472a0",
+      "model_manifest": {
+        "original": "366bf1264ce86c0c65b837a5323410c7cd695b0ffa23cdd29e6c52f6315dc00e",
+        "derived": "fe9900329b47f3afb3f2aafac164af047a6feb0e676ea74e658ada5e887b5150",
+        "only_change": "Opt-in compliant base contact (kp2500,kd50,max_vel.2,max_contacts4) and original seeded IMU library filename",
+        "seed_scope": "IMU only; GPS/barometer/magnetometer and host scheduling not independently seeded"
+      },
+      "world_process": {
+        "launcher_pid": 2039099,
+        "launcher_sid": 2039099,
+        "servers": [
+          {
+            "pid": 2039175,
+            "sid": 2039099,
+            "comm": "gzserver",
+            "argv": [
+              "gzserver",
+              "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world"
+            ],
+            "environment": {
+              "PX4_SITL_WORLD": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world",
+              "GAZEBO_MASTER_URI": "http://127.0.0.1:11345"
+            }
+          }
+        ],
+        "world": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world",
+        "world_sha256": "09d9a334728b35a5ca0392e8751e3df5b8aea8b1d5019f8e850a4b0b8bc57b96"
+      }
+    },
+    {
+      "id": "run008",
+      "task": "H",
+      "candidate": "XYZ",
+      "seed": 52020,
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/formal01/run008/log001.ulg",
+      "bytes": 109145229,
+      "sha256": "b52c7067a4d994223bd8e23ee4fa10ee6dd97ada8316610a1461e7f6a3dd4d14",
+      "source_head": "794301664cc0aacee6b5c62987531ab6f0b33fdf",
+      "firmware_sha256": "3c31069dc295edfa535b87909e39544d09a42acb2c54182421324e435386fa09",
+      "sampling": "earliest PID and XYZ per H/V, full 64 s excitation window",
+      "filtered_topics": [
+        "sta_velocity_ctrl_status",
+        "velocity_ctrl_selection",
+        "vehicle_local_position_log"
+      ],
+      "stream_dropouts": 0,
+      "stream_corruption": false,
+      "sample_clock": {
+        "samples": 6400,
+        "intervals": 6399,
+        "duration_s": 63.988,
+        "mean_hz": 100.00312558604739,
+        "min_us": 8000,
+        "max_us": 12000,
+        "p01_p50_p99_us": [
+          8000.0,
+          8000.0,
+          12000.0
+        ],
+        "histogram_us": {
+          "8000": 3200,
+          "12000": 3199
+        }
+      },
+      "input_publication_clock": {
+        "samples": 6400,
+        "intervals": 6399,
+        "duration_s": 63.988,
+        "mean_hz": 100.00312558604739,
+        "min_us": 8000,
+        "max_us": 12000,
+        "p01_p50_p99_us": [
+          8000.0,
+          8000.0,
+          12000.0
+        ],
+        "histogram_us": {
+          "8000": 3200,
+          "12000": 3199
+        }
+      },
+      "diagnostic_publication_clock": {
+        "samples": 6400,
+        "intervals": 6399,
+        "duration_s": 63.988,
+        "mean_hz": 100.00312558604739,
+        "min_us": 8000,
+        "max_us": 12000,
+        "p01_p50_p99_us": [
+          8000.0,
+          8000.0,
+          12000.0
+        ],
+        "histogram_us": {
+          "8000": 3200,
+          "12000": 3199
+        }
+      },
+      "actual_mode_values": {
+        "effective_mode": [
+          1
+        ],
+        "effective_axes": [
+          7
+        ],
+        "active_axes": [
+          7
+        ],
+        "committed_axes": [
+          7
+        ],
+        "pid_axes": [
+          0
+        ],
+        "inner_mode": [
+          0
+        ],
+        "inner_axes": [
+          0
+        ],
+        "inner_divisor": [
+          1
+        ],
+        "z_phase": [
+          3
+        ],
+        "timing": [
+          0
+        ]
+      },
+      "dt_fields_s": {
+        "raw_dt": {
+          "min": 0.00800000037997961,
+          "max": 0.012000000104308128,
+          "values": [
+            0.00800000037997961,
+            0.012000000104308128
+          ]
+        },
+        "input_dt": {
+          "min": 0.00800000037997961,
+          "max": 0.012000000104308128,
+          "values": [
+            0.00800000037997961,
+            0.012000000104308128
+          ]
+        },
+        "used_dt": {
+          "min": 0.00800000037997961,
+          "max": 0.012000000104308128,
+          "values": [
+            0.00800000037997961,
+            0.012000000104308128
+          ]
+        }
+      },
+      "selection_h_s": [
+        0.00800000037997961,
+        0.012000000104308128
+      ],
+      "runtime_parameters_sha256": "6035dbc4c11b5b5d39d7dd05cfded13aa1ce39c1cf4bc7d8a2bd1d7c63040676",
+      "model_manifest": {
+        "original": "366bf1264ce86c0c65b837a5323410c7cd695b0ffa23cdd29e6c52f6315dc00e",
+        "derived": "fe9900329b47f3afb3f2aafac164af047a6feb0e676ea74e658ada5e887b5150",
+        "only_change": "Opt-in compliant base contact (kp2500,kd50,max_vel.2,max_contacts4) and original seeded IMU library filename",
+        "seed_scope": "IMU only; GPS/barometer/magnetometer and host scheduling not independently seeded"
+      },
+      "world_process": {
+        "launcher_pid": 2043521,
+        "launcher_sid": 2043521,
+        "servers": [
+          {
+            "pid": 2043597,
+            "sid": 2043521,
+            "comm": "gzserver",
+            "argv": [
+              "gzserver",
+              "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world"
+            ],
+            "environment": {
+              "PX4_SITL_WORLD": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world",
+              "GAZEBO_MASTER_URI": "http://127.0.0.1:11345"
+            }
+          }
+        ],
+        "world": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world",
+        "world_sha256": "09d9a334728b35a5ca0392e8751e3df5b8aea8b1d5019f8e850a4b0b8bc57b96"
+      }
+    },
+    {
+      "id": "run163",
+      "task": "V",
+      "candidate": "PID",
+      "seed": 52016,
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/formal01/run163/log001.ulg",
+      "bytes": 110732981,
+      "sha256": "583d3507cdef7228c989cd92c18e44894fdbdc7d3e8f10d272c2af01176ecc88",
+      "source_head": "794301664cc0aacee6b5c62987531ab6f0b33fdf",
+      "firmware_sha256": "3c31069dc295edfa535b87909e39544d09a42acb2c54182421324e435386fa09",
+      "sampling": "earliest PID and XYZ per H/V, full 64 s excitation window",
+      "filtered_topics": [
+        "sta_velocity_ctrl_status",
+        "velocity_ctrl_selection",
+        "vehicle_local_position_log"
+      ],
+      "stream_dropouts": 0,
+      "stream_corruption": false,
+      "sample_clock": {
+        "samples": 6400,
+        "intervals": 6399,
+        "duration_s": 63.992,
+        "mean_hz": 99.99687460932616,
+        "min_us": 8000,
+        "max_us": 12000,
+        "p01_p50_p99_us": [
+          8000.0,
+          12000.0,
+          12000.0
+        ],
+        "histogram_us": {
+          "8000": 3199,
+          "12000": 3200
+        }
+      },
+      "input_publication_clock": {
+        "samples": 6400,
+        "intervals": 6399,
+        "duration_s": 63.992,
+        "mean_hz": 99.99687460932616,
+        "min_us": 8000,
+        "max_us": 12000,
+        "p01_p50_p99_us": [
+          8000.0,
+          12000.0,
+          12000.0
+        ],
+        "histogram_us": {
+          "8000": 3199,
+          "12000": 3200
+        }
+      },
+      "diagnostic_publication_clock": {
+        "samples": 6400,
+        "intervals": 6399,
+        "duration_s": 63.992,
+        "mean_hz": 99.99687460932616,
+        "min_us": 8000,
+        "max_us": 12000,
+        "p01_p50_p99_us": [
+          8000.0,
+          12000.0,
+          12000.0
+        ],
+        "histogram_us": {
+          "8000": 3199,
+          "12000": 3200
+        }
+      },
+      "actual_mode_values": {
+        "effective_mode": [
+          0
+        ],
+        "effective_axes": [
+          0
+        ],
+        "active_axes": [
+          0
+        ],
+        "committed_axes": [
+          0
+        ],
+        "pid_axes": [
+          7
+        ],
+        "inner_mode": [
+          0
+        ],
+        "inner_axes": [
+          0
+        ],
+        "inner_divisor": [
+          1
+        ],
+        "z_phase": [
+          0
+        ],
+        "timing": [
+          0
+        ]
+      },
+      "dt_fields_s": {
+        "raw_dt": {
+          "min": 0.00800000037997961,
+          "max": 0.012000000104308128,
+          "values": [
+            0.00800000037997961,
+            0.012000000104308128
+          ]
+        },
+        "input_dt": {
+          "min": 0.00800000037997961,
+          "max": 0.012000000104308128,
+          "values": [
+            0.00800000037997961,
+            0.012000000104308128
+          ]
+        },
+        "used_dt": {
+          "min": 0.00800000037997961,
+          "max": 0.012000000104308128,
+          "values": [
+            0.00800000037997961,
+            0.012000000104308128
+          ]
+        }
+      },
+      "selection_h_s": [
+        0.00800000037997961,
+        0.012000000104308128
+      ],
+      "runtime_parameters_sha256": "7cd644f8887eee4ccd69ce34a8727576a1cb5066916b624ab17453d8ec7e7e30",
+      "model_manifest": {
+        "original": "366bf1264ce86c0c65b837a5323410c7cd695b0ffa23cdd29e6c52f6315dc00e",
+        "derived": "fe9900329b47f3afb3f2aafac164af047a6feb0e676ea74e658ada5e887b5150",
+        "only_change": "Opt-in compliant base contact (kp2500,kd50,max_vel.2,max_contacts4) and original seeded IMU library filename",
+        "seed_scope": "IMU only; GPS/barometer/magnetometer and host scheduling not independently seeded"
+      },
+      "world_process": {
+        "launcher_pid": 2753176,
+        "launcher_sid": 2753176,
+        "servers": [
+          {
+            "pid": 2753252,
+            "sid": 2753176,
+            "comm": "gzserver",
+            "argv": [
+              "gzserver",
+              "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world"
+            ],
+            "environment": {
+              "PX4_SITL_WORLD": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world",
+              "GAZEBO_MASTER_URI": "http://127.0.0.1:11345"
+            }
+          }
+        ],
+        "world": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world",
+        "world_sha256": "09d9a334728b35a5ca0392e8751e3df5b8aea8b1d5019f8e850a4b0b8bc57b96"
+      }
+    },
+    {
+      "id": "run165",
+      "task": "V",
+      "candidate": "XYZ",
+      "seed": 52016,
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/formal01/run165/log001.ulg",
+      "bytes": 110973951,
+      "sha256": "e027df95bd2fbdd134802a44cbd43ad5239ed9070afde46da27ee5af77e9391a",
+      "source_head": "794301664cc0aacee6b5c62987531ab6f0b33fdf",
+      "firmware_sha256": "3c31069dc295edfa535b87909e39544d09a42acb2c54182421324e435386fa09",
+      "sampling": "earliest PID and XYZ per H/V, full 64 s excitation window",
+      "filtered_topics": [
+        "sta_velocity_ctrl_status",
+        "velocity_ctrl_selection",
+        "vehicle_local_position_log"
+      ],
+      "stream_dropouts": 0,
+      "stream_corruption": false,
+      "sample_clock": {
+        "samples": 6400,
+        "intervals": 6399,
+        "duration_s": 63.992,
+        "mean_hz": 99.99687460932616,
+        "min_us": 8000,
+        "max_us": 12000,
+        "p01_p50_p99_us": [
+          8000.0,
+          12000.0,
+          12000.0
+        ],
+        "histogram_us": {
+          "8000": 3199,
+          "12000": 3200
+        }
+      },
+      "input_publication_clock": {
+        "samples": 6400,
+        "intervals": 6399,
+        "duration_s": 63.992,
+        "mean_hz": 99.99687460932616,
+        "min_us": 8000,
+        "max_us": 12000,
+        "p01_p50_p99_us": [
+          8000.0,
+          12000.0,
+          12000.0
+        ],
+        "histogram_us": {
+          "8000": 3199,
+          "12000": 3200
+        }
+      },
+      "diagnostic_publication_clock": {
+        "samples": 6400,
+        "intervals": 6399,
+        "duration_s": 63.992,
+        "mean_hz": 99.99687460932616,
+        "min_us": 8000,
+        "max_us": 12000,
+        "p01_p50_p99_us": [
+          8000.0,
+          12000.0,
+          12000.0
+        ],
+        "histogram_us": {
+          "8000": 3199,
+          "12000": 3200
+        }
+      },
+      "actual_mode_values": {
+        "effective_mode": [
+          1
+        ],
+        "effective_axes": [
+          7
+        ],
+        "active_axes": [
+          7
+        ],
+        "committed_axes": [
+          7
+        ],
+        "pid_axes": [
+          0
+        ],
+        "inner_mode": [
+          0
+        ],
+        "inner_axes": [
+          0
+        ],
+        "inner_divisor": [
+          1
+        ],
+        "z_phase": [
+          3
+        ],
+        "timing": [
+          0
+        ]
+      },
+      "dt_fields_s": {
+        "raw_dt": {
+          "min": 0.00800000037997961,
+          "max": 0.012000000104308128,
+          "values": [
+            0.00800000037997961,
+            0.012000000104308128
+          ]
+        },
+        "input_dt": {
+          "min": 0.00800000037997961,
+          "max": 0.012000000104308128,
+          "values": [
+            0.00800000037997961,
+            0.012000000104308128
+          ]
+        },
+        "used_dt": {
+          "min": 0.00800000037997961,
+          "max": 0.012000000104308128,
+          "values": [
+            0.00800000037997961,
+            0.012000000104308128
+          ]
+        }
+      },
+      "selection_h_s": [
+        0.00800000037997961,
+        0.012000000104308128
+      ],
+      "runtime_parameters_sha256": "f27233b94784c49ff1cb3df51f295003d0d4aad264b98cc723d2ce25967c3f97",
+      "model_manifest": {
+        "original": "366bf1264ce86c0c65b837a5323410c7cd695b0ffa23cdd29e6c52f6315dc00e",
+        "derived": "fe9900329b47f3afb3f2aafac164af047a6feb0e676ea74e658ada5e887b5150",
+        "only_change": "Opt-in compliant base contact (kp2500,kd50,max_vel.2,max_contacts4) and original seeded IMU library filename",
+        "seed_scope": "IMU only; GPS/barometer/magnetometer and host scheduling not independently seeded"
+      },
+      "world_process": {
+        "launcher_pid": 2762450,
+        "launcher_sid": 2762450,
+        "servers": [
+          {
+            "pid": 2762525,
+            "sid": 2762450,
+            "comm": "gzserver",
+            "argv": [
+              "gzserver",
+              "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world"
+            ],
+            "environment": {
+              "PX4_SITL_WORLD": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world",
+              "GAZEBO_MASTER_URI": "http://127.0.0.1:11345"
+            }
+          }
+        ],
+        "world": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world",
+        "world_sha256": "09d9a334728b35a5ca0392e8751e3df5b8aea8b1d5019f8e850a4b0b8bc57b96"
+      }
+    }
+  ],
+  "script_sha256": "8ed65508618d146f0d7520738b4585efe4f41252131f367bdf50c1449b247bf9",
+  "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+  "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+  "numpy": {
+    "version": "2.2.6",
+    "path": "/home/yr/Desktop/codev doc/experiments/M00-20260912/python/numpy/__init__.py"
+  },
+  "storage_bytes": {
+    "/home/yr/Desktop/Codev-autopilot": {
+      "total": 422528196608,
+      "used": 331238494208,
+      "free": 69751271424
+    },
+    "/dev/shm": {
+      "total": 8277499904,
+      "used": 183140352,
+      "free": 8094359552
+    }
+  },
+  "current_on_disk_firmware": {
+    "path": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/bin/px4",
+    "sha256": "3c31069dc295edfa535b87909e39544d09a42acb2c54182421324e435386fa09"
+  },
+  "counts": {
+    "configuration_files": 8,
+    "raw_main_ulogs_decoded": 4,
+    "cxx_tests": 0,
+    "flight_attempts": 0,
+    "source_builds": 0
+  },
+  "not_executed": [
+    "new flights",
+    "MATLAB",
+    "full 320-run replay",
+    "production builds",
+    "fresh seed allocation",
+    "V09 holdout reads"
+  ],
+  "limitations": [
+    "Sampled periods do not bound all future callbacks.",
+    "Current firmware hash is observation, not new-source qualification.",
+    "Shared external trajectories do not imply equal consumed velocity targets.",
+    "Only existing IMU engine seed was controlled; other sources and scheduling were not."
+  ]
+}

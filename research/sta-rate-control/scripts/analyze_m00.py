@@ -18,12 +18,13 @@ def plain(value):
     raise TypeError(type(value).__name__)
 
 
-def analyze(run):
+def analyze(run, log_index=None):
     result = json.loads((run / "result.json").read_text())
-    if not result["success"] or len(result["logs"]) != 1:
+    if not result["success"] or (log_index is None and len(result["logs"]) != 1):
         raise ValueError("Run must pass and have exactly one ULog")
-    path = Path(result["logs"][0]["archive"])
-    if hashlib.sha256(path.read_bytes()).hexdigest() != result["logs"][0]["sha256"]:
+    selected_log = result["logs"][0 if log_index is None else log_index]
+    path = Path(selected_log["archive"])
+    if hashlib.sha256(path.read_bytes()).hexdigest() != selected_log["sha256"]:
         raise ValueError("ULog checksum mismatch")
     log = ULog(str(path))
     events = {entry["name"]: entry["timestamp_us"] for entry in result["events"]}
@@ -110,7 +111,7 @@ def analyze(run):
         raise ValueError(f"ULog acceptance failed: {checks}")
     output = {
         "run": run.name,
-        "ulog_sha256": result["logs"][0]["sha256"],
+        "ulog_sha256": selected_log["sha256"],
         "hover_start_us": start, "hover_end_us": end,
         "hover_duration_s": (end-start)*1e-6,
         "acceptance": {key: bool(value) for key, value in checks.items()},

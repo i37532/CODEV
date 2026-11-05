@@ -40,6 +40,21 @@
  */
 
 /**
+ * Iris SITL bounded research rate excitation trigger
+ *
+ * Rising 0 to 1 airborne starts fixed 0.04/0.08/0.12 rad/s sine pulses.
+ * Existing attitude controller remains the sole rates-setpoint publisher.
+ * Only PX4 SITL airframe 10016. Off by default; no hardware effect.
+ * @value 0 Off
+ * @value 1 One pulse sequence
+ * @value 2 M05 roll, pitch, synchronous roll/pitch sequence (36 s)
+ * @value 3 M06 yaw-only world-z rate sequence (36 s)
+ * @value 4 M06 yaw first, then synchronous roll/pitch/world-yaw (36 s)
+ * @group Multicopter Attitude Control
+ */
+PARAM_DEFINE_INT32(MC_RATT_TEST, 0);
+
+/**
  * Roll P gain
  *
  * Roll proportional gain, i.e. desired angular speed in rad/s for error 1 rad.

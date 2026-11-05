@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="36" failures="0" disabled="0" errors="0" timestamp="2026-10-24T09:31:52" time="0.022" name="AllTests">
+  <testsuite name="RegularizedIstaVelocityControl" tests="36" failures="0" disabled="0" errors="0" time="0.022">
+    <testcase name="ParameterDomainIncludesClosedEpsilonEndpoints" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="InvalidConfigurationPreservesStateAndCandidate" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="CurrentIdealOutputUsesCandidateNuWithoutFeedForward" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="ZeroErrorRetainsNonzeroNuWithoutUnusedIntermediateOverflow" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="PositiveNegativeSymmetryIncludesNonzeroNu" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="ExactSignedBranchBoundariesAndNextafterNeighbors" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="RootIsMonotonicOddContinuousAndBoundedByInput" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="RoundedEngineeringBoundariesRespectSaturationDefinition" status="run" time="0.001" classname="RegularizedIstaVelocityControl" />
+    <testcase name="CompensatedRootDoesNotDependOnOldNu" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="RationalizedRootAvoidsFloatSubtractionCancellation" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="ScaledOuterRootAvoidsIntermediateSquaresAndMultiplesOverflow" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="LargestFiniteErrorIsFiniteOrExplicitlyRejectedWithoutStateChange" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="InvalidInputsAndSubtractionOverflowAreAtomic" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="InvalidDtIsRejectedWithoutClamping" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="NonzeroIntermediateOverflowIsRejected" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="NonzeroIntermediateUnderflowIsNotSilentlyZeroed" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="NormalIncrementAdditionRoundingIsNotProductUnderflow" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="FinalOutputAndStateOverflowAreRejectedAtomically" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="NonzeroSubnormalStateCannotEnterThroughResetOrProtectedCommit" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="FinalSubnormalOutputOrNextStateIsRejected" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="StateAndCandidateGenerationsAreIndependentAcrossAxes" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="ResetToSameValueAndGlobalResetInvalidateCandidates" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="EpsilonGainAndEqualConfigurationUpdatesInvalidate" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="CandidatesCommitOnlyOnceIncludingSameNu" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="OwnerAxisBranchGenerationsAndEveryPayloadFieldAreSealed" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="ProtectedCommitPreservesIdealOutputWithoutImplicitClaim" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="ReconstructedControllerAtSameAddressRejectsDestroyedOwnersCandidate" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="BatchCommitPreflightsAllAxesBeforeAnyMutation" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="BatchMaskAndIndexIdentityAreExplicitAndUnselectedAxesRemainCurrent" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="AllNonemptyBatchMasksCommitOnlySelectedIndependentStates" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="InvalidProtectedStateDoesNotConsumeCandidate" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="UnconfiguredInvalidAxisAndResetValidation" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="FloatGridMatchesIndependentDoubleMonotonicRoot" status="run" time="0.01" classname="RegularizedIstaVelocityControl" />
+    <testcase name="VariableSampleDrivenSequencesMatchIndependentDoubleState" status="run" time="0.011" classname="RegularizedIstaVelocityControl" />
+    <testcase name="FixedPeriodInnerLayerMatchesIndependentStateMatrix" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+    <testcase name="ModeFourCannotBecomeEffectiveOrDisplaceExistingAlgorithms" status="run" time="0" classname="RegularizedIstaVelocityControl" />
+  </testsuite>
+</testsuites>

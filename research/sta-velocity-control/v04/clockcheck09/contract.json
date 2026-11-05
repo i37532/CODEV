@@ -1,0 +1,48 @@
+{
+  "kind": "offline_attitude_clock_revision_not_flight_protocol",
+  "version": "clockcheck09",
+  "starting_head": "5f791eac46d004dfaf4bde818e35039eae6382ee",
+  "flight_authorized": false,
+  "execution_ready": false,
+  "maximum_attempts": 0,
+  "jobs": [],
+  "seeds": [],
+  "historical_acceptance_changed": false,
+  "whitelist": [{"topic": "vehicle_attitude", "instance": 0}],
+  "clocks": {
+    "input": "positive int64-representable integers; no float rounding or invented fields",
+    "timestamp": "nondecreasing publication time; not a unique sample ID",
+    "timestamp_sample": "strictly increasing physical sample time",
+    "future_sample": "reject",
+    "publication_sample_age_limit_us": 20000,
+    "age_limit_origin": "existing analyze_v00 yaw asynchronous freshness ceiling, now also applied conservatively to attitude sample age; not a fitted 4ms allowance",
+    "association_and_boundary_age_limit_us": 20000,
+    "topic_gap_limit_us": 250000,
+    "gap_origin": "existing analyze_v00 topic coverage ceiling, applied to both clocks; never substitutes for local-position/diagnostic 40000us gates",
+    "coverage_count_min": 600
+  },
+  "windows": {
+    "safety": "closed boundaries, complete tied groups plus complete predecessor group; check every row",
+    "reset": "check all counter edges at/after start through end, including edges into first boundary record and counter wrap; preserve old alignment classification",
+    "missing_predecessor": "reject; cannot prove opening reset edge",
+    "metric": "original half-open publication window; yaw retains one-record-one-weight convention; physical velocity sample weighting unchanged",
+    "never": ["sort", "deduplicate", "interpolate", "zero-weight away tied samples", "borrow future messages"]
+  },
+  "association": {
+    "descriptive": "enumerate all latest-publication candidates and expose ambiguity",
+    "unique_attitude_request": "reject tied candidates even with identical payloads; no assumed consumer identity",
+    "actual_consumption": "not provable without recorded consumer sample/sequence key",
+    "yaw_metric": "every recorded attitude row vs unique preceding published target, descriptive only",
+    "output_equality": "strictly increasing unique keys before intersection; retain existing coverage/error thresholds"
+  },
+  "legacy_behavior": "optional policy defaults to None; old runners and old historical checks remain selected by default",
+  "unchanged": ["control laws", "controller dt", "parameters", "model", "numeric safety/performance limits", "old protocol files", "raw logs", "historical verdicts"],
+  "future_batch_prerequisites": [
+    "bind identical clock09 policy in new live heading path and all full offline analysis components; old entry points are not a revised runner",
+    "freeze age/window/ambiguity semantics explicitly; distinguish descriptive metrics from actual-consumption claims",
+    "regress partial ULog transport and complete end-to-end acceptance wiring without changing thresholds",
+    "freeze a new clean source/firmware/model/plugin/analyzer manifest; old protocol08 has three changed shared analysis assets and cannot be reused",
+    "register unused paired seeds, precise order/maximum attempts/new output path and obtain separate user flight authorization",
+    "retain failure-stop, PID inner-loop checks, EEPROM backup/restore and all original safety limits"
+  ]
+}

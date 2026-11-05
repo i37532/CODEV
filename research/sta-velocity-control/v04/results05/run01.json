@@ -1,0 +1,51 @@
+{
+  "source_head": "95cc6fe33db5051774174219e73a724a851c64ad",
+  "branch": "research/sta-velocity-control",
+  "binary_sha256": "cef3f8520fe5f51de2d2aae2a47e71fcd7b67b020f020af2c318067262ba0d82",
+  "runner_sha256": "eb41d7947f7b72b10567eda9651ff2bca1da26d3c5cb532b7f38c7f316fb2eb6",
+  "command": [
+    "./sitl/run.sh",
+    "--headless",
+    "--backend",
+    "gazebo",
+    "--model",
+    "iris"
+  ],
+  "pid_parameters_modified": false,
+  "success": false,
+  "events": [
+    {
+      "name": "ready",
+      "timestamp_us": 30076000.0
+    },
+    {
+      "name": "takeoff_command",
+      "timestamp_us": 30076000
+    }
+  ],
+  "scenario_sha256": "a61ffac6b782ad91d744a1cf1af65c0150a8b4ebc088c64611cf9f060248a143",
+  "scenario_path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/protocol05/execution.json",
+  "simulation_speed_requested": 1.0,
+  "explicit_environment": {
+    "PX4_SITL_WORLD": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world",
+    "GAZEBO_MASTER_URI": "http://127.0.0.1:11345"
+  },
+  "launcher_pid": 1206528,
+  "error": "ValueError('Invalid navigator target')",
+  "launcher_returncode": 0,
+  "logs": [
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/08_27_37.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series04/run01/08_27_37.ulg",
+      "sha256": "07f2dff288574f49f5b9f1a18b1ad1a77fb7af5bb444d0601031684fa122d833",
+      "bytes": 206779
+    },
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/08_27_38.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series04/run01/08_27_38.ulg",
+      "sha256": "88b9cd401f5e410dac6b50f6ee07073597b01a7a7e910646fe89d321f429e086",
+      "bytes": 11545414
+    }
+  ],
+  "finished_utc": "2026-09-23T08:28:15Z"
+}

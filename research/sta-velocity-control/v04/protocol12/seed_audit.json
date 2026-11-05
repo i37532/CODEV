@@ -1,0 +1,38 @@
+{
+  "seeds": [
+    12001,
+    12002,
+    12003
+  ],
+  "files_parsed": 23852,
+  "matches": [],
+  "invalid_json": [],
+  "exceptions": [
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/M06-20260916/c02_regression_roll_diagnostic.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Previously audited empty diagnostic, not a seed registry; unchanged"
+    }
+  ],
+  "scan_manifest_sha256": "887dff7c9c5a4d12fbe41bc486eaf430b719b722ca0db9ab048f49c85d54c62a",
+  "roots": [
+    "/home/yr/Desktop/Codev-autopilot/research",
+    "/home/yr/Desktop/codev doc/experiments",
+    "/home/yr/Desktop/codev doc/plan"
+  ],
+  "excluded": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/protocol02",
+  "scope": "Structured seed/seed-list keys in JSON, plus separate source text audit; recheck before flight",
+  "accepted": true,
+  "design_registrations": [
+    {
+      "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/protocol12/execution.json",
+      "field": "seeds",
+      "seeds": [
+        12001,
+        12002,
+        12003
+      ]
+    }
+  ]
+}

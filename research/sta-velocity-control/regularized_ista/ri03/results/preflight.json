@@ -1,0 +1,1255 @@
+{
+  "stage": "RI03-A",
+  "success": true,
+  "approved": false,
+  "source_head": "e7fb67112e4cf605f5ddf362f120c320a64d2cf5",
+  "counts": {
+    "cpp_unique_tests": 675,
+    "cpp_targets": 48,
+    "python_tests": 789,
+    "model_oracle_tests": 6,
+    "historical_accepted_replays": 3,
+    "historical_failure_audits": 1,
+    "new_flights": 0
+  },
+  "firmware_sha256": "f33e6b477d38fd2a78761258257ebc1e833a19fb1a324bffa2244f2b78706078",
+  "eeprom_before": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+  "eeprom_final": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+  "scope": {
+    "entry_head": "e7fb67112e4cf605f5ddf362f120c320a64d2cf5",
+    "production_changes": [
+      "src/modules/mc_pos_control/MulticopterPositionControl.cpp",
+      "src/modules/mc_pos_control/PositionControl/CMakeLists.txt",
+      "src/modules/mc_pos_control/PositionControl/PositionControl.cpp",
+      "src/modules/mc_pos_control/PositionControl/PositionControl.hpp",
+      "src/modules/mc_pos_control/PositionControl/RegularizedIstaNonSitlTest.cpp",
+      "src/modules/mc_pos_control/PositionControl/RegularizedIstaPositionTest.cpp",
+      "src/modules/mc_pos_control/PositionControl/RegularizedIstaVelocityControl.hpp",
+      "src/modules/mc_pos_control/PositionControl/RegularizedIstaVelocityControlTest.cpp",
+      "src/modules/mc_pos_control/PositionControl/RegularizedIstaVelocityParamTest.cpp",
+      "src/modules/mc_pos_control/RegularizedIstaVelocityModuleTest.cpp",
+      "src/modules/mc_pos_control/mc_pos_control_params.c"
+    ],
+    "allowed_production_changes": [
+      "src/modules/mc_pos_control/MulticopterPositionControl.cpp",
+      "src/modules/mc_pos_control/PositionControl/CMakeLists.txt",
+      "src/modules/mc_pos_control/PositionControl/PositionControl.cpp",
+      "src/modules/mc_pos_control/PositionControl/PositionControl.hpp",
+      "src/modules/mc_pos_control/PositionControl/RegularizedIstaNonSitlTest.cpp",
+      "src/modules/mc_pos_control/PositionControl/RegularizedIstaPositionTest.cpp",
+      "src/modules/mc_pos_control/PositionControl/RegularizedIstaVelocityControl.hpp",
+      "src/modules/mc_pos_control/PositionControl/RegularizedIstaVelocityControlTest.cpp",
+      "src/modules/mc_pos_control/PositionControl/RegularizedIstaVelocityParamTest.cpp",
+      "src/modules/mc_pos_control/RegularizedIstaVelocityModuleTest.cpp",
+      "src/modules/mc_pos_control/mc_pos_control_params.c"
+    ],
+    "immutable_research_unchanged": true,
+    "parameter_default_count": 72,
+    "parameter_defaults_sha256": "364eb89c576c09c203af881489f171e101ed92baa4a42e2020005f18d60e4d10"
+  },
+  "generated_schema": {
+    "velocity_ctrl_selection": {
+      "ulog_format_bytes_including_nul": 1018,
+      "queue": 8,
+      "generated_sha256": "3e12e3e5184e9b5573a2affed61be1f9f28c1dfb9bea589db39b3d6c6d7be67d",
+      "header_sha256": "65f55776c55514895dad260064cdd9d41c28654356677e7d2f97ba3bdc7aff81"
+    },
+    "sta_velocity_ctrl_status": {
+      "ulog_format_bytes_including_nul": 1475,
+      "queue": 8,
+      "generated_sha256": "2229f14718321b1924021e6cb7c716b89bce0c061fbfdd04a108df28b0bef1a0",
+      "header_sha256": "01fdbb8a5f5cec079209fd28cc5ed39d99a9bbc8119960d948bbe5625b0f1901"
+    }
+  },
+  "not_executed": [
+    "MATLAB/Simulink rerun",
+    "flight",
+    "hardware",
+    "RI04",
+    "old R04/R05",
+    "tuning",
+    "push"
+  ],
+  "evidence_path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/evidence.json",
+  "evidence_sha256": "08b529a716aad3b7ece7851259884c6f0b7f73c935e0eccbcb94487f2b3ea1df",
+  "commands": [
+    {
+      "name": "ri02_frozen_reference",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri02/reference/freeze.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.06470433995127678,
+      "log_sha256": "be6e7fd525c799ff71a77e98ae95b655cb5f9b828d63b6295a371feb92f789dd"
+    },
+    {
+      "name": "source_package",
+      "argv": [
+        "sha256sum",
+        "--check",
+        "SHA256SUMS.txt"
+      ],
+      "cwd": "/home/yr/Desktop/STA-ISTA-MATLAB-PX4",
+      "exit_code": 0,
+      "wall_seconds": 0.007840846024919301,
+      "log_sha256": "3c8645f70ac39ed17189eefa215e985b114a8c32d9aec8c33b7d24d2b74d466f"
+    },
+    {
+      "name": "configure_tests",
+      "argv": [
+        "make",
+        "tests",
+        "TESTFILTER=RegularizedIsta",
+        "-j4"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.46481416298775,
+      "log_sha256": "41faa81620a7ce27a92bb4253a2e85a246e70da71ee974466ba142f74ee06b1b"
+    },
+    {
+      "name": "build_test_targets",
+      "argv": [
+        "cmake",
+        "--build",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test",
+        "--target",
+        "unit-RegularizedIstaVelocityControl",
+        "unit-PositionControl",
+        "unit-ControlMath",
+        "unit-Takeoff",
+        "unit-VelocityControl",
+        "unit-StaVelocityControl",
+        "unit-RegularizedStaVelocityControl",
+        "unit-StaVelocityProtection",
+        "unit-VelocityEsta",
+        "unit-VelocityEstaZ",
+        "unit-VelocityZIntegration",
+        "unit-VelocityXYIntegration",
+        "unit-VelocityXYZIntegration",
+        "unit-VelocityAxes",
+        "unit-VelocityDecimation",
+        "unit-RegularizedVelocityRegression",
+        "unit-RegularizedVelocityIntegration",
+        "unit-VelocityResearchTask",
+        "unit-VelocityAblationTask",
+        "unit-RateControl",
+        "unit-RateControlDispatcher",
+        "unit-StaRateControl",
+        "unit-ControllerSelection",
+        "unit-StaProtection",
+        "unit-StaAxesApplication",
+        "unit-TakeoffNuManager",
+        "unit-IstaRateControl",
+        "unit-IstaIntegration",
+        "unit-ProperIstaRateControl",
+        "unit-ProperIstaIntegration",
+        "unit-ProperIstaProtection",
+        "unit-ControlDecimation",
+        "unit-AttitudeControl",
+        "functional-VelocitySelectionParam",
+        "functional-VelocityDiagnosticInput",
+        "functional-VelocityModule",
+        "functional-RegularizedVelocityParam",
+        "functional-RegularizedVelocityModule",
+        "unit-RegularizedIstaRegression",
+        "unit-RegularizedIstaProtection",
+        "unit-RegularizedIstaPosition",
+        "unit-RegularizedIstaNonSitl",
+        "functional-RegularizedIstaVelocityParam",
+        "functional-RegularizedIstaVelocityModule",
+        "functional-VehicleIMU",
+        "functional-EKF2SelectorTiming",
+        "functional-EKF2Selector",
+        "functional-EstimatorDiagnosticTopics",
+        "--parallel",
+        "4"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.21431187400594354,
+      "log_sha256": "8c35b1682f73592d30612d7b0fabdb384fcfff35cb5a076cb48b85b1368aa794"
+    },
+    {
+      "name": "unit-RegularizedIstaVelocityControl",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RegularizedIstaVelocityControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-RegularizedIstaVelocityControl.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.03194190299836919,
+      "log_sha256": "9a09cf30df30bfd29412f9e3c79005c7bf6fd857207009c826c0e0fa9767a407"
+    },
+    {
+      "name": "unit-PositionControl",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-PositionControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-PositionControl.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.0036260090419091284,
+      "log_sha256": "66e9858cf2dc328e76779d465c83e69caf04cedb7775d13ffb2e0fc1cb91acd2"
+    },
+    {
+      "name": "unit-ControlMath",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-ControlMath",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-ControlMath.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.0036099780118092895,
+      "log_sha256": "c536db783b90094db2aaf58e7700e93ce12ffb38ca9d7f1a2b04e54a51e02d4f"
+    },
+    {
+      "name": "unit-Takeoff",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-Takeoff",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-Takeoff.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.0018076890264637768,
+      "log_sha256": "aee7006df06648fc270f5eae86a1e07bda684ba71c7ce24e10d995107977a7ba"
+    },
+    {
+      "name": "unit-VelocityControl",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-VelocityControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-VelocityControl.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.016712431970518082,
+      "log_sha256": "cde6e88e57841a0e625672e3a47c4156372fa45f18f64f52456e2b90fa5005ad"
+    },
+    {
+      "name": "unit-StaVelocityControl",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaVelocityControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-StaVelocityControl.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.03190007002558559,
+      "log_sha256": "0c2b79fe5fd235518bebb73b03cdd43fed867e60fd3ce18b97a42efa77d96d0c"
+    },
+    {
+      "name": "unit-RegularizedStaVelocityControl",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RegularizedStaVelocityControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-RegularizedStaVelocityControl.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.0035290290252305567,
+      "log_sha256": "354291f8d74c160b6f3350a4559faea2ec2b7d3d3da39218a1a464545e9d8d73"
+    },
+    {
+      "name": "unit-StaVelocityProtection",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaVelocityProtection",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-StaVelocityProtection.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.003509735979605466,
+      "log_sha256": "98f9ca1642fb698a66a3d7d5fb36ddd52e9527a8a0a9ed3810f67bf11c9901c4"
+    },
+    {
+      "name": "unit-VelocityEsta",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-VelocityEsta",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-VelocityEsta.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.015935215051285923,
+      "log_sha256": "28509b00618f64103f2244bde38517b0c0baf2b8e603432a9d1363b0e654fda4"
+    },
+    {
+      "name": "unit-VelocityEstaZ",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-VelocityEstaZ",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-VelocityEstaZ.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.007817234960384667,
+      "log_sha256": "b152e11c543b60ef833f79a903609d68a2b906f97d63e8616fe36efdb83c253c"
+    },
+    {
+      "name": "unit-VelocityZIntegration",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-VelocityZIntegration",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-VelocityZIntegration.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.00795744895003736,
+      "log_sha256": "8f882f7736e2d6776aae2ac51191c5265e176cb0b1a8a271f262b24bf84865ee"
+    },
+    {
+      "name": "unit-VelocityXYIntegration",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-VelocityXYIntegration",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-VelocityXYIntegration.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.015853094984777272,
+      "log_sha256": "b02c6ed163bea4b6a346d52047431c9fec81b802cd0b6e89845df8d918703e8f"
+    },
+    {
+      "name": "unit-VelocityXYZIntegration",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-VelocityXYZIntegration",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-VelocityXYZIntegration.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.01588987500872463,
+      "log_sha256": "32466139183ae7cf11782d3769e4ec36223ecf3fd29909ad9eb14ef2dc348094"
+    },
+    {
+      "name": "unit-VelocityAxes",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-VelocityAxes",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-VelocityAxes.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.06404261197894812,
+      "log_sha256": "8cbc8f1f9bca9f4ef2bd232bd8afcda44d852593a99cd98654b2a194d88cff07"
+    },
+    {
+      "name": "unit-VelocityDecimation",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-VelocityDecimation",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-VelocityDecimation.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.007718348992057145,
+      "log_sha256": "3a74e92bd1e0fff2fa8464545bcdfdd61f865b522b53baa1b8571fc61ffbc07a"
+    },
+    {
+      "name": "unit-RegularizedVelocityRegression",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RegularizedVelocityRegression",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-RegularizedVelocityRegression.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.06392903398955241,
+      "log_sha256": "59fa4546ca6e4c7474085ccacf5919646676ca2e1fb388e71dbac4fc89b639d3"
+    },
+    {
+      "name": "unit-RegularizedVelocityIntegration",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RegularizedVelocityIntegration",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-RegularizedVelocityIntegration.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.0037293629720807076,
+      "log_sha256": "d475b0a68e9a66a3ca945f21d345ffee24068956c78d4c5b5f8fc6f4b73b9a1b"
+    },
+    {
+      "name": "unit-VelocityResearchTask",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-VelocityResearchTask",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-VelocityResearchTask.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.003521171980537474,
+      "log_sha256": "61f3ca672dafff0eb4d33ad6e123b21615b5f013cd864b0baf716746390f737c"
+    },
+    {
+      "name": "unit-VelocityAblationTask",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-VelocityAblationTask",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-VelocityAblationTask.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.11396603198954836,
+      "log_sha256": "bdceff101603c8e7a99893d87efab7c07613f11de0d0203e6a4b694a80bd9091"
+    },
+    {
+      "name": "unit-RateControl",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RateControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-RateControl.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.0036293980083428323,
+      "log_sha256": "a457cb84d53aeb021996e4ac9da269e567ea7403968ca71a19ca5e2d915fa2c4"
+    },
+    {
+      "name": "unit-RateControlDispatcher",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RateControlDispatcher",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-RateControlDispatcher.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.0076379620004445314,
+      "log_sha256": "110d3d2bca61f73a5f2316ab36965e6a79dd05de98c04f00336b04eff4fda058"
+    },
+    {
+      "name": "unit-StaRateControl",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaRateControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-StaRateControl.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.008177994983270764,
+      "log_sha256": "1cb4fe30cb35d763e3f4a746c9fd06f526f9c3dc28c09c1edfa7a0eddd55ecbf"
+    },
+    {
+      "name": "unit-ControllerSelection",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-ControllerSelection",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-ControllerSelection.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.0035469509894028306,
+      "log_sha256": "57bd1553e85c82f56343c7bd16eaf60842216c4f7adf36d49aa089881c766cb8"
+    },
+    {
+      "name": "unit-StaProtection",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaProtection",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-StaProtection.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.03185804997337982,
+      "log_sha256": "8bc33eca5bc2b9e13e7dcb2784f3f01222efa87617d5c79097dfdc9240d054be"
+    },
+    {
+      "name": "unit-StaAxesApplication",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaAxesApplication",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-StaAxesApplication.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.015714307024609298,
+      "log_sha256": "2a7420393cb9838476adffc626eda5a5dddce1a306134803922a83f0eb04a968"
+    },
+    {
+      "name": "unit-TakeoffNuManager",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-TakeoffNuManager",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-TakeoffNuManager.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.003806105989497155,
+      "log_sha256": "1b5381923c66e8d8d75641785532eaaa793f46031a565f301a8ab6573fda30f4"
+    },
+    {
+      "name": "unit-IstaRateControl",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-IstaRateControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-IstaRateControl.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.003544914012309164,
+      "log_sha256": "1f54a88a00cb6c28f199b4ec77a40e5eb8af91a149a127935359ee01b7d249e4"
+    },
+    {
+      "name": "unit-IstaIntegration",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-IstaIntegration",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-IstaIntegration.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.03193060396006331,
+      "log_sha256": "bdb4defd633b55737793439b21d2e7255b70aac48e21d9cf20c521b4fa5bc486"
+    },
+    {
+      "name": "unit-ProperIstaRateControl",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-ProperIstaRateControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-ProperIstaRateControl.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.0036308499984443188,
+      "log_sha256": "38de812611d94e5ecc9651afea5de3e890d5b49f6fadc7f63621b721e32b4d88"
+    },
+    {
+      "name": "unit-ProperIstaIntegration",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-ProperIstaIntegration",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-ProperIstaIntegration.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.00362112297443673,
+      "log_sha256": "c79db63921d8f9fe19631e597cb2c173828a675b18024d42f5b274069c50505c"
+    },
+    {
+      "name": "unit-ProperIstaProtection",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-ProperIstaProtection",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-ProperIstaProtection.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.0034636270138435066,
+      "log_sha256": "5cb22270f63a4086eaba1c524b2cfa5b4fd71198c31c17e271aeb33fcc2f500e"
+    },
+    {
+      "name": "unit-ControlDecimation",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-ControlDecimation",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-ControlDecimation.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.003847842977847904,
+      "log_sha256": "b5f3be2623c36c2b2207b16ce08d76413a596804ccc0352793d0cdba79a5747b"
+    },
+    {
+      "name": "unit-AttitudeControl",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-AttitudeControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-AttitudeControl.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.0035200060228817165,
+      "log_sha256": "7f3fbc1dc90aa4376e9a979a40f2534f96867b44f98e2223434027b8482a4a6d"
+    },
+    {
+      "name": "functional-VelocitySelectionParam",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/functional-VelocitySelectionParam",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/functional-VelocitySelectionParam.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.0318779349909164,
+      "log_sha256": "97d70f006b8245087ff0e83a72f41879b9170415d125af384311c5617804eff1"
+    },
+    {
+      "name": "functional-VelocityDiagnosticInput",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/functional-VelocityDiagnosticInput",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/functional-VelocityDiagnosticInput.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.0035040279617533088,
+      "log_sha256": "b52d9e5aca81a0100b73e3976b27adefbe030ab8d339d1f6c41602f7e022415d"
+    },
+    {
+      "name": "functional-VelocityModule",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/functional-VelocityModule",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/functional-VelocityModule.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.2642315079574473,
+      "log_sha256": "c8a2d6f9c9c699e9c7d6d58184f60c3185992f9c3ac4b0437e34357877ced93e"
+    },
+    {
+      "name": "functional-RegularizedVelocityParam",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/functional-RegularizedVelocityParam",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/functional-RegularizedVelocityParam.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.03181084600510076,
+      "log_sha256": "7fd7cc7a21ac281d9f9cbb5bdf7e63d126b072f263518cb0877f8d99027d9da0"
+    },
+    {
+      "name": "functional-RegularizedVelocityModule",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/functional-RegularizedVelocityModule",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/functional-RegularizedVelocityModule.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.11400821001734585,
+      "log_sha256": "36821d903cce75209940d35baf82a82927b969dcff4ef32b8a3f62acb325a643"
+    },
+    {
+      "name": "unit-RegularizedIstaRegression",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RegularizedIstaRegression",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-RegularizedIstaRegression.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.11400770099135116,
+      "log_sha256": "f3495e487e28502f50ccdaa56cf4a7a81b1e32afbccb5c41e1e32a3862a38424"
+    },
+    {
+      "name": "unit-RegularizedIstaProtection",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RegularizedIstaProtection",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-RegularizedIstaProtection.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.0036783209652639925,
+      "log_sha256": "3ba2b66b3deec7693facdcc4f1c7dabb22fa79d88fb45776c88889a32721c9e4"
+    },
+    {
+      "name": "unit-RegularizedIstaPosition",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RegularizedIstaPosition",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-RegularizedIstaPosition.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.0036987840430811048,
+      "log_sha256": "3842806223be10770d3d5fe9444adbcf1aa692d95dea7a1c1946443878df4dcc"
+    },
+    {
+      "name": "unit-RegularizedIstaNonSitl",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RegularizedIstaNonSitl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/unit-RegularizedIstaNonSitl.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.0035353940329514444,
+      "log_sha256": "218e4062ca98e3aa3303db7f767470edaf4d6d0d3226beaa5de2a2b9fce71fe9"
+    },
+    {
+      "name": "functional-RegularizedIstaVelocityParam",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/functional-RegularizedIstaVelocityParam",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/functional-RegularizedIstaVelocityParam.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.01569747901521623,
+      "log_sha256": "4ad3a3c79e8e4ab470f49be61359eea28bdd62934d2cdb40f7f80ed9b655fab8"
+    },
+    {
+      "name": "functional-RegularizedIstaVelocityModule",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/functional-RegularizedIstaVelocityModule",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/functional-RegularizedIstaVelocityModule.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.11426970496540889,
+      "log_sha256": "0a1544ab1395f5f21886e4de1b4bb78f2e93e9c92f06de9764e7399d1262a53c"
+    },
+    {
+      "name": "functional-VehicleIMU",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/functional-VehicleIMU",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/functional-VehicleIMU.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.21458461397560313,
+      "log_sha256": "8c16e473b6d049a61b7097c333d5deea77813d39e45f3afc2d411cfc50dc70d4"
+    },
+    {
+      "name": "functional-EKF2SelectorTiming",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/functional-EKF2SelectorTiming",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/functional-EKF2SelectorTiming.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.0658817490329966,
+      "log_sha256": "91ed648abb3d6e7e9b3657f35e7f71eaf618d65bd638317ec2ebab17b648e8d2"
+    },
+    {
+      "name": "functional-EKF2Selector",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/functional-EKF2Selector",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/functional-EKF2Selector.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.06445483298739418,
+      "log_sha256": "b694610550ba33ba188041ca676c9d7a640ffac243213d1e614115361b514bf2"
+    },
+    {
+      "name": "functional-EstimatorDiagnosticTopics",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/functional-EstimatorDiagnosticTopics",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/functional-EstimatorDiagnosticTopics.xml"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.003593986970372498,
+      "log_sha256": "f54eca2fff7b3932a874efaf9ed95a22fe4bd0fa168f9db05a2cfbe22b15848d"
+    },
+    {
+      "name": "strict_cxx14",
+      "argv": [
+        "g++",
+        "-std=c++14",
+        "-pedantic-errors",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-exceptions",
+        "-fno-rtti",
+        "-c",
+        "/home/yr/Desktop/Codev-autopilot/src/modules/mc_pos_control/PositionControl/RegularizedIstaVelocityControl.cpp",
+        "-o",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/strict_kernel.o"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.11436012695776299,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "py00_tools_test_tools",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri02/tools/test_tools.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 3.971993218990974,
+      "log_sha256": "b0cb3e156b445a6e60117fa747323139e5e843f35a611e5b9effb8d035b19f2f"
+    },
+    {
+      "name": "py01_r03_position11_test_adapter",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_position11/test_adapter.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.6652393279946409,
+      "log_sha256": "6ff1aee28a81e07eff8e9ae2a6f70bdf30f26c24422a5060bfedaa5756c63cd4"
+    },
+    {
+      "name": "py02_r03_position11_test_callbacks",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_position11/test_callbacks.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.16418578999582678,
+      "log_sha256": "48fbfb82b05f3b3f9cfb31ebf410741debf30bcb141b60a29b0ceef115e3e21a"
+    },
+    {
+      "name": "py03_r03_position11_test_policy",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_position11/test_policy.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.16452090995153412,
+      "log_sha256": "b132f67cfafc913f9a0f2ffd387c52a3239225658a1b429d694ea88a4c2fc771"
+    },
+    {
+      "name": "py04_r03_position11_test_recorded",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_position11/test_recorded.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 5.629771760024596,
+      "log_sha256": "864d19f224c72b39c6acceffd55692db1e3da955953271213edc17f393faa330"
+    },
+    {
+      "name": "py05_r03_warmup10_test_evidence",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_warmup10/test_evidence.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.06389778695302084,
+      "log_sha256": "9666de1f56cdacc1534f5f66cc61c246831bc274203df01e69ad6fb390528ca0"
+    },
+    {
+      "name": "py06_r03_warmup10_test_failed_prefix",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_warmup10/test_failed_prefix.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.21467169903917238,
+      "log_sha256": "13321e85f60d8d29e1db547f2fe05f7e2802dbea593f80455a3c914b2a33d9ab"
+    },
+    {
+      "name": "py07_r03_warmup10_test_readiness",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_warmup10/test_readiness.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.06405526003800333,
+      "log_sha256": "9ffa3f724c3704259bd161920cc014b7c8d92cdc1d286a5405f199a75dc77a19"
+    },
+    {
+      "name": "py08_r03_monitor02_test_incremental",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_monitor02/test_incremental.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.21841695200419053,
+      "log_sha256": "322e2aa596765f362d5bd0e193d8f563fd0023928403646f25d244d1a02bcb75"
+    },
+    {
+      "name": "py09_r03_monitor02_test_integration",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_monitor02/test_integration.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 1.1670204480178654,
+      "log_sha256": "b3f60af81f5b6fddcaf25ff6824db675b72647703f8e1f9a54de5cee3900a319"
+    },
+    {
+      "name": "py10_r03_prearm04_test_adversarial",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_prearm04/test_adversarial.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 1.0169562500086613,
+      "log_sha256": "9b93f1aa64d3b1d868c3a9215e3c3facd1c4b92c89ce0df603f674fda9765c3a"
+    },
+    {
+      "name": "py11_r03_prearm04_test_integration",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_prearm04/test_integration.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.9657728779711761,
+      "log_sha256": "dcc4a95570d76ceedf62db3b02244f8a30fa086dd9d4b9bad00e12b1c442230b"
+    },
+    {
+      "name": "py12_r03_prearm04_test_replay",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_prearm04/test_replay.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.31457344902446494,
+      "log_sha256": "89e259b9481afacf3dee331d9c66dcde98cb6ec0eca65936e00a2d240b446b02"
+    },
+    {
+      "name": "py13_r03_numeric05_test_checker",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_numeric05/test_checker.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.21698454697616398,
+      "log_sha256": "e06599160feafd5d63413ede9edfd65cb55b8f6c66e70659655b415abfd0f502"
+    },
+    {
+      "name": "py14_r03_handoff06_test_adapter",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_handoff06/test_adapter.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 1.2185796319972724,
+      "log_sha256": "77aa50dd604bb4aebb73bb310a2d94e6939502ba33ab81968f6cc7afa2fe8229"
+    },
+    {
+      "name": "py15_r03_upstream08_test_analyzer",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_upstream08/test_analyzer.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 1.1160410030279309,
+      "log_sha256": "801b279ee84d514aa07636f8f1df76155d7eb573b634aebb379fd121d6c0ed35"
+    },
+    {
+      "name": "py16_r03_upstream08_test_protocol",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_upstream08/test_protocol.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 1.5172142840456218,
+      "log_sha256": "112767bebaf2929dc6bcf46e81f08f857a00146a0bf129bb381c290a3432c743"
+    },
+    {
+      "name": "py17_r03_upstream08_test_runner",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_upstream08/test_runner.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 5.276906354993116,
+      "log_sha256": "9920326eff2e915b791246264e0763b0838ed5d95bb5cf420086c733a568f39a"
+    },
+    {
+      "name": "py18_r03_upstream08_test_timing",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_upstream08/test_timing.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.2146753800334409,
+      "log_sha256": "90df0ea030783d2127c3d0722d7f23b60d742255caf74648089bdcfc14e05540"
+    },
+    {
+      "name": "py19_r03_upstream08_test_verify",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_upstream08/test_verify.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.1645945010241121,
+      "log_sha256": "1acdc23eda6a5d6fef2f5aa46d2432973b774e7f9825f034c33378d8dd9eed88"
+    },
+    {
+      "name": "py20_protocol02_test_cli_clock",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/protocol02/test_cli_clock.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.2649740669876337,
+      "log_sha256": "5d8fa68f7f874f55218a4700f3c4111a73d1c6e1650b0eb09a51da0ad6db1b4e"
+    },
+    {
+      "name": "py21_protocol03b_test_validation",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/protocol03b/test_validation.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 4.726089186035097,
+      "log_sha256": "ffda157b9c052864788829383ea94e70b2b37a8c9cf4f305c7cc8a93348ed6d6"
+    },
+    {
+      "name": "py22_protocol03b_test_task_output",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/protocol03b/test_task_output.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.26466165302554145,
+      "log_sha256": "bed51f0e63ee1c3d201c433154e82be754217b9bcabd04e6f0d7f6e569ff8dcb"
+    },
+    {
+      "name": "py23_protocol04_test_pilot",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/protocol04/test_pilot.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 6.329026768973563,
+      "log_sha256": "8d6c0ef9e3b745f83c8a2f2e2c2b22ab70a14e4e9fe8cf98c6289d32b8002fbc"
+    },
+    {
+      "name": "py24_protocol04_test_design",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/protocol04/test_design.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.2644602049840614,
+      "log_sha256": "0464fbb4c5c3ea894bdaf0bac014a7b3399acc025769b67025356dda99b4aac9"
+    },
+    {
+      "name": "py25_protocol04_test_formal_design",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/protocol04/test_formal_design.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.2143114049686119,
+      "log_sha256": "7dfb54b81dbac6f860fbd831af4a75cac260fe2e766596bff303af55c656176d"
+    },
+    {
+      "name": "py26_evidence_tools_test_replay_batch",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/evidence_tools/test_replay_batch.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.064197689993307,
+      "log_sha256": "87c60991f8bf5ff67e50756d1cb28057dda10b5919f220859feb30a1e080dfec"
+    },
+    {
+      "name": "py27_protocol05_test_mass",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/protocol05/test_mass.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 6.981402511999477,
+      "log_sha256": "0895c215a755cc79275b3281447a3418dfb065423ad7f34ea6b61df4f99dd8c8"
+    },
+    {
+      "name": "py28_formal_test_runtime",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/formal/test_runtime.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 17.153658348019235,
+      "log_sha256": "0b264ccc2c3f4ac961b27d32dfd9cc4c6fb0bf71c63871a436da87d988af980d"
+    },
+    {
+      "name": "py29_formal_test_formal_package",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/formal/test_formal_package.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.4148435880197212,
+      "log_sha256": "1699ffe6ea9aeb55b8dffc165a21ebdd2f94b1a7de8dac56449f4e83c0a0a9d9"
+    },
+    {
+      "name": "py30_evidence_tools_test_qualified_gate_summary",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/evidence_tools/test_qualified_gate_summary.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.21526634198380634,
+      "log_sha256": "30def8ecfcf37faaea372b850af237f9b3b8859c79d99ea6d978eff6fc28814c"
+    },
+    {
+      "name": "py31_ri03_test_protocol",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri03/test_protocol.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 1.4673634680220857,
+      "log_sha256": "8f39c2249626b29b9cf19babe8e5d8ecc89db5694519b9228dec30432f689043"
+    },
+    {
+      "name": "py32_tools_test_tools",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri03/tools/test_tools.py"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 3.47476731200004,
+      "log_sha256": "75ef1d1d2fa75d8918ef1914b2d2f3e3cb6fa694e4ac4fad5c7bd8ff9c720959"
+    },
+    {
+      "name": "r02_tools",
+      "argv": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r02/tools",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.6668119030073285,
+      "log_sha256": "02da84021e6ef1573c7df29a50a88d54423e4c05c67043049ecfc37dd5d993e5"
+    },
+    {
+      "name": "model_reference",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri01/model/check.py",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/model_reference"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 28.08500748698134,
+      "log_sha256": "53e72ee9bcf349e47e96ed6096b35eebb1fd0873d4539799125aca2b20436dd2"
+    },
+    {
+      "name": "history_X_001",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri02/tools/replay.py",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision09/A/batch01/run001",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/history_X_001"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 19.408868376980536,
+      "log_sha256": "3a8876cb6daaad0cccad21bd07685cd7fd58a05cddf37397a9effa2c927e5a11"
+    },
+    {
+      "name": "history_X_002",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri02/tools/replay.py",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision09/A/batch01/run002",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/history_X_002"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 19.91095771099208,
+      "log_sha256": "b91ad95faba7860fd60d380f5c6e4d8e67ab46b9db33ca755c8f5b6d9b8e991e"
+    },
+    {
+      "name": "history_X_003",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri02/tools/replay.py",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision09/A/batch01/run003",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/history_X_003"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 22.8671344150207,
+      "log_sha256": "ffe51d2187e736e979f1a362d2dbb7c50d5e61cd2044e0a7660b1cf2f9942bc6"
+    },
+    {
+      "name": "original_failure_exact_prefix",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_position11/audit.py",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI03/offline01/historical_failure_audit.json"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 3.22484889999032,
+      "log_sha256": "1a5bd5a1558576cd3575b8d53ff67f9a533bdcf75ee4353eb8f72f99ef28cddd"
+    },
+    {
+      "name": "build_sitl",
+      "argv": [
+        "make",
+        "px4_sitl_default",
+        "-j4"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 6.985889439994935,
+      "log_sha256": "b1ad9afce9fa1317e39340c18cd97053df0ad28136115ba831818a7b538b8d92"
+    },
+    {
+      "name": "gazebo_build_only",
+      "argv": [
+        "env",
+        "DONT_RUN=1",
+        "make",
+        "px4_sitl_default",
+        "gazebo_iris",
+        "-j4"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.3150603650137782,
+      "log_sha256": "f0d69c065a37b774ce973a42328870749fe612caf106649aeb417a3bfc10262d"
+    },
+    {
+      "name": "diff_check",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/home/yr/Desktop/Codev-autopilot",
+      "exit_code": 0,
+      "wall_seconds": 0.11412866198224947,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "unique_test_counting": "675 unique C++/48 targets; 789 direct Python; 6 independent oracle counted separately",
+  "flight_qualification": false
+}

@@ -1,0 +1,134 @@
+{
+  "accepted": false,
+  "job": {
+    "id": "run01",
+    "seed": 14001,
+    "mode": 0,
+    "axes": 0,
+    "parameters": {
+      "MPC_VC_L1_X": 1,
+      "MPC_VC_L2_X": 0.2,
+      "MPC_VC_NU_X": 0.4,
+      "MPC_VC_A_X": 0.8,
+      "MPC_VC_MODE": 0,
+      "MPC_VC_AXES": 0
+    }
+  },
+  "baseline_accepted": true,
+  "flight": {
+    "n": 9085,
+    "inner": {
+      "max_age_us": 4000,
+      "median_age_us": 0.0,
+      "maximum_reads": 4
+    },
+    "maximum_gap_s": 0.012,
+    "hz": 99.99999999999999
+  },
+  "diagnostic": {
+    "n": 6048,
+    "inner": {
+      "max_age_us": 4000,
+      "median_age_us": 0.0,
+      "maximum_reads": 4
+    },
+    "maximum_gap_s": 0.012,
+    "hz": 99.99669268421746,
+    "error": {
+      "rmse": [
+        0.04297925103508391,
+        0.009251905918166284,
+        0.0028586136801803073
+      ],
+      "mean": [
+        -0.0025834780533332425,
+        -0.002458096914771886,
+        0.00011426904517429632
+      ],
+      "std": [
+        0.04290153447937156,
+        0.008919390263700172,
+        0.0028563288952480528
+      ],
+      "max_abs": [
+        0.10136037319898605,
+        0.02974523790180683,
+        0.010484650731086731
+      ]
+    },
+    "iae_m": [
+      1.083324042111634,
+      0.22126221723458708,
+      0.07190106002730319
+    ],
+    "acceleration_tv": [
+      3.5700345039367676,
+      2.9589738845825195,
+      3.6434273719787598
+    ],
+    "samples": 3200,
+    "seconds": 32.0,
+    "constraint_fraction": 0.0,
+    "maximum_continuous_constraint_s": 0.0,
+    "nu_peak": null
+  },
+  "local_output": {
+    "matched": 6048,
+    "denominator": 6048,
+    "coverage": 1.0,
+    "max_gap_s": 0.012,
+    "max_abs_error": 0.0
+  },
+  "attitude_output": {
+    "matched": 6048,
+    "denominator": 6048,
+    "coverage": 1.0,
+    "max_gap_s": 0.012,
+    "max_abs_error": 0.0
+  },
+  "mixer": {
+    "count": 15120,
+    "bit_histogram": {
+      "1": 15120
+    },
+    "feedback_valid_fraction": 1.0,
+    "raw_nonzero_fraction": 1.0,
+    "saturation_fraction_among_valid": 0.0,
+    "rate_direction_saturation_fraction_among_valid": 0.0
+  },
+  "position_rmse": [
+    0.07592274134625558,
+    0.03111599681940916,
+    0.05537017458496053
+  ],
+  "yaw_rmse": 0.00015809968766509108,
+  "height": {
+    "rmse": 0.05535446215086448,
+    "mean": -0.011535950320422966,
+    "std": 0.05413906473348262,
+    "max_abs": 0.1431286334991455
+  },
+  "first_invocation": {
+    "samples": 9085,
+    "first_failures": 0,
+    "retries": 0,
+    "first_input_masks": [
+      32511,
+      32704,
+      32763,
+      32767
+    ]
+  },
+  "exit": {
+    "raw_fault_counts": {
+      "0": 7903,
+      "2": 1183
+    },
+    "classification": {
+      "clear": 7903,
+      "expected_planned_landing_gate": 1183
+    },
+    "raw_values_preserved": true
+  },
+  "error": "Empty/nonmonotonic position_setpoint_triplet"
+}

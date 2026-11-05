@@ -1,0 +1,80 @@
+{
+  "seeds": [
+    31001,
+    31002,
+    31003,
+    31004,
+    31005,
+    31006,
+    31007,
+    31008,
+    31009
+  ],
+  "files_parsed": 29295,
+  "matches": [],
+  "invalid_json": [],
+  "exceptions": [
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/M06-20260916/c02_regression_roll_diagnostic.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Previously audited empty diagnostic, not a seed registry; unchanged"
+    }
+  ],
+  "scan_manifest_sha256": "520acffdc79fc6f8e9ab3f2eb3cd90a7a8c363971d9d183c1e03cfa9d4eb1b5b",
+  "roots": [
+    "/home/yr/Desktop/Codev-autopilot/research",
+    "/home/yr/Desktop/codev doc/experiments",
+    "/home/yr/Desktop/codev doc/plan"
+  ],
+  "excluded": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/protocol02",
+  "scope": "Structured seed/seed-list keys in JSON, plus separate source text audit; recheck before flight",
+  "accepted": true,
+  "design_registrations": [
+    {
+      "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v07/protocol03/execution.json",
+      "field": "seeds",
+      "seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008,
+        31009
+      ]
+    },
+    {
+      "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v07/protocol03/seed_audit.json",
+      "field": "seeds",
+      "seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008,
+        31009
+      ]
+    },
+    {
+      "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v07/protocol03/seed_audit.json",
+      "field": "design_registrations.0.seeds",
+      "seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008,
+        31009
+      ]
+    }
+  ]
+}

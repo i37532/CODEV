@@ -1,0 +1,14 @@
+{
+  "stage": "V04-protocol15-triplet-publication-policy",
+  "seeds": [15001, 15002, 15003],
+  "maximum_attempts": 6,
+  "descent_cap": 0.55,
+  "land_speed": 0.6,
+  "new_run_root": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series13",
+  "scope": "PID then ESTA X; original candidate, task, numeric safety/performance and other topic rules retained",
+  "entry": "Original coarse gate and deadline plus causal raw 3-second window; unchanged from protocol14",
+  "triplet_policy": "Only position_setpoint_triplet permits equal publication timestamps when all logged fields are bit-identical; retain every row; reject reversed or ambiguous messages",
+  "logging": "Preserve original bits and estimator diagnostic bit10 for both controllers",
+  "failure_policy": "Stop on first required check or paired failure; retain all attempts; no retries or tuning",
+  "authorization": "Standing user authorization bound to exact source/execution hash and budget"
+}

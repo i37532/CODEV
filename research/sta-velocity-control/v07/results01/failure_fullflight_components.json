@@ -1,0 +1,125 @@
+{
+  "original_accepted": false,
+  "full_chain_acceptance": false,
+  "new_flights": 0,
+  "source_head": "c8319664a09bea74fec5d352f478bad4bcf6dc0a",
+  "ulog_sha256": "d3f1023a6be49415ea75e8dc68f7e5718c00943d82e2e1aef2a9c485dcabe643",
+  "velocity_control_fullflight": {
+    "n": 11618,
+    "inner": {
+      "max_age_us": 4000,
+      "median_age_us": 0.0,
+      "maximum_reads": 4
+    },
+    "maximum_gap_s": 0.012,
+    "hz": 100.00172164451483,
+    "cadence": {
+      "updates": 6025,
+      "holds": 5593,
+      "update_hz": 51.855932786998146,
+      "h_min": 0.00800000037997961,
+      "h_max": 0.019999999552965164,
+      "host_cost": {
+        "path_ns": {
+          "update": {
+            "median": 1.475,
+            "p95": 3.102600000000002,
+            "p99": 6.040840000000008,
+            "max": 21.805
+          },
+          "hold": {
+            "median": 1.153,
+            "p95": 2.6945999999999986,
+            "p99": 6.743399999999996,
+            "max": 20.928
+          }
+        },
+        "module_ns": {
+          "update": {
+            "median": 9.984,
+            "p95": 22.993200000000016,
+            "p99": 31.761200000000006,
+            "max": 429.57
+          },
+          "hold": {
+            "median": 8.255,
+            "p95": 20.0708,
+            "p99": 28.16739999999999,
+            "max": 904.052
+          }
+        }
+      },
+      "host_us_per_sim_second": {
+        "path_ns": 161.03027511879347,
+        "module_ns": 1078.5378245299912
+      }
+    }
+  },
+  "imu": [
+    {
+      "instance": 0,
+      "sample_strictly_increasing": true,
+      "maximum_sample_gap_us": 12000,
+      "clipping_or": 0,
+      "calibration_counts": [
+        0
+      ]
+    },
+    {
+      "instance": 1,
+      "sample_strictly_increasing": true,
+      "maximum_sample_gap_us": 8000,
+      "clipping_or": 0,
+      "calibration_counts": [
+        0
+      ]
+    },
+    {
+      "instance": 2,
+      "sample_strictly_increasing": true,
+      "maximum_sample_gap_us": 8000,
+      "clipping_or": 0,
+      "calibration_counts": [
+        0
+      ]
+    }
+  ],
+  "ekf": [
+    {
+      "instance": 0,
+      "filter_fault_flags_or": 0
+    },
+    {
+      "instance": 1,
+      "filter_fault_flags_or": 0
+    },
+    {
+      "instance": 2,
+      "filter_fault_flags_or": 0
+    },
+    {
+      "instance": 3,
+      "filter_fault_flags_or": 0
+    },
+    {
+      "instance": 4,
+      "filter_fault_flags_or": 0
+    },
+    {
+      "instance": 5,
+      "filter_fault_flags_or": 0
+    }
+  ],
+  "primary_instances": [
+    0
+  ],
+  "instance_change_count": [
+    1
+  ],
+  "source_evidence": {
+    "file": "src/modules/sensors/vehicle_imu/VehicleIMU.cpp",
+    "sha256": "9f957273c46c484ab058c7f738abe87f6ba7f0db638e4b6b4bd279cfb4f0d583",
+    "lines": "154: queued sample loop;467: timestamp_sample from gyro sample;474: timestamp from hrt_absolute_time",
+    "inference": "Distinct sample integration can share lockstep publication time. No scheduling trace proves why this specific pair shared it; no upstream fix or relaxed clock rule is implemented."
+  }
+}

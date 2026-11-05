@@ -1,0 +1,830 @@
+{
+  "scope": "Exploratory selected historical subset, not independent validation",
+  "success": true,
+  "runs": [
+    {
+      "run": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/reference/0000_ESTA_m1_nominal_s5201",
+      "mode": 1,
+      "candidate": "ESTA",
+      "scene": "nominal",
+      "seed": 5201,
+      "source_head": "defb4c7696cc3a776a7e9c19dc53b48c3104f82f",
+      "historical_analysis_sha256": "f814019d7e6462b903c8d50775fb3760d77fdf8a138a171a61bee3d50a00ba3c",
+      "logs_sha256": {
+        "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/reference/0000_ESTA_m1_nominal_s5201/03_54_07.ulg": "e26b845b4f420a3c7987d605f916dcaed8bd5bbceca8efb5be658308df333839",
+        "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/reference/0000_ESTA_m1_nominal_s5201/03_54_14.ulg": "3188c352f2cd1d6bb5f4d1edf26903c5128224dc40bed12d879941dd90d6ea27"
+      },
+      "window_start_us": 58372000,
+      "duration_s": 36.0,
+      "callbacks": 9000,
+      "updates": 9000,
+      "diagnostic_missing": 0,
+      "update_missing": 0,
+      "ulog_dropouts": 0,
+      "effective_axes": [
+        7
+      ],
+      "dt_min": 0.004000000189989805,
+      "dt_max": 0.004000000189989805,
+      "moments": {
+        "mean": [
+          0.0001763417124052972,
+          5.0531002173859936e-05,
+          -4.649296856789281e-05
+        ],
+        "std": [
+          0.004258156169777093,
+          0.004085146046643463,
+          0.0029423731764012724
+        ],
+        "rmse": [
+          0.004261805998135619,
+          0.004085458554995659,
+          0.0029427404753616325
+        ],
+        "identity_residual": 3.5914196963582334e-19
+      },
+      "nu_mean_updates": [
+        0.004170530399294673,
+        0.4891175459689564,
+        -0.00020071452833265841
+      ],
+      "negative_h_nu_mean_updates": [
+        -1.668212238953708e-05,
+        -0.0019564702768032427,
+        8.028581514643529e-07
+      ],
+      "protected_counts": [
+        0,
+        0,
+        0
+      ],
+      "old_raw_motor_limits_diagnostic": {
+        "count": 13779,
+        "missing": 1309,
+        "logged_hz": 228.30914031948035,
+        "producer_hz": 250.0,
+        "max_interval_s": 0.052
+      },
+      "original_rmse_reproduced": true
+    },
+    {
+      "run": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/reference/0001_ESTA_m1_nominal_s5202",
+      "mode": 1,
+      "candidate": "ESTA",
+      "scene": "nominal",
+      "seed": 5202,
+      "source_head": "defb4c7696cc3a776a7e9c19dc53b48c3104f82f",
+      "historical_analysis_sha256": "ea3dbc42fc795c64cc2b20ad36d0dc8deb3764ec45cd9de251ec71375cd5accc",
+      "logs_sha256": {
+        "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/reference/0001_ESTA_m1_nominal_s5202/03_54_36.ulg": "41e96e23d2e43610f62d7639838e50ff2b39cde0e35ccfb6603efd646ea3accb",
+        "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/reference/0001_ESTA_m1_nominal_s5202/03_54_43.ulg": "ba89a57c50fa4295935934b2ad8dcb2b68301d4146d9c37394202ebdeb757af5"
+      },
+      "window_start_us": 57384000,
+      "duration_s": 36.0,
+      "callbacks": 9000,
+      "updates": 9000,
+      "diagnostic_missing": 0,
+      "update_missing": 0,
+      "ulog_dropouts": 0,
+      "effective_axes": [
+        7
+      ],
+      "dt_min": 0.004000000189989805,
+      "dt_max": 0.004000000189989805,
+      "moments": {
+        "mean": [
+          6.60228876473007e-05,
+          4.473903583695776e-05,
+          -5.720012234895775e-05
+        ],
+        "std": [
+          0.004067117677280645,
+          0.00398754520822416,
+          0.002993518229664785
+        ],
+        "rmse": [
+          0.004067653527839096,
+          0.003987796179465411,
+          0.0029940646695306716
+        ],
+        "identity_residual": 3.1509625637859973e-19
+      },
+      "nu_mean_updates": [
+        0.00010999909122215791,
+        0.4875751771695084,
+        -2.968924946779023e-05
+      ],
+      "negative_h_nu_mean_updates": [
+        -4.399963857873336e-07,
+        -0.0019503008013124644,
+        1.1875700351182485e-07
+      ],
+      "protected_counts": [
+        0,
+        0,
+        0
+      ],
+      "old_raw_motor_limits_diagnostic": {
+        "count": 13872,
+        "missing": 1247,
+        "logged_hz": 229.37888609604448,
+        "producer_hz": 250.00000000000003,
+        "max_interval_s": 0.016
+      },
+      "original_rmse_reproduced": true
+    },
+    {
+      "run": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/reference/0008_ESTA_m1_div2_s5201",
+      "mode": 1,
+      "candidate": "ESTA",
+      "scene": "div2",
+      "seed": 5201,
+      "source_head": "defb4c7696cc3a776a7e9c19dc53b48c3104f82f",
+      "historical_analysis_sha256": "8e45f4db65ec8ce492a038a08776428cddceca7525cee1223127386ee90f0ced",
+      "logs_sha256": {
+        "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/reference/0008_ESTA_m1_div2_s5201/03_57_59.ulg": "0ebaa09cb91f9ed5305d13204e28882565512e6cee579ed3537391b5f4bcc69b",
+        "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/reference/0008_ESTA_m1_div2_s5201/03_58_05.ulg": "32484b86a43466c8673df1c8b05f2028d164b30c425f06b92a305f51725fd2a3"
+      },
+      "window_start_us": 57328000,
+      "duration_s": 36.0,
+      "callbacks": 9000,
+      "updates": 4500,
+      "diagnostic_missing": 0,
+      "update_missing": 0,
+      "ulog_dropouts": 0,
+      "effective_axes": [
+        7
+      ],
+      "dt_min": 0.00800000037997961,
+      "dt_max": 0.00800000037997961,
+      "moments": {
+        "mean": [
+          0.00012740862506648734,
+          -1.3417336586927477e-05,
+          -0.00014035542198689654
+        ],
+        "std": [
+          0.004507877553666638,
+          0.004048455503568582,
+          0.002997396601080237
+        ],
+        "rmse": [
+          0.0045096777042924726,
+          0.004048477737285416,
+          0.003000680927497656
+        ],
+        "identity_residual": 2.846030702774449e-19
+      },
+      "nu_mean_updates": [
+        0.004407112750845651,
+        0.48641705320278805,
+        -0.0016674884325443094
+      ],
+      "negative_h_nu_mean_updates": [
+        -3.525690368137804e-05,
+        -0.003891336610450865,
+        1.333990809396606e-05
+      ],
+      "protected_counts": [
+        0,
+        0,
+        0
+      ],
+      "old_raw_motor_limits_diagnostic": {
+        "count": 13752,
+        "missing": 1325,
+        "logged_hz": 228.02799150968428,
+        "producer_hz": 250.00000000000003,
+        "max_interval_s": 0.016
+      },
+      "original_rmse_reproduced": true
+    },
+    {
+      "run": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/reference/0009_ESTA_m1_div2_s5202",
+      "mode": 1,
+      "candidate": "ESTA",
+      "scene": "div2",
+      "seed": 5202,
+      "source_head": "defb4c7696cc3a776a7e9c19dc53b48c3104f82f",
+      "historical_analysis_sha256": "a666b72810e079568683554b1455126903621520fb282569339b74f18cef0b07",
+      "logs_sha256": {
+        "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/reference/0009_ESTA_m1_div2_s5202/03_58_27.ulg": "f23e85d5ceb27321d6538bf82af81da747c19776ad13cc4d8c164c86714a80b1",
+        "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/reference/0009_ESTA_m1_div2_s5202/03_58_34.ulg": "2c257565e2ebce653841500ca36a2fe5997d5f09a03107530e5863548d966245"
+      },
+      "window_start_us": 57824000,
+      "duration_s": 36.0,
+      "callbacks": 9000,
+      "updates": 4500,
+      "diagnostic_missing": 0,
+      "update_missing": 0,
+      "ulog_dropouts": 0,
+      "effective_axes": [
+        7
+      ],
+      "dt_min": 0.00800000037997961,
+      "dt_max": 0.00800000037997961,
+      "moments": {
+        "mean": [
+          0.00013177388321411045,
+          8.935460542609993e-05,
+          -0.00011834768212348637
+        ],
+        "std": [
+          0.0043009799768593295,
+          0.004449666466593075,
+          0.0030707776927531303
+        ],
+        "rmse": [
+          0.004302998154501369,
+          0.004450563549645549,
+          0.0030730574046336887
+        ],
+        "identity_residual": 2.964615315390051e-19
+      },
+      "nu_mean_updates": [
+        0.003669514069385413,
+        0.4888481625318527,
+        -0.0005075903778229582
+      ],
+      "negative_h_nu_mean_updates": [
+        -2.9356113949423836e-05,
+        -0.003910785486007105,
+        4.0607232154576874e-06
+      ],
+      "protected_counts": [
+        0,
+        0,
+        0
+      ],
+      "old_raw_motor_limits_diagnostic": {
+        "count": 13728,
+        "missing": 1363,
+        "logged_hz": 227.41882041086814,
+        "producer_hz": 250.0,
+        "max_interval_s": 0.012
+      },
+      "original_rmse_reproduced": true
+    },
+    {
+      "run": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/reference/0010_ESTA_m1_div4_s5201",
+      "mode": 1,
+      "candidate": "ESTA",
+      "scene": "div4",
+      "seed": 5201,
+      "source_head": "defb4c7696cc3a776a7e9c19dc53b48c3104f82f",
+      "historical_analysis_sha256": "170b0b624c6c70c72820964fea4d1e0a98b15ef7f7de29bb440e92abaa5f8cff",
+      "logs_sha256": {
+        "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/reference/0010_ESTA_m1_div4_s5201/03_58_55.ulg": "3ac671c2cfa3a95c13cc5d3f8df304c594fd0352138c82b67d978415c84b907a",
+        "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/reference/0010_ESTA_m1_div4_s5201/03_59_02.ulg": "66f1947087d63cf1439794abf631c4869cf952235094b8080da55e7d6fc8f36c"
+      },
+      "window_start_us": 57468000,
+      "duration_s": 36.0,
+      "callbacks": 9000,
+      "updates": 2250,
+      "diagnostic_missing": 0,
+      "update_missing": 0,
+      "ulog_dropouts": 0,
+      "effective_axes": [
+        7
+      ],
+      "dt_min": 0.01600000075995922,
+      "dt_max": 0.01600000075995922,
+      "moments": {
+        "mean": [
+          0.0001465730522581402,
+          -1.4628131143884578e-05,
+          -0.00021974844486653133
+        ],
+        "std": [
+          0.005070952963749378,
+          0.005042398902132988,
+          0.003200909684280819
+        ],
+        "rmse": [
+          0.005073070827438421,
+          0.005042420120383923,
+          0.003208443888545291
+        ],
+        "identity_residual": 3.6591823321385775e-19
+      },
+      "nu_mean_updates": [
+        -0.0001553747035149071,
+        0.48606402542856003,
+        -0.0022165321548624586
+      ],
+      "negative_h_nu_mean_updates": [
+        2.485995374316887e-06,
+        -0.007777024776245807,
+        3.546451616227336e-05
+      ],
+      "protected_counts": [
+        0,
+        0,
+        0
+      ],
+      "old_raw_motor_limits_diagnostic": {
+        "count": 13678,
+        "missing": 1399,
+        "logged_hz": 226.80087556381005,
+        "producer_hz": 250.00000000000003,
+        "max_interval_s": 0.012
+      },
+      "original_rmse_reproduced": true
+    },
+    {
+      "run": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/reference/0011_ESTA_m1_div4_s5202",
+      "mode": 1,
+      "candidate": "ESTA",
+      "scene": "div4",
+      "seed": 5202,
+      "source_head": "defb4c7696cc3a776a7e9c19dc53b48c3104f82f",
+      "historical_analysis_sha256": "d3c440fd82e377693d351175fa00ec8e15cfcaa122e034b36131ef954423044f",
+      "logs_sha256": {
+        "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/reference/0011_ESTA_m1_div4_s5202/03_59_24.ulg": "14fe8fbc9febbff5d37abe281154972374241a0fbe561b960a668bf02bbc6bda",
+        "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/reference/0011_ESTA_m1_div4_s5202/03_59_31.ulg": "af4d434640a9cc41594f1acd594392a0626c7dd09d9166b15c84577bb7e84184"
+      },
+      "window_start_us": 57804000,
+      "duration_s": 36.0,
+      "callbacks": 9000,
+      "updates": 2250,
+      "diagnostic_missing": 0,
+      "update_missing": 0,
+      "ulog_dropouts": 0,
+      "effective_axes": [
+        7
+      ],
+      "dt_min": 0.01600000075995922,
+      "dt_max": 0.01600000075995922,
+      "moments": {
+        "mean": [
+          -1.4930009933272635e-05,
+          9.28838813237639e-05,
+          -0.00014132478119022887
+        ],
+        "std": [
+          0.005262414696278734,
+          0.004811788639776016,
+          0.003197031424187676
+        ],
+        "rmse": [
+          0.005262435875220419,
+          0.004812685043641139,
+          0.003200153530851526
+        ],
+        "identity_residual": 4.590918574118308e-19
+      },
+      "nu_mean_updates": [
+        -0.0003439986461566554,
+        0.48828923636012606,
+        -0.0015074842524611287
+      ],
+      "negative_h_nu_mean_updates": [
+        5.503978599931438e-06,
+        -0.007812628152841932,
+        2.411974918500462e-05
+      ],
+      "protected_counts": [
+        0,
+        0,
+        0
+      ],
+      "old_raw_motor_limits_diagnostic": {
+        "count": 13734,
+        "missing": 1361,
+        "logged_hz": 227.45793030343182,
+        "producer_hz": 250.0,
+        "max_interval_s": 0.012
+      },
+      "original_rmse_reproduced": true
+    },
+    {
+      "run": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/screen/0019_L09_m2_div4_s5201",
+      "mode": 2,
+      "candidate": "L09",
+      "scene": "div4",
+      "seed": 5201,
+      "source_head": "defb4c7696cc3a776a7e9c19dc53b48c3104f82f",
+      "historical_analysis_sha256": "ca3acefe97e2dc61f3fdb4dc36e9afe6f04e24673557b4a8ed545dbd634ffb40",
+      "logs_sha256": {
+        "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/screen/0019_L09_m2_div4_s5201/04_09_02.ulg": "4f0893a0cbe73ddc67d8dc5db8110ee9bd63c15df3fbb8cc441651bcf4734fb9",
+        "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/screen/0019_L09_m2_div4_s5201/04_09_08.ulg": "eb7746f2116e45dce494abc68cae94c34af0b16684f0b0cb25644a67ac3e3f47"
+      },
+      "window_start_us": 58020000,
+      "duration_s": 36.0,
+      "callbacks": 9000,
+      "updates": 2250,
+      "diagnostic_missing": 0,
+      "update_missing": 0,
+      "ulog_dropouts": 0,
+      "effective_axes": [
+        7
+      ],
+      "dt_min": 0.01600000075995922,
+      "dt_max": 0.01600000075995922,
+      "moments": {
+        "mean": [
+          0.00011119912218580591,
+          -0.00776934293113623,
+          -8.722799800226413e-05
+        ],
+        "std": [
+          0.005202957640790975,
+          0.004416380959550819,
+          0.003164925727179709
+        ],
+        "rmse": [
+          0.005204145795098361,
+          0.008936840065788373,
+          0.0031661275372604865
+        ],
+        "identity_residual": 8.131516293641283e-19
+      },
+      "nu_mean_updates": [
+        0.0035850897847808988,
+        0.4879756606684791,
+        -0.0010932086261519645
+      ],
+      "negative_h_nu_mean_updates": [
+        -5.736143928101647e-05,
+        -0.007807610941537258,
+        1.7491338849225377e-05
+      ],
+      "protected_counts": [
+        0,
+        0,
+        0
+      ],
+      "old_raw_motor_limits_diagnostic": {
+        "count": 13730,
+        "missing": 1347,
+        "logged_hz": 227.66317325550546,
+        "producer_hz": 250.00000000000003,
+        "max_interval_s": 0.012
+      },
+      "original_rmse_reproduced": true,
+      "virtual_mean_updates": [
+        0.00015480677961536552,
+        2.7945756093273112e-05,
+        -6.786200059354394e-05
+      ]
+    },
+    {
+      "run": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/training/0010_L09_m2_nominal_s5201",
+      "mode": 2,
+      "candidate": "L09",
+      "scene": "nominal",
+      "seed": 5201,
+      "source_head": "defb4c7696cc3a776a7e9c19dc53b48c3104f82f",
+      "historical_analysis_sha256": "7efc214660f244139454757fbbfb5850610e468b0f77777bae1d6c2f14db5d12",
+      "logs_sha256": {
+        "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/training/0010_L09_m2_nominal_s5201/04_16_15.ulg": "88737b8612c59831231760476853c61bbeb93a08a89348f852678ef887dbc962",
+        "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/training/0010_L09_m2_nominal_s5201/04_16_21.ulg": "a860341a119538b7506f257fbfbf1ea7dccba79f8b74161845dfcb763936727d"
+      },
+      "window_start_us": 58500000,
+      "duration_s": 36.0,
+      "callbacks": 9000,
+      "updates": 9000,
+      "diagnostic_missing": 0,
+      "update_missing": 0,
+      "ulog_dropouts": 0,
+      "effective_axes": [
+        7
+      ],
+      "dt_min": 0.004000000189989805,
+      "dt_max": 0.004000000189989805,
+      "moments": {
+        "mean": [
+          7.96784533785184e-05,
+          -0.0019639488003987127,
+          -8.59524463626763e-05
+        ],
+        "std": [
+          0.004161775844334187,
+          0.0040574861638139155,
+          0.0027519314672387546
+        ],
+        "rmse": [
+          0.004162538508460471,
+          0.004507803107959431,
+          0.002753273437821654
+        ],
+        "identity_residual": 3.023907621697852e-19
+      },
+      "nu_mean_updates": [
+        0.0040628019894269375,
+        0.48893778121802545,
+        -0.0010064075565872676
+      ],
+      "negative_h_nu_mean_updates": [
+        -1.625120872959882e-05,
+        -0.0019557512177653135,
+        4.0256304175562454e-06
+      ],
+      "protected_counts": [
+        0,
+        0,
+        0
+      ],
+      "old_raw_motor_limits_diagnostic": {
+        "count": 13824,
+        "missing": 1297,
+        "logged_hz": 228.5548941798942,
+        "producer_hz": 250.0,
+        "max_interval_s": 0.008
+      },
+      "original_rmse_reproduced": true,
+      "virtual_mean_updates": [
+        8.652408622376336e-05,
+        -8.98576054225174e-06,
+        -8.261632235571785e-05
+      ]
+    },
+    {
+      "run": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/training/0011_L09_m2_nominal_s5202",
+      "mode": 2,
+      "candidate": "L09",
+      "scene": "nominal",
+      "seed": 5202,
+      "source_head": "defb4c7696cc3a776a7e9c19dc53b48c3104f82f",
+      "historical_analysis_sha256": "54469bc1ff557bdf4e44e4b47f436b1347a6876c6a00dbe20ccee756907a54c1",
+      "logs_sha256": {
+        "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/training/0011_L09_m2_nominal_s5202/04_16_44.ulg": "5ede9b4269118e70a1d71dbb4c27daa873a0df11a6d88dcfe44d3d4038d56fcd",
+        "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/training/0011_L09_m2_nominal_s5202/04_16_51.ulg": "f6e9244fab31a7fde83c5ebe8857f29f57468ba23d6865a7ce47a35c8478e34b"
+      },
+      "window_start_us": 57356000,
+      "duration_s": 36.0,
+      "callbacks": 9000,
+      "updates": 9000,
+      "diagnostic_missing": 0,
+      "update_missing": 0,
+      "ulog_dropouts": 0,
+      "effective_axes": [
+        7
+      ],
+      "dt_min": 0.004000000189989805,
+      "dt_max": 0.004000000189989805,
+      "moments": {
+        "mean": [
+          6.32892660077131e-05,
+          -0.001854010312917833,
+          -4.742676946140515e-05
+        ],
+        "std": [
+          0.004141185104110414,
+          0.004200836792180142,
+          0.0028341780902294265
+        ],
+        "rmse": [
+          0.004141668697239999,
+          0.004591773513027393,
+          0.0028345748791657947
+        ],
+        "identity_residual": 2.846030702774449e-19
+      },
+      "nu_mean_updates": [
+        0.0014884402279927195,
+        0.49079699223240214,
+        0.00020671982877926596
+      ],
+      "negative_h_nu_mean_updates": [
+        -5.9537611947593855e-06,
+        -0.001963188062176059,
+        -8.268793543917199e-07
+      ],
+      "protected_counts": [
+        0,
+        0,
+        0
+      ],
+      "old_raw_motor_limits_diagnostic": {
+        "count": 13756,
+        "missing": 1332,
+        "logged_hz": 227.92801749850867,
+        "producer_hz": 250.0,
+        "max_interval_s": 0.012
+      },
+      "original_rmse_reproduced": true,
+      "virtual_mean_updates": [
+        6.130155014741847e-05,
+        9.740145888374384e-05,
+        -4.2194465532377034e-05
+      ]
+    },
+    {
+      "run": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/training/0017_L09_m2_div2_s5201",
+      "mode": 2,
+      "candidate": "L09",
+      "scene": "div2",
+      "seed": 5201,
+      "source_head": "defb4c7696cc3a776a7e9c19dc53b48c3104f82f",
+      "historical_analysis_sha256": "6795c9eb0e9e745c0e0bc7c385ee84d35eb21860ca3d1e0d07ca6ba36b01b8a1",
+      "logs_sha256": {
+        "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/training/0017_L09_m2_div2_s5201/04_19_38.ulg": "d9d2c1d2b3711632b038fa14636ee1960c524eb97791148c6db13f006ff88dc5",
+        "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/training/0017_L09_m2_div2_s5201/04_19_44.ulg": "3e18785ec3cfacaa148b74c2bf8f109c98b94bac4a141b84c1c56d686d377bb3"
+      },
+      "window_start_us": 57840000,
+      "duration_s": 36.0,
+      "callbacks": 9000,
+      "updates": 4500,
+      "diagnostic_missing": 0,
+      "update_missing": 0,
+      "ulog_dropouts": 0,
+      "effective_axes": [
+        7
+      ],
+      "dt_min": 0.00800000037997961,
+      "dt_max": 0.00800000037997961,
+      "moments": {
+        "mean": [
+          0.00018052158869330824,
+          -0.0038963849486301316,
+          -0.00010285588163403897
+        ],
+        "std": [
+          0.004288288145049689,
+          0.004148796738506256,
+          0.002900240935463755
+        ],
+        "rmse": [
+          0.004292086119704276,
+          0.005691601711763705,
+          0.002902064233631991
+        ],
+        "identity_residual": 3.5744790374131474e-19
+      },
+      "nu_mean_updates": [
+        0.003920165492684141,
+        0.48751705437236365,
+        -0.001482991374104232
+      ],
+      "negative_h_nu_mean_updates": [
+        -3.136132543105614e-05,
+        -0.0039001366202254524,
+        1.186393155634039e-05
+      ],
+      "protected_counts": [
+        0,
+        0,
+        0
+      ],
+      "old_raw_motor_limits_diagnostic": {
+        "count": 13692,
+        "missing": 1394,
+        "logged_hz": 226.89758037785882,
+        "producer_hz": 250.00000000000003,
+        "max_interval_s": 0.008
+      },
+      "original_rmse_reproduced": true,
+      "virtual_mean_updates": [
+        0.00017805161806782701,
+        -1.155574826061212e-06,
+        -9.673581799557537e-05
+      ]
+    },
+    {
+      "run": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/training/0018_L09_m2_div2_s5202",
+      "mode": 2,
+      "candidate": "L09",
+      "scene": "div2",
+      "seed": 5202,
+      "source_head": "defb4c7696cc3a776a7e9c19dc53b48c3104f82f",
+      "historical_analysis_sha256": "8a7f09ab0d4d12283671297181af845917fcc59b70d81e872988be6c05ed5b9f",
+      "logs_sha256": {
+        "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/training/0018_L09_m2_div2_s5202/04_20_06.ulg": "8bda8fcce8b0a4a508c76c1d3dc6668c5febbea836a8919942a19c226e81ea32",
+        "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/training/0018_L09_m2_div2_s5202/04_20_13.ulg": "17b71866d80805d6d19787850e87b5ba3278a08b51f66fed5435d7282cf70508"
+      },
+      "window_start_us": 57420000,
+      "duration_s": 36.0,
+      "callbacks": 9000,
+      "updates": 4500,
+      "diagnostic_missing": 0,
+      "update_missing": 0,
+      "ulog_dropouts": 0,
+      "effective_axes": [
+        7
+      ],
+      "dt_min": 0.00800000037997961,
+      "dt_max": 0.00800000037997961,
+      "moments": {
+        "mean": [
+          8.87481720734892e-05,
+          -0.0038598831455338867,
+          -7.304865924137023e-05
+        ],
+        "std": [
+          0.0042768265089800726,
+          0.00427968111114032,
+          0.0029366111188997806
+        ],
+        "rmse": [
+          0.00427774721389201,
+          0.005763190809805618,
+          0.002937519526788283
+        ],
+        "identity_residual": 3.2526065174565133e-19
+      },
+      "nu_mean_updates": [
+        2.0877783753045757e-05,
+        0.48860460726420085,
+        -0.0005877523847965576
+      ],
+      "negative_h_nu_mean_updates": [
+        -1.670222779574785e-07,
+        -0.003908837043773383,
+        4.702019301706385e-06
+      ],
+      "protected_counts": [
+        0,
+        0,
+        0
+      ],
+      "old_raw_motor_limits_diagnostic": {
+        "count": 13726,
+        "missing": 1368,
+        "logged_hz": 227.34048896839596,
+        "producer_hz": 250.0,
+        "max_interval_s": 0.008
+      },
+      "original_rmse_reproduced": true,
+      "virtual_mean_updates": [
+        7.373952530676951e-05,
+        3.539724198606158e-05,
+        -6.34864548411824e-05
+      ]
+    },
+    {
+      "run": "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/training/0019_L09_m2_div4_s5202",
+      "mode": 2,
+      "candidate": "L09",
+      "scene": "div4",
+      "seed": 5202,
+      "source_head": "defb4c7696cc3a776a7e9c19dc53b48c3104f82f",
+      "historical_analysis_sha256": "a1c13744c701cd84838aeed78169b0963b81a616f1502e6c292f6e9af0408bf5",
+      "logs_sha256": {
+        "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/training/0019_L09_m2_div4_s5202/04_20_35.ulg": "12aac941bb2345e7c32792fc1e81afa3a35778f112d7e465f4b5d382875b673f",
+        "/home/yr/Desktop/codev doc/experiments/ISTA-OPT02-20260918/run01/training/0019_L09_m2_div4_s5202/04_20_43.ulg": "40a73a47023c5e0574e0455e1d0d72f0a030b6938d6d9d98fa16856d63551885"
+      },
+      "window_start_us": 57868000,
+      "duration_s": 36.0,
+      "callbacks": 9000,
+      "updates": 2250,
+      "diagnostic_missing": 0,
+      "update_missing": 0,
+      "ulog_dropouts": 0,
+      "effective_axes": [
+        7
+      ],
+      "dt_min": 0.01600000075995922,
+      "dt_max": 0.01600000075995922,
+      "moments": {
+        "mean": [
+          -3.601797476019581e-06,
+          -0.007587442057651868,
+          -4.905263510752573e-05
+        ],
+        "std": [
+          0.004497928741956698,
+          0.004421242985266988,
+          0.0032148001202249054
+        ],
+        "rmse": [
+          0.004497930184058571,
+          0.008781609562773643,
+          0.0032151743302671304
+        ],
+        "identity_residual": 5.421010862427522e-19
+      },
+      "nu_mean_updates": [
+        -0.0005395269945325304,
+        0.4920231941143672,
+        -0.0002391753491311748
+      ],
+      "negative_h_nu_mean_updates": [
+        8.632432322538977e-06,
+        -0.007872371479747444,
+        3.82680576786231e-06
+      ],
+      "protected_counts": [
+        0,
+        0,
+        0
+      ],
+      "old_raw_motor_limits_diagnostic": {
+        "count": 13725,
+        "missing": 1402,
+        "logged_hz": 226.82797831548328,
+        "producer_hz": 250.0,
+        "max_interval_s": 0.012
+      },
+      "original_rmse_reproduced": true,
+      "virtual_mean_updates": [
+        -1.6822456863394564e-06,
+        0.00017703003732643917,
+        -5.303821302775999e-05
+      ]
+    }
+  ],
+  "original_primary_metric_unchanged": true,
+  "historical_manifest_sha256": "dbe6783e3cab46c3148688b30f38486ffeb756fbbda70851b175fc27d486fee8"
+}

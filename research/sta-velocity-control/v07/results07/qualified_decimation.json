@@ -1,0 +1,18 @@
+{
+  "status": "passed_development_only",
+  "source_head": "6fe452e6088a82a2b432915754f6501ad4023004",
+  "protocol": "research/sta-velocity-control/v07/protocol07/execution.json",
+  "protocol_sha256": "ca9da358732f3df4573511238bfbf6c35cbe84bc147d65eef0990004e22ec0c0",
+  "accepted_flights": 18,
+  "accepted_pairs": 9,
+  "independent_identical_replays": 18,
+  "scope": "Iris Gazebo SITL, qualified V06 compliant contact, low-speed fixed-yaw figure8 with takeoff and landing; no hardware or XYZ-ESTA decimation approval",
+  "velocity_configurations": [{"MPC_VC_MODE": 0, "MPC_VC_AXES": 0}, {"MPC_VC_MODE": 1, "MPC_VC_AXES": 3}],
+  "MPC_VC_DIV": [1, 2, 4],
+  "measured_update_hz_approximately": [100, 50, 25],
+  "fixed_inner_parameters": {"MC_RTC_MODE": 0, "MC_STA_AXES": 0, "MC_RTC_DIV": 1, "MC_RATT_TEST": 0, "MC_STA_TKO_MGT": 0},
+  "gain_reference": "research/sta-velocity-control/v05/qualified_xy.json",
+  "actual_all_parameters": "Each runs/runNN/ulog_parameters.json, runtime snapshots and source protocol frozen.json",
+  "default_firmware": "PID and DIV1; EEPROM restored exactly, not automatically left in research mode",
+  "limitations": "Three development IMU seed pairs per DIV; different DIV use different seed groups, other randomness not independently controlled; no superiority, significance, board CPU, WCET or energy claim"
+}

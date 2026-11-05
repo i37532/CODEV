@@ -1,0 +1,11 @@
+{
+  "stage": "V04-protocol12-common-descent-cap",
+  "seeds": [12001, 12002, 12003],
+  "maximum_attempts": 6,
+  "descent_cap": 0.5,
+  "new_run_root": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series10",
+  "scope": "PID then ESTA X for each seed; common descent limit only; original gains, task, metrics, guards and thresholds retained",
+  "logging": "Preserve original bits and include existing estimator diagnostic bit10 for both controllers",
+  "failure_policy": "Stop batch on first failed check or pair, retain every attempt; no retries or added tuning",
+  "authorization": "Standing user authorization; exact source and execution hash recorded before launch"
+}

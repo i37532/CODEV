@@ -1,0 +1,136 @@
+{
+  "audit_completed": true,
+  "flight_accepted": false,
+  "historical_regrade": false,
+  "source_head": "c2e6c0be8490c1ebe2250859f5cdc10252941f63",
+  "error": "RuntimeError('Stale diagnostic')",
+  "cli": {
+    "position_before": {
+      "timestamp_us": 112320000,
+      "printed_age_us": 0,
+      "printer_now_us": 112320000,
+      "host_delivery_latency_known": false
+    },
+    "velocity": {
+      "timestamp_us": 113508000,
+      "printed_age_us": 8000,
+      "printer_now_us": 113516000,
+      "host_delivery_latency_known": false
+    },
+    "position_after": {
+      "timestamp_us": 113788000,
+      "printed_age_us": 4000,
+      "printer_now_us": 113792000,
+      "host_delivery_latency_known": false
+    },
+    "cross_read_difference_us": 1188000,
+    "old_guard_rejects": true,
+    "numeric_age_limit_us": 1000000,
+    "command_indices": [
+      1348,
+      1353,
+      1354
+    ]
+  },
+  "raw_topics": {
+    "sta_velocity_ctrl_status": {
+      "records": 11263,
+      "start_us": 1668000,
+      "end_us": 114288000,
+      "max_publication_gap_us": 12000,
+      "sequence_gaps": 0
+    },
+    "sta_rate_ctrl_status": {
+      "records": 28156,
+      "start_us": 1672000,
+      "end_us": 114292000,
+      "max_publication_gap_us": 4000,
+      "sequence_gaps": 0
+    },
+    "velocity_ctrl_selection": {
+      "records": 11263,
+      "start_us": 1668000,
+      "end_us": 114288000,
+      "max_publication_gap_us": 12000,
+      "sequence_gaps": 0
+    },
+    "vehicle_local_position_log": {
+      "records": 11263,
+      "start_us": 1668000,
+      "end_us": 114288000,
+      "max_publication_gap_us": 12000,
+      "sequence_gaps": 0
+    }
+  },
+  "position_log": {
+    "source_topic": "vehicle_local_position_log",
+    "control_topic_unchanged": true,
+    "queue_length": 32,
+    "records": 11263,
+    "sequence_first": 90,
+    "sequence_last": 11352,
+    "sequence_gaps": 0,
+    "raw_overlap_records": 11263,
+    "raw_missing_records": 0,
+    "consumed_records": 11263,
+    "publication_end_us": 114288000,
+    "no_interpolation": true,
+    "no_deduplication": true,
+    "raw_records_preserved": true
+  },
+  "dropout_count": 0,
+  "interval_us": [
+    112320000,
+    113788000
+  ],
+  "interval_samples": 148,
+  "interval_required_state": {
+    "effective_mode": 1,
+    "effective_axes": 3,
+    "inner_mode": 0,
+    "inner_axes": 0,
+    "inner_divisor": 1,
+    "inner_valid": 1,
+    "fault": 0,
+    "first_fail": 0,
+    "retry_result": 0,
+    "timing": 0,
+    "sta_fault": 0,
+    "failsafe": 0,
+    "armed": 1,
+    "enabled": 1,
+    "valid": 1,
+    "pid_axes": 4,
+    "committed_axes": 3
+  },
+  "missing_required_events": [
+    "hover_end",
+    "land_command",
+    "landed_disarmed"
+  ],
+  "limitation": "Print-time freshness does not prove timely host delivery or continuous online protection. Commands lack monotonic start/end timing. No OS scheduling cause or whole-flight success inferred.",
+  "raw_logs": [
+    {
+      "source": "/dev/shm/px4-v07-w5n5u5jn/2026-09-29/07_11_57.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run13/07_11_57.ulg",
+      "sha256": "f2a7ec52ca1a9d7f07cf9865a3173878eed2775d53ddf16cf0c9555407470347",
+      "bytes": 222891,
+      "durable_copy_verified": true,
+      "volatile_source_retained": true
+    },
+    {
+      "source": "/dev/shm/px4-v07-w5n5u5jn/sess001/log001.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run13/log001.ulg",
+      "sha256": "a9d352dda27f976b1ff367feaa14388d00244adf4aff360e31ddb59b9ca3340e",
+      "bytes": 81245790,
+      "durable_copy_verified": true,
+      "volatile_source_retained": true
+    }
+  ],
+  "source_fingerprints": {
+    "commands.jsonl": "142ea916ae808bbcce76882bfb38c425ebe0ee3bb30ee9a2cca823ad25982a6e",
+    "samples.jsonl": "07bf310a4547706a75a54ea7ac8354d0bd57549c2ca8fea786d26d89ef91004d",
+    "result.json": "cedbbaaa6d104ff9f4d6df5f4585bb08c2cd4add7bce89f41b3c6bf95c90aa3b",
+    "job.json": "0c0da13783a880c8acaf18f014b03a6914cbb2e7ffbb81696c0547b47cb07f2b"
+  }
+}

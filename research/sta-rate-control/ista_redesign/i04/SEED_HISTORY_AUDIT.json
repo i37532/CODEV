@@ -1,0 +1,16 @@
+{
+  "date": "2026-09-18",
+  "candidate_seeds": [6201, 6202, 6203],
+  "scope": [
+    "research/sta-rate-control/m10",
+    "research/sta-rate-control/ista_redesign/i03",
+    "research/sta-rate-control/reports/M10.md",
+    "research/sta-rate-control/reports/ISTA_OPT01.md",
+    "research/sta-rate-control/reports/ISTA_OPT02.md",
+    "research/sta-rate-control/reports/I03.md"
+  ],
+  "method": "Search seed fields and standalone decimal tokens in frozen JSON/manifests/reports; exclude generated SHA-256 artifact manifests and this I04 directory.",
+  "historical_exact_matches": [],
+  "conclusion": "The three I04 paired seeds were not used by the audited formal manifests or reports before I04.",
+  "limitations": "This is a manifest/report reuse audit, not a claim that every simulator random source is independent. The seeded plugin manifest defines the explicitly controlled sources."
+}

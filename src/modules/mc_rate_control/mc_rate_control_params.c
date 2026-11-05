@@ -398,3 +398,200 @@ PARAM_DEFINE_FLOAT(MC_ACRO_SUPEXPOY, 0.7f);
  * @group Multicopter Rate Control
  */
 PARAM_DEFINE_INT32(MC_BAT_SCALE_EN, 0);
+
+/**
+ * Rate controller research mode
+ *
+ * M08 supports calibrated Iris SITL ESTA/ISTA AXES=1/3/7. I04 adds the
+ * separately named Proper-ISTA on calibrated AXES=1/3/7. Other requests
+ * are unsupported. Requests changed while armed remain
+ * pending until disarm. Existing PID gains keep their live update semantics.
+ *
+ * @value 0 PID
+ * @value 1 ESTA (Iris SITL roll, roll/pitch or all axes)
+ * @value 2 ISTA (Iris SITL roll, roll/pitch or all axes)
+ * @value 3 Proper-ISTA (calibrated Iris SITL AXES=1/3/7)
+ * @min 0
+ * @max 3
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_INT32(MC_RTC_MODE, 0);
+
+/**
+ * Experimental rate control axes
+ *
+ * Bit mask: roll=1, pitch=2, yaw=4. Default 0. In PID mode all valid masks
+ * are inactive: effective experimental axes remain zero. Changes while
+ * armed are evaluated after disarm. Out-of-range masks are rejected.
+ *
+ * @bit 0 Roll
+ * @bit 1 Pitch
+ * @bit 2 Yaw
+ * @min 0
+ * @max 7
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_INT32(MC_STA_AXES, 0);
+
+/**
+ * Experimental takeoff nu-state manager
+ *
+ * Default 0 preserves the established protection lifecycle exactly. Value 1
+ * freezes and resets experimental nu state from arm until onboard local-position
+ * and land-detector evidence confirms takeoff. Changes while armed are staged
+ * until disarm. Iris SITL research only; simulator truth is never consumed.
+ *
+ * @value 0 Established protection lifecycle
+ * @value 1 Enable takeoff nu-state manager
+ * @min 0
+ * @max 1
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_INT32(MC_STA_TKO_MGT, 0);
+
+/**
+ * Experimental R root-error gain
+ *
+ * Units: (rad/s^2)/sqrt(rad/s). Zero means unconfigured. Staged while armed.
+ * M06: calibrated Iris SITL ESTA, independent parameters on each axis.
+ *
+ * @min 0
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_FLOAT(MC_STA_L1_R, 0.0f);
+
+/**
+ * Experimental P root-error gain
+ *
+ * Units: (rad/s^2)/sqrt(rad/s). Zero means unconfigured. Staged while armed.
+ * M06: calibrated Iris SITL ESTA, independent parameters on each axis.
+ *
+ * @min 0
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_FLOAT(MC_STA_L1_P, 0.0f);
+
+/**
+ * Experimental Y root-error gain
+ *
+ * Units: (rad/s^2)/sqrt(rad/s). Zero means unconfigured. Staged while armed.
+ * M06: calibrated Iris SITL ESTA, independent parameters on each axis.
+ *
+ * @min 0
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_FLOAT(MC_STA_L1_Y, 0.0f);
+
+/**
+ * Experimental R nu derivative gain
+ *
+ * Units: rad/s^3. Zero means unconfigured. Staged while armed.
+ * M06: calibrated Iris SITL ESTA, independent parameters on each axis.
+ *
+ * @min 0
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_FLOAT(MC_STA_L2_R, 0.0f);
+
+/**
+ * Experimental P nu derivative gain
+ *
+ * Units: rad/s^3. Zero means unconfigured. Staged while armed.
+ * M06: calibrated Iris SITL ESTA, independent parameters on each axis.
+ *
+ * @min 0
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_FLOAT(MC_STA_L2_P, 0.0f);
+
+/**
+ * Experimental Y nu derivative gain
+ *
+ * Units: rad/s^3. Zero means unconfigured. Staged while armed.
+ * M06: calibrated Iris SITL ESTA, independent parameters on each axis.
+ *
+ * @min 0
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_FLOAT(MC_STA_L2_Y, 0.0f);
+
+/**
+ * Experimental R input gain (requires calibration)
+ *
+ * Units: rad/s^2 per normalized command. Zero means unconfigured. Staged while armed.
+ * M06: calibrated Iris SITL ESTA, independent parameters on each axis.
+ *
+ * @min 0
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_FLOAT(MC_STA_G_R, 0.0f);
+
+/**
+ * Experimental P input gain (requires calibration)
+ *
+ * Units: rad/s^2 per normalized command. Zero means unconfigured. Staged while armed.
+ * M06: calibrated Iris SITL ESTA, independent parameters on each axis.
+ *
+ * @min 0
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_FLOAT(MC_STA_G_P, 0.0f);
+
+/**
+ * Experimental Y input gain (requires calibration)
+ *
+ * Units: rad/s^2 per normalized command. Zero means unconfigured. Staged while armed.
+ * M06: calibrated Iris SITL ESTA, independent parameters on each axis.
+ *
+ * @min 0
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_FLOAT(MC_STA_G_Y, 0.0f);
+
+/**
+ * Experimental R nu magnitude limit
+ *
+ * Units: rad/s^2. Zero means unconfigured. Staged while armed.
+ * M06: calibrated Iris SITL ESTA, independent parameters on each axis.
+ *
+ * @min 0
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_FLOAT(MC_STA_NU_R, 0.0f);
+
+/**
+ * Experimental P nu magnitude limit
+ *
+ * Units: rad/s^2. Zero means unconfigured. Staged while armed.
+ * M06: calibrated Iris SITL ESTA, independent parameters on each axis.
+ *
+ * @min 0
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_FLOAT(MC_STA_NU_P, 0.0f);
+
+/**
+ * Experimental Y nu magnitude limit
+ *
+ * Units: rad/s^2. Zero means unconfigured. Staged while armed.
+ * M06: calibrated Iris SITL ESTA, independent parameters on each axis.
+ *
+ * @min 0
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_FLOAT(MC_STA_NU_Y, 0.0f);
+
+/**
+ * Rate-controller callback divisor (research SITL)
+ *
+ * Only 1, 2 and 4 accepted. Staged while armed for all modes.
+ * Sensor/filter settings stay unchanged. Torque held, thrust refreshed.
+ *
+ * @value 1 Every callback
+ * @value 2 Every second callback
+ * @value 4 Every fourth callback
+ * @min 1
+ * @max 4
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_INT32(MC_RTC_DIV, 1);

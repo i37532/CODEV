@@ -1,0 +1,65 @@
+{
+  "kind": "offline_protocol10_wiring_not_flight",
+  "new_flights": 0,
+  "commands": [
+    {
+      "name": "full_regression",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/scripts/verify_v04_protocol04.py",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/protocol10_committed01/full"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0
+    },
+    {
+      "name": "imu_conversion",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/scripts/verify_v04_imu0_repair.py",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/protocol10_committed01/imu"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0
+    },
+    {
+      "name": "seven_clock_replays",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/scripts/replay_v04_clock09.py",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/protocol10_committed01/seven"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0
+    },
+    {
+      "name": "eight_landing_replays",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/scripts/replay_v04_landing10.py",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/protocol10_committed01/eight"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0
+    }
+  ],
+  "passed": true,
+  "source_head": "d7090c4bc17eae80b88181c8e32dd0ac59d1b868",
+  "eeprom_before": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+  "active_simulators_before": [],
+  "eight_historical_inputs_unchanged": 284,
+  "eight_historical_verdicts_unchanged": true,
+  "cpp_control_tests": 109,
+  "cpp_imu_unique_tests": 11,
+  "cpp_imu_sanitizer_tests": 11,
+  "python_tests": 347,
+  "historical_inputs_unchanged": 243,
+  "firmware_sha256": "29f0c6121f7d82b30693ce14bead61c15257c0fde5581521dbb22f72d4bc96ca",
+  "eeprom_after": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+  "active_simulators_after": [],
+  "seven_historical_verdicts_unchanged": true
+}

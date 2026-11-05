@@ -1,0 +1,51 @@
+{
+  "source_head": "5b5dc2c0d05986cc7cded7e4477ad79ae4315ce9",
+  "branch": "research/sta-velocity-control",
+  "binary_sha256": "4d94c6c768dd4bb72039d49a5aab5511e54d6a15cb24bc8717c5e9546aafa027",
+  "runner_sha256": "eb41d7947f7b72b10567eda9651ff2bca1da26d3c5cb532b7f38c7f316fb2eb6",
+  "command": [
+    "./sitl/run.sh",
+    "--headless",
+    "--backend",
+    "gazebo",
+    "--model",
+    "iris"
+  ],
+  "pid_parameters_modified": false,
+  "success": false,
+  "events": [
+    {
+      "name": "ready",
+      "timestamp_us": 30036000.0
+    },
+    {
+      "name": "takeoff_command",
+      "timestamp_us": 30056000
+    }
+  ],
+  "scenario_sha256": "d910b97a31075d609668d6b955d1dc2f2c779a7ff164a06b03afeda2337d7238",
+  "scenario_path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/protocol04/execution.json",
+  "simulation_speed_requested": 1.0,
+  "explicit_environment": {
+    "PX4_SITL_WORLD": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world",
+    "GAZEBO_MASTER_URI": "http://127.0.0.1:11345"
+  },
+  "launcher_pid": 1195600,
+  "error": "ValueError('Coordinate/reset changed: ref_lat')",
+  "launcher_returncode": 0,
+  "logs": [
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/07_58_29.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series03/run01/07_58_29.ulg",
+      "sha256": "34d2dc25a3529fa613991714cd106c99e3cdeb5b540ff5192aa87d5ce7a10d63",
+      "bytes": 196307
+    },
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/07_58_30.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series03/run01/07_58_30.ulg",
+      "sha256": "e31d4e5fe706d36d6ddf245d1596fef44808ef5a7e179362b501caeefa4cfaa3",
+      "bytes": 9115271
+    }
+  ],
+  "finished_utc": "2026-09-23T07:58:59Z"
+}

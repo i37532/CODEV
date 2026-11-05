@@ -1,0 +1,537 @@
+{
+  "kind": "offline_clockcheck09_repair",
+  "starting_head": "5f791eac46d004dfaf4bde818e35039eae6382ee",
+  "new_flights": 0,
+  "new_seeds": 0,
+  "flight_authorized": false,
+  "execution_ready": false,
+  "historical_acceptance_changed": false,
+  "cpp_tests": 109,
+  "python_tests": 277,
+  "new_python_tests": 43,
+  "old_execution_asset_changes": {
+    "research/sta-velocity-control/scripts/analyze_v00.py": {
+      "old": "a6c3cdcf68c001ad4c5975ceed4ac8327dda33b7618af8ac0a34bebcb9762d91",
+      "current": "4298ee230c4d0d60aeca83ddd0b805ef04f29fa54e09889476c91fb4c82a5051"
+    },
+    "research/sta-velocity-control/scripts/analyze_v04_core04.py": {
+      "old": "e7503dfe381bd425888e8f75ad681cff499b5dedd1b83d1b25ef130e2528b30a",
+      "current": "1c770b327c20acfa4744df7d1e296667e492a412322ae13a8732b1152418af0a"
+    },
+    "research/sta-velocity-control/scripts/v04_heading_stream.py": {
+      "old": "380216c5adf0c1a7e401e30aabeb6a50b69a41c712e8a175d79b32a211452d0e",
+      "current": "0d23ea43e95968aeb86529ce073aa85d9a99f8a07c006349654d6744adeb0db3"
+    }
+  },
+  "old_execution_assets_unchanged": 250,
+  "historical_input_file_count": 243,
+  "inputs_unchanged": true,
+  "replay": {
+    "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/clockcheck09_replay03/evidence.json",
+    "sha256": "bc8254e64120591822b9b2e45f8e14ea459bd96eca7d1f771aeb153afe1d532c"
+  },
+  "verification": {
+    "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/clockcheck09_verify02/evidence.json",
+    "sha256": "c67fc5b684e3c74024abf7a3cd450738f44edbf1eeb8a0bd9820e9b4b5901e9c"
+  },
+  "eeprom_sha256": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+  "sources": {
+    "v04_attitude_clock09.py": "baf3395b83d0ef53c7fbe53b06706c6159a506dd6247f7ed7fe3fc70624aeb6a",
+    "analyze_v04_height_clock09.py": "8dbb25c601058238e0cd90d2c537e33918c0b700d65c82f00758dce56d9ff6ad",
+    "replay_v04_clock09.py": "eabb4480a59abf829cc6184aa02f5eecbc07db4ec46a84a3a07d71b1963b1550",
+    "test_v04_attitude_clock09.py": "e4ced24b43cb8d319dc879438f1cb6f0cbe4f6c8432deef65f47da3d09fa2666",
+    "test_v04_clock09_integration.py": "b245ade6cd5d0be7f873e8027d0c67b2512dbf11243245f6efa8b0b252c49d7c",
+    "analyze_v00.py": "4298ee230c4d0d60aeca83ddd0b805ef04f29fa54e09889476c91fb4c82a5051",
+    "analyze_v04_core04.py": "1c770b327c20acfa4744df7d1e296667e492a412322ae13a8732b1152418af0a",
+    "v04_heading_stream.py": "0d23ea43e95968aeb86529ce073aa85d9a99f8a07c006349654d6744adeb0db3"
+  },
+  "runs": [
+    {
+      "series": 1,
+      "ulog": {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/02_41_19.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series01/run01/02_41_19.ulg",
+        "sha256": "264c87938aefcb2beed91cce6f3955813a37fbeae1a73c2e26aa57bd55bb30e9",
+        "bytes": 12967151
+      },
+      "historical_runner_success": false,
+      "historical_error": "RuntimeError('Did not reach target altitude 2.5 +/- .5m')",
+      "historical_accepted": false,
+      "accepted": false,
+      "complete_recorded_flight": false,
+      "through_us": 42708000,
+      "live_field_arrays_equal": 1045,
+      "reference_source": "derived development reference, not flight provenance",
+      "legacy_clock": {
+        "check_passed": false,
+        "error": "ValueError('Empty/nonmonotonic vehicle_attitude')"
+      },
+      "revised_clock": {
+        "check_passed": true,
+        "result": {
+          "records": 8575
+        }
+      },
+      "legacy_heading": {
+        "check_passed": false,
+        "error": "ValueError('Empty/nonmonotonic vehicle_attitude')"
+      },
+      "revised_heading": {
+        "check_passed": false,
+        "error": "KeyError('first_fail')"
+      },
+      "legacy_components": {
+        "check_passed": false,
+        "error": "KeyError('hover_end')"
+      },
+      "revised_components": {
+        "check_passed": false,
+        "error": "KeyError('hover_end')"
+      },
+      "revised_height_components": {
+        "check_passed": false,
+        "error": "FileNotFoundError(2, 'No such file or directory')"
+      },
+      "unique_rate_association": {
+        "check_passed": true
+      },
+      "associations": {
+        "check_passed": true,
+        "result": {
+          "query_count": 2587,
+          "ambiguous_count": 0,
+          "ambiguous": [],
+          "actual_consumption_proven": false
+        }
+      }
+    },
+    {
+      "series": 2,
+      "ulog": {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/06_58_19.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series02/run01/06_58_19.ulg",
+        "sha256": "f41c005af1008fbd6fb1441e15b576b5ed2181e86a736141708905da9ca5ccae",
+        "bytes": 11181921
+      },
+      "historical_runner_success": false,
+      "historical_error": "ValueError('Coordinate/reset changed: heading_reset_counter')",
+      "historical_accepted": false,
+      "accepted": false,
+      "complete_recorded_flight": false,
+      "through_us": 37128000,
+      "live_field_arrays_equal": 1049,
+      "reference_source": "archived prearm",
+      "legacy_clock": {
+        "check_passed": true,
+        "result": {
+          "records": 7295
+        }
+      },
+      "revised_clock": {
+        "check_passed": true,
+        "result": {
+          "records": 7295
+        }
+      },
+      "legacy_heading": {
+        "check_passed": false,
+        "error": "ValueError('Reference does not match raw prearm sample x')"
+      },
+      "revised_heading": {
+        "check_passed": false,
+        "error": "ValueError('Reference does not match raw prearm sample x')"
+      },
+      "legacy_components": {
+        "check_passed": false,
+        "error": "KeyError('hover_start')"
+      },
+      "revised_components": {
+        "check_passed": false,
+        "error": "KeyError('hover_start')"
+      },
+      "revised_height_components": {
+        "check_passed": false,
+        "error": "FileNotFoundError(2, 'No such file or directory')"
+      },
+      "unique_rate_association": {
+        "check_passed": true
+      },
+      "associations": {
+        "check_passed": true,
+        "result": {
+          "query_count": 1633,
+          "ambiguous_count": 0,
+          "ambiguous": [],
+          "actual_consumption_proven": false
+        }
+      }
+    },
+    {
+      "series": 3,
+      "ulog": {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/07_58_30.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series03/run01/07_58_30.ulg",
+        "sha256": "e31d4e5fe706d36d6ddf245d1596fef44808ef5a7e179362b501caeefa4cfaa3",
+        "bytes": 9115271
+      },
+      "historical_runner_success": false,
+      "historical_error": "ValueError('Coordinate/reset changed: ref_lat')",
+      "historical_accepted": false,
+      "accepted": false,
+      "complete_recorded_flight": false,
+      "through_us": 30464000,
+      "live_field_arrays_equal": 1049,
+      "reference_source": "archived prearm",
+      "legacy_clock": {
+        "check_passed": true,
+        "result": {
+          "records": 5966
+        }
+      },
+      "revised_clock": {
+        "check_passed": true,
+        "result": {
+          "records": 5966
+        }
+      },
+      "legacy_heading": {
+        "check_passed": true,
+        "confirmed": false,
+        "ready": false
+      },
+      "revised_heading": {
+        "check_passed": true,
+        "confirmed": false,
+        "ready": false
+      },
+      "legacy_components": {
+        "check_passed": false,
+        "error": "KeyError('hover_start')"
+      },
+      "revised_components": {
+        "check_passed": false,
+        "error": "KeyError('hover_start')"
+      },
+      "revised_height_components": {
+        "check_passed": false,
+        "error": "FileNotFoundError(2, 'No such file or directory')"
+      },
+      "unique_rate_association": {
+        "check_passed": true
+      },
+      "associations": {
+        "check_passed": true,
+        "result": {
+          "query_count": 95,
+          "ambiguous_count": 0,
+          "ambiguous": [],
+          "actual_consumption_proven": false
+        }
+      }
+    },
+    {
+      "series": 4,
+      "ulog": {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/08_27_38.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series04/run01/08_27_38.ulg",
+        "sha256": "88b9cd401f5e410dac6b50f6ee07073597b01a7a7e910646fe89d321f429e086",
+        "bytes": 11545414
+      },
+      "historical_runner_success": false,
+      "historical_error": "ValueError('Invalid navigator target')",
+      "historical_accepted": false,
+      "accepted": false,
+      "complete_recorded_flight": false,
+      "through_us": 38096000,
+      "live_field_arrays_equal": 1049,
+      "reference_source": "archived prearm",
+      "legacy_clock": {
+        "check_passed": true,
+        "result": {
+          "records": 7718
+        }
+      },
+      "revised_clock": {
+        "check_passed": true,
+        "result": {
+          "records": 7718
+        }
+      },
+      "legacy_heading": {
+        "check_passed": true,
+        "confirmed": true,
+        "ready": true
+      },
+      "revised_heading": {
+        "check_passed": true,
+        "confirmed": true,
+        "ready": true
+      },
+      "legacy_components": {
+        "check_passed": false,
+        "error": "KeyError('hover_start')"
+      },
+      "revised_components": {
+        "check_passed": false,
+        "error": "KeyError('hover_start')"
+      },
+      "revised_height_components": {
+        "check_passed": false,
+        "error": "KeyError('landed_disarmed')"
+      },
+      "unique_rate_association": {
+        "check_passed": true
+      },
+      "associations": {
+        "check_passed": true,
+        "result": {
+          "query_count": 1823,
+          "ambiguous_count": 0,
+          "ambiguous": [],
+          "actual_consumption_proven": false
+        }
+      }
+    },
+    {
+      "series": 5,
+      "ulog": {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/09_49_33.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series05/run01/09_49_33.ulg",
+        "sha256": "d8d97dfd7b54fb512c42669e1b874ea49911abe332495b893a269f0ce5e82f16",
+        "bytes": 36005502
+      },
+      "historical_runner_success": true,
+      "historical_error": null,
+      "historical_accepted": false,
+      "accepted": false,
+      "complete_recorded_flight": true,
+      "through_us": 115324000,
+      "live_field_arrays_equal": 1049,
+      "reference_source": "archived prearm",
+      "legacy_clock": {
+        "check_passed": true,
+        "result": {
+          "records": 24932
+        }
+      },
+      "revised_clock": {
+        "check_passed": true,
+        "result": {
+          "records": 24932
+        }
+      },
+      "legacy_heading": {
+        "check_passed": true,
+        "confirmed": true,
+        "ready": true
+      },
+      "revised_heading": {
+        "check_passed": true,
+        "confirmed": true,
+        "ready": true
+      },
+      "legacy_components": {
+        "check_passed": true,
+        "component_accepted_not_flight_accepted": true,
+        "baseline_accepted": true
+      },
+      "revised_components": {
+        "check_passed": true,
+        "component_accepted_not_flight_accepted": true,
+        "baseline_accepted": true
+      },
+      "revised_height_components": {
+        "check_passed": true
+      },
+      "unique_rate_association": {
+        "check_passed": true
+      },
+      "associations": {
+        "check_passed": true,
+        "result": {
+          "query_count": 18897,
+          "ambiguous_count": 0,
+          "ambiguous": [],
+          "actual_consumption_proven": false
+        }
+      }
+    },
+    {
+      "series": 6,
+      "ulog": {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/11_01_38.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series06/run01/11_01_38.ulg",
+        "sha256": "46a50a2c0678ead8efd093ee7ad193144a46a0f5c116e202fc1ed6f26b0c523b",
+        "bytes": 35055648
+      },
+      "historical_runner_success": false,
+      "historical_error": "ValueError('CLI reference representation changed: ref_timestamp')",
+      "historical_accepted": false,
+      "accepted": false,
+      "complete_recorded_flight": false,
+      "through_us": 112036000,
+      "live_field_arrays_equal": 1049,
+      "reference_source": "archived prearm",
+      "legacy_clock": {
+        "check_passed": true,
+        "result": {
+          "records": 24414
+        }
+      },
+      "revised_clock": {
+        "check_passed": true,
+        "result": {
+          "records": 24414
+        }
+      },
+      "legacy_heading": {
+        "check_passed": false,
+        "error": "ValueError('Coordinate/reset changed: ref_timestamp')"
+      },
+      "revised_heading": {
+        "check_passed": false,
+        "error": "ValueError('Coordinate/reset changed: ref_timestamp')"
+      },
+      "legacy_components": {
+        "check_passed": false,
+        "error": "KeyError('landed_disarmed')"
+      },
+      "revised_components": {
+        "check_passed": false,
+        "error": "KeyError('landed_disarmed')"
+      },
+      "revised_height_components": {
+        "check_passed": false,
+        "error": "KeyError('landed_disarmed')"
+      },
+      "unique_rate_association": {
+        "check_passed": true
+      },
+      "associations": {
+        "check_passed": true,
+        "result": {
+          "query_count": 18493,
+          "ambiguous_count": 0,
+          "ambiguous": [],
+          "actual_consumption_proven": false
+        }
+      }
+    },
+    {
+      "series": 7,
+      "ulog": {
+        "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/12_25_16.ulg",
+        "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series07/run01/12_25_16.ulg",
+        "sha256": "de1f5a137d2d583621d684e751004cc18bc620d41850412368e39f6cb7380d34",
+        "bytes": 18543593
+      },
+      "historical_runner_success": false,
+      "historical_error": "ValueError('Empty/nonmonotonic vehicle_attitude')",
+      "historical_accepted": false,
+      "accepted": false,
+      "complete_recorded_flight": false,
+      "through_us": 60316000,
+      "live_field_arrays_equal": 1049,
+      "reference_source": "archived prearm",
+      "legacy_clock": {
+        "check_passed": false,
+        "error": "ValueError('Empty/nonmonotonic vehicle_attitude')"
+      },
+      "revised_clock": {
+        "check_passed": true,
+        "result": {
+          "records": 12536
+        }
+      },
+      "legacy_heading": {
+        "check_passed": false,
+        "error": "ValueError('Empty/nonmonotonic vehicle_attitude')"
+      },
+      "revised_heading": {
+        "check_passed": true,
+        "confirmed": true,
+        "ready": true
+      },
+      "legacy_components": {
+        "check_passed": false,
+        "error": "KeyError('hover_end')"
+      },
+      "revised_components": {
+        "check_passed": false,
+        "error": "KeyError('hover_end')"
+      },
+      "revised_height_components": {
+        "check_passed": false,
+        "error": "KeyError('landed_disarmed')"
+      },
+      "unique_rate_association": {
+        "check_passed": false,
+        "error": "ValueError('Ambiguous attitude association; no consumed-sample key')"
+      },
+      "associations": {
+        "check_passed": true,
+        "result": {
+          "query_count": 6780,
+          "ambiguous_count": 1,
+          "ambiguous": [
+            {
+              "query_us": 60128000,
+              "row_indices": [
+                12487,
+                12488
+              ],
+              "samples_us": [
+                60124000,
+                60128000
+              ]
+            }
+          ],
+          "actual_consumption_proven": false
+        }
+      }
+    }
+  ],
+  "command_outcomes": [
+    {
+      "name": "targeted01",
+      "tests": 34,
+      "exit_code": 1,
+      "reason": "empty fixture interval"
+    },
+    {
+      "name": "targeted02",
+      "tests": 34,
+      "exit_code": 0
+    },
+    {
+      "name": "replay01",
+      "exit_code": 1,
+      "reason": "protocol inheritance loader"
+    },
+    {
+      "name": "replay02",
+      "exit_code": 0
+    },
+    {
+      "name": "verify01",
+      "python_tests": 269,
+      "exit_code": 1,
+      "reason": "historical protocol08 exact source contract"
+    },
+    {
+      "name": "targeted03",
+      "tests": 43,
+      "exit_code": 0
+    },
+    {
+      "name": "replay03",
+      "exit_code": 0
+    },
+    {
+      "name": "verify02",
+      "cpp_tests": 109,
+      "python_tests": 277,
+      "exit_code": 0
+    }
+  ]
+}

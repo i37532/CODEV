@@ -98,6 +98,15 @@ MulticopterAttitudeControl::parameters_updated()
 						radians(_param_mc_yawrate_max.get())));
 
 	_man_tilt_max = math::radians(_param_mpc_man_tilt_max.get());
+#if defined(CONFIG_ARCH_BOARD_PX4_SITL)
+	int32_t test = 0, airframe = 0;
+	param_get(param_find("MC_RATT_TEST"), &test);
+	param_get(param_find("SYS_AUTOSTART"), &airframe);
+	_research_test = test >= 1 && test <= 4;
+	_research_scene = test;
+	_research_combined = test == 2;
+	_research_iris = airframe == 10016;
+#endif
 }
 
 float
@@ -315,12 +324,34 @@ MulticopterAttitudeControl::Run()
 			}
 
 			Vector3f rates_sp = _attitude_control.update(q);
+			// Single original publisher; M04 roll or M05 staged R/P excitation.
+			const float legacy_addition = _research_pulse.update(_research_test,
+					       _research_iris && _v_control_mode.flag_armed && !_landed,
+					       v_att.timestamp_sample);
+
+			const bool three_axis = _research_scene == 3 || _research_scene == 4;
+			const bool yaw_only = _research_scene == 3;
+			const float elapsed = _research_pulse.elapsed();
+			const float addition = three_axis ? ResearchPulse::threeAxis(elapsed, 0, yaw_only) :
+					       (_research_combined ? ResearchPulse::combined(elapsed, 0) : legacy_addition);
+			const float pitch_addition = three_axis ? ResearchPulse::threeAxis(elapsed, 1, yaw_only) :
+						     (_research_combined ? ResearchPulse::combined(elapsed, 1) : 0.f);
+			const float yaw_addition = three_axis ? ResearchPulse::threeAxis(elapsed, 2, yaw_only) : 0.f;
+
+			if (_research_test) { rates_sp(0) += addition; rates_sp(1) += pitch_addition; }
+			// Leave nominal PID arithmetic unchanged. World-z excitation has the
+			// same body transform as the existing yaw feedforward; no second publisher.
+			if (three_axis) { rates_sp += ResearchPulse::yawBody(q, yaw_addition); }
 
 			// publish rate setpoint
 			vehicle_rates_setpoint_s v_rates_sp{};
 			v_rates_sp.roll = rates_sp(0);
 			v_rates_sp.pitch = rates_sp(1);
 			v_rates_sp.yaw = rates_sp(2);
+			v_rates_sp.research_roll_addition = addition;
+			v_rates_sp.research_pitch_addition = pitch_addition;
+			v_rates_sp.research_yaw_addition = yaw_addition;
+			v_rates_sp.research_elapsed = _research_pulse.elapsed();
 			_thrust_setpoint_body.copyTo(v_rates_sp.thrust_body);
 			v_rates_sp.timestamp = hrt_absolute_time();
 

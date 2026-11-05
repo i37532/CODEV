@@ -1,0 +1,49 @@
+{
+  "seeds": [
+    71101,
+    71102,
+    71103,
+    71111,
+    71112,
+    71113,
+    71121,
+    71122,
+    71123,
+    71131,
+    71132,
+    71133
+  ],
+  "files_parsed": 56914,
+  "matches": [],
+  "invalid_json": [],
+  "exceptions": [
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/M06-20260916/c02_regression_roll_diagnostic.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Previously audited empty diagnostic, not a seed registry; unchanged"
+    }
+  ],
+  "scan_manifest_sha256": "cda52638817fececd9e2c424c2f1f9fe8ad703dc4346f41762d1bff7386761b4",
+  "roots": [
+    "/home/yr/Desktop/Codev-autopilot/research",
+    "/home/yr/Desktop/codev doc/experiments",
+    "/home/yr/Desktop/codev doc/plan"
+  ],
+  "excluded": "No directory exclusions; exact fingerprinted unattempted design files only",
+  "scope": "Structured seed/seed-list keys in JSON, plus separate source text audit; recheck before flight",
+  "accepted": true,
+  "design_registrations": [],
+  "text_audit": {
+    "command": "rg -n -w '71101|71102|71103|71111|71112|71113|71121|71122|71123|71131|71132|71133' research '/home/yr/Desktop/codev doc/plan' -g '*.py' -g '*.md' -g '*.txt' -g '*.json' -g '*.cpp' -g '*.hpp' -g '*.params'",
+    "exit_code": 0,
+    "historical_matches": [],
+    "new_revision_only_matches": [
+      "regularized_sta/AUTHORIZATION_R03_REVISION02_CN.md",
+      "regularized_sta/r03_revision02/protocol.py",
+      "regularized_sta/r03_revision02/PROTOCOL_CN.md",
+      "regularized_sta/r03_revision02/test_replay.py"
+    ],
+    "scope": "Whole-number text check of repository research and external plan; external experiment JSON covered by structured scan, binary ULog values are not seed registrations"
+  }
+}

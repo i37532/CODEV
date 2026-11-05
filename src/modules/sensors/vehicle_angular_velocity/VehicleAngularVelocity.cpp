@@ -760,7 +760,24 @@ void VehicleAngularVelocity::CalibrateAndPublish(bool publish, const hrt_abstime
 	// Angular acceleration: rotate sensor frame to board, scale raw data to SI, apply any additional configured rotation
 	_angular_acceleration = _calibration.rotation() * angular_acceleration_unscaled;
 
-	if (publish && (timestamp_sample >= _last_publish + _publish_interval_min_us)) {
+	// _last_publish below is a cadence marker, not the last actual sample.
+	// Device selection resets filters, but must never reset this global output
+	// contract. Keep processing/calibration and nominal cadence unchanged.
+	const bool due = publish && (timestamp_sample >= _last_publish + _publish_interval_min_us);
+	const auto decision = _publication_guard.consider(timestamp_sample, _selected_sensor_device_id, due);
+
+	if (decision.event) {
+		gyro_sample_status_s status{};
+		status.timestamp = hrt_absolute_time(); status.timestamp_sample = timestamp_sample;
+		status.previous_sample = decision.previous_sample; status.device_id = _selected_sensor_device_id;
+		status.event_seq = ++_sample_event_seq;
+		status.duplicate_count = _publication_guard.duplicates(); status.backward_count = _publication_guard.backwards();
+		status.zero_count = _publication_guard.zero(); status.switch_count = _publication_guard.switches();
+		status.reason = decision.reason; status.published = decision.publish; status.switched = decision.switched;
+		_sample_status_pub.publish(status);
+	}
+
+	if (decision.publish) {
 
 		// Publish vehicle_angular_acceleration
 		vehicle_angular_acceleration_s v_angular_acceleration;

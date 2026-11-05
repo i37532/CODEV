@@ -1,0 +1,874 @@
+{
+  "stage": "V08",
+  "status": "needs_revision",
+  "source_head": "c2e6c0be8490c1ebe2250859f5cdc10252941f63",
+  "training_planned": 24,
+  "training_attempted": 13,
+  "training_accepted": 12,
+  "training_failed": 1,
+  "training_unexecuted": 11,
+  "validation_attempted": 0,
+  "pilot_attempted": 0,
+  "formal_attempted": 0,
+  "selected_candidates": null,
+  "thresholds_changed": false,
+  "failed_run_regraded": false,
+  "flights": [
+    {
+      "attempt": 1,
+      "job": {
+        "id": "run01",
+        "phase": "training",
+        "task": "hover",
+        "gate": "training",
+        "seed": 38001,
+        "candidate": "pid0",
+        "mode": 0,
+        "axes": 0,
+        "divisor": 1,
+        "parameters": {
+          "MPC_VC_L1_X": 1.0,
+          "MPC_VC_L2_X": 0.2,
+          "MPC_VC_NU_X": 0.4,
+          "MPC_VC_A_X": 0.8,
+          "MPC_VC_L1_Y": 1.0,
+          "MPC_VC_L2_Y": 0.2,
+          "MPC_VC_NU_Y": 0.4,
+          "MPC_VC_A_Y": 0.8,
+          "MPC_VC_L1_Z": 0.0,
+          "MPC_VC_L2_Z": 0.0,
+          "MPC_VC_NU_Z": 0.0,
+          "MPC_VC_A_Z": 0.0,
+          "MPC_VC_MODE": 0,
+          "MPC_VC_AXES": 0,
+          "MPC_VC_DIV": 1,
+          "MPC_XY_VEL_P_ACC": 1.4400000000000002,
+          "MPC_XY_VEL_I_ACC": 0.32000000000000006,
+          "MPC_XY_VEL_D_ACC": 0.16000000000000003,
+          "MPC_VCT_TEST": 5
+        }
+      },
+      "status": "accepted",
+      "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run01",
+      "error": null,
+      "complete_task": true,
+      "rmse_xyz_m_per_s": [
+        0.01047953771272321,
+        0.009021746341428218,
+        0.002649531939857242
+      ],
+      "correction_tv_per_second": [
+        0.0727529302239418,
+        0.07096229493618011,
+        0.085370734333992
+      ]
+    },
+    {
+      "attempt": 2,
+      "job": {
+        "id": "run02",
+        "phase": "training",
+        "task": "hover",
+        "gate": "training",
+        "seed": 38001,
+        "candidate": "esta0",
+        "mode": 1,
+        "axes": 3,
+        "divisor": 1,
+        "parameters": {
+          "MPC_VC_L1_X": 0.5,
+          "MPC_VC_L2_X": 0.1,
+          "MPC_VC_NU_X": 0.4,
+          "MPC_VC_A_X": 0.8,
+          "MPC_VC_L1_Y": 0.5,
+          "MPC_VC_L2_Y": 0.1,
+          "MPC_VC_NU_Y": 0.4,
+          "MPC_VC_A_Y": 0.8,
+          "MPC_VC_L1_Z": 0.0,
+          "MPC_VC_L2_Z": 0.0,
+          "MPC_VC_NU_Z": 0.0,
+          "MPC_VC_A_Z": 0.0,
+          "MPC_VC_MODE": 1,
+          "MPC_VC_AXES": 3,
+          "MPC_VC_DIV": 1,
+          "MPC_XY_VEL_P_ACC": 1.8,
+          "MPC_XY_VEL_I_ACC": 0.4,
+          "MPC_XY_VEL_D_ACC": 0.2,
+          "MPC_VCT_TEST": 5
+        }
+      },
+      "status": "accepted",
+      "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run02",
+      "error": null,
+      "complete_task": true,
+      "rmse_xyz_m_per_s": [
+        0.006360971956779798,
+        0.006798266404928242,
+        0.002672750547514558
+      ],
+      "correction_tv_per_second": [
+        0.22367285192012787,
+        0.22647491097450256,
+        0.08575847744941711
+      ]
+    },
+    {
+      "attempt": 3,
+      "job": {
+        "id": "run03",
+        "phase": "training",
+        "task": "hover",
+        "gate": "training",
+        "seed": 38001,
+        "candidate": "esta1",
+        "mode": 1,
+        "axes": 3,
+        "divisor": 1,
+        "parameters": {
+          "MPC_VC_L1_X": 0.75,
+          "MPC_VC_L2_X": 0.15000000000000002,
+          "MPC_VC_NU_X": 0.4,
+          "MPC_VC_A_X": 0.8,
+          "MPC_VC_L1_Y": 0.75,
+          "MPC_VC_L2_Y": 0.15000000000000002,
+          "MPC_VC_NU_Y": 0.4,
+          "MPC_VC_A_Y": 0.8,
+          "MPC_VC_L1_Z": 0.0,
+          "MPC_VC_L2_Z": 0.0,
+          "MPC_VC_NU_Z": 0.0,
+          "MPC_VC_A_Z": 0.0,
+          "MPC_VC_MODE": 1,
+          "MPC_VC_AXES": 3,
+          "MPC_VC_DIV": 1,
+          "MPC_XY_VEL_P_ACC": 1.8,
+          "MPC_XY_VEL_I_ACC": 0.4,
+          "MPC_XY_VEL_D_ACC": 0.2,
+          "MPC_VCT_TEST": 5
+        }
+      },
+      "status": "accepted",
+      "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run03",
+      "error": null,
+      "complete_task": true,
+      "rmse_xyz_m_per_s": [
+        0.00963419948910392,
+        0.011139862589455669,
+        0.002647094505765525
+      ],
+      "correction_tv_per_second": [
+        0.4382181167602539,
+        0.470537394285202,
+        0.08613816648721695
+      ]
+    },
+    {
+      "attempt": 4,
+      "job": {
+        "id": "run04",
+        "phase": "training",
+        "task": "hover",
+        "gate": "training",
+        "seed": 38001,
+        "candidate": "pid1",
+        "mode": 0,
+        "axes": 0,
+        "divisor": 1,
+        "parameters": {
+          "MPC_VC_L1_X": 1.0,
+          "MPC_VC_L2_X": 0.2,
+          "MPC_VC_NU_X": 0.4,
+          "MPC_VC_A_X": 0.8,
+          "MPC_VC_L1_Y": 1.0,
+          "MPC_VC_L2_Y": 0.2,
+          "MPC_VC_NU_Y": 0.4,
+          "MPC_VC_A_Y": 0.8,
+          "MPC_VC_L1_Z": 0.0,
+          "MPC_VC_L2_Z": 0.0,
+          "MPC_VC_NU_Z": 0.0,
+          "MPC_VC_A_Z": 0.0,
+          "MPC_VC_MODE": 0,
+          "MPC_VC_AXES": 0,
+          "MPC_VC_DIV": 1,
+          "MPC_XY_VEL_P_ACC": 1.8,
+          "MPC_XY_VEL_I_ACC": 0.4,
+          "MPC_XY_VEL_D_ACC": 0.2,
+          "MPC_VCT_TEST": 5
+        }
+      },
+      "status": "accepted",
+      "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run04",
+      "error": null,
+      "complete_task": true,
+      "rmse_xyz_m_per_s": [
+        0.008593980492826267,
+        0.007803530399347165,
+        0.002656262686924846
+      ],
+      "correction_tv_per_second": [
+        0.09132479131221771,
+        0.08828315138816833,
+        0.08563253283500671
+      ]
+    },
+    {
+      "attempt": 5,
+      "job": {
+        "id": "run05",
+        "phase": "training",
+        "task": "hover",
+        "gate": "training",
+        "seed": 38001,
+        "candidate": "pid2",
+        "mode": 0,
+        "axes": 0,
+        "divisor": 1,
+        "parameters": {
+          "MPC_VC_L1_X": 1.0,
+          "MPC_VC_L2_X": 0.2,
+          "MPC_VC_NU_X": 0.4,
+          "MPC_VC_A_X": 0.8,
+          "MPC_VC_L1_Y": 1.0,
+          "MPC_VC_L2_Y": 0.2,
+          "MPC_VC_NU_Y": 0.4,
+          "MPC_VC_A_Y": 0.8,
+          "MPC_VC_L1_Z": 0.0,
+          "MPC_VC_L2_Z": 0.0,
+          "MPC_VC_NU_Z": 0.0,
+          "MPC_VC_A_Z": 0.0,
+          "MPC_VC_MODE": 0,
+          "MPC_VC_AXES": 0,
+          "MPC_VC_DIV": 1,
+          "MPC_XY_VEL_P_ACC": 2.16,
+          "MPC_XY_VEL_I_ACC": 0.48,
+          "MPC_XY_VEL_D_ACC": 0.24,
+          "MPC_VCT_TEST": 5
+        }
+      },
+      "status": "accepted",
+      "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run05",
+      "error": null,
+      "complete_task": true,
+      "rmse_xyz_m_per_s": [
+        0.007499206387236553,
+        0.006717282435172737,
+        0.002641910068549864
+      ],
+      "correction_tv_per_second": [
+        0.1098896861076355,
+        0.10709653794765472,
+        0.08521639555692673
+      ]
+    },
+    {
+      "attempt": 6,
+      "job": {
+        "id": "run06",
+        "phase": "training",
+        "task": "hover",
+        "gate": "training",
+        "seed": 38001,
+        "candidate": "esta2",
+        "mode": 1,
+        "axes": 3,
+        "divisor": 1,
+        "parameters": {
+          "MPC_VC_L1_X": 1.0,
+          "MPC_VC_L2_X": 0.2,
+          "MPC_VC_NU_X": 0.4,
+          "MPC_VC_A_X": 0.8,
+          "MPC_VC_L1_Y": 1.0,
+          "MPC_VC_L2_Y": 0.2,
+          "MPC_VC_NU_Y": 0.4,
+          "MPC_VC_A_Y": 0.8,
+          "MPC_VC_L1_Z": 0.0,
+          "MPC_VC_L2_Z": 0.0,
+          "MPC_VC_NU_Z": 0.0,
+          "MPC_VC_A_Z": 0.0,
+          "MPC_VC_MODE": 1,
+          "MPC_VC_AXES": 3,
+          "MPC_VC_DIV": 1,
+          "MPC_XY_VEL_P_ACC": 1.8,
+          "MPC_XY_VEL_I_ACC": 0.4,
+          "MPC_XY_VEL_D_ACC": 0.2,
+          "MPC_VCT_TEST": 5
+        }
+      },
+      "status": "accepted",
+      "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run06",
+      "error": null,
+      "complete_task": true,
+      "rmse_xyz_m_per_s": [
+        0.014645697298711518,
+        0.016669937122803062,
+        0.0026834281042521606
+      ],
+      "correction_tv_per_second": [
+        0.7379934787750244,
+        0.7882802486419678,
+        0.08570549637079239
+      ]
+    },
+    {
+      "attempt": 7,
+      "job": {
+        "id": "run07",
+        "phase": "training",
+        "task": "hover",
+        "gate": "training",
+        "seed": 38002,
+        "candidate": "esta2",
+        "mode": 1,
+        "axes": 3,
+        "divisor": 1,
+        "parameters": {
+          "MPC_VC_L1_X": 1.0,
+          "MPC_VC_L2_X": 0.2,
+          "MPC_VC_NU_X": 0.4,
+          "MPC_VC_A_X": 0.8,
+          "MPC_VC_L1_Y": 1.0,
+          "MPC_VC_L2_Y": 0.2,
+          "MPC_VC_NU_Y": 0.4,
+          "MPC_VC_A_Y": 0.8,
+          "MPC_VC_L1_Z": 0.0,
+          "MPC_VC_L2_Z": 0.0,
+          "MPC_VC_NU_Z": 0.0,
+          "MPC_VC_A_Z": 0.0,
+          "MPC_VC_MODE": 1,
+          "MPC_VC_AXES": 3,
+          "MPC_VC_DIV": 1,
+          "MPC_XY_VEL_P_ACC": 1.8,
+          "MPC_XY_VEL_I_ACC": 0.4,
+          "MPC_XY_VEL_D_ACC": 0.2,
+          "MPC_VCT_TEST": 5
+        }
+      },
+      "status": "accepted",
+      "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run07",
+      "error": null,
+      "complete_task": true,
+      "rmse_xyz_m_per_s": [
+        0.014526121639340646,
+        0.01692273875974188,
+        0.0022932644414697095
+      ],
+      "correction_tv_per_second": [
+        0.7294124960899353,
+        0.7914304733276367,
+        0.07767556607723236
+      ]
+    },
+    {
+      "attempt": 8,
+      "job": {
+        "id": "run08",
+        "phase": "training",
+        "task": "hover",
+        "gate": "training",
+        "seed": 38002,
+        "candidate": "pid2",
+        "mode": 0,
+        "axes": 0,
+        "divisor": 1,
+        "parameters": {
+          "MPC_VC_L1_X": 1.0,
+          "MPC_VC_L2_X": 0.2,
+          "MPC_VC_NU_X": 0.4,
+          "MPC_VC_A_X": 0.8,
+          "MPC_VC_L1_Y": 1.0,
+          "MPC_VC_L2_Y": 0.2,
+          "MPC_VC_NU_Y": 0.4,
+          "MPC_VC_A_Y": 0.8,
+          "MPC_VC_L1_Z": 0.0,
+          "MPC_VC_L2_Z": 0.0,
+          "MPC_VC_NU_Z": 0.0,
+          "MPC_VC_A_Z": 0.0,
+          "MPC_VC_MODE": 0,
+          "MPC_VC_AXES": 0,
+          "MPC_VC_DIV": 1,
+          "MPC_XY_VEL_P_ACC": 2.16,
+          "MPC_XY_VEL_I_ACC": 0.48,
+          "MPC_XY_VEL_D_ACC": 0.24,
+          "MPC_VCT_TEST": 5
+        }
+      },
+      "status": "accepted",
+      "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run08",
+      "error": null,
+      "complete_task": true,
+      "rmse_xyz_m_per_s": [
+        0.009135467106273146,
+        0.00792090425292338,
+        0.002636655056425669
+      ],
+      "correction_tv_per_second": [
+        0.11167179048061371,
+        0.1089010164141655,
+        0.07989617437124252
+      ]
+    },
+    {
+      "attempt": 9,
+      "job": {
+        "id": "run09",
+        "phase": "training",
+        "task": "hover",
+        "gate": "training",
+        "seed": 38002,
+        "candidate": "pid1",
+        "mode": 0,
+        "axes": 0,
+        "divisor": 1,
+        "parameters": {
+          "MPC_VC_L1_X": 1.0,
+          "MPC_VC_L2_X": 0.2,
+          "MPC_VC_NU_X": 0.4,
+          "MPC_VC_A_X": 0.8,
+          "MPC_VC_L1_Y": 1.0,
+          "MPC_VC_L2_Y": 0.2,
+          "MPC_VC_NU_Y": 0.4,
+          "MPC_VC_A_Y": 0.8,
+          "MPC_VC_L1_Z": 0.0,
+          "MPC_VC_L2_Z": 0.0,
+          "MPC_VC_NU_Z": 0.0,
+          "MPC_VC_A_Z": 0.0,
+          "MPC_VC_MODE": 0,
+          "MPC_VC_AXES": 0,
+          "MPC_VC_DIV": 1,
+          "MPC_XY_VEL_P_ACC": 1.8,
+          "MPC_XY_VEL_I_ACC": 0.4,
+          "MPC_XY_VEL_D_ACC": 0.2,
+          "MPC_VCT_TEST": 5
+        }
+      },
+      "status": "accepted",
+      "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run09",
+      "error": null,
+      "complete_task": true,
+      "rmse_xyz_m_per_s": [
+        0.010602750445095808,
+        0.008262612269904763,
+        0.0023714358257001227
+      ],
+      "correction_tv_per_second": [
+        0.0929727703332901,
+        0.08953560888767242,
+        0.07840291410684586
+      ]
+    },
+    {
+      "attempt": 10,
+      "job": {
+        "id": "run10",
+        "phase": "training",
+        "task": "hover",
+        "gate": "training",
+        "seed": 38002,
+        "candidate": "esta1",
+        "mode": 1,
+        "axes": 3,
+        "divisor": 1,
+        "parameters": {
+          "MPC_VC_L1_X": 0.75,
+          "MPC_VC_L2_X": 0.15000000000000002,
+          "MPC_VC_NU_X": 0.4,
+          "MPC_VC_A_X": 0.8,
+          "MPC_VC_L1_Y": 0.75,
+          "MPC_VC_L2_Y": 0.15000000000000002,
+          "MPC_VC_NU_Y": 0.4,
+          "MPC_VC_A_Y": 0.8,
+          "MPC_VC_L1_Z": 0.0,
+          "MPC_VC_L2_Z": 0.0,
+          "MPC_VC_NU_Z": 0.0,
+          "MPC_VC_A_Z": 0.0,
+          "MPC_VC_MODE": 1,
+          "MPC_VC_AXES": 3,
+          "MPC_VC_DIV": 1,
+          "MPC_XY_VEL_P_ACC": 1.8,
+          "MPC_XY_VEL_I_ACC": 0.4,
+          "MPC_XY_VEL_D_ACC": 0.2,
+          "MPC_VCT_TEST": 5
+        }
+      },
+      "status": "accepted",
+      "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run10",
+      "error": null,
+      "complete_task": true,
+      "rmse_xyz_m_per_s": [
+        0.009735089660555741,
+        0.011422815039961532,
+        0.0026586889411329083
+      ],
+      "correction_tv_per_second": [
+        0.4338321089744568,
+        0.4772898554801941,
+        0.08059114962816238
+      ]
+    },
+    {
+      "attempt": 11,
+      "job": {
+        "id": "run11",
+        "phase": "training",
+        "task": "hover",
+        "gate": "training",
+        "seed": 38002,
+        "candidate": "esta0",
+        "mode": 1,
+        "axes": 3,
+        "divisor": 1,
+        "parameters": {
+          "MPC_VC_L1_X": 0.5,
+          "MPC_VC_L2_X": 0.1,
+          "MPC_VC_NU_X": 0.4,
+          "MPC_VC_A_X": 0.8,
+          "MPC_VC_L1_Y": 0.5,
+          "MPC_VC_L2_Y": 0.1,
+          "MPC_VC_NU_Y": 0.4,
+          "MPC_VC_A_Y": 0.8,
+          "MPC_VC_L1_Z": 0.0,
+          "MPC_VC_L2_Z": 0.0,
+          "MPC_VC_NU_Z": 0.0,
+          "MPC_VC_A_Z": 0.0,
+          "MPC_VC_MODE": 1,
+          "MPC_VC_AXES": 3,
+          "MPC_VC_DIV": 1,
+          "MPC_XY_VEL_P_ACC": 1.8,
+          "MPC_XY_VEL_I_ACC": 0.4,
+          "MPC_XY_VEL_D_ACC": 0.2,
+          "MPC_VCT_TEST": 5
+        }
+      },
+      "status": "accepted",
+      "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run11",
+      "error": null,
+      "complete_task": true,
+      "rmse_xyz_m_per_s": [
+        0.00641353006699631,
+        0.0067958042717895925,
+        0.0026676657096745848
+      ],
+      "correction_tv_per_second": [
+        0.2236131727695465,
+        0.22773264348506927,
+        0.08016171306371689
+      ]
+    },
+    {
+      "attempt": 12,
+      "job": {
+        "id": "run12",
+        "phase": "training",
+        "task": "hover",
+        "gate": "training",
+        "seed": 38002,
+        "candidate": "pid0",
+        "mode": 0,
+        "axes": 0,
+        "divisor": 1,
+        "parameters": {
+          "MPC_VC_L1_X": 1.0,
+          "MPC_VC_L2_X": 0.2,
+          "MPC_VC_NU_X": 0.4,
+          "MPC_VC_A_X": 0.8,
+          "MPC_VC_L1_Y": 1.0,
+          "MPC_VC_L2_Y": 0.2,
+          "MPC_VC_NU_Y": 0.4,
+          "MPC_VC_A_Y": 0.8,
+          "MPC_VC_L1_Z": 0.0,
+          "MPC_VC_L2_Z": 0.0,
+          "MPC_VC_NU_Z": 0.0,
+          "MPC_VC_A_Z": 0.0,
+          "MPC_VC_MODE": 0,
+          "MPC_VC_AXES": 0,
+          "MPC_VC_DIV": 1,
+          "MPC_XY_VEL_P_ACC": 1.4400000000000002,
+          "MPC_XY_VEL_I_ACC": 0.32000000000000006,
+          "MPC_XY_VEL_D_ACC": 0.16000000000000003,
+          "MPC_VCT_TEST": 5
+        }
+      },
+      "status": "accepted",
+      "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run12",
+      "error": null,
+      "complete_task": true,
+      "rmse_xyz_m_per_s": [
+        0.012779309330087746,
+        0.009802878310061106,
+        0.0026468564341164996
+      ],
+      "correction_tv_per_second": [
+        0.07431747019290924,
+        0.0714036300778389,
+        0.07982634007930756
+      ]
+    },
+    {
+      "attempt": 13,
+      "job": {
+        "id": "run13",
+        "phase": "training",
+        "task": "figure8",
+        "gate": "training",
+        "seed": 38001,
+        "candidate": "esta2",
+        "mode": 1,
+        "axes": 3,
+        "divisor": 1,
+        "parameters": {
+          "MPC_VC_L1_X": 1.0,
+          "MPC_VC_L2_X": 0.2,
+          "MPC_VC_NU_X": 0.4,
+          "MPC_VC_A_X": 0.8,
+          "MPC_VC_L1_Y": 1.0,
+          "MPC_VC_L2_Y": 0.2,
+          "MPC_VC_NU_Y": 0.4,
+          "MPC_VC_A_Y": 0.8,
+          "MPC_VC_L1_Z": 0.0,
+          "MPC_VC_L2_Z": 0.0,
+          "MPC_VC_NU_Z": 0.0,
+          "MPC_VC_A_Z": 0.0,
+          "MPC_VC_MODE": 1,
+          "MPC_VC_AXES": 3,
+          "MPC_VC_DIV": 1,
+          "MPC_XY_VEL_P_ACC": 1.8,
+          "MPC_XY_VEL_I_ACC": 0.4,
+          "MPC_XY_VEL_D_ACC": 0.2,
+          "MPC_VCT_TEST": 6
+        }
+      },
+      "status": "failed",
+      "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run13",
+      "error": "RuntimeError('Stale diagnostic')",
+      "complete_task": false
+    }
+  ],
+  "raw_logs": [
+    {
+      "source": "/dev/shm/px4-v07-t7yi441l/2026-09-29/06_39_29.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run01/06_39_29.ulg",
+      "sha256": "a520521621b13721dca1bd0056bdafe260404febfae37c6c5dd98b81b0278d5b",
+      "bytes": 211323,
+      "durable_copy_verified": true,
+      "volatile_source_retained": true
+    },
+    {
+      "source": "/dev/shm/px4-v07-t7yi441l/sess001/log001.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run01/log001.ulg",
+      "sha256": "b258aa79859a1b559a53103d6382c555b99959c8beb06088bc08446f508d567a",
+      "bytes": 110263784,
+      "durable_copy_verified": true,
+      "volatile_source_retained": true
+    },
+    {
+      "source": "/dev/shm/px4-v07-1pm4n4_m/2026-09-29/06_42_13.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run02/06_42_13.ulg",
+      "sha256": "76d5a6b723027acb05f0486b1f35b970825638b6c717da4a36fedc0fdb8454e9",
+      "bytes": 215710,
+      "durable_copy_verified": true,
+      "volatile_source_retained": true
+    },
+    {
+      "source": "/dev/shm/px4-v07-1pm4n4_m/sess001/log001.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run02/log001.ulg",
+      "sha256": "f2d98566ab9d3ddf64845e89a35face495285acbc1aaf78fbbc3a3fec5f8f24a",
+      "bytes": 110545562,
+      "durable_copy_verified": true,
+      "volatile_source_retained": true
+    },
+    {
+      "source": "/dev/shm/px4-v07-ooti1ucv/2026-09-29/06_44_58.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run03/06_44_58.ulg",
+      "sha256": "5eb857b6c20d79947f520fd5dcd57fbdeea2b6fccb99bb8a09d9c5cde17e8176",
+      "bytes": 221044,
+      "durable_copy_verified": true,
+      "volatile_source_retained": true
+    },
+    {
+      "source": "/dev/shm/px4-v07-ooti1ucv/sess001/log001.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run03/log001.ulg",
+      "sha256": "a83bff3ae7998494e5018dfd141a3f2d4f44ca65d9123900654592e030fdeda8",
+      "bytes": 108374341,
+      "durable_copy_verified": true,
+      "volatile_source_retained": true
+    },
+    {
+      "source": "/dev/shm/px4-v07-766kz11i/2026-09-29/06_47_39.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run04/06_47_39.ulg",
+      "sha256": "92e2ac53a6139df505e34426905ce368edb40b8e6395c0cf7eb206b2f25a2cec",
+      "bytes": 197746,
+      "durable_copy_verified": true,
+      "volatile_source_retained": true
+    },
+    {
+      "source": "/dev/shm/px4-v07-766kz11i/sess001/log001.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run04/log001.ulg",
+      "sha256": "4b5599e7ece207065df995c36a02940b26c39a03cfedb7671b3442e93195a867",
+      "bytes": 109886484,
+      "durable_copy_verified": true,
+      "volatile_source_retained": true
+    },
+    {
+      "source": "/dev/shm/px4-v07-1y3_j66z/2026-09-29/06_50_23.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run05/06_50_23.ulg",
+      "sha256": "5f93a9502904d473ba3ebf2325663e0ac8925b28bcc63bf40b102cf0a50d468e",
+      "bytes": 207559,
+      "durable_copy_verified": true,
+      "volatile_source_retained": true
+    },
+    {
+      "source": "/dev/shm/px4-v07-1y3_j66z/sess001/log001.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run05/log001.ulg",
+      "sha256": "f8e8de65ccc5cf3c6365201e1b94662fb5441606a0f5c23d8e174701e00ab8f9",
+      "bytes": 109852612,
+      "durable_copy_verified": true,
+      "volatile_source_retained": true
+    },
+    {
+      "source": "/dev/shm/px4-v07-lfrpeot3/2026-09-29/06_53_07.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run06/06_53_07.ulg",
+      "sha256": "1dd09d2053e44362d32e95c38c2e7306ff77de31559a91ec57d64d5b1b12759a",
+      "bytes": 222271,
+      "durable_copy_verified": true,
+      "volatile_source_retained": true
+    },
+    {
+      "source": "/dev/shm/px4-v07-lfrpeot3/sess001/log001.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run06/log001.ulg",
+      "sha256": "575ebe9a0622253eb4d4cb2c324cc4511b01c7f1ea1ee50984c8958bb78af19a",
+      "bytes": 109491864,
+      "durable_copy_verified": true,
+      "volatile_source_retained": true
+    },
+    {
+      "source": "/dev/shm/px4-v07-kp3jw9sh/2026-09-29/06_55_51.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run07/06_55_51.ulg",
+      "sha256": "4d7be28341d83d8b34386b26d2cfeb646518beb9fed21dfed86b28c1320f3d41",
+      "bytes": 199149,
+      "durable_copy_verified": true,
+      "volatile_source_retained": true
+    },
+    {
+      "source": "/dev/shm/px4-v07-kp3jw9sh/sess001/log001.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run07/log001.ulg",
+      "sha256": "919bbb4ff64c29207c9deb99cc948e51f2aaa443d8b8dc48f427ecd574ea1f1f",
+      "bytes": 107673372,
+      "durable_copy_verified": true,
+      "volatile_source_retained": true
+    },
+    {
+      "source": "/dev/shm/px4-v07-ash_7zkz/2026-09-29/06_58_32.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run08/06_58_32.ulg",
+      "sha256": "a561802f2a235bd254a431ad8ab77c699e3115a1eb5c094aaebea7c711cf3a2c",
+      "bytes": 207087,
+      "durable_copy_verified": true,
+      "volatile_source_retained": true
+    },
+    {
+      "source": "/dev/shm/px4-v07-ash_7zkz/sess001/log001.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run08/log001.ulg",
+      "sha256": "89dcef007a911d86689ffc24e030de38057dcf26bb9b5ea660039ceadf9f651b",
+      "bytes": 106907684,
+      "durable_copy_verified": true,
+      "volatile_source_retained": true
+    },
+    {
+      "source": "/dev/shm/px4-v07-vrwk9vdc/2026-09-29/07_01_12.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run09/07_01_12.ulg",
+      "sha256": "2e36a67eca22769d4e2bd8686743d930a4f3bb1b56f80382bd7be65becac2c9d",
+      "bytes": 218272,
+      "durable_copy_verified": true,
+      "volatile_source_retained": true
+    },
+    {
+      "source": "/dev/shm/px4-v07-vrwk9vdc/sess001/log001.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run09/log001.ulg",
+      "sha256": "c49ab45674cbc1315b3f1645810947d89605635915ff0a003368ccdda2bd8fc6",
+      "bytes": 108948730,
+      "durable_copy_verified": true,
+      "volatile_source_retained": true
+    },
+    {
+      "source": "/dev/shm/px4-v07-4p1u4no5/2026-09-29/07_03_54.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run10/07_03_54.ulg",
+      "sha256": "ce26fb12f2a27addd5249b125320211e4a6ff19b0192b78d6cc15a008eeddca4",
+      "bytes": 208650,
+      "durable_copy_verified": true,
+      "volatile_source_retained": true
+    },
+    {
+      "source": "/dev/shm/px4-v07-4p1u4no5/sess001/log001.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run10/log001.ulg",
+      "sha256": "a86ca1a9dfdff0bc318be6889683a7b406ff0f18e3b4ab85439a83a3ad236de4",
+      "bytes": 108779424,
+      "durable_copy_verified": true,
+      "volatile_source_retained": true
+    },
+    {
+      "source": "/dev/shm/px4-v07-wzi8otmx/2026-09-29/07_06_37.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run11/07_06_37.ulg",
+      "sha256": "07daa72670c47bde8e5ec5e257305371d28b6fce006e6c9269b0ea85b3ec976a",
+      "bytes": 217350,
+      "durable_copy_verified": true,
+      "volatile_source_retained": true
+    },
+    {
+      "source": "/dev/shm/px4-v07-wzi8otmx/sess001/log001.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run11/log001.ulg",
+      "sha256": "2b560d80af90a95a12bdad0dc73acaf6cb8281de37d99a2e0bdb5b470706be17",
+      "bytes": 107703112,
+      "durable_copy_verified": true,
+      "volatile_source_retained": true
+    },
+    {
+      "source": "/dev/shm/px4-v07-p_fm4x4t/2026-09-29/07_09_17.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run12/07_09_17.ulg",
+      "sha256": "e52166b1cdb6cb31f390aa0e718f6e438baecf43fab12cf590322fa1617a68ee",
+      "bytes": 197446,
+      "durable_copy_verified": true,
+      "volatile_source_retained": true
+    },
+    {
+      "source": "/dev/shm/px4-v07-p_fm4x4t/sess001/log001.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run12/log001.ulg",
+      "sha256": "ba1096e74ec7e5612a23b1e86ae52f40c7acd8733f5af78629efd653adf57090",
+      "bytes": 107353191,
+      "durable_copy_verified": true,
+      "volatile_source_retained": true
+    },
+    {
+      "source": "/dev/shm/px4-v07-w5n5u5jn/2026-09-29/07_11_57.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run13/07_11_57.ulg",
+      "sha256": "f2a7ec52ca1a9d7f07cf9865a3173878eed2775d53ddf16cf0c9555407470347",
+      "bytes": 222891,
+      "durable_copy_verified": true,
+      "volatile_source_retained": true
+    },
+    {
+      "source": "/dev/shm/px4-v07-w5n5u5jn/sess001/log001.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run13/log001.ulg",
+      "sha256": "a9d352dda27f976b1ff367feaa14388d00244adf4aff360e31ddb59b9ca3340e",
+      "bytes": 81245790,
+      "durable_copy_verified": true,
+      "volatile_source_retained": true
+    }
+  ],
+  "independent_replays": 12,
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/offline_failure01/test_audit.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/protocol01/test_tuning.py"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "original_artifact_count": 729,
+  "original_index_sha256": "60dd6b0cd7225cf2b7de3234eb9d4db52b2737be3ddf79ce742f647d5973c562"
+}

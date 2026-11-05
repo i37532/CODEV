@@ -1,0 +1,17 @@
+{
+  "stage": "V04-handoff06-offline",
+  "flight_authorized": false,
+  "execution_ready": false,
+  "maximum_attempts": 0,
+  "seeds": [],
+  "jobs": [],
+  "parent_source": "2522940fbc0038e1dd170a7207e74190d86552ab",
+  "inherit": "protocol05 numerical/controller/log/heading/height/observation/landing gates unchanged; never inherit its budget or authorization",
+  "change": "POSCTL local trajectory XY hold target -> explicit global COMMAND_INT XY, altitude and once-frozen yaw; not a request to retain an invalid Navigator triplet",
+  "source": "After existing heading admission, capture raw onboard trajectory_setpoint XY at the latest validated local_position sample, preceding target <=40ms old; original global reference unchanged; no actual-position substitution, no truth",
+  "wire": {"message": "COMMAND_INT", "command": 192, "frame": 5, "param4": "radians for this pinned PX4", "x_y": "nearest signed integer degrees times 1e7", "z": "float32 AMSL altitude from original ground reference", "maximum_sends": 1},
+  "projection": {"kind": "ECL azimuthal equidistant", "radius_m": 6371000, "encoding_error_limit_m": 0.02, "latitude_domain_deg": [-85,85], "local_domain_radius_m": 10000},
+  "handoff": {"ack_target_wall_timeout_s": 5, "before_acceptance": "bounded pending joins fresh addressed accepted ACK, AUTO_LOITER and matching post-command Navigator target; intermediate stale/invalid/temporary targets are recorded, never accepted", "after_acceptance": "no mode or target loss; error latch and no resend; raw logs must show continuous target from first qualified readback through observation", "original_preparation_timeout_s": 150},
+  "downstream": "Raw Navigator lat/lon equals integer wire /1e7 exactly; float alt/yaw equals wire exactly. CLI compared to pinned 6/4 decimal printing only. During 3s entry/observation local and consumed XY finite and <=0.05m from encoded target, original height/yaw gates retained.",
+  "limitations": "Offline replay and synthetic target responses do not prove real command-to-Navigator/FlightTask scheduling or flight. Batch capture/seed registration/clean source rebuild and explicit new flight authorization remain necessary. Old failed runs remain failed."
+}

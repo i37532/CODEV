@@ -1,0 +1,432 @@
+{
+  "scope": "Iris SITL; original position P, Y/Z velocity PID, attitude and all rate PID; X local NED PID vs ESTA only.",
+  "randomness": "Existing isolated M10 IMU engine seeding only, original noise equations/rates/densities. Same-seed initial 5000 innovation records pair within 1e-10; different seeds differ >1e-6. GPS/mag/barometer original default engines, host scheduling not randomized. Not six independent all-source random draws.",
+  "simulation_speed": 1,
+  "startup_overrides": {
+    "MC_RTC_MODE": 0,
+    "MC_STA_AXES": 0,
+    "MC_RTC_DIV": 1,
+    "MC_RATT_TEST": 0,
+    "MC_STA_TKO_MGT": 0,
+    "MIS_TAKEOFF_ALT": 2.5,
+    "SDLOG_DIRS_MAX": 1000,
+    "SDLOG_MODE": 1,
+    "MPC_VC_MODE": 0,
+    "MPC_VC_AXES": 0,
+    "MPC_VCT_TEST": 1,
+    "MPC_VC_L1_X": 1,
+    "MPC_VC_L2_X": 0.2,
+    "MPC_VC_NU_X": 0.4,
+    "MPC_VC_A_X": 0.8
+  },
+  "logging": "Preserve startup SDLOG_PROFILE bits, OR 16; restart logger -b 256 -r 1000 -t -f before warmup",
+  "bounds": {
+    "tilt_deg": 15,
+    "height_flight_m": [
+      -0.5,
+      4
+    ],
+    "height_hover_error_m": 1,
+    "height_at_hover_entry_error_m": 0.5,
+    "xy_speed_m_s": 1,
+    "xy_from_start_m": 2,
+    "vz_hover_m_s": 0.6,
+    "vz_takeoff_landing_m_s": 3.5,
+    "hover_yaw_error_deg": 20,
+    "normalized_command_abs": 1.001
+  },
+  "data_gate": {
+    "hover_duration_s": [
+      60,
+      62
+    ],
+    "maximum_topic_gap_s": 0.25,
+    "minimum_hover_samples": 600,
+    "maximum_pairing_age_us": 20000,
+    "minimum_metric_window_s": 59.75,
+    "required_rate_sequence_missing": 0,
+    "maximum_ulog_dropouts": 0,
+    "minimum_actuator_match_fraction": 0.8,
+    "maximum_actuator_match_gap_s": 0.25
+  },
+  "selection_gate": {
+    "requested_mode": "exact job mode",
+    "requested_axes": "exact job axes",
+    "effective_mode": "exact job mode",
+    "effective_axes": "exact job axes",
+    "pending": 0,
+    "reject": 0,
+    "maximum_gap_us": 250000,
+    "minimum_flight_samples": 600,
+    "publish_sequence_missing": 0,
+    "pid_calls_when_enabled": 1,
+    "pid_calls_when_disabled": 0,
+    "positive_input_timestamp_deltas": true,
+    "armed_active_samples_required": true
+  },
+  "excitation": {
+    "parameter": "MPC_VCT_TEST=1 (default0, SITLonly)",
+    "direction": "local NED X/North",
+    "amplitude_m_s": 0.2,
+    "period_s": 8,
+    "duration_s": 32,
+    "envelope": "sin(pi*t/32)^2",
+    "formula": "0.2*sin(2*pi*t/8)*sin(pi*t/32)^2",
+    "settle_after_auto_loiter_s": 12,
+    "axes_unmodified": "Y/Z; original position P remains active",
+    "instant_integral_bound_m": 0.55
+  },
+  "diagnostic_gate": {
+    "minimum_samples": 600,
+    "sequence_missing": 0,
+    "maximum_gap_s": 0.04,
+    "raw_dt_domain_s": [
+      0.002,
+      0.04
+    ],
+    "mode": "exact job mode",
+    "axes": "exact job axes",
+    "minimum_excitation_samples": 2500,
+    "minimum_excitation_span_s": 31.96,
+    "full_window_inside_hover": true,
+    "output_exact_minimum_coverage": 0.8,
+    "output_exact_maximum_gap_s": 0.25,
+    "accepted_output_difference": 0,
+    "nu_in_pid": "NaN; ESTA finite X only, Y/Z NaN; ideal/applied states separately checked",
+    "pid_calls": 1,
+    "strict_failures": "Any required check fails: stop and preserve, no additional flight."
+  },
+  "candidate": {
+    "MPC_VC_L1_X": 1,
+    "MPC_VC_L2_X": 0.2,
+    "MPC_VC_NU_X": 0.4,
+    "MPC_VC_A_X": 0.8
+  },
+  "pair_gate": {
+    "relative_rmse_limit": 1.25,
+    "absolute_velocity_rmse_allowance_m_s": [
+      0.02,
+      0.02,
+      0.01
+    ],
+    "absolute_yaw_rmse_allowance_rad": 0.02,
+    "absolute_position_rmse_allowance_m": 0.05,
+    "source": "V00/V01 PID noise scale (X .010751,Y .008080,Z .005138m/s); V03 provides consumed-state baseline. Fixed before any ESTA data.",
+    "per_pair_rule": "candidate_rmse <= 1.25*paired_PID_rmse + frozen absolute allowance; each commanded/noncommanded axis separately",
+    "maximum_constraint_fraction": 0.05,
+    "maximum_continuous_constraint_s": 0.5,
+    "maximum_faults": 0,
+    "maximum_failsafe": 0,
+    "maximum_hover_yaw_error_deg": 20,
+    "maximum_hover_height_error_m": 1,
+    "maximum_position_deviation_m": 2,
+    "maximum_tilt_deg": 15,
+    "maximum_xy_speed_m_s": 1,
+    "maximum_hover_vz_m_s": 0.6,
+    "maximum_candidate_flights_before_reauthorization": 6,
+    "candidates": 1,
+    "order": "future V04: PID/ESTA paired x3; needs user authorization and gains/seed freeze",
+    "parameter_search_flights": 0,
+    "window": "Velocity RMSE complete 32s excitation; position and yaw RMSE 60s observation, identical windows per mode. Componentwise position comparison.",
+    "calculation": "ESTA <= 1.25 * same-seed PID + fixed allowance; acceptance is development noninferiority, not scientific superiority.",
+    "noise_pair_max_difference": 1e-10,
+    "noise_distinct_min_difference": 0.000001
+  },
+  "parameter_restore": "Archive original complete EEPROM bytes before experiment, restore exact bytes after each stopped run; save runtime full parameters before/after",
+  "failure_action": "Original owned SITL cleanup, no automatic fallback. Experimental invalid output gated out; retained prior setpoint is NOT a safe-state claim. Preserve every attempted run; stop batch at first required failure including pair gate.",
+  "world_verification": "Exactly one live gzserver, same session as launch session leader; exact absolute .world argv, PX4_SITL_WORLD and master URI; frozen file SHA-256. Model path checked separately from launcher console.",
+  "not_authorized": [
+    "hardware",
+    "ISTA",
+    "Proper-ISTA",
+    "old I05 continuation",
+    "push",
+    "V05",
+    "AXES3/7",
+    "extra tuning"
+  ],
+  "plugins": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/plugins01",
+  "stage": "V04-protocol03",
+  "status": "execution_requires_clean_commit_and_full_offline_verification",
+  "execution_ready": true,
+  "flight_authorized": true,
+  "repair_head": "65d1b5c4e2177547e369ba2a750581f1bb894c56",
+  "branch": "research/sta-velocity-control",
+  "inherit": {
+    "path": "research/sta-velocity-control/v04/protocol01/protocol.json",
+    "sha256": "3e4379bfc9aff61caafc5e69c4fa97060a3b921a23990beb01fc5e27129075f7",
+    "unchanged_fields": [
+      "scope",
+      "randomness",
+      "simulation_speed",
+      "startup_overrides",
+      "logging",
+      "bounds",
+      "data_gate",
+      "selection_gate",
+      "excitation",
+      "diagnostic_gate",
+      "candidate",
+      "pair_gate",
+      "parameter_restore",
+      "failure_action",
+      "world_verification",
+      "not_authorized",
+      "plugins"
+    ]
+  },
+  "budget": {
+    "maximum_new_attempts": 6,
+    "old_remaining_attempts_reused": 0,
+    "extra_smoke_or_tuning_attempts": 0,
+    "automatic_retry": false,
+    "stop_on_any_required_failure": true,
+    "attempt_consumed_at": "before starting the owned project launcher, including startup/preflight failures",
+    "seeds": [
+      9201,
+      9202,
+      9203
+    ],
+    "jobs": [
+      {
+        "id": "run01",
+        "seed": 9201,
+        "mode": 0,
+        "axes": 0
+      },
+      {
+        "id": "run02",
+        "seed": 9201,
+        "mode": 1,
+        "axes": 1
+      },
+      {
+        "id": "run03",
+        "seed": 9202,
+        "mode": 0,
+        "axes": 0
+      },
+      {
+        "id": "run04",
+        "seed": 9202,
+        "mode": 1,
+        "axes": 1
+      },
+      {
+        "id": "run05",
+        "seed": 9203,
+        "mode": 0,
+        "axes": 0
+      },
+      {
+        "id": "run06",
+        "seed": 9203,
+        "mode": 1,
+        "axes": 1
+      }
+    ],
+    "order_reason": "PID first within every pair to verify the repaired task before ESTA. Fixed order is not randomized; order bias must be disclosed."
+  },
+  "height_task": {
+    "coordinate": "local NED, estimated height = frozen_ground_z - local_position.z; not Gazebo truth or terrain clearance",
+    "target_height_m": 2.5,
+    "ground_freeze": "last valid pre-arm warmup local_position; archive timestamp/sample, xyz, heading, ref_alt/ref_timestamp and all available reset counters",
+    "local_target_z": "frozen_ground_z - 2.5",
+    "global_target_alt_m": "frozen_ref_alt - local_target_z",
+    "target_source": "original navigator -> flight_mode_manager -> trajectory_setpoint; no external trajectory/attitude/rate publisher",
+    "takeoff": "unchanged commander takeoff; wait for armed airborne POSCTL after original navigation completion; do not issue current-position Hold",
+    "reposition": {
+      "command": "MAV_CMD_DO_REPOSITION via existing local-only MAVLink connection, once",
+      "param1": -1,
+      "param2": 1,
+      "param3": 0,
+      "param4": "frozen pre-arm heading in radians, matching this pinned CODEV receiver/navigator raw-field implementation only",
+      "param5": "NaN",
+      "param6": "NaN",
+      "param7": "float32(frozen_ref_alt - local_target_z)",
+      "xy": "retain valid takeoff triplet lat/lon; must capture and verify unchanged",
+      "confirmation": 0,
+      "maximum_sends": 1,
+      "ack_wall_timeout_s": 5,
+      "require": "fresh accepted ACK AND AUTO_LOITER AND navigator target readback; ACK alone does not prove target acceptance",
+      "altitude_readback_tolerance_m": 0.02,
+      "yaw_readback_tolerance_rad": 0.001,
+      "coordinate_reference_change": "abort, no rebasing or resend in this batch"
+    },
+    "entry": {
+      "height_m": [
+        2,
+        3
+      ],
+      "abs_vz_strictly_below_m_s": 0.2,
+      "continuous_sim_seconds": 3,
+      "local_target_z_tolerance_m": 0.05,
+      "local_target_vz_abs_max_m_s": 0.05,
+      "require": "armed, AUTO_LOITER, not landed, no ground_contact, valid position/velocity, fixed yaw, healthy diagnostics, confirmed target and unchanged reference/reset counters",
+      "host_max_sample_gap_s": 1,
+      "ulog_max_sample_gap_s": 0.04,
+      "height_ready_deadline_after_excitation_gate_s": 10,
+      "hover_start_event": "only after entry passes; preserve candidate entry samples; verify the final 3 seconds independently in actual ULog"
+    },
+    "excitation_clock": "unchanged first valid airborne AUTO_LOITER gate starts existing 12s settle; ready by gate+10s, else abort before gate+12s. Derive gate from diagnostic timestamp_sample and excitation_time, not host receipt time. Never reset/restart excitation while armed.",
+    "observation_sim_s": 60,
+    "observation_accepted_duration_s": [
+      60,
+      62
+    ],
+    "require_excitation_inside_observation": true,
+    "landing": "unchanged commander mode auto:land; require landed and automatic disarm",
+    "wall_timeouts_s": {
+      "startup": 180,
+      "warmup": 180,
+      "takeoff_including_height_entry": 150,
+      "hover": 240,
+      "landing": 150
+    }
+  },
+  "additional_log_gates": {
+    "window": "takeoff_command <= timestamp < landed_disarmed, enabled samples; excitation fault also checked throughout the armed interval",
+    "required_zero_fields": [
+      "first_fail",
+      "retry_result"
+    ],
+    "first_input_required": true,
+    "first_input_rule": "decode validity bits using selected p/v/FF channels; NaN-disabled channels are not automatically failures",
+    "missing_new_field": "reject, never substitute zero",
+    "retry_policy": "even valid second update rejects this comparison attempt; first failure is not erased by final valid=1",
+    "readback_evidence": "archive command/ACK, pre/post navigator triplet, trajectory and consumed p_sp/v_sp/yaw with timestamps; target/height readiness independently checked from ULog",
+    "observed_not_claimed": "online CLI polling cannot guarantee per-callback abort; any offline mandatory failure stops before the next attempt",
+    "excitation_fault_policy": "Raw fault preserved. Require zero until completed 32s excitation and >=60s observation, unique planned land command and actual AUTO_LAND. Only exact Gate=2 with zero excitation then allowed until disarm; clock/controller bits, early gate, mode return or nonzero excitation always reject; require disarm clears."
+  },
+  "metrics": {
+    "primary": "time-weighted X velocity RMSE over complete excitation_time [0,32); consumed v-v_sp, no interpolation",
+    "secondary": "Y/Z RMSE and IAE in same 32s; position XYZ/yaw RMSE and height in 60s observation; constraints, applied/ideal nu, thrust and actual-update acceleration TV",
+    "pair_rules": "inherit protocol01 pair_gate numerical limits unchanged; each same-seed pair must pass before next pair",
+    "missing": "retain attempted failure; no replacement, zero fill or imputed pair; no V04 pass unless all six accepted and all three pairs pass",
+    "historical": "old V00/V03/V04 runs are descriptive only, never paired with this batch",
+    "interpretation": "development admission only; n=3 paired seeds cannot establish general superiority"
+  },
+  "implementation_gate": {
+    "runner": "scripts/run_v04_protocol03.py + run_v04_flight03.py; isolated explicit height command",
+    "analyzer": "scripts/analyze_v04_protocol03.py; inherits unchanged numerical gates and independently decodes phase/height/first failure",
+    "tests_required": [
+      "command encoding/ACK/readback and heading units",
+      "height/reference conversion and reset rejection",
+      "3s entry and 10s deadline, stale/duplicate/backward samples",
+      "event ordering and full excitation inside observation",
+      "first failure and valid/invalid retry rejection, missing fields",
+      "stop-on-failure and exactly six single-use attempts",
+      "source/model/plugin/firmware checks and exact EEPROM restore",
+      "full repaired C++/Python regressions and no-flight SITL/Gazebo build"
+    ],
+    "before_first_launch": "user authorization + implemented/tested runner/analyzer + explicit source commit + clean rebuild and full SHA manifest + fresh seed-use audit; otherwise no launch",
+    "need_new_approval_if": "gains, thresholds, task windows, seeds/order/budget or production control/Takeoff/nav/estimator/model logic needs another change"
+  },
+  "artifacts": {
+    "new_run_root": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series02",
+    "existing_directory": "reject, no resume or overwrite",
+    "source": "one clean execution commit for all six; design freeze commit is not yet an execution-ready source assertion",
+    "hashes": "source, binary, assets/plugins, expanded protocol, actual parameters, full raw ULog and all failed attempts"
+  },
+  "authorization": "User approved new six-attempt height batch, then explicitly approved minimal planned-landing Gate=2 classification. No retries, tuning, XY or production control changes.",
+  "maximum_attempts": 6,
+  "jobs": [
+    {
+      "id": "run01",
+      "seed": 9201,
+      "mode": 0,
+      "axes": 0,
+      "parameters": {
+        "MPC_VC_L1_X": 1,
+        "MPC_VC_L2_X": 0.2,
+        "MPC_VC_NU_X": 0.4,
+        "MPC_VC_A_X": 0.8,
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0
+      }
+    },
+    {
+      "id": "run02",
+      "seed": 9201,
+      "mode": 1,
+      "axes": 1,
+      "parameters": {
+        "MPC_VC_L1_X": 1,
+        "MPC_VC_L2_X": 0.2,
+        "MPC_VC_NU_X": 0.4,
+        "MPC_VC_A_X": 0.8,
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1
+      }
+    },
+    {
+      "id": "run03",
+      "seed": 9202,
+      "mode": 0,
+      "axes": 0,
+      "parameters": {
+        "MPC_VC_L1_X": 1,
+        "MPC_VC_L2_X": 0.2,
+        "MPC_VC_NU_X": 0.4,
+        "MPC_VC_A_X": 0.8,
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0
+      }
+    },
+    {
+      "id": "run04",
+      "seed": 9202,
+      "mode": 1,
+      "axes": 1,
+      "parameters": {
+        "MPC_VC_L1_X": 1,
+        "MPC_VC_L2_X": 0.2,
+        "MPC_VC_NU_X": 0.4,
+        "MPC_VC_A_X": 0.8,
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1
+      }
+    },
+    {
+      "id": "run05",
+      "seed": 9203,
+      "mode": 0,
+      "axes": 0,
+      "parameters": {
+        "MPC_VC_L1_X": 1,
+        "MPC_VC_L2_X": 0.2,
+        "MPC_VC_NU_X": 0.4,
+        "MPC_VC_A_X": 0.8,
+        "MPC_VC_MODE": 0,
+        "MPC_VC_AXES": 0
+      }
+    },
+    {
+      "id": "run06",
+      "seed": 9203,
+      "mode": 1,
+      "axes": 1,
+      "parameters": {
+        "MPC_VC_L1_X": 1,
+        "MPC_VC_L2_X": 0.2,
+        "MPC_VC_NU_X": 0.4,
+        "MPC_VC_A_X": 0.8,
+        "MPC_VC_MODE": 1,
+        "MPC_VC_AXES": 1
+      }
+    }
+  ],
+  "seeds": [
+    9201,
+    9202,
+    9203
+  ],
+  "stop_on_any_required_failure": true,
+  "automatic_retry": false,
+  "predecessor": {
+    "path": "research/sta-velocity-control/v04/protocol02/protocol.json",
+    "sha256": "4d81ace6bd989f77eb042be87f34fea6bdadee5d3da664002b275ad6cff8c5bf",
+    "audit_head": "a367c7afa561e5f3829f39ad6092b51e63afd2bf",
+    "sole_acceptance_change": "phase-specific planned landing Gate=2; historical rejection unchanged"
+  }
+}

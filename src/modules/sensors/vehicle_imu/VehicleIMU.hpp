@@ -73,6 +73,7 @@ public:
 	void PrintStatus();
 
 private:
+	friend class VehicleIMUTestAccess;
 	void ParametersUpdate(bool force = false);
 	bool Publish();
 	void Run() override;

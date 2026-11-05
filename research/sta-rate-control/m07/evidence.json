@@ -1,0 +1,1536 @@
+{
+  "source_head": "4ee6b3067e407f9f8d3f6121682304e749bd9511",
+  "branch": "research/sta-rate-control",
+  "worktree": "M src/modules/mc_rate_control/StaRateControl/CMakeLists.txt\n?? research/sta-rate-control/scripts/m07_kernel_probe.cpp\n?? research/sta-rate-control/scripts/reference_m07.py\n?? research/sta-rate-control/scripts/summarize_m07.py\n?? research/sta-rate-control/scripts/verify_m07.py\n?? src/modules/mc_rate_control/StaRateControl/IstaRateControl.cpp\n?? src/modules/mc_rate_control/StaRateControl/IstaRateControl.hpp\n?? src/modules/mc_rate_control/StaRateControl/IstaRateControlTest.cpp",
+  "sources": {
+    "src/modules/mc_att_control/AttitudeControl/AttitudeControl.cpp": "da8b346114b9126a0f3e79eeb3ee6c5e3b219350caa6add259b36bba02c8e54f",
+    "src/modules/mc_att_control/AttitudeControl/AttitudeControl.hpp": "fdfb13e7b82473b95c3ea37bc93713e3a329c829bdec44ab6acfacbd53530912",
+    "src/modules/mc_att_control/AttitudeControl/AttitudeControlTest.cpp": "86f74c86675a7e62b6777281dfa37f1f4cf179f49867b45812a455d83e9b8b4c",
+    "src/modules/mc_att_control/AttitudeControl/CMakeLists.txt": "5f41e5dae423d606da5f48221470e764395eb39e97dbc2880d6945ffaeb0310a",
+    "src/modules/mc_att_control/AttitudeControl/ResearchPulse.hpp": "d2b2ac26a4365ce8200211ffa442eda808eb6bddfaac55c6f6b723fbfcd6da61",
+    "src/modules/mc_att_control/CMakeLists.txt": "a182835c27ed171a6fa213e2256e15b529e604b6a483bd1292b8ff99ca8445a2",
+    "src/modules/mc_att_control/mc_att_control.hpp": "b2e6cc1ef693a756e143d7d187d8129b03deee3527a01150776f4f6706aec977",
+    "src/modules/mc_att_control/mc_att_control_main.cpp": "7bcd6afca7df77c380669932dd94ab8a678218cb4db5d047fbfe2f672682b3a1",
+    "src/modules/mc_att_control/mc_att_control_params.c": "de66daea2c0c714c246d70f825c76118a1e25399e99438fb9ca0cd1cbbcf8e0b",
+    "src/modules/mc_rate_control/CMakeLists.txt": "a413fd82245209881d1cd99b5f0afc8b093ec4770e2bfd9da54774e1e498b093",
+    "src/modules/mc_rate_control/MulticopterRateControl.cpp": "0202e75238dbdeee3517061ca6c393aaaf02d84756f719b5ccc602bbcceb0b18",
+    "src/modules/mc_rate_control/MulticopterRateControl.hpp": "57e0d4cf90ecf3589aa22b198f81556d40faa7ac25e049fb119d4c9cdc1bdf03",
+    "src/modules/mc_rate_control/RateControl/CMakeLists.txt": "35e27d73e90715f5670647da8c30d2051ffd82cc8501939887518125c72969ab",
+    "src/modules/mc_rate_control/RateControl/ControllerSelection.hpp": "97fa38c7da0fec36076def56d5257f97ccf7070d78cb9bce27e6e1cbdb814a0f",
+    "src/modules/mc_rate_control/RateControl/ControllerSelectionTest.cpp": "e860cb52d170eecef64e8e7daf3e5682c9f6d97bd049ca989752154e7f131cbe",
+    "src/modules/mc_rate_control/RateControl/RateControl.cpp": "9f90c0ea42ee672138f9aaa76cfeea6ea1abf5df4db3d889c36750dfd1f66a4d",
+    "src/modules/mc_rate_control/RateControl/RateControl.hpp": "ea8cc37349e899f4bd3d914a5220b92a32c7c5078fe4766b6876ad08bd76c37c",
+    "src/modules/mc_rate_control/RateControl/RateControlDispatcher.hpp": "366dc8d143a1d5469c2808ce48465e5bc290557c82a7ee677abaaa60371146c5",
+    "src/modules/mc_rate_control/RateControl/RateControlDispatcherTest.cpp": "f181d28934331c120b740345e40071d569d8db146c61d1f2d6a89627b6216ff9",
+    "src/modules/mc_rate_control/RateControl/RateControlTest.cpp": "2b3c2557aab0c81438ea2861ba62ac824b4d55180d888ca978d8b6890269989c",
+    "src/modules/mc_rate_control/RateControl/test/M00RateControl.cpp": "7c958f2d46eb0e415f08c9377676255eb0e18a7205e3ed5c270972c2fd16e27e",
+    "src/modules/mc_rate_control/RateControl/test/M00RateControl.hpp": "b3b055e4d9fff1a52830bdd22b25160d9ad62c2cbd3b9107ceebc6f1eca615ba",
+    "src/modules/mc_rate_control/RateControl/test/README.md": "a296242a79bcaa6e178d2b3631df851e7a0e10d1391b2ca1258639451e573982",
+    "src/modules/mc_rate_control/StaRateControl/CMakeLists.txt": "936788f43bc9e4bb36ad55fe57f78607f0a22bdf74ff5b10303ab487c6599462",
+    "src/modules/mc_rate_control/StaRateControl/IstaRateControl.cpp": "ac66bc2688b3f488e9817883ba5ca1ec46619dc4abca149cf4d032fb282ce99d",
+    "src/modules/mc_rate_control/StaRateControl/IstaRateControl.hpp": "0a066924626bccb4f45aed9644dc6c97b1bef930186d3705c223548a3fd879c8",
+    "src/modules/mc_rate_control/StaRateControl/IstaRateControlTest.cpp": "a65d536abb81025676d2a0387ddb06c26945d8a040ed22530d1846e1d98a57e7",
+    "src/modules/mc_rate_control/StaRateControl/StaAxesApplication.hpp": "62ec3e3a4c53828906ee85ee19d02af5ad93baa092968934d221ca9ba88406ee",
+    "src/modules/mc_rate_control/StaRateControl/StaAxesApplicationTest.cpp": "1667c7899b31a9a172ab636f989c59b34369353393d84633864eb066833738e5",
+    "src/modules/mc_rate_control/StaRateControl/StaProtection.cpp": "583520354fa4ca4da083476a3c6bcd5bd37ba3be75e3e21c0c65c9ce3d7a8ef6",
+    "src/modules/mc_rate_control/StaRateControl/StaProtection.hpp": "4d9ebc8aa7fd404c56a0eb7a31a6f944f1bf70c7742942acc30e47bcfbacddd6",
+    "src/modules/mc_rate_control/StaRateControl/StaProtectionTest.cpp": "8e7322d6b65485226876a2117f4b99f8a6f9fd49bddcbd1b113bd43453b5b7da",
+    "src/modules/mc_rate_control/StaRateControl/StaRateControl.cpp": "0cad4e30c2e912e4b2d3ade219b1fa3ee6dbc80336cd62ea17a8cecd52cd7989",
+    "src/modules/mc_rate_control/StaRateControl/StaRateControl.hpp": "9533d6e4d081bc685018fc3698ec1cab4b8098612ff2a1e33c6b75e42ff310fd",
+    "src/modules/mc_rate_control/StaRateControl/StaRateControlTest.cpp": "a112a7ddf104da08e3d3c66efa9eea223b4378095fd9d4d63d1d4fc3b916863d",
+    "src/modules/mc_rate_control/StaRateControl/StaRollApplication.hpp": "d1a97904e06bff04920f53f9cac61e8c3a19be34d65e4fdb571d68911e8b07de",
+    "src/modules/mc_rate_control/StaRateControl/test/ReferenceSamples.hpp": "302d2f5a7004ab0a02a8ba510c5c945e55828ef345ecce78a586a9a341c59be1",
+    "src/modules/mc_rate_control/mc_rate_control_params.c": "77b7c5f895ae8d26abe89ff6d4d29e9616c3def67f561ee756a266cb3a4ac1a0",
+    "research/sta-rate-control/scripts/m07_kernel_probe.cpp": "b2c15b8ea6e7f07a508a8157d2d3c5d29032eae44915cc2864a8b1a7e8ed59cc",
+    "research/sta-rate-control/scripts/reference_m07.py": "bfd265b4c97ebda973a7fb99a23727f0487a85e0e2506270f264f35c32fbd85b",
+    "research/sta-rate-control/scripts/verify_m07.py": "d633cfe5c999866511b1dea8754c71b264d216dc073209aaaedf0d1d1a816b77",
+    "research/sta-rate-control/scripts/summarize_m07.py": "997f473e38fe379446c1277cf86947ad29807fc72ce33d1415228d1f6e9e7b88"
+  },
+  "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+  "matlab": null,
+  "octave": null,
+  "matlab_executed": false,
+  "simulator_started": false,
+  "tests": {
+    "IstaRateControl": {
+      "tests": 13,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0
+    },
+    "StaRateControl": {
+      "tests": 11,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0
+    },
+    "StaProtection": {
+      "tests": 18,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0
+    },
+    "StaAxesApplication": {
+      "tests": 12,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0
+    },
+    "RateControl": {
+      "tests": 1,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0
+    },
+    "RateControlDispatcher": {
+      "tests": 4,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0
+    },
+    "ControllerSelection": {
+      "tests": 5,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0
+    },
+    "GyroPublicationGuard": {
+      "tests": 6,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0
+    },
+    "AttitudeControl": {
+      "tests": 3,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0
+    },
+    "python_research": {
+      "tests": 27
+    },
+    "python_convenience": {
+      "tests": 12
+    }
+  },
+  "passed": true,
+  "reference_files": {
+    "/home/yr/Desktop/codev doc/algorithms/SUPER_TWISTING_FAMILY_CN.md": "3610ba449be64e99fe5fe46cb70f4cbc2f536d539cea392c44e7c3fd39bee739",
+    "/home/yr/Desktop/codev doc/algorithms/cpp/sta_algorithms.hpp": "9e4c1c18628106ee2795f48633c9960e922e9caca11fe3211c240ec3345270a7",
+    "/home/yr/Desktop/codev doc/algorithms/matlab/ista_step.m": "233ff9fe205ef6bcf0b358c109cb8d547fdcb7f6e3fea05a2f157c086f0f1aec",
+    "/home/yr/Desktop/codev doc/plan/STA_MILESTONES_CN.md": "4e4cc9c3f0fc04294c7aca63ae8e8cd480170efe32788ad60cfebd1619898fb3",
+    "/home/yr/Desktop/codev doc/plan/STA_MILESTONE_STATUS_CN.md": "58c8409b2f5806e4b08891a402b08e720eab17aaf405c90401c3d2163d9e3911"
+  },
+  "reference": {
+    "seed": 7072026,
+    "oracle": "binary64 monotone bisection, 120 offline iterations",
+    "ideal_tolerance": {
+      "rate": 1e-07,
+      "nu": 1e-06
+    },
+    "branches": {
+      "1": 1883,
+      "2": 2272,
+      "3": 1845
+    },
+    "max_reference_relative_error": 5.9233267787122586e-08,
+    "max_equation_scaled_residual": 1.0612250076588518e-07,
+    "closed_loops": [
+      {
+        "scenario": "ideal",
+        "h": 0.0010000000474974513,
+        "g": 0.5,
+        "steps": 464,
+        "settled_to_tolerance": true,
+        "final_abs_error": 3.191696090316346e-09,
+        "tail_rmse": 0.6862839017003315,
+        "max_double_trajectory_difference": 2.825570377673614e-08,
+        "clipped_samples": 0,
+        "max_actual_vs_ideal_prediction": 1.0859156152065452e-07
+      },
+      {
+        "scenario": "disturbance",
+        "h": 0.0010000000474974513,
+        "g": 0.5,
+        "steps": 6000,
+        "settled_to_tolerance": false,
+        "final_abs_error": 0.00010765182035691367,
+        "tail_rmse": 0.0001702813215588555,
+        "max_double_trajectory_difference": 3.0475239359839534e-08,
+        "clipped_samples": 0,
+        "max_actual_vs_ideal_prediction": 0.00020000000879931556
+      },
+      {
+        "scenario": "noise",
+        "h": 0.0010000000474974513,
+        "g": 0.5,
+        "steps": 6000,
+        "settled_to_tolerance": false,
+        "final_abs_error": 0.0009929567424981868,
+        "tail_rmse": 0.0006813245582049284,
+        "max_double_trajectory_difference": 3.064867820645745e-08,
+        "clipped_samples": 0,
+        "max_actual_vs_ideal_prediction": 0.0009999999997831227
+      },
+      {
+        "scenario": "saturation",
+        "h": 0.0010000000474974513,
+        "g": 0.5,
+        "steps": 1996,
+        "settled_to_tolerance": true,
+        "final_abs_error": 3.1901829076436496e-09,
+        "tail_rmse": 0.05364960461899759,
+        "max_double_trajectory_difference": 2.0843729719166593e-06,
+        "clipped_samples": 1064,
+        "max_actual_vs_ideal_prediction": 0.012098167324438691
+      },
+      {
+        "scenario": "ideal",
+        "h": 0.0010000000474974513,
+        "g": 1.0,
+        "steps": 464,
+        "settled_to_tolerance": true,
+        "final_abs_error": 3.191696090316346e-09,
+        "tail_rmse": 0.6862839017003315,
+        "max_double_trajectory_difference": 2.825570377673614e-08,
+        "clipped_samples": 0,
+        "max_actual_vs_ideal_prediction": 1.0859156152065452e-07
+      },
+      {
+        "scenario": "disturbance",
+        "h": 0.0010000000474974513,
+        "g": 1.0,
+        "steps": 6000,
+        "settled_to_tolerance": false,
+        "final_abs_error": 0.00010765182035691367,
+        "tail_rmse": 0.0001702813215588555,
+        "max_double_trajectory_difference": 3.0475239359839534e-08,
+        "clipped_samples": 0,
+        "max_actual_vs_ideal_prediction": 0.00020000000879931556
+      },
+      {
+        "scenario": "noise",
+        "h": 0.0010000000474974513,
+        "g": 1.0,
+        "steps": 6000,
+        "settled_to_tolerance": false,
+        "final_abs_error": 0.0009929567424981868,
+        "tail_rmse": 0.0006813245582049284,
+        "max_double_trajectory_difference": 3.064867820645745e-08,
+        "clipped_samples": 0,
+        "max_actual_vs_ideal_prediction": 0.0009999999997831227
+      },
+      {
+        "scenario": "saturation",
+        "h": 0.0010000000474974513,
+        "g": 1.0,
+        "steps": 1996,
+        "settled_to_tolerance": true,
+        "final_abs_error": 3.1901829076436496e-09,
+        "tail_rmse": 0.05364960461899759,
+        "max_double_trajectory_difference": 2.0843729719166593e-06,
+        "clipped_samples": 1064,
+        "max_actual_vs_ideal_prediction": 0.012098167324438691
+      },
+      {
+        "scenario": "ideal",
+        "h": 0.0010000000474974513,
+        "g": 130.57528686523438,
+        "steps": 464,
+        "settled_to_tolerance": true,
+        "final_abs_error": 3.1917541292714957e-09,
+        "tail_rmse": 0.6862838997307994,
+        "max_double_trajectory_difference": 2.815912780729235e-08,
+        "clipped_samples": 0,
+        "max_actual_vs_ideal_prediction": 1.0847643339140234e-07
+      },
+      {
+        "scenario": "disturbance",
+        "h": 0.0010000000474974513,
+        "g": 130.57528686523438,
+        "steps": 6000,
+        "settled_to_tolerance": false,
+        "final_abs_error": 0.00010765181416263635,
+        "tail_rmse": 0.0001702813214188769,
+        "max_double_trajectory_difference": 2.8187795375611557e-08,
+        "clipped_samples": 0,
+        "max_actual_vs_ideal_prediction": 0.00020000001284711824
+      },
+      {
+        "scenario": "noise",
+        "h": 0.0010000000474974513,
+        "g": 130.57528686523438,
+        "steps": 6000,
+        "settled_to_tolerance": false,
+        "final_abs_error": 0.0009929567425061916,
+        "tail_rmse": 0.0006813245582284858,
+        "max_double_trajectory_difference": 2.7157050191961574e-08,
+        "clipped_samples": 0,
+        "max_actual_vs_ideal_prediction": 0.0009999999998117207
+      },
+      {
+        "scenario": "saturation",
+        "h": 0.0010000000474974513,
+        "g": 130.57528686523438,
+        "steps": 1996,
+        "settled_to_tolerance": true,
+        "final_abs_error": 3.190138589381448e-09,
+        "tail_rmse": 0.05364960462116021,
+        "max_double_trajectory_difference": 2.084283629882888e-06,
+        "clipped_samples": 1064,
+        "max_actual_vs_ideal_prediction": 0.012098167324438691
+      },
+      {
+        "scenario": "ideal",
+        "h": 0.009999999776482582,
+        "g": 0.5,
+        "steps": 50,
+        "settled_to_tolerance": true,
+        "final_abs_error": 2.2333876538931747e-23,
+        "tail_rmse": 0.6398904697507363,
+        "max_double_trajectory_difference": 2.0630258723564054e-08,
+        "clipped_samples": 0,
+        "max_actual_vs_ideal_prediction": 9.06370622999475e-08
+      },
+      {
+        "scenario": "disturbance",
+        "h": 0.009999999776482582,
+        "g": 0.5,
+        "steps": 600,
+        "settled_to_tolerance": false,
+        "final_abs_error": 0.0011066835410945917,
+        "tail_rmse": 0.0017102897147704386,
+        "max_double_trajectory_difference": 1.1872979266414063e-08,
+        "clipped_samples": 0,
+        "max_actual_vs_ideal_prediction": 0.0019999802745477987
+      },
+      {
+        "scenario": "noise",
+        "h": 0.009999999776482582,
+        "g": 0.5,
+        "steps": 600,
+        "settled_to_tolerance": false,
+        "final_abs_error": 0.0009632990103681225,
+        "tail_rmse": 0.0006780814341903432,
+        "max_double_trajectory_difference": 1.158919216148746e-08,
+        "clipped_samples": 0,
+        "max_actual_vs_ideal_prediction": 0.0009999999965501964
+      },
+      {
+        "scenario": "saturation",
+        "h": 0.009999999776482582,
+        "g": 0.5,
+        "steps": 198,
+        "settled_to_tolerance": true,
+        "final_abs_error": 2.2081844946044497e-23,
+        "tail_rmse": 0.04739032229232351,
+        "max_double_trajectory_difference": 2.686284281960827e-07,
+        "clipped_samples": 105,
+        "max_actual_vs_ideal_prediction": 0.11708853766322136
+      },
+      {
+        "scenario": "ideal",
+        "h": 0.009999999776482582,
+        "g": 1.0,
+        "steps": 50,
+        "settled_to_tolerance": true,
+        "final_abs_error": 2.2333876538931747e-23,
+        "tail_rmse": 0.6398904697507363,
+        "max_double_trajectory_difference": 2.0630258723564054e-08,
+        "clipped_samples": 0,
+        "max_actual_vs_ideal_prediction": 9.06370622999475e-08
+      },
+      {
+        "scenario": "disturbance",
+        "h": 0.009999999776482582,
+        "g": 1.0,
+        "steps": 600,
+        "settled_to_tolerance": false,
+        "final_abs_error": 0.0011066835410945917,
+        "tail_rmse": 0.0017102897147704386,
+        "max_double_trajectory_difference": 1.1872979266414063e-08,
+        "clipped_samples": 0,
+        "max_actual_vs_ideal_prediction": 0.0019999802745477987
+      },
+      {
+        "scenario": "noise",
+        "h": 0.009999999776482582,
+        "g": 1.0,
+        "steps": 600,
+        "settled_to_tolerance": false,
+        "final_abs_error": 0.0009632990103681225,
+        "tail_rmse": 0.0006780814341903432,
+        "max_double_trajectory_difference": 1.158919216148746e-08,
+        "clipped_samples": 0,
+        "max_actual_vs_ideal_prediction": 0.0009999999965501964
+      },
+      {
+        "scenario": "saturation",
+        "h": 0.009999999776482582,
+        "g": 1.0,
+        "steps": 198,
+        "settled_to_tolerance": true,
+        "final_abs_error": 2.2081844946044497e-23,
+        "tail_rmse": 0.04739032229232351,
+        "max_double_trajectory_difference": 2.686284281960827e-07,
+        "clipped_samples": 105,
+        "max_actual_vs_ideal_prediction": 0.11708853766322136
+      },
+      {
+        "scenario": "ideal",
+        "h": 0.009999999776482582,
+        "g": 130.57528686523438,
+        "steps": 50,
+        "settled_to_tolerance": true,
+        "final_abs_error": 1.7741228218525617e-22,
+        "tail_rmse": 0.6398904692338032,
+        "max_double_trajectory_difference": 1.5392139562919738e-08,
+        "clipped_samples": 0,
+        "max_actual_vs_ideal_prediction": 8.300400100580418e-08
+      },
+      {
+        "scenario": "disturbance",
+        "h": 0.009999999776482582,
+        "g": 130.57528686523438,
+        "steps": 600,
+        "settled_to_tolerance": false,
+        "final_abs_error": 0.0011066835600236648,
+        "tail_rmse": 0.0017102896923964729,
+        "max_double_trajectory_difference": 9.579435800155522e-09,
+        "clipped_samples": 0,
+        "max_actual_vs_ideal_prediction": 0.001999980297770612
+      },
+      {
+        "scenario": "noise",
+        "h": 0.009999999776482582,
+        "g": 130.57528686523438,
+        "steps": 600,
+        "settled_to_tolerance": false,
+        "final_abs_error": 0.000963299015065148,
+        "tail_rmse": 0.0006780814335273117,
+        "max_double_trajectory_difference": 7.290484882460646e-09,
+        "clipped_samples": 0,
+        "max_actual_vs_ideal_prediction": 0.0009999999960055156
+      },
+      {
+        "scenario": "saturation",
+        "h": 0.009999999776482582,
+        "g": 130.57528686523438,
+        "steps": 198,
+        "settled_to_tolerance": true,
+        "final_abs_error": 1.05438960842945e-21,
+        "tail_rmse": 0.04739032223538622,
+        "max_double_trajectory_difference": 2.686321783629264e-07,
+        "clipped_samples": 105,
+        "max_actual_vs_ideal_prediction": 0.11708853766322136
+      },
+      {
+        "scenario": "ideal",
+        "h": 0.10000000149011612,
+        "g": 0.5,
+        "steps": 8,
+        "settled_to_tolerance": true,
+        "final_abs_error": 6.617444900424222e-24,
+        "tail_rmse": 0.004797116270103338,
+        "max_double_trajectory_difference": 3.459730335553246e-08,
+        "clipped_samples": 0,
+        "max_actual_vs_ideal_prediction": 5.603038033541452e-08
+      },
+      {
+        "scenario": "disturbance",
+        "h": 0.10000000149011612,
+        "g": 0.5,
+        "steps": 60,
+        "settled_to_tolerance": false,
+        "final_abs_error": 0.013870500350535374,
+        "tail_rmse": 0.01780327652762945,
+        "max_double_trajectory_difference": 3.459730346655476e-08,
+        "clipped_samples": 0,
+        "max_actual_vs_ideal_prediction": 0.01999980578226598
+      },
+      {
+        "scenario": "noise",
+        "h": 0.10000000149011612,
+        "g": 0.5,
+        "steps": 60,
+        "settled_to_tolerance": false,
+        "final_abs_error": 0.00022891545572841909,
+        "tail_rmse": 0.000674584723168483,
+        "max_double_trajectory_difference": 3.1761515750794445e-08,
+        "clipped_samples": 0,
+        "max_actual_vs_ideal_prediction": 0.0009997929013298911
+      },
+      {
+        "scenario": "saturation",
+        "h": 0.10000000149011612,
+        "g": 0.5,
+        "steps": 18,
+        "settled_to_tolerance": true,
+        "final_abs_error": 6.669143688708786e-24,
+        "tail_rmse": 0.009082348133901193,
+        "max_double_trajectory_difference": 5.1145197313418045e-09,
+        "clipped_samples": 10,
+        "max_actual_vs_ideal_prediction": 0.8398648947477341
+      },
+      {
+        "scenario": "ideal",
+        "h": 0.10000000149011612,
+        "g": 1.0,
+        "steps": 8,
+        "settled_to_tolerance": true,
+        "final_abs_error": 6.617444900424222e-24,
+        "tail_rmse": 0.004797116270103338,
+        "max_double_trajectory_difference": 3.459730335553246e-08,
+        "clipped_samples": 0,
+        "max_actual_vs_ideal_prediction": 5.603038033541452e-08
+      },
+      {
+        "scenario": "disturbance",
+        "h": 0.10000000149011612,
+        "g": 1.0,
+        "steps": 60,
+        "settled_to_tolerance": false,
+        "final_abs_error": 0.013870500350535374,
+        "tail_rmse": 0.01780327652762945,
+        "max_double_trajectory_difference": 3.459730346655476e-08,
+        "clipped_samples": 0,
+        "max_actual_vs_ideal_prediction": 0.01999980578226598
+      },
+      {
+        "scenario": "noise",
+        "h": 0.10000000149011612,
+        "g": 1.0,
+        "steps": 60,
+        "settled_to_tolerance": false,
+        "final_abs_error": 0.00022891545572841909,
+        "tail_rmse": 0.000674584723168483,
+        "max_double_trajectory_difference": 3.1761515750794445e-08,
+        "clipped_samples": 0,
+        "max_actual_vs_ideal_prediction": 0.0009997929013298911
+      },
+      {
+        "scenario": "saturation",
+        "h": 0.10000000149011612,
+        "g": 1.0,
+        "steps": 18,
+        "settled_to_tolerance": true,
+        "final_abs_error": 6.669143688708786e-24,
+        "tail_rmse": 0.009082348133901193,
+        "max_double_trajectory_difference": 5.1145197313418045e-09,
+        "clipped_samples": 10,
+        "max_actual_vs_ideal_prediction": 0.8398648947477341
+      },
+      {
+        "scenario": "ideal",
+        "h": 0.10000000149011612,
+        "g": 130.57528686523438,
+        "steps": 8,
+        "settled_to_tolerance": true,
+        "final_abs_error": 4.166350114967891e-21,
+        "tail_rmse": 0.004797116164606155,
+        "max_double_trajectory_difference": 2.9806592527492626e-08,
+        "clipped_samples": 0,
+        "max_actual_vs_ideal_prediction": 5.7987840307305305e-08
+      },
+      {
+        "scenario": "disturbance",
+        "h": 0.10000000149011612,
+        "g": 130.57528686523438,
+        "steps": 60,
+        "settled_to_tolerance": false,
+        "final_abs_error": 0.013870499840714989,
+        "tail_rmse": 0.017803276231878468,
+        "max_double_trajectory_difference": 2.9806592527492626e-08,
+        "clipped_samples": 0,
+        "max_actual_vs_ideal_prediction": 0.01999980579175571
+      },
+      {
+        "scenario": "noise",
+        "h": 0.10000000149011612,
+        "g": 130.57528686523438,
+        "steps": 60,
+        "settled_to_tolerance": false,
+        "final_abs_error": 0.00022891544711534356,
+        "tail_rmse": 0.0006745846903313243,
+        "max_double_trajectory_difference": 3.0169934106538676e-08,
+        "clipped_samples": 0,
+        "max_actual_vs_ideal_prediction": 0.0009997928169527333
+      },
+      {
+        "scenario": "saturation",
+        "h": 0.10000000149011612,
+        "g": 130.57528686523438,
+        "steps": 18,
+        "settled_to_tolerance": true,
+        "final_abs_error": 3.725985314210099e-21,
+        "tail_rmse": 0.00908234828855728,
+        "max_double_trajectory_difference": 2.727826541037981e-09,
+        "clipped_samples": 10,
+        "max_actual_vs_ideal_prediction": 0.8398648947477341
+      }
+    ],
+    "reference_samples": 6000,
+    "edge_reference_samples": 11,
+    "production_updates": 54173,
+    "passed": true
+  },
+  "ubsan_repeat_tests": 13,
+  "firmware_sha256": "ec3dd3d7fc12143b7edd48ad5b1c5308bbe82a2f4c8f5154e5ef75e9555d3f88",
+  "probe_sha256": "4408be051df08fde003257ecee9ac9c35e7ee01296b59582ca1c5d0741f52f19",
+  "attempts": [
+    {
+      "attempt": "attempt01",
+      "passed": false,
+      "failure": "RuntimeError('build_tests failed: /home/yr/Desktop/codev doc/experiments/M07-20260916/attempt01/build_tests.log')",
+      "evidence": "/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt01/evidence.json",
+      "sha256": "aeb731841071864ba5d5e6757975d72d9e8330ec2dbb533ddfccb25ef19a1a41",
+      "commands": [
+        {
+          "name": "predecessor_hashes",
+          "argv": [
+            "sha256sum",
+            "--check",
+            "--quiet",
+            "research/sta-rate-control/m06/artifacts.sha256"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "compiler",
+          "argv": [
+            "g++",
+            "--version"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "cmake",
+          "argv": [
+            "cmake",
+            "--version"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "diff_check",
+          "argv": [
+            "git",
+            "diff",
+            "--check"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "build_tests",
+          "argv": [
+            "make",
+            "tests",
+            "TESTFILTER=IstaRateControl"
+          ],
+          "returncode": 2
+        }
+      ]
+    },
+    {
+      "attempt": "attempt02",
+      "passed": true,
+      "failure": null,
+      "evidence": "/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt02/evidence.json",
+      "sha256": "4404013c51aedc9bf3ac409b830de6a34ff7945d486a84fb55728dad61941c28",
+      "commands": [
+        {
+          "name": "predecessor_hashes",
+          "argv": [
+            "sha256sum",
+            "--check",
+            "--quiet",
+            "research/sta-rate-control/m06/artifacts.sha256"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "compiler",
+          "argv": [
+            "g++",
+            "--version"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "cmake",
+          "argv": [
+            "cmake",
+            "--version"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "diff_check",
+          "argv": [
+            "git",
+            "diff",
+            "--check"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "build_tests",
+          "argv": [
+            "make",
+            "tests",
+            "TESTFILTER=IstaRateControl"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "IstaRateControl",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-IstaRateControl",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt02/IstaRateControl.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "StaRateControl",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaRateControl",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt02/StaRateControl.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "StaProtection",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaProtection",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt02/StaProtection.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "StaAxesApplication",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaAxesApplication",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt02/StaAxesApplication.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "RateControl",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RateControl",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt02/RateControl.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "RateControlDispatcher",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RateControlDispatcher",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt02/RateControlDispatcher.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "ControllerSelection",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-ControllerSelection",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt02/ControllerSelection.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "GyroPublicationGuard",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-GyroPublicationGuard",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt02/GyroPublicationGuard.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "AttitudeControl",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-AttitudeControl",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt02/AttitudeControl.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "cxx14_probe",
+          "argv": [
+            "g++",
+            "-std=c++14",
+            "-pedantic-errors",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Wdouble-promotion",
+            "-O2",
+            "-fno-exceptions",
+            "-fno-rtti",
+            "-Isrc/modules/mc_rate_control/StaRateControl",
+            "src/modules/mc_rate_control/StaRateControl/IstaRateControl.cpp",
+            "research/sta-rate-control/scripts/m07_kernel_probe.cpp",
+            "-o",
+            "/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt02/probe"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "reference",
+          "argv": [
+            "/usr/bin/python3",
+            "research/sta-rate-control/scripts/reference_m07.py",
+            "--probe",
+            "/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt02/probe",
+            "--output",
+            "/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt02/reference"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "python_research",
+          "argv": [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "research/sta-rate-control/scripts",
+            "-p",
+            "test_m*.py"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "python_convenience",
+          "argv": [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "sim_scripts/_internal",
+            "-p",
+            "test_*.py"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "sitl_build",
+          "argv": [
+            "make",
+            "px4_sitl_default"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "firmware_symbols",
+          "argv": [
+            "nm",
+            "-C",
+            "build/px4_sitl_default/bin/px4"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "unchanged_runtime",
+          "argv": [
+            "git",
+            "diff",
+            "--exit-code",
+            "HEAD",
+            "--",
+            "src/modules/mc_rate_control/RateControl",
+            "src/modules/mc_rate_control/MulticopterRateControl.cpp",
+            "src/modules/mc_rate_control/MulticopterRateControl.hpp",
+            "src/modules/mc_rate_control/mc_rate_control_params.c",
+            "src/modules/mc_att_control",
+            "msg",
+            "ROMFS",
+            "boards",
+            "sitl",
+            "src/modules/mc_rate_control/StaRateControl/StaRateControl.cpp",
+            "src/modules/mc_rate_control/StaRateControl/StaRateControl.hpp",
+            "src/modules/mc_rate_control/StaRateControl/StaProtection.cpp",
+            "src/modules/mc_rate_control/StaRateControl/StaProtection.hpp",
+            "src/modules/mc_rate_control/StaRateControl/StaAxesApplication.hpp",
+            "research/sta-rate-control/m06"
+          ],
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "attempt": "attempt03",
+      "passed": true,
+      "failure": null,
+      "evidence": "/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt03/evidence.json",
+      "sha256": "f131758631bd3f684f7682425600c5178265c116db60f5cd8bd112276239bf5f",
+      "commands": [
+        {
+          "name": "predecessor_hashes",
+          "argv": [
+            "sha256sum",
+            "--check",
+            "--quiet",
+            "research/sta-rate-control/m06/artifacts.sha256"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "compiler",
+          "argv": [
+            "g++",
+            "--version"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "cmake",
+          "argv": [
+            "cmake",
+            "--version"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "diff_check",
+          "argv": [
+            "git",
+            "diff",
+            "--check"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "build_tests",
+          "argv": [
+            "make",
+            "tests",
+            "TESTFILTER=IstaRateControl"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "IstaRateControl",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-IstaRateControl",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt03/IstaRateControl.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "StaRateControl",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaRateControl",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt03/StaRateControl.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "StaProtection",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaProtection",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt03/StaProtection.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "StaAxesApplication",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaAxesApplication",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt03/StaAxesApplication.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "RateControl",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RateControl",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt03/RateControl.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "RateControlDispatcher",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RateControlDispatcher",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt03/RateControlDispatcher.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "ControllerSelection",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-ControllerSelection",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt03/ControllerSelection.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "GyroPublicationGuard",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-GyroPublicationGuard",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt03/GyroPublicationGuard.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "AttitudeControl",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-AttitudeControl",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt03/AttitudeControl.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "cxx14_probe",
+          "argv": [
+            "g++",
+            "-std=c++14",
+            "-pedantic-errors",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Wdouble-promotion",
+            "-O2",
+            "-fno-exceptions",
+            "-fno-rtti",
+            "-Isrc/modules/mc_rate_control/StaRateControl",
+            "src/modules/mc_rate_control/StaRateControl/IstaRateControl.cpp",
+            "research/sta-rate-control/scripts/m07_kernel_probe.cpp",
+            "-o",
+            "/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt03/probe"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "reference",
+          "argv": [
+            "/usr/bin/python3",
+            "research/sta-rate-control/scripts/reference_m07.py",
+            "--probe",
+            "/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt03/probe",
+            "--output",
+            "/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt03/reference"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "python_research",
+          "argv": [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "research/sta-rate-control/scripts",
+            "-p",
+            "test_m*.py"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "python_convenience",
+          "argv": [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "sim_scripts/_internal",
+            "-p",
+            "test_*.py"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "sitl_build",
+          "argv": [
+            "make",
+            "px4_sitl_default"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "firmware_symbols",
+          "argv": [
+            "nm",
+            "-C",
+            "build/px4_sitl_default/bin/px4"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "unchanged_runtime",
+          "argv": [
+            "git",
+            "diff",
+            "--exit-code",
+            "HEAD",
+            "--",
+            "src/modules/mc_rate_control/RateControl",
+            "src/modules/mc_rate_control/MulticopterRateControl.cpp",
+            "src/modules/mc_rate_control/MulticopterRateControl.hpp",
+            "src/modules/mc_rate_control/mc_rate_control_params.c",
+            "src/modules/mc_att_control",
+            "msg",
+            "ROMFS",
+            "boards",
+            "sitl",
+            "src/modules/mc_rate_control/StaRateControl/StaRateControl.cpp",
+            "src/modules/mc_rate_control/StaRateControl/StaRateControl.hpp",
+            "src/modules/mc_rate_control/StaRateControl/StaProtection.cpp",
+            "src/modules/mc_rate_control/StaRateControl/StaProtection.hpp",
+            "src/modules/mc_rate_control/StaRateControl/StaAxesApplication.hpp",
+            "research/sta-rate-control/m06"
+          ],
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "attempt": "attempt04",
+      "passed": false,
+      "failure": "RuntimeError('ubsan_build failed: /home/yr/Desktop/codev doc/experiments/M07-20260916/attempt04/ubsan_build.log')",
+      "evidence": "/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt04/evidence.json",
+      "sha256": "e5f8fcfc8a12321efef1d84657aa330e7e34ac1d2cb6b6ef2c1c841e598da07f",
+      "commands": [
+        {
+          "name": "predecessor_hashes",
+          "argv": [
+            "sha256sum",
+            "--check",
+            "--quiet",
+            "research/sta-rate-control/m06/artifacts.sha256"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "compiler",
+          "argv": [
+            "g++",
+            "--version"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "cmake",
+          "argv": [
+            "cmake",
+            "--version"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "diff_check",
+          "argv": [
+            "git",
+            "diff",
+            "--check"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "build_tests",
+          "argv": [
+            "make",
+            "tests",
+            "TESTFILTER=IstaRateControl"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "IstaRateControl",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-IstaRateControl",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt04/IstaRateControl.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "StaRateControl",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaRateControl",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt04/StaRateControl.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "StaProtection",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaProtection",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt04/StaProtection.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "StaAxesApplication",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaAxesApplication",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt04/StaAxesApplication.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "RateControl",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RateControl",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt04/RateControl.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "RateControlDispatcher",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RateControlDispatcher",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt04/RateControlDispatcher.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "ControllerSelection",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-ControllerSelection",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt04/ControllerSelection.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "GyroPublicationGuard",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-GyroPublicationGuard",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt04/GyroPublicationGuard.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "AttitudeControl",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-AttitudeControl",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt04/AttitudeControl.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "cxx14_probe",
+          "argv": [
+            "g++",
+            "-std=c++14",
+            "-pedantic-errors",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Wdouble-promotion",
+            "-O2",
+            "-fno-exceptions",
+            "-fno-rtti",
+            "-Isrc/modules/mc_rate_control/StaRateControl",
+            "src/modules/mc_rate_control/StaRateControl/IstaRateControl.cpp",
+            "research/sta-rate-control/scripts/m07_kernel_probe.cpp",
+            "-o",
+            "/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt04/probe"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "reference",
+          "argv": [
+            "/usr/bin/python3",
+            "research/sta-rate-control/scripts/reference_m07.py",
+            "--probe",
+            "/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt04/probe",
+            "--output",
+            "/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt04/reference"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "ubsan_build",
+          "argv": [
+            "g++",
+            "-std=c++14",
+            "-pedantic-errors",
+            "-O1",
+            "-g",
+            "-fsanitize=undefined,float-cast-overflow",
+            "-fno-sanitize-recover=all",
+            "-Ibuild/px4_sitl_test/googletest-src/googletest/include",
+            "src/modules/mc_rate_control/StaRateControl/IstaRateControl.cpp",
+            "src/modules/mc_rate_control/StaRateControl/IstaRateControlTest.cpp",
+            "build/px4_sitl_test/lib/libgtest_main.a",
+            "build/px4_sitl_test/lib/libgtest.a",
+            "-pthread",
+            "-o",
+            "/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt04/ista_ubsan"
+          ],
+          "returncode": 1
+        }
+      ]
+    },
+    {
+      "attempt": "attempt05",
+      "passed": true,
+      "failure": null,
+      "evidence": "/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt05/evidence.json",
+      "sha256": "9288fb49f0f226f5c829326ca1111fc70811e7f8bb0e87c3ac7e939b6b005aab",
+      "commands": [
+        {
+          "name": "predecessor_hashes",
+          "argv": [
+            "sha256sum",
+            "--check",
+            "--quiet",
+            "research/sta-rate-control/m06/artifacts.sha256"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "compiler",
+          "argv": [
+            "g++",
+            "--version"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "cmake",
+          "argv": [
+            "cmake",
+            "--version"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "diff_check",
+          "argv": [
+            "git",
+            "diff",
+            "--check"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "build_tests",
+          "argv": [
+            "make",
+            "tests",
+            "TESTFILTER=IstaRateControl"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "IstaRateControl",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-IstaRateControl",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt05/IstaRateControl.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "StaRateControl",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaRateControl",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt05/StaRateControl.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "StaProtection",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaProtection",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt05/StaProtection.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "StaAxesApplication",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaAxesApplication",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt05/StaAxesApplication.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "RateControl",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RateControl",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt05/RateControl.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "RateControlDispatcher",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RateControlDispatcher",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt05/RateControlDispatcher.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "ControllerSelection",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-ControllerSelection",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt05/ControllerSelection.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "GyroPublicationGuard",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-GyroPublicationGuard",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt05/GyroPublicationGuard.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "AttitudeControl",
+          "argv": [
+            "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-AttitudeControl",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt05/AttitudeControl.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "cxx14_probe",
+          "argv": [
+            "g++",
+            "-std=c++14",
+            "-pedantic-errors",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Wdouble-promotion",
+            "-O2",
+            "-fno-exceptions",
+            "-fno-rtti",
+            "-Isrc/modules/mc_rate_control/StaRateControl",
+            "src/modules/mc_rate_control/StaRateControl/IstaRateControl.cpp",
+            "research/sta-rate-control/scripts/m07_kernel_probe.cpp",
+            "-o",
+            "/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt05/probe"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "reference",
+          "argv": [
+            "/usr/bin/python3",
+            "research/sta-rate-control/scripts/reference_m07.py",
+            "--probe",
+            "/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt05/probe",
+            "--output",
+            "/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt05/reference"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "ubsan_build",
+          "argv": [
+            "g++",
+            "-std=c++14",
+            "-pedantic-errors",
+            "-O1",
+            "-g",
+            "-fno-rtti",
+            "-fno-exceptions",
+            "-fsanitize=undefined,float-cast-overflow",
+            "-fno-sanitize-recover=all",
+            "-Ibuild/px4_sitl_test/googletest-src/googletest/include",
+            "src/modules/mc_rate_control/StaRateControl/IstaRateControl.cpp",
+            "src/modules/mc_rate_control/StaRateControl/IstaRateControlTest.cpp",
+            "build/px4_sitl_test/lib/libgtest_main.a",
+            "build/px4_sitl_test/lib/libgtest.a",
+            "-pthread",
+            "-o",
+            "/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt05/ista_ubsan"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "ubsan_tests",
+          "argv": [
+            "/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt05/ista_ubsan",
+            "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M07-20260916/attempt05/ubsan.xml"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "python_research",
+          "argv": [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "research/sta-rate-control/scripts",
+            "-p",
+            "test_m*.py"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "python_convenience",
+          "argv": [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "sim_scripts/_internal",
+            "-p",
+            "test_*.py"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "sitl_build",
+          "argv": [
+            "make",
+            "px4_sitl_default"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "firmware_symbols",
+          "argv": [
+            "nm",
+            "-C",
+            "build/px4_sitl_default/bin/px4"
+          ],
+          "returncode": 0
+        },
+        {
+          "name": "unchanged_runtime",
+          "argv": [
+            "git",
+            "diff",
+            "--exit-code",
+            "HEAD",
+            "--",
+            "src/modules/mc_rate_control/RateControl",
+            "src/modules/mc_rate_control/MulticopterRateControl.cpp",
+            "src/modules/mc_rate_control/MulticopterRateControl.hpp",
+            "src/modules/mc_rate_control/mc_rate_control_params.c",
+            "src/modules/mc_att_control",
+            "msg",
+            "ROMFS",
+            "boards",
+            "sitl",
+            "src/modules/mc_rate_control/StaRateControl/StaRateControl.cpp",
+            "src/modules/mc_rate_control/StaRateControl/StaRateControl.hpp",
+            "src/modules/mc_rate_control/StaRateControl/StaProtection.cpp",
+            "src/modules/mc_rate_control/StaRateControl/StaProtection.hpp",
+            "src/modules/mc_rate_control/StaRateControl/StaAxesApplication.hpp",
+            "research/sta-rate-control/m06"
+          ],
+          "returncode": 0
+        }
+      ]
+    }
+  ],
+  "data_root": "/home/yr/Desktop/codev doc/experiments/M07-20260916",
+  "accepted_attempt": "attempt05",
+  "artifact_count": 379,
+  "index_sha256": "8ae46b945c79dcf53a3ba7b269b5bf422fd48a9026c89c252208d84a482b5884"
+}

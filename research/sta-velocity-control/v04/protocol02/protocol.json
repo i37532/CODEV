@@ -1,0 +1,107 @@
+{
+  "stage": "V04-protocol02",
+  "status": "design_frozen_awaiting_execution_authorization_and_implementation",
+  "execution_ready": false,
+  "flight_authorized": false,
+  "repair_head": "65d1b5c4e2177547e369ba2a750581f1bb894c56",
+  "branch": "research/sta-velocity-control",
+  "inherit": {
+    "path": "research/sta-velocity-control/v04/protocol01/protocol.json",
+    "sha256": "3e4379bfc9aff61caafc5e69c4fa97060a3b921a23990beb01fc5e27129075f7",
+    "unchanged_fields": ["scope", "randomness", "simulation_speed", "startup_overrides", "logging", "bounds", "data_gate", "selection_gate", "excitation", "diagnostic_gate", "candidate", "pair_gate", "parameter_restore", "failure_action", "world_verification", "not_authorized", "plugins"]
+  },
+  "budget": {
+    "maximum_new_attempts": 6,
+    "old_remaining_attempts_reused": 0,
+    "extra_smoke_or_tuning_attempts": 0,
+    "automatic_retry": false,
+    "stop_on_any_required_failure": true,
+    "attempt_consumed_at": "before starting the owned project launcher, including startup/preflight failures",
+    "seeds": [9201, 9202, 9203],
+    "jobs": [
+      {"id": "run01", "seed": 9201, "mode": 0, "axes": 0},
+      {"id": "run02", "seed": 9201, "mode": 1, "axes": 1},
+      {"id": "run03", "seed": 9202, "mode": 0, "axes": 0},
+      {"id": "run04", "seed": 9202, "mode": 1, "axes": 1},
+      {"id": "run05", "seed": 9203, "mode": 0, "axes": 0},
+      {"id": "run06", "seed": 9203, "mode": 1, "axes": 1}
+    ],
+    "order_reason": "PID first within every pair to verify the repaired task before ESTA. Fixed order is not randomized; order bias must be disclosed."
+  },
+  "height_task": {
+    "coordinate": "local NED, estimated height = frozen_ground_z - local_position.z; not Gazebo truth or terrain clearance",
+    "target_height_m": 2.5,
+    "ground_freeze": "last valid pre-arm warmup local_position; archive timestamp/sample, xyz, heading, ref_alt/ref_timestamp and all available reset counters",
+    "local_target_z": "frozen_ground_z - 2.5",
+    "global_target_alt_m": "frozen_ref_alt - local_target_z",
+    "target_source": "original navigator -> flight_mode_manager -> trajectory_setpoint; no external trajectory/attitude/rate publisher",
+    "takeoff": "unchanged commander takeoff; wait for armed airborne POSCTL after original navigation completion; do not issue current-position Hold",
+    "reposition": {
+      "command": "MAV_CMD_DO_REPOSITION via existing local-only MAVLink connection, once",
+      "param1": -1,
+      "param2": 1,
+      "param3": 0,
+      "param4": "frozen pre-arm heading in radians, matching this pinned CODEV receiver/navigator raw-field implementation only",
+      "param5": "NaN",
+      "param6": "NaN",
+      "param7": "float32(frozen_ref_alt - local_target_z)",
+      "xy": "retain valid takeoff triplet lat/lon; must capture and verify unchanged",
+      "confirmation": 0,
+      "maximum_sends": 1,
+      "ack_wall_timeout_s": 5,
+      "require": "fresh accepted ACK AND AUTO_LOITER AND navigator target readback; ACK alone does not prove target acceptance",
+      "altitude_readback_tolerance_m": 0.02,
+      "yaw_readback_tolerance_rad": 0.001,
+      "coordinate_reference_change": "abort, no rebasing or resend in this batch"
+    },
+    "entry": {
+      "height_m": [2.0, 3.0],
+      "abs_vz_strictly_below_m_s": 0.2,
+      "continuous_sim_seconds": 3,
+      "local_target_z_tolerance_m": 0.05,
+      "local_target_vz_abs_max_m_s": 0.05,
+      "require": "armed, AUTO_LOITER, not landed, no ground_contact, valid position/velocity, fixed yaw, healthy diagnostics, confirmed target and unchanged reference/reset counters",
+      "host_max_sample_gap_s": 1,
+      "ulog_max_sample_gap_s": 0.04,
+      "height_ready_deadline_after_excitation_gate_s": 10,
+      "hover_start_event": "only after entry passes; preserve candidate entry samples; verify the final 3 seconds independently in actual ULog"
+    },
+    "excitation_clock": "unchanged first valid airborne AUTO_LOITER gate starts existing 12s settle; ready by gate+10s, else abort before gate+12s. Derive gate from diagnostic timestamp_sample and excitation_time, not host receipt time. Never reset/restart excitation while armed.",
+    "observation_sim_s": 60,
+    "observation_accepted_duration_s": [60, 62],
+    "require_excitation_inside_observation": true,
+    "landing": "unchanged commander mode auto:land; require landed and automatic disarm",
+    "wall_timeouts_s": {"startup": 180, "warmup": 180, "takeoff_including_height_entry": 150, "hover": 240, "landing": 150}
+  },
+  "additional_log_gates": {
+    "window": "takeoff_command <= timestamp < landed_disarmed, enabled samples; excitation fault also checked throughout the armed interval",
+    "required_zero_fields": ["first_fail", "retry_result", "excitation_fault"],
+    "first_input_required": true,
+    "first_input_rule": "decode validity bits using selected p/v/FF channels; NaN-disabled channels are not automatically failures",
+    "missing_new_field": "reject, never substitute zero",
+    "retry_policy": "even valid second update rejects this comparison attempt; first failure is not erased by final valid=1",
+    "readback_evidence": "archive command/ACK, pre/post navigator triplet, trajectory and consumed p_sp/v_sp/yaw with timestamps; target/height readiness independently checked from ULog",
+    "observed_not_claimed": "online CLI polling cannot guarantee per-callback abort; any offline mandatory failure stops before the next attempt"
+  },
+  "metrics": {
+    "primary": "time-weighted X velocity RMSE over complete excitation_time [0,32); consumed v-v_sp, no interpolation",
+    "secondary": "Y/Z RMSE and IAE in same 32s; position XYZ/yaw RMSE and height in 60s observation; constraints, applied/ideal nu, thrust and actual-update acceleration TV",
+    "pair_rules": "inherit protocol01 pair_gate numerical limits unchanged; each same-seed pair must pass before next pair",
+    "missing": "retain attempted failure; no replacement, zero fill or imputed pair; no V04 pass unless all six accepted and all three pairs pass",
+    "historical": "old V00/V03/V04 runs are descriptive only, never paired with this batch",
+    "interpretation": "development admission only; n=3 paired seeds cannot establish general superiority"
+  },
+  "implementation_gate": {
+    "runner": "new isolated run_v04_protocol02.py, not yet implemented; must not call old takeoff-to-Hold sequence unchanged",
+    "analyzer": "new isolated analyze_v04_protocol02.py, not yet implemented; preserve historical analyzers",
+    "tests_required": ["command encoding/ACK/readback and heading units", "height/reference conversion and reset rejection", "3s entry and 10s deadline, stale/duplicate/backward samples", "event ordering and full excitation inside observation", "first failure and valid/invalid retry rejection, missing fields", "stop-on-failure and exactly six single-use attempts", "source/model/plugin/firmware checks and exact EEPROM restore", "full repaired C++/Python regressions and no-flight SITL/Gazebo build"],
+    "before_first_launch": "user authorization + implemented/tested runner/analyzer + explicit source commit + clean rebuild and full SHA manifest + fresh seed-use audit; otherwise no launch",
+    "need_new_approval_if": "gains, thresholds, task windows, seeds/order/budget or production control/Takeoff/nav/estimator/model logic needs another change"
+  },
+  "artifacts": {
+    "new_run_root": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series02",
+    "existing_directory": "reject, no resume or overwrite",
+    "source": "one clean execution commit for all six; design freeze commit is not yet an execution-ready source assertion",
+    "hashes": "source, binary, assets/plugins, expanded protocol, actual parameters, full raw ULog and all failed attempts"
+  }
+}

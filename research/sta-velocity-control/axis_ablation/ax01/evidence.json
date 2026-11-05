@@ -1,0 +1,487 @@
+{
+  "success": true,
+  "new_flights": 0,
+  "seeds_used": [],
+  "commands": [
+    {
+      "name": "head",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "workspace",
+      "argv": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "submodules",
+      "argv": [
+        "git",
+        "submodule",
+        "status",
+        "--recursive"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "build_velocity",
+      "argv": [
+        "make",
+        "tests",
+        "TESTFILTER=Velocity",
+        "-j4"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "interface_tests",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax01/test_interface.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "historical",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v07/protocol07/verify.py",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261005/AX01/offline03/historical"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "tuning_applicable",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax01/legacy_tuning.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "protocol02_test_cli_clock",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/protocol02/test_cli_clock.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "protocol03b_test_validation",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/protocol03b/test_validation.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "protocol03b_test_task_output",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/protocol03b/test_task_output.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "protocol04_test_pilot",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/protocol04/test_pilot.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "protocol04_test_design",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/protocol04/test_design.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "protocol04_test_formal_design",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/protocol04/test_formal_design.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "evidence_tools_test_replay_batch",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/evidence_tools/test_replay_batch.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "protocol05_test_mass",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/protocol05/test_mass.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "formal_test_runtime",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/formal/test_runtime.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "formal_test_formal_package",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/formal/test_formal_package.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "evidence_tools_test_qualified_gate_summary",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/evidence_tools/test_qualified_gate_summary.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "VelocityAxes",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-VelocityAxes",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261005/AX01/offline03/VelocityAxes.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "actual_module_trace",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax01/interface.py",
+        "--trace-log",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261005/AX01/offline03/historical/VelocityModule.log"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "configuration",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax01/interface.py",
+        "yz"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "diff_check",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "baseline": "c5f240fb638fd94669d86c8f9e1c37d7c2efec38",
+  "eeprom_before": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+  "reference": {
+    "PositionControl.cpp": "c9414d51303e3868b1ea7e854f8c4cdb71cdb4731d8dd9f15ef2ccc9dbf08cc7",
+    "PositionControl.hpp": "6c821e18ec193aa84000f93d2c37fdde722ec5045906a245abeb6812d67b389a",
+    "StaVelocityProtection.cpp": "d53607bab2d23f03f5c493e1384f9a2c02e2bcf71918307683e74badcde893b8",
+    "StaVelocityProtection.hpp": "6b1d812436b4cbf1b8903c2b21fe8c92e484bd623d4a8fb64ef179c0cd81d271",
+    "VelocityControlSelector.hpp": "b9c260cdee406a6210845092ad74c68725d72762968ca1416bdd4699f92601ba"
+  },
+  "v08_provenance_not_applicable": "protocol02.test_tuning.TuningTest.test_original_production_and_launcher_unchanged",
+  "new_axes_tests": {
+    "tests": 26,
+    "failures": 0,
+    "disabled": 0,
+    "errors": 0
+  },
+  "cpp_tests": 261,
+  "python_tests": 629,
+  "trace": {
+    "accepted": true,
+    "meaning": "offline module trace, NOT flight/ULog qualification",
+    "masks": {
+      "0": {
+        "samples": 110,
+        "normal_samples": 110,
+        "remaining_pid_axes": 7
+      },
+      "1": {
+        "samples": 110,
+        "normal_samples": 109,
+        "remaining_pid_axes": 6
+      },
+      "2": {
+        "samples": 110,
+        "normal_samples": 109,
+        "remaining_pid_axes": 5
+      },
+      "3": {
+        "samples": 110,
+        "normal_samples": 109,
+        "remaining_pid_axes": 4
+      },
+      "4": {
+        "samples": 110,
+        "normal_samples": 109,
+        "remaining_pid_axes": 3
+      },
+      "5": {
+        "samples": 110,
+        "normal_samples": 109,
+        "remaining_pid_axes": 2
+      },
+      "6": {
+        "samples": 110,
+        "normal_samples": 109,
+        "remaining_pid_axes": 1
+      },
+      "7": {
+        "samples": 110,
+        "normal_samples": 109,
+        "remaining_pid_axes": 0
+      }
+    }
+  },
+  "ulog_format_bytes": 1475,
+  "generated_metadata": {
+    "MPC_VC_MODE": {
+      "default": 0,
+      "description": "Accepts PID/AXES=0 or SITL ESTA/AXES=1..7 with valid independent gains. AX01 Y/XZ/YZ require DIV1. MODE2 remains rejected. Armed requests are pending until disarm; requesting the effective configuration cancels pending changes. Original PID gain updates are unaffected."
+    },
+    "MPC_VC_AXES": {
+      "default": 0,
+      "description": "Local NED axes, not body rates. MODE0 requires 0; MODE1 permits 1 X, 2 Y, 3 XY, 4 Z, 5 XZ, 6 YZ or 7 XYZ with valid gains in SITL. Other axes remain PID. XY uses independent gains and an atomic transaction. Z retains PID during ground/takeoff ramp and one handover sample. XZ/YZ/XYZ retain ground/ramp PID and a bounded atomic handover; normal flight computes only selected ESTA axes. All rate controllers must remain PID."
+    },
+    "MPC_VC_DIV": {
+      "default": 1,
+      "description": "Only feedback correction and integral/nu are decimated. Position P, acceleration feedforward, mapping and lifecycle run every callback. DIV>1 only supports PID and X/XY ESTA; Y/Z/XZ/YZ/XYZ require DIV1. Armed changes are deferred until disarm. Invalid values are rejected."
+    }
+  },
+  "eeprom_after": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+  "firmware_sha256": "46b70f9f4c5e6a0abdbab777f3b2764a4125c66c894e1f2b476553eed61cb08b",
+  "tested_worktree_assets": {
+    "research/sta-velocity-control/axis_ablation/ax01/README_CN.md": "998eac0a85175cb2ba4b7f75f5a92e9b38a47f8b8d332de9afcb2131e7ef320b",
+    "research/sta-velocity-control/axis_ablation/ax01/interface.py": "8c29c84df435e4378ca0ebec15e5ea33a3affb68e6e1313bc29f081f955061a6",
+    "research/sta-velocity-control/axis_ablation/ax01/legacy_tuning.py": "4fb5395999ed30684d975ded046fe1c314ac6af72913806903e9a3dddb4e1693",
+    "research/sta-velocity-control/axis_ablation/ax01/reference/AX00PositionControl.cpp": "c9414d51303e3868b1ea7e854f8c4cdb71cdb4731d8dd9f15ef2ccc9dbf08cc7",
+    "research/sta-velocity-control/axis_ablation/ax01/reference/AX00PositionControl.hpp": "6c821e18ec193aa84000f93d2c37fdde722ec5045906a245abeb6812d67b389a",
+    "research/sta-velocity-control/axis_ablation/ax01/reference/AX00StaVelocityProtection.cpp": "d53607bab2d23f03f5c493e1384f9a2c02e2bcf71918307683e74badcde893b8",
+    "research/sta-velocity-control/axis_ablation/ax01/reference/AX00StaVelocityProtection.hpp": "6b1d812436b4cbf1b8903c2b21fe8c92e484bd623d4a8fb64ef179c0cd81d271",
+    "research/sta-velocity-control/axis_ablation/ax01/reference/AX00VelocityControlSelector.hpp": "b9c260cdee406a6210845092ad74c68725d72762968ca1416bdd4699f92601ba",
+    "research/sta-velocity-control/axis_ablation/ax01/test_interface.py": "2db0ea8912c8188afe04aa1062b3aecd0da93791edfce5c6a4e7278188b24749",
+    "research/sta-velocity-control/axis_ablation/ax01/verify.py": "e691dbb590b65499442270485875f89d5b4b1cd09eec3f988d2a7b67533e93f1",
+    "research/sta-velocity-control/axis_ablation/plan/ax01_entry/VELOCITY_AXIS_ABLATION_PROMPTS_CN.md": "67ed00e559e47fd4c8596d33a565b1fbc849ffcc99e30fb19bb2b3f41701d86d",
+    "research/sta-velocity-control/axis_ablation/plan/ax01_entry/VELOCITY_AXIS_ABLATION_STATUS_CN.md": "218031a3b430ef39ba0b0f3695308cec020f64cadf98ce02cc29916ecb04af24",
+    "research/sta-velocity-control/axis_ablation/plan/ax01_entry/VELOCITY_AXIS_ABLATION_TODO_CN.md": "2e231ede1ba9d5623afb5588bc69535e3fec4be742316d4ac950917aa76b5a06",
+    "research/sta-velocity-control/reports/AX01.md": "2c51fc3dcc8ac408f05ed92ddb9cc86d0d2826326f5e4b1482efa661bebe33cc",
+    "src/modules/mc_pos_control/PositionControl/VelocityAxesTest.cpp": "e710e3ed42c40d928496433efab2180c01d9771fb4da53c3e32ce6051d80d299",
+    "msg/sta_velocity_ctrl_status.msg": "1c2ba539a29c0cbd9f5d9c330580cd7385de35b53e7519fee15984b8ac89db4f",
+    "research/sta-velocity-control/README_CN.md": "9dfb2ccbbd052ffd982a7fd2ccf1f3708c95e986e6e647fca033695f1dbce374",
+    "research/sta-velocity-control/axis_ablation/README_CN.md": "4ca0e1ab651827697192f14d739415be2631d77e6cc7ef352819ba5d13d1d7ae",
+    "src/modules/mc_pos_control/MulticopterPositionControl.cpp": "a11ffe92e26eb9dd74bde548711805b643c7e53465c33f570ccf98d1850c23ef",
+    "src/modules/mc_pos_control/PositionControl/CMakeLists.txt": "3696abda02be4617d495f67d18ad7f57afb9ba672569279dea932ad967f67f11",
+    "src/modules/mc_pos_control/PositionControl/PositionControl.cpp": "d619264f8f933ff187542a5889ce0ac101207e5a8643499cc4f56a19a65ea96d",
+    "src/modules/mc_pos_control/PositionControl/PositionControl.hpp": "c5445455221b0bd2151e26086303b94999de049d15a9b0efaae68874ec565f7e",
+    "src/modules/mc_pos_control/PositionControl/StaVelocityProtection.cpp": "60af98c32b730ce25dfb2bb7889f551534a69e06db0ac531f99af7e01df12318",
+    "src/modules/mc_pos_control/PositionControl/StaVelocityProtection.hpp": "ba205703c2ec7f0ce5815076c7b43af2b15a20e6dfd69cba69d20a7074e01d83",
+    "src/modules/mc_pos_control/PositionControl/StaVelocityProtectionTest.cpp": "7a13e72f508131b1f740919d219156018df416ac82ed41e405ec3ef5fe11a8cb",
+    "src/modules/mc_pos_control/PositionControl/VelocityControlSelector.hpp": "687729c6b96fc7d82f7dbad53877bbd64d826933262af29545d5463a0c775b8d",
+    "src/modules/mc_pos_control/PositionControl/VelocitySelectionParamTest.cpp": "de596d8ab4a42de76caaf6337a1cfb834cef7b8a511d5be4cb4d44a04770eec7",
+    "src/modules/mc_pos_control/VelocityModuleTest.cpp": "43a46b9ba07ed049a74b2f7c3f75a73bdeadce73f19650cb0b5196f23cf11fa6",
+    "src/modules/mc_pos_control/mc_pos_control_params.c": "5d0a1045de67df005664d5f5626db007f7c865316f785562e9d716411bce9636"
+  },
+  "tested_worktree_base": "c5f240fb638fd94669d86c8f9e1c37d7c2efec38",
+  "note": "Working-tree build over AX00; submitted source is identified by exact assets and final external status SHA. No flight or V08 source qualification.",
+  "original_outputs": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261005/AX01",
+  "attempts": {
+    "offline01": "failed: V08 unchanged-production provenance predicate (kept)",
+    "offline02": "passed, 261 C++ / 629 applicable Python",
+    "offline03": "passed, final metadata/build verification"
+  },
+  "cpp_suite_counts": {
+    "PositionControl": {
+      "tests": 15,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "ControlMath": {
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "Takeoff": {
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "RateControl": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "RateControlDispatcher": {
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocityControl": {
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocitySelectionParam": {
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "StaVelocityControl": {
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "StaVelocityProtection": {
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "StaRateControl": {
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocityDiagnosticInput": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocityEsta": {
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocityModule": {
+      "tests": 31,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocityEstaZ": {
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocityZIntegration": {
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "EKF2Selector": {
+      "tests": 15,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "LandingDescentContract": {
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "EstimatorDiagnosticTopics": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocityXYIntegration": {
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocityXYZIntegration": {
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocityResearchTask": {
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocityDecimation": {
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "candidate_audit": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "ImuPublicationClock": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "LoggerFileNaming": {
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "LoggerRamLog": {
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocityAxes": {
+      "tests": 26,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0
+    }
+  },
+  "external_fingerprints": {
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261005/AX01/offline01/evidence.json": "865ef89b8a8cdb2f261e98407d6990af91e65f6c1d4543814ef10db83b46caf6",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261005/AX01/offline01/artifacts.sha256": "4c64159ba9657f457b21769788dbea8482a47a449727b09538cb4616a351a95d",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261005/AX01/offline02/evidence.json": "ae65b76416953d7ee84896b3375b0d46c5e0cc8b182601caf2c3c36f9cc055b2",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261005/AX01/offline02/artifacts.sha256": "2c5f79fa09d5a0137590368454811da82a38835ee44c3636976a470455674b61",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261005/AX01/offline03/evidence.json": "7a7f3355241fc7e2d918bba9a9d348b5203c44f17f1a71c51b89db674504bbc0",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261005/AX01/offline03/artifacts.sha256": "32d5e3aba01e56d16caa21d586c58cc56054cb8157ec92f325b27a6753c6cd6a"
+  }
+}

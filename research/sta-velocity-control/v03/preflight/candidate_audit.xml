@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="10" failures="3" disabled="0" errors="0" timestamp="2026-09-21T21:31:39" time="0" name="AllTests">
+  <testsuite name="StaVelocityControlTest" tests="7" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="EvaluateUsesOldNuAndAdapterAddsFeedForwardOnce" status="run" time="0" classname="StaVelocityControlTest" />
+    <testcase name="PositiveNegativeAndZeroError" status="run" time="0" classname="StaVelocityControlTest" />
+    <testcase name="StatesAreThreeAxisIndependentAndCandidatesAreOneShot" status="run" time="0" classname="StaVelocityControlTest" />
+    <testcase name="InvalidInputsAndNumericsAreAtomic" status="run" time="0" classname="StaVelocityControlTest" />
+    <testcase name="FrozenEightTwelveMillisecondSequenceMatchesIndependentDoubleReference" status="run" time="0" classname="StaVelocityControlTest" />
+    <testcase name="ZohObjectsSeparateIdealAndLaggedConstrainedConclusions" status="run" time="0" classname="StaVelocityControlTest" />
+    <testcase name="ModeOneRemainsRejectedAndKernelHasNoDispatcherPath" status="run" time="0" classname="StaVelocityControlTest" />
+  </testsuite>
+  <testsuite name="V03CandidateAudit" tests="3" failures="3" disabled="0" errors="0" time="0">
+    <testcase name="ForeignInstanceCannotCommitIntoAnotherController" status="run" time="0" classname="V03CandidateAudit">
+      <failure message="/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v03/preflight/CandidateAuditTest.cpp:19&#x0A;Expected: (target.commit(proposal)) != (Kernel::Status::Ok), actual: 1-byte object &lt;00&gt; vs 1-byte object &lt;00&gt;" type=""><![CDATA[/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v03/preflight/CandidateAuditTest.cpp:19
+Expected: (target.commit(proposal)) != (Kernel::Status::Ok), actual: 1-byte object <00> vs 1-byte object <00>]]></failure>
+      <failure message="/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v03/preflight/CandidateAuditTest.cpp:20&#x0A;Expected equality of these values:&#x0A;  target.state()[0]&#x0A;    Which is: 0.49200001&#x0A;  -.5f&#x0A;    Which is: -0.5" type=""><![CDATA[/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v03/preflight/CandidateAuditTest.cpp:20
+Expected equality of these values:
+  target.state()[0]
+    Which is: 0.49200001
+  -.5f
+    Which is: -0.5]]></failure>
+    </testcase>
+    <testcase name="AxisRetargetCannotCommitWrongAxisState" status="run" time="0" classname="V03CandidateAudit">
+      <failure message="/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v03/preflight/CandidateAuditTest.cpp:33&#x0A;Expected: (kernel.commit(proposal)) != (Kernel::Status::Ok), actual: 1-byte object &lt;00&gt; vs 1-byte object &lt;00&gt;" type=""><![CDATA[/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v03/preflight/CandidateAuditTest.cpp:33
+Expected: (kernel.commit(proposal)) != (Kernel::Status::Ok), actual: 1-byte object <00> vs 1-byte object <00>]]></failure>
+      <failure message="/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v03/preflight/CandidateAuditTest.cpp:34&#x0A;Expected equality of these values:&#x0A;  kernel.state()[1]&#x0A;    Which is: 0.49200001&#x0A;  -.5f&#x0A;    Which is: -0.5" type=""><![CDATA[/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v03/preflight/CandidateAuditTest.cpp:34
+Expected equality of these values:
+  kernel.state()[1]
+    Which is: 0.49200001
+  -.5f
+    Which is: -0.5]]></failure>
+    </testcase>
+    <testcase name="InvalidOutputCannotCommitAnOtherwiseFiniteState" status="run" time="0" classname="V03CandidateAudit">
+      <failure message="/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v03/preflight/CandidateAuditTest.cpp:45&#x0A;Expected: (kernel.commit(proposal)) != (Kernel::Status::Ok), actual: 1-byte object &lt;00&gt; vs 1-byte object &lt;00&gt;" type=""><![CDATA[/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v03/preflight/CandidateAuditTest.cpp:45
+Expected: (kernel.commit(proposal)) != (Kernel::Status::Ok), actual: 1-byte object <00> vs 1-byte object <00>]]></failure>
+      <failure message="/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v03/preflight/CandidateAuditTest.cpp:46&#x0A;Expected equality of these values:&#x0A;  kernel.state()[0]&#x0A;    Which is: 0.49200001&#x0A;  .5f&#x0A;    Which is: 0.5" type=""><![CDATA[/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v03/preflight/CandidateAuditTest.cpp:46
+Expected equality of these values:
+  kernel.state()[0]
+    Which is: 0.49200001
+  .5f
+    Which is: 0.5]]></failure>
+    </testcase>
+  </testsuite>
+</testsuites>

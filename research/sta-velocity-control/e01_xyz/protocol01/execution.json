@@ -1,0 +1,22 @@
+{
+  "stage": "E01-XYZ-protocol01-paired",
+  "seeds": [22001, 22002, 22003],
+  "modes": [0, 1],
+  "maximum_attempts": 6,
+  "new_run_root": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/E01-XYZ/paired01",
+  "task": "Restart/warmup/takeoff/explicit 2.5m handoff/fixed yaw/90s observation/land/disarm. TEST4: existing 12s settle, Z 16s, XY 16s, XYZ 32s; each subwindow must pass.",
+  "excitation": "Smooth sine: sin(2*pi*u/8)*sin(pi*u/window_duration)^2. Z coefficient 0.1m/s; X=-Y coefficient 0.2/sqrt(2)m/s; zero added command on inactive axes. Bounded, zero integral, not a guarantee of zero position error. Original position P remains active.",
+  "authority": "用户：插入E01-XYZ三轴集成与验收，做的时候不需要我授权，做完为止。 Ordinary related offline repairs and separately frozen finite SITL batches covered; each failed batch stops, no retries or relaxed gates.",
+  "candidate": {
+    "X": {"lambda1":1,"lambda2":0.2,"nu_limit":0.4,"correction_limit":0.8},
+    "Y": {"lambda1":1,"lambda2":0.2,"nu_limit":0.4,"correction_limit":0.8},
+    "Z": {"lambda1":2,"lambda2":1,"nu_limit":4,"correction_limit":6},
+    "selection": "Retain accepted V05 XY and Z03 Z parameters, one fixed candidate, no additional flight tuning; Z03 error and TV did not beat PID. Ground/ramp and exactly one handover sample use PID, normal XYZ uses only ESTA. Original HTE enabled."
+  },
+  "scope": "Local NED velocity XYZ, MODE1/AXES7; original position P, attitude and all rate PID. Only Iris10016/quad_w Gazebo empty_grey world using project launcher; no hardware, old ISTA, velocity decimation, V06 or push.",
+  "safety": "Inherit V04 protocol17 and V05 protocol02 physical/timing/log/reset gates without numerical relaxation. Observation remains 90..92s; landing .6m/s with descent cap .55m/s. No auto fallback or hidden restart.",
+  "paired_gates": "Each Z/XY/XYZ window and combined64s: every axis RMSE <=1.25*paired PID+[.02,.02,.01]m/s; observation position RMSE <=1.25*PID+.05m per axis; yaw <=1.25*PID+.02rad; constraints fraction<=.05 and continuous<=.5s. Requires all three pairs; this is an additive development gate, not superiority or statistical non-inferiority.",
+  "failure_policy": "First required flight, log or paired gate failure stops batch, preserves data, consumes attempt; remaining budget not continued or replaced. Offline correction/refreeze new source/new seeds/new finite budget permitted by standing authority; never change numeric gates to obtain pass.",
+  "statistics": "Three development paired IMU seeds, fixed PID then ESTA order. Only IMU RNG controlled; other sensors/scheduling not independently seeded. Report per-axis/window means, raw results, true-update acceleration-request TV, saturation and height/yaw; no significance/general stability claim.",
+  "next": "Independent full-chain replay and hash/EEPROM checks, results report/commit and external SHA; stop without V06 or push."
+}

@@ -1,0 +1,91 @@
+{
+  "scope": "Z01 offline only; Z not admitted in production",
+  "success": true,
+  "new_flights": 0,
+  "commands": [
+    {
+      "name": "status",
+      "argv": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "submodules",
+      "argv": [
+        "git",
+        "submodule",
+        "status",
+        "--recursive"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "build_z",
+      "argv": [
+        "make",
+        "tests",
+        "TESTFILTER=VelocityEstaZ",
+        "-j4"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "z_tests",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-VelocityEstaZ",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/Z01/verify01/z.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "inherited_regression",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/scripts/verify_v04_repair.py",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/Z01/verify01/regression"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "firmware_symbols",
+      "argv": [
+        "nm",
+        "-C",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/bin/px4"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "diff_check",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "head": "7dcf9994a52993958cd1aed4ca64070c62a30a49",
+  "eeprom_before": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+  "z_tests": {
+    "tests": 16,
+    "failures": 0,
+    "errors": 0,
+    "disabled": 0
+  },
+  "inherited_cpp_tests": 106,
+  "inherited_python_tests": 347,
+  "no_z_prototype_firmware_symbol": true,
+  "firmware_sha256": "2e776c7ab5b8b49515fd38a9fcb302b6ebbc459677f04a8de9a9a6258981526c",
+  "eeprom_after": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+  "source_fingerprints": {
+    "research/sta-velocity-control/z_velocity/verify_z01.py": "ec06338165a6cc39f617c43a5947235799ca2bd1a48ac52a0d379264ef7563ec",
+    "research/sta-velocity-control/z_velocity/StaVelocityZPrototype.hpp": "47b4866b92bc21bde0a3efaee8eb5832b654041b00c78604721dc3a392205959",
+    "src/modules/mc_pos_control/PositionControl/VelocityEstaZTest.cpp": "1b04ff32eb2ec45f042a76c7c1933434b9c065958aff337304eccc5653539775",
+    "src/modules/mc_pos_control/PositionControl/CMakeLists.txt": "3a5d72f36cbf70323b23e19aeb2e6f2c974012b8fa351630bffd9d4a1b0113e0"
+  }
+}

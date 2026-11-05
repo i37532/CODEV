@@ -1,0 +1,21 @@
+{
+  "stage": "V04-logcheck07-offline",
+  "status": "offline_only",
+  "base_head": "110e3f667eaca57280519621d52fe6f63413a774",
+  "flight_authorized": false,
+  "execution_ready": false,
+  "maximum_attempts": 0,
+  "jobs": [],
+  "seeds": [],
+  "source_run": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series05/run01",
+  "original_acceptance": false,
+  "historical_acceptance_must_not_change": true,
+  "event_topics": ["vehicle_command", "vehicle_command_ack"],
+  "event_rule": "Recorded order, nondecreasing timestamp, different IDs allowed at equal time; no sorting/deduplication; duplicate same-time ID rejected; handoff command and ACK must each be unique and ordered",
+  "sampled_topics": "Unchanged strict timestamp and continuity checks",
+  "coordinate_rule": "One exact binary64 compiled-receiver representation, pinned source/compiler/compile command; no epsilon or ULP band",
+  "source_record": "Original integer encoding, projection and provenance remain unchanged; receiver expectation is a separate derived record",
+  "other_thresholds": "Unchanged protocol06 numerical, safety, lifecycle, reference and downstream coverage checks",
+  "acceptance": "Offline revised_checks_passed only; accepted remains false even when checks pass",
+  "next_flight": "Requires separately frozen and authorized protocol; this directory provides no flight runner"
+}

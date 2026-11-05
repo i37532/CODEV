@@ -43,6 +43,10 @@
 #include <matrix/matrix/math.hpp>
 #include <uORB/topics/vehicle_attitude_setpoint.h>
 #include <uORB/topics/vehicle_local_position_setpoint.h>
+#include "VelocityControlSelector.hpp"
+#include "StaVelocityProtection.hpp"
+#include "VelocityDecimation.hpp"
+#include <uORB/topics/sta_velocity_ctrl_status.h>
 
 struct PositionControlStates {
 	matrix::Vector3f position;
@@ -150,11 +154,43 @@ public:
 	 */
 	bool update(const float dt);
 
+	void configureVelocityControl(int32_t mode, int32_t axes, bool armed);
+	void configureVelocityDivisor(int32_t divisor, bool armed);
+	const VelocityDecimation &velocityDecimation() const { return _decimation; }
+	const matrix::Vector3f &velocityCorrection() const { return _correction; }
+	const matrix::Vector3f &velocityIntegral() const { return _vel_int; }
+	uint8_t intervalPositive() const { return _interval_positive; }
+	uint8_t intervalNegative() const { return _interval_negative; }
+	uint64_t velocityPathTimeNs() const { return _velocity_path_ns; }
+	void configureVelocityEsta(const StaVelocityProtection::Config &config, bool armed);
+	const StaVelocityProtection::Config &requestedVelocityEsta() const { return _esta_requested; }
+	const StaVelocityProtection::Config &effectiveVelocityEsta() const { return _esta_effective; }
+	bool velocityEstaPending() const { return _esta_pending; }
+	bool velocityEstaRejected() const { return !_esta_config_valid; }
+	uint32_t velocityEstaGeneration() const { return _esta_config_generation; }
+	void setVelocityFrame(const StaVelocityProtection::Frame &frame);
+	const VelocityControlSelector &velocitySelection() const { return _velocity_selector; }
+	const sta_velocity_ctrl_status_s &diagnostic() const { return _diagnostic; }
+	struct RistaDiagnostic {
+		StaVelocityProtection::Vec p{}, nu_candidate{}, nu_applied{}, a_ideal{}, a_applied{}, acc_published{}, thrust_published{};
+		float h{0.f}, seed_h{0.f};
+		uint64_t cache_sample{0};
+		uint8_t strict_axes{0}, commit_axes{0};
+		bool valid{false}, cache_valid{false};
+	};
+	const RistaDiagnostic &regularizedIstaDiagnostic() const { return _rista_diagnostic; }
+	uint16_t inputValidity() const;
+	uint16_t failureReason() const;
+	bool velocityOutputPublishable() const { return !_decimation.fault && (_velocity_selector.effectiveMode() == 0 || _diagnostic.valid); }
+	void setDiagnosticExcitation(float velocity, bool vertical = false) { _diagnostic_excitation = velocity; _diagnostic_excitation_y = _diagnostic_excitation_z = 0.f; _diagnostic_vertical = vertical; }
+	void setDiagnosticExcitationXY(float x, float y) { setDiagnosticExcitation(x); _diagnostic_excitation_y = y; }
+	void setDiagnosticExcitationXYZ(float x, float y, float z) { setDiagnosticExcitationXY(x, y); _diagnostic_excitation_z = z; }
+
 	/**
 	 * Set the integral term in xy to 0.
 	 * @see _vel_int
 	 */
-	void resetIntegral() { _vel_int.setZero(); }
+	void resetIntegral() { _vel_int.setZero(); _decimation.invalidate(); _rista_cache_valid = false; }
 
 	/**
 	 * Get the controllers output local position setpoint
@@ -173,10 +209,56 @@ public:
 	void getAttitudeSetpoint(vehicle_attitude_setpoint_s &attitude_setpoint) const;
 
 private:
+	friend class VelocityControlTestAccess;
+	friend class RegularizedVelocityTestAccess;
+	friend class RegularizedIstaVelocityTestAccess;
+	friend class RegularizedIstaVelocityModuleTestAccess;
+	// Offline-only override for later masks; production admission is explicitly
+	// gated in configureVelocityControl, with no setter/parameter for this flag.
+	// The only writer is the explicitly named offline test friend.
+	bool _regularized_test_admission{false};
+	bool _regularized_ista_admission{false}; // Offline later-mask override; no production writer or parameter.
+	bool _staEffective() const { return _velocity_selector.effectiveMode() == 1 || _velocity_selector.effectiveMode() == 3 || _velocity_selector.effectiveMode() == 4; }
+	RistaDiagnostic _rista_diagnostic{};
+	uint64_t _rista_processed_sample{0}, _rista_cache_sample{0};
+	uint32_t _rista_cache_generation{0};
+	bool _rista_cache_valid{false};
+	float _rista_cache_correction{0.f}, _rista_cache_ff{0.f};
+	void _recordRistaDiagnostic(bool success);
+	float _regularizedPsi(float s, size_t axis) const;
+	VelocityControlSelector _velocity_selector;
+	VelocityDecimation _decimation;
+	matrix::Vector3f _correction{NAN, NAN, NAN}; // never includes acceleration FF
+	uint32_t _velocity_frame_serial{0}, _consumed_frame_serial{0};
+	uint8_t _interval_positive{0}, _interval_negative{0};
+	bool _decimated_retry{false};
+	uint64_t _velocity_path_ns{0};
+	void _velocityControlDecimated(float dt);
+	void _mapHeldCorrection();
+	sta_velocity_ctrl_status_s _diagnostic{};
+	float _diagnostic_excitation{0.f};
+	float _diagnostic_excitation_y{0.f};
+	float _diagnostic_excitation_z{0.f};
+	bool _diagnostic_vertical{false};
+	StaVelocityProtection _velocity_protection;
+	StaVelocityProtection::Frame _velocity_frame{};
+	StaVelocityProtection::Config _esta_requested{}, _esta_effective{};
+	bool _esta_config_valid{false}, _esta_pending{false}, _esta_failed{false}, _esta_config_changed{false};
+	bool _z_engaged{false};
+	uint8_t _z_phase{0}; // 0 not Z,1 ground/ramp PID,2 PID handover,3 ESTA,4 acceleration-only
+	float _z_hte_shift{0.f};
+	uint32_t _esta_config_generation{0};
+	void _recordDiagnostic(bool success);
 	bool _updateSuccessful();
 
 	void _positionControl(); ///< Position proportional control
 	void _velocityControl(const float dt); ///< Velocity PID control
+	void _velocityControlPid(const float dt); ///< V00 PID operations, unchanged order
+	void _velocityControlEstaX(const float dt);
+	void _velocityControlEstaXY(const float dt);
+	void _velocityControlEstaZ(const float dt);
+	void _velocityControlEstaXYZ(const float dt);
+	void _velocityControlEstaMixed(const float dt); // AX01 Y/XZ/YZ, DIV1 only
 	void _accelerationControl(); ///< Acceleration setpoint processing
 
 	// Gains

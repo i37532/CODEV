@@ -1,0 +1,71 @@
+{
+  "source_head": "d37a4cb3ed4e8351acc0ab027dd4149dd1bc1eb2",
+  "branch": "research/sta-velocity-control",
+  "binary_sha256": "0e46f38f2e681b419544c6aa32955345fd0543d73fa4d8783e28817455d4b76e",
+  "runner_sha256": "19625274c9496c2e7667c0ab32e676ad375deee405b34a10dcd211efc7fba8e1",
+  "command": [
+    "./sitl/run.sh",
+    "--headless",
+    "--backend",
+    "gazebo",
+    "--model",
+    "iris"
+  ],
+  "pid_parameters_modified": false,
+  "success": false,
+  "events": [
+    {
+      "name": "ready",
+      "timestamp_us": 30884000.0
+    },
+    {
+      "name": "takeoff_command",
+      "timestamp_us": 30884000
+    },
+    {
+      "name": "reposition_command",
+      "timestamp_us": 39604000.0
+    },
+    {
+      "name": "handoff_ready",
+      "timestamp_us": 40016000.0
+    },
+    {
+      "name": "hover_start",
+      "timestamp_us": 48464000.0
+    },
+    {
+      "name": "hover_end",
+      "timestamp_us": 138784000.0
+    },
+    {
+      "name": "land_command",
+      "timestamp_us": 138784000.0
+    }
+  ],
+  "scenario_sha256": "98a13f8da21cd776d9f799da7fcea0d08d82700c1c686afcc8b071a0515a06bd",
+  "scenario_path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v07/protocol04/execution.json",
+  "simulation_speed_requested": 1.0,
+  "explicit_environment": {
+    "PX4_SITL_WORLD": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world",
+    "GAZEBO_MASTER_URI": "http://127.0.0.1:11345"
+  },
+  "launcher_pid": 990720,
+  "error": "ValueError('Landing evidence pending timeout')",
+  "launcher_returncode": 0,
+  "logs": [
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-29/04_15_31.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/series04/run05/04_15_31.ulg",
+      "sha256": "8fa3ec7b6840699d759c2025df7940b767bf076b33cab546f0dba65ad340e0f4",
+      "bytes": 201341
+    },
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/sess005/log001.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/series04/run05/log001.ulg",
+      "sha256": "9ca12419859af705e5de327827df6e5003e00b77e9267aff68ccd7a214f7c242",
+      "bytes": 99712776
+    }
+  ],
+  "finished_utc": "2026-09-29T04:17:52Z"
+}

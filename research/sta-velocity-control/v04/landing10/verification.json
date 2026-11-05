@@ -1,0 +1,210 @@
+{
+  "kind": "landing10_offline_repair_not_flight_acceptance",
+  "new_flights": 0,
+  "passed": true,
+  "source_head": "7755b003868c25e105616483cd92d95151b7d68a",
+  "eeprom_before": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+  "active_simulators_before": [],
+  "cpp_control_tests": 109,
+  "cpp_imu_unique_tests": 11,
+  "cpp_imu_sanitizer_tests": 11,
+  "historical_inputs_unchanged": 243,
+  "firmware_sha256": "20699ef4af12647ebb8300dd9631a8824897cda75b65895a4a06fdf15826c0c1",
+  "eeprom_after": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+  "active_simulators_after": [],
+  "seven_historical_verdicts_unchanged": true,
+  "python_tests_before_final_completion_guards": 332,
+  "python_tests_final": 334,
+  "new_python_tests": 32,
+  "targeted01": {
+    "tests": 24,
+    "failures": 1,
+    "exit_code": 1,
+    "reason": "test expected a later rejection string; implementation rejected earlier AUTO_LAND-before-command"
+  },
+  "targeted02": {
+    "tests": 30,
+    "exit_code": 0
+  },
+  "python_final01": {
+    "tests": 333,
+    "exit_code": 0
+  },
+  "python_final02": {
+    "tests": 334,
+    "exit_code": 0
+  },
+  "flight_authorized": false,
+  "execution_ready": false,
+  "eight_replays": [
+    {
+      "series": 1,
+      "landing_component": {
+        "check_passed": false,
+        "not_executed": "No complete observation/landing command"
+      },
+      "heading_check_passed": null,
+      "heading_error": null,
+      "new_full_chain_passed": false,
+      "accepted": false
+    },
+    {
+      "series": 2,
+      "landing_component": {
+        "check_passed": false,
+        "not_executed": "No complete observation/landing command"
+      },
+      "heading_check_passed": false,
+      "heading_error": "ValueError('Reference does not match raw prearm sample x')",
+      "new_full_chain_passed": false,
+      "accepted": false
+    },
+    {
+      "series": 3,
+      "landing_component": {
+        "check_passed": false,
+        "not_executed": "No complete observation/landing command"
+      },
+      "heading_check_passed": true,
+      "heading_error": null,
+      "new_full_chain_passed": false,
+      "accepted": false
+    },
+    {
+      "series": 4,
+      "landing_component": {
+        "check_passed": false,
+        "not_executed": "No complete observation/landing command"
+      },
+      "heading_check_passed": true,
+      "heading_error": null,
+      "new_full_chain_passed": false,
+      "accepted": false
+    },
+    {
+      "series": 5,
+      "landing_component": {
+        "check_passed": true,
+        "result": {
+          "command_us": 107864000,
+          "through_us": 115484000,
+          "diagnostic_rows": 6792,
+          "classification": {
+            "clear": 6088,
+            "expected_planned_landing_gate": 704
+          },
+          "raw_values_preserved": true,
+          "consumed_status_proven": false
+        }
+      },
+      "heading_check_passed": true,
+      "heading_error": null,
+      "new_full_chain_passed": false,
+      "accepted": false
+    },
+    {
+      "series": 6,
+      "landing_component": {
+        "check_passed": true,
+        "result": {
+          "command_us": 107668000,
+          "through_us": 112036000,
+          "diagnostic_rows": 6489,
+          "classification": {
+            "clear": 6053,
+            "expected_planned_landing_gate": 436
+          },
+          "raw_values_preserved": true,
+          "consumed_status_proven": false
+        }
+      },
+      "heading_check_passed": false,
+      "heading_error": "ValueError('Coordinate/reset changed: ref_timestamp')",
+      "new_full_chain_passed": false,
+      "accepted": false
+    },
+    {
+      "series": 7,
+      "landing_component": {
+        "check_passed": false,
+        "not_executed": "No complete observation/landing command"
+      },
+      "heading_check_passed": true,
+      "heading_error": null,
+      "new_full_chain_passed": false,
+      "accepted": false
+    },
+    {
+      "series": 8,
+      "landing_component": {
+        "check_passed": true,
+        "result": {
+          "command_us": 108240000,
+          "through_us": 108356000,
+          "diagnostic_rows": 6042,
+          "classification": {
+            "clear": 6030,
+            "expected_planned_landing_gate": 12
+          },
+          "raw_values_preserved": true,
+          "consumed_status_proven": false
+        }
+      },
+      "heading_check_passed": true,
+      "heading_error": null,
+      "new_full_chain_passed": false,
+      "accepted": false
+    }
+  ],
+  "original_files_unchanged": 284,
+  "submodules": [
+    " 7c2c623da9f5dcb3f01d32830af1a2ed958de363 Tools/flightgear_bridge (7c2c623)",
+    " cbdb2fc7dd44331da1dcd04a891ed7f8c27b1ef0 Tools/flightgear_bridge/models/Rascal (remotes/origin/electric-14-gcbdb2fc)",
+    " 4540de7ae8e71b9bd6e6f67d085695be0ab36bc3 Tools/flightgear_bridge/models/TF-G1 (4540de7)",
+    " 562ee71388c493675269210f7692d8b7a8bb800d Tools/flightgear_bridge/models/TF-G2 (562ee71)",
+    " 158e429a0110589b1e2adfe868e166271470e144 Tools/flightgear_bridge/models/TF-R1 (heads/master)",
+    " 0a816d8100e9860a031ccfccfb9941bcd6eedc81 Tools/jMAVSim (0a816d8)",
+    " c08380767b21938391bec676a43b36b837af9ba4 Tools/jMAVSim/jMAVlib (heads/master)",
+    " e070c50d591541d440510b65c9da5cad1db5aa9a Tools/jsbsim_bridge (e070c50)",
+    " 40571cd808a204f4062128daeb6bb6db8c134c48 Tools/jsbsim_bridge/models/ATI-Resolution (2019.1)",
+    " d0d1db1961549e557885002cf9c3cff40cc27be2 Tools/jsbsim_bridge/models/Rascal (remotes/origin/preserve-this-branch-for-px4-submodules)",
+    " 822050a7ab6fd87972e59f16312f451bce217a56 Tools/sitl_gazebo (822050a)",
+    " 28ef45c1fcb532b2bfd54c16b059c6a545143b2f Tools/sitl_gazebo/external/OpticalFlow (28ef45c)",
+    " 9b5b567ae77f93d1ef4d36151529ba2506a46e7a Tools/sitl_gazebo/external/OpticalFlow/external/klt_feature_tracker (heads/master)",
+    " 08fd0a73045346448adf6969660196228b23e1fa boards/atlflight/cmake_hexagon (remotes/origin/px4)",
+    " 636fae5ca34eff6007344718755d78fcdf94238e mavlink/include/mavlink/v2.0 (636fae5c)",
+    " 979e27408fa90a3c3d6432190c8f65cc80c3e6b6 platforms/nuttx/NuttX/apps (nuttx-8.2-590-g979e27408)",
+    " bf660cba2af81f055002b3817c87b1f63a78fd09 platforms/nuttx/NuttX/nuttx (nuttx-8.2-3070-gbf660cba2a)",
+    " 0322a4e345e48ea28cb1cee14a33033cdaf0b16a platforms/qurt/dspal (heads/master)",
+    " 07168bd5715818802b78f674816ec851307998a7 platforms/qurt/dspal/cmake_hexagon (remotes/origin/sdk3.1-4-g07168bd)",
+    " c34ef0ce3100684a927c6aecebf0c904bee251b3 src/drivers/gps/devices (remotes/origin/codev_main_12.3_gps_update)",
+    " 29e1aa6c12e3590252b102153d8c62155047a676 src/drivers/uavcan/libuavcan (remotes/origin/pr-nuttx_update_7.31+-4-g29e1aa6c)",
+    " 192295c4f9b67f4a20b0eabf74757b6597415f2b src/drivers/uavcan/libuavcan/dsdl (192295c)",
+    " c58477a644d20ccf95a20c151f3a0402f271c3b8 src/drivers/uavcan/libuavcan/libuavcan/dsdl_compiler/pyuavcan (v1.0.0dev3~7)",
+    " fd12483ddd4e58242d61d74a163e7aeaa1e0f466 src/drivers/uavcan/libuavcan/libuavcan/dsdl_compiler/pyuavcan/dsdl (fd12483)",
+    " 36a01e428b110ff84c8babe5b65667b5e3037d5e src/drivers/uavcan_v1/legacy_data_types (remotes/origin/legacy)",
+    " 2a116170285fb47fcaae150ad21c2ccde0756a5f src/drivers/uavcan_v1/libcanard (1.1.0)",
+    " 0a773b93ce5c94e1d2791b180058cb9897fab7e1 src/drivers/uavcan_v1/public_regulated_data_types (0a773b9)",
+    " 2a116170285fb47fcaae150ad21c2ccde0756a5f src/drivers/uavcannode_gps_demo/libcanard (1.1.0)",
+    " 0a773b93ce5c94e1d2791b180058cb9897fab7e1 src/drivers/uavcannode_gps_demo/public_regulated_data_types (0a773b9)",
+    " baca5d31259c598540e4d1284bc8d8f793abf83a src/lib/crypto/monocypher (3.1.2)",
+    " b3fed06fe822d08d19ab1d2c2f8daf7b7d21951c src/lib/ecl (v1.9.0-rc1-591-gb3fed06)",
+    " b8568a89db8455d0ab2e2e391e2149ba2e5e10dd src/lib/matrix (v1.0.2-195-gb8568a8)",
+    " 21d3cfe3ae570d1674da0105ab23b80958e0449a src/modules/micrortps_bridge/micro-CDR (v1.0.0beta2-54-g21d3cfe)"
+  ],
+  "new_code_sha256": {
+    "research/sta-velocity-control/scripts/replay_v04_landing10.py": "a2a09bf37f678c9fbc51e857f766243b01e52ada885089feb0c797eff176fb3a",
+    "research/sta-velocity-control/scripts/test_v04_landing10.py": "85a6a305da8a588e7601b64cc59a90135df39792b24a155c341db3ab2e73b46b",
+    "research/sta-velocity-control/scripts/v04_monitor10.py": "bb1567783875772259ca37fd3f86f639f9f66bdb740d8bba9bbb0a036dc32369",
+    "research/sta-velocity-control/scripts/v04_landing10.py": "601d7cbe8d073de4ed677faf9fe7f8c9201026c9464fb36ccb0b24d0d79a0615",
+    "research/sta-velocity-control/scripts/v04_landing_live10.py": "5c4765490ed49ae2bcab52664bda6a19fe71cbb00f3a3026737df408999bfcfb",
+    "research/sta-velocity-control/scripts/analyze_v04_landing10.py": "dd7e7e968002fd2339fd6630e669b28182d23b07f588187f1b61b5e1ec808497",
+    "research/sta-velocity-control/scripts/run_v04_flight11.py": "7fd7ca8e4fb350559a0806d2791b633c2f84227e077cff45820b60998a0ec7c5"
+  },
+  "python_final03": {
+    "tests": 334,
+    "exit_code": 0,
+    "seconds": 24.57,
+    "reason": "final review retained mandatory first_input diagnostic field; full suite rerun"
+  }
+}

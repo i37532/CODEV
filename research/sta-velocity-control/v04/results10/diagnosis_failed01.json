@@ -1,0 +1,113 @@
+{
+  "checks": [
+    {
+      "name": "failed_without_complete_landing",
+      "passed": true
+    },
+    {
+      "name": "no_recorded_dropouts_or_corruption",
+      "passed": true
+    },
+    {
+      "name": "complete_observation_window",
+      "passed": true
+    },
+    {
+      "name": "hover_heading_check_passed",
+      "passed": false
+    },
+    {
+      "name": "full_raw_history_rejects",
+      "passed": true
+    },
+    {
+      "name": "cli_rejection_reproduced",
+      "passed": true
+    },
+    {
+      "name": "actual_raw_resets",
+      "passed": true
+    },
+    {
+      "name": "actual_raw_primary_changes",
+      "passed": true
+    },
+    {
+      "name": "new_raw_landing_component_passed",
+      "passed": false
+    },
+    {
+      "name": "live_new_landing_component_really_used",
+      "passed": true
+    },
+    {
+      "name": "actual_outer_and_inner_PID",
+      "passed": true
+    },
+    {
+      "name": "no_first_retry_or_control_fault",
+      "passed": false
+    },
+    {
+      "name": "no_disarm_after_land",
+      "passed": true
+    },
+    {
+      "name": "original_files_unchanged",
+      "passed": true
+    }
+  ],
+  "diagnostic_checks_passed": false,
+  "heading_through_hover_only": {
+    "passed": false,
+    "error": "Empty/nonmonotonic estimator_selector_status"
+  },
+  "landing_component_only": {
+    "passed": false,
+    "error": "Landing diagnostic failure: timing"
+  },
+  "recorded_flight_values": {
+    "effective_mode": [
+      0
+    ],
+    "effective_axes": [
+      0
+    ],
+    "inner_mode": [
+      0
+    ],
+    "inner_axes": [
+      0
+    ],
+    "inner_divisor": [
+      1
+    ],
+    "inner_valid": [
+      1
+    ],
+    "first_fail": [
+      0
+    ],
+    "retry_result": [
+      0
+    ],
+    "fault": [
+      0
+    ],
+    "sta_fault": [
+      0
+    ],
+    "failsafe": [
+      0
+    ],
+    "timing": [
+      0,
+      2
+    ],
+    "excitation_fault": [
+      0,
+      2,
+      3
+    ]
+  }
+}

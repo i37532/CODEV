@@ -1,0 +1,28 @@
+{
+  "stage": "Z03-protocol03-paired-Z-ESTA",
+  "seeds": [
+    19001,
+    19002,
+    19003
+  ],
+  "modes": [
+    0,
+    1
+  ],
+  "maximum_attempts": 6,
+  "new_run_root": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/paired01",
+  "task": "Iris restart/warmup/takeoff/explicit 2.5m handoff/fixed yaw/60s observation/32s Z sine/land/disarm",
+  "excitation": "MPC_VCT_TEST=2, 0.1*sin(2*pi*t/8)*sin(pi*t/32)^2 m/s; 12s settle; once per arming",
+  "authority": "User requests Z replacement through completion without per-batch authorization",
+  "scope": "PID then Z ESTA per seed; X/Y and all rate PID; HTE and land detector unchanged; development pairs",
+  "safety": "Original V04 protocol17 numeric safety, logging, timing, height, yaw, reset, saturation gates retained",
+  "failure_policy": "Stop on first required failure. Preserve all raw data. New repaired batch requires separate frozen source/seeds/budget, not another user approval.",
+  "next": "Stop after three accepted pairs and final report; do not expand XY/hardware",
+  "candidate": {
+    "lambda1": 2,
+    "lambda2": 1,
+    "nu_limit": 4,
+    "correction_limit": 6,
+    "evidence": "Z03_PID02.md: PID admission and four offline nonzero-state object trajectories"
+  }
+}

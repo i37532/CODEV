@@ -117,6 +117,12 @@ set(msg_files
 	qshell_retval.msg
 	radio_status.msg
 	rate_ctrl_status.msg
+	rate_ctrl_selection.msg
+	sta_rate_ctrl_status.msg
+	velocity_ctrl_selection.msg
+	sta_velocity_ctrl_status.msg
+	sta_takeoff_status.msg
+	gyro_sample_status.msg
 	rc_channels.msg
 	rc_parameter_map.msg
 	rpm.msg
@@ -171,6 +177,7 @@ set(msg_files
 	vehicle_imu_status.msg
 	vehicle_land_detected.msg
 	vehicle_local_position.msg
+	vehicle_local_position_log.msg
 	vehicle_local_position_setpoint.msg
 	vehicle_magnetometer.msg
 	vehicle_odometry.msg

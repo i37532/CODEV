@@ -48,3 +48,5 @@ px4_add_module(
 	DEPENDS
 		version
 	)
+
+px4_add_functional_gtest(SRC EstimatorDiagnosticTopicsTest.cpp LINKLIBS modules__logger)

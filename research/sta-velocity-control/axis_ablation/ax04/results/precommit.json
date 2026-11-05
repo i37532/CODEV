@@ -1,0 +1,157 @@
+{
+  "success": true,
+  "new_flights": 0,
+  "commands": [
+    {
+      "name": "submodules",
+      "argv": [
+        "git",
+        "submodule",
+        "status",
+        "--recursive"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "submodule_clean",
+      "argv": [
+        "git",
+        "submodule",
+        "foreach",
+        "--recursive",
+        "--quiet",
+        "git status --porcelain"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "snapshot",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax04/freeze.py",
+        "--check"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "dry_run",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax04/run.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "ax02_test_protocol",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax02/test_protocol.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "ax02_test_targets",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax02/test_targets.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "ax03_test_collect",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax03/test_collect.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "ax04_test_formal",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax04/test_formal.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "VelocityAblationTask",
+      "argv": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-VelocityAblationTask",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX04/check01/VelocityAblationTask.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "statistics_full_counts",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/axis_ablation/ax04/verify_statistics.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "diff_check",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "eeprom_before": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+  "source_head": "4d5e2a7f5dfee5b12615d8d07cbe3d3519f7bd55",
+  "workspace": "?? research/sta-velocity-control/axis_ablation/ax04/\n",
+  "seed_audit": {
+    "accepted": true,
+    "files_parsed": 38965,
+    "scan_manifest_sha256": "183b12eb49fdf4629f5284f04403fea81b1e88bf65dba2c56bbdc727f2271759",
+    "roots": [
+      "/home/yr/Desktop/Codev-autopilot/research",
+      "/home/yr/Desktop/codev doc/experiments",
+      "/home/yr/Desktop/codev doc/plan"
+    ],
+    "excluded": "none; exact fingerprinted unattempted/design registrations only",
+    "registered_matches": 962
+  },
+  "historical_evidence": {
+    "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX04/offline01/evidence.json",
+    "sha256": "3a5f70463c3768841f83a014ffbac80755a144223642ad60738113f646d4e990"
+  },
+  "cpp_tests": 273,
+  "python_tests": 710,
+  "synthetic_statistics": {
+    "success": true,
+    "synthetic_comparisons": 14,
+    "bootstrap_repetitions": 200000,
+    "signflip_repetitions": 100000,
+    "formal_attempted": 0,
+    "formal_accepted": 0,
+    "note": "Synthetic statistics are not formal flight outcomes"
+  },
+  "frozen_sha256": "0cf4d1a6626ed0cb19ce7cf0af822fe16f9a9fb70f3d3209dfe8d51cd7695f3a",
+  "execution_sha256": "308aa5a4e52828585bbf6ee3ec0be339a8081475663ceb759de0aee40167d2d3",
+  "asset_count": 500,
+  "external_asset_count": 7,
+  "firmware_sha256": "e3cde25d0b73dcdbc4e088830b5cdc9d498416c402b04f402cb364a8be65d7d5",
+  "eeprom_after": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+  "evidence_fingerprints": [
+    {
+      "sha256": "3a5f70463c3768841f83a014ffbac80755a144223642ad60738113f646d4e990",
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX04/offline01/evidence.json"
+    },
+    {
+      "sha256": "ee7a626f4d1530925e5160bf8ea3ac2eefc2541fa20066be55dc21b13a505b13",
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX04/offline01/artifacts.sha256"
+    },
+    {
+      "sha256": "990ac6962450f0a8ce96ff4d26eb24396819ca37bd3283cf63eeb50996be64e6",
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX04/check01/evidence.json"
+    },
+    {
+      "sha256": "07c8754b88df943a2fa2c215d5c9cfbfc4817b2e94bdf7e1626552063691309c",
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX04/check01/artifacts.sha256"
+    }
+  ],
+  "scope": "AX04 precommit offline result. Final clean-source firmware receipt is external qualified_source.json; no AX05 authority."
+}

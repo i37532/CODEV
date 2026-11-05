@@ -1,0 +1,17 @@
+{
+  "kind": "offline_engineering_candidate_not_loadable_profile",
+  "flight_authorized": false,
+  "production_defaults_changed": false,
+  "source_head": "8578560847bd32efa17b5f45d3ec413c2961a927",
+  "algorithm": "R-ISTA",
+  "axis": "NED Z",
+  "reference_h_seconds": 0.01,
+  "original": {"lambda1": 2.0, "lambda2": 1.0, "epsilon": 0.02},
+  "candidate": {"lambda1": 2.2470735044448613, "lambda2": 1.1647156696299077, "epsilon": 0.02},
+  "unchanged_limits": {"nu_m_per_s2": 4.0, "correction_m_per_s2": 6.0},
+  "basis": "Match original R-STA local proportional and integral coefficients at fixed 10 ms; not fitted to flight RMSE",
+  "parameter_searches": 0,
+  "validation_status": "offline_model_checked_not_flight_qualified",
+  "validation_evidence": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI04_Z_BANDWIDTH/model01/summary.json",
+  "limitations": ["Not same-lambda comparison", "Not a full nonlinear or variable-step equivalence", "No new flight validation", "No guaranteed improvement", "Cannot be loaded by existing runner"]
+}

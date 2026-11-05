@@ -1,0 +1,31 @@
+{
+  "milestone": "I05R-A",
+  "date": "2026-09-18",
+  "axes": 3,
+  "divisor": 1,
+  "simulation_speed_requested": 5,
+  "paired_seeds": [6601, 6602, 6603, 6604, 6605],
+  "ordered_jobs": [[6601,"esta"],[6601,"proper_ista"],[6602,"proper_ista"],[6602,"esta"],[6603,"esta"],[6603,"proper_ista"],[6604,"proper_ista"],[6604,"esta"],[6605,"esta"],[6605,"proper_ista"]],
+  "attempt_policy": "one attempt per immutable job; retain every failure; no retry",
+  "parameters": {
+    "MC_STA_L1_R": 2.2, "MC_STA_L2_R": 0.05, "MC_STA_G_R": 130.575283, "MC_STA_NU_R": 3.0,
+    "MC_STA_L1_P": 2.4, "MC_STA_L2_P": 0.08, "MC_STA_G_P": 112.763533, "MC_STA_NU_P": 3.0,
+    "MC_STA_L1_Y": 1.5, "MC_STA_L2_Y": 0.02, "MC_STA_G_Y": 34.582326, "MC_STA_NU_Y": 3.0,
+    "MC_STA_TKO_MGT": 0
+  },
+  "paired_gate": {
+    "ratio_max_each": 1.25,
+    "absolute_margin_commanded_rad_s": 0.0005,
+    "absolute_margin_uncommanded_rad_s": 0.001,
+    "median_primary_pitch_ratio_max": 1.10,
+    "required_pairs": 5
+  },
+  "sources": {
+    "old_i05_frozen": {"path":"research/sta-rate-control/ista_redesign/i05/FROZEN_A.json","sha256":"7bf890825559c875880e44a265361afc47af3f01e71e2fce2dc0cc0666d1cb92"},
+    "old_i05_summary": {"path":"research/sta-rate-control/ista_redesign/i05/results/A/summary.json","sha256":"cf804b59bf8c506f1fa35bf362666489b42cb816977308b56fb9bd5724ff4071"},
+    "pitch_calibration": {"path":"research/sta-rate-control/m05/calibration.json","sha256":"faecde040e53a93d8ffa77c7ff8b29fc5e745a6375c05b8e8ba06340d3b255b3"},
+    "m10_frozen": {"path":"research/sta-rate-control/m10/FROZEN.json","sha256":"958e60d954f51d1189a54b73107c36bd744bfdda6bea9f4db052ea3381734842"},
+    "plugins_manifest": {"path":"/home/yr/Desktop/codev doc/experiments/M10-20260917/plugins03/manifest.json","sha256":"e10aab329615926555f50fedd8a4392330c54fcec078df1bd2f234186d8981c2"}
+  },
+  "scope": "Fresh paired R/P remediation admission only; no tuning, yaw expansion, decimation, hardware, or retroactive I05-A pass"
+}

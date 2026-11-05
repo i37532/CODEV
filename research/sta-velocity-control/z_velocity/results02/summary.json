@@ -1,0 +1,119 @@
+{
+  "ledger": {
+    "source_head": "746f94f05b49bbed577126765097284de31f4e0e",
+    "planned": 1,
+    "attempts": [
+      {
+        "attempt": 1,
+        "job": {
+          "id": "run01",
+          "seed": 18002,
+          "mode": 0,
+          "axes": 0,
+          "parameters": {
+            "MPC_VC_L1_X": 0,
+            "MPC_VC_L2_X": 0,
+            "MPC_VC_NU_X": 0,
+            "MPC_VC_A_X": 0,
+            "MPC_VC_L1_Z": 1.0,
+            "MPC_VC_L2_Z": 0.2,
+            "MPC_VC_NU_Z": 2.0,
+            "MPC_VC_A_Z": 3.0,
+            "MPC_VC_MODE": 0,
+            "MPC_VC_AXES": 0
+          }
+        },
+        "directory": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/pid02/run01",
+        "status": "accepted"
+      }
+    ],
+    "pairs": [],
+    "success": true,
+    "firmware_sha256": "c8a99bac017760b2589da19226aa43e819610f045dc7abbe1dd5c4dd0852b10c",
+    "original_parameter_sha256": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+    "applied_profile": 1171,
+    "parameter_restore_exact": true,
+    "remaining_simulators": []
+  },
+  "diagnostics": [
+    {
+      "run": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/pid02/run01",
+      "accepted": true,
+      "logs": [
+        {
+          "ulog": {
+            "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-27/05_37_44.ulg",
+            "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/pid02/run01/05_37_44.ulg",
+            "sha256": "ab273af19dd5fdc67ea955fb1487ce75de3689b45047af8e49f017c1253fb44c",
+            "bytes": 208884
+          },
+          "dropouts": 0,
+          "corruption": false
+        },
+        {
+          "ulog": {
+            "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-27/05_37_45.ulg",
+            "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260927/Z03/pid02/run01/05_37_45.ulg",
+            "sha256": "52283de27095b31a4f79290b402dd58fef7691a8dc5e92f542f1bd18183a42e4",
+            "bytes": 81620244
+          },
+          "dropouts": 0,
+          "corruption": false,
+          "samples": 11699,
+          "armed_enabled": 8696,
+          "requested_mode": {
+            "0": 8696
+          },
+          "effective_mode": {
+            "0": 8696
+          },
+          "requested_axes": {
+            "0": 8696
+          },
+          "effective_axes": {
+            "0": 8696
+          },
+          "pid_axes": {
+            "0": 371,
+            "7": 8325
+          },
+          "active_axes": {
+            "0": 8696
+          },
+          "committed_axes": {
+            "0": 8696
+          },
+          "config_pending": {
+            "0": 8696
+          },
+          "sta_fault": {
+            "0": 8696
+          },
+          "fault": {
+            "0": 8696
+          },
+          "first_fail": {
+            "0": 8696
+          },
+          "retry_result": {
+            "0": 8696
+          },
+          "timing": {
+            "0": 8696
+          },
+          "z_phase": {
+            "0": 8696
+          },
+          "first_eligible": {
+            "sample": 35204000,
+            "s": 0.7281453609466553,
+            "correction": -2.9211905002593994,
+            "nu_seed_lambda1_1": -2.0678761613744516,
+            "hover": 0.5,
+            "constraint": 0
+          }
+        }
+      ]
+    }
+  ]
+}

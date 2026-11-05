@@ -1,0 +1,246 @@
+{
+  "accepted": false,
+  "flight_completed": false,
+  "error": "RuntimeError('V03 monitor: inner_mode=-1.0')",
+  "source": "d5fb5c5c2b89c33a23cac7af1c2e79d1d5c89e5b",
+  "logs": [
+    {
+      "sha256": "99883783cfff92cb1cc6b2e11d606d8ed2c5b52e79201955127d1e0e6dc5ebf2",
+      "bytes": 155537,
+      "dropouts": 0,
+      "topics": {
+        "sta_velocity_ctrl_status": {
+          "missing": true
+        },
+        "sta_rate_ctrl_status": {
+          "n": 92,
+          "after_takeoff_command": 0,
+          "first_us": 160000,
+          "last_us": 524000,
+          "hz": 250.0,
+          "effective_mode": {},
+          "effective_axes": {},
+          "div_eff": {},
+          "fault": {},
+          "abort_requested": {},
+          "termination": {},
+          "measurement_valid": {},
+          "output_valid": {},
+          "sequence_missing": 0
+        },
+        "vehicle_local_position": {
+          "missing": true
+        },
+        "vehicle_land_detected": {
+          "missing": true
+        },
+        "vehicle_status": {
+          "n": 2,
+          "after_takeoff_command": 0,
+          "first_us": 16000,
+          "last_us": 172000,
+          "hz": 6.410256410256411,
+          "takeoff_time_max": 0
+        }
+      }
+    },
+    {
+      "sha256": "b576c517ba9d8965214ff41238ed3d2dd1aab2923266167bbac8dbdd6194fc2f",
+      "bytes": 9181060,
+      "dropouts": 0,
+      "topics": {
+        "sta_velocity_ctrl_status": {
+          "n": 2930,
+          "after_takeoff_command": 2,
+          "first_us": 1636000,
+          "last_us": 30924000,
+          "hz": 100.00682873531822,
+          "inner_valid": {
+            "0": 2
+          },
+          "inner_mode": {
+            "-1": 2
+          },
+          "timing": {
+            "0": 2
+          },
+          "valid": {
+            "1": 2
+          },
+          "pid_calls": {
+            "1": 2
+          },
+          "takeoff_state": {
+            "1": 2
+          },
+          "landed": {
+            "1": 2
+          },
+          "contact": {
+            "1": 2
+          },
+          "fault": {
+            "0": 2
+          },
+          "failsafe": {
+            "0": 2
+          },
+          "excitation": {
+            "0.0": 2
+          },
+          "sequence_missing": 0,
+          "format_fields": [
+            "timestamp",
+            "timestamp_sample",
+            "input_timestamp",
+            "setpoint_timestamp",
+            "output_timestamp",
+            "attitude_timestamp",
+            "publish_seq",
+            "update_seq",
+            "requested_mode",
+            "requested_axes",
+            "effective_mode",
+            "effective_axes",
+            "raw_dt",
+            "input_dt",
+            "used_dt",
+            "excitation",
+            "excitation_time",
+            "hover_thrust",
+            "tilt_limit",
+            "thrust_min",
+            "thrust_max",
+            "p_sp[0]",
+            "p_sp[1]",
+            "p_sp[2]",
+            "v_ff[0]",
+            "v_ff[1]",
+            "v_ff[2]",
+            "v_sp[0]",
+            "v_sp[1]",
+            "v_sp[2]",
+            "v[0]",
+            "v[1]",
+            "v[2]",
+            "v_dot[0]",
+            "v_dot[1]",
+            "v_dot[2]",
+            "a_ff[0]",
+            "a_ff[1]",
+            "a_ff[2]",
+            "s[0]",
+            "s[1]",
+            "s[2]",
+            "nu_before[0]",
+            "nu_before[1]",
+            "nu_before[2]",
+            "nu_ideal[0]",
+            "nu_ideal[1]",
+            "nu_ideal[2]",
+            "nu_applied[0]",
+            "nu_applied[1]",
+            "nu_applied[2]",
+            "a_sta[0]",
+            "a_sta[1]",
+            "a_sta[2]",
+            "a_req[0]",
+            "a_req[1]",
+            "a_req[2]",
+            "a_proxy[0]",
+            "a_proxy[1]",
+            "a_proxy[2]",
+            "thrust[0]",
+            "thrust[1]",
+            "thrust[2]",
+            "q_sp[0]",
+            "q_sp[1]",
+            "q_sp[2]",
+            "q_sp[3]",
+            "controller_time_us",
+            "module_time_us",
+            "clock",
+            "pid_calls",
+            "pid_axes",
+            "active_axes",
+            "reset_bits",
+            "constraint_bits",
+            "timing",
+            "takeoff_state",
+            "reject",
+            "inner_mode",
+            "inner_axes",
+            "inner_divisor",
+            "inner_valid",
+            "updated",
+            "valid",
+            "pending",
+            "armed",
+            "enabled",
+            "landed",
+            "contact",
+            "failsafe",
+            "fault"
+          ],
+          "consumed_inner_timestamp_available": false
+        },
+        "sta_rate_ctrl_status": {
+          "n": 7325,
+          "after_takeoff_command": 6,
+          "first_us": 1640000,
+          "last_us": 30936000,
+          "hz": 250.0,
+          "effective_mode": {
+            "0": 6
+          },
+          "effective_axes": {
+            "0": 6
+          },
+          "div_eff": {
+            "1": 6
+          },
+          "fault": {
+            "0": 6
+          },
+          "abort_requested": {
+            "0": 6
+          },
+          "termination": {
+            "0": 6
+          },
+          "measurement_valid": {
+            "1": 6
+          },
+          "output_valid": {
+            "1": 6
+          },
+          "sequence_missing": 0
+        },
+        "vehicle_local_position": {
+          "n": 2930,
+          "after_takeoff_command": 2,
+          "first_us": 1636000,
+          "last_us": 30924000,
+          "hz": 100.00682873531822
+        },
+        "vehicle_land_detected": {
+          "n": 30,
+          "after_takeoff_command": 0,
+          "first_us": 1504000,
+          "last_us": 30504000,
+          "hz": 1.0,
+          "airborne_samples_after_command": 0
+        },
+        "vehicle_status": {
+          "n": 61,
+          "after_takeoff_command": 1,
+          "first_us": 1516000,
+          "last_us": 30928000,
+          "hz": 2.039983680130559,
+          "takeoff_time_max": 0
+        }
+      }
+    }
+  ],
+  "limitation": "Old V03 diagnostic lacks consumed inner timestamp/seq: exact per-frame age cannot be reconstructed from ULog alone. Queue mechanism separately reproduced with actual uORB functional test. No hover, excitation RMSE or landing acceptance."
+}

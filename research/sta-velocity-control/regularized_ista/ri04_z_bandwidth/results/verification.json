@@ -1,0 +1,100 @@
+{
+  "offline_only": true,
+  "new_flights": 0,
+  "production_changed": false,
+  "removed_gtest_env": {},
+  "commands": [
+    {
+      "name": "diagnostic_tests",
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri04_z_bandwidth/test_diagnose.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI04_Z_BANDWIDTH/checks02/diagnostic_tests.log",
+      "sha256": "2a67196fae5695ddac1d7467625aeef9226ee72f1afe588a1b2e110ba91ded07"
+    },
+    {
+      "name": "existing_cpp",
+      "argv": [
+        "ctest",
+        "--test-dir",
+        "build/px4_sitl_test",
+        "-V",
+        "-R",
+        "PositionControl|ControlMath|Takeoff|RateControl|Regularized|VelocityZ|VelocityRista"
+      ],
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI04_Z_BANDWIDTH/checks02/existing_cpp.log",
+      "sha256": "70b9d9c3f62c12809693146e51e8833a913f12bf068f2e24fa5ab95a1110f742"
+    },
+    {
+      "name": "freeze_check",
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri04_revision01/freeze.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI04_Z_BANDWIDTH/checks02/freeze_check.log",
+      "sha256": "9dd3d044c17798610a0e456e24caae960cc4f3207261f23e253f48ba1d1712d8"
+    },
+    {
+      "name": "production_diff",
+      "argv": [
+        "git",
+        "diff",
+        "8578560847bd32efa17b5f45d3ec413c2961a927",
+        "--",
+        "src",
+        "msg",
+        "Tools",
+        "sitl",
+        "ROMFS",
+        "boards",
+        "platforms",
+        "CMakeLists.txt",
+        ".gitmodules"
+      ],
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI04_Z_BANDWIDTH/checks02/production_diff.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff_check",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI04_Z_BANDWIDTH/checks02/diff_check.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "success": true,
+  "existing_cpp_cases": 414,
+  "existing_cpp_ctest_targets": 22,
+  "python_diagnostic_tests": 8,
+  "python_actual_cpp_model_tests": 9,
+  "existing_cpp_build_note": "Existing test binaries; production unchanged. Two pure cores freshly compiled separately by model01.",
+  "model_trajectories": 72,
+  "model_updates": 235206,
+  "infeasible_model_counterexamples": 12,
+  "historical_log_diagnostics": 9,
+  "MATLAB_rerun": false,
+  "SITL_flights": 0,
+  "sources": {
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri04_z_bandwidth/README_CN.md": "2c36655d1a6b4d2fa3077ff727104e48ced6cb3aa73c66866d8fbd0b0f8ed224",
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri04_z_bandwidth/candidate.json": "318fd97607ce753b64aa25cecf03c8773380187f00c91d273c5326fc1933a352",
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri04_z_bandwidth/diagnose.py": "3f468d6a41e21f613787af7c4b65879f2bc5c56066f572eea50d1f03c27c8d8a",
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri04_z_bandwidth/kernel_bridge.cpp": "d4913f8321b9d95801fe3a7607be61436f6e93f32c4425a68b21b943e8c9de88",
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri04_z_bandwidth/model_check.py": "058bf6513a24b48ba953a090039b8bb658802756401ed7e5c0a49beec87aafde",
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri04_z_bandwidth/test_diagnose.py": "e39b538be4084afcc5adfbf6a50cd098fd097fe56665cc42b0cd953e09f4d118",
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri04_z_bandwidth/test_model.py": "c628c8deebc30d5fa1a928ddd34441b499957040684b2968c162824efb8269a6",
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_ista/ri04_z_bandwidth/verify.py": "a26830038ff90273ad20637c1181a083f6ccc39ec059c04f23bd2659be32a57b"
+  }
+}

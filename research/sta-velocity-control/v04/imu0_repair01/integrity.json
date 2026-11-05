@@ -1,0 +1,39 @@
+{
+  "base": "e9d824d06d5b253937d739da57f53bd531169fb6",
+  "branch": "research/sta-velocity-control",
+  "production_delta": [
+    "src/modules/simulator/simulator_mavlink.cpp"
+  ],
+  "only_accelerometer_block_changed": true,
+  "source_before_sha256": "843c1cb93c0046cc39c7d332015e52eec4f0db6c2000cfb24535e7b821196212",
+  "source_after_sha256": "faad1a51786e9ebfbd21bb9ab61f2e895e22e50004e75cf4a7adad81ccf90320",
+  "other_sources_unchanged": [
+    "src/lib/drivers/accelerometer/PX4Accelerometer.cpp",
+    "src/lib/drivers/accelerometer/PX4Accelerometer.hpp",
+    "src/modules/sensors/vehicle_imu/VehicleIMU.cpp",
+    "src/modules/sensors/vehicle_imu/Integrator.hpp",
+    "src/modules/ekf2/EKF2.cpp"
+  ],
+  "frozen_asset_count": 199,
+  "changed_old_assets": {},
+  "old_asset_list_includes_conversion_source": false,
+  "historical_files_verified": {
+    "research/sta-velocity-control/v04/results07/original_artifacts.sha256": 42,
+    "research/sta-velocity-control/v04/landing_ekf_audit01/artifacts.sha256": 59,
+    "research/sta-velocity-control/v04/imu0_chain01/artifacts.sha256": 175
+  },
+  "eeprom_sha256": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+  "firmware_precommit_sha256": "fb91cadaac2ede677974ada3ad16c363b8eec7d74fcc0604608f2e792cd77d9e",
+  "process_check": {
+    "argv": [
+      "pgrep",
+      "-a",
+      "-x",
+      "px4|gzserver|gzclient"
+    ],
+    "exit_code": 1,
+    "stdout": ""
+  },
+  "new_flights": 0,
+  "passed": true
+}

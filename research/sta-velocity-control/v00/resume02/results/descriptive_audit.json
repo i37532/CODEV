@@ -1,0 +1,96 @@
+{
+  "purpose": "Descriptive errata; original frozen acceptance unchanged",
+  "analyzer_sha256": "cc951d85791f0057607cb2bcd1cfaae89017f17e8a9275f0f055c4b2513f6311",
+  "runs": [
+    {
+      "attempt": 1,
+      "original_accepted": true,
+      "original_metrics_sha256": "1503d2d88f0797906df9723edb4d00f758b2ee451e465e8a83384c8043952882",
+      "ulog_sha256": "da2b22b5b1a6d5fcf8766b545a4b1c91e66a10ba309c6c65ada8b00ee6522404",
+      "saturation": {
+        "count": 15098,
+        "bit_histogram": {
+          "1": 15098
+        },
+        "feedback_valid_fraction": 1.0,
+        "raw_nonzero_fraction": 1.0,
+        "saturation_fraction_among_valid": 0.0,
+        "rate_direction_saturation_fraction_among_valid": 0.0
+      },
+      "position_module_perf": {
+        "counts": [
+          4087,
+          10127
+        ],
+        "approximate_hz": 100.013246787654,
+        "limitation": "CLI snapshot boundaries approximate hover boundaries; simulated elapsed=0 is not zero CPU cost."
+      },
+      "estimated_hover_height_m": {
+        "mean": 1.9237333536148071,
+        "min": 1.8254265785217285,
+        "max": 2.0108959674835205
+      },
+      "evidence_note": "Height relative to estimated preflight ground; not Gazebo true altitude."
+    },
+    {
+      "attempt": 2,
+      "original_accepted": true,
+      "original_metrics_sha256": "9932de4df21d8f18b1ded2511df524976cf33b644abc5eab8a8e17597a75a157",
+      "ulog_sha256": "6b5148ee48ecd5916c74461d46808cb6a7e644e6545e22b4e54b4cdc58960041",
+      "saturation": {
+        "count": 15098,
+        "bit_histogram": {
+          "1": 15098
+        },
+        "feedback_valid_fraction": 1.0,
+        "raw_nonzero_fraction": 1.0,
+        "saturation_fraction_among_valid": 0.0,
+        "rate_direction_saturation_fraction_among_valid": 0.0
+      },
+      "position_module_perf": {
+        "counts": [
+          4088,
+          10127
+        ],
+        "approximate_hz": 99.99668830308651,
+        "limitation": "CLI snapshot boundaries approximate hover boundaries; simulated elapsed=0 is not zero CPU cost."
+      },
+      "estimated_hover_height_m": {
+        "mean": 1.9339526891708374,
+        "min": 1.835844874382019,
+        "max": 2.018568754196167
+      },
+      "evidence_note": "Height relative to estimated preflight ground; not Gazebo true altitude."
+    },
+    {
+      "attempt": 3,
+      "original_accepted": true,
+      "original_metrics_sha256": "bfe843325e7fc67e2fd734835e58d293b0a7a88d22b23f527128a682423e335d",
+      "ulog_sha256": "6896b183ec61c61b5dc5005631f5a97761a1f74a109d87318894b8fb245c188f",
+      "saturation": {
+        "count": 15120,
+        "bit_histogram": {
+          "1": 15120
+        },
+        "feedback_valid_fraction": 1.0,
+        "raw_nonzero_fraction": 1.0,
+        "saturation_fraction_among_valid": 0.0,
+        "rate_direction_saturation_fraction_among_valid": 0.0
+      },
+      "position_module_perf": {
+        "counts": [
+          4089,
+          10136
+        ],
+        "approximate_hz": 99.98346560846561,
+        "limitation": "CLI snapshot boundaries approximate hover boundaries; simulated elapsed=0 is not zero CPU cost."
+      },
+      "estimated_hover_height_m": {
+        "mean": 1.946509599685669,
+        "min": 1.8499341011047363,
+        "max": 2.02825665473938
+      },
+      "evidence_note": "Height relative to estimated preflight ground; not Gazebo true altitude."
+    }
+  ]
+}

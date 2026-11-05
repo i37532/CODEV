@@ -1,0 +1,33 @@
+{
+  "stage": "V04-protocol05-series04-proposal",
+  "kind": "budget_request_only_not_executable_protocol",
+  "flight_authorized": false,
+  "execution_ready": false,
+  "authorized_current_scope": "CLI/raw precision repair and offline verification only",
+  "proposed_maximum_attempts": 6,
+  "seeds": [9401, 9402, 9403],
+  "jobs": [
+    {"id": "run01", "seed": 9401, "mode": 0, "axes": 0},
+    {"id": "run02", "seed": 9401, "mode": 1, "axes": 1},
+    {"id": "run03", "seed": 9402, "mode": 0, "axes": 0},
+    {"id": "run04", "seed": 9402, "mode": 1, "axes": 1},
+    {"id": "run05", "seed": 9403, "mode": 0, "axes": 0},
+    {"id": "run06", "seed": 9403, "mode": 1, "axes": 1}
+  ],
+  "proposed_output": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series04",
+  "candidate": {"MPC_VC_L1_X": 1, "MPC_VC_L2_X": 0.2, "MPC_VC_NU_X": 0.4, "MPC_VC_A_X": 0.8},
+  "inherit_without_relaxation": "protocol04 full heading evidence and raw invariance, protocol03 height/exit tasks, existing numerical/safety/log/pair limits",
+  "task": "restart, warmup, original takeoff, confirmed alignment, >=1s quiet POSCTL, one frozen yaw, one DO_REPOSITION to 2.5m, 3s entry, 60s observation including 32s X excitation, land/disarm",
+  "change": "CLI values equal pinned printed raw reference; full-rate raw ULog invariance remains exact",
+  "old_remaining_attempts_reused": 0,
+  "extra_smoke_or_tuning_attempts": 0,
+  "automatic_retry": false,
+  "stop_on_any_required_failure": true,
+  "before_execution": [
+    "Separate explicit user approval of new budget",
+    "Create separate protocol05 execution configuration/entry; do not alter old frozen files",
+    "Freeze actual source/model/plugin/parameter assets and commit; clean build and offline regression",
+    "Recheck seed history excluding only this new registration, exact new output path, parameters and process conflicts",
+    "Any new rule or scope change requires renewed approval before flight"
+  ]
+}

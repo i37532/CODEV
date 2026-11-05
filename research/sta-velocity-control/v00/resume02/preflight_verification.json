@@ -1,0 +1,222 @@
+{
+  "commands": [
+    {
+      "name": "head",
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "status",
+      "command": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "submodules",
+      "command": [
+        "git",
+        "submodule",
+        "status",
+        "--recursive"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "compiler",
+      "command": [
+        "g++",
+        "--version"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "cmake",
+      "command": [
+        "cmake",
+        "--version"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "gazebo",
+      "command": [
+        "pkg-config",
+        "--modversion",
+        "gazebo"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "kernel",
+      "command": [
+        "uname",
+        "-a"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "os",
+      "command": [
+        "lsb_release",
+        "-a"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "python",
+      "command": [
+        "python3",
+        "--version"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "build_sitl",
+      "command": [
+        "make",
+        "px4_sitl_default",
+        "-j4"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "build_tests",
+      "command": [
+        "make",
+        "tests",
+        "TESTFILTER=PositionControl",
+        "-j4"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "PositionControl",
+      "command": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-PositionControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260921/V00/verification04/PositionControl.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "ControlMath",
+      "command": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-ControlMath",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260921/V00/verification04/ControlMath.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "Takeoff",
+      "command": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-Takeoff",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260921/V00/verification04/Takeoff.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "RateControl",
+      "command": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RateControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260921/V00/verification04/RateControl.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "RateControlDispatcher",
+      "command": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RateControlDispatcher",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260921/V00/verification04/RateControlDispatcher.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "python_tools",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "research/sta-velocity-control/scripts",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "tests": {
+    "PositionControl": {
+      "tests": 15,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "ControlMath": {
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "Takeoff": {
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "RateControl": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "RateControlDispatcher": {
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    }
+  },
+  "references": {
+    "src/modules/mc_pos_control/mc_pos_control_params.c": "9ce32fd677982cdc1979a0647b8cdfb043240341b74bc14fb7d74b659ccaef18",
+    "src/modules/mc_pos_control/MulticopterPositionControl.cpp": "14def4699f764c1ec8ce1d775e5d0e49240a6aa213d51b2b16ddae6343fd8195",
+    "src/modules/mc_pos_control/CMakeLists.txt": "caba5fae1f652542b74eb567369455939e406a10d28d887240b840239d235dc8",
+    "src/modules/mc_pos_control/MulticopterPositionControl.hpp": "ce6b07488c5363aa9740df48e5704801e80ad22240df63e2dde97fa75fe50ce2",
+    "src/modules/mc_pos_control/PositionControl/ControlMath.cpp": "db01884a4bb523300c03bcad63a7e634105e81d0cc499a6f8c8897f612656294",
+    "src/modules/mc_pos_control/PositionControl/ControlMathTest.cpp": "6e008bee362d4e7639ecf76321b978a239954649d0a0813d9ae1aa14470aabef",
+    "src/modules/mc_pos_control/PositionControl/PositionControlTest.cpp": "bf7828c8dde1e450a2cb6f89cf22190fae1b6d6304a6926b196d889d6f4c952b",
+    "src/modules/mc_pos_control/PositionControl/CMakeLists.txt": "1c7e5f8c4633274e53e4b5a3423d9950c71b2a03b8e65f8d0b7065d9d664d183",
+    "src/modules/mc_pos_control/PositionControl/ControlMath.hpp": "6222dd0d4b796e84be0f69ce6697885e81dce272ca495cb8582915a6b9d2e705",
+    "src/modules/mc_pos_control/PositionControl/PositionControl.cpp": "8bc5a6509b0bbb8df05b2348552d0dc639e72280cc0e5448c6b082018bfad499",
+    "src/modules/mc_pos_control/PositionControl/PositionControl.hpp": "fa0536781f6b69ba6ce5b1521f6b347ab30db4caea425572fb9eb420a5f55ec2",
+    "src/modules/mc_pos_control/Takeoff/Takeoff.cpp": "e8040562fb7d31d359e6ae5822f46e9f98ae01d7ea5a1d95a8ee7f0e81a74a6b",
+    "src/modules/mc_pos_control/Takeoff/Takeoff.hpp": "7723fee15bacdfe9a97e6960136eaf96c397a4323263a03b94ce2bbd8ae09cfa",
+    "src/modules/mc_pos_control/Takeoff/TakeoffTest.cpp": "b1dd1be934cf70e6414b0c79dca13c44ed72592f4077224fd7745b4d6a720794",
+    "src/modules/mc_pos_control/Takeoff/CMakeLists.txt": "cf73e4e9ca9cd5490b7e8a566f548a911dd31feb8df519943f6396158ccd5371",
+    "sitl/run.sh": "f0fc7c081c50e8c20e58170a92b359435ee6b9820b01ed6c6ed92bc6a068f282",
+    "Tools/sitl_run.sh": "60df5d9cfe17901a35032231babfd26c4b8197c841aabc0c355d70a4bdedbb6f",
+    "sitl/worlds/empty_grey.world": "09d9a334728b35a5ca0392e8751e3df5b8aea8b1d5019f8e850a4b0b8bc57b96",
+    "Tools/sitl_gazebo/models/iris/iris.sdf": "366bf1264ce86c0c65b837a5323410c7cd695b0ffa23cdd29e6c52f6315dc00e",
+    "Tools/sitl_gazebo/models/gps/gps.sdf": "ed28b2b88fb667218d2e9c360fac77bd7cd73b4c620a1bd4237b690ddb146a99",
+    "ROMFS/px4fmu_common/init.d-posix/airframes/10016_iris": "982f170d692f4f7a4cf01b5e74f05b7e7a856dc7da64e6da77edc16f342dce38",
+    "ROMFS/px4fmu_common/mixers/quad_w.main.mix": "3db9434060d08a35e253f33b571ed00175847eb40ab1123b29350a0ee6a21b6d",
+    "msg/vehicle_local_position.msg": "9de590aa68f907885f34fd271e9de5d8ce9d02074ab56090bcae542169f098a8",
+    "msg/vehicle_local_position_setpoint.msg": "ec89e11299d0a4858d31a549f1cc21012047a958e70d6e0d5161233170601f59",
+    "src/modules/ekf2/EKF2.cpp": "5f632b6c1d4dc50eb07c6ea6d5fd11937c95689649e90a74bcfb8c0ff686e5b2"
+  },
+  "success": true,
+  "initial_plan_sha256": {
+    "VELOCITY_STA_TODO_CN.md": "b22a2f98040ef0483ef03549879c691ecd068743840d10deddb310f6387d056d",
+    "VELOCITY_STA_PROMPTS_CN.md": "2890495797bd1cd9da4e7aeed77f5d9585f2dd028192a0a838b289f6f7f3c6ad",
+    "VELOCITY_STA_STATUS_CN.md": "f91dadc8d1622ff9c2a00026d4f62224a88c769fc54b6901eed8c36b9e75aa0e"
+  },
+  "binary_sha256": "8192d91462cdb33db48ba31087eb4a35fed022026d96440856d06dc2324d155c"
+}

@@ -1,0 +1,52 @@
+{
+  "stage": "R00",
+  "scope": "audit_only",
+  "flight_attempts": 0,
+  "commands": [
+    {
+      "label": "interface",
+      "cmd": "python3 research/sta-velocity-control/regularized_sta/r00/interface/audit.py",
+      "chunk_id": "efa3ad",
+      "wall_time_seconds": 0.000003251,
+      "exit_code": 0,
+      "original_token_count": 833,
+      "output": "{\n  \"stage\": \"R00-interface\",\n  \"source_head\": \"0a5796c3ed69d2e415696cf2450fbde74d56e6ea\",\n  \"check_count\": 15,\n  \"checks\": [\n    {\n      \"name\": \"new_epsilon_parameter_names_unused\",\n      \"passed\": true,\n      \"candidates\": {\n        \"MPC_VC_EPS_X\": 12,\n        \"MPC_VC_EPS_Y\": 12,\n        \"MPC_VC_EPS_Z\": 12\n      },\n      \"searched\": \"src and boards PARAM_DEFINE declarations\"\n    },\n    {\n      \"name\": \"epsilon_names_fit_mavlink_16\",\n      \"passed\": true\n    },\n    {\n      \"name\": \"mode3_unallocated_in_velocity_selector\",\n      \"passed\": true\n    },\n    {\n      \"name\": \"mode2_reserved_rejected\",\n      \"passed\": true\n    },\n    {\n      \"name\": \"pid_default_unchanged\",\n      \"passed\": true\n    },\n    {\n      \"name\": \"four_nonlinear_reconstructions\",\n      \"passed\": true,\n      \"lines\": [\n        156,\n        656,\n        713,\n        785\n      ],\n      \"functions\": [\n        \"updateHoverThrust\",\n        \"_velocityControlEstaZ\",\n        \"_velocityControlEstaXYZ\",\n        \"_velocityControlEstaMixed\"\n      ]\n    },\n    {\n      \"name\": \"candidate_owner_axis_revision_payload\",\n      \"passed\": true\n    },\n    {\n      \"name\": \"protection_real_sample_dt\",\n      \"passed\": true\n    },\n    {\n      \"name\": \"ff_once_after_correction_limit\",\n      \"passed\": true\n    },\n    {\n      \"name\": \"legacy_pid_dt_and_sample_time_both_present\",\n      \"passed\": true\n    },\n    {\n      \"name\": \"actual_inner_pid_gate\",\n      \"passed\": true\n    },\n    {\n      \"name\": \"sta_velocity_ctrl_status_format_within_1500\",\n      \"passed\": true,\n      \"format_bytes\": 1475,\n      \"generated_sha256\": \"2229f14718321b1924021e6cb7c716b89bce0c061fbfdd04a108df28b0bef1a0\"\n    },\n    {\n      \"name\": \"sta_velocity_ctrl_status_queue8\",\n      \"passed\": true\n    },\n    {\n      \"name\": \"velocity_ctrl_selection_format_within_1500\",\n      \"passed\": true,\n      \"format_bytes\": 584,\n      \"generated_sha256\": \"5466fb25a5582ce15f3c33f4174fe55c32c8b9b634b8f856d9de43bbf9cc084f\"\n    },\n    {\n      \"name\": \"velocity_ctrl_selection_queue8\",\n      \"passed\": true\n    }\n  ],\n  \"source_sha256\": {\n    \"src/modules/mc_pos_control/PositionControl/VelocityControlSelector.hpp\": \"687729c6b96fc7d82f7dbad53877bbd64d826933262af29545d5463a0c775b8d\",\n    \"src/modules/mc_pos_control/PositionControl/StaVelocityControl.cpp\": \"d0bec410e23c6b855b3becac9d0ad6c192b058d5683e8522a3e4362a27a3a872\",\n    \"src/modules/mc_pos_control/PositionControl/StaVelocityProtection.cpp\": \"60af98c32b730ce25dfb2bb7889f551534a69e06db0ac531f99af7e01df12318\",\n    \"src/modules/mc_pos_control/PositionControl/PositionControl.cpp\": \"d619264f8f933ff187542a5889ce0ac101207e5a8643499cc4f56a19a65ea96d\",\n    \"src/modules/mc_pos_control/MulticopterPositionControl.cpp\": \"b70bb4ccc12df620235a0bccde5a64defda6464e775dabc201c22de83d19b2b1\",\n    \"src/modules/mc_pos_control/mc_pos_control_params.c\": \"ebf1289920496ec694c7d24f9eafc35a1ae563d46e18bab9d97204e7e158a39c\",\n    \"msg/sta_velocity_ctrl_status.msg\": \"1c2ba539a29c0cbd9f5d9c330580cd7385de35b53e7519fee15984b8ac89db4f\",\n    \"msg/velocity_ctrl_selection.msg\": \"2050ff23f155136a92a417653cc9ead0c87e73a50459302a1f89219116f6f2c9\",\n    \"src/modules/logger/logged_topics.cpp\": \"c72713dbfeab4e991aa849612f937dbff7b7ae3572de4f1f5b67edbe5ac194bc\"\n  },\n  \"production_changes\": false,\n  \"flight_count\": 0,\n  \"controller_runtime_tests\": 0,\n  \"accepted\": true\n}\n"
+    },
+    {
+      "label": "math",
+      "cmd": "python3 research/sta-velocity-control/regularized_sta/r00/math/math_probe.py",
+      "chunk_id": "c9facf",
+      "wall_time_seconds": 0.000006607,
+      "exit_code": 0,
+      "original_token_count": 272,
+      "output": "test_01_piecewise_product_equivalence (__main__.MathProbe) ... ok\ntest_02_sign_mapping_nonzero_nu (__main__.MathProbe) ... ok\ntest_03_exact_boundary_and_neighbors (__main__.MathProbe) ... ok\ntest_04_explicit_old_nu (__main__.MathProbe) ... ok\ntest_05_jury_vs_direct_eigenvalues (__main__.MathProbe) ... ok\ntest_06_high_z_stability_boundary (__main__.MathProbe) ... ok\ntest_07_ax05_epsilon_domain (__main__.MathProbe) ... ok\ntest_08_independent_zoh_matches_local_matrix (__main__.MathProbe) ... ok\ntest_09_constant_disturbance_exact_equilibrium (__main__.MathProbe) ... ok\ntest_10_ramp_disturbance_particular_solution (__main__.MathProbe) ... ok\ntest_11_convergence_ideal_fixed_period (__main__.MathProbe) ... ok\ntest_12_invalid_epsilon_rejected (__main__.MathProbe) ... ok\ntest_13_tiny_error_piecewise_no_ratio_overflow (__main__.MathProbe) ... ok\ntest_14_zero_gain_not_asymptotically_stable (__main__.MathProbe) ... ok\ntest_15_alternating_time_not_fixed_time (__main__.MathProbe) ... ok\n\n----------------------------------------------------------------------\nRan 15 tests in 0.006s\n\nOK\n"
+    },
+    {
+      "label": "evidence_unit",
+      "cmd": "python3 research/sta-velocity-control/regularized_sta/r00/evidence/test_audit_baseline.py",
+      "chunk_id": "e82e3d",
+      "wall_time_seconds": 0.056906249,
+      "exit_code": 0,
+      "original_token_count": 169,
+      "output": "test_8_12ms_distribution (__main__.BaselineAuditTest) ... ok\ntest_backwards_is_rejected (__main__.BaselineAuditTest) ... ok\ntest_combination_specific_gain_is_rejected (__main__.BaselineAuditTest) ... ok\ntest_common_wrong_inner_mode_is_rejected (__main__.BaselineAuditTest) ... ok\ntest_duplicate_is_rejected_not_removed (__main__.BaselineAuditTest) ... ok\ntest_eight_configs_keep_common_parameters (__main__.BaselineAuditTest) ... ok\ntest_insufficient_data_is_rejected (__main__.BaselineAuditTest) ... ok\ntest_wrong_mode_or_axes_is_rejected (__main__.BaselineAuditTest) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 0.001s\n\nOK\n"
+    },
+    {
+      "label": "diff_check",
+      "cmd": "git diff --check",
+      "chunk_id": "c89015",
+      "wall_time_seconds": 0.00000268,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    },
+    {
+      "label": "protected_scope",
+      "cmd": "git diff --name-only HEAD -- src msg Tools sitl ROMFS boards",
+      "chunk_id": "d3f8f2",
+      "wall_time_seconds": 0.000002898,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    }
+  ]
+}

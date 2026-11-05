@@ -1,0 +1,15 @@
+{
+  "version": 3,
+  "revision_reason": "Before any ESTA flight: v1 original PID landing exceeded frozen roll command bound. Retain v1 results; slow descent for both controllers, do not loosen acceptance limits.",
+  "scenario_parameters": {"MPC_LAND_SPEED": 0.3, "LNDMC_Z_VEL_MAX": 0.3},
+  "frozen_before_esta_flight": true,
+  "date": "2026-09-14",
+  "model": "Iris 10016 quad_w; empty_grey.world",
+  "hover_seconds": 60,
+  "roll_rate_addition": {"publisher": "existing mc_att_control only", "amplitudes_rad_s": [0.04, 0.08, 0.12], "period_seconds": 4, "start_offsets_seconds": [0, 8, 16], "start_after_hover_seconds": 15},
+  "limits": {"tilt_deg": 15, "height_error_m": 1, "rate_rad_s": 1, "roll_command_abs": 0.15, "nu_abs_rad_s2": 3, "rmse_ratio_max": 1.25},
+  "analysis": {"hover_window": "full 60 seconds", "tracking_window": "excitation start through start+24 seconds", "ratio": "each ESTA repeat roll RMSE / median of three frozen PID repeat roll RMSE, in both windows", "other_axes": "report unchanged PID equivalence and R/P/Y RMSE"},
+  "required": {"each_mode_repeats": 3, "nan": 0, "fallback": 0, "abort": 0, "failsafe": 0, "landed_disarmed": true},
+  "gain_selection": "model calibration g_R first; provisional lambda1=3 lambda2=6; all tuning attempts retained, thresholds cannot be loosened after ESTA results",
+  "scope": "development SITL only; no statistical independence or real-vehicle claims"
+}

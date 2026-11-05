@@ -1,0 +1,195 @@
+{
+  "audited_commit": "3d7b5a0dfcf36be5ae678a76c9d8c1f0f52b3eba",
+  "commands": [
+    {
+      "name": "head",
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "branch",
+      "command": [
+        "git",
+        "branch",
+        "--show-current"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "workspace",
+      "command": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "submodules",
+      "command": [
+        "git",
+        "submodule",
+        "status",
+        "--recursive"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "submodule_workspaces",
+      "command": [
+        "git",
+        "submodule",
+        "foreach",
+        "--recursive",
+        "--quiet",
+        "git status --porcelain"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "compiler",
+      "command": [
+        "g++",
+        "--version"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "gazebo",
+      "command": [
+        "pkg-config",
+        "--modversion",
+        "gazebo"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "compile",
+      "command": [
+        "g++",
+        "-std=c++14",
+        "-O2",
+        "-pthread",
+        "-fno-rtti",
+        "-fno-exceptions",
+        "-I/home/yr/Desktop/Codev-autopilot/src/modules/mc_pos_control/PositionControl",
+        "-isystem",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/googletest-src/googletest/include",
+        "/home/yr/Desktop/Codev-autopilot/src/modules/mc_pos_control/PositionControl/StaVelocityControl.cpp",
+        "/home/yr/Desktop/Codev-autopilot/src/modules/mc_pos_control/PositionControl/StaVelocityControlTest.cpp",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v03/preflight/CandidateAuditTest.cpp",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/lib/libgtest_main.a",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/lib/libgtest.a",
+        "-o",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260921/V03/preflight02/candidate_audit"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "candidate_audit",
+      "command": [
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260921/V03/preflight02/candidate_audit",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260921/V03/preflight02/candidate_audit.xml"
+      ],
+      "exit_code": 1
+    }
+  ],
+  "tests": {
+    "tests": 10,
+    "failures": 3,
+    "errors": 0,
+    "disabled": 0
+  },
+  "runtime_verified": false,
+  "flight_attempts": 0,
+  "status": "needs_revision",
+  "persisted_or_generated_default_not_runtime": {
+    "MC_RTC_MODE": {
+      "saved_override": null,
+      "generated_default": 0
+    },
+    "MC_STA_AXES": {
+      "saved_override": null,
+      "generated_default": 0
+    },
+    "MC_RTC_DIV": {
+      "saved_override": null,
+      "generated_default": 1
+    },
+    "MC_RATT_TEST": {
+      "saved_override": null,
+      "generated_default": 0
+    },
+    "MC_STA_TKO_MGT": {
+      "saved_override": null,
+      "generated_default": 0
+    },
+    "MPC_VC_MODE": {
+      "saved_override": null,
+      "generated_default": 0
+    },
+    "MPC_VC_AXES": {
+      "saved_override": null,
+      "generated_default": 0
+    }
+  },
+  "cases": [
+    {
+      "suite": "StaVelocityControlTest",
+      "name": "EvaluateUsesOldNuAndAdapterAddsFeedForwardOnce",
+      "passed": true
+    },
+    {
+      "suite": "StaVelocityControlTest",
+      "name": "PositiveNegativeAndZeroError",
+      "passed": true
+    },
+    {
+      "suite": "StaVelocityControlTest",
+      "name": "StatesAreThreeAxisIndependentAndCandidatesAreOneShot",
+      "passed": true
+    },
+    {
+      "suite": "StaVelocityControlTest",
+      "name": "InvalidInputsAndNumericsAreAtomic",
+      "passed": true
+    },
+    {
+      "suite": "StaVelocityControlTest",
+      "name": "FrozenEightTwelveMillisecondSequenceMatchesIndependentDoubleReference",
+      "passed": true
+    },
+    {
+      "suite": "StaVelocityControlTest",
+      "name": "ZohObjectsSeparateIdealAndLaggedConstrainedConclusions",
+      "passed": true
+    },
+    {
+      "suite": "StaVelocityControlTest",
+      "name": "ModeOneRemainsRejectedAndKernelHasNoDispatcherPath",
+      "passed": true
+    },
+    {
+      "suite": "V03CandidateAudit",
+      "name": "ForeignInstanceCannotCommitIntoAnotherController",
+      "passed": false
+    },
+    {
+      "suite": "V03CandidateAudit",
+      "name": "AxisRetargetCannotCommitWrongAxisState",
+      "passed": false
+    },
+    {
+      "suite": "V03CandidateAudit",
+      "name": "InvalidOutputCannotCommitAnOtherwiseFiniteState",
+      "passed": false
+    }
+  ],
+  "parameter_sha256": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+  "parameters_unchanged": true
+}

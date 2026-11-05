@@ -53,7 +53,9 @@ enum class SDLogProfileMask : int32_t {
 	SENSOR_COMPARISON =     1 << 6,
 	VISION_AND_AVOIDANCE =  1 << 7,
 	RAW_IMU_GYRO_FIFO =     1 << 8,
-	RAW_IMU_ACCEL_FIFO =    1 << 9
+	RAW_IMU_ACCEL_FIFO =    1 << 9,
+	ESTIMATOR_SWITCH_DIAGNOSTICS = 1 << 10,
+	SITL_IMU_TIMING =       1 << 11
 };
 
 enum class MissionLogType : int32_t {
@@ -74,7 +76,11 @@ inline bool operator&(SDLogProfileMask a, SDLogProfileMask b)
 class LoggedTopics
 {
 public:
-	static constexpr int MAX_TOPICS_NUM = 255; /**< Maximum number of logged topics */
+#if defined(CONFIG_ARCH_BOARD_PX4_SITL)
+	static constexpr int MAX_TOPICS_NUM = 256; /**< Retain 255 old slots plus queued position evidence. */
+#else
+	static constexpr int MAX_TOPICS_NUM = 255;
+#endif
 
 	struct RequestedSubscription {
 		uint16_t interval_ms;

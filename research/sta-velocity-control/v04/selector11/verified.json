@@ -1,0 +1,161 @@
+{
+  "offline": true,
+  "flights": 0,
+  "success": true,
+  "expected_old_failure": false,
+  "commands": [
+    {
+      "name": "build_selector",
+      "argv": [
+        "cmake",
+        "--build",
+        "build/px4_sitl_test",
+        "--target",
+        "functional-EKF2Selector",
+        "-j4"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "selector",
+      "argv": [
+        "timeout",
+        "60s",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/functional-EKF2Selector",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/selector11_fixed02/selector.xml"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "full_control_regression",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/z_velocity/verify_z01.py",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/selector11_fixed02/control"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    }
+  ],
+  "head": "01c70ee6f78459f3166500cc01e885426f9b6a91",
+  "tests": {
+    "tests": 10,
+    "failures": 0,
+    "disabled": 0,
+    "errors": 0
+  },
+  "fault_transitions": [
+    {
+      "instance": 0,
+      "timestamp": 113444000,
+      "sample": 113444000,
+      "faults": [
+        "fs_bad_acc_clipping"
+      ],
+      "changes": 1
+    },
+    {
+      "instance": 0,
+      "timestamp": 113456000,
+      "sample": 113456000,
+      "faults": [],
+      "changes": 2
+    },
+    {
+      "instance": 1,
+      "timestamp": 113448000,
+      "sample": 113448000,
+      "faults": [
+        "fs_bad_acc_clipping"
+      ],
+      "changes": 1
+    },
+    {
+      "instance": 1,
+      "timestamp": 113456000,
+      "sample": 113456000,
+      "faults": [],
+      "changes": 2
+    },
+    {
+      "instance": 2,
+      "timestamp": 113448000,
+      "sample": 113448000,
+      "faults": [
+        "fs_bad_acc_clipping"
+      ],
+      "changes": 1
+    },
+    {
+      "instance": 2,
+      "timestamp": 113460000,
+      "sample": 113460000,
+      "faults": [],
+      "changes": 2
+    },
+    {
+      "instance": 3,
+      "timestamp": 113452000,
+      "sample": 113452000,
+      "faults": [
+        "fs_bad_acc_clipping"
+      ],
+      "changes": 1
+    },
+    {
+      "instance": 3,
+      "timestamp": 113460000,
+      "sample": 113460000,
+      "faults": [],
+      "changes": 2
+    },
+    {
+      "instance": 4,
+      "timestamp": 113452000,
+      "sample": 113452000,
+      "faults": [
+        "fs_bad_acc_clipping"
+      ],
+      "changes": 1
+    },
+    {
+      "instance": 4,
+      "timestamp": 113464000,
+      "sample": 113464000,
+      "faults": [],
+      "changes": 2
+    },
+    {
+      "instance": 5,
+      "timestamp": 113444000,
+      "sample": 113444000,
+      "faults": [
+        "fs_bad_acc_clipping"
+      ],
+      "changes": 1
+    },
+    {
+      "instance": 5,
+      "timestamp": 113456000,
+      "sample": 113456000,
+      "faults": [],
+      "changes": 2
+    }
+  ],
+  "local_sample_reversals": [
+    {
+      "timestamp": 113448000,
+      "previous": 113444000,
+      "current": 113440000
+    }
+  ],
+  "historical_ulog_sha256": "96db142fdfc5449c74ab0c86e46cae39d380caee51df31690280207b285a3403",
+  "source_fingerprints": {
+    "src/modules/ekf2/EKF2Selector.cpp": "dd97cadaf1e0c76ede23e9a7781a0dfd861455017ef67687fd63ca2348cfd4d7",
+    "src/modules/ekf2/EKF2Selector.hpp": "5c2af63a5294f763c4891939da6780516ec3f065ab74ce078f28911edccd2037",
+    "src/modules/ekf2/EKF2SelectorTest.cpp": "f1ae4a85e75be134808b4a0b4277b77a607daabe74a086130b6dcd84c663b4e6"
+  }
+}

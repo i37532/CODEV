@@ -67,13 +67,108 @@ TEST(TakeoffTest, RegularTakeoffRamp)
 
 	// armed, not landed, want takeoff, ramping up
 	takeoff.updateTakeoffState(true, false, true, 1.f, false, 4_s);
-	EXPECT_FLOAT_EQ(takeoff.updateRamp(.5f, 1.5f), 0.f);
-	EXPECT_FLOAT_EQ(takeoff.updateRamp(.5f, 1.5f), .5f);
-	EXPECT_FLOAT_EQ(takeoff.updateRamp(.5f, 1.5f), 1.f);
+	// CODEV 317ee4c9cca deliberately overrides the calculated initial value
+	// with zero. Preserve that production behavior (V00 scope approval).
+	EXPECT_FLOAT_EQ(takeoff.updateRamp(.5f, 1.5f), .375f);
+	EXPECT_FLOAT_EQ(takeoff.updateRamp(.5f, 1.5f), .75f);
+	EXPECT_FLOAT_EQ(takeoff.updateRamp(.5f, 1.5f), 1.125f);
 	EXPECT_FLOAT_EQ(takeoff.updateRamp(.5f, 1.5f), 1.5f);
 	EXPECT_FLOAT_EQ(takeoff.updateRamp(.5f, 1.5f), 1.5f);
 
 	// armed, not landed, want takeoff, rampup time passed
 	takeoff.updateTakeoffState(true, false, true, 1.f, false, 6500_ms);
 	EXPECT_EQ(takeoff.getTakeoffState(), TakeoffState::flight);
+}
+
+TEST(TakeoffTest, CodevZeroInitialValueIndependentOfGain)
+{
+	for (const float gain : {-1.f, 0.f, .005f, 1.f, 4.f, 20.f}) {
+		Takeoff takeoff;
+		takeoff.generateInitialRampValue(gain);
+		EXPECT_FLOAT_EQ(takeoff.updateRamp(.1f, 1.5f), 0.f);
+		takeoff.setSpoolupTime(0.f);
+		takeoff.setTakeoffRampTime(2.f);
+		takeoff.updateTakeoffState(true, false, true, 1.5f, false, 1_s);
+		ASSERT_EQ(takeoff.getTakeoffState(), TakeoffState::rampup);
+		EXPECT_FLOAT_EQ(takeoff.updateRamp(.5f, 1.5f), .375f);
+	}
+}
+
+TEST(TakeoffTest, SpoolupCancellationRestartsDelay)
+{
+	Takeoff takeoff;
+	takeoff.setSpoolupTime(1.f);
+	takeoff.generateInitialRampValue(4.f);
+	takeoff.updateTakeoffState(true, true, false, 1.f, false, 100_ms);
+	takeoff.updateTakeoffState(false, true, false, 1.f, false, 500_ms);
+	EXPECT_EQ(takeoff.getTakeoffState(), TakeoffState::disarmed);
+	takeoff.updateTakeoffState(true, true, false, 1.f, false, 600_ms);
+	takeoff.updateTakeoffState(true, true, false, 1.f, false, 1500_ms);
+	EXPECT_EQ(takeoff.getTakeoffState(), TakeoffState::spoolup);
+	EXPECT_FLOAT_EQ(takeoff.updateRamp(.1f, 1.f), 0.f);
+	takeoff.updateTakeoffState(true, true, false, 1.f, false, 1600_ms);
+	EXPECT_EQ(takeoff.getTakeoffState(), TakeoffState::ready_for_takeoff);
+}
+
+TEST(TakeoffTest, DisarmAndRearmRestartsRamp)
+{
+	Takeoff takeoff;
+	takeoff.setSpoolupTime(0.f);
+	takeoff.setTakeoffRampTime(2.f);
+	takeoff.generateInitialRampValue(4.f);
+	takeoff.updateTakeoffState(true, false, true, 2.f, false, 1_s);
+	EXPECT_FLOAT_EQ(takeoff.updateRamp(1.f, 2.f), 1.f);
+	takeoff.updateTakeoffState(false, true, false, 2.f, false, 2_s);
+	EXPECT_EQ(takeoff.getTakeoffState(), TakeoffState::disarmed);
+	EXPECT_FLOAT_EQ(takeoff.updateRamp(.5f, 2.f), 0.f);
+	takeoff.updateTakeoffState(true, false, true, 2.f, false, 3_s);
+	EXPECT_FLOAT_EQ(takeoff.updateRamp(.5f, 2.f), .5f);
+}
+
+TEST(TakeoffTest, LandingReturnsToReadyThenNewRamp)
+{
+	Takeoff takeoff;
+	takeoff.setSpoolupTime(0.f);
+	takeoff.setTakeoffRampTime(1.f);
+	takeoff.generateInitialRampValue(4.f);
+	takeoff.updateTakeoffState(true, false, true, 1.f, false, 1_s);
+	EXPECT_FLOAT_EQ(takeoff.updateRamp(1.f, 1.f), 1.f);
+	takeoff.updateTakeoffState(true, false, false, 1.f, false, 2_s);
+	EXPECT_EQ(takeoff.getTakeoffState(), TakeoffState::flight);
+	takeoff.updateTakeoffState(true, true, false, 1.f, false, 3_s);
+	EXPECT_EQ(takeoff.getTakeoffState(), TakeoffState::ready_for_takeoff);
+	EXPECT_FLOAT_EQ(takeoff.updateRamp(.1f, 1.f), 0.f);
+	takeoff.updateTakeoffState(true, false, true, 1.f, false, 4_s);
+	EXPECT_FLOAT_EQ(takeoff.updateRamp(.25f, 1.f), .25f);
+}
+
+TEST(TakeoffTest, ShortRampAndSkipTakeoff)
+{
+	for (const float ramp_time : {0.f, .01f, .1f}) {
+		Takeoff takeoff;
+		takeoff.setSpoolupTime(0.f);
+		takeoff.setTakeoffRampTime(ramp_time);
+		takeoff.generateInitialRampValue(4.f);
+		takeoff.updateTakeoffState(true, false, true, 1.f, false, 1_s);
+		EXPECT_FLOAT_EQ(takeoff.updateRamp(.1f, 1.f), 1.f);
+	}
+	Takeoff skipped;
+	skipped.updateTakeoffState(true, false, false, 1.f, true, 1_s);
+	EXPECT_EQ(skipped.getTakeoffState(), TakeoffState::flight);
+	EXPECT_FLOAT_EQ(skipped.updateRamp(.1f, 2.f), 2.f);
+	skipped.updateTakeoffState(false, true, false, 1.f, true, 2_s);
+	EXPECT_EQ(skipped.getTakeoffState(), TakeoffState::disarmed);
+}
+
+TEST(TakeoffTest, NonuniformStepsAndChangedTarget)
+{
+	Takeoff takeoff;
+	takeoff.setSpoolupTime(0.f);
+	takeoff.setTakeoffRampTime(2.f);
+	takeoff.generateInitialRampValue(4.f);
+	takeoff.updateTakeoffState(true, false, true, 2.f, false, 1_s);
+	EXPECT_FLOAT_EQ(takeoff.updateRamp(.25f, 2.f), .25f);
+	EXPECT_FLOAT_EQ(takeoff.updateRamp(.75f, 1.f), .5f);
+	EXPECT_FLOAT_EQ(takeoff.updateRamp(.5f, 2.f), 1.5f);
+	EXPECT_FLOAT_EQ(takeoff.updateRamp(.75f, 2.f), 2.f);
 }

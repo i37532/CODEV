@@ -219,7 +219,7 @@ void Logger::print_statistics(LogType type)
 	float mebibytes = kibibytes / 1024.0f;
 	float seconds = ((float)(hrt_absolute_time() - stats.start_time_file)) / 1000000.0f;
 
-	PX4_INFO("Log file: %s/%s/%s", LOG_ROOT[(int)type], _file_name[(int)type].log_dir, _file_name[(int)type].log_file_name);
+	PX4_INFO("Log file: %s/%s/%s", log_root(type), _file_name[(int)type].log_dir, _file_name[(int)type].log_file_name);
 
 	if (mebibytes < 0.1f) {
 		PX4_INFO("Wrote %4.2f KiB (avg %5.2f KiB/s)", (double)kibibytes, (double)(kibibytes / seconds));
@@ -332,6 +332,14 @@ Logger *Logger::instantiate(int argc, char *argv[])
 	}
 
 	Logger *logger = new Logger(backend, log_buffer_size, log_interval, poll_topic, log_mode, log_name_timestamp);
+#if defined(CONFIG_ARCH_BOARD_PX4_SITL)
+	const char *research_root = getenv("PX4_SITL_LOG_DIR");
+	if (logger && research_root && !logger->_research_log_root.configure(research_root)) {
+		PX4_ERR("Invalid private tmpfs research log directory");
+		delete logger;
+		return nullptr;
+	}
+#endif
 
 #if defined(DBGPRINT) && defined(__PX4_NUTTX)
 	struct mallinfo alloc_info = mallinfo();
@@ -543,20 +551,20 @@ void Logger::run()
 	PX4_INFO("logger started (mode=%s)", configured_backend_mode());
 
 	if (_writer.backend() & LogWriter::BackendFile) {
-		int mkdir_ret = mkdir(LOG_ROOT[(int)LogType::Full], S_IRWXU | S_IRWXG | S_IRWXO);
+		int mkdir_ret = mkdir(log_root(LogType::Full), S_IRWXU | S_IRWXG | S_IRWXO);
 
 		if (mkdir_ret == 0) {
-			PX4_INFO("log root dir created: %s", LOG_ROOT[(int)LogType::Full]);
+			PX4_INFO("log root dir created: %s", log_root(LogType::Full));
 
 		} else if (errno != EEXIST) {
-			PX4_ERR("failed creating log root dir: %s (%i)", LOG_ROOT[(int)LogType::Full], errno);
+			PX4_ERR("failed creating log root dir: %s (%i)", log_root(LogType::Full), errno);
 
 			if ((_writer.backend() & ~LogWriter::BackendFile) == 0) {
 				return;
 			}
 		}
 
-		if (util::check_free_space(LOG_ROOT[(int)LogType::Full], _param_sdlog_dirs_max.get(), _mavlink_log_pub,
+		if (util::check_free_space(log_root(LogType::Full), _param_sdlog_dirs_max.get(), _mavlink_log_pub,
 					   _file_name[(int)LogType::Full].sess_dir_index) == 1) {
 			return;
 		}
@@ -1094,7 +1102,7 @@ int Logger::create_log_dir(LogType type, tm *tt, char *log_dir, int log_dir_len)
 	LogFileName &file_name = _file_name[(int)type];
 
 	/* create dir on sdcard if needed */
-	int n = snprintf(log_dir, log_dir_len, "%s/", LOG_ROOT[(int)type]);
+	int n = snprintf(log_dir, log_dir_len, "%s/", log_root(type));
 
 	if (n >= log_dir_len) {
 		PX4_ERR("log path too long");

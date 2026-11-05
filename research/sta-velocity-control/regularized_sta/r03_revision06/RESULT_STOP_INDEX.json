@@ -1,0 +1,667 @@
+{
+  "stage": "R03-revision06-D stopped result index",
+  "revision": "r03_revision06",
+  "status": "stopped_failed",
+  "source_head": "ae61c29f6ed37e67a64ff29f952a45554e11096b",
+  "firmware_sha256": "9e2d15d95c0bc53a2a427d33b1e21a5cd90ddb31c067d1aae80cecf853ce1a55",
+  "new_flights_by_this_archive": 0,
+  "r03_accepted": false,
+  "gate_passed": false,
+  "gate_pass_created": false,
+  "execution_authority_granted": false,
+  "original_verdicts_preserved": true,
+  "generated_on": "2026-10-20",
+  "execution_command": {
+    "session_id": 48010,
+    "exit_code": 1,
+    "entry": "r03_revision06/runner.py --gate D --execute",
+    "note": "Observed parent-run session; actual frozen arguments and per-attempt CLI records remain in archived batch/run evidence"
+  },
+  "current": {
+    "planned": 9,
+    "attempted": 3,
+    "takeoff_commands": 3,
+    "airborne_tasks": 3,
+    "landed_disarmed": 2,
+    "accepted": 2,
+    "failed": 1,
+    "unattempted": 6,
+    "independent_replays": 2,
+    "paired_checks": 1,
+    "gate_passed": false,
+    "failed_run_not_reanalysed": true
+  },
+  "cumulative": {
+    "total_budget": 58,
+    "attempted": 52,
+    "takeoff_commands": 51,
+    "accepted": 46,
+    "failed": 6,
+    "unattempted": 6
+  },
+  "unattempted_ids": [
+    "run031",
+    "run032",
+    "run033",
+    "run034",
+    "run035",
+    "run036"
+  ],
+  "interpretation": [
+    "Two accepted partial runs cannot be combined with a future new-source D gate.",
+    "Run030 stopped during landing on CLI reference representation changed: ref_alt; no landed_disarmed event and no r03_metrics.json.",
+    "Only run028/run029 were independently reanalysed; no failed-run regrading, finalize, replacement, or new seeds.",
+    "Remaining six budget slots cannot produce a new complete same-source nine-run D gate; another bounded protocol is required."
+  ],
+  "ledger": {
+    "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/ledger.json",
+    "sha256": "e3d6af1187b1d02e3f365134704cf66cab07c2e17924766494608512761bf8f5"
+  },
+  "journal": {
+    "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/journal.jsonl",
+    "sha256": "4d52273c9116d32377779e18310400a5d11eb3be606aec37b4b6bc0302957d20"
+  },
+  "qualification": {
+    "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/qualification01/evidence.json",
+    "sha256": "af5095d811551aa817a155ae8cafd0243f478e867d22b40bf7e82a8a224c23c0",
+    "source_head": "ae61c29f6ed37e67a64ff29f952a45554e11096b",
+    "counts": {
+      "cpp_unique_tests": 513,
+      "python_tests": 1688,
+      "fixed_legacy_samples": 32768,
+      "fixed_same_sample_recalculations": 256,
+      "new_flights": 0
+    },
+    "commands": 72,
+    "all_command_exit_codes_zero": true,
+    "clean": true,
+    "success": true
+  },
+  "authorization_receipt": {
+    "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/qualification01/authorization.json",
+    "sha256": "dc64ba09cfb7dec804df579c49998c4a5cf0a32ae4d91080421c715ea5147954"
+  },
+  "frozen_source": {
+    "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_revision06/gates/D/frozen.json",
+    "sha256": "7fb8d9053433efc795516dd1fc0182b9c834ec7ca023999cec91111a06ec96f1"
+  },
+  "execution_manifest": {
+    "path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_revision06/execution.json",
+    "sha256": "a36942e674cdedfb5e2cbb52848a8d6b670f04dea1c709a7d8a4aea33938973c"
+  },
+  "original_parameter_backup": {
+    "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/original_parameters.bson",
+    "sha256": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc"
+  },
+  "restoration": {
+    "parameter_restore_exact": true,
+    "original_parameter_sha256": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+    "eeprom_audit_sha256": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+    "eeprom_unchanged": true,
+    "remaining_simulators": [],
+    "scope": "Observed at stopped-batch audit; no claim about a later external process"
+  },
+  "independent_replay": {
+    "evidence": {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/partial_replay01/evidence.json",
+      "sha256": "a8e8cb804cabf6e5ea9f2c3deb1a1b5a6bcdad3451f5a868f490de803f034324"
+    },
+    "script": {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/partial_replay01/audit.py",
+      "sha256": "fda43474275be5dfc930e9a71cf79a0c27ce7ff829d4f23d7c0c959197db1455"
+    },
+    "process_exit_code": 0,
+    "commands": [
+      {
+        "argv": [
+          "/usr/bin/python3",
+          "-B",
+          "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_revision06/analyzer.py",
+          "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028",
+          "--output",
+          "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/partial_replay01/run028"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 15.485916293982882,
+        "stdout_sha256": "71794242736686d5a1c0508f8fc55f8787b26b4dd3f62b580eb38ca340b6c1da"
+      },
+      {
+        "argv": [
+          "/usr/bin/python3",
+          "-B",
+          "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_revision06/analyzer.py",
+          "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029",
+          "--output",
+          "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/partial_replay01/run029"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 27.61801034002565,
+        "stdout_sha256": "d761cb6ba6c8bd92c9be31e310b8997ac2ab60671dddfaf178cdf5907ddade2e"
+      }
+    ],
+    "accepted_replayed": 2,
+    "paired_recomputed": 1,
+    "paired_decision": {
+      "accepted": true,
+      "checks": {
+        "velocity_0": true,
+        "position_0": true,
+        "velocity_1": true,
+        "position_1": true,
+        "velocity_2": true,
+        "position_2": true,
+        "first_half_velocity_0": true,
+        "first_half_velocity_1": true,
+        "first_half_velocity_2": true,
+        "second_half_velocity_0": true,
+        "second_half_velocity_1": true,
+        "second_half_velocity_2": true,
+        "yaw": true
+      },
+      "seed": 71431,
+      "gate": "D",
+      "candidate": "RSTA",
+      "criterion": "Inherited development risk, not a requirement to beat PID or ESTA"
+    },
+    "source_inputs_unchanged": true,
+    "comparison": "All JSON values, numeric types and list order exact; dictionary order/whitespace may differ; spectrum bytes SHA exact"
+  },
+  "runs": [
+    {
+      "id": "run028",
+      "candidate": "PID",
+      "original_status": "accepted",
+      "original_success": true,
+      "error": null,
+      "takeoff_command": true,
+      "airborne_task_reached": true,
+      "landed_disarmed": true,
+      "result": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/result.json",
+        "sha256": "9544e1bf403568b19b7dde0e06b8140734bf30468336377e61440675a01848e9"
+      },
+      "job": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/job.json",
+        "sha256": "18662d577606d8de177746c30e51899c3c033ba4a70faf419ead954d5e3bff60"
+      },
+      "run_protocol": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/run_protocol.json",
+        "sha256": "22bf57c308e6eb63e9e3ef2b77087ebfb4a076583cce26378ae65b53417bc2a7"
+      },
+      "qualification_reference": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/qualification_reference.json",
+        "sha256": "bd92ed04cf12389e3bba7c55a3d0ca757d3ff2940933d3cd7e084a22051ac31f"
+      },
+      "parameter_restore": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/parameter_restore.json",
+        "sha256": "560c9285b05ac2871cf2c0d0cac0556dabfccd93d0e9ed18d81f98783ef4452e"
+      },
+      "parameter_artifacts": [
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/original_parameters.bson",
+          "sha256": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc"
+        },
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/startup_parameters.bson",
+          "sha256": "cbaf1f299c0ada0ea11dda1f2248466c0bc5721fa8fdd0cd900c482946c94d7d"
+        },
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/params_all.txt",
+          "sha256": "87cdc43f06662bde47ce77d5bb1eadbd5bcfa7884a345956ec86bcec2d1d48a9"
+        },
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/runtime_parameters_start.json",
+          "sha256": "983b1c6304050821f0a7f308edc08bc5d09b7433a956a37571e341f30946b1da"
+        }
+      ],
+      "logs": [
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/02_03_56.ulg",
+          "bytes": 6789421,
+          "sha256": "f229e6f841b4e3f1385cf312ea74712c8f3c6c7c9f007124cb063c59f155cdab"
+        },
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/log001.ulg",
+          "bytes": 100160917,
+          "sha256": "20827ecef353810b52bc407ec6f7e277335199d66b0275346702b2a3d3c8217a"
+        }
+      ],
+      "original_metrics": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/r03_metrics.json",
+        "sha256": "e69c190df88ac5e51241fc866cab47869e7722a89cda1e1840c4b7c87631523e"
+      },
+      "original_spectrum": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/spectra.json",
+        "sha256": "e9564105402c723576362d7fdf28729652f0922c367a764b5497bb359144f54f"
+      },
+      "independent_replay": {
+        "numeric_equal": true,
+        "bytes_identical": false,
+        "representation_only": true,
+        "comparison": "All JSON values/types/list order exact; dictionary key order/whitespace ignored",
+        "metrics_sha256": "71794242736686d5a1c0508f8fc55f8787b26b4dd3f62b580eb38ca340b6c1da",
+        "source_metrics_sha256": "e69c190df88ac5e51241fc866cab47869e7722a89cda1e1840c4b7c87631523e",
+        "spectra_sha256": "e9564105402c723576362d7fdf28729652f0922c367a764b5497bb359144f54f",
+        "exit_code": 0
+      },
+      "online_evidence": [
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/commands.jsonl",
+          "sha256": "904ddd12e47083a2997602fd2f1727e23dca58b05c803bc1cdbb75eeb6f7a00a"
+        },
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/heading_live.jsonl",
+          "sha256": "a9540f6fb47d989402fa46ecba1788dbfad1a14b0fa286ca9e47ac9833bf1a8e"
+        },
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/landing10_monitor.jsonl",
+          "sha256": "47a36338190b2a70e3e8856c36449dd1c040dd65aeff38109ba5f5f0364ec2eb"
+        },
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/landing_pending_poll.jsonl",
+          "sha256": "cfc742bacc74f2afbd0532a22a74b18eba216e812ccae11e6dd492331a39837e"
+        },
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/console.log",
+          "sha256": "82bf088fe3a92f2e86498d7917834d4462d78154b98a220c4bf7138bd5bb01e4"
+        }
+      ]
+    },
+    {
+      "id": "run029",
+      "candidate": "RSTA",
+      "original_status": "accepted",
+      "original_success": true,
+      "error": null,
+      "takeoff_command": true,
+      "airborne_task_reached": true,
+      "landed_disarmed": true,
+      "result": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/result.json",
+        "sha256": "3868fceb2dd85bf3d2a4085d9550a4eb86352880a331b091b99e92aeee1e0eb0"
+      },
+      "job": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/job.json",
+        "sha256": "6d797268d54866760d236c9f196e0cf987af18b4cd0c1d74d7ae9e4d24239a03"
+      },
+      "run_protocol": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/run_protocol.json",
+        "sha256": "3eb39259c5584c80d3055435d46138898bd4b33a3708e2b550513063f102c6c7"
+      },
+      "qualification_reference": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/qualification_reference.json",
+        "sha256": "bd92ed04cf12389e3bba7c55a3d0ca757d3ff2940933d3cd7e084a22051ac31f"
+      },
+      "parameter_restore": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/parameter_restore.json",
+        "sha256": "b81df93a0cd407e7f86636d4c4003e52c3d02adc309171e6257ce619157de248"
+      },
+      "parameter_artifacts": [
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/original_parameters.bson",
+          "sha256": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc"
+        },
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/startup_parameters.bson",
+          "sha256": "26ea8e803d1e4743ade26a7a403a620e98ea883ce0856dd2a8619b1c12d34593"
+        },
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/params_all.txt",
+          "sha256": "e2a86e8713c15fdc5c522bdc20eec578fd6e074f1de4c2d57d15a59bba754f3e"
+        },
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/runtime_parameters_start.json",
+          "sha256": "9e17bee76ea09f78b995e8572171a6c9457ce9637971093244f8b9a560e3c4ae"
+        }
+      ],
+      "logs": [
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/02_07_15.ulg",
+          "bytes": 7117217,
+          "sha256": "66e787f898a3b9ac3fb869da561aa32a558cb55ef1d09dbd530ea6f800532a2e"
+        },
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/log001.ulg",
+          "bytes": 100846230,
+          "sha256": "045b47026b141df4e2e9865dc5bb819ec59323f7741a3b78ba4d277e22c18e04"
+        }
+      ],
+      "original_metrics": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/r03_metrics.json",
+        "sha256": "e95391398a4709e528fb585498688d9c0795421a047ef16f00180d23a591a0a8"
+      },
+      "original_spectrum": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/spectra.json",
+        "sha256": "d419898f0b6185dc76fe452a4f6a38d57f345c84987fdaeb65edb813186dd3ad"
+      },
+      "independent_replay": {
+        "numeric_equal": true,
+        "bytes_identical": false,
+        "representation_only": true,
+        "comparison": "All JSON values/types/list order exact; dictionary key order/whitespace ignored",
+        "metrics_sha256": "d761cb6ba6c8bd92c9be31e310b8997ac2ab60671dddfaf178cdf5907ddade2e",
+        "source_metrics_sha256": "e95391398a4709e528fb585498688d9c0795421a047ef16f00180d23a591a0a8",
+        "spectra_sha256": "d419898f0b6185dc76fe452a4f6a38d57f345c84987fdaeb65edb813186dd3ad",
+        "exit_code": 0
+      },
+      "online_evidence": [
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/commands.jsonl",
+          "sha256": "3cf0beac625b0d19f549fa30405ab235f9bd44609e88ba16e2bc689d2bb01c2b"
+        },
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/heading_live.jsonl",
+          "sha256": "fa3467f10a6c48ccc366eec1dca6fe8b5748f6ee046279b2d6e6161f0d7c981c"
+        },
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/landing10_monitor.jsonl",
+          "sha256": "18fee75168acd35d9c7a3b87507eb9e00c5b64e0903b8d7fa5b3811177b01305"
+        },
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/landing_pending_poll.jsonl",
+          "sha256": "1c09a74c2f23f20762f8141c16a5ca7355552577e10a26ab9580a4fb46c26e99"
+        },
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/console.log",
+          "sha256": "c1a120e0447c4b375e5e7170a2f211197ae44ec817d629b50936ebb8c804404d"
+        }
+      ]
+    },
+    {
+      "id": "run030",
+      "candidate": "ESTA",
+      "original_status": "failed",
+      "original_success": false,
+      "error": "ValueError('CLI reference representation changed: ref_alt')",
+      "takeoff_command": true,
+      "airborne_task_reached": true,
+      "landed_disarmed": false,
+      "result": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/result.json",
+        "sha256": "8ffd598d6e01b2e06ffa90c00766091cb5ef464c2be261c533b9f08c879a54ab"
+      },
+      "job": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/job.json",
+        "sha256": "2fc5c7a50a5cf6b44d1d9f01b151eb6a1dcbae2ab0f10add2c5f379341d6844f"
+      },
+      "run_protocol": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/run_protocol.json",
+        "sha256": "5bb24f513049488f38dda4719d8b27b43d16a5495d211edc7b9644a5b4196bb3"
+      },
+      "qualification_reference": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/qualification_reference.json",
+        "sha256": "bd92ed04cf12389e3bba7c55a3d0ca757d3ff2940933d3cd7e084a22051ac31f"
+      },
+      "parameter_restore": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/parameter_restore.json",
+        "sha256": "c5e9b694d15fd097a06de37f22fadc30d19c202faf9fe4c9c2f08c04c05b0cd1"
+      },
+      "parameter_artifacts": [
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/original_parameters.bson",
+          "sha256": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc"
+        },
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/startup_parameters.bson",
+          "sha256": "2a595c3c17429d18aae5a69c20b6eafe43e80fed98e4d0a86780f4b2f1c8cca6"
+        },
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/params_all.txt",
+          "sha256": "27ef2a6cef920c33d7ed679e428015643d242ac700e0c33ff7bd5baa550b749a"
+        },
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/runtime_parameters_start.json",
+          "sha256": "1f40e80765b1e9e7f23e22f0b3315a2377bb17802b56d2a3ef6df7c0c8a8ebd4"
+        }
+      ],
+      "logs": [
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/02_10_45.ulg",
+          "bytes": 6890374,
+          "sha256": "7576db12bf185e6ef4ee39c6c210a9a9550fd4ea205ee06995c83a69b33c0794"
+        },
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/log001.ulg",
+          "bytes": 96107568,
+          "sha256": "c3d99287c920181f476bcadb427e35f1f2380fa13df1ff55c1b3287ddfb7d2d9"
+        }
+      ],
+      "original_metrics": null,
+      "original_spectrum": null,
+      "independent_replay": null,
+      "online_evidence": [
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/commands.jsonl",
+          "sha256": "aa9f133a4edbc080285e7b536c5e4ace214ddf97d445b9dce35460f05055eb02"
+        },
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/heading_live.jsonl",
+          "sha256": "e1121a0a5c621c177b30069d451aefb2c4783496428eb315aa490016861d004d"
+        },
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/landing10_monitor.jsonl",
+          "sha256": "fcece127b771f4240c008cb47ecd4ba82fd74df27cb800208e587bb88dec7ec7"
+        },
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/landing_pending_poll.jsonl",
+          "sha256": "d02c195457f9175507540a7d80469b57d18091c135c081f129133074617adc3f"
+        },
+        {
+          "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/console.log",
+          "sha256": "da69d2ab93a2e7c25f5012139a712fa50eabccd817452cbc419d2898eac984c6"
+        }
+      ]
+    }
+  ],
+  "ulog_files": 6,
+  "ulog_bytes": 317911727,
+  "input_fingerprints": {
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/authorization.json": "dc64ba09cfb7dec804df579c49998c4a5cf0a32ae4d91080421c715ea5147954",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/journal.jsonl": "4d52273c9116d32377779e18310400a5d11eb3be606aec37b4b6bc0302957d20",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/ledger.json": "e3d6af1187b1d02e3f365134704cf66cab07c2e17924766494608512761bf8f5",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/original_parameters.bson": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/protocol.json": "ca45454a9993903b75974099063c4bef339047b27fc2672bc0b9604ed736996b",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/qualification.json": "2990f6bd14c6ef469489009428ed34a3735bad6a47e1d591b439c601a3a0d194",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/qualification_reference.json": "bd92ed04cf12389e3bba7c55a3d0ca757d3ff2940933d3cd7e084a22051ac31f",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/02_03_56.ulg": "f229e6f841b4e3f1385cf312ea74712c8f3c6c7c9f007124cb063c59f155cdab",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/authorization.json": "dc64ba09cfb7dec804df579c49998c4a5cf0a32ae4d91080421c715ea5147954",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/commands.jsonl": "904ddd12e47083a2997602fd2f1727e23dca58b05c803bc1cdbb75eeb6f7a00a",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/console.log": "82bf088fe3a92f2e86498d7917834d4462d78154b98a220c4bf7138bd5bb01e4",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/entry_candidates.json": "96c471051686540256da66c5af4cac05ec2664a5158699372e032f3731e58db8",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/entry_raw_gate.jsonl": "796b80787a3017155032118f538e53abf8a502f42f753a288d0697bf19a35f9a",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/ground.json": "5d118e6d03420c917cfc5eed59c1ebda8038a1fb4b495ae3804e0034e64ac899",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/handoff_pending.jsonl": "8b75e49cd2c8b0a7224881b19c9d7db3ff77b269a7fdcdab5bb489e701a26961",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/handoff_target.json": "0b7b4c776d57d19f4a81f086a7d1d5c0ad84a2ef1733874f41423632e288e4b8",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/heading_live.jsonl": "a9540f6fb47d989402fa46ecba1788dbfad1a14b0fa286ca9e47ac9833bf1a8e",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/height_reference.json": "994f5ee484dc36d3109510ab22cc5b8c1b6efb8758ef8e22d50468b1d92226be",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/imu_innovations.csv": "942a1d0d5cdb73537a9a09b73845790202881768e1b2906272c1c8737ea18fa5",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/job.json": "18662d577606d8de177746c30e51899c3c033ba4a70faf419ead954d5e3bff60",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/landing10_monitor.jsonl": "47a36338190b2a70e3e8856c36449dd1c040dd65aeff38109ba5f5f0364ec2eb",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/landing_context.json": "1fb6be2aaa4cf6ce2bd44fe1a10bfbc1e92e13bb45a50e75dde8b607f916c724",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/landing_pending_poll.jsonl": "cfc742bacc74f2afbd0532a22a74b18eba216e812ccae11e6dd492331a39837e",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/live_log.json": "5e05cc23499c18d4b66bbc2de8cceaa7de3bf99eb0987d64ce4b2a5393b3e24a",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/log001.ulg": "20827ecef353810b52bc407ec6f7e277335199d66b0275346702b2a3d3c8217a",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/logger_status.txt": "9439120ad1f0c5601195013d4d2b23b6f258cfed2caf8fd569c5a9b6a6496a17",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/mavlink_events.jsonl": "835ad1f47627fc8b343735196d3f0d77ffdc44929a8d1b6bc7778855d5624473",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/mavlink_status.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/model_manifest.json": "523c9c77729bbf4b141716badbea6caffafc52e64b72c3c80697d468f2507bd0",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/models/iris/iris-gen.sdf": "fe9900329b47f3afb3f2aafac164af047a6feb0e676ea74e658ada5e887b5150",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/models/iris/iris.sdf": "fe9900329b47f3afb3f2aafac164af047a6feb0e676ea74e658ada5e887b5150",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/models/iris/model.config": "fc6a6787ae91b01968720225df947649019023c1f1f1f0a9462f2c3de20c7ebc",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/original_parameters.bson": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/paired_checks.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/parameter_restore.json": "560c9285b05ac2871cf2c0d0cac0556dabfccd93d0e9ed18d81f98783ef4452e",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/params_all.txt": "87cdc43f06662bde47ce77d5bb1eadbd5bcfa7884a345956ec86bcec2d1d48a9",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/params_end.txt": "3052acdb178a3c18b7676b59d298e1d2b11b41c7756d03f567a2c728190fe638",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/perf_hover_end.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/perf_hover_start.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/position_log_evidence.json": "3bf0dc3acbd41b0e7b4571aaf32d4516f969e1422cb9efcfad63e9ebfd33930c",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/postland_tail.json": "f09b44bc4e14aa9b9e8075109cd40189a6225b663f1e9bb95042a06feab05c8a",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/protocol09_monitor.jsonl": "5f40a0818aa8ed062eed2fd59d23201e09a7de0f23b67b1afc42dcb704336bd6",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/qualification.json": "2990f6bd14c6ef469489009428ed34a3735bad6a47e1d591b439c601a3a0d194",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/qualification_reference.json": "bd92ed04cf12389e3bba7c55a3d0ca757d3ff2940933d3cd7e084a22051ac31f",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/r03_configuration_checks.jsonl": "a28017cf85d55cf83e73b90bc65e364ec8f9a94c278766d957781a8f46fb73b3",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/r03_metrics.json": "e69c190df88ac5e51241fc866cab47869e7722a89cda1e1840c4b7c87631523e",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/r03_prearm04_timing.jsonl": "267d130145b83165a6645bae15d3a7a2286a90a8fbd84d9fc4f2c1e5dd5046e4",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/ram_log_root.json": "5ab0cbee311d3e421b213de35f9e978c73a63b8c7d3afa810cc4e45ae7b4fd75",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/ram_release.json": "597884d002ad51e1e6da7308a90affc3de314047e47d384b2d829e1079bf35b9",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/reposition_ack.json": "d96eb1eac83bdf334ea7a57a6bf5e0b6ab5b4b4b1265e857338ad7b29518631b",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/reposition_command.json": "9cc924217f3f358505da205023745579c5010b045b8efd1ad40870884d164cf6",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/result.json": "9544e1bf403568b19b7dde0e06b8140734bf30468336377e61440675a01848e9",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/run_protocol.json": "22bf57c308e6eb63e9e3ef2b77087ebfb4a076583cce26378ae65b53417bc2a7",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/runtime_parameters_end.json": "5e27927d4b6028bb8577b3dc5d7c151956ce757c50314e3f320019c36c1b41bb",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/runtime_parameters_start.json": "983b1c6304050821f0a7f308edc08bc5d09b7433a956a37571e341f30946b1da",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/samples.jsonl": "308100372924abf6464ee08ca5cc80e74cc5f531ba35c329e2959e0339c03ac2",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/spectra.json": "e9564105402c723576362d7fdf28729652f0922c367a764b5497bb359144f54f",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/startup_parameters.bson": "cbaf1f299c0ada0ea11dda1f2248466c0bc5721fa8fdd0cd900c482946c94d7d",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/task_yaw.json": "e095ff6f4b7064653c386ea9f44336321adacf5f0e7539cf6f6f4d7da0a76da5",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/tracked_diff.patch": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/triplet_after.txt": "3ec819137813258b858cba756c550d5d364020a74521a80459ddc87a6a2d45bd",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/triplet_before.txt": "d2ec215c932ae5d9214a4740f9ccd7c4540b92f4e17e21e59838f2cace83ab99",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/ulog_parameters.json": "ca02f2c640c6b6f4724b72b1cdc835eb54df35a1e51c5605b662c82717b7d681",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/ulog_topics.json": "b58259df27d1f2d1738a3c7a35df5e386a4f73d38153a30fa99d596163513bca",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/uorb_hover.txt": "e724fb7793b0bd3327d16cc200208bf7d9d0352df2ea0b366b1596fe8fac239c",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/uorb_start.txt": "aea77b583afd36717f557df657268e57d588649560c5bd97b845aa5727db04d4",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/v00_metrics.json": "d803a5afb4d7f6435cae59572c317578d67d1abccd5439b95851413115af9a4b",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/v00_monitor.jsonl": "d4f86cd7fabe957c0ffb67a9c1f01c46388ef71a8d28a93cd87401031eeef472",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/version.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/worktree_status.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run028/world_process.json": "2f8414f1c64990846def677ec7f721807e99b7d5e97e9c764770ffe5dce7fe9e",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/02_07_15.ulg": "66e787f898a3b9ac3fb869da561aa32a558cb55ef1d09dbd530ea6f800532a2e",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/authorization.json": "dc64ba09cfb7dec804df579c49998c4a5cf0a32ae4d91080421c715ea5147954",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/commands.jsonl": "3cf0beac625b0d19f549fa30405ab235f9bd44609e88ba16e2bc689d2bb01c2b",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/console.log": "c1a120e0447c4b375e5e7170a2f211197ae44ec817d629b50936ebb8c804404d",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/entry_candidates.json": "09fd92bfecdf2887f72be561dea47e82413184944c1cb0560416bfd831e0ef3b",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/entry_raw_gate.jsonl": "4e26b8d96bc2b6e8566859e916cd429a4397666a45817ddecd13ee8cfe87dcd2",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/ground.json": "6ae28e7fe42876dc33206b87b4d91c7210e1ff279e81b1aaa55119312a7d08cc",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/handoff_pending.jsonl": "9a0e3e42b95efdd3d8bd88d9bf2a674f611611be638fb6d7ea209342556dd00a",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/handoff_target.json": "32c1f26d6b2cf12a0e1cc5163e6d1b9d3debbe43426337da8cb3238b24509128",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/heading_live.jsonl": "fa3467f10a6c48ccc366eec1dca6fe8b5748f6ee046279b2d6e6161f0d7c981c",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/height_reference.json": "35fed4a742384c9de1c0d2560ddcc8d31d72191c3c341c33b0cd1ea14931482a",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/imu_innovations.csv": "7d16d2f06c339567450d5532b7e5be8c67e6d6a40530965e3014e29b10dffa6f",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/job.json": "6d797268d54866760d236c9f196e0cf987af18b4cd0c1d74d7ae9e4d24239a03",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/landing10_monitor.jsonl": "18fee75168acd35d9c7a3b87507eb9e00c5b64e0903b8d7fa5b3811177b01305",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/landing_context.json": "6c2ceb0dad8ab54c9f6a0569c2891db599baff97fd318a59a7889bf6dcb3d6d2",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/landing_pending_poll.jsonl": "1c09a74c2f23f20762f8141c16a5ca7355552577e10a26ab9580a4fb46c26e99",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/live_log.json": "2f0dc596180b1a474e7b1598fa03632d116b350a786ed90b578982719df21762",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/log001.ulg": "045b47026b141df4e2e9865dc5bb819ec59323f7741a3b78ba4d277e22c18e04",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/logger_status.txt": "f6f2d4c53c94fcb9c67cd23af7fd72302a728747bdde0c052edcc2de30efbea2",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/mavlink_events.jsonl": "0d7925139899f37d68aa12585e472904ff0e690699f7fc84bbfc353f8dd47cbf",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/mavlink_status.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/model_manifest.json": "523c9c77729bbf4b141716badbea6caffafc52e64b72c3c80697d468f2507bd0",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/models/iris/iris-gen.sdf": "fe9900329b47f3afb3f2aafac164af047a6feb0e676ea74e658ada5e887b5150",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/models/iris/iris.sdf": "fe9900329b47f3afb3f2aafac164af047a6feb0e676ea74e658ada5e887b5150",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/models/iris/model.config": "fc6a6787ae91b01968720225df947649019023c1f1f1f0a9462f2c3de20c7ebc",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/original_parameters.bson": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/paired_checks.json": "da5521f3db689e13117df9529825e19ba9a8a584f0007401ee785f825df168dd",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/parameter_restore.json": "b81df93a0cd407e7f86636d4c4003e52c3d02adc309171e6257ce619157de248",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/params_all.txt": "e2a86e8713c15fdc5c522bdc20eec578fd6e074f1de4c2d57d15a59bba754f3e",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/params_end.txt": "f4fc0b69ef4ed70900862379bd55e6543129bf7b1608cab667ced7d6dca8da94",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/perf_hover_end.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/perf_hover_start.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/position_log_evidence.json": "f3a27fa3f8d88d38688067018a62b91c15da4964ecc9ab48bbc446204979e6c2",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/postland_tail.json": "6b18174c509748ccf356eb2426c1e9b89e0c3d6632d766b13a897a928980a30b",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/protocol09_monitor.jsonl": "8e3a79dd5d1d0cabc1590f37d8ff5c7e90e44469f9b14cc193def96573041001",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/qualification.json": "2990f6bd14c6ef469489009428ed34a3735bad6a47e1d591b439c601a3a0d194",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/qualification_reference.json": "bd92ed04cf12389e3bba7c55a3d0ca757d3ff2940933d3cd7e084a22051ac31f",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/r03_configuration_checks.jsonl": "ffaeaff2e449d197b04e288528a33810b4c5528fdb98c1ec58d0d88a4579cab3",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/r03_metrics.json": "e95391398a4709e528fb585498688d9c0795421a047ef16f00180d23a591a0a8",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/r03_prearm04_timing.jsonl": "c9e8c08a0b50abe91343ff08c77df0f94e0c1f145f2fa436f76de77751fe89a9",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/ram_log_root.json": "1fbfafeed4161b1ab477aff2d9e2b3a35c85fecc0fe5348f9163e5630e4e68cb",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/ram_release.json": "0c00cec0ec2fc4ec31cf0051cf1bd44575e2b964494ceb84d26630f25d61415f",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/reposition_ack.json": "7866626ab1ab6a32cde6e1393c6afe7cf78e6485becf0d95eb3b3e4018e33113",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/reposition_command.json": "491ae219ffea5ef7af2a01edfcb3837b6e165813ddc7d34a9fa70e86ed802f0a",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/result.json": "3868fceb2dd85bf3d2a4085d9550a4eb86352880a331b091b99e92aeee1e0eb0",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/run_protocol.json": "3eb39259c5584c80d3055435d46138898bd4b33a3708e2b550513063f102c6c7",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/runtime_parameters_end.json": "b098c273852d058d019382e30ae46855920daca3d3c87ddcb575e9f2f5a23f49",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/runtime_parameters_start.json": "9e17bee76ea09f78b995e8572171a6c9457ce9637971093244f8b9a560e3c4ae",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/samples.jsonl": "6b025dabc0188b7b2091403a065ba3f484b4d6812e98465acea2154f6823192c",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/spectra.json": "d419898f0b6185dc76fe452a4f6a38d57f345c84987fdaeb65edb813186dd3ad",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/startup_parameters.bson": "26ea8e803d1e4743ade26a7a403a620e98ea883ce0856dd2a8619b1c12d34593",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/task_yaw.json": "821aa0c8bd238cea5186ba4a6382ad4eed244d2ca51d859868751a20143103bb",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/tracked_diff.patch": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/triplet_after.txt": "3988ea22df6dbb39fa75e3f5c8e7ae6baafef5a59387d5095fe30a431ff136c3",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/triplet_before.txt": "7fa2ba12767a33c55367481e8766798295faa09de3018088b7ab4a6b29ac9319",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/ulog_parameters.json": "05987316a08ec7a2cb507d07ad4a28afdcc4a4e2fb3508510ba723ec5f54ee75",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/ulog_topics.json": "9bb7a1b00c74744d70d602c62d7c8136afbdc3e573bfb292dd9fdd4a7ae12aa8",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/uorb_hover.txt": "adcd990631e17d2ff634c303349b458c8e295056ffed11179bbfa9da3d58adca",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/uorb_start.txt": "aea77b583afd36717f557df657268e57d588649560c5bd97b845aa5727db04d4",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/v00_metrics.json": "8df22ae0341fdeff46517ef52037da4265d2ccf9e25e603f41337de0d86b2f39",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/v00_monitor.jsonl": "08d66e20124c8f9fe861755beb595a2b95f70e03a3fcbd379d84bd749bf257a4",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/version.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/worktree_status.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run029/world_process.json": "e40ea940a2a53bceedf7ba6f328ea7ab2ac1aebd31a31bd87a1005ed8648b911",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/02_10_45.ulg": "7576db12bf185e6ef4ee39c6c210a9a9550fd4ea205ee06995c83a69b33c0794",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/authorization.json": "dc64ba09cfb7dec804df579c49998c4a5cf0a32ae4d91080421c715ea5147954",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/commands.jsonl": "aa9f133a4edbc080285e7b536c5e4ace214ddf97d445b9dce35460f05055eb02",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/console.log": "da69d2ab93a2e7c25f5012139a712fa50eabccd817452cbc419d2898eac984c6",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/entry_candidates.json": "5a986f5e1f1c037b24f9f6fccb140fb2d91385b5f0f7300b3e7c493de01b9c08",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/entry_raw_gate.jsonl": "2193c6aba8e3244dc616b4d5427cb968d24536f480720a9a9e2f483ce821d2c4",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/ground.json": "5de6cf8469dcf9eae82348db543a7efc9a2ada26d7c02dab821bd8a2e43047b4",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/handoff_pending.jsonl": "589c8ff0da5c906fada61ddaad655263503149db839fba10ef791fcf0defafd3",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/handoff_target.json": "99e25b762e2a15ed71c690f601e0aea67143338ee1bb63befa2c75a6233b86a9",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/heading_live.jsonl": "e1121a0a5c621c177b30069d451aefb2c4783496428eb315aa490016861d004d",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/height_reference.json": "454eee983e58c1e173958dc788373cb17e31be85e5bd3c256695aee36c757301",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/imu_innovations.csv": "debba16c31b40ee6d006db1eb249807079bdaeead71e82b4a08d9c4caff5277c",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/job.json": "2fc5c7a50a5cf6b44d1d9f01b151eb6a1dcbae2ab0f10add2c5f379341d6844f",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/landing10_monitor.jsonl": "fcece127b771f4240c008cb47ecd4ba82fd74df27cb800208e587bb88dec7ec7",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/landing_context.json": "61b158feb0dfec664901c55b059b5d5e14fff9579a49ba65b28e1eef23a0e568",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/landing_pending_poll.jsonl": "d02c195457f9175507540a7d80469b57d18091c135c081f129133074617adc3f",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/live_log.json": "37baa4db1bb79d0f4e1a041ee77948ead67fb460cce0fbf3c69f40c028b1f3e8",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/log001.ulg": "c3d99287c920181f476bcadb427e35f1f2380fa13df1ff55c1b3287ddfb7d2d9",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/mavlink_events.jsonl": "d4b0717dda5f2b9cb1a27cf5abb30d6443b3486c88645f3a50d2d14966c48f03",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/mavlink_status.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/model_manifest.json": "523c9c77729bbf4b141716badbea6caffafc52e64b72c3c80697d468f2507bd0",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/models/iris/iris-gen.sdf": "fe9900329b47f3afb3f2aafac164af047a6feb0e676ea74e658ada5e887b5150",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/models/iris/iris.sdf": "fe9900329b47f3afb3f2aafac164af047a6feb0e676ea74e658ada5e887b5150",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/models/iris/model.config": "fc6a6787ae91b01968720225df947649019023c1f1f1f0a9462f2c3de20c7ebc",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/original_parameters.bson": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/parameter_restore.json": "c5e9b694d15fd097a06de37f22fadc30d19c202faf9fe4c9c2f08c04c05b0cd1",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/params_all.txt": "27ef2a6cef920c33d7ed679e428015643d242ac700e0c33ff7bd5baa550b749a",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/perf_hover_end.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/perf_hover_start.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/protocol09_monitor.jsonl": "4d9bb7cf2a15203b841b93cd645c5125fcf37e9259c64ce0741db14fcb865dcf",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/qualification.json": "2990f6bd14c6ef469489009428ed34a3735bad6a47e1d591b439c601a3a0d194",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/qualification_reference.json": "bd92ed04cf12389e3bba7c55a3d0ca757d3ff2940933d3cd7e084a22051ac31f",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/r03_configuration_checks.jsonl": "372404ac08cc4da637bf72212ca8077d7e0de4f7e5a5e877eff9ad888d523cf5",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/r03_prearm04_timing.jsonl": "4d01ba5fca5aabdf2b24c5d40ff747e40762c21765e2cdaa8598e6aa2f998675",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/ram_log_root.json": "143d1127cb03c0286e9019f280f58d0aa4d7f415ff9af255223bc33f8fe699bd",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/reposition_ack.json": "2d187b69b1d2dfd62245d439222770f89ec21cb728b09803b02246d82a16c2ed",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/reposition_command.json": "f98f4feec379861fee539a678c3bd1e0a305d7a6f801106d987eb4d013119d80",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/result.json": "8ffd598d6e01b2e06ffa90c00766091cb5ef464c2be261c533b9f08c879a54ab",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/run_protocol.json": "5bb24f513049488f38dda4719d8b27b43d16a5495d211edc7b9644a5b4196bb3",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/runtime_parameters_start.json": "1f40e80765b1e9e7f23e22f0b3315a2377bb17802b56d2a3ef6df7c0c8a8ebd4",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/samples.jsonl": "755b6a7e227044e2030f8ab444cbcaef6dbd9ca0337d0243792a9a0881b5563e",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/startup_parameters.bson": "2a595c3c17429d18aae5a69c20b6eafe43e80fed98e4d0a86780f4b2f1c8cca6",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/task_yaw.json": "505c375c7a6f51fed91f98c8fcdf047d8a0b3a965e63863a280312632f6d3633",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/tracked_diff.patch": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/triplet_after.txt": "b0d19d744c10101d81998ad016fcc730b8f5bc7d9b6f724203ee642f5cba89d1",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/triplet_before.txt": "b6ba804933bc0f3f3e875435c94899dd73712518faecc51c24359bd728a25f78",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/uorb_hover.txt": "e724fb7793b0bd3327d16cc200208bf7d9d0352df2ea0b366b1596fe8fac239c",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/uorb_start.txt": "aea77b583afd36717f557df657268e57d588649560c5bd97b845aa5727db04d4",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/v00_monitor.jsonl": "042099278ee6738cc507bac1e024ae4bd2273e1f50d963416c049727a9b17976",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/version.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/worktree_status.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030/world_process.json": "8f53289410a3629cc40af687b91eb6b46dee75b74383c1247b14a3b5936e0ba1",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/run030_paired_checks_at_stop.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-REGULARIZED-20261016/R03_revision06/D/batch01/seed_audit_before_launch.json": "8888a57dd59c809a259d078facdc053301d87e4b0d5fa8974da164b3b126a249"
+  },
+  "analysis_source_fingerprints": {
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_revision06/analyzer.py": "ad5a9a8f1ef2fbb41563ef28de817bec63fd4281e7d8a2e59a8432733a3fbd93",
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_revision06/freeze.py": "f3ccd8fae358eab2de8b61be9cb4787910e23a8803fde14bc92acac68e6c0efe",
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_revision06/numeric_adapter.py": "b9e03681b875eeaeb0a2226f997a79f642bf9d38fa0131f1c9b1857f432fbad4",
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_revision06/protocol.py": "3116bb563132feae4b0189033bc7107cce25a257e4be70fc9513268a29752d04",
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_revision06/replay.py": "e44bd7d6daa12090040b04f080c6077c0f82b7280c75994115e6ef77a6fec02b",
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_revision06/revision_audit.py": "da6832940922a51cc48d74b8a778acefd40a97d295cd31ae4078b31263bf5a9d",
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_revision06/runner.py": "cee57f8e639596f46db52fd1b76b7144a49ee40f2520174de222c181b59ef544",
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_revision06/test_analysis.py": "a1a21c720325af49a09d1dfa3ac38385f058f84630062bf5d628890a456cfb8c",
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_revision06/test_numeric_adapter.py": "a5a5db3f7896f74ef71d9f827146f6a8a615a722178dad7f049eeb5fef82d5a7",
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_revision06/test_protocol.py": "2b7c2da1ea6dd8df6ab95c68d5a928caa8134ca8ff69b49de6929b0636a3a57f",
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_revision06/test_qualification_diagnostics.py": "7eb1108237e3e7e1879e5bcc7059ea69bf4661da3b429648a069782bc04cf619",
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_revision06/test_replay.py": "5658736551f6ac0964061650beb2e74955a09a90806f0b093eef2b4bde16b565",
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_revision06/test_revision_audit.py": "0d3c738a70c2aebf03d677e32efa5c456bb121c1e94f09c67df90e66ada1ee52",
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_revision06/test_runner.py": "0c80a91906acae7dd614823c2a307b557a545db7394e76e995001ae57fa98cd1",
+    "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/regularized_sta/r03_revision06/verify.py": "564108c819c455ca5850ecee90dd758e914a8d081362b667d2c60eb436c5327d"
+  },
+  "source_inputs_verified_unchanged_at_index_creation": true
+}

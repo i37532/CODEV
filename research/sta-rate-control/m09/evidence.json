@@ -1,0 +1,2452 @@
+{
+  "scope": "M09 Iris SITL development; not M10 or hardware",
+  "source_head": "72b6e3bc0569bb98b9f268d1d2d9320b74c421fa",
+  "series_path": "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03",
+  "verification_path": "/home/yr/Desktop/codev doc/experiments/M09-20260917/verification04",
+  "series": {
+    "success": true,
+    "source_head": "72b6e3bc0569bb98b9f268d1d2d9320b74c421fa",
+    "files": {
+      "msg/sta_rate_ctrl_status.msg": "896146f77619145591f7cbd970bff547a5217241ac4e9580a803c36400de1ad6",
+      "research/sta-rate-control/m09/PROTOCOL_CN.md": "784c8517aecb288b4e4ec3816479dffb69f6a92a5118766e1a0a1cb7b8a76df4",
+      "research/sta-rate-control/m09/RUN_CN.md": "4dad249072e6873a2011e410259cf93002e00fe7bb83b806cc549e2b3de1b243",
+      "research/sta-rate-control/scripts/analyze_m09.py": "43f60bbed565be4662f3e27ed4e292cc572e9e2110157c66e4fc7976b23b1ccb",
+      "research/sta-rate-control/scripts/archive_m09.py": "e0b3effab079c7f34dd57169591c1bb7c3fa0423e69373716d58b36c4a2656b6",
+      "research/sta-rate-control/scripts/audit_m09.py": "98b3dbfd393331cdd42841c5010f89fff1b11b8f867070666ba300c30d2fd535",
+      "research/sta-rate-control/scripts/run_m09.py": "57867109efce72d5b77acc074a06a8f3d858513331c5c17d7cfa30b0a00c7b35",
+      "research/sta-rate-control/scripts/run_m09_batch.py": "1432c048436443ad80485d02884d6b06b43ee6aa70856cafa66f6749ebb06d18",
+      "research/sta-rate-control/scripts/test_m09.py": "79551cc235d397f361bb98ea4d1f95de3d2d09dd06a6d55e3314cbf3600b3408",
+      "research/sta-rate-control/scripts/verify_m09.py": "2f88c1be6da0ce5f235f7d58b6bb4f941965bf04e44b60d190b1e0e5d7eabd36",
+      "src/modules/mc_rate_control/MulticopterRateControl.cpp": "a583b6ec27e3f5574971c6568ae3907f2541357668b8ac02d7523e60f563f911",
+      "src/modules/mc_rate_control/MulticopterRateControl.hpp": "1d7a12aa705d56f66c78213c30c910c4d6d8d48f7244b0798df6c8bd454ced26",
+      "src/modules/mc_rate_control/StaRateControl/CMakeLists.txt": "ac5600ebf536b25404172b40f3d4bcf9ecfca2c989cb2466fdb361dde5c5efb5",
+      "src/modules/mc_rate_control/StaRateControl/ControlDecimation.hpp": "11589c9b72415472ea732ff21e5ac4bb220b6624c9dfe7b749091cff4a43868e",
+      "src/modules/mc_rate_control/StaRateControl/ControlDecimationTest.cpp": "c70a8a195fa1ba67aa6d0702fae2086a4bd275b9ce6e52f6c3fb8e2855bf4e2d",
+      "src/modules/mc_rate_control/StaRateControl/StaProtection.cpp": "7ad5cb6ff92c5eac833b511e18dfafa4ac5e2a78a39f338b702e1291ab1399ba",
+      "src/modules/mc_rate_control/StaRateControl/StaProtection.hpp": "0462380fb4af7219c81c08fa74e2c013da046e35b2c8b829d973859fb6350074",
+      "src/modules/mc_rate_control/mc_rate_control_params.c": "24dafc01a5d54f5535e073b1a4c3702a315cfdd1106f05807ba4efb06427e790"
+    },
+    "firmware_sha256": "97bf6d7afbf47f79232fe3601f571838982a4b8de04edc94ee7e5980fb1fa99d",
+    "commands": [
+      {
+        "name": "pid_div1_run",
+        "argv": [
+          "/usr/bin/python3",
+          "research/sta-rate-control/scripts/run_m09.py",
+          "--output",
+          "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/pid_div1"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "pid_div1_analysis",
+        "argv": [
+          "/usr/bin/python3",
+          "research/sta-rate-control/scripts/analyze_m09.py",
+          "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/pid_div1"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "pid_div2_run",
+        "argv": [
+          "/usr/bin/python3",
+          "research/sta-rate-control/scripts/run_m09.py",
+          "--output",
+          "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/pid_div2"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "pid_div2_analysis",
+        "argv": [
+          "/usr/bin/python3",
+          "research/sta-rate-control/scripts/analyze_m09.py",
+          "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/pid_div2"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "pid_div4_run",
+        "argv": [
+          "/usr/bin/python3",
+          "research/sta-rate-control/scripts/run_m09.py",
+          "--output",
+          "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/pid_div4"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "pid_div4_analysis",
+        "argv": [
+          "/usr/bin/python3",
+          "research/sta-rate-control/scripts/analyze_m09.py",
+          "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/pid_div4"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "esta_div1_run",
+        "argv": [
+          "/usr/bin/python3",
+          "research/sta-rate-control/scripts/run_m09.py",
+          "--output",
+          "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/esta_div1"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "esta_div1_analysis",
+        "argv": [
+          "/usr/bin/python3",
+          "research/sta-rate-control/scripts/analyze_m09.py",
+          "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/esta_div1"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "esta_div2_run",
+        "argv": [
+          "/usr/bin/python3",
+          "research/sta-rate-control/scripts/run_m09.py",
+          "--output",
+          "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/esta_div2"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "esta_div2_analysis",
+        "argv": [
+          "/usr/bin/python3",
+          "research/sta-rate-control/scripts/analyze_m09.py",
+          "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/esta_div2"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "esta_div4_run",
+        "argv": [
+          "/usr/bin/python3",
+          "research/sta-rate-control/scripts/run_m09.py",
+          "--output",
+          "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/esta_div4"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "esta_div4_analysis",
+        "argv": [
+          "/usr/bin/python3",
+          "research/sta-rate-control/scripts/analyze_m09.py",
+          "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/esta_div4"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "ista_div1_run",
+        "argv": [
+          "/usr/bin/python3",
+          "research/sta-rate-control/scripts/run_m09.py",
+          "--output",
+          "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/ista_div1"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "ista_div1_analysis",
+        "argv": [
+          "/usr/bin/python3",
+          "research/sta-rate-control/scripts/analyze_m09.py",
+          "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/ista_div1"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "ista_div2_run",
+        "argv": [
+          "/usr/bin/python3",
+          "research/sta-rate-control/scripts/run_m09.py",
+          "--output",
+          "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/ista_div2"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "ista_div2_analysis",
+        "argv": [
+          "/usr/bin/python3",
+          "research/sta-rate-control/scripts/analyze_m09.py",
+          "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/ista_div2"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "ista_div4_run",
+        "argv": [
+          "/usr/bin/python3",
+          "research/sta-rate-control/scripts/run_m09.py",
+          "--output",
+          "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/ista_div4"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "ista_div4_analysis",
+        "argv": [
+          "/usr/bin/python3",
+          "research/sta-rate-control/scripts/analyze_m09.py",
+          "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/ista_div4"
+        ],
+        "returncode": 0
+      }
+    ],
+    "runs": [
+      {
+        "success": true,
+        "mode": 0,
+        "div": 1,
+        "ulog": "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/pid_div1/07_45_58.ulg",
+        "callback_hz": 250.0,
+        "update_hz": 250.0,
+        "hover_updates": 15054,
+        "hover_callbacks": 15054,
+        "actual_dt_s": {
+          "min": 0.004000000189989805,
+          "max": 0.004000000189989805
+        },
+        "tv_actual_updates": {
+          "actual_update_span_s": 36.0,
+          "duration_s": 36.0,
+          "tv": [
+            3.3805716253145874,
+            3.307665638392791,
+            1.602839129176573
+          ],
+          "tv_per_s": [
+            0.09390476736984965,
+            0.09187960106646642,
+            0.04452330914379369
+          ]
+        },
+        "actuator_samples_checked": 18909,
+        "rmse_tracking": [
+          0.004508514523044134,
+          0.003506796760789722,
+          0.008184830561755434
+        ],
+        "rmse_hover": [
+          0.004584597453872683,
+          0.003604832087216631,
+          0.006531030929914634
+        ],
+        "kernel_cost": {
+          "count": 15054,
+          "median_ns": 171.0,
+          "p95_ns": 772.0,
+          "p99_ns": 1238.409999999998,
+          "max_ns": 24324
+        },
+        "module_cost": {
+          "count": 15054,
+          "median_ns": 2492.0,
+          "p95_ns": 9994.099999999991,
+          "p99_ns": 22987.979999999978,
+          "max_ns": 1039846
+        },
+        "kernel_wall_ns_per_sim_second": 76640.95196970704,
+        "module_wall_ns_per_sim_second": 1001796.0539427358,
+        "native_highband_rms": [
+          0.000540785122922645,
+          0.0005560266187740947,
+          0.00023549998081839294
+        ],
+        "common_0_20hz_rms": [
+          0.0007098936102729264,
+          0.0006202716403429368,
+          0.0017145242988681514
+        ],
+        "common_grid_hz": 62.5,
+        "spectrum_edge_trim_s": 1.024,
+        "ulog_dropouts": 0,
+        "motor_original": {
+          "count": 13622,
+          "missing": 1431,
+          "logged_hz": 226.23239436619718,
+          "producer_hz": 250.0,
+          "max_interval_s": 0.012
+        },
+        "tracking_ratio_own_n1": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "tracking_ratio_same_div_pid": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "success": true,
+        "mode": 0,
+        "div": 2,
+        "ulog": "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/pid_div2/07_48_01.ulg",
+        "callback_hz": 250.0,
+        "update_hz": 125.00000000000001,
+        "hover_updates": 7528,
+        "hover_callbacks": 15056,
+        "actual_dt_s": {
+          "min": 0.00800000037997961,
+          "max": 0.00800000037997961
+        },
+        "tv_actual_updates": {
+          "actual_update_span_s": 35.992,
+          "duration_s": 36.0,
+          "tv": [
+            3.0287036537083623,
+            2.9435687076766044,
+            1.3930249481400097
+          ],
+          "tv_per_s": [
+            0.08413065704745451,
+            0.08176579743546124,
+            0.038695137448333604
+          ]
+        },
+        "actuator_samples_checked": 18908,
+        "rmse_tracking": [
+          0.0045571410618043835,
+          0.003555495878516203,
+          0.008214909280505335
+        ],
+        "rmse_hover": [
+          0.004703498156578435,
+          0.003664047101946915,
+          0.006552713044317385
+        ],
+        "kernel_cost": {
+          "count": 7528,
+          "median_ns": 350.0,
+          "p95_ns": 1161.6499999999996,
+          "p99_ns": 4156.259999999886,
+          "max_ns": 21040
+        },
+        "module_cost": {
+          "count": 15056,
+          "median_ns": 2494.0,
+          "p95_ns": 10302.25,
+          "p99_ns": 22887.85000000001,
+          "max_ns": 1553565
+        },
+        "kernel_wall_ns_per_sim_second": 70904.15144470276,
+        "module_wall_ns_per_sim_second": 1036483.8591829957,
+        "native_highband_rms": [
+          0.0005474562601132642,
+          0.0005525111261032627,
+          0.0002376549275919991
+        ],
+        "common_0_20hz_rms": [
+          0.0006990097546356813,
+          0.0006250188875196371,
+          0.001715052085832526
+        ],
+        "common_grid_hz": 62.5,
+        "spectrum_edge_trim_s": 1.024,
+        "ulog_dropouts": 0,
+        "motor_original": {
+          "count": 13612,
+          "missing": 1444,
+          "logged_hz": 226.0212553968781,
+          "producer_hz": 250.0,
+          "max_interval_s": 0.024
+        },
+        "tracking_ratio_own_n1": [
+          1.0107854901013864,
+          1.013887065903276,
+          1.0036749348105565
+        ],
+        "tracking_ratio_same_div_pid": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "success": true,
+        "mode": 0,
+        "div": 4,
+        "ulog": "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/pid_div4/07_50_03.ulg",
+        "callback_hz": 250.0,
+        "update_hz": 62.5,
+        "hover_updates": 3763,
+        "hover_callbacks": 15054,
+        "actual_dt_s": {
+          "min": 0.01600000075995922,
+          "max": 0.01600000075995922
+        },
+        "tv_actual_updates": {
+          "actual_update_span_s": 35.984,
+          "duration_s": 36.0,
+          "tv": [
+            2.1415524897383875,
+            2.158739982172847,
+            0.9046444600753603
+          ],
+          "tv_per_s": [
+            0.05948756915939965,
+            0.0599649995048013,
+            0.025129012779871118
+          ]
+        },
+        "actuator_samples_checked": 18520,
+        "rmse_tracking": [
+          0.004900759767252396,
+          0.0037869286484617935,
+          0.008075134556616681
+        ],
+        "rmse_hover": [
+          0.004973491561850705,
+          0.0037950502032531586,
+          0.006474944956974122
+        ],
+        "kernel_cost": {
+          "count": 3763,
+          "median_ns": 467.0,
+          "p95_ns": 1427.8999999999996,
+          "p99_ns": 10338.120000000014,
+          "max_ns": 19934
+        },
+        "module_cost": {
+          "count": 15054,
+          "median_ns": 2218.5,
+          "p95_ns": 9451.249999999978,
+          "p99_ns": 21538.409999999996,
+          "max_ns": 1515317
+        },
+        "kernel_wall_ns_per_sim_second": 46839.533647777855,
+        "module_wall_ns_per_sim_second": 913813.0439115127,
+        "native_highband_rms": [
+          0.0005370820977035053,
+          0.0005418164481775021,
+          0.0002088680873425802
+        ],
+        "common_0_20hz_rms": [
+          0.000738234200967659,
+          0.0006465223773162762,
+          0.0016891624727603351
+        ],
+        "common_grid_hz": 62.5,
+        "spectrum_edge_trim_s": 1.024,
+        "ulog_dropouts": 0,
+        "motor_original": {
+          "count": 13351,
+          "missing": 1702,
+          "logged_hz": 221.73133138453363,
+          "producer_hz": 250.0,
+          "max_interval_s": 0.024
+        },
+        "tracking_ratio_own_n1": [
+          1.0870009938314271,
+          1.0798825557284326,
+          0.9865976449590391
+        ],
+        "tracking_ratio_same_div_pid": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "success": true,
+        "mode": 1,
+        "div": 1,
+        "ulog": "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/esta_div1/07_52_05.ulg",
+        "callback_hz": 250.0,
+        "update_hz": 250.0,
+        "hover_updates": 15054,
+        "hover_callbacks": 15054,
+        "actual_dt_s": {
+          "min": 0.004000000189989805,
+          "max": 0.004000000189989805
+        },
+        "tv_actual_updates": {
+          "actual_update_span_s": 36.0,
+          "duration_s": 36.0,
+          "tv": [
+            2.0610262310810867,
+            2.7892928377259523,
+            5.4688029855878995
+          ],
+          "tv_per_s": [
+            0.0572507286411413,
+            0.07748035660349867,
+            0.15191119404410833
+          ]
+        },
+        "actuator_samples_checked": 18851,
+        "rmse_tracking": [
+          0.0048138378115852405,
+          0.0037634038361227745,
+          0.003032106322326988
+        ],
+        "rmse_hover": [
+          0.004834643427629889,
+          0.003776141313597263,
+          0.002640249501784345
+        ],
+        "kernel_cost": {
+          "count": 15054,
+          "median_ns": 490.0,
+          "p95_ns": 2041.0,
+          "p99_ns": 3265.089999999969,
+          "max_ns": 34781
+        },
+        "module_cost": {
+          "count": 15054,
+          "median_ns": 3095.0,
+          "p95_ns": 13433.049999999996,
+          "p99_ns": 25085.35,
+          "max_ns": 1087773
+        },
+        "kernel_wall_ns_per_sim_second": 199624.1779047366,
+        "module_wall_ns_per_sim_second": 1252773.2013552117,
+        "native_highband_rms": [
+          0.0003013284111941605,
+          0.0004265725408957382,
+          0.0008715518142855302
+        ],
+        "common_0_20hz_rms": [
+          0.0009976364562158042,
+          0.0011093554458129332,
+          0.001996814489921049
+        ],
+        "common_grid_hz": 62.5,
+        "spectrum_edge_trim_s": 1.024,
+        "ulog_dropouts": 0,
+        "motor_original": {
+          "count": 13508,
+          "missing": 1545,
+          "logged_hz": 224.3389582779697,
+          "producer_hz": 250.0,
+          "max_interval_s": 0.016
+        },
+        "tracking_ratio_own_n1": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "tracking_ratio_same_div_pid": [
+          1.067721482759016,
+          1.0731742079273694,
+          0.3704543789207873
+        ]
+      },
+      {
+        "success": true,
+        "mode": 1,
+        "div": 2,
+        "ulog": "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/esta_div2/07_54_07.ulg",
+        "callback_hz": 250.0,
+        "update_hz": 125.00000000000001,
+        "hover_updates": 7528,
+        "hover_callbacks": 15056,
+        "actual_dt_s": {
+          "min": 0.00800000037997961,
+          "max": 0.00800000037997961
+        },
+        "tv_actual_updates": {
+          "actual_update_span_s": 35.992,
+          "duration_s": 36.0,
+          "tv": [
+            1.7389268376012978,
+            2.362031748984009,
+            4.806921789195258
+          ],
+          "tv_per_s": [
+            0.048303523266702716,
+            0.06561199302733359,
+            0.1335256052554238
+          ]
+        },
+        "actuator_samples_checked": 18543,
+        "rmse_tracking": [
+          0.005208829145308475,
+          0.004344537116085434,
+          0.003057765034154975
+        ],
+        "rmse_hover": [
+          0.005384312074379764,
+          0.004516916391846772,
+          0.002766748668124145
+        ],
+        "kernel_cost": {
+          "count": 7528,
+          "median_ns": 679.0,
+          "p95_ns": 2531.0,
+          "p99_ns": 10041.719999999972,
+          "max_ns": 24774
+        },
+        "module_cost": {
+          "count": 15056,
+          "median_ns": 2758.0,
+          "p95_ns": 12032.25,
+          "p99_ns": 23572.500000000022,
+          "max_ns": 1376317
+        },
+        "kernel_wall_ns_per_sim_second": 137578.19661242113,
+        "module_wall_ns_per_sim_second": 1106833.1119229493,
+        "native_highband_rms": [
+          0.0003079424969333139,
+          0.000426641180716786,
+          0.0008768955146815462
+        ],
+        "common_0_20hz_rms": [
+          0.0010219378143502122,
+          0.0011841312928012214,
+          0.0020001881342182866
+        ],
+        "common_grid_hz": 62.5,
+        "spectrum_edge_trim_s": 1.024,
+        "ulog_dropouts": 0,
+        "motor_original": {
+          "count": 13328,
+          "missing": 1728,
+          "logged_hz": 221.30521421454668,
+          "producer_hz": 250.0,
+          "max_interval_s": 0.008
+        },
+        "tracking_ratio_own_n1": [
+          1.0820533115537518,
+          1.1544169335176553,
+          1.0084623390806082
+        ],
+        "tracking_ratio_same_div_pid": [
+          1.1430037110253635,
+          1.221921572835156,
+          0.37222140010861793
+        ]
+      },
+      {
+        "success": true,
+        "mode": 1,
+        "div": 4,
+        "ulog": "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/esta_div4/07_56_10.ulg",
+        "callback_hz": 250.0,
+        "update_hz": 62.5,
+        "hover_updates": 3764,
+        "hover_callbacks": 15058,
+        "actual_dt_s": {
+          "min": 0.01600000075995922,
+          "max": 0.01600000075995922
+        },
+        "tv_actual_updates": {
+          "actual_update_span_s": 35.984,
+          "duration_s": 36.0,
+          "tv": [
+            1.121894634256023,
+            1.5024713124148548,
+            2.9533423066513933
+          ],
+          "tv_per_s": [
+            0.031163739840445084,
+            0.04173531423374596,
+            0.08203728629587204
+          ]
+        },
+        "actuator_samples_checked": 18882,
+        "rmse_tracking": [
+          0.005945796076836173,
+          0.0051340268015084844,
+          0.003171315872914
+        ],
+        "rmse_hover": [
+          0.00595892317192032,
+          0.0050685333992888815,
+          0.00280059686981467
+        ],
+        "kernel_cost": {
+          "count": 3764,
+          "median_ns": 1050.0,
+          "p95_ns": 3256.2499999999995,
+          "p99_ns": 16467.889999999967,
+          "max_ns": 28033
+        },
+        "module_cost": {
+          "count": 15058,
+          "median_ns": 2827.0,
+          "p95_ns": 12406.15,
+          "p99_ns": 23642.350000000013,
+          "max_ns": 1125300
+        },
+        "kernel_wall_ns_per_sim_second": 100519.89108056054,
+        "module_wall_ns_per_sim_second": 1143577.7877399218,
+        "native_highband_rms": [
+          0.0002476517028993666,
+          0.00030640622344134746,
+          0.0007141514634150325
+        ],
+        "common_0_20hz_rms": [
+          0.0011032840235566529,
+          0.0013110784003409234,
+          0.002083705281553633
+        ],
+        "common_grid_hz": 62.5,
+        "spectrum_edge_trim_s": 1.024,
+        "ulog_dropouts": 0,
+        "motor_original": {
+          "count": 13576,
+          "missing": 1482,
+          "logged_hz": 225.39350468220763,
+          "producer_hz": 250.00000000000003,
+          "max_interval_s": 0.012
+        },
+        "tracking_ratio_own_n1": [
+          1.2351467393701345,
+          1.3641976851460582,
+          1.0459118301894426
+        ],
+        "tracking_ratio_same_div_pid": [
+          1.2132396524650861,
+          1.355723140860831,
+          0.39272607170557383
+        ]
+      },
+      {
+        "success": true,
+        "mode": 2,
+        "div": 1,
+        "ulog": "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/ista_div1/07_58_12.ulg",
+        "callback_hz": 250.0,
+        "update_hz": 250.00000000000003,
+        "hover_updates": 15056,
+        "hover_callbacks": 15056,
+        "actual_dt_s": {
+          "min": 0.004000000189989805,
+          "max": 0.004000000189989805
+        },
+        "tv_actual_updates": {
+          "actual_update_span_s": 35.995999999999995,
+          "duration_s": 36.0,
+          "tv": [
+            1.9558135038767546,
+            2.2577039562165737,
+            5.090481453650682
+          ],
+          "tv_per_s": [
+            0.05432815288546541,
+            0.06271399878379372,
+            0.14140226260140784
+          ]
+        },
+        "actuator_samples_checked": 18888,
+        "rmse_tracking": [
+          0.004605070306922544,
+          0.0039368989044612284,
+          0.0031241088369472294
+        ],
+        "rmse_hover": [
+          0.004746978985750561,
+          0.004161912787742816,
+          0.002698899364171227
+        ],
+        "kernel_cost": {
+          "count": 15056,
+          "median_ns": 839.0,
+          "p95_ns": 3576.0,
+          "p99_ns": 7952.350000000148,
+          "max_ns": 30041
+        },
+        "module_cost": {
+          "count": 15056,
+          "median_ns": 3373.5,
+          "p95_ns": 14593.25,
+          "p99_ns": 25949.700000000004,
+          "max_ns": 1288772
+        },
+        "kernel_wall_ns_per_sim_second": 338177.416140817,
+        "module_wall_ns_per_sim_second": 1360355.363666556,
+        "native_highband_rms": [
+          0.0002896572017271956,
+          0.00033800493025672065,
+          0.0008041691574242369
+        ],
+        "common_0_20hz_rms": [
+          0.0008809638728304818,
+          0.000832844413637287,
+          0.0019387628214703496
+        ],
+        "common_grid_hz": 62.5,
+        "spectrum_edge_trim_s": 1.024,
+        "ulog_dropouts": 0,
+        "motor_original": {
+          "count": 13607,
+          "missing": 1448,
+          "logged_hz": 225.95323502059256,
+          "producer_hz": 250.00000000000003,
+          "max_interval_s": 0.012
+        },
+        "tracking_ratio_own_n1": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "tracking_ratio_same_div_pid": [
+          1.0214163186976308,
+          1.1226481524337466,
+          0.38169499214131425
+        ]
+      },
+      {
+        "success": true,
+        "mode": 2,
+        "div": 2,
+        "ulog": "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/ista_div2/08_00_15.ulg",
+        "callback_hz": 250.0,
+        "update_hz": 125.00000000000001,
+        "hover_updates": 7526,
+        "hover_callbacks": 15053,
+        "actual_dt_s": {
+          "min": 0.00800000037997961,
+          "max": 0.00800000037997961
+        },
+        "tv_actual_updates": {
+          "actual_update_span_s": 35.992,
+          "duration_s": 36.0,
+          "tv": [
+            1.5167361207152226,
+            1.7266870243474841,
+            4.165118795459421
+          ],
+          "tv_per_s": [
+            0.04213155890875618,
+            0.04796352845409678,
+            0.11569774431831724
+          ]
+        },
+        "actuator_samples_checked": 18794,
+        "rmse_tracking": [
+          0.00480942870893814,
+          0.005411573027672762,
+          0.003289367955441433
+        ],
+        "rmse_hover": [
+          0.005002797563038436,
+          0.005547003039784283,
+          0.002831050237184041
+        ],
+        "kernel_cost": {
+          "count": 7526,
+          "median_ns": 1312.0,
+          "p95_ns": 4570.75,
+          "p99_ns": 16581.0,
+          "max_ns": 400299
+        },
+        "module_cost": {
+          "count": 15053,
+          "median_ns": 3307.0,
+          "p95_ns": 14339.399999999998,
+          "p99_ns": 25235.51999999999,
+          "max_ns": 1574832
+        },
+        "kernel_wall_ns_per_sim_second": 248218.34307733193,
+        "module_wall_ns_per_sim_second": 1291766.6589157588,
+        "native_highband_rms": [
+          0.00026560481212470355,
+          0.0003119359450675584,
+          0.0007476504948533016
+        ],
+        "common_0_20hz_rms": [
+          0.000847251631062228,
+          0.0008128622252354966,
+          0.0019027487395669059
+        ],
+        "common_grid_hz": 62.5,
+        "spectrum_edge_trim_s": 1.024,
+        "ulog_dropouts": 0,
+        "motor_original": {
+          "count": 13550,
+          "missing": 1502,
+          "logged_hz": 225.05149159524285,
+          "producer_hz": 250.0,
+          "max_interval_s": 0.012
+        },
+        "tracking_ratio_own_n1": [
+          1.0443768256281334,
+          1.374577594954358,
+          1.0528980029568014
+        ],
+        "tracking_ratio_same_div_pid": [
+          1.0553609475134098,
+          1.5220304600468686,
+          0.40041439815377844
+        ]
+      },
+      {
+        "success": true,
+        "mode": 2,
+        "div": 4,
+        "ulog": "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/ista_div4/08_02_17.ulg",
+        "callback_hz": 250.0,
+        "update_hz": 62.5,
+        "hover_updates": 3763,
+        "hover_callbacks": 15053,
+        "actual_dt_s": {
+          "min": 0.01600000075995922,
+          "max": 0.01600000075995922
+        },
+        "tv_actual_updates": {
+          "actual_update_span_s": 35.984,
+          "duration_s": 36.0,
+          "tv": [
+            0.8935914304963997,
+            0.9900570246390998,
+            2.377788303100658
+          ],
+          "tv_per_s": [
+            0.024821984180455545,
+            0.027501584017752774,
+            0.0660496750861294
+          ]
+        },
+        "actuator_samples_checked": 18844,
+        "rmse_tracking": [
+          0.0055092210153629044,
+          0.008775023586698473,
+          0.0035874821848414866
+        ],
+        "rmse_hover": [
+          0.0060210282635419195,
+          0.009286083652021559,
+          0.0030404274084805775
+        ],
+        "kernel_cost": {
+          "count": 3763,
+          "median_ns": 1725.0,
+          "p95_ns": 5326.799999999999,
+          "p99_ns": 18772.18,
+          "max_ns": 359049
+        },
+        "module_cost": {
+          "count": 15053,
+          "median_ns": 2914.0,
+          "p95_ns": 12855.999999999998,
+          "p99_ns": 24240.639999999992,
+          "max_ns": 1365742
+        },
+        "kernel_wall_ns_per_sim_second": 160230.81650279035,
+        "module_wall_ns_per_sim_second": 1166235.8324475153,
+        "native_highband_rms": [
+          0.00019567403287313315,
+          0.00022241662457428917,
+          0.0005590940726303872
+        ],
+        "common_0_20hz_rms": [
+          0.000799282500475655,
+          0.0007795278210493199,
+          0.0018711959878796203
+        ],
+        "common_grid_hz": 62.5,
+        "spectrum_edge_trim_s": 1.024,
+        "ulog_dropouts": 0,
+        "motor_original": {
+          "count": 13592,
+          "missing": 1461,
+          "logged_hz": 225.7341217114005,
+          "producer_hz": 250.0,
+          "max_interval_s": 0.012
+        },
+        "tracking_ratio_own_n1": [
+          1.1963380900137837,
+          2.2289176835998408,
+          1.1483217685677845
+        ],
+        "tracking_ratio_same_div_pid": [
+          1.1241565138892007,
+          2.317187462790667,
+          0.4442628366981131
+        ]
+      }
+    ],
+    "unchanged_sensor_filter_parameters": {
+      "EKF2_ABIAS_INIT": 0.20000000298023224,
+      "EKF2_ABL_ACCLIM": 25.0,
+      "EKF2_ABL_GYRLIM": 3.0,
+      "EKF2_ABL_LIM": 0.4000000059604645,
+      "EKF2_ABL_TAU": 0.5,
+      "EKF2_ACC_B_NOISE": 0.003000000026077032,
+      "EKF2_ACC_NOISE": 0.3499999940395355,
+      "EKF2_AID_MASK": 1,
+      "EKF2_ANGERR_INIT": 0.10000000149011612,
+      "EKF2_ARSP_THR": 0.0,
+      "EKF2_ASPD_MAX": 20.0,
+      "EKF2_ASP_DELAY": 100.0,
+      "EKF2_AVEL_DELAY": 5.0,
+      "EKF2_BARO_DELAY": 0.0,
+      "EKF2_BARO_GATE": 5.0,
+      "EKF2_BARO_NOISE": 3.5,
+      "EKF2_BCOEF_X": 25.0,
+      "EKF2_BCOEF_Y": 25.0,
+      "EKF2_BETA_GATE": 5.0,
+      "EKF2_BETA_NOISE": 0.30000001192092896,
+      "EKF2_DECL_TYPE": 7,
+      "EKF2_DRAG_NOISE": 2.5,
+      "EKF2_EAS_NOISE": 1.399999976158142,
+      "EKF2_EVA_NOISE": 0.05000000074505806,
+      "EKF2_EVP_GATE": 5.0,
+      "EKF2_EVP_NOISE": 0.10000000149011612,
+      "EKF2_EVV_GATE": 3.0,
+      "EKF2_EVV_NOISE": 0.10000000149011612,
+      "EKF2_EV_DELAY": 175.0,
+      "EKF2_EV_NOISE_MD": 0,
+      "EKF2_EV_POS_X": 0.0,
+      "EKF2_EV_POS_Y": 0.0,
+      "EKF2_EV_POS_Z": 0.0,
+      "EKF2_FUSE_BETA": 0,
+      "EKF2_GBIAS_INIT": 0.10000000149011612,
+      "EKF2_GND_EFF_DZ": 4.0,
+      "EKF2_GND_MAX_HGT": 0.5,
+      "EKF2_GPS_CHECK": 245,
+      "EKF2_GPS_DELAY": 110.0,
+      "EKF2_GPS_POS_X": 0.0,
+      "EKF2_GPS_POS_Y": 0.0,
+      "EKF2_GPS_POS_Z": 0.0,
+      "EKF2_GPS_P_GATE": 5.0,
+      "EKF2_GPS_P_NOISE": 0.5,
+      "EKF2_GPS_V_GATE": 5.0,
+      "EKF2_GPS_V_NOISE": 0.30000001192092896,
+      "EKF2_GSF_TAS": 15.0,
+      "EKF2_GYR_B_NOISE": 0.0010000000474974513,
+      "EKF2_GYR_NOISE": 0.014999999664723873,
+      "EKF2_HDG_GATE": 2.5999999046325684,
+      "EKF2_HEAD_NOISE": 0.30000001192092896,
+      "EKF2_HGT_MODE": 0,
+      "EKF2_IMU_POS_X": 0.0,
+      "EKF2_IMU_POS_Y": 0.0,
+      "EKF2_IMU_POS_Z": 0.0,
+      "EKF2_MAG_ACCLIM": 0.5,
+      "EKF2_MAG_B_NOISE": 9.999999747378752e-05,
+      "EKF2_MAG_CHECK": 0,
+      "EKF2_MAG_DECL": 0.0,
+      "EKF2_MAG_DELAY": 0.0,
+      "EKF2_MAG_E_NOISE": 0.0010000000474974513,
+      "EKF2_MAG_GATE": 3.0,
+      "EKF2_MAG_NOISE": 0.05000000074505806,
+      "EKF2_MAG_TYPE": 0,
+      "EKF2_MAG_YAWLIM": 0.25,
+      "EKF2_MIN_OBS_DT": 20,
+      "EKF2_MIN_RNG": 0.10000000149011612,
+      "EKF2_MOVE_TEST": 1.0,
+      "EKF2_MULTI_IMU": 3,
+      "EKF2_MULTI_MAG": 2,
+      "EKF2_NOAID_NOISE": 10.0,
+      "EKF2_NOAID_TOUT": 5000000,
+      "EKF2_OF_DELAY": 20.0,
+      "EKF2_OF_GATE": 3.0,
+      "EKF2_OF_N_MAX": 0.5,
+      "EKF2_OF_N_MIN": 0.15000000596046448,
+      "EKF2_OF_POS_X": 0.0,
+      "EKF2_OF_POS_Y": 0.0,
+      "EKF2_OF_POS_Z": 0.0,
+      "EKF2_OF_QMIN": 1,
+      "EKF2_PCOEF_XN": 0.0,
+      "EKF2_PCOEF_XP": 0.0,
+      "EKF2_PCOEF_YN": 0.0,
+      "EKF2_PCOEF_YP": 0.0,
+      "EKF2_PCOEF_Z": 0.0,
+      "EKF2_REQ_EPH": 3.0,
+      "EKF2_REQ_EPV": 5.0,
+      "EKF2_REQ_GPS_H": 0.5,
+      "EKF2_REQ_HDRIFT": 0.10000000149011612,
+      "EKF2_REQ_NSATS": 6,
+      "EKF2_REQ_PDOP": 2.5,
+      "EKF2_REQ_SACC": 0.5,
+      "EKF2_REQ_VDRIFT": 0.20000000298023224,
+      "EKF2_RNG_AID": 1,
+      "EKF2_RNG_A_HMAX": 5.0,
+      "EKF2_RNG_A_IGATE": 1.0,
+      "EKF2_RNG_A_VMAX": 1.0,
+      "EKF2_RNG_DELAY": 5.0,
+      "EKF2_RNG_GATE": 5.0,
+      "EKF2_RNG_NOISE": 0.10000000149011612,
+      "EKF2_RNG_PITCH": 0.0,
+      "EKF2_RNG_POS_X": 0.0,
+      "EKF2_RNG_POS_Y": 0.0,
+      "EKF2_RNG_POS_Z": 0.0,
+      "EKF2_RNG_QLTY_T": 1.0,
+      "EKF2_RNG_SFE": 0.05000000074505806,
+      "EKF2_SEL_ERR_RED": 0.20000000298023224,
+      "EKF2_SEL_IMU_ACC": 1.0,
+      "EKF2_SEL_IMU_ANG": 15.0,
+      "EKF2_SEL_IMU_RAT": 7.0,
+      "EKF2_SEL_IMU_VEL": 2.0,
+      "EKF2_SYNT_MAG_Z": 0,
+      "EKF2_TAS_GATE": 3.0,
+      "EKF2_TAU_POS": 0.25,
+      "EKF2_TAU_VEL": 0.25,
+      "EKF2_TERR_GRAD": 0.5,
+      "EKF2_TERR_MASK": 3,
+      "EKF2_TERR_NOISE": 5.0,
+      "EKF2_WIND_NOISE": 0.10000000149011612,
+      "IMU_ACCEL_CUTOFF": 30.0,
+      "IMU_DGYRO_CUTOFF": 30.0,
+      "IMU_GYRO_CAL_EN": 1,
+      "IMU_GYRO_CUTOFF": 40.0,
+      "IMU_GYRO_DYN_NF": 0,
+      "IMU_GYRO_FFT_EN": 1,
+      "IMU_GYRO_FFT_LEN": 1024,
+      "IMU_GYRO_FFT_MAX": 192.0,
+      "IMU_GYRO_FFT_MIN": 32.0,
+      "IMU_GYRO_NF_BW": 20.0,
+      "IMU_GYRO_NF_FREQ": 0.0,
+      "IMU_GYRO_RATEMAX": 800,
+      "IMU_INTEG_RATE": 250,
+      "SENS_BARO_QNH": 1013.25,
+      "SENS_BARO_RATE": 20.0,
+      "SENS_BOARD_ROT": 0,
+      "SENS_BOARD_X_OFF": 9.999999974752427e-07,
+      "SENS_BOARD_Y_OFF": 0.0,
+      "SENS_BOARD_Z_OFF": 0.0,
+      "SENS_DPRES_OFF": 0.0010000000474974513,
+      "SENS_FLOW_MAXHGT": 3.0,
+      "SENS_FLOW_MAXR": 2.5,
+      "SENS_FLOW_MINHGT": 0.699999988079071,
+      "SENS_FLOW_ROT": 6,
+      "SENS_GPS_MASK": 0,
+      "SENS_GPS_PRIME": 0,
+      "SENS_GPS_TAU": 10.0,
+      "SENS_IMU_MODE": 0,
+      "SENS_MAG_MODE": 0,
+      "SENS_MAG_RATE": 50.0
+    }
+  },
+  "refined_analysis": {
+    "success": true,
+    "analysis_version": 2,
+    "reason": "Odd-length one-sided PSD normalization correction; no firmware change",
+    "analyzer_sha256": "15d4cf30b0076ffd870cbb99150f6c73a742e41a16d948bfc1576ff3f9721c30",
+    "runs": [
+      {
+        "success": true,
+        "analysis_version": 2,
+        "mode": 0,
+        "div": 1,
+        "ulog": "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/pid_div1/07_45_58.ulg",
+        "callback_hz": 250.0,
+        "update_hz": 250.0,
+        "hover_updates": 15054,
+        "hover_callbacks": 15054,
+        "actual_dt_s": {
+          "min": 0.004000000189989805,
+          "max": 0.004000000189989805
+        },
+        "tv_actual_updates": {
+          "actual_update_span_s": 36.0,
+          "duration_s": 36.0,
+          "tv": [
+            3.3805716253145874,
+            3.307665638392791,
+            1.602839129176573
+          ],
+          "tv_per_s": [
+            0.09390476736984965,
+            0.09187960106646642,
+            0.04452330914379369
+          ]
+        },
+        "actuator_samples_checked": 18909,
+        "rmse_tracking": [
+          0.004508514523044134,
+          0.003506796760789722,
+          0.008184830561755434
+        ],
+        "rmse_hover": [
+          0.004584597453872683,
+          0.003604832087216631,
+          0.006531030929914634
+        ],
+        "kernel_cost": {
+          "count": 15054,
+          "median_ns": 171.0,
+          "p95_ns": 772.0,
+          "p99_ns": 1238.409999999998,
+          "max_ns": 24324
+        },
+        "module_cost": {
+          "count": 15054,
+          "median_ns": 2492.0,
+          "p95_ns": 9994.099999999991,
+          "p99_ns": 22987.979999999978,
+          "max_ns": 1039846
+        },
+        "kernel_wall_ns_per_sim_second": 76640.95196970704,
+        "module_wall_ns_per_sim_second": 1001796.0539427358,
+        "native_highband_rms": [
+          0.0005407852610836573,
+          0.0005560280915068085,
+          0.00023550004156854532
+        ],
+        "common_0_20hz_rms": [
+          0.0007098936102729264,
+          0.0006202716403429368,
+          0.0017145242988681514
+        ],
+        "common_grid_hz": 62.5,
+        "spectrum_edge_trim_s": 1.024,
+        "ulog_dropouts": 0,
+        "motor_original": {
+          "count": 13622,
+          "missing": 1431,
+          "logged_hz": 226.23239436619718,
+          "producer_hz": 250.0,
+          "max_interval_s": 0.012
+        },
+        "tracking_ratio_own_n1": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "tracking_ratio_same_div_pid": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "success": true,
+        "analysis_version": 2,
+        "mode": 0,
+        "div": 2,
+        "ulog": "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/pid_div2/07_48_01.ulg",
+        "callback_hz": 250.0,
+        "update_hz": 125.00000000000001,
+        "hover_updates": 7528,
+        "hover_callbacks": 15056,
+        "actual_dt_s": {
+          "min": 0.00800000037997961,
+          "max": 0.00800000037997961
+        },
+        "tv_actual_updates": {
+          "actual_update_span_s": 35.992,
+          "duration_s": 36.0,
+          "tv": [
+            3.0287036537083623,
+            2.9435687076766044,
+            1.3930249481400097
+          ],
+          "tv_per_s": [
+            0.08413065704745451,
+            0.08176579743546124,
+            0.038695137448333604
+          ]
+        },
+        "actuator_samples_checked": 18908,
+        "rmse_tracking": [
+          0.0045571410618043835,
+          0.003555495878516203,
+          0.008214909280505335
+        ],
+        "rmse_hover": [
+          0.004703498156578435,
+          0.003664047101946915,
+          0.006552713044317385
+        ],
+        "kernel_cost": {
+          "count": 7528,
+          "median_ns": 350.0,
+          "p95_ns": 1161.6499999999996,
+          "p99_ns": 4156.259999999886,
+          "max_ns": 21040
+        },
+        "module_cost": {
+          "count": 15056,
+          "median_ns": 2494.0,
+          "p95_ns": 10302.25,
+          "p99_ns": 22887.85000000001,
+          "max_ns": 1553565
+        },
+        "kernel_wall_ns_per_sim_second": 70904.15144470276,
+        "module_wall_ns_per_sim_second": 1036483.8591829957,
+        "native_highband_rms": [
+          0.0005474562601132642,
+          0.0005525111261032627,
+          0.0002376549275919991
+        ],
+        "common_0_20hz_rms": [
+          0.0006990097546356813,
+          0.0006250188875196371,
+          0.001715052085832526
+        ],
+        "common_grid_hz": 62.5,
+        "spectrum_edge_trim_s": 1.024,
+        "ulog_dropouts": 0,
+        "motor_original": {
+          "count": 13612,
+          "missing": 1444,
+          "logged_hz": 226.0212553968781,
+          "producer_hz": 250.0,
+          "max_interval_s": 0.024
+        },
+        "tracking_ratio_own_n1": [
+          1.0107854901013864,
+          1.013887065903276,
+          1.0036749348105565
+        ],
+        "tracking_ratio_same_div_pid": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "success": true,
+        "analysis_version": 2,
+        "mode": 0,
+        "div": 4,
+        "ulog": "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/pid_div4/07_50_03.ulg",
+        "callback_hz": 250.0,
+        "update_hz": 62.5,
+        "hover_updates": 3763,
+        "hover_callbacks": 15054,
+        "actual_dt_s": {
+          "min": 0.01600000075995922,
+          "max": 0.01600000075995922
+        },
+        "tv_actual_updates": {
+          "actual_update_span_s": 35.984,
+          "duration_s": 36.0,
+          "tv": [
+            2.1415524897383875,
+            2.158739982172847,
+            0.9046444600753603
+          ],
+          "tv_per_s": [
+            0.05948756915939965,
+            0.0599649995048013,
+            0.025129012779871118
+          ]
+        },
+        "actuator_samples_checked": 18520,
+        "rmse_tracking": [
+          0.004900759767252396,
+          0.0037869286484617935,
+          0.008075134556616681
+        ],
+        "rmse_hover": [
+          0.004973491561850705,
+          0.0037950502032531586,
+          0.006474944956974122
+        ],
+        "kernel_cost": {
+          "count": 3763,
+          "median_ns": 467.0,
+          "p95_ns": 1427.8999999999996,
+          "p99_ns": 10338.120000000014,
+          "max_ns": 19934
+        },
+        "module_cost": {
+          "count": 15054,
+          "median_ns": 2218.5,
+          "p95_ns": 9451.249999999978,
+          "p99_ns": 21538.409999999996,
+          "max_ns": 1515317
+        },
+        "kernel_wall_ns_per_sim_second": 46839.533647777855,
+        "module_wall_ns_per_sim_second": 913813.0439115127,
+        "native_highband_rms": [
+          0.0005370820977035053,
+          0.0005418164481775021,
+          0.0002088680873425802
+        ],
+        "common_0_20hz_rms": [
+          0.000738234200967659,
+          0.0006465223773162762,
+          0.0016891624727603351
+        ],
+        "common_grid_hz": 62.5,
+        "spectrum_edge_trim_s": 1.024,
+        "ulog_dropouts": 0,
+        "motor_original": {
+          "count": 13351,
+          "missing": 1702,
+          "logged_hz": 221.73133138453363,
+          "producer_hz": 250.0,
+          "max_interval_s": 0.024
+        },
+        "tracking_ratio_own_n1": [
+          1.0870009938314271,
+          1.0798825557284326,
+          0.9865976449590391
+        ],
+        "tracking_ratio_same_div_pid": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "success": true,
+        "analysis_version": 2,
+        "mode": 1,
+        "div": 1,
+        "ulog": "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/esta_div1/07_52_05.ulg",
+        "callback_hz": 250.0,
+        "update_hz": 250.0,
+        "hover_updates": 15054,
+        "hover_callbacks": 15054,
+        "actual_dt_s": {
+          "min": 0.004000000189989805,
+          "max": 0.004000000189989805
+        },
+        "tv_actual_updates": {
+          "actual_update_span_s": 36.0,
+          "duration_s": 36.0,
+          "tv": [
+            2.0610262310810867,
+            2.7892928377259523,
+            5.4688029855878995
+          ],
+          "tv_per_s": [
+            0.0572507286411413,
+            0.07748035660349867,
+            0.15191119404410833
+          ]
+        },
+        "actuator_samples_checked": 18851,
+        "rmse_tracking": [
+          0.0048138378115852405,
+          0.0037634038361227745,
+          0.003032106322326988
+        ],
+        "rmse_hover": [
+          0.004834643427629889,
+          0.003776141313597263,
+          0.002640249501784345
+        ],
+        "kernel_cost": {
+          "count": 15054,
+          "median_ns": 490.0,
+          "p95_ns": 2041.0,
+          "p99_ns": 3265.089999999969,
+          "max_ns": 34781
+        },
+        "module_cost": {
+          "count": 15054,
+          "median_ns": 3095.0,
+          "p95_ns": 13433.049999999996,
+          "p99_ns": 25085.35,
+          "max_ns": 1087773
+        },
+        "kernel_wall_ns_per_sim_second": 199624.1779047366,
+        "module_wall_ns_per_sim_second": 1252773.2013552117,
+        "native_highband_rms": [
+          0.00030132844581303803,
+          0.00042657364458554566,
+          0.000871552084493952
+        ],
+        "common_0_20hz_rms": [
+          0.0009976364562158042,
+          0.0011093554458129332,
+          0.001996814489921049
+        ],
+        "common_grid_hz": 62.5,
+        "spectrum_edge_trim_s": 1.024,
+        "ulog_dropouts": 0,
+        "motor_original": {
+          "count": 13508,
+          "missing": 1545,
+          "logged_hz": 224.3389582779697,
+          "producer_hz": 250.0,
+          "max_interval_s": 0.016
+        },
+        "tracking_ratio_own_n1": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "tracking_ratio_same_div_pid": [
+          1.067721482759016,
+          1.0731742079273694,
+          0.3704543789207873
+        ]
+      },
+      {
+        "success": true,
+        "analysis_version": 2,
+        "mode": 1,
+        "div": 2,
+        "ulog": "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/esta_div2/07_54_07.ulg",
+        "callback_hz": 250.0,
+        "update_hz": 125.00000000000001,
+        "hover_updates": 7528,
+        "hover_callbacks": 15056,
+        "actual_dt_s": {
+          "min": 0.00800000037997961,
+          "max": 0.00800000037997961
+        },
+        "tv_actual_updates": {
+          "actual_update_span_s": 35.992,
+          "duration_s": 36.0,
+          "tv": [
+            1.7389268376012978,
+            2.362031748984009,
+            4.806921789195258
+          ],
+          "tv_per_s": [
+            0.048303523266702716,
+            0.06561199302733359,
+            0.1335256052554238
+          ]
+        },
+        "actuator_samples_checked": 18543,
+        "rmse_tracking": [
+          0.005208829145308475,
+          0.004344537116085434,
+          0.003057765034154975
+        ],
+        "rmse_hover": [
+          0.005384312074379764,
+          0.004516916391846772,
+          0.002766748668124145
+        ],
+        "kernel_cost": {
+          "count": 7528,
+          "median_ns": 679.0,
+          "p95_ns": 2531.0,
+          "p99_ns": 10041.719999999972,
+          "max_ns": 24774
+        },
+        "module_cost": {
+          "count": 15056,
+          "median_ns": 2758.0,
+          "p95_ns": 12032.25,
+          "p99_ns": 23572.500000000022,
+          "max_ns": 1376317
+        },
+        "kernel_wall_ns_per_sim_second": 137578.19661242113,
+        "module_wall_ns_per_sim_second": 1106833.1119229493,
+        "native_highband_rms": [
+          0.0003079424969333139,
+          0.000426641180716786,
+          0.0008768955146815462
+        ],
+        "common_0_20hz_rms": [
+          0.0010219378143502122,
+          0.0011841312928012214,
+          0.0020001881342182866
+        ],
+        "common_grid_hz": 62.5,
+        "spectrum_edge_trim_s": 1.024,
+        "ulog_dropouts": 0,
+        "motor_original": {
+          "count": 13328,
+          "missing": 1728,
+          "logged_hz": 221.30521421454668,
+          "producer_hz": 250.0,
+          "max_interval_s": 0.008
+        },
+        "tracking_ratio_own_n1": [
+          1.0820533115537518,
+          1.1544169335176553,
+          1.0084623390806082
+        ],
+        "tracking_ratio_same_div_pid": [
+          1.1430037110253635,
+          1.221921572835156,
+          0.37222140010861793
+        ]
+      },
+      {
+        "success": true,
+        "analysis_version": 2,
+        "mode": 1,
+        "div": 4,
+        "ulog": "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/esta_div4/07_56_10.ulg",
+        "callback_hz": 250.0,
+        "update_hz": 62.5,
+        "hover_updates": 3764,
+        "hover_callbacks": 15058,
+        "actual_dt_s": {
+          "min": 0.01600000075995922,
+          "max": 0.01600000075995922
+        },
+        "tv_actual_updates": {
+          "actual_update_span_s": 35.984,
+          "duration_s": 36.0,
+          "tv": [
+            1.121894634256023,
+            1.5024713124148548,
+            2.9533423066513933
+          ],
+          "tv_per_s": [
+            0.031163739840445084,
+            0.04173531423374596,
+            0.08203728629587204
+          ]
+        },
+        "actuator_samples_checked": 18882,
+        "rmse_tracking": [
+          0.005945796076836173,
+          0.0051340268015084844,
+          0.003171315872914
+        ],
+        "rmse_hover": [
+          0.00595892317192032,
+          0.0050685333992888815,
+          0.00280059686981467
+        ],
+        "kernel_cost": {
+          "count": 3764,
+          "median_ns": 1050.0,
+          "p95_ns": 3256.2499999999995,
+          "p99_ns": 16467.889999999967,
+          "max_ns": 28033
+        },
+        "module_cost": {
+          "count": 15058,
+          "median_ns": 2827.0,
+          "p95_ns": 12406.15,
+          "p99_ns": 23642.350000000013,
+          "max_ns": 1125300
+        },
+        "kernel_wall_ns_per_sim_second": 100519.89108056054,
+        "module_wall_ns_per_sim_second": 1143577.7877399218,
+        "native_highband_rms": [
+          0.0002476517028993666,
+          0.00030640622344134746,
+          0.0007141514634150325
+        ],
+        "common_0_20hz_rms": [
+          0.0011032840235566529,
+          0.0013110784003409234,
+          0.002083705281553633
+        ],
+        "common_grid_hz": 62.5,
+        "spectrum_edge_trim_s": 1.024,
+        "ulog_dropouts": 0,
+        "motor_original": {
+          "count": 13576,
+          "missing": 1482,
+          "logged_hz": 225.39350468220763,
+          "producer_hz": 250.00000000000003,
+          "max_interval_s": 0.012
+        },
+        "tracking_ratio_own_n1": [
+          1.2351467393701345,
+          1.3641976851460582,
+          1.0459118301894426
+        ],
+        "tracking_ratio_same_div_pid": [
+          1.2132396524650861,
+          1.355723140860831,
+          0.39272607170557383
+        ]
+      },
+      {
+        "success": true,
+        "analysis_version": 2,
+        "mode": 2,
+        "div": 1,
+        "ulog": "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/ista_div1/07_58_12.ulg",
+        "callback_hz": 250.0,
+        "update_hz": 250.00000000000003,
+        "hover_updates": 15056,
+        "hover_callbacks": 15056,
+        "actual_dt_s": {
+          "min": 0.004000000189989805,
+          "max": 0.004000000189989805
+        },
+        "tv_actual_updates": {
+          "actual_update_span_s": 35.995999999999995,
+          "duration_s": 36.0,
+          "tv": [
+            1.9558135038767546,
+            2.2577039562165737,
+            5.090481453650682
+          ],
+          "tv_per_s": [
+            0.05432815288546541,
+            0.06271399878379372,
+            0.14140226260140784
+          ]
+        },
+        "actuator_samples_checked": 18888,
+        "rmse_tracking": [
+          0.004605070306922544,
+          0.0039368989044612284,
+          0.0031241088369472294
+        ],
+        "rmse_hover": [
+          0.004746978985750561,
+          0.004161912787742816,
+          0.002698899364171227
+        ],
+        "kernel_cost": {
+          "count": 15056,
+          "median_ns": 839.0,
+          "p95_ns": 3576.0,
+          "p99_ns": 7952.350000000148,
+          "max_ns": 30041
+        },
+        "module_cost": {
+          "count": 15056,
+          "median_ns": 3373.5,
+          "p95_ns": 14593.25,
+          "p99_ns": 25949.700000000004,
+          "max_ns": 1288772
+        },
+        "kernel_wall_ns_per_sim_second": 338177.416140817,
+        "module_wall_ns_per_sim_second": 1360355.363666556,
+        "native_highband_rms": [
+          0.0002896572017271956,
+          0.00033800493025672065,
+          0.0008041691574242369
+        ],
+        "common_0_20hz_rms": [
+          0.0008809638728304818,
+          0.000832844413637287,
+          0.0019387628214703496
+        ],
+        "common_grid_hz": 62.5,
+        "spectrum_edge_trim_s": 1.024,
+        "ulog_dropouts": 0,
+        "motor_original": {
+          "count": 13607,
+          "missing": 1448,
+          "logged_hz": 225.95323502059256,
+          "producer_hz": 250.00000000000003,
+          "max_interval_s": 0.012
+        },
+        "tracking_ratio_own_n1": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "tracking_ratio_same_div_pid": [
+          1.0214163186976308,
+          1.1226481524337466,
+          0.38169499214131425
+        ]
+      },
+      {
+        "success": true,
+        "analysis_version": 2,
+        "mode": 2,
+        "div": 2,
+        "ulog": "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/ista_div2/08_00_15.ulg",
+        "callback_hz": 250.0,
+        "update_hz": 125.00000000000001,
+        "hover_updates": 7526,
+        "hover_callbacks": 15053,
+        "actual_dt_s": {
+          "min": 0.00800000037997961,
+          "max": 0.00800000037997961
+        },
+        "tv_actual_updates": {
+          "actual_update_span_s": 35.992,
+          "duration_s": 36.0,
+          "tv": [
+            1.5167361207152226,
+            1.7266870243474841,
+            4.165118795459421
+          ],
+          "tv_per_s": [
+            0.04213155890875618,
+            0.04796352845409678,
+            0.11569774431831724
+          ]
+        },
+        "actuator_samples_checked": 18794,
+        "rmse_tracking": [
+          0.00480942870893814,
+          0.005411573027672762,
+          0.003289367955441433
+        ],
+        "rmse_hover": [
+          0.005002797563038436,
+          0.005547003039784283,
+          0.002831050237184041
+        ],
+        "kernel_cost": {
+          "count": 7526,
+          "median_ns": 1312.0,
+          "p95_ns": 4570.75,
+          "p99_ns": 16581.0,
+          "max_ns": 400299
+        },
+        "module_cost": {
+          "count": 15053,
+          "median_ns": 3307.0,
+          "p95_ns": 14339.399999999998,
+          "p99_ns": 25235.51999999999,
+          "max_ns": 1574832
+        },
+        "kernel_wall_ns_per_sim_second": 248218.34307733193,
+        "module_wall_ns_per_sim_second": 1291766.6589157588,
+        "native_highband_rms": [
+          0.00026560481212470355,
+          0.0003119359450675584,
+          0.0007476504948533016
+        ],
+        "common_0_20hz_rms": [
+          0.000847251631062228,
+          0.0008128622252354966,
+          0.0019027487395669059
+        ],
+        "common_grid_hz": 62.5,
+        "spectrum_edge_trim_s": 1.024,
+        "ulog_dropouts": 0,
+        "motor_original": {
+          "count": 13550,
+          "missing": 1502,
+          "logged_hz": 225.05149159524285,
+          "producer_hz": 250.0,
+          "max_interval_s": 0.012
+        },
+        "tracking_ratio_own_n1": [
+          1.0443768256281334,
+          1.374577594954358,
+          1.0528980029568014
+        ],
+        "tracking_ratio_same_div_pid": [
+          1.0553609475134098,
+          1.5220304600468686,
+          0.40041439815377844
+        ]
+      },
+      {
+        "success": true,
+        "analysis_version": 2,
+        "mode": 2,
+        "div": 4,
+        "ulog": "/home/yr/Desktop/codev doc/experiments/M09-20260917/series03/ista_div4/08_02_17.ulg",
+        "callback_hz": 250.0,
+        "update_hz": 62.5,
+        "hover_updates": 3763,
+        "hover_callbacks": 15053,
+        "actual_dt_s": {
+          "min": 0.01600000075995922,
+          "max": 0.01600000075995922
+        },
+        "tv_actual_updates": {
+          "actual_update_span_s": 35.984,
+          "duration_s": 36.0,
+          "tv": [
+            0.8935914304963997,
+            0.9900570246390998,
+            2.377788303100658
+          ],
+          "tv_per_s": [
+            0.024821984180455545,
+            0.027501584017752774,
+            0.0660496750861294
+          ]
+        },
+        "actuator_samples_checked": 18844,
+        "rmse_tracking": [
+          0.0055092210153629044,
+          0.008775023586698473,
+          0.0035874821848414866
+        ],
+        "rmse_hover": [
+          0.0060210282635419195,
+          0.009286083652021559,
+          0.0030404274084805775
+        ],
+        "kernel_cost": {
+          "count": 3763,
+          "median_ns": 1725.0,
+          "p95_ns": 5326.799999999999,
+          "p99_ns": 18772.18,
+          "max_ns": 359049
+        },
+        "module_cost": {
+          "count": 15053,
+          "median_ns": 2914.0,
+          "p95_ns": 12855.999999999998,
+          "p99_ns": 24240.639999999992,
+          "max_ns": 1365742
+        },
+        "kernel_wall_ns_per_sim_second": 160230.81650279035,
+        "module_wall_ns_per_sim_second": 1166235.8324475153,
+        "native_highband_rms": [
+          0.00019567403287313315,
+          0.00022241662457428917,
+          0.0005590940726303872
+        ],
+        "common_0_20hz_rms": [
+          0.000799282500475655,
+          0.0007795278210493199,
+          0.0018711959878796203
+        ],
+        "common_grid_hz": 62.5,
+        "spectrum_edge_trim_s": 1.024,
+        "ulog_dropouts": 0,
+        "motor_original": {
+          "count": 13592,
+          "missing": 1461,
+          "logged_hz": 225.7341217114005,
+          "producer_hz": 250.0,
+          "max_interval_s": 0.012
+        },
+        "tracking_ratio_own_n1": [
+          1.1963380900137837,
+          2.2289176835998408,
+          1.1483217685677845
+        ],
+        "tracking_ratio_same_div_pid": [
+          1.1241565138892007,
+          2.317187462790667,
+          0.4442628366981131
+        ]
+      }
+    ]
+  },
+  "supplementary_audit": {
+    "success": true,
+    "runs": [
+      {
+        "success": true,
+        "mode": 0,
+        "div": 1,
+        "armed_samples": 20469,
+        "actuator_bitwise_samples": 18909,
+        "pid_bitwise_samples": 27580,
+        "max_armed_tilt_deg": 1.6961784478299502,
+        "max_hover_height_error_m": 0.1530979871749878,
+        "hold_thrust_changes": 0,
+        "nu_frozen_or_limited_samples": [
+          0,
+          0,
+          0
+        ],
+        "actual_armed_pid_calls": 20469,
+        "consumed_motor_missing": 0,
+        "consumed_motor_repeated": 0,
+        "dropout_count": 0,
+        "hover_seconds": 60.211999999999996
+      },
+      {
+        "success": true,
+        "mode": 0,
+        "div": 2,
+        "armed_samples": 20460,
+        "actuator_bitwise_samples": 18908,
+        "pid_bitwise_samples": 13791,
+        "max_armed_tilt_deg": 1.6830128186169944,
+        "max_hover_height_error_m": 0.15385520458221436,
+        "hold_thrust_changes": 3867,
+        "nu_frozen_or_limited_samples": [
+          0,
+          0,
+          0
+        ],
+        "actual_armed_pid_calls": 10231,
+        "consumed_motor_missing": 0,
+        "consumed_motor_repeated": 0,
+        "dropout_count": 0,
+        "hover_seconds": 60.22
+      },
+      {
+        "success": true,
+        "mode": 0,
+        "div": 4,
+        "armed_samples": 20466,
+        "actuator_bitwise_samples": 18520,
+        "pid_bitwise_samples": 6897,
+        "max_armed_tilt_deg": 1.661949693639075,
+        "max_hover_height_error_m": 0.15675973892211914,
+        "hold_thrust_changes": 5869,
+        "nu_frozen_or_limited_samples": [
+          0,
+          0,
+          0
+        ],
+        "actual_armed_pid_calls": 5118,
+        "consumed_motor_missing": 0,
+        "consumed_motor_repeated": 0,
+        "dropout_count": 0,
+        "hover_seconds": 60.211999999999996
+      },
+      {
+        "success": true,
+        "mode": 1,
+        "div": 1,
+        "armed_samples": 20469,
+        "actuator_bitwise_samples": 18851,
+        "pid_bitwise_samples": 0,
+        "max_armed_tilt_deg": 2.033984751669622,
+        "max_hover_height_error_m": 0.1491236686706543,
+        "hold_thrust_changes": 0,
+        "nu_frozen_or_limited_samples": [
+          751,
+          751,
+          751
+        ],
+        "actual_armed_pid_calls": 0,
+        "consumed_motor_missing": 0,
+        "consumed_motor_repeated": 0,
+        "dropout_count": 0,
+        "hover_seconds": 60.211999999999996
+      },
+      {
+        "success": true,
+        "mode": 1,
+        "div": 2,
+        "armed_samples": 20496,
+        "actuator_bitwise_samples": 18543,
+        "pid_bitwise_samples": 0,
+        "max_armed_tilt_deg": 1.6512624485952911,
+        "max_hover_height_error_m": 0.15475857257843018,
+        "hold_thrust_changes": 3906,
+        "nu_frozen_or_limited_samples": [
+          376,
+          376,
+          376
+        ],
+        "actual_armed_pid_calls": 0,
+        "consumed_motor_missing": 0,
+        "consumed_motor_repeated": 0,
+        "dropout_count": 0,
+        "hover_seconds": 60.22
+      },
+      {
+        "success": true,
+        "mode": 1,
+        "div": 4,
+        "armed_samples": 20481,
+        "actuator_bitwise_samples": 18882,
+        "pid_bitwise_samples": 0,
+        "max_armed_tilt_deg": 1.7101260697463725,
+        "max_hover_height_error_m": 0.15667724609375,
+        "hold_thrust_changes": 5840,
+        "nu_frozen_or_limited_samples": [
+          189,
+          189,
+          189
+        ],
+        "actual_armed_pid_calls": 0,
+        "consumed_motor_missing": 0,
+        "consumed_motor_repeated": 0,
+        "dropout_count": 0,
+        "hover_seconds": 60.227999999999994
+      },
+      {
+        "success": true,
+        "mode": 2,
+        "div": 1,
+        "armed_samples": 20487,
+        "actuator_bitwise_samples": 18888,
+        "pid_bitwise_samples": 0,
+        "max_armed_tilt_deg": 1.7043054463703144,
+        "max_hover_height_error_m": 0.1546262502670288,
+        "hold_thrust_changes": 0,
+        "nu_frozen_or_limited_samples": [
+          752,
+          752,
+          752
+        ],
+        "actual_armed_pid_calls": 0,
+        "consumed_motor_missing": 0,
+        "consumed_motor_repeated": 0,
+        "dropout_count": 0,
+        "hover_seconds": 60.22
+      },
+      {
+        "success": true,
+        "mode": 2,
+        "div": 2,
+        "armed_samples": 20463,
+        "actuator_bitwise_samples": 18794,
+        "pid_bitwise_samples": 0,
+        "max_armed_tilt_deg": 2.2967196922947997,
+        "max_hover_height_error_m": 0.14880776405334473,
+        "hold_thrust_changes": 3934,
+        "nu_frozen_or_limited_samples": [
+          378,
+          378,
+          378
+        ],
+        "actual_armed_pid_calls": 0,
+        "consumed_motor_missing": 0,
+        "consumed_motor_repeated": 0,
+        "dropout_count": 0,
+        "hover_seconds": 60.208
+      },
+      {
+        "success": true,
+        "mode": 2,
+        "div": 4,
+        "armed_samples": 20468,
+        "actuator_bitwise_samples": 18844,
+        "pid_bitwise_samples": 0,
+        "max_armed_tilt_deg": 2.6396081069321515,
+        "max_hover_height_error_m": 0.1476684808731079,
+        "hold_thrust_changes": 5861,
+        "nu_frozen_or_limited_samples": [
+          189,
+          189,
+          189
+        ],
+        "actual_armed_pid_calls": 0,
+        "consumed_motor_missing": 0,
+        "consumed_motor_repeated": 0,
+        "dropout_count": 0,
+        "hover_seconds": 60.208
+      }
+    ]
+  },
+  "verification": {
+    "commands": [
+      {
+        "name": "diff",
+        "argv": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "build_tests",
+        "argv": [
+          "make",
+          "tests",
+          "TESTFILTER=IstaIntegration"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "IstaIntegration",
+        "argv": [
+          "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-IstaIntegration",
+          "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M09-20260917/verification04/regression/IstaIntegration.xml"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "IstaRateControl",
+        "argv": [
+          "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-IstaRateControl",
+          "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M09-20260917/verification04/regression/IstaRateControl.xml"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "StaRateControl",
+        "argv": [
+          "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaRateControl",
+          "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M09-20260917/verification04/regression/StaRateControl.xml"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "StaProtection",
+        "argv": [
+          "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaProtection",
+          "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M09-20260917/verification04/regression/StaProtection.xml"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "StaAxesApplication",
+        "argv": [
+          "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaAxesApplication",
+          "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M09-20260917/verification04/regression/StaAxesApplication.xml"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "RateControl",
+        "argv": [
+          "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RateControl",
+          "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M09-20260917/verification04/regression/RateControl.xml"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "RateControlDispatcher",
+        "argv": [
+          "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-RateControlDispatcher",
+          "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M09-20260917/verification04/regression/RateControlDispatcher.xml"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "ControllerSelection",
+        "argv": [
+          "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-ControllerSelection",
+          "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M09-20260917/verification04/regression/ControllerSelection.xml"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "GyroPublicationGuard",
+        "argv": [
+          "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-GyroPublicationGuard",
+          "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M09-20260917/verification04/regression/GyroPublicationGuard.xml"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "AttitudeControl",
+        "argv": [
+          "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-AttitudeControl",
+          "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/M09-20260917/verification04/regression/AttitudeControl.xml"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "python_research",
+        "argv": [
+          "/usr/bin/python3",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "research/sta-rate-control/scripts",
+          "-p",
+          "test_m*.py"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "python_convenience",
+        "argv": [
+          "/usr/bin/python3",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "sim_scripts/_internal",
+          "-p",
+          "test_*.py"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "probe_build",
+        "argv": [
+          "g++",
+          "-std=c++14",
+          "-pedantic-errors",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-Wdouble-promotion",
+          "-O2",
+          "-fno-exceptions",
+          "-fno-rtti",
+          "-Isrc/modules/mc_rate_control/StaRateControl",
+          "src/modules/mc_rate_control/StaRateControl/IstaRateControl.cpp",
+          "research/sta-rate-control/scripts/m07_kernel_probe.cpp",
+          "-o",
+          "/home/yr/Desktop/codev doc/experiments/M09-20260917/verification04/regression/probe"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "m07_reference",
+        "argv": [
+          "/usr/bin/python3",
+          "research/sta-rate-control/scripts/reference_m07.py",
+          "--probe",
+          "/home/yr/Desktop/codev doc/experiments/M09-20260917/verification04/regression/probe",
+          "--output",
+          "/home/yr/Desktop/codev doc/experiments/M09-20260917/verification04/regression/m07_reference"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "sitl_build",
+        "argv": [
+          "make",
+          "px4_sitl_default"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "symbols",
+        "argv": [
+          "nm",
+          "-C",
+          "build/px4_sitl_default/bin/px4"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "unchanged_math_model",
+        "argv": [
+          "git",
+          "diff",
+          "--exit-code",
+          "HEAD",
+          "--",
+          "src/modules/mc_rate_control/StaRateControl/IstaRateControl.cpp",
+          "src/modules/mc_rate_control/StaRateControl/IstaRateControl.hpp",
+          "src/modules/mc_rate_control/StaRateControl/StaRateControl.cpp",
+          "src/modules/mc_rate_control/StaRateControl/StaRateControl.hpp",
+          "src/modules/mc_rate_control/RateControl/RateControl.cpp",
+          "src/modules/mc_rate_control/RateControl/RateControl.hpp",
+          "src/modules/mc_att_control",
+          "sitl",
+          "boards",
+          "ROMFS",
+          "research/sta-rate-control/m06"
+        ],
+        "returncode": 0
+      },
+      {
+        "name": "ControlDecimation",
+        "returncode": 0
+      }
+    ],
+    "tests": {
+      "IstaIntegration": {
+        "tests": 7,
+        "failures": 0,
+        "disabled": 0,
+        "errors": 0
+      },
+      "IstaRateControl": {
+        "tests": 13,
+        "failures": 0,
+        "disabled": 0,
+        "errors": 0
+      },
+      "StaRateControl": {
+        "tests": 11,
+        "failures": 0,
+        "disabled": 0,
+        "errors": 0
+      },
+      "StaProtection": {
+        "tests": 18,
+        "failures": 0,
+        "disabled": 0,
+        "errors": 0
+      },
+      "StaAxesApplication": {
+        "tests": 12,
+        "failures": 0,
+        "disabled": 0,
+        "errors": 0
+      },
+      "RateControl": {
+        "tests": 1,
+        "failures": 0,
+        "disabled": 0,
+        "errors": 0
+      },
+      "RateControlDispatcher": {
+        "tests": 4,
+        "failures": 0,
+        "disabled": 0,
+        "errors": 0
+      },
+      "ControllerSelection": {
+        "tests": 5,
+        "failures": 0,
+        "disabled": 0,
+        "errors": 0
+      },
+      "GyroPublicationGuard": {
+        "tests": 6,
+        "failures": 0,
+        "disabled": 0,
+        "errors": 0
+      },
+      "AttitudeControl": {
+        "tests": 3,
+        "failures": 0,
+        "disabled": 0,
+        "errors": 0
+      },
+      "python_research": {
+        "tests": 39
+      },
+      "python_convenience": {
+        "tests": 18
+      },
+      "ControlDecimation": {
+        "tests": 10,
+        "failures": 0,
+        "errors": 0,
+        "disabled": 0
+      }
+    },
+    "success": true,
+    "head": "72b6e3bc0569bb98b9f268d1d2d9320b74c421fa",
+    "firmware_sha256": "97bf6d7afbf47f79232fe3601f571838982a4b8de04edc94ee7e5980fb1fa99d",
+    "logger_format_length": 1492
+  },
+  "source_files": {
+    "msg/sta_rate_ctrl_status.msg": "896146f77619145591f7cbd970bff547a5217241ac4e9580a803c36400de1ad6",
+    "research/sta-rate-control/scripts/analyze_m09.py": "15d4cf30b0076ffd870cbb99150f6c73a742e41a16d948bfc1576ff3f9721c30",
+    "research/sta-rate-control/scripts/archive_m09.py": "cf3ae39498ea1d81fc3a68bb04aa25866eef9d6703be34f4556d91d617e1e378",
+    "research/sta-rate-control/scripts/audit_m09.py": "d10c73c6783facee0bce2140f567a387fbd4ff1fc409f6a78542a23529f667d7",
+    "research/sta-rate-control/scripts/refine_m09.py": "4c850fb4f7f33aedf79a56328a2b008946e0889a1af11d38cc8dd628b677a998",
+    "research/sta-rate-control/scripts/run_m09.py": "57867109efce72d5b77acc074a06a8f3d858513331c5c17d7cfa30b0a00c7b35",
+    "research/sta-rate-control/scripts/run_m09_batch.py": "1432c048436443ad80485d02884d6b06b43ee6aa70856cafa66f6749ebb06d18",
+    "research/sta-rate-control/scripts/test_m09.py": "79551cc235d397f361bb98ea4d1f95de3d2d09dd06a6d55e3314cbf3600b3408",
+    "research/sta-rate-control/scripts/test_m09_spectrum.py": "2ab0c0643de4fc125cf1274eff6bb8ec89fbff673a1dd8c7e1934e26a73a096c",
+    "research/sta-rate-control/scripts/verify_m09.py": "2f88c1be6da0ce5f235f7d58b6bb4f941965bf04e44b60d190b1e0e5d7eabd36",
+    "src/modules/mc_rate_control/MulticopterRateControl.cpp": "a583b6ec27e3f5574971c6568ae3907f2541357668b8ac02d7523e60f563f911",
+    "src/modules/mc_rate_control/MulticopterRateControl.hpp": "1d7a12aa705d56f66c78213c30c910c4d6d8d48f7244b0798df6c8bd454ced26",
+    "src/modules/mc_rate_control/StaRateControl/CMakeLists.txt": "ac5600ebf536b25404172b40f3d4bcf9ecfca2c989cb2466fdb361dde5c5efb5",
+    "src/modules/mc_rate_control/StaRateControl/ControlDecimation.hpp": "11589c9b72415472ea732ff21e5ac4bb220b6624c9dfe7b749091cff4a43868e",
+    "src/modules/mc_rate_control/StaRateControl/ControlDecimationTest.cpp": "c70a8a195fa1ba67aa6d0702fae2086a4bd275b9ce6e52f6c3fb8e2855bf4e2d",
+    "src/modules/mc_rate_control/StaRateControl/StaProtection.cpp": "7ad5cb6ff92c5eac833b511e18dfafa4ac5e2a78a39f338b702e1291ab1399ba",
+    "src/modules/mc_rate_control/StaRateControl/StaProtection.hpp": "0462380fb4af7219c81c08fa74e2c013da046e35b2c8b829d973859fb6350074",
+    "src/modules/mc_rate_control/mc_rate_control_params.c": "24dafc01a5d54f5535e073b1a4c3702a315cfdd1106f05807ba4efb06427e790"
+  },
+  "environment": {
+    "compiler": {
+      "argv": [
+        "g++",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "g++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0\nCopyright (C) 2021 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+      "stderr": ""
+    },
+    "gazebo": {
+      "argv": [
+        "gazebo",
+        "--version"
+      ],
+      "returncode": 255,
+      "stdout": "Gazebo multi-robot simulator, version 11.10.2\nCopyright (C) 2012 Open Source Robotics Foundation.\nReleased under the Apache 2 License.\nhttp://gazebosim.org\n\n\n",
+      "stderr": ""
+    },
+    "kernel": {
+      "argv": [
+        "uname",
+        "-a"
+      ],
+      "returncode": 0,
+      "stdout": "Linux yr-G15 6.8.0-138-generic #138~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Aug  7 13:43:15 UTC  x86_64 x86_64 x86_64 GNU/Linux\n",
+      "stderr": ""
+    },
+    "cpu": {
+      "argv": [
+        "lscpu"
+      ],
+      "returncode": 0,
+      "stdout": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           39 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  16\nOn-line CPU(s) list:                     0-15\nVendor ID:                               GenuineIntel\nModel name:                              11th Gen Intel(R) Core(TM) i7-11800H @ 2.30GHz\nCPU family:                              6\nModel:                                   141\nThread(s) per core:                      2\nCore(s) per socket:                      8\nSocket(s):                               1\nStepping:                                1\nCPU max MHz:                             4600.0000\nCPU min MHz:                             800.0000\nBogoMIPS:                                4608.00\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb cat_l2 cdp_l2 ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid rdt_a avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb intel_pt avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves split_lock_detect user_shstk dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req vnmi avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid movdiri movdir64b fsrm avx512_vp2intersect md_clear ibt flush_l1d arch_capabilities\nVirtualization:                          VT-x\nL1d cache:                               384 KiB (8 instances)\nL1i cache:                               256 KiB (8 instances)\nL2 cache:                                10 MiB (8 instances)\nL3 cache:                                24 MiB (1 instance)\nNUMA node(s):                            1\nNUMA node0 CPU(s):                       0-15\nVulnerability Gather data sampling:      Mitigation; Microcode\nVulnerability Indirect target selection: Mitigation; Aligned branch/return thunks\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Not affected\nVulnerability Spec rstack overflow:      Not affected\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Enhanced / Automatic IBRS; IBPB conditional; PBRSB-eIBRS SW sequence; BHI SW loop, KVM SW loop\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Not affected\n",
+      "stderr": ""
+    },
+    "submodules": {
+      "argv": [
+        "git",
+        "submodule",
+        "status",
+        "--recursive"
+      ],
+      "returncode": 0,
+      "stdout": " 7c2c623da9f5dcb3f01d32830af1a2ed958de363 Tools/flightgear_bridge (7c2c623)\n cbdb2fc7dd44331da1dcd04a891ed7f8c27b1ef0 Tools/flightgear_bridge/models/Rascal (remotes/origin/electric-14-gcbdb2fc)\n 4540de7ae8e71b9bd6e6f67d085695be0ab36bc3 Tools/flightgear_bridge/models/TF-G1 (4540de7)\n 562ee71388c493675269210f7692d8b7a8bb800d Tools/flightgear_bridge/models/TF-G2 (562ee71)\n 158e429a0110589b1e2adfe868e166271470e144 Tools/flightgear_bridge/models/TF-R1 (heads/master)\n 0a816d8100e9860a031ccfccfb9941bcd6eedc81 Tools/jMAVSim (0a816d8)\n c08380767b21938391bec676a43b36b837af9ba4 Tools/jMAVSim/jMAVlib (heads/master)\n e070c50d591541d440510b65c9da5cad1db5aa9a Tools/jsbsim_bridge (e070c50)\n 40571cd808a204f4062128daeb6bb6db8c134c48 Tools/jsbsim_bridge/models/ATI-Resolution (2019.1)\n d0d1db1961549e557885002cf9c3cff40cc27be2 Tools/jsbsim_bridge/models/Rascal (remotes/origin/preserve-this-branch-for-px4-submodules)\n 822050a7ab6fd87972e59f16312f451bce217a56 Tools/sitl_gazebo (822050a)\n 28ef45c1fcb532b2bfd54c16b059c6a545143b2f Tools/sitl_gazebo/external/OpticalFlow (28ef45c)\n 9b5b567ae77f93d1ef4d36151529ba2506a46e7a Tools/sitl_gazebo/external/OpticalFlow/external/klt_feature_tracker (heads/master)\n 08fd0a73045346448adf6969660196228b23e1fa boards/atlflight/cmake_hexagon (remotes/origin/px4)\n 636fae5ca34eff6007344718755d78fcdf94238e mavlink/include/mavlink/v2.0 (636fae5c)\n 979e27408fa90a3c3d6432190c8f65cc80c3e6b6 platforms/nuttx/NuttX/apps (nuttx-8.2-590-g979e27408)\n bf660cba2af81f055002b3817c87b1f63a78fd09 platforms/nuttx/NuttX/nuttx (nuttx-8.2-3070-gbf660cba2a)\n 0322a4e345e48ea28cb1cee14a33033cdaf0b16a platforms/qurt/dspal (heads/master)\n 07168bd5715818802b78f674816ec851307998a7 platforms/qurt/dspal/cmake_hexagon (remotes/origin/sdk3.1-4-g07168bd)\n c34ef0ce3100684a927c6aecebf0c904bee251b3 src/drivers/gps/devices (remotes/origin/codev_main_12.3_gps_update)\n 29e1aa6c12e3590252b102153d8c62155047a676 src/drivers/uavcan/libuavcan (remotes/origin/pr-nuttx_update_7.31+-4-g29e1aa6c)\n 192295c4f9b67f4a20b0eabf74757b6597415f2b src/drivers/uavcan/libuavcan/dsdl (192295c)\n c58477a644d20ccf95a20c151f3a0402f271c3b8 src/drivers/uavcan/libuavcan/libuavcan/dsdl_compiler/pyuavcan (v1.0.0dev3~7)\n fd12483ddd4e58242d61d74a163e7aeaa1e0f466 src/drivers/uavcan/libuavcan/libuavcan/dsdl_compiler/pyuavcan/dsdl (fd12483)\n 36a01e428b110ff84c8babe5b65667b5e3037d5e src/drivers/uavcan_v1/legacy_data_types (remotes/origin/legacy)\n 2a116170285fb47fcaae150ad21c2ccde0756a5f src/drivers/uavcan_v1/libcanard (1.1.0)\n 0a773b93ce5c94e1d2791b180058cb9897fab7e1 src/drivers/uavcan_v1/public_regulated_data_types (0a773b9)\n 2a116170285fb47fcaae150ad21c2ccde0756a5f src/drivers/uavcannode_gps_demo/libcanard (1.1.0)\n 0a773b93ce5c94e1d2791b180058cb9897fab7e1 src/drivers/uavcannode_gps_demo/public_regulated_data_types (0a773b9)\n baca5d31259c598540e4d1284bc8d8f793abf83a src/lib/crypto/monocypher (3.1.2)\n b3fed06fe822d08d19ab1d2c2f8daf7b7d21951c src/lib/ecl (v1.9.0-rc1-591-gb3fed06)\n b8568a89db8455d0ab2e2e391e2149ba2e5e10dd src/lib/matrix (v1.0.2-195-gb8568a8)\n 21d3cfe3ae570d1674da0105ab23b80958e0449a src/modules/micrortps_bridge/micro-CDR (v1.0.0beta2-54-g21d3cfe)\n",
+      "stderr": ""
+    }
+  },
+  "raw_file_count": 809,
+  "index_sha256": "2d44ece715105b71b68729dbd0ee0ebacff898bc4bf215f0302b6b08549033f1"
+}

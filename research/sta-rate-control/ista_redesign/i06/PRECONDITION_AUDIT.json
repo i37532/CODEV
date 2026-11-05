@@ -1,0 +1,48 @@
+{
+  "milestone": "I06",
+  "date": "2026-09-18",
+  "repository": "/home/yr/Desktop/Codev-autopilot",
+  "branch": "research/sta-rate-control",
+  "audited_head": "1d64163b14ee9c0788da291c824c448a291b1a69",
+  "worktree_at_start": "clean",
+  "submodules_at_start": "clean",
+  "inputs_read_at_start_sha256": {
+    "ISTA_REDESIGN_TODO_CN.md": "c7d388adf43954e52a49c88391b08a607cd6c4fbd63bbaa34c35d53001fe217c",
+    "STA_MILESTONES_CN.md": "4e4cc9c3f0fc04294c7aca63ae8e8cd480170efe32788ad60cfebd1619898fb3",
+    "STA_MILESTONE_STATUS_CN.md": "115c0f4a05f9219a6c329f32e764973d821bd934f73e9946c02ab63e160d861e",
+    "reports/I05.md": "800fb4ae942069fddf84aba8388f5b476736236b6f6b62b5c476ed960f57e33d",
+    "reports/M10.md": "42eccdf8d866c1b6718b514cc88ad90ab089a820b55fe1d2286cb0b7e4d2715f",
+    "reports/ISTA_OPT01.md": "ec02f80ea564b7b7dffe1bc1c9c83d971bcc158a6cf453331a7c2a7ec5e97e69",
+    "reports/ISTA_OPT02.md": "507677164e677c6c21a02c07fd6d4ca4be0ca0528b24071775c25f9ae364b81d",
+    "i05/results/A/summary.json": "cf804b59bf8c506f1fa35bf362666489b42cb816977308b56fb9bd5724ff4071"
+  },
+  "required_predecessor": "I05 passed",
+  "actual_predecessor": {
+    "status": "failed at subgate A",
+    "protocol_source_sha": "07bf593294b40503536aa9b78fab65fb87d6e34d",
+    "result_sha": "1d64163b14ee9c0788da291c824c448a291b1a69",
+    "attempted": 6,
+    "individually_valid": 6,
+    "gate_success": false,
+    "violation": "6301:pitch_only:1"
+  },
+  "proper_ista_capability": {
+    "mode": 3,
+    "accepted_axes": [1, 3],
+    "rejected_axes": [7],
+    "qualified_baseline_axes": [1],
+    "proper_div2_div4_validated": false
+  },
+  "i06_consequences": {
+    "group_a_common_full_axis_domain_available": false,
+    "group_b_equal_full_axis_tuning_available": false,
+    "yaw_tasks_comparable_across_four_controllers": false,
+    "divisor_matrix_comparable_across_four_controllers": false,
+    "training_protocol_frozen": false,
+    "training_or_validation_runs": 0,
+    "formal_holdout_runs": 0,
+    "seeds_allocated": 0,
+    "status": "blocked"
+  },
+  "scope_decision": "Do not redefine I06 as roll-only, do not let yaw silently remain PID for Proper-ISTA, and do not bypass failed I05 gates without a separately authorized remediation stage."
+}

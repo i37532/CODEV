@@ -1,0 +1,95 @@
+{
+  "success": true,
+  "new_flights": 0,
+  "source": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V07-LOGFILES/series04/run05/log001.ulg",
+  "sha256": "9ca12419859af705e5de327827df6e5003e00b77e9267aff68ccd7a214f7c242",
+  "limitation": "Recorded heading watermarks, but reconstructed per-topic prefixes and poll schedules are synthetic; not exact historical byte arrival or a regrading.",
+  "timings": [
+    {
+      "first_scan": true,
+      "decode_s": 1.1135496670030989,
+      "position_check_s": 0.007527239038608968,
+      "landing_s": 0.0023280599853023887
+    },
+    {
+      "first_scan": false,
+      "decode_s": 0.3106212149723433,
+      "position_check_s": 0.007485428010113537,
+      "landing_s": 0.002471390995196998
+    },
+    {
+      "first_scan": false,
+      "decode_s": 0.30923497397452593,
+      "position_check_s": 0.007001023041084409,
+      "landing_s": 0.002722456003539264
+    }
+  ],
+  "final_landing_component": {
+    "command_us": 139176000,
+    "through_us": 140024000,
+    "diagnostic_rows": 9157,
+    "classification": {
+      "clear": 9072,
+      "expected_planned_landing_gate": 85
+    },
+    "raw_values_preserved": true,
+    "consumed_status_proven": false
+  },
+  "recorded_polls": [
+    {
+      "through_us": 139176000,
+      "age_us": 340000.0,
+      "now_us": 139516000.0
+    },
+    {
+      "through_us": 139636000,
+      "age_us": 380000.0,
+      "now_us": 140016000.0
+    }
+  ],
+  "old_schedule_rejection": "Landing evidence pending timeout",
+  "synthetic_immediate_polls": [
+    {
+      "poll": 1,
+      "host_start": 0.0,
+      "pending_since": null,
+      "host_end": 0.0,
+      "now_us": 139516000,
+      "evidence": {
+        "category": "pending_raw_landing_evidence",
+        "pending": true
+      },
+      "pending_since_after": [
+        139516000,
+        0.0
+      ]
+    },
+    {
+      "poll": 2,
+      "host_start": 0.0,
+      "pending_since": [
+        139516000,
+        0.0
+      ],
+      "host_end": 0.35,
+      "now_us": 139866000,
+      "evidence": {
+        "category": "raw_landing_verified",
+        "pending": false,
+        "evidence": {
+          "command_us": 139176000,
+          "through_us": 139636000,
+          "diagnostic_rows": 9118,
+          "classification": {
+            "clear": 9072,
+            "expected_planned_landing_gate": 46
+          },
+          "raw_values_preserved": true,
+          "consumed_status_proven": false
+        }
+      },
+      "pending_since_after": null
+    }
+  ],
+  "file_unchanged": true
+}

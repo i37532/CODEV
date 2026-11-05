@@ -1,0 +1,15 @@
+{
+  "batch": "/home/yr/Desktop/codev doc/experiments/ISTA-REDESIGN-20260918/I05R/RC-formal01",
+  "requested_manifest_sha256": "a64c24eb1ffad179bb8ec6d4b484f600728d37f07bade896b7ca7a8a45f6a747",
+  "misleading_old_summary_sha256": "85b34308aacda2fbd9fa3be843fb12cbcce5cd5ad80955a43cec43969f1b5c4b",
+  "attempts": 18,
+  "requested_by_divisor": {"1": 6, "2": 6, "4": 6},
+  "actual_logged_MC_RTC_DIV": {"1": 18, "2": 0, "4": 0},
+  "root_cause": "Inherited run_m10 nominal scenario overwrote job MC_RTC_DIV after job parameters were loaded; batch_rc then replaced the analysis divisor with the requested job label.",
+  "disposition": "Entire batch invalid for R-C. Retain all files; do not count as DIV2/4 evidence or remediation success; no automatic rerun.",
+  "corrective_checks": [
+    "R-C runner restores the frozen job divisor after inherited scenario setup",
+    "analysis requires actual config divisor to equal requested job divisor",
+    "batch retains actual divisor and records requested_divisor separately"
+  ]
+}

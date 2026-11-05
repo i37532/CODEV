@@ -1,0 +1,259 @@
+{
+  "method": "model-only quasi-static reaction torque, complete FRD inertia solve",
+  "g_Y": 34.582326356808004,
+  "g_R_retained": 130.5752831836131,
+  "g_P_retained": 112.7635334435299,
+  "inertia_frd_kg_m2": [
+    [
+      0.030043343483870964,
+      0.0,
+      -4.4516129032258627e-07
+    ],
+    [
+      0.0,
+      0.03073440787096774,
+      0.0
+    ],
+    [
+      -4.4516129032258627e-07,
+      0.0,
+      0.05771156438709677
+    ]
+  ],
+  "yaw_mixer": [
+    0.765306,
+    1.0,
+    -0.765306,
+    -1.0
+  ],
+  "turning_directions": [
+    1.0,
+    1.0,
+    -1.0,
+    -1.0
+  ],
+  "moment_constants_m": [
+    0.06,
+    0.06,
+    0.06,
+    0.06
+  ],
+  "acceleration_jacobian": [
+    [
+      130.5752821901421,
+      0.0,
+      19.039182518453007
+    ],
+    [
+      0.0,
+      112.7635334435299,
+      0.0
+    ],
+    [
+      -0.06705053123126338,
+      0.0,
+      34.582326356808004
+    ]
+  ],
+  "working_point": {
+    "roll": 0.0,
+    "pitch": 0.004,
+    "yaw": 0.0,
+    "throttle": 0.707
+  },
+  "samples": [
+    {
+      "throttle": 0.65,
+      "delta_c_yaw": -0.01,
+      "delta_alpha": [
+        -0.1763718696630123,
+        -0.002105154539365132,
+        -0.32138569367737
+      ],
+      "gain": 32.138569367737
+    },
+    {
+      "throttle": 0.65,
+      "delta_c_yaw": -0.005,
+      "delta_alpha": [
+        -0.08818593483150246,
+        -0.0005262886348403797,
+        -0.1606928468386857
+      ],
+      "gain": 32.13856936773714
+    },
+    {
+      "throttle": 0.65,
+      "delta_c_yaw": -0.001,
+      "delta_alpha": [
+        -0.017637186966304928,
+        -2.105154539137552e-05,
+        -0.032138569367737624
+      ],
+      "gain": 32.138569367737624
+    },
+    {
+      "throttle": 0.65,
+      "delta_c_yaw": 0.001,
+      "delta_alpha": [
+        0.017637186966304928,
+        -2.105154539137552e-05,
+        0.03213856936773619
+      ],
+      "gain": 32.13856936773619
+    },
+    {
+      "throttle": 0.65,
+      "delta_c_yaw": 0.005,
+      "delta_alpha": [
+        0.08818593483150246,
+        -0.0005262886348403797,
+        0.16069284683868526
+      ],
+      "gain": 32.13856936773705
+    },
+    {
+      "throttle": 0.65,
+      "delta_c_yaw": 0.01,
+      "delta_alpha": [
+        0.1763718696630123,
+        -0.002105154539365132,
+        0.321385693677369
+      ],
+      "gain": 32.1385693677369
+    },
+    {
+      "throttle": 0.707,
+      "delta_c_yaw": -0.01,
+      "delta_alpha": [
+        -0.19039182518569783,
+        -0.002105154539368742,
+        -0.34582326356810844
+      ],
+      "gain": 34.582326356810846
+    },
+    {
+      "throttle": 0.707,
+      "delta_c_yaw": -0.005,
+      "delta_alpha": [
+        -0.09519591259284892,
+        -0.0005262886348494089,
+        -0.17291163178405544
+      ],
+      "gain": 34.58232635681109
+    },
+    {
+      "throttle": 0.707,
+      "delta_c_yaw": -0.001,
+      "delta_alpha": [
+        -0.01903918251857865,
+        -2.1051545394987214e-05,
+        -0.03458232635681186
+      ],
+      "gain": 34.58232635681186
+    },
+    {
+      "throttle": 0.707,
+      "delta_c_yaw": 0.001,
+      "delta_alpha": [
+        0.01903918251857865,
+        -2.1051545394987214e-05,
+        0.03458232635681186
+      ],
+      "gain": 34.58232635681186
+    },
+    {
+      "throttle": 0.707,
+      "delta_c_yaw": 0.005,
+      "delta_alpha": [
+        0.09519591259284892,
+        -0.0005262886348494089,
+        0.17291163178405494
+      ],
+      "gain": 34.58232635681099
+    },
+    {
+      "throttle": 0.707,
+      "delta_c_yaw": 0.01,
+      "delta_alpha": [
+        0.19039182518569783,
+        -0.002105154539368742,
+        0.34582326356810944
+      ],
+      "gain": 34.582326356810945
+    },
+    {
+      "throttle": 0.75,
+      "delta_c_yaw": -0.01,
+      "delta_alpha": [
+        -0.20096828286068752,
+        -0.0021051545393615187,
+        -0.36425862331024406
+      ],
+      "gain": 36.425862331024405
+    },
+    {
+      "throttle": 0.75,
+      "delta_c_yaw": -0.005,
+      "delta_alpha": [
+        -0.10048414143034376,
+        -0.0005262886348349621,
+        -0.18212931165512347
+      ],
+      "gain": 36.425862331024696
+    },
+    {
+      "throttle": 0.75,
+      "delta_c_yaw": -0.001,
+      "delta_alpha": [
+        -0.020096828286066536,
+        -2.1051545394987214e-05,
+        -0.036425862331024315
+      ],
+      "gain": 36.42586233102431
+    },
+    {
+      "throttle": 0.75,
+      "delta_c_yaw": 0.001,
+      "delta_alpha": [
+        0.020096828286066536,
+        -2.1051545394987214e-05,
+        0.036425862331022386
+      ],
+      "gain": 36.42586233102239
+    },
+    {
+      "throttle": 0.75,
+      "delta_c_yaw": 0.005,
+      "delta_alpha": [
+        0.10048414143034376,
+        -0.0005262886348349621,
+        0.1821293116551225
+      ],
+      "gain": 36.4258623310245
+    },
+    {
+      "throttle": 0.75,
+      "delta_c_yaw": 0.01,
+      "delta_alpha": [
+        0.20096828286068752,
+        -0.0021051545393615187,
+        0.3642586233102426
+      ],
+      "gain": 36.42586233102426
+    }
+  ],
+  "local_gain_variation": 0.07066491027405186,
+  "unit": "rad/s^2 per normalized yaw command",
+  "uncertainty": "Not measured: 12.5/25 ms motor lag, filters, drag and coupling. +/-20% is an engineering sensitivity range, NOT a confidence interval.",
+  "files": {
+    "Tools/sitl_gazebo/models/iris/iris.sdf": "366bf1264ce86c0c65b837a5323410c7cd695b0ffa23cdd29e6c52f6315dc00e",
+    "Tools/sitl_gazebo/models/gps/gps.sdf": "ed28b2b88fb667218d2e9c360fac77bd7cd73b4c620a1bd4237b690ddb146a99",
+    "build/px4_sitl_default/src/lib/mixer/MultirotorMixer/mixer_multirotor_normalized.generated.h": "928f33bd53b0e2cabb64b797e4f195775842e2ee6cb073d81662498575f8bd13",
+    "src/drivers/pwm_out_sim/PWMSim.hpp": "e5710fc1efcbb49e885f3726a9766605175f1b5f7177f9b6af8fe9c5f2837b04",
+    "src/modules/simulator/simulator_mavlink.cpp": "843c1cb93c0046cc39c7d332015e52eec4f0db6c2000cfb24535e7b821196212",
+    "Tools/sitl_gazebo/src/gazebo_motor_model.cpp": "bf5c3ee5ee01dcfbbb17a5832c2fb7b98f9f8fcc307b6dc059ede55d0cdb69b1",
+    "Tools/sitl_gazebo/src/gazebo_mavlink_interface.cpp": "85d26a3640f9514093ed7f332870b32d363f7946ab77b12965c5f977069532de",
+    "Tools/sitl_gazebo/include/gazebo_motor_model.h": "de3dce58155c83bc7ad08cbf352e7803a7a3a7a309131c8618aa75f2db7850a9"
+  }
+}

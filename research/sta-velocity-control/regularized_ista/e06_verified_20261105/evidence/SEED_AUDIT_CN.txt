@@ -1,0 +1,9 @@
+新注册IMU种子99601、99602、99603。
+执行前只读查重范围：/home/yr/Desktop/codev doc/experiments、/home/yr/Desktop/codev doc/plan、
+/home/yr/Desktop/Codev-autopilot/research，含隐藏/ignore文件的json/py/md/txt/yaml/yml/toml。
+独立审查命令：rg -n --hidden --no-ignore --glob '*.json' --glob '*.py' --glob '*.md' --glob '*.txt'
+--glob '*.yaml' --glob '*.yml' --glob '*.toml' -P '(?<![0-9A-Za-z_.])9960[123](?![0-9A-Za-z_.])' 上述三目录。
+登记前退出码1，无精确整数命中。辅助seed/种子字段附近检索无命中。
+最初未锚定数字搜索匹配大量哈希/数值子串，不作为已用种子证据，已由精确检查排除。
+旧开发99501/99502、验证99511/99512/99513均不再用于本批。
+仅IMU随机序列可由此种子控制；不声称全部随机源独立或严格相同外扰。

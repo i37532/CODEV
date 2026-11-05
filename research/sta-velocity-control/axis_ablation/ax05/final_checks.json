@@ -1,0 +1,55 @@
+{
+  "stage": "AX05 result-only closure",
+  "host_start_head": "688815a6dd029a485bbb25502bc58400d5c91083",
+  "flight_source_head": "794301664cc0aacee6b5c62987531ab6f0b33fdf",
+  "new_flights_during_closure": 0,
+  "commands": [
+    {
+      "command": "python3 -m unittest discover -s research/sta-velocity-control/axis_ablation/ax05 -p 'test_*.py' -v",
+      "tests": 17,
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/result_tests01.log",
+      "sha256": "ccc560d0f808ec99f4ab411ac6bb4e5d068cc943bcd528effec1b7a55598454d"
+    },
+    {
+      "command": "python3 research/sta-velocity-control/axis_ablation/ax04/test_formal.py -v",
+      "tests": 40,
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/final_formal_tests01.log",
+      "sha256": "ea4a3b307b5dfdd31d0a323162042d7e08082f87aabb6afd938819aad13ae30e"
+    },
+    {
+      "command": "python3 research/sta-velocity-control/axis_ablation/ax03/test_collect.py -v",
+      "tests": 12,
+      "exit_code": 0,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/final_legacy_tests01.log",
+      "sha256": "a6e35283018ee67bbc342af6edd90c093c95584ca5dba56a207602420af19f5a"
+    },
+    {
+      "command": "python3 research/sta-velocity-control/axis_ablation/ax04/freeze.py --check",
+      "exit_code": 0,
+      "repository_assets": 500,
+      "external_assets": 7,
+      "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/final_freeze01.log",
+      "sha256": "177a63d38c946db7ea9f3bcccf04c80f461a4b86463fff62a5d40bd92d28b88d"
+    }
+  ],
+  "replay_exit_code": 0,
+  "full_ulog_audit_exit_code": 0,
+  "frozen_collect_exit_code": 0,
+  "frozen_package_exit_code": 0,
+  "export_exit_code": 0,
+  "export_verify01_all_8_assets_byte_identical": true,
+  "post_formatting_result_tests": {
+    "tests": 17,
+    "exit_code": 0,
+    "log": "/home/yr/Desktop/codev doc/experiments/VELOCITY-AXIS-ABLATION-20261008/AX05/result_tests02.log",
+    "sha256": "f609b5e2a0d14383b25290036e80edb024a0fac6e00f5448cfbf2e4d46016c85"
+  },
+  "initial_export_missing_matplotlib_exit_code": 1,
+  "initial_storage_block_preflight_exit_code": 2,
+  "git_diff_check_exit_code": 0,
+  "recursive_submodules_clean_exit_code": 0,
+  "postflight_parameter_sha256": "06a022de820f43ba6b9559c90da62d16326de448d19a19254c268c328fa113fc",
+  "notes": "40+12 repeated legacy cases are included in the 81 unique preflight Python cases; 17 new result cases give 98 distinct Python and 10 C++ actually executed in AX05. No claim of rerunning historical 273/710. Full 320 flight budget completed; no additional flights or production changes."
+}

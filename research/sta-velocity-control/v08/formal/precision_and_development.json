@@ -1,0 +1,448 @@
+{
+  "sources": [
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/validation02",
+      "source_head": "ffe57be3542a8fb4c5e5148df9c6163b79c8d55a",
+      "ledger_sha256": "75c393f6bc546c711d56a8629f0dc578c9852239366bbb745bc9448114816e49",
+      "original_batch_success": true,
+      "original_attempts": 12,
+      "retained_whole_gates": null,
+      "warning": "Distinct gate protocols; not one homogeneous eighteen-run batch"
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/pilots01",
+      "source_head": "ce0704bcdfefd8b4501c2c06ed9556fe5b542469",
+      "ledger_sha256": "8118282b92ac1232a440f100d534c49ec8e4ce96f88239888c9312fb9d98fac5",
+      "original_batch_success": false,
+      "original_attempts": 13,
+      "retained_whole_gates": [
+        "heading",
+        "force"
+      ],
+      "warning": "Distinct gate protocols; not one homogeneous eighteen-run batch"
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/pilots02_mass",
+      "source_head": "80a2dd0098dd72214f2b8876b0333082c9bb00d8",
+      "ledger_sha256": "cdae852e72e6132c8219a98099eb1cf3957fd88b95cb862c8cfb75c984b24644",
+      "original_batch_success": true,
+      "original_attempts": 6,
+      "retained_whole_gates": null,
+      "warning": "Distinct gate protocols; not one homogeneous eighteen-run batch"
+    }
+  ],
+  "scenes": {
+    "figure8": {
+      "seeds": [
+        40301,
+        40302,
+        40303
+      ],
+      "algorithms": {
+        "0": {
+          "accepted": 3,
+          "attempted": 3,
+          "xyz_rmse_mean_m_s": [
+            0.00906059037414372,
+            0.00939879779049621,
+            0.002687869854216324
+          ],
+          "xy_rmse_mean_m_s": 0.009229694082319965,
+          "xy_correction_tv_per_second": 0.10895724470416705,
+          "position_rmse_mean_m": [
+            0.027655065428557935,
+            0.02421432350691599,
+            0.04109284117409972
+          ],
+          "yaw_rmse_mean_rad": 0.00014472400190406286,
+          "host_cost_us_mean_of_run_quantiles": {
+            "path_ns": {
+              "median": 1.0393333333333334,
+              "p95": 2.305733333333332,
+              "p99": 4.1071566666666905,
+              "max": 22.14233333333333
+            },
+            "module_ns": {
+              "median": 8.4625,
+              "p95": 20.855233333333327,
+              "p99": 29.26423000000001,
+              "max": 473.78766666666667
+            }
+          },
+          "host_cost_window": "full observation, about90s; not pooled quantiles, not board CPU/WCET"
+        },
+        "1": {
+          "accepted": 3,
+          "attempted": 3,
+          "xyz_rmse_mean_m_s": [
+            0.006714586507050808,
+            0.007039809081349858,
+            0.002784217837958868
+          ],
+          "xy_rmse_mean_m_s": 0.006877197794200332,
+          "xy_correction_tv_per_second": 0.22338782250881195,
+          "position_rmse_mean_m": [
+            0.02472873373788002,
+            0.023313356320328122,
+            0.04150687494940324
+          ],
+          "yaw_rmse_mean_rad": 0.0001495496608672717,
+          "host_cost_us_mean_of_run_quantiles": {
+            "path_ns": {
+              "median": 1.8026666666666669,
+              "p95": 4.101716666666662,
+              "p99": 9.641650000000018,
+              "max": 23.939333333333334
+            },
+            "module_ns": {
+              "median": 8.921666666666667,
+              "p95": 21.823266666666655,
+              "p99": 30.387053333333313,
+              "max": 658.3580000000001
+            }
+          },
+          "host_cost_window": "full observation, about90s; not pooled quantiles, not board CPU/WCET"
+        }
+      },
+      "differences_m_s": [
+        -0.00240612086724956,
+        -0.003377431380386429,
+        -0.0012739366167229104
+      ],
+      "paired_mean_difference_m_s": -0.002352496288119633,
+      "paired_sd_m_s": 0.0010527721746917075,
+      "approximate_n20_95_halfwidth_m_s": 0.000492706881857296,
+      "precision_caveat": "Only3 development pairs, imperfect IID; approximate t projection, not a power guarantee or stopping rule"
+    },
+    "force": {
+      "seeds": [
+        40201,
+        40202,
+        40203
+      ],
+      "algorithms": {
+        "0": {
+          "accepted": 3,
+          "attempted": 3,
+          "xyz_rmse_mean_m_s": [
+            0.016391658091277097,
+            0.013725605375934235,
+            0.0024987144208112374
+          ],
+          "xy_rmse_mean_m_s": 0.015058631733605665,
+          "xy_correction_tv_per_second": 0.11147111654281616,
+          "position_rmse_mean_m": [
+            0.027468701738282034,
+            0.028448144186200397,
+            0.033398063602507154
+          ],
+          "yaw_rmse_mean_rad": 0.00014509485644216785,
+          "host_cost_us_mean_of_run_quantiles": {
+            "path_ns": {
+              "median": 0.4693333333333334,
+              "p95": 1.182833333333332,
+              "p99": 2.5545499999999928,
+              "max": 19.471
+            },
+            "module_ns": {
+              "median": 3.7626666666666666,
+              "p95": 13.964199999999977,
+              "p99": 46.8014333333326,
+              "max": 871.8533333333334
+            }
+          },
+          "host_cost_window": "full observation, about90s; not pooled quantiles, not board CPU/WCET"
+        },
+        "1": {
+          "accepted": 3,
+          "attempted": 3,
+          "xyz_rmse_mean_m_s": [
+            0.006931483600834419,
+            0.007109709386565415,
+            0.002574588667463922
+          ],
+          "xy_rmse_mean_m_s": 0.007020596493699917,
+          "xy_correction_tv_per_second": 0.22007524222135544,
+          "position_rmse_mean_m": [
+            0.026188291235023822,
+            0.026250731618204275,
+            0.032689626437671614
+          ],
+          "yaw_rmse_mean_rad": 0.00015017506159791414,
+          "host_cost_us_mean_of_run_quantiles": {
+            "path_ns": {
+              "median": 1.0193333333333332,
+              "p95": 2.6375333333333333,
+              "p99": 6.983493333333332,
+              "max": 21.972333333333335
+            },
+            "module_ns": {
+              "median": 4.297666666666667,
+              "p95": 15.625499999999997,
+              "p99": 56.39249333333342,
+              "max": 387.20866666666666
+            }
+          },
+          "host_cost_window": "full observation, about90s; not pooled quantiles, not board CPU/WCET"
+        }
+      },
+      "differences_m_s": [
+        -0.008588081196866063,
+        -0.008477328262473702,
+        -0.007048696260377478
+      ],
+      "paired_mean_difference_m_s": -0.008038035239905747,
+      "paired_sd_m_s": 0.0008585803779668258,
+      "approximate_n20_95_halfwidth_m_s": 0.0004018233678865729,
+      "precision_caveat": "Only3 development pairs, imperfect IID; approximate t projection, not a power guarantee or stopping rule"
+    },
+    "heading": {
+      "seeds": [
+        40201,
+        40202,
+        40203
+      ],
+      "algorithms": {
+        "0": {
+          "accepted": 3,
+          "attempted": 3,
+          "xyz_rmse_mean_m_s": [
+            0.010363944393073388,
+            0.00882675225012481,
+            0.002594237888200783
+          ],
+          "xy_rmse_mean_m_s": 0.009595348321599098,
+          "xy_correction_tv_per_second": 0.11326522504289945,
+          "position_rmse_mean_m": [
+            0.027789228852384985,
+            0.03060734597541415,
+            0.032662584429792224
+          ],
+          "yaw_rmse_mean_rad": 0.0006339871431706629,
+          "host_cost_us_mean_of_run_quantiles": {
+            "path_ns": {
+              "median": 0.8276666666666666,
+              "p95": 1.8796666666666664,
+              "p99": 4.260613333333339,
+              "max": 21.971999999999998
+            },
+            "module_ns": {
+              "median": 6.990833333333334,
+              "p95": 18.666449999999994,
+              "p99": 50.58965666666674,
+              "max": 487.47900000000004
+            }
+          },
+          "host_cost_window": "full observation, about90s; not pooled quantiles, not board CPU/WCET"
+        },
+        "1": {
+          "accepted": 3,
+          "attempted": 3,
+          "xyz_rmse_mean_m_s": [
+            0.006896469658320192,
+            0.006908190907049533,
+            0.002596523774765042
+          ],
+          "xy_rmse_mean_m_s": 0.006902330282684862,
+          "xy_correction_tv_per_second": 0.22627337028582892,
+          "position_rmse_mean_m": [
+            0.027026183316297216,
+            0.028590200774236546,
+            0.03303704674698718
+          ],
+          "yaw_rmse_mean_rad": 0.000631599221996707,
+          "host_cost_us_mean_of_run_quantiles": {
+            "path_ns": {
+              "median": 1.6286666666666667,
+              "p95": 3.725366666666664,
+              "p99": 9.819676666666668,
+              "max": 29.840666666666667
+            },
+            "module_ns": {
+              "median": 7.7138333333333335,
+              "p95": 20.616066666666658,
+              "p99": 53.84197333333358,
+              "max": 768.6100000000001
+            }
+          },
+          "host_cost_window": "full observation, about90s; not pooled quantiles, not board CPU/WCET"
+        }
+      },
+      "differences_m_s": [
+        -0.0020820341639094745,
+        -0.003603219836490569,
+        -0.0023938001163426644
+      ],
+      "paired_mean_difference_m_s": -0.002693018038914236,
+      "paired_sd_m_s": 0.0008035234822377841,
+      "approximate_n20_95_halfwidth_m_s": 0.00037605624364875557,
+      "precision_caveat": "Only3 development pairs, imperfect IID; approximate t projection, not a power guarantee or stopping rule"
+    },
+    "hover": {
+      "seeds": [
+        40301,
+        40302,
+        40303
+      ],
+      "algorithms": {
+        "0": {
+          "accepted": 3,
+          "attempted": 3,
+          "xyz_rmse_mean_m_s": [
+            0.008000865161072748,
+            0.007167974129848193,
+            0.002775583248814915
+          ],
+          "xy_rmse_mean_m_s": 0.007584419645460471,
+          "xy_correction_tv_per_second": 0.10762422283490498,
+          "position_rmse_mean_m": [
+            0.026104696966765206,
+            0.02519473668750372,
+            0.04127418080233484
+          ],
+          "yaw_rmse_mean_rad": 0.00014413392027839896,
+          "host_cost_us_mean_of_run_quantiles": {
+            "path_ns": {
+              "median": 1.039,
+              "p95": 2.3088166666666656,
+              "p99": 4.2178700000000395,
+              "max": 26.64033333333333
+            },
+            "module_ns": {
+              "median": 8.350833333333334,
+              "p95": 21.024299999999997,
+              "p99": 29.755376666666688,
+              "max": 905.1463333333332
+            }
+          },
+          "host_cost_window": "full observation, about90s; not pooled quantiles, not board CPU/WCET"
+        },
+        "1": {
+          "accepted": 3,
+          "attempted": 3,
+          "xyz_rmse_mean_m_s": [
+            0.00661394776050097,
+            0.006735904256294892,
+            0.0027050000649620435
+          ],
+          "xy_rmse_mean_m_s": 0.00667492600839793,
+          "xy_correction_tv_per_second": 0.22641095767418543,
+          "position_rmse_mean_m": [
+            0.025255795560169714,
+            0.023239037004531726,
+            0.04115030747769583
+          ],
+          "yaw_rmse_mean_rad": 0.00014777691817063082,
+          "host_cost_us_mean_of_run_quantiles": {
+            "path_ns": {
+              "median": 1.945,
+              "p95": 4.394933333333333,
+              "p99": 10.655893333333434,
+              "max": 23.102999999999998
+            },
+            "module_ns": {
+              "median": 8.9,
+              "p95": 21.71178333333332,
+              "p99": 30.076556666666676,
+              "max": 412.951
+            }
+          },
+          "host_cost_window": "full observation, about90s; not pooled quantiles, not board CPU/WCET"
+        }
+      },
+      "differences_m_s": [
+        -0.0009431318417097313,
+        -0.0009122240003699078,
+        -0.0008731250691079804
+      ],
+      "paired_mean_difference_m_s": -0.0009094936370625398,
+      "paired_sd_m_s": 3.508316142212643e-05,
+      "approximate_n20_95_halfwidth_m_s": 1.6419236265485474e-05,
+      "precision_caveat": "Only3 development pairs, imperfect IID; approximate t projection, not a power guarantee or stopping rule"
+    },
+    "mass": {
+      "seeds": [
+        40401,
+        40402,
+        40403
+      ],
+      "algorithms": {
+        "0": {
+          "accepted": 3,
+          "attempted": 3,
+          "xyz_rmse_mean_m_s": [
+            0.009898312987247563,
+            0.009131058558173725,
+            0.002752146423128692
+          ],
+          "xy_rmse_mean_m_s": 0.009514685772710642,
+          "xy_correction_tv_per_second": 0.11063137277960777,
+          "position_rmse_mean_m": [
+            0.030581132587514732,
+            0.025854771940579186,
+            0.05287170572622022
+          ],
+          "yaw_rmse_mean_rad": 0.00015107841502069911,
+          "host_cost_us_mean_of_run_quantiles": {
+            "path_ns": {
+              "median": 1.0483333333333336,
+              "p95": 2.3022666666666662,
+              "p99": 3.7422299999999833,
+              "max": 21.477666666666668
+            },
+            "module_ns": {
+              "median": 8.670666666666667,
+              "p95": 20.54451666666667,
+              "p99": 28.987633333333264,
+              "max": 753.2506666666667
+            }
+          },
+          "host_cost_window": "full observation, about90s; not pooled quantiles, not board CPU/WCET"
+        },
+        "1": {
+          "accepted": 3,
+          "attempted": 3,
+          "xyz_rmse_mean_m_s": [
+            0.007179482110678277,
+            0.0070722452630501455,
+            0.0027494687845485036
+          ],
+          "xy_rmse_mean_m_s": 0.00712586368686421,
+          "xy_correction_tv_per_second": 0.2249890094002088,
+          "position_rmse_mean_m": [
+            0.028112976645378877,
+            0.023566083364374716,
+            0.052603745356847566
+          ],
+          "yaw_rmse_mean_rad": 0.00015480613011568888,
+          "host_cost_us_mean_of_run_quantiles": {
+            "path_ns": {
+              "median": 1.8854999999999997,
+              "p95": 4.22905,
+              "p99": 11.352516666666675,
+              "max": 26.962
+            },
+            "module_ns": {
+              "median": 9.098166666666668,
+              "p95": 22.30015,
+              "p99": 30.497626666666672,
+              "max": 541.3323333333334
+            }
+          },
+          "host_cost_window": "full observation, about90s; not pooled quantiles, not board CPU/WCET"
+        }
+      },
+      "differences_m_s": [
+        -0.002266811824498817,
+        -0.0028268990151735646,
+        -0.0020727554178669155
+      ],
+      "paired_mean_difference_m_s": -0.0023888220858464325,
+      "paired_sd_m_s": 0.00039159675591766383,
+      "approximate_n20_95_halfwidth_m_s": 0.00018327081698386055,
+      "precision_caveat": "Only3 development pairs, imperfect IID; approximate t projection, not a power guarantee or stopping rule"
+    }
+  },
+  "formal_attempts": 0,
+  "interpretation": "Development only; no reselection or confirmatory inference"
+}

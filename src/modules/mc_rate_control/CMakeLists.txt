@@ -32,6 +32,7 @@
 ############################################################################
 
 add_subdirectory(RateControl)
+add_subdirectory(StaRateControl)
 
 px4_add_module(
 	MODULE modules__mc_rate_control
@@ -45,5 +46,9 @@ px4_add_module(
 		circuit_breaker
 		mathlib
 		RateControl
+		StaRateControl
 		px4_work_queue
 	)
+
+# M03: protection diagnostics are linked, but the dispatcher still runs only PID.
+add_dependencies(modules__mc_rate_control StaRateControl)

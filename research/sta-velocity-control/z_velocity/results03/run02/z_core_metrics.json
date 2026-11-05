@@ -1,0 +1,124 @@
+{
+  "accepted": true,
+  "job": {
+    "id": "run02",
+    "seed": 19001,
+    "mode": 1,
+    "axes": 4,
+    "parameters": {
+      "MPC_VC_L1_X": 0,
+      "MPC_VC_L2_X": 0,
+      "MPC_VC_NU_X": 0,
+      "MPC_VC_A_X": 0,
+      "MPC_VC_L1_Z": 2.0,
+      "MPC_VC_L2_Z": 1.0,
+      "MPC_VC_NU_Z": 4.0,
+      "MPC_VC_A_Z": 6.0,
+      "MPC_VC_MODE": 1,
+      "MPC_VC_AXES": 4
+    }
+  },
+  "baseline_accepted": true,
+  "flight": {
+    "n": 8698,
+    "inner": {
+      "max_age_us": 4000,
+      "median_age_us": 0.0,
+      "maximum_reads": 4
+    },
+    "maximum_gap_s": 0.012,
+    "hz": 100.00229969644005
+  },
+  "z_lifecycle": {
+    "phase_counts": {
+      "1": 726,
+      "2": 1,
+      "3": 7971
+    },
+    "handovers": 1,
+    "hte_updates": 7570
+  },
+  "diagnostic": {
+    "n": 6001,
+    "inner": {
+      "max_age_us": 4000,
+      "median_age_us": 0.0,
+      "maximum_reads": 4
+    },
+    "maximum_gap_s": 0.012,
+    "hz": 100.0,
+    "error": {
+      "rmse": [
+        0.007102959444507443,
+        0.009216196560496869,
+        0.009883954825544146
+      ],
+      "mean": [
+        -0.0013719915145629787,
+        0.0017794256537163257,
+        0.00037362050412048203
+      ],
+      "std": [
+        0.006969194512587852,
+        0.009042782944680841,
+        0.00987689074113397
+      ],
+      "max_abs": [
+        0.022050457075238228,
+        0.032063402235507965,
+        0.018384799361228943
+      ]
+    },
+    "iae_m": [
+      0.17373371865088166,
+      0.21538428629469095,
+      0.281350487542805
+    ],
+    "acceleration_tv": [
+      2.731995105743408,
+      3.0595693588256836,
+      135.42105102539062
+    ],
+    "samples": 3200,
+    "seconds": 32.0,
+    "constraint_fraction": 0.0,
+    "maximum_continuous_constraint_s": 0.0,
+    "nu_peak": 0.09580504149198532
+  },
+  "local_output": {
+    "matched": 6001,
+    "denominator": 6001,
+    "coverage": 1.0,
+    "max_gap_s": 0.012,
+    "max_abs_error": 0.0
+  },
+  "attitude_output": {
+    "matched": 6001,
+    "denominator": 6001,
+    "coverage": 1.0,
+    "max_gap_s": 0.012,
+    "max_abs_error": 0.0
+  },
+  "mixer": {
+    "count": 15003,
+    "bit_histogram": {
+      "1": 15003
+    },
+    "feedback_valid_fraction": 1.0,
+    "raw_nonzero_fraction": 1.0,
+    "saturation_fraction_among_valid": 0.0,
+    "rate_direction_saturation_fraction_among_valid": 0.0
+  },
+  "position_rmse": [
+    0.025122702626463444,
+    0.03201435311326502,
+    0.041086113577152625
+  ],
+  "yaw_rmse": 0.0001486893774360129,
+  "height": {
+    "rmse": 0.041235097192348594,
+    "mean": -0.007813024155359788,
+    "std": 0.04048814510458832,
+    "max_abs": 0.10945367813110352
+  }
+}

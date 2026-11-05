@@ -1,0 +1,53 @@
+{
+  "scope": "offline_real_header_protocol_compatibility",
+  "flight_attempts": 0,
+  "compatible": false,
+  "commands": [
+    {
+      "name": "compile",
+      "argv": [
+        "g++",
+        "-std=c++14",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I/home/yr/Desktop/Codev-autopilot/src/modules/mc_pos_control/PositionControl",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/protocol02_audit01/ExcitationLandingAudit.cpp",
+        "-o",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/protocol02_lifecycle_audit01/excitation_landing_audit"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "probe",
+      "argv": [
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/protocol02_lifecycle_audit01/excitation_landing_audit"
+      ],
+      "exit_code": 1
+    }
+  ],
+  "frozen_zero_rule": {
+    "window": "takeoff_command <= timestamp < landed_disarmed, enabled samples; excitation fault also checked throughout the armed interval",
+    "required_zero_fields": [
+      "first_fail",
+      "retry_result",
+      "excitation_fault"
+    ],
+    "first_input_required": true,
+    "first_input_rule": "decode validity bits using selected p/v/FF channels; NaN-disabled channels are not automatically failures",
+    "missing_new_field": "reject, never substitute zero",
+    "retry_policy": "even valid second update rejects this comparison attempt; first failure is not erased by final valid=1",
+    "readback_evidence": "archive command/ACK, pre/post navigator triplet, trajectory and consumed p_sp/v_sp/yaw with timestamps; target/height readiness independently checked from ULog",
+    "observed_not_claimed": "online CLI polling cannot guarantee per-callback abort; any offline mandatory failure stops before the next attempt"
+  },
+  "head": "2fc381789770cdc38f82f123b1cdef3f7cacc9e6",
+  "sha256": {
+    "research/sta-velocity-control/v04/protocol02/protocol.json": "4d81ace6bd989f77eb042be87f34fea6bdadee5d3da664002b275ad6cff8c5bf",
+    "research/sta-velocity-control/v04/protocol02_audit01/ExcitationLandingAudit.cpp": "4f6642a6fada928f340803b9362009052cab4447431e9554e4cdb927b0284375",
+    "src/modules/mc_pos_control/PositionControl/VelocityDiagnosticExcitation.hpp": "54610f65d4b176fa7ad0c08404900e8e7c302de8ce1c552db10bf3d92ec08ef0",
+    "src/modules/mc_pos_control/MulticopterPositionControl.cpp": "4983b598062f78d6a562c67c95a9b0bb5848fb141a70c45a22f631b66ca687fb"
+  },
+  "tests": 6,
+  "passed": 5,
+  "failed": 1
+}

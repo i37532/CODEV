@@ -1,0 +1,42 @@
+{
+  "success": true,
+  "commands": [
+    {
+      "name": "v08_tests",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/protocol01/test_tuning.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "previous_regression",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v07/protocol07/verify.py",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/verification_committed01/regression"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "dry_run",
+      "argv": [
+        "python3",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v08/protocol01/run.py",
+        "--source-head",
+        "c2e6c0be8490c1ebe2250859f5cdc10252941f63",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/verification_committed01/NOT_CREATED"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "new_flights": 0,
+  "head": "c2e6c0be8490c1ebe2250859f5cdc10252941f63",
+  "cpp_tests": 231,
+  "new_python_tests": 19,
+  "python_tests": 522,
+  "assets_checked": 1463,
+  "firmware_sha256": "099263564d077586f958a437ac4861fc0a6d2a5a18d9a22a5f4300ba859f0402"
+}

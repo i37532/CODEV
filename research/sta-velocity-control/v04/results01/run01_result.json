@@ -1,0 +1,59 @@
+{
+  "source_head": "67b07d75a98bc3ddf502a779e6cf80f068a1e0e6",
+  "branch": "research/sta-velocity-control",
+  "binary_sha256": "7236e9a9d1b5b9198cc54e8761e548ecda3a5dcc088b9eafc25d1be611e22c99",
+  "runner_sha256": "88c542a410f8021343c797d6626156791ff75a35170eec9e283ee555313402fd",
+  "command": [
+    "./sitl/run.sh",
+    "--headless",
+    "--backend",
+    "gazebo",
+    "--model",
+    "iris"
+  ],
+  "pid_parameters_modified": false,
+  "success": false,
+  "events": [
+    {
+      "name": "ready",
+      "timestamp_us": 30968000.0
+    },
+    {
+      "name": "takeoff_command",
+      "timestamp_us": 30968000.0
+    },
+    {
+      "name": "hold_command_after_takeoff",
+      "timestamp_us": 38120000.0
+    },
+    {
+      "name": "hover_start",
+      "timestamp_us": 42708000.0
+    }
+  ],
+  "scenario_sha256": "3e4379bfc9aff61caafc5e69c4fa97060a3b921a23990beb01fc5e27129075f7",
+  "scenario_path": "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v04/protocol01/protocol.json",
+  "simulation_speed_requested": 1.0,
+  "explicit_environment": {
+    "PX4_SITL_WORLD": "/home/yr/Desktop/Codev-autopilot/sitl/worlds/empty_grey.world",
+    "GAZEBO_MASTER_URI": "http://127.0.0.1:11345"
+  },
+  "launcher_pid": 1144467,
+  "error": "RuntimeError('Did not reach target altitude 2.5 +/- .5m')",
+  "launcher_returncode": 0,
+  "logs": [
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/02_41_18.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series01/run01/02_41_18.ulg",
+      "sha256": "0f365d2b0a35046d3f3519f1bc8923cd46588dba75610c6bb4086437c8bd7868",
+      "bytes": 170387
+    },
+    {
+      "source": "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_default/tmp/rootfs/log/2026-09-23/02_41_19.ulg",
+      "archive": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/series01/run01/02_41_19.ulg",
+      "sha256": "264c87938aefcb2beed91cce6f3955813a37fbeae1a73c2e26aa57bd55bb30e9",
+      "bytes": 12967151
+    }
+  ],
+  "finished_utc": "2026-09-23T02:42:01Z"
+}

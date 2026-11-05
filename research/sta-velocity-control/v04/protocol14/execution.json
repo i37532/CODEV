@@ -1,0 +1,13 @@
+{
+  "stage": "V04-protocol14-causal-raw-entry",
+  "seeds": [14001, 14002, 14003],
+  "maximum_attempts": 6,
+  "descent_cap": 0.55,
+  "land_speed": 0.6,
+  "new_run_root": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260926/V04/series12",
+  "scope": "PID then ESTA X; consistent legal common landing parameters; original gains, task, metrics and thresholds retained",
+  "entry": "Original coarse entry and deadline plus causal raw 3-second full-window check; no future target borrowing; final analyzer unchanged",
+  "logging": "Preserve original bits and estimator diagnostic bit10 for both controllers",
+  "failure_policy": "Stop on first required check or paired failure; retain all attempts; no retries or tuning",
+  "authorization": "Standing user authorization bound to exact source/execution hash and budget"
+}

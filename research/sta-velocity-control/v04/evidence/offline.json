@@ -1,0 +1,201 @@
+{
+  "success": true,
+  "commands": [
+    {
+      "name": "v01_regression",
+      "command": [
+        "python3",
+        "research/sta-velocity-control/scripts/verify_v01.py",
+        "--output",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/verification05/v01"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "build_v04_tests",
+      "command": [
+        "make",
+        "tests",
+        "TESTFILTER=VelocityEsta",
+        "-j4"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "StaVelocityControl",
+      "command": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaVelocityControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/verification05/StaVelocityControl.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "StaVelocityProtection",
+      "command": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaVelocityProtection",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/verification05/StaVelocityProtection.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "StaRateControl",
+      "command": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-StaRateControl",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/verification05/StaRateControl.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "VelocityDiagnosticInput",
+      "command": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/functional-VelocityDiagnosticInput",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/verification05/VelocityDiagnosticInput.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "VelocityEsta",
+      "command": [
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/unit-VelocityEsta",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/verification05/VelocityEsta.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "candidate_compile",
+      "command": [
+        "g++",
+        "-std=c++14",
+        "-O2",
+        "-fno-rtti",
+        "-fno-exceptions",
+        "-pthread",
+        "-I/home/yr/Desktop/Codev-autopilot/src/modules/mc_pos_control/PositionControl",
+        "-I/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/googletest-src/googletest/include",
+        "/home/yr/Desktop/Codev-autopilot/src/modules/mc_pos_control/PositionControl/StaVelocityControl.cpp",
+        "/home/yr/Desktop/Codev-autopilot/research/sta-velocity-control/v03/preflight/CandidateAuditTest.cpp",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/lib/libgtest_main.a",
+        "/home/yr/Desktop/Codev-autopilot/build/px4_sitl_test/lib/libgtest.a",
+        "-o",
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/verification05/candidate_audit"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "candidate_audit",
+      "command": [
+        "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/verification05/candidate_audit",
+        "--gtest_output=xml:/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260923/V04/verification05/candidate_audit.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "gazebo_build_only",
+      "command": [
+        "env",
+        "DONT_RUN=1",
+        "make",
+        "px4_sitl_default",
+        "gazebo_iris",
+        "-j4"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "tests": {
+    "PositionControl": {
+      "tests": 15,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "ControlMath": {
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "Takeoff": {
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "RateControl": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "RateControlDispatcher": {
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocityControl": {
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocitySelectionParam": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "StaVelocityControl": {
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "StaVelocityProtection": {
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "StaRateControl": {
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocityDiagnosticInput": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "VelocityEsta": {
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    },
+    "candidate_audit": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "disabled": 0
+    }
+  },
+  "source_sha256": {
+    "msg/sta_velocity_ctrl_status.msg": "af553afc825a4542456d124ee5253c64165627a5e66bb2fe9543bd1df968482d",
+    "src/modules/mc_pos_control/MulticopterPositionControl.cpp": "c58869cbcbba6f4c1fd742e1c19386a624616131383f4b8cc6aac15fa4d737e1",
+    "src/modules/mc_pos_control/MulticopterPositionControl.hpp": "58d174356f5923b39255586f245ed3da5f34c062325e7b4484c950f34f6d19e2",
+    "src/modules/mc_pos_control/PositionControl/CMakeLists.txt": "ad8653d2c71b2030099c97e93fcfdcfe1ca1bc75c31e2e4af5a7df9701ecf083",
+    "src/modules/mc_pos_control/PositionControl/PositionControl.cpp": "923ee05645180b6be75248bd3c7bb1366edda7c4a8b5949cacb07c90d7ffa745",
+    "src/modules/mc_pos_control/PositionControl/PositionControl.hpp": "3a4c074e31ea4d7884ed7c5f1b13c4326e095f6a743fee24e8cbb942dfcc5afc",
+    "src/modules/mc_pos_control/PositionControl/StaVelocityProtection.cpp": "d4d15de4c10d3db561474aab66eeb6096220d4391c418a0c3add8b4d54c0ca76",
+    "src/modules/mc_pos_control/PositionControl/StaVelocityProtection.hpp": "ec8ff569252b733058bec781b3d43dc32f6e60f473e17010cfb41ff1f4d070ef",
+    "src/modules/mc_pos_control/PositionControl/VelocityControlSelector.hpp": "ec18af862fc80abf8c79379e22daad843a38c536d1077cd68a3b9d3b2b988ea7",
+    "src/modules/mc_pos_control/PositionControl/VelocitySelectionParamTest.cpp": "84de4822b2b2f63b7181a7f2bed5b6f9699afd5731134a3a59a81f619bd53181",
+    "src/modules/mc_pos_control/mc_pos_control_params.c": "ba8acff24beb8d3d89a55ac6b0d09f2e6449db379ae1411fdf14d55bb82409de"
+  },
+  "ulog_format_bytes": 1316,
+  "sta_linked_for_guarded_sitl_x_only": true,
+  "unique_cpp_tests": 92
+}

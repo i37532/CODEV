@@ -1,0 +1,244 @@
+{
+  "accepted": true,
+  "job": {
+    "id": "run07",
+    "task": "figure8",
+    "seed": 24004,
+    "mode": 0,
+    "axes": 0,
+    "parameters": {
+      "MPC_VC_L1_X": 1.0,
+      "MPC_VC_L2_X": 0.2,
+      "MPC_VC_NU_X": 0.4,
+      "MPC_VC_A_X": 0.8,
+      "MPC_VC_L1_Y": 1.0,
+      "MPC_VC_L2_Y": 0.2,
+      "MPC_VC_NU_Y": 0.4,
+      "MPC_VC_A_Y": 0.8,
+      "MPC_VC_L1_Z": 2.0,
+      "MPC_VC_L2_Z": 1.0,
+      "MPC_VC_NU_Z": 4.0,
+      "MPC_VC_A_Z": 6.0,
+      "MPC_VC_MODE": 0,
+      "MPC_VC_AXES": 0,
+      "MPC_VCT_TEST": 6
+    }
+  },
+  "baseline_accepted": true,
+  "flight": {
+    "n": 11849,
+    "inner": {
+      "max_age_us": 4000,
+      "median_age_us": 0.0,
+      "maximum_reads": 4
+    },
+    "maximum_gap_s": 0.012,
+    "hz": 99.99999999999999
+  },
+  "xyz_lifecycle": {
+    "pid_only": true,
+    "samples": 11849
+  },
+  "diagnostic": {
+    "n": 9067,
+    "inner": {
+      "max_age_us": 4000,
+      "median_age_us": 0.0,
+      "maximum_reads": 4
+    },
+    "maximum_gap_s": 0.012,
+    "hz": 99.99999999999999,
+    "windows": {
+      "first_loop": {
+        "error": {
+          "rmse": [
+            0.011802245167695806,
+            0.011836117583735584,
+            0.0022252546324301585
+          ],
+          "mean": [
+            0.001956064412559489,
+            0.0016503914805070846,
+            -4.447876650738146e-05
+          ],
+          "std": [
+            0.011639020706756948,
+            0.011720490067274669,
+            0.0022248100634620115
+          ],
+          "max_abs": [
+            0.037556104362010956,
+            0.037825409322977066,
+            0.007419241592288017
+          ]
+        },
+        "iae_m": [
+          0.3004571064342737,
+          0.2768675601324074,
+          0.05641725051484549
+        ],
+        "acceleration_tv": [
+          2.8717846870422363,
+          2.779035806655884,
+          2.4731714725494385
+        ],
+        "normalized_thrust_tv": [
+          0.2071809321641922,
+          0.20051652193069458,
+          0.1797574758529663
+        ],
+        "samples": 3200,
+        "seconds": 32.0,
+        "constraint_fraction": 0.0,
+        "maximum_continuous_constraint_s": 0.0,
+        "nu_peak": null
+      },
+      "second_loop": {
+        "error": {
+          "rmse": [
+            0.010469055630614378,
+            0.00880383200318478,
+            0.0027051858304050756
+          ],
+          "mean": [
+            0.0018324181702919337,
+            -0.0032629148586856916,
+            -0.00010386352207569865
+          ],
+          "std": [
+            0.010307442429918422,
+            0.008176848082560221,
+            0.0027031912151763158
+          ],
+          "max_abs": [
+            0.028411883860826492,
+            0.024726107716560364,
+            0.008005782961845398
+          ]
+        },
+        "iae_m": [
+          0.2757817553505307,
+          0.22770132544217597,
+          0.06967514533130467
+        ],
+        "acceleration_tv": [
+          2.8795113563537598,
+          3.013324737548828,
+          2.987323522567749
+        ],
+        "normalized_thrust_tv": [
+          0.21002210676670074,
+          0.2171153575181961,
+          0.21689218282699585
+        ],
+        "samples": 3200,
+        "seconds": 32.0,
+        "constraint_fraction": 0.0,
+        "maximum_continuous_constraint_s": 0.0,
+        "nu_peak": null
+      }
+    },
+    "error": {
+      "rmse": [
+        0.011155584180026126,
+        0.01043075110901211,
+        0.0024768718735712083
+      ],
+      "mean": [
+        0.0018942412914257085,
+        -0.0008062616890893022,
+        -7.417114429153994e-05
+      ],
+      "std": [
+        0.01099358487152881,
+        0.010399543777823357,
+        0.0024757610788286107
+      ],
+      "max_abs": [
+        0.037556104362010956,
+        0.037825409322977066,
+        0.008005782961845398
+      ]
+    },
+    "iae_m": [
+      0.5762388617848045,
+      0.504568885574585,
+      0.12609239584615028
+    ],
+    "acceleration_tv": [
+      5.75229549407959,
+      5.792431831359863,
+      5.460517883300781
+    ],
+    "normalized_thrust_tv": [
+      0.41728171706199646,
+      0.4176390469074249,
+      0.39665186405181885
+    ],
+    "samples": 6400,
+    "seconds": 64.0,
+    "constraint_fraction": 0.0,
+    "maximum_continuous_constraint_s": 0.0,
+    "nu_peak": null
+  },
+  "task_targets": {
+    "task": "figure8",
+    "samples": 9067,
+    "maximum_target_error": {
+      "p_sp": [
+        2.4113545088466637e-07,
+        2.1412433422185462e-07
+      ],
+      "v_ff": [
+        5.091507650212268e-08,
+        9.190859797530981e-08
+      ],
+      "a_ff": [
+        1.8110967097556552e-08,
+        3.758818525531615e-08
+      ]
+    },
+    "max_source_age_us": 8000,
+    "reference_displacement_max": 0.42163153346958393,
+    "reference_speed_max": 0.13884009181744894,
+    "heading_addition_max": 0.0,
+    "yaw_request_error_max": 0.0,
+    "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+  },
+  "local_output": {
+    "matched": 9067,
+    "denominator": 9067,
+    "coverage": 1.0,
+    "max_gap_s": 0.012,
+    "max_abs_error": 0.0
+  },
+  "attitude_output": {
+    "matched": 9067,
+    "denominator": 9067,
+    "coverage": 1.0,
+    "max_gap_s": 0.012,
+    "max_abs_error": 0.0
+  },
+  "mixer": {
+    "count": 22667,
+    "bit_histogram": {
+      "1": 22667
+    },
+    "feedback_valid_fraction": 1.0,
+    "raw_nonzero_fraction": 1.0,
+    "saturation_fraction_among_valid": 0.0,
+    "rate_direction_saturation_fraction_among_valid": 0.0
+  },
+  "position_rmse": [
+    0.029613480848399723,
+    0.027594356841914726,
+    0.040197064457017144
+  ],
+  "yaw_rmse": 0.00016170300092973079,
+  "height": {
+    "rmse": 0.04057055908952526,
+    "mean": -0.006966250568868255,
+    "std": 0.039968007429047596,
+    "max_abs": 0.09464502334594727
+  }
+}

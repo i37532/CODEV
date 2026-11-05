@@ -1,0 +1,2870 @@
+{
+  "success": true,
+  "flights": 0,
+  "old_verdicts_changed": false,
+  "component_records": [
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run01",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "b258aa79859a1b559a53103d6382c555b99959c8beb06088bc08446f508d567a",
+      "task_evidence": {
+        "task": "hover",
+        "samples": 9067,
+        "maximum_target_error": {
+          "p_sp": [
+            0.0,
+            0.0
+          ],
+          "v_ff": [
+            0.0,
+            0.0
+          ],
+          "a_ff": [
+            0.0,
+            0.0
+          ]
+        },
+        "max_source_age_us": 16000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.0,
+        "reference_speed_max": 0.0,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9067,
+          "denominator": 9067,
+          "coverage": 1.0,
+          "max_gap_s": 0.016,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9067,
+              "matched": 9067,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.016
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.016
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.016
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run02",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "f2d98566ab9d3ddf64845e89a35face495285acbc1aaf78fbbc3a3fec5f8f24a",
+      "task_evidence": {
+        "task": "hover",
+        "samples": 9071,
+        "maximum_target_error": {
+          "p_sp": [
+            0.0,
+            0.0
+          ],
+          "v_ff": [
+            0.0,
+            0.0
+          ],
+          "a_ff": [
+            0.0,
+            0.0
+          ]
+        },
+        "max_source_age_us": 12000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.0,
+        "reference_speed_max": 0.0,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9071,
+          "denominator": 9071,
+          "coverage": 1.0,
+          "max_gap_s": 0.016,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9071,
+              "matched": 9071,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.016
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run03",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "a83bff3ae7998494e5018dfd141a3f2d4f44ca65d9123900654592e030fdeda8",
+      "task_evidence": {
+        "task": "hover",
+        "samples": 9037,
+        "maximum_target_error": {
+          "p_sp": [
+            0.0,
+            0.0
+          ],
+          "v_ff": [
+            0.0,
+            0.0
+          ],
+          "a_ff": [
+            0.0,
+            0.0
+          ]
+        },
+        "max_source_age_us": 12000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.0,
+        "reference_speed_max": 0.0,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9037,
+          "denominator": 9037,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9037,
+              "matched": 9037,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run04",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "4b5599e7ece207065df995c36a02940b26c39a03cfedb7671b3442e93195a867",
+      "task_evidence": {
+        "task": "hover",
+        "samples": 9064,
+        "maximum_target_error": {
+          "p_sp": [
+            0.0,
+            0.0
+          ],
+          "v_ff": [
+            0.0,
+            0.0
+          ],
+          "a_ff": [
+            0.0,
+            0.0
+          ]
+        },
+        "max_source_age_us": 12000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.0,
+        "reference_speed_max": 0.0,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9064,
+          "denominator": 9064,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9064,
+              "matched": 9064,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run05",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "f8e8de65ccc5cf3c6365201e1b94662fb5441606a0f5c23d8e174701e00ab8f9",
+      "task_evidence": {
+        "task": "hover",
+        "samples": 9004,
+        "maximum_target_error": {
+          "p_sp": [
+            0.0,
+            0.0
+          ],
+          "v_ff": [
+            0.0,
+            0.0
+          ],
+          "a_ff": [
+            0.0,
+            0.0
+          ]
+        },
+        "max_source_age_us": 12000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.0,
+        "reference_speed_max": 0.0,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9004,
+          "denominator": 9004,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9004,
+              "matched": 9004,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run06",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "575ebe9a0622253eb4d4cb2c324cc4511b01c7f1ea1ee50984c8958bb78af19a",
+      "task_evidence": {
+        "task": "hover",
+        "samples": 9007,
+        "maximum_target_error": {
+          "p_sp": [
+            0.0,
+            0.0
+          ],
+          "v_ff": [
+            0.0,
+            0.0
+          ],
+          "a_ff": [
+            0.0,
+            0.0
+          ]
+        },
+        "max_source_age_us": 12000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.0,
+        "reference_speed_max": 0.0,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9007,
+          "denominator": 9007,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9007,
+              "matched": 9007,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run07",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "919bbb4ff64c29207c9deb99cc948e51f2aaa443d8b8dc48f427ecd574ea1f1f",
+      "task_evidence": {
+        "task": "hover",
+        "samples": 9064,
+        "maximum_target_error": {
+          "p_sp": [
+            0.0,
+            0.0
+          ],
+          "v_ff": [
+            0.0,
+            0.0
+          ],
+          "a_ff": [
+            0.0,
+            0.0
+          ]
+        },
+        "max_source_age_us": 16000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.0,
+        "reference_speed_max": 0.0,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9064,
+          "denominator": 9064,
+          "coverage": 1.0,
+          "max_gap_s": 0.016,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9064,
+              "matched": 9064,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.016
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.016
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.016
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run08",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "89dcef007a911d86689ffc24e030de38057dcf26bb9b5ea660039ceadf9f651b",
+      "task_evidence": {
+        "task": "hover",
+        "samples": 9017,
+        "maximum_target_error": {
+          "p_sp": [
+            0.0,
+            0.0
+          ],
+          "v_ff": [
+            0.0,
+            0.0
+          ],
+          "a_ff": [
+            0.0,
+            0.0
+          ]
+        },
+        "max_source_age_us": 12000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.0,
+        "reference_speed_max": 0.0,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9017,
+          "denominator": 9017,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9017,
+              "matched": 9017,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run09",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "c49ab45674cbc1315b3f1645810947d89605635915ff0a003368ccdda2bd8fc6",
+      "task_evidence": {
+        "task": "hover",
+        "samples": 9038,
+        "maximum_target_error": {
+          "p_sp": [
+            0.0,
+            0.0
+          ],
+          "v_ff": [
+            0.0,
+            0.0
+          ],
+          "a_ff": [
+            0.0,
+            0.0
+          ]
+        },
+        "max_source_age_us": 12000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.0,
+        "reference_speed_max": 0.0,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9038,
+          "denominator": 9038,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9038,
+              "matched": 9038,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run10",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "a86ca1a9dfdff0bc318be6889683a7b406ff0f18e3b4ab85439a83a3ad236de4",
+      "task_evidence": {
+        "task": "hover",
+        "samples": 9012,
+        "maximum_target_error": {
+          "p_sp": [
+            0.0,
+            0.0
+          ],
+          "v_ff": [
+            0.0,
+            0.0
+          ],
+          "a_ff": [
+            0.0,
+            0.0
+          ]
+        },
+        "max_source_age_us": 12000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.0,
+        "reference_speed_max": 0.0,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9012,
+          "denominator": 9012,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9012,
+              "matched": 9012,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run11",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "2b560d80af90a95a12bdad0dc73acaf6cb8281de37d99a2e0bdb5b470706be17",
+      "task_evidence": {
+        "task": "hover",
+        "samples": 9060,
+        "maximum_target_error": {
+          "p_sp": [
+            0.0,
+            0.0
+          ],
+          "v_ff": [
+            0.0,
+            0.0
+          ],
+          "a_ff": [
+            0.0,
+            0.0
+          ]
+        },
+        "max_source_age_us": 12000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.0,
+        "reference_speed_max": 0.0,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9060,
+          "denominator": 9060,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9060,
+              "matched": 9060,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run12",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "ba1096e74ec7e5612a23b1e86ae52f40c7acd8733f5af78629efd653adf57090",
+      "task_evidence": {
+        "task": "hover",
+        "samples": 9063,
+        "maximum_target_error": {
+          "p_sp": [
+            0.0,
+            0.0
+          ],
+          "v_ff": [
+            0.0,
+            0.0
+          ],
+          "a_ff": [
+            0.0,
+            0.0
+          ]
+        },
+        "max_source_age_us": 12000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.0,
+        "reference_speed_max": 0.0,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9063,
+          "denominator": 9063,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9063,
+              "matched": 9063,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training02/run01",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "acc5553602850ff0acac292763a94f567183421302a3a8509f4f1512246f9798",
+      "task_evidence": {
+        "task": "hover",
+        "samples": 9063,
+        "maximum_target_error": {
+          "p_sp": [
+            0.0,
+            0.0
+          ],
+          "v_ff": [
+            0.0,
+            0.0
+          ],
+          "a_ff": [
+            0.0,
+            0.0
+          ]
+        },
+        "max_source_age_us": 8000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.0,
+        "reference_speed_max": 0.0,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9063,
+          "denominator": 9063,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9063,
+              "matched": 9063,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training02/run02",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "b4472ca39b395a88879cce9e32f9e2c093c0f8517560bf137a41aa6a49069b01",
+      "task_evidence": {
+        "task": "hover",
+        "samples": 9071,
+        "maximum_target_error": {
+          "p_sp": [
+            0.0,
+            0.0
+          ],
+          "v_ff": [
+            0.0,
+            0.0
+          ],
+          "a_ff": [
+            0.0,
+            0.0
+          ]
+        },
+        "max_source_age_us": 12000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.0,
+        "reference_speed_max": 0.0,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9071,
+          "denominator": 9071,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9071,
+              "matched": 9071,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training02/run03",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "5778a0ba8dff05a26d08236c8beb3bce504826f242925f3ee27fa6906a6cd2f6",
+      "task_evidence": {
+        "task": "hover",
+        "samples": 9007,
+        "maximum_target_error": {
+          "p_sp": [
+            0.0,
+            0.0
+          ],
+          "v_ff": [
+            0.0,
+            0.0
+          ],
+          "a_ff": [
+            0.0,
+            0.0
+          ]
+        },
+        "max_source_age_us": 8000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.0,
+        "reference_speed_max": 0.0,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9007,
+          "denominator": 9007,
+          "coverage": 1.0,
+          "max_gap_s": 0.016,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9007,
+              "matched": 9007,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.016
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.016
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.016
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training02/run04",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "8708bda8dd23068527e07a2ccc9aa9e777b2c2d8d948a12da7288037e8410d15",
+      "task_evidence": {
+        "task": "hover",
+        "samples": 9045,
+        "maximum_target_error": {
+          "p_sp": [
+            0.0,
+            0.0
+          ],
+          "v_ff": [
+            0.0,
+            0.0
+          ],
+          "a_ff": [
+            0.0,
+            0.0
+          ]
+        },
+        "max_source_age_us": 8000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.0,
+        "reference_speed_max": 0.0,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9045,
+          "denominator": 9045,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9045,
+              "matched": 9045,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training02/run05",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "7b06a3989a5e03c83dc60c30b657ef81881faabd7017df636220636624cce2aa",
+      "task_evidence": {
+        "task": "hover",
+        "samples": 9066,
+        "maximum_target_error": {
+          "p_sp": [
+            0.0,
+            0.0
+          ],
+          "v_ff": [
+            0.0,
+            0.0
+          ],
+          "a_ff": [
+            0.0,
+            0.0
+          ]
+        },
+        "max_source_age_us": 8000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.0,
+        "reference_speed_max": 0.0,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9066,
+          "denominator": 9066,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9066,
+              "matched": 9066,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training02/run06",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "7d85331dcc0819555aa25056298347d5be717011b53bc227781a2780d7cf1fa5",
+      "task_evidence": {
+        "task": "hover",
+        "samples": 9023,
+        "maximum_target_error": {
+          "p_sp": [
+            0.0,
+            0.0
+          ],
+          "v_ff": [
+            0.0,
+            0.0
+          ],
+          "a_ff": [
+            0.0,
+            0.0
+          ]
+        },
+        "max_source_age_us": 8000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.0,
+        "reference_speed_max": 0.0,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9023,
+          "denominator": 9023,
+          "coverage": 1.0,
+          "max_gap_s": 0.016,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9023,
+              "matched": 9023,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.016
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.016
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.016
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training02/run07",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "e1844b2a4b9deaf97e6801de9116d1389d5aa4578f38d26fa207ad23b84afbac",
+      "task_evidence": {
+        "task": "hover",
+        "samples": 9006,
+        "maximum_target_error": {
+          "p_sp": [
+            0.0,
+            0.0
+          ],
+          "v_ff": [
+            0.0,
+            0.0
+          ],
+          "a_ff": [
+            0.0,
+            0.0
+          ]
+        },
+        "max_source_age_us": 12000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 1,
+        "reference_displacement_max": 0.0,
+        "reference_speed_max": 0.0,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9006,
+          "denominator": 9006,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9006,
+              "matched": 9006,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training02/run08",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "08de9388bf958f09c26be70f10b027d20e41bcb97d64f776cc43f885888c2f20",
+      "task_evidence": {
+        "task": "hover",
+        "samples": 9018,
+        "maximum_target_error": {
+          "p_sp": [
+            0.0,
+            0.0
+          ],
+          "v_ff": [
+            0.0,
+            0.0
+          ],
+          "a_ff": [
+            0.0,
+            0.0
+          ]
+        },
+        "max_source_age_us": 8000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.0,
+        "reference_speed_max": 0.0,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9018,
+          "denominator": 9018,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9018,
+              "matched": 9018,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training02/run09",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "a07eac4a17e00ff1fb6027dd79af812931297a735e655115e0ccd83d3d8f1f81",
+      "task_evidence": {
+        "task": "hover",
+        "samples": 9057,
+        "maximum_target_error": {
+          "p_sp": [
+            0.0,
+            0.0
+          ],
+          "v_ff": [
+            0.0,
+            0.0
+          ],
+          "a_ff": [
+            0.0,
+            0.0
+          ]
+        },
+        "max_source_age_us": 12000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.0,
+        "reference_speed_max": 0.0,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9057,
+          "denominator": 9057,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9057,
+              "matched": 9057,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training02/run10",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "4887a16b2e70608fb14604a63d3164621a25a769fb4328804d563ba339689aeb",
+      "task_evidence": {
+        "task": "hover",
+        "samples": 9006,
+        "maximum_target_error": {
+          "p_sp": [
+            0.0,
+            0.0
+          ],
+          "v_ff": [
+            0.0,
+            0.0
+          ],
+          "a_ff": [
+            0.0,
+            0.0
+          ]
+        },
+        "max_source_age_us": 8000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.0,
+        "reference_speed_max": 0.0,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9006,
+          "denominator": 9006,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9006,
+              "matched": 9006,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training02/run11",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "b1a4a7a65c7d4364f257891af3c8f82cbb7d84530f17a6ae31950be5b73a6e98",
+      "task_evidence": {
+        "task": "hover",
+        "samples": 9038,
+        "maximum_target_error": {
+          "p_sp": [
+            0.0,
+            0.0
+          ],
+          "v_ff": [
+            0.0,
+            0.0
+          ],
+          "a_ff": [
+            0.0,
+            0.0
+          ]
+        },
+        "max_source_age_us": 12000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.0,
+        "reference_speed_max": 0.0,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9038,
+          "denominator": 9038,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9038,
+              "matched": 9038,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training02/run12",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "c713d11fc86e443be3ce5bb029190766b18d3c1ddd4f7d86da2fbb7d4ae42190",
+      "task_evidence": {
+        "task": "hover",
+        "samples": 9076,
+        "maximum_target_error": {
+          "p_sp": [
+            0.0,
+            0.0
+          ],
+          "v_ff": [
+            0.0,
+            0.0
+          ],
+          "a_ff": [
+            0.0,
+            0.0
+          ]
+        },
+        "max_source_age_us": 8000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.0,
+        "reference_speed_max": 0.0,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9076,
+          "denominator": 9076,
+          "coverage": 1.0,
+          "max_gap_s": 0.016,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9076,
+              "matched": 9076,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.016
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.016
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.016
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training02/run13",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "9f4b2e3773cbc2ae0915e41f41f75b1365d1e5593d5bea2503231fa74fbb0d83",
+      "task_evidence": {
+        "task": "figure8",
+        "samples": 9026,
+        "maximum_target_error": {
+          "p_sp": [
+            2.3461619286235802e-07,
+            2.1412433422185462e-07
+          ],
+          "v_ff": [
+            5.0915090712977396e-08,
+            9.190859797530981e-08
+          ],
+          "a_ff": [
+            1.8110967097556552e-08,
+            3.758818525531615e-08
+          ]
+        },
+        "max_source_age_us": 16000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.42163153346958393,
+        "reference_speed_max": 0.13884009181744894,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9026,
+          "denominator": 9026,
+          "coverage": 1.0,
+          "max_gap_s": 0.016,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9026,
+              "matched": 9026,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.016
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.016
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.016
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.016
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training02/run14",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "02cfdc879d31dab0a2816da85b0bf59f190336f322d922b161f9ecb26611bcc2",
+      "task_evidence": {
+        "task": "figure8",
+        "samples": 9011,
+        "maximum_target_error": {
+          "p_sp": [
+            2.2028285862063512e-07,
+            2.1458999550916236e-07
+          ],
+          "v_ff": [
+            5.1344577658984925e-08,
+            9.034225441351129e-08
+          ],
+          "a_ff": [
+            1.8399702840336818e-08,
+            3.766309419374336e-08
+          ]
+        },
+        "max_source_age_us": 16000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.42163153346958393,
+        "reference_speed_max": 0.1388399525341589,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9011,
+          "denominator": 9011,
+          "coverage": 1.0,
+          "max_gap_s": 0.016,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9011,
+              "matched": 9011,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.016
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.016
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.016
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training02/run15",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "78e46640497e08908f4a2eab9e9a6a8f0b6aba3ddb098e46170727e9b030333a",
+      "task_evidence": {
+        "task": "figure8",
+        "samples": 9067,
+        "maximum_target_error": {
+          "p_sp": [
+            2.3741016058620446e-07,
+            2.0664085894489537e-07
+          ],
+          "v_ff": [
+            5.091510670018895e-08,
+            9.190866769731576e-08
+          ],
+          "a_ff": [
+            1.8628446681046018e-08,
+            3.805618696561819e-08
+          ]
+        },
+        "max_source_age_us": 16000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.4216315334695839,
+        "reference_speed_max": 0.13884009181744894,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9067,
+          "denominator": 9067,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9067,
+              "matched": 9067,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training02/run16",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "c6bd92fd5d2c10d3ca0f19d5cc80a81de949318c6b86c4668dbfea292113b770",
+      "task_evidence": {
+        "task": "figure8",
+        "samples": 9030,
+        "maximum_target_error": {
+          "p_sp": [
+            2.282132488540256e-07,
+            2.0757218151951085e-07
+          ],
+          "v_ff": [
+            5.091507650212268e-08,
+            9.190862284430557e-08
+          ],
+          "a_ff": [
+            1.8628446681046018e-08,
+            3.805618696561819e-08
+          ]
+        },
+        "max_source_age_us": 12000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.4216315334695839,
+        "reference_speed_max": 0.13884009181744894,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9030,
+          "denominator": 9030,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9030,
+              "matched": 9030,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training02/run17",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "7d79957398f9ecc7285c13fbcec4fcdf531e87c9f4a8f42a065fdab0197c3517",
+      "task_evidence": {
+        "task": "figure8",
+        "samples": 9032,
+        "maximum_target_error": {
+          "p_sp": [
+            2.2995957998928063e-07,
+            2.1347438657060014e-07
+          ],
+          "v_ff": [
+            5.0915122243311295e-08,
+            9.190859797530981e-08
+          ],
+          "a_ff": [
+            1.8110967097556552e-08,
+            3.758818525531615e-08
+          ]
+        },
+        "max_source_age_us": 8000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.42163153346958393,
+        "reference_speed_max": 0.13884009181744894,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9032,
+          "denominator": 9032,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9032,
+              "matched": 9032,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training02/run18",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "19dea31de18bc38427929440a29720cfc8e4bc6986c45c261401c96e72ccd782",
+      "task_evidence": {
+        "task": "figure8",
+        "samples": 9038,
+        "maximum_target_error": {
+          "p_sp": [
+            2.392728057354354e-07,
+            2.1319301164723914e-07
+          ],
+          "v_ff": [
+            5.091507650212268e-08,
+            9.190859797530981e-08
+          ],
+          "a_ff": [
+            1.8110967097556552e-08,
+            3.758818525531615e-08
+          ]
+        },
+        "max_source_age_us": 8000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.42163153346958393,
+        "reference_speed_max": 0.13884009181744894,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9038,
+          "denominator": 9038,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9038,
+              "matched": 9038,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training02/run19",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "a4e630dfc83bfaeec0164571c409f8eef7c0a2438d77ad457afcdfd3e4ab663d",
+      "task_evidence": {
+        "task": "figure8",
+        "samples": 9024,
+        "maximum_target_error": {
+          "p_sp": [
+            2.282132488540256e-07,
+            2.0664085894489537e-07
+          ],
+          "v_ff": [
+            5.091507650212268e-08,
+            9.190859797530981e-08
+          ],
+          "a_ff": [
+            1.8628446681046018e-08,
+            3.805618696561819e-08
+          ]
+        },
+        "max_source_age_us": 8000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.4216315334695839,
+        "reference_speed_max": 0.13884009181744894,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9024,
+          "denominator": 9024,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9024,
+              "matched": 9024,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training02/run20",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "496e7e63d6dc0e45656f8a66909f2210d46d3caead0c9c2f94deb63098ddcd11",
+      "task_evidence": {
+        "task": "figure8",
+        "samples": 9084,
+        "maximum_target_error": {
+          "p_sp": [
+            2.4113545088466637e-07,
+            2.1319301164723914e-07
+          ],
+          "v_ff": [
+            5.091507650212268e-08,
+            9.190859797530981e-08
+          ],
+          "a_ff": [
+            1.8110967097556552e-08,
+            3.758818525531615e-08
+          ]
+        },
+        "max_source_age_us": 12000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.42163153346958393,
+        "reference_speed_max": 0.13884009181744894,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9084,
+          "denominator": 9084,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9084,
+              "matched": 9084,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training02/run21",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "820bcd3918b5923e931a1655788dcfdbeb91771e460b8d41e4693c8e9ff550e3",
+      "task_evidence": {
+        "task": "figure8",
+        "samples": 9050,
+        "maximum_target_error": {
+          "p_sp": [
+            2.3741016058620446e-07,
+            2.0664085894489537e-07
+          ],
+          "v_ff": [
+            5.0915154217734404e-08,
+            9.19088710034377e-08
+          ],
+          "a_ff": [
+            1.8628446681046018e-08,
+            3.805618696561819e-08
+          ]
+        },
+        "max_source_age_us": 12000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.4216315334695839,
+        "reference_speed_max": 0.13884009181744894,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9050,
+          "denominator": 9050,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9050,
+              "matched": 9050,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training02/run22",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "798efb25cf628a9eea145ca633b36e47640a13eeabf8abf7c891ba6b86c958b3",
+      "task_evidence": {
+        "task": "figure8",
+        "samples": 9062,
+        "maximum_target_error": {
+          "p_sp": [
+            2.3368487028774254e-07,
+            2.0664085894489537e-07
+          ],
+          "v_ff": [
+            5.0915207952528796e-08,
+            9.190859797530981e-08
+          ],
+          "a_ff": [
+            1.8628446681046018e-08,
+            3.805618696561819e-08
+          ]
+        },
+        "max_source_age_us": 12000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.4216315334695839,
+        "reference_speed_max": 0.13884009181744894,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9062,
+          "denominator": 9062,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9062,
+              "matched": 9062,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training02/run23",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "9dfa6596acb0bb1fa2563179cf9c8a033b71b8111ab490cfd541211124b860e5",
+      "task_evidence": {
+        "task": "figure8",
+        "samples": 9075,
+        "maximum_target_error": {
+          "p_sp": [
+            2.4113545088466637e-07,
+            2.0664085894489537e-07
+          ],
+          "v_ff": [
+            5.091507650212268e-08,
+            9.190861263025374e-08
+          ],
+          "a_ff": [
+            1.8628446681046018e-08,
+            3.805618696561819e-08
+          ]
+        },
+        "max_source_age_us": 12000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.4216315334695839,
+        "reference_speed_max": 0.13884009181744894,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9075,
+          "denominator": 9075,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9075,
+              "matched": 9075,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training02/run24",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "b2b82901b4b358f29a59f530cd79aab47fe642a800259870d2b99c95b3f16031",
+      "task_evidence": {
+        "task": "figure8",
+        "samples": 9032,
+        "maximum_target_error": {
+          "p_sp": [
+            2.3182222513851158e-07,
+            2.1319301164723914e-07
+          ],
+          "v_ff": [
+            5.091507650212268e-08,
+            9.190862728519766e-08
+          ],
+          "a_ff": [
+            1.8110967097556552e-08,
+            3.758818525531615e-08
+          ]
+        },
+        "max_source_age_us": 8000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.42163153346958393,
+        "reference_speed_max": 0.13884009181744894,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9032,
+          "denominator": 9032,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9032,
+              "matched": 9032,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/validation01/run01",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "5cc6b9cc64b0f0f3526854737260dad126590afea64c653efa3630f745168980",
+      "task_evidence": {
+        "task": "hover",
+        "samples": 9056,
+        "maximum_target_error": {
+          "p_sp": [
+            0.0,
+            0.0
+          ],
+          "v_ff": [
+            0.0,
+            0.0
+          ],
+          "a_ff": [
+            0.0,
+            0.0
+          ]
+        },
+        "max_source_age_us": 12000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.0,
+        "reference_speed_max": 0.0,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9056,
+          "denominator": 9056,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9056,
+              "matched": 9056,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/validation01/run02",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "314a8f0c8ffbfe0ff060007e6433a02bcf691df16ecbbc15ba0e6639fe8fdb14",
+      "task_evidence": {
+        "task": "hover",
+        "samples": 9061,
+        "maximum_target_error": {
+          "p_sp": [
+            0.0,
+            0.0
+          ],
+          "v_ff": [
+            0.0,
+            0.0
+          ],
+          "a_ff": [
+            0.0,
+            0.0
+          ]
+        },
+        "max_source_age_us": 8000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.0,
+        "reference_speed_max": 0.0,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9061,
+          "denominator": 9061,
+          "coverage": 1.0,
+          "max_gap_s": 0.016,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9061,
+              "matched": 9061,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.016
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.016
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.016
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/validation01/run03",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "5bf432984501008587f97d5e3911ca586f4b539d1071b60426e6fbdc16f20256",
+      "task_evidence": {
+        "task": "hover",
+        "samples": 9026,
+        "maximum_target_error": {
+          "p_sp": [
+            0.0,
+            0.0
+          ],
+          "v_ff": [
+            0.0,
+            0.0
+          ],
+          "a_ff": [
+            0.0,
+            0.0
+          ]
+        },
+        "max_source_age_us": 8000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.0,
+        "reference_speed_max": 0.0,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9026,
+          "denominator": 9026,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9026,
+              "matched": 9026,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/validation01/run04",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "725790d7b9918d564983a10dad09126d1f191511bbfa47430fa9a33d8b9bac95",
+      "task_evidence": {
+        "task": "hover",
+        "samples": 9065,
+        "maximum_target_error": {
+          "p_sp": [
+            0.0,
+            0.0
+          ],
+          "v_ff": [
+            0.0,
+            0.0
+          ],
+          "a_ff": [
+            0.0,
+            0.0
+          ]
+        },
+        "max_source_age_us": 8000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.0,
+        "reference_speed_max": 0.0,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9065,
+          "denominator": 9065,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9065,
+              "matched": 9065,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/validation01/run05",
+      "old_verdict": "accepted",
+      "component_valid": true,
+      "ulog_sha256": "811e3955702e5389f82478776c8f16b015a363be2a52b667a8de5fbf0f640648",
+      "task_evidence": {
+        "task": "hover",
+        "samples": 9037,
+        "maximum_target_error": {
+          "p_sp": [
+            0.0,
+            0.0
+          ],
+          "v_ff": [
+            0.0,
+            0.0
+          ],
+          "a_ff": [
+            0.0,
+            0.0
+          ]
+        },
+        "max_source_age_us": 12000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 0,
+        "reference_displacement_max": 0.0,
+        "reference_speed_max": 0.0,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9037,
+          "denominator": 9037,
+          "coverage": 1.0,
+          "max_gap_s": 0.012,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9037,
+              "matched": 9037,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6400,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 0,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    },
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/validation01/run06",
+      "old_verdict": "failed",
+      "component_valid": true,
+      "ulog_sha256": "2f88f099ae7aa982dfd9f06fdbf0ef9588383ea4be1a7a472bb575341497b6e2",
+      "task_evidence": {
+        "task": "hover",
+        "samples": 9030,
+        "maximum_target_error": {
+          "p_sp": [
+            0.0,
+            0.0
+          ],
+          "v_ff": [
+            0.0,
+            0.0
+          ],
+          "a_ff": [
+            0.0,
+            0.0
+          ]
+        },
+        "max_source_age_us": 16000,
+        "source_association": "exact diagnostic.setpoint_timestamp; unique raw trajectory timestamp; bounded by diagnostic publication",
+        "source_after_position_samples": 1,
+        "reference_displacement_max": 0.0,
+        "reference_speed_max": 0.0,
+        "heading_addition_max": 0.0,
+        "yaw_request_error_max": 0.0,
+        "attitude_task_output": {
+          "matched": 9029,
+          "denominator": 9030,
+          "coverage": 0.9998892580287929,
+          "max_gap_s": 0.02,
+          "max_abs_error": 0.0,
+          "windows": {
+            "observation": {
+              "requested": 9030,
+              "matched": 9029,
+              "coverage": 0.9998892580287929,
+              "max_gap_including_edges_s": 0.02
+            },
+            "task": {
+              "requested": 6400,
+              "matched": 6399,
+              "coverage": 0.99984375,
+              "max_gap_including_edges_s": 0.02
+            },
+            "first_loop": {
+              "requested": 3200,
+              "matched": 3199,
+              "coverage": 0.9996875,
+              "max_gap_including_edges_s": 0.02
+            },
+            "second_loop": {
+              "requested": 3200,
+              "matched": 3200,
+              "coverage": 1.0,
+              "max_gap_including_edges_s": 0.012
+            }
+          },
+          "missing_count": 1,
+          "association": "unique exact recorded publication intersection; missing rows not recreated",
+          "missing_yaw_ff_unverified": true
+        },
+        "source": "Navigator/FlightTask base + per-frame SITL adapter; original position P remains active"
+      }
+    }
+  ],
+  "skipped": [
+    {
+      "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-STA-20260929/V08/training01/run13",
+      "old_verdict": "failed",
+      "reason": "Incomplete historical task, not reconstructed"
+    }
+  ]
+}

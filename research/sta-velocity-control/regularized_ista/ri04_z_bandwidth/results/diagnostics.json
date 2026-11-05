@@ -1,0 +1,477 @@
+{
+  "diagnostic_only": true,
+  "new_flights": 0,
+  "flight_authorized": false,
+  "historical_acceptance_changed": false,
+  "source_sha256": "a5a23089ee311fbd6dab9ff6cba03e13b601c5921b6f51101a3f0fd9c083a68d",
+  "runs": [
+    {
+      "id": "run001",
+      "candidate": "PID",
+      "seed": 82101,
+      "samples": 3200,
+      "recomputed_error": {
+        "mean": -5.36431512646231e-05,
+        "variance": 1.1451528719797648e-05,
+        "rmse": 0.003384435892061666,
+        "max_abs": 0.012004397809505463,
+        "bias_energy_fraction": 0.00025122102362662793
+      },
+      "raw_dt_us_histogram": {
+        "8000": 1600,
+        "12000": 1600
+      },
+      "layer_s_fraction": 1.0,
+      "constraint_samples": 0,
+      "hte_nonzero_samples": 0,
+      "local_gain": {
+        "rsta_p": 14.142135623730951,
+        "rsta_i": 50.0,
+        "rista_p_range": [
+          12.526183293393544,
+          13.026652759547684
+        ],
+        "rista_i_range": [
+          42.48428995863474,
+          44.7893386486878
+        ]
+      },
+      "harmonics": {
+        "frequencies_hz": [
+          0.09375,
+          0.125,
+          0.15625
+        ],
+        "projected_error_rmse": 0.002502846301150448,
+        "residual_error_rmse": 0.002278193736338675,
+        "central_gain": 1.0440671362064118,
+        "central_phase_deg": -5.151313564500249,
+        "exploratory": true,
+        "not_a_counterfactual": true
+      },
+      "source": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI04_REVISION01/B/batch01/run001/log001.ulg",
+        "sha256": "534b7c84417bfe75b6f8913d880efc83fdbe25a4ba70d6a15ec6aa690050a911",
+        "metrics_sha256": "1490e14015c7a08304680497d02839366106ac56bb03e6178322520f4ad62b2c"
+      }
+    },
+    {
+      "id": "run002",
+      "candidate": "RSTA",
+      "seed": 82101,
+      "samples": 3200,
+      "recomputed_error": {
+        "mean": -6.564168519616941e-06,
+        "variance": 1.5327353161194288e-06,
+        "rmse": 0.0012380542816968015,
+        "max_abs": 0.005338504910469055,
+        "bias_energy_fraction": 2.811124441045071e-05
+      },
+      "raw_dt_us_histogram": {
+        "8000": 1600,
+        "12000": 1600
+      },
+      "layer_s_fraction": 1.0,
+      "constraint_samples": 0,
+      "hte_nonzero_samples": 3128,
+      "local_gain": {
+        "rsta_p": 14.142135623730951,
+        "rsta_i": 50.0,
+        "rista_p_range": [
+          12.526183293393544,
+          13.026652759547684
+        ],
+        "rista_i_range": [
+          42.48428995863474,
+          44.7893386486878
+        ]
+      },
+      "harmonics": {
+        "frequencies_hz": [
+          0.09375,
+          0.125,
+          0.15625
+        ],
+        "projected_error_rmse": 0.0001758465034198492,
+        "residual_error_rmse": 0.0012255025139357306,
+        "central_gain": 1.0063180229024267,
+        "central_phase_deg": -0.10107082850453217,
+        "exploratory": true,
+        "not_a_counterfactual": true
+      },
+      "source": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI04_REVISION01/B/batch01/run002/log001.ulg",
+        "sha256": "e95db939b3fee214b79eb4848fc959797d537ad87272c8a866ad95e4182bc6b3",
+        "metrics_sha256": "efdb5ba0f94f3cbb67771ca16823058e4428cbc283df58e5153e33b2159e82fc"
+      },
+      "local_formula_output_max_abs": 7.74810771098089e-09,
+      "local_formula_state_max_abs": 1.8607573884499296e-09
+    },
+    {
+      "id": "run003",
+      "candidate": "RISTA",
+      "seed": 82101,
+      "samples": 3200,
+      "recomputed_error": {
+        "mean": 2.7758394949159984e-06,
+        "variance": 1.6766923449829234e-06,
+        "rmse": 0.0012948745307047415,
+        "max_abs": 0.0052714720368385315,
+        "bias_energy_fraction": 4.595505857058162e-06
+      },
+      "raw_dt_us_histogram": {
+        "8000": 1600,
+        "12000": 1600
+      },
+      "layer_s_fraction": 1.0,
+      "constraint_samples": 0,
+      "hte_nonzero_samples": 3135,
+      "local_gain": {
+        "rsta_p": 14.142135623730951,
+        "rsta_i": 50.0,
+        "rista_p_range": [
+          12.526183293393544,
+          13.026652759547684
+        ],
+        "rista_i_range": [
+          42.48428995863474,
+          44.7893386486878
+        ]
+      },
+      "harmonics": {
+        "frequencies_hz": [
+          0.09375,
+          0.125,
+          0.15625
+        ],
+        "projected_error_rmse": 0.00021248446948958044,
+        "residual_error_rmse": 0.0012773215728600048,
+        "central_gain": 1.008229669337046,
+        "central_phase_deg": -0.1246738528417401,
+        "exploratory": true,
+        "not_a_counterfactual": true
+      },
+      "source": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI04_REVISION01/B/batch01/run003/log001.ulg",
+        "sha256": "4af9fdfae951c837bf485ae0a069fcb9b17369da7efafb3ab997a170f4336dd8",
+        "metrics_sha256": "9a2e1569d531a205eb6c562ed63ac7a0044f94b2976917a0cb60c3e49220b36b"
+      },
+      "local_formula_output_max_abs": 1.0571235553591407e-08,
+      "local_formula_state_max_abs": 1.849217709515294e-09,
+      "layer_p_fraction": 1.0,
+      "strict_implicit_samples": 3200
+    },
+    {
+      "id": "run004",
+      "candidate": "PID",
+      "seed": 82102,
+      "samples": 3200,
+      "recomputed_error": {
+        "mean": -0.00021097996537901037,
+        "variance": 1.5900039857022102e-05,
+        "rmse": 0.003993063035166541,
+        "max_abs": 0.011699916794896126,
+        "bias_energy_fraction": 0.002791708708202692
+      },
+      "raw_dt_us_histogram": {
+        "8000": 1600,
+        "12000": 1600
+      },
+      "layer_s_fraction": 1.0,
+      "constraint_samples": 0,
+      "hte_nonzero_samples": 0,
+      "local_gain": {
+        "rsta_p": 14.142135623730951,
+        "rsta_i": 50.0,
+        "rista_p_range": [
+          12.526183293393544,
+          13.026652759547684
+        ],
+        "rista_i_range": [
+          42.48428995863474,
+          44.7893386486878
+        ]
+      },
+      "harmonics": {
+        "frequencies_hz": [
+          0.09375,
+          0.125,
+          0.15625
+        ],
+        "projected_error_rmse": 0.002893679758523194,
+        "residual_error_rmse": 0.00275157588627437,
+        "central_gain": 1.0374531664461724,
+        "central_phase_deg": -6.302873543687818,
+        "exploratory": true,
+        "not_a_counterfactual": true
+      },
+      "source": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI04_REVISION01/B/batch01/run004/log001.ulg",
+        "sha256": "123f2413dcd9e957aada5cf54aabf3e69e43795fd8d56fa47fb7b2fded884b76",
+        "metrics_sha256": "e7fdcc55c55860618ee961863603e6b93d3c3df2e0d8c49df1b8afef1ba827a5"
+      }
+    },
+    {
+      "id": "run005",
+      "candidate": "RISTA",
+      "seed": 82102,
+      "samples": 3200,
+      "recomputed_error": {
+        "mean": -1.2908250122563905e-05,
+        "variance": 3.214609462422531e-06,
+        "rmse": 0.0017929796667401883,
+        "max_abs": 0.007419891655445099,
+        "bias_energy_fraction": 5.18303349294867e-05
+      },
+      "raw_dt_us_histogram": {
+        "8000": 1600,
+        "12000": 1600
+      },
+      "layer_s_fraction": 1.0,
+      "constraint_samples": 0,
+      "hte_nonzero_samples": 3152,
+      "local_gain": {
+        "rsta_p": 14.142135623730951,
+        "rsta_i": 50.0,
+        "rista_p_range": [
+          12.526183293393544,
+          13.026652759547684
+        ],
+        "rista_i_range": [
+          42.48428995863474,
+          44.7893386486878
+        ]
+      },
+      "harmonics": {
+        "frequencies_hz": [
+          0.09375,
+          0.125,
+          0.15625
+        ],
+        "projected_error_rmse": 0.0002286789836575615,
+        "residual_error_rmse": 0.0017783368656632808,
+        "central_gain": 1.0087862824107385,
+        "central_phase_deg": -0.21637916088925277,
+        "exploratory": true,
+        "not_a_counterfactual": true
+      },
+      "source": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI04_REVISION01/B/batch01/run005/log001.ulg",
+        "sha256": "bb9eac6a8c0cbf84d1578c155729ac34f472d0742c6834c1dae1719ec4e78034",
+        "metrics_sha256": "e359e18ed5f4524fdf4310cdd1f3a27931b19beafb5456aea78e55f61885d051"
+      },
+      "local_formula_output_max_abs": 1.0856876869747012e-08,
+      "local_formula_state_max_abs": 2.018422678995435e-09,
+      "layer_p_fraction": 1.0,
+      "strict_implicit_samples": 3200
+    },
+    {
+      "id": "run006",
+      "candidate": "RSTA",
+      "seed": 82102,
+      "samples": 3200,
+      "recomputed_error": {
+        "mean": -2.2106732427346293e-05,
+        "variance": 2.8503722294972704e-06,
+        "rmse": 0.001688449269926664,
+        "max_abs": 0.006529577076435089,
+        "bias_energy_fraction": 0.00017142457292522036
+      },
+      "raw_dt_us_histogram": {
+        "8000": 1600,
+        "12000": 1600
+      },
+      "layer_s_fraction": 1.0,
+      "constraint_samples": 0,
+      "hte_nonzero_samples": 3157,
+      "local_gain": {
+        "rsta_p": 14.142135623730951,
+        "rsta_i": 50.0,
+        "rista_p_range": [
+          12.526183293393544,
+          13.026652759547684
+        ],
+        "rista_i_range": [
+          42.48428995863474,
+          44.7893386486878
+        ]
+      },
+      "harmonics": {
+        "frequencies_hz": [
+          0.09375,
+          0.125,
+          0.15625
+        ],
+        "projected_error_rmse": 0.00019911970772220938,
+        "residual_error_rmse": 0.001676667014977186,
+        "central_gain": 1.007670286697781,
+        "central_phase_deg": -0.2113665130758391,
+        "exploratory": true,
+        "not_a_counterfactual": true
+      },
+      "source": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI04_REVISION01/B/batch01/run006/log001.ulg",
+        "sha256": "231627170bc78517a8cba26e0b2c587ac41007232833033322d180ff60166e36",
+        "metrics_sha256": "343a31e11268114aa1adc3fd5fccacf08039b0171c7cf1014f1228fd4760fff2"
+      },
+      "local_formula_output_max_abs": 1.0889465898444861e-08,
+      "local_formula_state_max_abs": 1.8630550505105425e-09
+    },
+    {
+      "id": "run007",
+      "candidate": "PID",
+      "seed": 82103,
+      "samples": 3200,
+      "recomputed_error": {
+        "mean": -0.0001668995440959407,
+        "variance": 1.3644187476656642e-05,
+        "rmse": 0.0036975725732534413,
+        "max_abs": 0.010602633468806744,
+        "bias_energy_fraction": 0.0020374027460951867
+      },
+      "raw_dt_us_histogram": {
+        "8000": 1600,
+        "12000": 1600
+      },
+      "layer_s_fraction": 1.0,
+      "constraint_samples": 0,
+      "hte_nonzero_samples": 0,
+      "local_gain": {
+        "rsta_p": 14.142135623730951,
+        "rsta_i": 50.0,
+        "rista_p_range": [
+          12.526183293393544,
+          13.026652759547684
+        ],
+        "rista_i_range": [
+          42.48428995863474,
+          44.7893386486878
+        ]
+      },
+      "harmonics": {
+        "frequencies_hz": [
+          0.09375,
+          0.125,
+          0.15625
+        ],
+        "projected_error_rmse": 0.002889266352997915,
+        "residual_error_rmse": 0.002307419094120138,
+        "central_gain": 1.0449980384440567,
+        "central_phase_deg": -4.638177386839149,
+        "exploratory": true,
+        "not_a_counterfactual": true
+      },
+      "source": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI04_REVISION01/B/batch01/run007/log001.ulg",
+        "sha256": "ff3d092bae630dacf74ecf64c8f9b784077a6980d0ed7bbc3cc9583f3d21e319",
+        "metrics_sha256": "e19fc9ec524897f41536fade0918d30ac41ecc0edcfb8a82e9630c95d2966a46"
+      }
+    },
+    {
+      "id": "run008",
+      "candidate": "RSTA",
+      "seed": 82103,
+      "samples": 3200,
+      "recomputed_error": {
+        "mean": 5.373777604290806e-06,
+        "variance": 1.9022827922227115e-06,
+        "rmse": 0.0013792431510464178,
+        "max_abs": 0.005693033337593079,
+        "bias_energy_fraction": 1.5180207428787519e-05
+      },
+      "raw_dt_us_histogram": {
+        "8000": 1600,
+        "12000": 1600
+      },
+      "layer_s_fraction": 1.0,
+      "constraint_samples": 0,
+      "hte_nonzero_samples": 3138,
+      "local_gain": {
+        "rsta_p": 14.142135623730951,
+        "rsta_i": 50.0,
+        "rista_p_range": [
+          12.526183293393544,
+          13.026652759547684
+        ],
+        "rista_i_range": [
+          42.48428995863474,
+          44.7893386486878
+        ]
+      },
+      "harmonics": {
+        "frequencies_hz": [
+          0.09375,
+          0.125,
+          0.15625
+        ],
+        "projected_error_rmse": 0.00020724234083846824,
+        "residual_error_rmse": 0.00136358435084605,
+        "central_gain": 1.005906970297176,
+        "central_phase_deg": -0.0964015228277735,
+        "exploratory": true,
+        "not_a_counterfactual": true
+      },
+      "source": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI04_REVISION01/B/batch01/run008/log001.ulg",
+        "sha256": "c841c3cbc011e88eeac76073a658257c05b3b0a79bd784b40c36b7e0b9070521",
+        "metrics_sha256": "9e28d2cf98c2853d5c8db96ad55cdc911a8db4c2ee17c772ead3418b92e73839"
+      },
+      "local_formula_output_max_abs": 8.5121137083366e-09,
+      "local_formula_state_max_abs": 1.7741143207294918e-09
+    },
+    {
+      "id": "run009",
+      "candidate": "RISTA",
+      "seed": 82103,
+      "samples": 3200,
+      "recomputed_error": {
+        "mean": 7.410288499158928e-06,
+        "variance": 2.105412569786275e-06,
+        "rmse": 0.001451022908903204,
+        "max_abs": 0.006354860961437225,
+        "bias_energy_fraction": 2.6080847178120503e-05
+      },
+      "raw_dt_us_histogram": {
+        "8000": 1600,
+        "12000": 1600
+      },
+      "layer_s_fraction": 1.0,
+      "constraint_samples": 0,
+      "hte_nonzero_samples": 3150,
+      "local_gain": {
+        "rsta_p": 14.142135623730951,
+        "rsta_i": 50.0,
+        "rista_p_range": [
+          12.526183293393544,
+          13.026652759547684
+        ],
+        "rista_i_range": [
+          42.48428995863474,
+          44.7893386486878
+        ]
+      },
+      "harmonics": {
+        "frequencies_hz": [
+          0.09375,
+          0.125,
+          0.15625
+        ],
+        "projected_error_rmse": 0.00024303391559708443,
+        "residual_error_rmse": 0.0014305250777359565,
+        "central_gain": 1.0073921203550211,
+        "central_phase_deg": -0.1194777160953915,
+        "exploratory": true,
+        "not_a_counterfactual": true
+      },
+      "source": {
+        "path": "/home/yr/Desktop/codev doc/experiments/VELOCITY-RISTA-20261024/RI04_REVISION01/B/batch01/run009/log001.ulg",
+        "sha256": "ae287fb8a071fc10040d1f9055fce54d491141d035fec79f387b6eb23911c44d",
+        "metrics_sha256": "d75bf6c1576d3825a757e93713e824b7c6b9a217c6089db7d069a3108853cd48"
+      },
+      "local_formula_output_max_abs": 9.845680021269843e-09,
+      "local_formula_state_max_abs": 1.8747356375636848e-09,
+      "layer_p_fraction": 1.0,
+      "strict_implicit_samples": 3200
+    }
+  ]
+}
