@@ -1,0 +1,809 @@
+{
+  "complete": true,
+  "accepted": 9,
+  "independent_replays": 9,
+  "measured": [
+    {
+      "id": "Q001",
+      "algorithm": "PID",
+      "baro": 0.3,
+      "rise90_s": 8.879999999999995,
+      "descent90_s": 4.484000000000009,
+      "rise_overshoot_m": 0.01898193359375,
+      "height_rmse_m": 0.010517853774883356,
+      "height_std_m": 0.009724661763738308,
+      "height_mean_m": 0.004007019042968749,
+      "vx_tracking_rmse_m_s": 0.006782263066142499,
+      "vy_tracking_rmse_m_s": 0.00536820292175719,
+      "x_tracking_rmse_m": 0.04506849755870983,
+      "y_tracking_rmse_m": 0.00999798678636756,
+      "vz_estimation_mean_m_s": -3.068554452329398e-05,
+      "vz_estimation_rmse_m_s": 0.0044900862697310456,
+      "rise_settle_5cm_1s_s": 9.931999999999995,
+      "height_peak_to_peak_m": 0.031005859375,
+      "thrust_command_hover": {
+        "available": true,
+        "mean": 0.707192553806305,
+        "std": 0.0014428863741251532,
+        "peak_to_peak": 0.0061043500900268555,
+        "weight_seconds": 10.0,
+        "minimum": 0.7041186690330505,
+        "maximum": 0.7102230191230774,
+        "units": "normalized thrust command (not N)",
+        "topic": "vehicle_attitude_setpoint",
+        "field": "-thrust_body[2]",
+        "clock": "publication timestamp",
+        "window": "takeoff+20..30 s",
+        "integration": "chronological published ZOH; zero-width ties have zero weight"
+      },
+      "label": "PID",
+      "hover_window": "takeoff command +20..30 s; inherited time-weighted metrics",
+      "velocity_tracking_rmse_xyz_m_s": [
+        0.006782263066142499,
+        0.00536820292175719,
+        0.004532952600919766
+      ],
+      "position_tracking_rmse_xyz_m": [
+        0.04506849755870983,
+        0.00999798678636756,
+        0.009005824551926724
+      ],
+      "true_height_bias_m": 0.004007019042968749,
+      "true_height_rmse_m": 0.010517853774883356,
+      "true_height_std_m": 0.009724661763738308,
+      "constraint_fraction": 0.0,
+      "maximum_tilt_deg": 0.9609731779558526,
+      "land_command_after_takeoff_s": 30.012,
+      "estimator_feedback": true,
+      "truth_feedback": false,
+      "seed": 99601,
+      "tuning_candidate": "PID_REF",
+      "landing_to_disarm_s": 9.664,
+      "touchdown_time_s": 9.664000000000001
+    },
+    {
+      "id": "Q002",
+      "algorithm": "RSTA",
+      "baro": 0.3,
+      "rise90_s": 7.583999999999996,
+      "descent90_s": 4.519999999999996,
+      "rise_overshoot_m": 0.01898193359375,
+      "height_rmse_m": 0.010279303243215807,
+      "height_std_m": 0.00977042623960347,
+      "height_mean_m": 0.003194189453124999,
+      "vx_tracking_rmse_m_s": 0.0038752320550734854,
+      "vy_tracking_rmse_m_s": 0.0039512245052301985,
+      "x_tracking_rmse_m": 0.0468865609795283,
+      "y_tracking_rmse_m": 0.012162298731403287,
+      "vz_estimation_mean_m_s": -0.0001761642610523268,
+      "vz_estimation_rmse_m_s": 0.004208910336241239,
+      "rise_settle_5cm_1s_s": 8.171999999999997,
+      "height_peak_to_peak_m": 0.031982421875,
+      "thrust_command_hover": {
+        "available": true,
+        "mean": 0.7070704512119292,
+        "std": 0.0022511590348657704,
+        "peak_to_peak": 0.011904895305633545,
+        "weight_seconds": 10.0,
+        "minimum": 0.7006973028182983,
+        "maximum": 0.7126021981239319,
+        "units": "normalized thrust command (not N)",
+        "topic": "vehicle_attitude_setpoint",
+        "field": "-thrust_body[2]",
+        "clock": "publication timestamp",
+        "window": "takeoff+20..30 s",
+        "integration": "chronological published ZOH; zero-width ties have zero weight"
+      },
+      "label": "STA",
+      "hover_window": "takeoff command +20..30 s; inherited time-weighted metrics",
+      "velocity_tracking_rmse_xyz_m_s": [
+        0.0038752320550734854,
+        0.0039512245052301985,
+        0.0019813129140820447
+      ],
+      "position_tracking_rmse_xyz_m": [
+        0.0468865609795283,
+        0.012162298731403287,
+        0.0077599110385952385
+      ],
+      "true_height_bias_m": 0.003194189453124999,
+      "true_height_rmse_m": 0.010279303243215807,
+      "true_height_std_m": 0.00977042623960347,
+      "constraint_fraction": 0.0,
+      "maximum_tilt_deg": 0.8881703956684954,
+      "land_command_after_takeoff_s": 30.008,
+      "estimator_feedback": true,
+      "truth_feedback": false,
+      "seed": 99601,
+      "tuning_candidate": "STA_REF",
+      "landing_to_disarm_s": 8.943999999999999,
+      "touchdown_time_s": 8.944000000000003
+    },
+    {
+      "id": "Q003",
+      "algorithm": "RISTA",
+      "baro": 0.3,
+      "rise90_s": 7.432000000000002,
+      "descent90_s": 4.511999999999993,
+      "rise_overshoot_m": 0.022003173828125,
+      "height_rmse_m": 0.011203123902010895,
+      "height_std_m": 0.008245516186007896,
+      "height_mean_m": 0.00758428955078125,
+      "vx_tracking_rmse_m_s": 0.0036195612811697766,
+      "vy_tracking_rmse_m_s": 0.0040989465620741615,
+      "x_tracking_rmse_m": 0.04577404967495299,
+      "y_tracking_rmse_m": 0.008829334336428843,
+      "vz_estimation_mean_m_s": 0.0006046160597426933,
+      "vz_estimation_rmse_m_s": 0.0036963459004597412,
+      "rise_settle_5cm_1s_s": 8.012,
+      "height_peak_to_peak_m": 0.027008056640625,
+      "thrust_command_hover": {
+        "available": true,
+        "mean": 0.7071107662916183,
+        "std": 0.0019419533029808105,
+        "peak_to_peak": 0.010174036026000977,
+        "weight_seconds": 10.0,
+        "minimum": 0.702494204044342,
+        "maximum": 0.712668240070343,
+        "units": "normalized thrust command (not N)",
+        "topic": "vehicle_attitude_setpoint",
+        "field": "-thrust_body[2]",
+        "clock": "publication timestamp",
+        "window": "takeoff+20..30 s",
+        "integration": "chronological published ZOH; zero-width ties have zero weight"
+      },
+      "label": "ISTA",
+      "hover_window": "takeoff command +20..30 s; inherited time-weighted metrics",
+      "velocity_tracking_rmse_xyz_m_s": [
+        0.0036195612811697766,
+        0.0040989465620741615,
+        0.0021061087933101227
+      ],
+      "position_tracking_rmse_xyz_m": [
+        0.04577404967495299,
+        0.008829334336428843,
+        0.0074265555901378046
+      ],
+      "true_height_bias_m": 0.00758428955078125,
+      "true_height_rmse_m": 0.011203123902010895,
+      "true_height_std_m": 0.008245516186007896,
+      "constraint_fraction": 0.0,
+      "maximum_tilt_deg": 0.8700270674214042,
+      "land_command_after_takeoff_s": 30.008,
+      "estimator_feedback": true,
+      "truth_feedback": false,
+      "seed": 99601,
+      "tuning_candidate": "E06",
+      "landing_to_disarm_s": 8.66,
+      "touchdown_time_s": 8.660000000000004
+    },
+    {
+      "id": "Q004",
+      "algorithm": "RSTA",
+      "baro": 0.3,
+      "rise90_s": 7.624000000000002,
+      "descent90_s": 4.475999999999999,
+      "rise_overshoot_m": 0.0269775390625,
+      "height_rmse_m": 0.016088518211273137,
+      "height_std_m": 0.007130889679565647,
+      "height_mean_m": 0.014421887207031248,
+      "vx_tracking_rmse_m_s": 0.005060739217052315,
+      "vy_tracking_rmse_m_s": 0.0040812248276931255,
+      "x_tracking_rmse_m": 0.0061448149576042626,
+      "y_tracking_rmse_m": 0.01588771921722237,
+      "vz_estimation_mean_m_s": 0.003073910055962914,
+      "vz_estimation_rmse_m_s": 0.005093835208709363,
+      "rise_settle_5cm_1s_s": 8.188000000000002,
+      "height_peak_to_peak_m": 0.02899169921875,
+      "thrust_command_hover": {
+        "available": true,
+        "mean": 0.7070155414819717,
+        "std": 0.002257326823042489,
+        "peak_to_peak": 0.01520460844039917,
+        "weight_seconds": 10.000000000000002,
+        "minimum": 0.7000831365585327,
+        "maximum": 0.7152877449989319,
+        "units": "normalized thrust command (not N)",
+        "topic": "vehicle_attitude_setpoint",
+        "field": "-thrust_body[2]",
+        "clock": "publication timestamp",
+        "window": "takeoff+20..30 s",
+        "integration": "chronological published ZOH; zero-width ties have zero weight"
+      },
+      "label": "STA",
+      "hover_window": "takeoff command +20..30 s; inherited time-weighted metrics",
+      "velocity_tracking_rmse_xyz_m_s": [
+        0.005060739217052315,
+        0.0040812248276931255,
+        0.0019687116941070927
+      ],
+      "position_tracking_rmse_xyz_m": [
+        0.0061448149576042626,
+        0.01588771921722237,
+        0.007701275481007949
+      ],
+      "true_height_bias_m": 0.014421887207031248,
+      "true_height_rmse_m": 0.016088518211273137,
+      "true_height_std_m": 0.007130889679565647,
+      "constraint_fraction": 0.0,
+      "maximum_tilt_deg": 0.8979611533513941,
+      "land_command_after_takeoff_s": 30.012,
+      "estimator_feedback": true,
+      "truth_feedback": false,
+      "seed": 99602,
+      "tuning_candidate": "STA_REF",
+      "landing_to_disarm_s": 8.936,
+      "touchdown_time_s": 8.935999999999993
+    },
+    {
+      "id": "Q005",
+      "algorithm": "RISTA",
+      "baro": 0.3,
+      "rise90_s": 7.475999999999999,
+      "descent90_s": 4.472000000000008,
+      "rise_overshoot_m": 0.02099609375,
+      "height_rmse_m": 0.012332888605126319,
+      "height_std_m": 0.006497297764977699,
+      "height_mean_m": 0.0104826171875,
+      "vx_tracking_rmse_m_s": 0.004849298943992161,
+      "vy_tracking_rmse_m_s": 0.005070824097645445,
+      "x_tracking_rmse_m": 0.005920684410265638,
+      "y_tracking_rmse_m": 0.013630953838934645,
+      "vz_estimation_mean_m_s": 0.0025599847777615647,
+      "vz_estimation_rmse_m_s": 0.004573427242702673,
+      "rise_settle_5cm_1s_s": 8.036000000000001,
+      "height_peak_to_peak_m": 0.02301025390625,
+      "thrust_command_hover": {
+        "available": true,
+        "mean": 0.7070859670639038,
+        "std": 0.0019053746671943187,
+        "peak_to_peak": 0.010014712810516357,
+        "weight_seconds": 10.0,
+        "minimum": 0.7023953795433044,
+        "maximum": 0.7124100923538208,
+        "units": "normalized thrust command (not N)",
+        "topic": "vehicle_attitude_setpoint",
+        "field": "-thrust_body[2]",
+        "clock": "publication timestamp",
+        "window": "takeoff+20..30 s",
+        "integration": "chronological published ZOH; zero-width ties have zero weight"
+      },
+      "label": "ISTA",
+      "hover_window": "takeoff command +20..30 s; inherited time-weighted metrics",
+      "velocity_tracking_rmse_xyz_m_s": [
+        0.004849298943992161,
+        0.005070824097645445,
+        0.002036866315902004
+      ],
+      "position_tracking_rmse_xyz_m": [
+        0.005920684410265638,
+        0.013630953838934645,
+        0.00782441223787455
+      ],
+      "true_height_bias_m": 0.0104826171875,
+      "true_height_rmse_m": 0.012332888605126319,
+      "true_height_std_m": 0.006497297764977699,
+      "constraint_fraction": 0.0,
+      "maximum_tilt_deg": 0.6758690026888687,
+      "land_command_after_takeoff_s": 30.004,
+      "estimator_feedback": true,
+      "truth_feedback": false,
+      "seed": 99602,
+      "tuning_candidate": "E06",
+      "landing_to_disarm_s": 8.668,
+      "touchdown_time_s": 8.668000000000006
+    },
+    {
+      "id": "Q006",
+      "algorithm": "PID",
+      "baro": 0.3,
+      "rise90_s": 8.896,
+      "descent90_s": 4.459999999999994,
+      "rise_overshoot_m": 0.0269775390625,
+      "height_rmse_m": 0.013933011367664566,
+      "height_std_m": 0.009407376803862891,
+      "height_mean_m": 0.010277648925781247,
+      "vx_tracking_rmse_m_s": 0.0059024245949143034,
+      "vy_tracking_rmse_m_s": 0.006050847564110306,
+      "x_tracking_rmse_m": 0.008810616700226943,
+      "y_tracking_rmse_m": 0.017425125185757468,
+      "vz_estimation_mean_m_s": 0.0025114878748223415,
+      "vz_estimation_rmse_m_s": 0.004656049941769199,
+      "rise_settle_5cm_1s_s": 9.552,
+      "height_peak_to_peak_m": 0.0369873046875,
+      "thrust_command_hover": {
+        "available": true,
+        "mean": 0.7071820055723191,
+        "std": 0.0016138258026402728,
+        "peak_to_peak": 0.005956888198852539,
+        "weight_seconds": 10.0,
+        "minimum": 0.7043669819831848,
+        "maximum": 0.7103238701820374,
+        "units": "normalized thrust command (not N)",
+        "topic": "vehicle_attitude_setpoint",
+        "field": "-thrust_body[2]",
+        "clock": "publication timestamp",
+        "window": "takeoff+20..30 s",
+        "integration": "chronological published ZOH; zero-width ties have zero weight"
+      },
+      "label": "PID",
+      "hover_window": "takeoff command +20..30 s; inherited time-weighted metrics",
+      "velocity_tracking_rmse_xyz_m_s": [
+        0.0059024245949143034,
+        0.006050847564110306,
+        0.005082028823882756
+      ],
+      "position_tracking_rmse_xyz_m": [
+        0.008810616700226943,
+        0.017425125185757468,
+        0.01033289430216337
+      ],
+      "true_height_bias_m": 0.010277648925781247,
+      "true_height_rmse_m": 0.013933011367664566,
+      "true_height_std_m": 0.009407376803862891,
+      "constraint_fraction": 0.0,
+      "maximum_tilt_deg": 0.8351862724150246,
+      "land_command_after_takeoff_s": 30.008,
+      "estimator_feedback": true,
+      "truth_feedback": false,
+      "seed": 99602,
+      "tuning_candidate": "PID_REF",
+      "landing_to_disarm_s": 9.636,
+      "touchdown_time_s": 9.635999999999996
+    },
+    {
+      "id": "Q007",
+      "algorithm": "RISTA",
+      "baro": 0.3,
+      "rise90_s": 7.451999999999998,
+      "descent90_s": 4.4879999999999995,
+      "rise_overshoot_m": 0.02099609375,
+      "height_rmse_m": 0.011490745123924452,
+      "height_std_m": 0.010242455848732708,
+      "height_mean_m": 0.005208581542968749,
+      "vx_tracking_rmse_m_s": 0.004350709132183504,
+      "vy_tracking_rmse_m_s": 0.004811424480403404,
+      "x_tracking_rmse_m": 0.018443074797465625,
+      "y_tracking_rmse_m": 0.007665579234701114,
+      "vz_estimation_mean_m_s": -0.0003913710328837624,
+      "vz_estimation_rmse_m_s": 0.004316428136828392,
+      "rise_settle_5cm_1s_s": 8.008000000000003,
+      "height_peak_to_peak_m": 0.031005859375,
+      "thrust_command_hover": {
+        "available": true,
+        "mean": 0.7071100972890854,
+        "std": 0.0019267067418548463,
+        "peak_to_peak": 0.010721325874328613,
+        "weight_seconds": 10.0,
+        "minimum": 0.7012410163879395,
+        "maximum": 0.7119623422622681,
+        "units": "normalized thrust command (not N)",
+        "topic": "vehicle_attitude_setpoint",
+        "field": "-thrust_body[2]",
+        "clock": "publication timestamp",
+        "window": "takeoff+20..30 s",
+        "integration": "chronological published ZOH; zero-width ties have zero weight"
+      },
+      "label": "ISTA",
+      "hover_window": "takeoff command +20..30 s; inherited time-weighted metrics",
+      "velocity_tracking_rmse_xyz_m_s": [
+        0.004350709132183504,
+        0.004811424480403404,
+        0.0020754670516732613
+      ],
+      "position_tracking_rmse_xyz_m": [
+        0.018443074797465625,
+        0.007665579234701114,
+        0.008079551556595602
+      ],
+      "true_height_bias_m": 0.005208581542968749,
+      "true_height_rmse_m": 0.011490745123924452,
+      "true_height_std_m": 0.010242455848732708,
+      "constraint_fraction": 0.0,
+      "maximum_tilt_deg": 0.9449777915917961,
+      "land_command_after_takeoff_s": 30.008,
+      "estimator_feedback": true,
+      "truth_feedback": false,
+      "seed": 99603,
+      "tuning_candidate": "E06",
+      "landing_to_disarm_s": 8.684,
+      "touchdown_time_s": 8.683999999999997
+    },
+    {
+      "id": "Q008",
+      "algorithm": "PID",
+      "baro": 0.3,
+      "rise90_s": 8.855999999999995,
+      "descent90_s": 4.463999999999999,
+      "rise_overshoot_m": 0.022979736328125,
+      "height_rmse_m": 0.012672388066395557,
+      "height_std_m": 0.010683196369821643,
+      "height_mean_m": 0.006816064453124999,
+      "vx_tracking_rmse_m_s": 0.005538930937506493,
+      "vy_tracking_rmse_m_s": 0.004337523545989959,
+      "x_tracking_rmse_m": 0.01717165479468592,
+      "y_tracking_rmse_m": 0.008814053590374422,
+      "vz_estimation_mean_m_s": 0.0003716193428757834,
+      "vz_estimation_rmse_m_s": 0.004751750136861513,
+      "rise_settle_5cm_1s_s": 9.483999999999995,
+      "height_peak_to_peak_m": 0.031982421875,
+      "thrust_command_hover": {
+        "available": true,
+        "mean": 0.7071674423217773,
+        "std": 0.0015097332109078932,
+        "peak_to_peak": 0.006027340888977051,
+        "weight_seconds": 10.0,
+        "minimum": 0.7040335536003113,
+        "maximum": 0.7100608944892883,
+        "units": "normalized thrust command (not N)",
+        "topic": "vehicle_attitude_setpoint",
+        "field": "-thrust_body[2]",
+        "clock": "publication timestamp",
+        "window": "takeoff+20..30 s",
+        "integration": "chronological published ZOH; zero-width ties have zero weight"
+      },
+      "label": "PID",
+      "hover_window": "takeoff command +20..30 s; inherited time-weighted metrics",
+      "velocity_tracking_rmse_xyz_m_s": [
+        0.005538930937506493,
+        0.004337523545989959,
+        0.004740066363258386
+      ],
+      "position_tracking_rmse_xyz_m": [
+        0.01717165479468592,
+        0.008814053590374422,
+        0.009295863927314818
+      ],
+      "true_height_bias_m": 0.006816064453124999,
+      "true_height_rmse_m": 0.012672388066395557,
+      "true_height_std_m": 0.010683196369821643,
+      "constraint_fraction": 0.0,
+      "maximum_tilt_deg": 0.9361146883380477,
+      "land_command_after_takeoff_s": 30.008,
+      "estimator_feedback": true,
+      "truth_feedback": false,
+      "seed": 99603,
+      "tuning_candidate": "PID_REF",
+      "landing_to_disarm_s": 9.612,
+      "touchdown_time_s": 9.611999999999995
+    },
+    {
+      "id": "Q009",
+      "algorithm": "RSTA",
+      "baro": 0.3,
+      "rise90_s": 7.588000000000001,
+      "descent90_s": 4.508000000000003,
+      "rise_overshoot_m": 0.029998779296875,
+      "height_rmse_m": 0.016150164912735573,
+      "height_std_m": 0.011757633746261646,
+      "height_mean_m": 0.0110718505859375,
+      "vx_tracking_rmse_m_s": 0.0048213473667149224,
+      "vy_tracking_rmse_m_s": 0.004978778995808198,
+      "x_tracking_rmse_m": 0.01784359475421997,
+      "y_tracking_rmse_m": 0.010080301369138803,
+      "vz_estimation_mean_m_s": 0.0009007499893399654,
+      "vz_estimation_rmse_m_s": 0.005091212118398815,
+      "rise_settle_5cm_1s_s": 8.147999999999996,
+      "height_peak_to_peak_m": 0.037994384765625,
+      "thrust_command_hover": {
+        "available": true,
+        "mean": 0.7070432030200958,
+        "std": 0.002247732533044339,
+        "peak_to_peak": 0.011480629444122314,
+        "weight_seconds": 10.0,
+        "minimum": 0.7016602158546448,
+        "maximum": 0.7131408452987671,
+        "units": "normalized thrust command (not N)",
+        "topic": "vehicle_attitude_setpoint",
+        "field": "-thrust_body[2]",
+        "clock": "publication timestamp",
+        "window": "takeoff+20..30 s",
+        "integration": "chronological published ZOH; zero-width ties have zero weight"
+      },
+      "label": "STA",
+      "hover_window": "takeoff command +20..30 s; inherited time-weighted metrics",
+      "velocity_tracking_rmse_xyz_m_s": [
+        0.0048213473667149224,
+        0.004978778995808198,
+        0.0019628704058469544
+      ],
+      "position_tracking_rmse_xyz_m": [
+        0.01784359475421997,
+        0.010080301369138803,
+        0.008157106524290875
+      ],
+      "true_height_bias_m": 0.0110718505859375,
+      "true_height_rmse_m": 0.016150164912735573,
+      "true_height_std_m": 0.011757633746261646,
+      "constraint_fraction": 0.0,
+      "maximum_tilt_deg": 0.8984424453473222,
+      "land_command_after_takeoff_s": 30.008,
+      "estimator_feedback": true,
+      "truth_feedback": false,
+      "seed": 99603,
+      "tuning_candidate": "STA_REF",
+      "landing_to_disarm_s": 8.952,
+      "touchdown_time_s": 8.952000000000005
+    }
+  ],
+  "means": {
+    "PID_REF": {
+      "n": 3,
+      "label": "PID",
+      "metrics": {
+        "rise90_s": 8.87733333333333,
+        "true_height_rmse_m": 0.012374417736314494,
+        "true_height_std_m": 0.009938411645807615,
+        "true_height_bias_m": 0.007033577473958331,
+        "rise_overshoot_m": 0.022979736328125,
+        "descent90_s": 4.469333333333334,
+        "landing_to_disarm_s": 9.637333333333332,
+        "touchdown_time_s": 9.63733333333333,
+        "rise_settle_5cm_1s_s": 9.655999999999997,
+        "height_peak_to_peak_m": 0.0333251953125,
+        "constraint_fraction": 0.0,
+        "maximum_tilt_deg": 0.9107580462363082,
+        "vz_estimation_mean_m_s": 0.0009508072243916103,
+        "vz_estimation_rmse_m_s": 0.004632628782787252,
+        "land_command_after_takeoff_s": 30.00933333333333,
+        "velocity_tracking_rmse_xyz_m_s": [
+          0.006074539532854431,
+          0.005252191343952485,
+          0.004785015929353636
+        ],
+        "position_tracking_rmse_xyz_m": [
+          0.023683589684540898,
+          0.012079055187499818,
+          0.00954486092713497
+        ],
+        "thrust_command_hover": {
+          "available": true,
+          "available_count": 3,
+          "expected_count": 3,
+          "mean": 0.7071806672334672,
+          "std": 0.0015221484625577732,
+          "peak_to_peak": 0.006029526392618815,
+          "minimum": 0.7041730682055155,
+          "maximum": 0.7102025945981344
+        }
+      }
+    },
+    "STA_REF": {
+      "n": 3,
+      "label": "STA",
+      "metrics": {
+        "rise90_s": 7.5986666666666665,
+        "true_height_rmse_m": 0.014172662122408171,
+        "true_height_std_m": 0.009552983221810253,
+        "true_height_bias_m": 0.009562642415364581,
+        "rise_overshoot_m": 0.025319417317708332,
+        "descent90_s": 4.501333333333332,
+        "landing_to_disarm_s": 8.944,
+        "touchdown_time_s": 8.944,
+        "rise_settle_5cm_1s_s": 8.169333333333332,
+        "height_peak_to_peak_m": 0.032989501953125,
+        "constraint_fraction": 0.0,
+        "maximum_tilt_deg": 0.894857998122404,
+        "vz_estimation_mean_m_s": 0.0012661652614168507,
+        "vz_estimation_rmse_m_s": 0.004797985887783139,
+        "land_command_after_takeoff_s": 30.00933333333333,
+        "velocity_tracking_rmse_xyz_m_s": [
+          0.004585772879613574,
+          0.004337076109577173,
+          0.001970965004678697
+        ],
+        "position_tracking_rmse_xyz_m": [
+          0.02362499023045084,
+          0.01271010643925482,
+          0.007872764347964687
+        ],
+        "thrust_command_hover": {
+          "available": true,
+          "available_count": 3,
+          "expected_count": 3,
+          "mean": 0.707043065237999,
+          "std": 0.0022520727969841995,
+          "peak_to_peak": 0.012863377730051676,
+          "minimum": 0.7008135517438253,
+          "maximum": 0.713676929473877
+        }
+      }
+    },
+    "E06": {
+      "n": 3,
+      "label": "ISTA",
+      "metrics": {
+        "rise90_s": 7.453333333333333,
+        "true_height_rmse_m": 0.011675585877020556,
+        "true_height_std_m": 0.008328423266572767,
+        "true_height_bias_m": 0.00775849609375,
+        "rise_overshoot_m": 0.021331787109375,
+        "descent90_s": 4.490666666666667,
+        "landing_to_disarm_s": 8.670666666666667,
+        "touchdown_time_s": 8.67066666666667,
+        "rise_settle_5cm_1s_s": 8.018666666666668,
+        "height_peak_to_peak_m": 0.027008056640625,
+        "constraint_fraction": 0.0,
+        "maximum_tilt_deg": 0.830291287234023,
+        "vz_estimation_mean_m_s": 0.0009244099348734986,
+        "vz_estimation_rmse_m_s": 0.004195400426663602,
+        "land_command_after_takeoff_s": 30.006666666666664,
+        "velocity_tracking_rmse_xyz_m_s": [
+          0.004273189785781814,
+          0.0046603983800410035,
+          0.0020728140536284624
+        ],
+        "position_tracking_rmse_xyz_m": [
+          0.023379269627561417,
+          0.010041955803354867,
+          0.0077768397948693195
+        ],
+        "thrust_command_hover": {
+          "available": true,
+          "available_count": 3,
+          "expected_count": 3,
+          "mean": 0.7071022768815358,
+          "std": 0.0019246782373433253,
+          "peak_to_peak": 0.010303358236948649,
+          "minimum": 0.7020435333251953,
+          "maximum": 0.7123468915621439
+        }
+      }
+    }
+  },
+  "assessment": {
+    "selected": "E06",
+    "n_per_configuration": 3,
+    "means": {
+      "PID_REF": {
+        "rise90_s": 8.87733333333333,
+        "true_height_rmse_m": 0.012374417736314494,
+        "true_height_std_m": 0.009938411645807615
+      },
+      "STA_REF": {
+        "rise90_s": 7.5986666666666665,
+        "true_height_rmse_m": 0.014172662122408171,
+        "true_height_std_m": 0.009552983221810253
+      },
+      "E06": {
+        "rise90_s": 7.453333333333333,
+        "true_height_rmse_m": 0.011675585877020556,
+        "true_height_std_m": 0.008328423266572767
+      }
+    },
+    "best_reference_mean": {
+      "rise90_s": 7.5986666666666665,
+      "true_height_rmse_m": 0.012374417736314494,
+      "true_height_std_m": 0.009552983221810253
+    },
+    "thresholds": {
+      "rise90_s": 7.578666666666667,
+      "true_height_rmse_m": 0.012250673558951349,
+      "true_height_std_m": 0.009457453389592151
+    },
+    "endpoint_passed": {
+      "rise90_s": true,
+      "true_height_rmse_m": true,
+      "true_height_std_m": true
+    },
+    "scientific_success": true,
+    "pairs": [
+      {
+        "seed": 99601,
+        "reference": "PID_REF",
+        "differences": {
+          "rise90_s": -1.4479999999999933,
+          "true_height_rmse_m": 0.0006852701271275394,
+          "true_height_std_m": -0.0014791455777304115
+        },
+        "wins": {
+          "rise90_s": true,
+          "true_height_rmse_m": false,
+          "true_height_std_m": true
+        },
+        "practical_joint": false
+      },
+      {
+        "seed": 99601,
+        "reference": "STA_REF",
+        "differences": {
+          "rise90_s": -0.15199999999999392,
+          "true_height_rmse_m": 0.0009238206587950885,
+          "true_height_std_m": -0.0015249100535955733
+        },
+        "wins": {
+          "rise90_s": true,
+          "true_height_rmse_m": false,
+          "true_height_std_m": true
+        },
+        "practical_joint": false
+      },
+      {
+        "seed": 99602,
+        "reference": "PID_REF",
+        "differences": {
+          "rise90_s": -1.4200000000000017,
+          "true_height_rmse_m": -0.0016001227625382468,
+          "true_height_std_m": -0.0029100790388851923
+        },
+        "wins": {
+          "rise90_s": true,
+          "true_height_rmse_m": true,
+          "true_height_std_m": true
+        },
+        "practical_joint": true
+      },
+      {
+        "seed": 99602,
+        "reference": "STA_REF",
+        "differences": {
+          "rise90_s": -0.14800000000000324,
+          "true_height_rmse_m": -0.0037556296061468184,
+          "true_height_std_m": -0.0006335919145879481
+        },
+        "wins": {
+          "rise90_s": true,
+          "true_height_rmse_m": true,
+          "true_height_std_m": true
+        },
+        "practical_joint": true
+      },
+      {
+        "seed": 99603,
+        "reference": "PID_REF",
+        "differences": {
+          "rise90_s": -1.4039999999999964,
+          "true_height_rmse_m": -0.0011816429424711047,
+          "true_height_std_m": -0.0004407405210889344
+        },
+        "wins": {
+          "rise90_s": true,
+          "true_height_rmse_m": true,
+          "true_height_std_m": true
+        },
+        "practical_joint": true
+      },
+      {
+        "seed": 99603,
+        "reference": "STA_REF",
+        "differences": {
+          "rise90_s": -0.13600000000000279,
+          "true_height_rmse_m": -0.00465941978881112,
+          "true_height_std_m": -0.0015151778975289378
+        },
+        "wins": {
+          "rise90_s": true,
+          "true_height_rmse_m": true,
+          "true_height_std_m": true
+        },
+        "practical_joint": true
+      }
+    ],
+    "strict_win_counts": {
+      "PID_REF": {
+        "rise90_s": 3,
+        "true_height_rmse_m": 2,
+        "true_height_std_m": 3
+      },
+      "STA_REF": {
+        "rise90_s": 3,
+        "true_height_rmse_m": 2,
+        "true_height_std_m": 3
+      }
+    },
+    "comparison": "Fixed-candidate arithmetic means, all three predefined IMU seeds; no significance claim"
+  },
+  "caveats_cn": [
+    "这是预先选定 E06 的追加验证，不是三算法等预算重新调参，不替代或改判此前 E04 的验证。",
+    "每配置为3个新配对IMU种子，未重新选择候选；只反映当前任务和既有调参历史。",
+    "只有IMU随机源受种子控制，其他传感器随机源和宿主调度不独立受控；n=3不支持普遍优势或显著性宣称。",
+    "共同BARO=0.3、加速度随机游走=0；其他传感器噪声仍保留。",
+    "真值高度仅用于离线分析；估计位置/速度误差相对日志中各次实际控制参考。",
+    "真值/估计位移均以各次起飞前自身原点为零，估计位移仅补偿已记录EKF位置reset；并非原始绝对坐标。",
+    "曲线不平滑、不排序、不去重；速度保留估计reset跳变，Z图示向上为正。",
+    "三条彩色实线分别为PID、STA、ISTA；灰色虚线仅为2.5m高度参考及起飞/下降命令时刻，不是第四算法。",
+    "降落命令名义为起飞命令后30s，图中采用每轮真实记录时刻；悬停指标窗口固定20–30s。",
+    "归一化推力命令不等于实测推力、功率或能耗。",
+    "结果不表示已永久安装参数，不构成硬件或实机验证；未达标不追加飞行、换候选或改判。"
+  ]
+}
